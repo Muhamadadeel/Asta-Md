@@ -4,7 +4,7 @@ if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/co
 
 
 //═══════[Required Variables]════════\\
-global.owner = process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, ''): '2348039607375';
+global.owner = process.env.OWNER_NUMBER || '2348039607375';
 global.mongodb = process.env.MONGODB_URI || "" ;
 global.port = Math.floor(Math.random() * 10000) + 5000;
 global.audio = '' ; 
