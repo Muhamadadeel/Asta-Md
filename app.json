@@ -1,0 +1,96 @@
+{
+  "name": "asta_md@0.5",
+  "description": "A Simple WhatsApp Bot By Astropeda Team",
+  "logo": "https://i.imgur.com/dMwGOUP.jpeg",
+  "keywords": ["WhatsAppBot", "NodeJs", "WhiskeySockets", "Baielys", "Javascript Bot"],
+  "success_url": "/",
+  "stack": "container",
+"env": {
+  "OWNER_NAME": {
+    "description": "Astropeda",    
+    "value": "WhatsApp Bot Team"
+  },
+  "PREFIX": {
+    "description": "Bot Handler",
+    "value": "/"
+  },
+  "MODE": {
+    "description": "Worktype of your bot. Use public or private, if it is private then only bot number can use it. If public then everyone can use it.",
+    "value": "private"
+  },
+  "HEROKU_API_KEY": {
+    "description": "Heroku API Key.",
+    "value": "",
+	  "required" :false
+  },
+  "HEROKU_APP_NAME": {
+    "description": "Heroku App Name.",
+    "value": "",
+	 "required" :false
+  },
+  "AUTO_READ_STATUS": {
+    "description": "Auto Read Status.",
+    "required" :false,
+    "value": "false"
+  },
+  "MSGS_IN_LOG": {
+    "description": "Messages in console.",
+    "required" :false,
+    "value": "false"
+  },
+  "READ_MESSAGE": {
+    "description": "Read your messages.",
+    "required" :false,
+    "value": "false"
+  },
+  "DISABLE_PM": {
+    "description": "Disables dm function.",
+    "value": "false",
+    "required" :false
+  },
+  "ALWAYS_ONLINE": {
+    "description": "Bot to be always Online.",
+    "value": "false",
+    "required" :false
+  },
+  "OWNER_NUMBER": {
+    "description": "The phone numbers of the users who you want to be admin for the bot (should be in international format without + and multiple numbers must be separated by a comma \",\")",
+    "value": "2348039607375"
+  },
+   "SESSION_ID": {
+    "description": "Please put your SESSION_ID here."
+  },
+  "OPENAI_API_KEY": {
+    "description": "Please put your OPENAI API key.",
+    "value": "",
+    "required" :false
+  },
+  "MONGODB_URI": {
+    "description": "Very important",
+    "required": true,
+    "value": ""
+  },
+  "AUTO_REACTION": {
+    "description": " Set it `true` If You Wants To Reacts emoji to all commands. \n And Set it `all` is You Wants to React Emojies to All Messages",
+    "value": "false",
+    "required": false 
+  },
+  "PACK_NAME": {
+    "description": "Put Sticker Pack_Name.",
+    "value": "",
+    "required": false 
+  },
+  "PACK_AUTHER": {
+    "description": "Put Sticker Author_Name.",
+    "value": "",
+    "required": false 
+  }
+},
+
+"addons": [
+		{
+			"plan": "heroku-postgresql"
+		}
+	]
+ 
+}
