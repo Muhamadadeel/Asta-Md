@@ -15,10 +15,14 @@ If the client.js file executes successfully, the code logs the stdout output to 
 
 */
 
-const { execFile } = require('child_process');
-const path = require('path');
+/*
+const client = require('./lib/client');
 
-const clientPath = path.join(__dirname, 'lib', 'client.js');
+// Use the client module here
+
+const { execFile } = require('child_process');
+
+const clientPath = './lib/client.js';
 
 execFile(clientPath, (error, stdout, stderr) => {
   if (error) {
@@ -26,5 +30,7 @@ execFile(clientPath, (error, stdout, stderr) => {
     return;
   }
 
-  console.log(stdout); 
+  console.log(stdout);
 });
+
+*/

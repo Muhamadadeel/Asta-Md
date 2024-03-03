@@ -3,10 +3,10 @@
                "name": "asta-bot",
                "version": "1.0.0",
                "description": "Multi device whatsapp bot.",
-               "main": "index.js",
+               "main": "./lib/client.js",
                "type": "commonjs",
    "scripts": {
-                "start": "pm2 start index.js --deep-monitoring --attach --name asta-bot@0.1",
+                "start": "pm2 start ./lib/client.js --deep-monitoring --attach --name asta-bot@0.1",
                 "stop": "pm2 stop asta-bot@0.1"
                 },
                "author": "Astropeda",
