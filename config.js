@@ -1,3 +1,20 @@
+/*
+First, it imports the fs-extra and child_process modules. The fs-extra module provides additional functionalities to the built-in fs module, while the child_process module is used to spawn new processes.
+
+Next, it checks if the config.env file exists and loads the environment variables from it using the dotenv module.
+
+Then, it sets up various global variables, such as owner, mongodb, port, blockJids, allowJids, and others. These variables are used throughout the bot code and can be overridden by setting the corresponding environment variables.
+
+After that, it exports an object containing various configuration options, such as sessionName, botname, botbgm, ownername, read_status, and others. These options are used to configure the behavior of the bot.
+
+
+*/
+/////////////////////////////
+/////////////////////////
+//////////////////
+///////////////
+/////////
+/////
 const fs = require('fs-extra')
 const { spawn } = require('child_process')
 if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/config.env' })
