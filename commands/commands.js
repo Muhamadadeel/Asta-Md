@@ -21,7 +21,6 @@ const { dare, truth, random_question, Config } = require('../lib/truth-dare.js')
 const { TelegraPh } = require('../lib/scraper')
 const { eco } = require('discord-mongoose-economy')
 const ty = eco.connect(mongodb);
-const { Insta } = require('../lib');
 const { redeploy, getvar, delvar, getallvar, change_env, get_deployments } = require('../lib/koyeb')
 const { addnote, delnote, allnotes, delallnote, tlang, fetchJson, botpic, runtime, prefix, Config, alive } = require('../lib')
 const { stickers } = require('../config')
@@ -1215,46 +1214,6 @@ cmd({ pattern: "blackpink", category: "logo", desc: "Some text to image feature 
 
 
 
-
-
-
-
-
-    cmd({
-        pattern: "tgs",
-        desc: "Downloads telegram stickers.",
-        category: "downloader",
-        filename: __filename,
-        use: '<add sticker url.>'
-    },
-    async(Void, citel, text) => {
-    if (!text) return await citel.reply("_Enter a tg sticker url_\nEg: .tgs https://t.me/addstickers/Oldboyfinal\nKeep in mind that there is a chance of ban if used frequently");
-    if (!text.includes("addstickers"))  return await citel.reply("_Uhh Please Enter a Valid tg sticker url_\nEg: .tgs https://t.me/addstickers/Oldboyfinal");
-    let tgUrl = text.split("|")[0];
-    let find = tgUrl.split("/addstickers/")[1];
-    let { result } = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=${encodeURIComponent(find)} `);
-    let check = text.split("|")[1] || "";
-    let res = `Total stickers: ${result.stickers.length}\n*Estimated complete in:* ${result.stickers.length * 1.5} seconds\nKeep in mind that there is a chance of a ban if used frequently`.trim()
-    if (result.is_animated) return await citel.reply("Animated stickers are not supported");
-      else if (check.startsWith("info")) return await citel.reply(res);
-    let limit = parseInt(check.split(",")[0]) || 10;
-    let count =  parseInt(check.split(",")[1]) ||  0;
-     let isCheckText = check.split(";")[1] ||  "Sticker"
-    let isSticker = true ;
-        if (isCheckText.includes("photo") ){isSticker = false ;	isCheckText = "Photo"}
-    if(limit > result.stickers.length ) {  limit = result.stickers.length  }
-        if(count > result.stickers.length ) {  count = result.stickers.length - 5  }
-    if(count > limit ){let temp = limit ;   limit = count;	count = temp ;}
-    await citel.reply(`${res}\n\n_Downloading as ${isCheckText} From index *${count}* to *${limit}*._\nIf you wants more to download then use Like \n\n .tgs ${tgUrl} |  10 ,  20 ; photo`)
-    for ( count ; count < limit ; count++) 
-    {
-     // if (count >= limit) break;
-      let file_path = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getFile?file_id=${result.stickers[count].file_id}`);
-      let sticUrl = `https://api.telegram.org/file/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/${file_path.result.file_path}`;
-      if(isSticker) { let a = await getBuffer(sticUrl); await citel.reply(a, { packname: Config.packname, author: "Suhail-Md"  }, "sticker");} 
-      else { await Void.sendMessage(citel.chat,{image : {url : sticUrl } , caption : `*_Telegram Sticker At Index ${count+1} Downloaded_*`}) } 
-    }
-})
 //---------------------------------------------------------------------------
 cmd ( {
     name: 'tiktok',
@@ -1963,7 +1922,7 @@ cmd({
 
 cmd({
     name: 'twitter',
-    description: 'Downloads Twitter videos.',
+    desc: 'Downloads Twitter videos.',
     category: 'downloader',
     use: '<add twitter url.>',
     async (Void, citel, text)  {
@@ -1995,7 +1954,7 @@ cmd({
 
 cmd ( {
     name: 'alldownloader',
-    description: 'Downloads video from various platforms.',
+    desc: 'Downloads video from various platforms.',
     category: 'downloader',
     use: '<add video url>',
     async execute(Void, citel, text) {
@@ -5308,201 +5267,6 @@ headers
 )
 
 } // If Statements End Here FOr Heroku App and Heroku APP Key to Update App Variable 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-cmd({
-    pattern: "instagramP",
-    alias: ["instagram"],
-    desc: "download instagram post.",
-    category: "downloader",
-    filename: __filename
-}, async (Void, citel, text, {
-    isCreator
-}) => {
-    if (!text) {
-        return citel.send("Need insta post url.");
-    }
-    try {
-        const response = await axios.get(`https://api.maher-zubair.tech/download/instagram?url=${encodeURIComponent(text)}`);
-        const data = response.data;
-        if (data.status === "success") {
-            for (let i = 0; i < data.data.length; i++) {
-                await Void.sendFileUrl(citel.chat, data.data[i], `*Downloaded Media from instagram.*${Config.caption}`, citel);
-            }
-        } else {
-            citel.send("*Error, Media Not Found*");
-        }
-    } catch (error) {
-        console.log("insta err: ", error);
-        citel.send("*Error, Media Not Found*");
-    }
-});
-
-cmd({
-    pattern: "instagramV",
-    desc: "Downloads Instagram videos.",
-    category: "downloader",
-    filename: __filename,
-    use: "<add ig url.>"
-}, async (Void, citel, text) => {
-    if (!text || !text.toLowerCase().startsWith("https://")) {
-        return await citel.send("*Provide insta video url, Dear*");
-    }
-    try {
-        const response = await axios.get(`https://api.maher-zubair.tech/download/instagram?url=${encodeURIComponent(text)}`);
-        const data = response.data;
-        if (data.status === "success") {
-            citel.send(data.data[0], {
-                caption: Config.caption
-            }, "image");
-        } else {
-            citel.send("*Error, Video Not Found*");
-        }
-    } catch (_0x4afabe) {
-        console.log("insta err: ", _0x4afabe);
-        citel.send("*Error, Video Not Found*");
-    }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 cmd(
