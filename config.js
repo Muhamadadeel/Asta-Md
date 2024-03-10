@@ -22,14 +22,14 @@ if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/co
 
 //═══════[Required Variables]════════\\
 global.owner = process.env.OWNER_NUMBER || '2348039607375';
-global.mongodb = process.env.MONGODB_URI || "" ;
+global.mongodb = process.env.MONGODB_URI || "mongodb+srv://astromedia0010:beka10beka10@cluster0.pxc8ulo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" ;
 global.port = Math.floor(Math.random() * 10000) + 5000;
 global.audio = '' ; 
 global.video = '' ;
 global.blockJids = process.env.BLOCK_JID ||'120363023983262391@g.us' ;
 global.allowJids = process.env.ALLOW_JID ||'120363022922797633@g.us' ;
 global.email = process.env.EMAIL || '';
-global.github = process.env.GITHUB || '';
+global.github = process.env.GITHUB || 'https://github.com/Astropeda/whatsapp-bot';
 global.location = process.env.LOCATION || '';
 global.timezone = process.env.TIME_ZONE || '';
 global.gurl = '' ;
