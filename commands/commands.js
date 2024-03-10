@@ -1991,8 +1991,32 @@ cmd({
 
 
 
+//-------------------------
 
-
+cmd ( {
+    name: 'alldownloader',
+    description: 'Downloads video from various platforms.',
+    category: 'downloader',
+    use: '<add video url>',
+    async execute(Void, citel, text) {
+        if (!text || !text.startsWith("https://")) {
+            return await citel.reply('*_Please Give me Video Url_*\n*Example _' + Config.prefix + 'alldownloader https://www.youtube.com/watch?v=dQw4w9WgXcQ_*');
+        }
+        try {
+            const response = await axios.get(`https://api.maher-zubair.tech/download/alldownload?url=${text}`);
+            if (response.data.status) {
+                const { video, thumbnail, audio } = response.data;
+                await citel.sendMessage(citel.chat, { video: { url: video }, caption: Config.caption }, { quoted: citel });
+            } else {
+                await citel.send('*_Error, Video Not Found_*');
+            }
+        } catch (error) {
+            console.log("error while Downloading : ", error);
+            await citel.send('*_Error, Video Not Found_*');
+        }
+    }
+}
+)
 
 
 
