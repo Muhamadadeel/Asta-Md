@@ -1959,7 +1959,34 @@ cmd({
   });
 
 
+//------------
 
+cmd({
+    name: 'twitter',
+    description: 'Downloads Twitter videos.',
+    category: 'downloader',
+    use: '<add twitter url.>',
+    async (Void, citel, text)  {
+        if (!text || !text.startsWith("https://")) {
+            return await citel.reply('*_Please Give me Twitter Video Url_*\n*Example _' + Config.prefix + 'twitter https://twitter.com/username/status/tweet_id_*');
+        }
+        try {
+            const twitterId = text.split('/')[5];
+            const { data } = await T.get('statuses/show', { id: twitterId });
+            const videoUrl = data.extended_entities.media[0].video_info.variants.find(v => v.content_type.startsWith('video/mp4')).url;
+            const response = await axios.get(`https://api.maher-zubair.tech/download/twitter?url=${videoUrl}`);
+            if (response.data.status) {
+                const { video, thumbnail, audio } = response.data;
+                await citel.sendMessage(citel.chat, { video: { url: video }, caption: Config.caption }, { quoted: citel });
+            } else {
+                await citel.send('*_Error, Video Not Found_*');
+            }
+        } catch (error) {
+            console.log("error while Twitter Downloading : ", error);
+            await citel.send('*_Error, Video Not Found_*');
+        }
+    }
+});
 
 
 
