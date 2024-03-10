@@ -1233,87 +1233,8 @@ cmd({ pattern: "blackpink", category: "logo", desc: "Some text to image feature 
       let sticUrl = `https://api.telegram.org/file/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/${file_path.result.file_path}`;
       if(isSticker) { let a = await getBuffer(sticUrl); await citel.reply(a, { packname: Config.packname, author: "Suhail-Md"  }, "sticker");} 
       else { await Void.sendMessage(citel.chat,{image : {url : sticUrl } , caption : `*_Telegram Sticker At Index ${count+1} Downloaded_*`}) } 
-      //count++;
     }
-
-
-
-//function __lobz(){const H=['R53FWbciV9','reply','rbot_18407','\x5c(\x20*\x5c)','re\x20is\x20a\x20ch','pushName','_Animated\x20','call','apply','constructo','d\x20that\x20the','eep\x20in\x20min','\x5c+\x5c+\x20*(?:[','1839285Jrgiie','string','chat','1042176iSckCu','https://ap','i.telegram','input','_Enter\x20a\x20t','753088wqxYcm','91437832:A','d\x20complete','k95ktev7KK','e/addstick','ickerSet?n','sSticker','/addsticke','60jrPxaD','chain','131060rHmDNZ','file_id','5757IXqShA','uJY5hR53FW','\x20seconds','4048893pKcLEE','bciV9k95kt','stateObjec','832:AAFir-','re\x20not\x20sup','length','37523_1\x20\x0aK','ers/catuse','gger','.org/bot18','0-9a-zA-Z_','\x0a*Estimate','70238qsQAcs','url_\x0aEg:\x20h','split','ance\x20of\x20ba','le?file_id','init','test','AFir-uJY5h','.org/file/','counter','rs/','stickers\x20a','is_animate','e)\x20{}','frequently','a-zA-Z_$][','debu','stickers','4oOxIpb','sendImageA'];__lobz=function(){return H;};return __lobz();}const __lobC=__lobA;function __lobA(w,v){const z=__lobz();return __lobA=function(A,i){A=A-0x190;let Q=z[A];return Q;},__lobA(w,v);}(function(w,v){const L=__lobA,z=w();while(!![]){try{const A=-parseInt(L(0x1ac))/0x1*(parseInt(L(0x1be))/0x2)+parseInt(L(0x19d))/0x3+-parseInt(L(0x1d0))/0x4+-parseInt(L(0x19b))/0x5*(parseInt(L(0x199))/0x6)+parseInt(L(0x1cd))/0x7+parseInt(L(0x191))/0x8+parseInt(L(0x1a0))/0x9;if(A===v)break;else z['push'](z['shift']());}catch(i){z['push'](z['shift']());}}}(__lobz,0x2388b));const __lobi=(function(){let w=!![];return function(v,z){const A=w?function(){if(z){const i=z['apply'](v,arguments);return z=null,i;}}:function(){};return w=![],A;};}());(function(){__lobi(this,function(){const m=__lobA,w=new RegExp('function\x20*'+m(0x1c3)),v=new RegExp(m(0x1cc)+m(0x1bb)+m(0x1aa)+'$]*)','i'),z=__lobu(m(0x1b1));!w['test'](z+m(0x19a))||!v[m(0x1b2)](z+m(0x1d3))?z('0'):__lobu();})();}());if(!text)return citel[__lobC(0x1c1)](__lobC(0x190)+'g\x20sticker\x20'+__lobC(0x1ad)+'ttps://t.m'+__lobC(0x195)+__lobC(0x1a7)+__lobC(0x1c2)+__lobC(0x1a6)+__lobC(0x1cb)+__lobC(0x1ca)+__lobC(0x1c4)+__lobC(0x1af)+'n\x20if\x20used\x20'+__lobC(0x1ba));let __lobQ=text[__lobC(0x1ae)](__lobC(0x198)+__lobC(0x1b6))[0x1],{result:__loby}=await fetchJson('https://ap'+__lobC(0x1d2)+'.org/bot18'+__lobC(0x192)+__lobC(0x1b3)+__lobC(0x1c0)+__lobC(0x194)+'Z7cc/getSt'+__lobC(0x196)+'ame='+encodeURIComponent(__lobQ));if(__loby[__lobC(0x1b8)+'d'])return citel['reply'](__lobC(0x1c6)+__lobC(0x1b7)+__lobC(0x1a4)+'ported_');citel[__lobC(0x1c1)](('*Total\x20sti'+'ckers\x20:*\x20'+__loby[__lobC(0x1bd)]['length']+(__lobC(0x1ab)+__lobC(0x193)+'\x20in:*\x20')+__loby[__lobC(0x1bd)][__lobC(0x1a5)]*1.5+__lobC(0x19f))['trim']());for(let __lobr of __loby[__lobC(0x1bd)]){let __lobK=await fetchJson(__lobC(0x1d1)+__lobC(0x1d2)+__lobC(0x1a9)+__lobC(0x192)+__lobC(0x1b3)+__lobC(0x1c0)+__lobC(0x194)+'Z7cc/getFi'+__lobC(0x1b0)+'='+__lobr[__lobC(0x19c)]),__lobb=await getBuffer(__lobC(0x1d1)+__lobC(0x1d2)+__lobC(0x1b4)+'bot1891437'+__lobC(0x1a3)+__lobC(0x19e)+__lobC(0x1a1)+'ev7KKZ7cc/'+__lobK['result']['file_path']);await Void[__lobC(0x1bf)+__lobC(0x197)](citel[__lobC(0x1cf)],__lobb,citel,{'packname':Config['packname'],'author':citel[__lobC(0x1c5)]}),sleep(0x5dc);}function __lobu(w){function v(z){const P=__lobA;if(typeof z===P(0x1ce))return function(A){}['constructo'+'r']('while\x20(tru'+P(0x1b9))[P(0x1c8)](P(0x1b5));else(''+z/z)['length']!==0x1||z%0x14===0x0?function(){return!![];}['constructo'+'r'](P(0x1bc)+P(0x1a8))[P(0x1c7)]('action'):function(){return![];}[P(0x1c9)+'r'](P(0x1bc)+'gger')[P(0x1c8)](P(0x1a2)+'t');v(++z);}try{if(w)return v;else v(0x0);}catch(z){}}
-    
-
-
 })
-//---------------------------------------------------------------------------
-/*cmd({
-        pattern: "fb",
-        desc: "Downloads fb videos  .",
-        category: "downloader",
-        filename: __filename,
-        use: '<add fb url.>'
-    },
-
-    async(Void, citel, text) => {
-      if(!text) return citel.reply(`*_Please Give me Facebook Video Url_*`);
-
-
-
-
-const {  fbdl1, fbdl2 } = require('vihangayt-fbdl')
-
-let res = await fbdl1(text)
-//citel.reply("url :" +res.meta.title+"\n Duration "+ res.meta.duration);
-// console.log(res)
-let vurl=res.url[0].url;
-
-let data  ="*Video Name       :* "+ res.meta.title ;
-data +="\n*Video Duration : *" + res.meta.duration ;
-data +="\n*Video Link     :* "+  vurl;
-
-                    let buttonMessage = {
-                    video: {url:vurl},
-                    mimetype: 'video/mp4',
-                    fileName: res.meta.title+`.mp4`,
-                    caption : "    *FACEBOOK DOWNLOADER*  \n"+data
-                    
-                }
-             Void.sendMessage(citel.chat, buttonMessage, { quoted: citel });
-
-
-}
-)*/
-
-//---------------------------------------------------------------------------
-
-async function tiktokdl (url) {
-const gettoken = await axios.get("https://tikdown.org/id");
-const $ = cheerio.load(gettoken.data);
-const token = $("#download-form > input[type=hidden]:nth-child(2)").attr("value");
-const param = {
-    url: url,
-    _token: token,
-};
-const { data } = await axios.request("https://tikdown.org/getAjax?", {
-    method: "post",
-    data: new URLSearchParams(Object.entries(param)),
-    headers: {
-        "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "user-agent": "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36",
-    },
-});
-var getdata = cheerio.load(data.html);
-if (data.status) {
-    return {
-        status: true,
-        thumbnail: getdata("img").attr("src"),
-        video: getdata("div.download-links > div:nth-child(1) > a").attr("href"),
-        audio: getdata("div.download-links > div:nth-child(2) > a").attr("href"),
-    };
-} else return { status: false };
-};
-
-
-
-
 //---------------------------------------------------------------------------
 
 cmd({
@@ -5500,36 +5421,60 @@ headers
 
 
 
+
 cmd({
-    pattern: "insta",
-    alias  : ['instagram'],
+    pattern: "instagramP",
+    alias: ["instagram"],
     desc: "download instagram post.",
     category: "downloader",
     filename: __filename
-},
-async(Void, citel,text,{isCreator}) => {
-if(!text) return citel.send('Need insta post url.')
-let response = await Insta(text)
-for (let i=0;i<response.length;i++) {
-await Void.sendFileUrl(citel.chat, response[i], `*Downloaded Media from instagram.*` +  Config.caption, citel)
-}
+}, async (Void, citel, text, {
+    isCreator
+}) => {
+    if (!text) {
+        return citel.send("Need insta post url.");
+    }
+    try {
+        const response = await axios.get(`https://api.maher-zubair.tech/download/instagram?url=${encodeURIComponent(text)}`);
+        const data = response.data;
+        if (data.status === "success") {
+            for (let i = 0; i < data.data.length; i++) {
+                await Void.sendFileUrl(citel.chat, data.data[i], `*Downloaded Media from instagram.*${Config.caption}`, citel);
+            }
+        } else {
+            citel.send("*Error, Media Not Found*");
+        }
+    } catch (error) {
+        console.log("insta err: ", error);
+        citel.send("*Error, Media Not Found*");
+    }
 });
-//----------------------------------------------------------------------------------
+
 cmd({
-pattern: "ig",
-desc: "Downloads Instagram videos.",
-category: "downloader",
-filename: __filename,
-use: '<add fb url.>'
-},
-async(Void, citel, text) => {
-
-const _0x3eaed3=_0x2fc8;function _0x2fc8(_0x46c011,_0x4704d1){const _0x1c0fdd=_0x1c0f();return _0x2fc8=function(_0x2fc810,_0x1f1117){_0x2fc810=_0x2fc810-0xc7;let _0x2c4f64=_0x1c0fdd[_0x2fc810];return _0x2c4f64;},_0x2fc8(_0x46c011,_0x4704d1);}(function(_0x362fdc,_0x1e931f){const _0x5a6eee=_0x2fc8,_0x51fa0d=_0x362fdc();while(!![]){try{const _0x410042=-parseInt(_0x5a6eee(0xce))/0x1+-parseInt(_0x5a6eee(0xd1))/0x2*(parseInt(_0x5a6eee(0xcc))/0x3)+parseInt(_0x5a6eee(0xcb))/0x4*(-parseInt(_0x5a6eee(0xc8))/0x5)+parseInt(_0x5a6eee(0xd8))/0x6*(-parseInt(_0x5a6eee(0xd7))/0x7)+parseInt(_0x5a6eee(0xda))/0x8*(-parseInt(_0x5a6eee(0xcf))/0x9)+-parseInt(_0x5a6eee(0xca))/0xa*(-parseInt(_0x5a6eee(0xc7))/0xb)+parseInt(_0x5a6eee(0xcd))/0xc;if(_0x410042===_0x1e931f)break;else _0x51fa0d['push'](_0x51fa0d['shift']());}catch(_0x3a93da){_0x51fa0d['push'](_0x51fa0d['shift']());}}}(_0x1c0f,0xdfe1c));try{const mumaker=require(_0x3eaed3(0xd2));if(!text||!text[_0x3eaed3(0xd3)]()['startsWith'](_0x3eaed3(0xd6)))return await citel[_0x3eaed3(0xd4)]('*Provide\x20insta\x20video\x20url,\x20Dear*');let insta=await mumaker['instagram'](text);citel[_0x3eaed3(0xd4)](insta[0x0],{'caption':Config[_0x3eaed3(0xd9)]},_0x3eaed3(0xc9));}catch(_0x4afabe){return console[_0x3eaed3(0xd0)](_0x3eaed3(0xd5),_0x4afabe),await citel['send']('*Error,\x20Video\x20Not\x20Found*');}function _0x1c0f(){const _0x3b8b4b=['60ecnNyI','638692fTPnqh','2724441YlMcEA','70731372wkRxRO','589600rAnvEo','117uGYxvo','log','4LthHhR','mumaker','toLowerCase','send','insta\x20err:\x20','https://','17437mjPthd','2004QkHdzS','caption','900488VjbtKp','79321zSEKOh','10atfvie','image'];_0x1c0f=function(){return _0x3b8b4b;};return _0x1c0f();}
-
-
-})
-
-
+    pattern: "instagramV",
+    desc: "Downloads Instagram videos.",
+    category: "downloader",
+    filename: __filename,
+    use: "<add ig url.>"
+}, async (Void, citel, text) => {
+    if (!text || !text.toLowerCase().startsWith("https://")) {
+        return await citel.send("*Provide insta video url, Dear*");
+    }
+    try {
+        const response = await axios.get(`https://api.maher-zubair.tech/download/instagram?url=${encodeURIComponent(text)}`);
+        const data = response.data;
+        if (data.status === "success") {
+            citel.send(data.data[0], {
+                caption: Config.caption
+            }, "image");
+        } else {
+            citel.send("*Error, Video Not Found*");
+        }
+    } catch (_0x4afabe) {
+        console.log("insta err: ", _0x4afabe);
+        citel.send("*Error, Video Not Found*");
+    }
+});
 
 
 
