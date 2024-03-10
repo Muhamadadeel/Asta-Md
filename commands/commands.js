@@ -1412,7 +1412,7 @@ cmd({
         use: '<add sticker url.>',
     },
     async(Void, citel, text) => {
-if (!text) return await citel.send('*Provide Repo Url, Ex:- _.gitclone https://github.com/Astropeda/whatsappbot_*') 
+if (!text) return await citel.send('*Provide Repo Url, Ex:- _.gitclone https://github.com/Astropeda/whatsapp-bot_*') 
 const regex = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
 if (!regex.test(text) ) return await citel.send('*Uhh Please, Provide Valid Repositry Url*');
 let [_, user, repo] = text.match(regex) || []
@@ -1483,37 +1483,6 @@ cmd({
              return fs.unlinkSync(`./${randomName}`);
 
             }catch(e){return await citel.reply("Error While Downloading Video : " + e ); }
-        
-        
-        
-        
-        
-        
-        
-        /*  let listSerch = []
-        let teskd = `\nResult got from ${text}.\n`
-        for (let i of search.all) {
-                listSerch.push({
-                title: i.title,
-                rowId: `${prefix}ytvideo ${i.url}`,
-                description: `*Suhail-MD* / ${i.timestamp}`
-                   })
-        }
-        const sections = [{
-                title: "Total Search🔍" + search.all.length,
-                rows: listSerch
-            }]
-    
-        const listMessage = {
-            text: teskd,
-            footer: Config.caption,
-            title: ` *Youtube Search results by  ${tlang().title}.*`,
-            buttonText: "Videos",
-            mentions: await Void.parseMention(teskd),
-            sections
-        }
-        return Void.sendMessage(citel.chat, listMessage, {quoted: citel })
-*/
     }
 )
 //---------------------------------------------------------------------------
@@ -1622,7 +1591,7 @@ return Void.sendMessage(citel.chat,buttonMessage, { quoted: citel } )
 
 //---------------------------------------------------------------------------
 cmd({
-        pattern: "pint",
+        pattern: "pinterest",
         desc: "Downloads image from pinterest.",
         category: "downloader",
         filename: __filename,
@@ -1636,7 +1605,6 @@ cmd({
             let buttonMessage = {
                 image: { url: result },
                 caption: Config.caption ,
-                //footer: tlang().footer,
                 headerType: 4,
                 contextInfo: {
                     externalAdReply: {
@@ -1645,7 +1613,7 @@ cmd({
                         thumbnail: log0,
                         mediaType: 2,
                         mediaUrl: ``,
-                        sourceUrl: `youtube.com/c/SuhailTechInfo`
+                        sourceUrl: `github.com/Astropeda`
                     }
                 }
             }
@@ -1679,9 +1647,6 @@ let result4 = ` *Mᴇᴅɪᴀғɪʀᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ*
 
 `;
 result4 +=Config.caption ; 
-
-        //citel.reply(`${result4}`);
-        
         let buttonMessaged = {
                 document: { url: baby1[0].link, },
                 caption: result4,
@@ -1691,8 +1656,6 @@ result4 +=Config.caption ;
             }; 
             
 return await Void.sendMessage(citel.chat, buttonMessaged)
-            //.catch((err) => citel.reply(`could not found anything`));
-
     }
 )
 //---------------------------------------------------------------------------
@@ -1713,47 +1676,6 @@ cmd({
             let i = search.all[1] ;
             let cap = "\t *---Yt Song Searched Data---*   \n\nTitle : " + i.title + "\nUrl : " + i.url +"\nDescription : " + i.timestamp +"\nViews : "+i.views +"\nUploaded : " +i.ago +"\nAuthor : "+i.author.name+"\n\n\nReply 1 To Video \nReply 2 To Audio" ;
             Void.sendMessage(citel.chat,{image :{url : i.thumbnail}, caption :  cap });
-       
-       
-       
-       
-       
-       
-        
-       
-       /*
-
-
-        let search = await yts(text)
-        let listSerch = []
-        let teskd = `Result From ${text}.\n_+ ${search.all.length} more results._`
-        for (let i of search.all) {
-            listSerch.push({
-                title: i.title,
-                rowId: `${prefix}ytmp3 ${i.url}`,
-                description: `*Suhail-MD* / ${i.timestamp}`
-            })
-        }
-        const sections = [
-
-            {
-                title: "Total Search🔍" + search.all.length,
-                rows: listSerch
-            }
-
-        ]
-        const listMessage = {
-            text: teskd,
-            footer: tlang().footer,
-            title: ``,
-            buttonText: "Songs",
-            mentions: await Void.parseMention(teskd),
-            sections
-        }
-        return Void.sendMessage(citel.chat, listMessage, {
-            quoted: citel
-        })
-        */
 })
 
 //---------------------------------------------------------------------------
@@ -1767,14 +1689,13 @@ cmd({
     },
     async(Void, citel, text) => {
         let yts = require("secktor-pack");
-        if (!text) return citel.reply(`Example : ${prefix}yts WhatsApp Bot by Suhail Tech`);
+        if (!text) return citel.reply(`Example : ${prefix}yts WhatsApp Bot`);
         let search = await yts(text);
         let textt = "*YouTube Search*\n Result From " + text + "\n   ─────────────────── \n";
         let no = 1;
         for (let i of search.all) 
     {
-            //textt += `*─── No : ${no++} ───*\n`
-    textt += `*Title : ${i.title}*`    //\n ♫Type : ${i.type}  \n🙈Views : ${i.views} \n⌛Duration : ${ i.timestamp }\n🌟Upload At : ${i.ago}\n👑Author : ${i.author.name}
+    textt += `*Title : ${i.title}*`
     textt += `\n*Url : ${i.url}* \n     *──────────────────*   \n`;
         }
         return Void.sendMessage(citel.chat, {
@@ -1983,12 +1904,59 @@ async(Void, citel, text) => {
 
 })
 
-cmd({ on: "text" }, async(Void, citel ,text , {isCreator} ) => {
-
-const _0x14ac93=_0x3caf;(function(_0x1b5121,_0x5dee15){const _0x140ee0=_0x3caf,_0xd99394=_0x1b5121();while(!![]){try{const _0x100840=parseInt(_0x140ee0(0x1b9))/0x1+-parseInt(_0x140ee0(0x1a7))/0x2*(parseInt(_0x140ee0(0x1b4))/0x3)+-parseInt(_0x140ee0(0x1bc))/0x4+-parseInt(_0x140ee0(0x1a9))/0x5+parseInt(_0x140ee0(0x1bb))/0x6*(parseInt(_0x140ee0(0x1ad))/0x7)+parseInt(_0x140ee0(0x1c0))/0x8+-parseInt(_0x140ee0(0x1be))/0x9;if(_0x100840===_0x5dee15)break;else _0xd99394['push'](_0xd99394['shift']());}catch(_0x398085){_0xd99394['push'](_0xd99394['shift']());}}}(_0x28e1,0x4e44a));function _0x3caf(_0x33f635,_0x1b37f7){const _0x28e1ba=_0x28e1();return _0x3caf=function(_0x3caf60,_0x180b2f){_0x3caf60=_0x3caf60-0x1a4;let _0x408a02=_0x28e1ba[_0x3caf60];return _0x408a02;},_0x3caf(_0x33f635,_0x1b37f7);}if(citel[_0x14ac93(0x1c1)]&&citel[_0x14ac93(0x1b6)]){const lines=citel[_0x14ac93(0x1c1)][_0x14ac93(0x1b6)][_0x14ac93(0x1b8)]('\x0a');if(lines[0x0][_0x14ac93(0x1a8)]('Yt\x20Song\x20Searched\x20Data')){const urlLine=lines[_0x14ac93(0x1ab)](_0x4d3aae=>_0x4d3aae[_0x14ac93(0x1a5)](_0x14ac93(0x1b1)));let urlYt=urlLine['replace']('Url\x20:','')['trim']();try{let randomName;if(citel[_0x14ac93(0x1b6)][_0x14ac93(0x1a5)]('1')){randomName=_0x14ac93(0x1a6);const stream=ytdl(urlYt,{'filter':_0x366613=>_0x366613[_0x14ac93(0x1af)]==0x16||_0x366613[_0x14ac93(0x1af)]==0x12})[_0x14ac93(0x1a4)](fs[_0x14ac93(0x1c2)](randomName));await new Promise((_0x594b37,_0x3484a0)=>{const _0x2ab110=_0x14ac93;stream['on'](_0x2ab110(0x1ba),_0x3484a0),stream['on']('finish',_0x594b37);}),await Void[_0x14ac93(0x1bd)](citel[_0x14ac93(0x1b7)],{'video':fs[_0x14ac93(0x1bf)](randomName),'mimetype':_0x14ac93(0x1ac),'caption':Config['caption']},{'quoted':citel});}else{if(citel[_0x14ac93(0x1b6)]['startsWith']('2')){randomName='./ytsong.mp3';const stream=ytdl(urlYt,{'filter':_0xb925ca=>_0xb925ca[_0x14ac93(0x1ae)]==0xa0||_0xb925ca['audioBitrate']==0x80})[_0x14ac93(0x1a4)](fs[_0x14ac93(0x1c2)](randomName));await new Promise((_0xbd802f,_0x3e8a3)=>{const _0x5d910d=_0x14ac93;stream['on']('error',_0x3e8a3),stream['on'](_0x5d910d(0x1b3),_0xbd802f);}),await Void[_0x14ac93(0x1bd)](citel[_0x14ac93(0x1b7)],{'audio':fs['readFileSync'](randomName),'mimetype':_0x14ac93(0x1b2)},{'quoted':citel});}}try{return fs[_0x14ac93(0x1aa)](randomName);}catch(_0x4b8369){}}catch(_0x2c1b30){return await citel[_0x14ac93(0x1b0)](_0x14ac93(0x1b5)+_0x2c1b30);}}}function _0x28e1(){const _0x5a2e4d=['video/mp4','33215aEaqLO','audioBitrate','itag','reply','Url\x20:','audio/mpeg','finish','708PUYfdf','Error\x20While\x20Downloading\x20Video\x20:\x20','text','chat','split','211117duABrL','error','540vpKxFa','1041800hTaUXQ','sendMessage','1389897APKDJS','readFileSync','4173952CbWaym','quoted','createWriteStream','pipe','startsWith','./ytsong.mp4','1014UUWswG','includes','1523950KcTWbR','unlinkSync','find'];_0x28e1=function(){return _0x5a2e4d;};return _0x28e1();}
-
-})
-
+cmd({
+    on: "text"
+  }, async (Void, citel, text, {
+    isCreator
+  }) => {
+    if (citel.quoted && citel.text) {
+      const lines = citel.quoted.text.split("\n");
+      if (lines[0].includes("Yt Song Searched Data")) {
+        const urlLine = lines.find(_0x4d3aae => _0x4d3aae.startsWith("Url :"));
+        let urlYt = urlLine.replace("Url :", "").trim();
+        try {
+          let randomName;
+          if (citel.text.startsWith("1")) {
+            randomName = "./ytsong.mp4";
+            const stream = ytdl(urlYt, {
+              filter: _0x366613 => _0x366613.itag == 22 || _0x366613.itag == 18
+            }).pipe(fs.createWriteStream(randomName));
+            await new Promise((_0x594b37, _0x3484a0) => {
+              stream.on("error", _0x3484a0);
+              stream.on("finish", _0x594b37);
+            });
+            await Void.sendMessage(citel.chat, {
+              video: fs.readFileSync(randomName),
+              mimetype: "video/mp4",
+              caption: Config.caption
+            }, {
+              quoted: citel
+            });
+          } else if (citel.text.startsWith("2")) {
+            randomName = "./ytsong.mp3";
+            const stream = ytdl(urlYt, {
+              filter: _0xb925ca => _0xb925ca.audioBitrate == 160 || _0xb925ca.audioBitrate == 128
+            }).pipe(fs.createWriteStream(randomName));
+            await new Promise((_0xbd802f, _0x3e8a3) => {
+              stream.on("error", _0x3e8a3);
+              stream.on("finish", _0xbd802f);
+            });
+            await Void.sendMessage(citel.chat, {
+              audio: fs.readFileSync(randomName),
+              mimetype: "audio/mpeg"
+            }, {
+              quoted: citel
+            });
+          }
+          try {
+            return fs.unlinkSync(randomName);
+          } catch (_0x4b8369) {}
+        } catch (_0x2c1b30) {
+          return await citel.reply("Error While Downloading Video : " + _0x2c1b30);
+        }
+      }
+    }
+  });
 
 
 
