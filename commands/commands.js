@@ -901,9 +901,29 @@ async(Void, citel) => {
 
 
 //DEAP SEA
-async function singleText(Void, citel , url = '' , text1 , text2 ){
-    const _0x369e3b=_0x5b0f;(function(_0x243142,_0x573730){const _0x2c040a=_0x5b0f,_0x49c469=_0x243142();while(!![]){try{const _0x23b873=-parseInt(_0x2c040a(0x1aa))/0x1+parseInt(_0x2c040a(0x1a3))/0x2+-parseInt(_0x2c040a(0x1a7))/0x3*(parseInt(_0x2c040a(0x1a4))/0x4)+parseInt(_0x2c040a(0x1a9))/0x5+-parseInt(_0x2c040a(0x19f))/0x6*(parseInt(_0x2c040a(0x1a1))/0x7)+parseInt(_0x2c040a(0x1a6))/0x8*(parseInt(_0x2c040a(0x1a5))/0x9)+-parseInt(_0x2c040a(0x19c))/0xa;if(_0x23b873===_0x573730)break;else _0x49c469['push'](_0x49c469['shift']());}catch(_0x473a48){_0x49c469['push'](_0x49c469['shift']());}}}(_0xb69c,0x7c465));function _0xb69c(){const _0x4d1386=['mumaker','*_Error\x20while\x20Generating\x20Your\x20Photo_*','65330cKdpnt','.html','error\x20For\x20TextPro\x20:\x20','29586xxrpiu','https://textpro.me/','119TGEesl','caption','1450616vOHMzo','1644RZJhcL','6105816IoLRZZ','8SAfiCS','2802NxQUUH','log','309735ebjXle','482416jsInja','textpro'];_0xb69c=function(){return _0x4d1386;};return _0xb69c();}const maker=require(_0x369e3b(0x19a));function _0x5b0f(_0x3d9a0c,_0x1d2daf){const _0xb69caa=_0xb69c();return _0x5b0f=function(_0x5b0feb,_0x14d3ff){_0x5b0feb=_0x5b0feb-0x19a;let _0x240a04=_0xb69caa[_0x5b0feb];return _0x240a04;},_0x5b0f(_0x3d9a0c,_0x1d2daf);}try{let anu,urlss=_0x369e3b(0x1a0)+url+_0x369e3b(0x19d);if(text1&&!text2)anu=await maker[_0x369e3b(0x1ab)](urlss,text1);else text1&&text2&&(anu=await maker[_0x369e3b(0x1ab)](urlss,[text1,text2]));return await Void['sendMessage'](citel['chat'],{'image':{'url':anu['image']},'caption':Config[_0x369e3b(0x1a2)]},{'quoted':citel});}catch(_0x450f19){return console[_0x369e3b(0x1a8)](_0x369e3b(0x19e),_0x450f19),await citel['send'](_0x369e3b(0x19b));}
-}
+async function singleText(Void, citel, url = "", text1, text2) {
+    const maker = require("mumaker");
+    try {
+      let anu;
+      let urlss = "https://textpro.me/" + url + ".html";
+      if (text1 && !text2) {
+        anu = await maker.textpro(urlss, text1);
+      } else if (text1 && text2) {
+        anu = await maker.textpro(urlss, [text1, text2]);
+      }
+      return await Void.sendMessage(citel.chat, {
+        image: {
+          url: anu.image
+        },
+        caption: Config.caption
+      }, {
+        quoted: citel
+      });
+    } catch (_0x450f19) {
+      console.log("error For TextPro : ", _0x450f19);
+      return await citel.send("*_Error while Generating Your Photo_*");
+    }
+  }
 //========================================================================================================
 
 //-----------------------------------------------------------------------------------
@@ -1236,50 +1256,55 @@ cmd({ pattern: "blackpink", category: "logo", desc: "Some text to image feature 
     }
 })
 //---------------------------------------------------------------------------
-
-const { MessageType } = require('@adiwajshing/baileys');
-const { exec } = require('child_process');
-const tiktokdl = require('tiktok-scraper');
-const axios = require('axios');
-
-cmd ({
-  pattern: "tiktok",
-  desc: "Download TikTok video",
-  category: "downloader",
-  filename: __filename,
-  use: '<add tiktok url>'
-},
-async (Void, citel, text) {
-    if (!text) return await citel.reply('*Uhh Please, Provide me tiktok Video Url*\n*_Ex .tiktok https://www.tiktok.com/@dakwahmuezza/video/7150544062221749531_*');
-    let url = text.split(" ")[0];
-    if (!/https:\/\/www\.tiktok\.com\/@.+\/video\/.+/.test(url)) return await citel.send('*Uhh Please, Give me Valid Tiktok Video Url!*');
-    try {
-        const response = await axios.get(`https://api.maher-zubair.tech/download/tiktok2?url=${url}`);
-        if (response.data.status) {
-            const { video, thumbnail, audio } = response.data;
-            await citel.sendMessage(citel.chat, { video: { url: video }, caption: Config.caption }, { quoted: citel });
-        } else {
+cmd ( {
+    name: 'tiktok',
+    description: 'Downloads Tiktok Videos Via Url.',
+    category: 'downloader',
+    use: '<add tiktok url.>',
+    async execute(Void, citel, text) {
+        if (!text) return await citel.reply('*Uhh Please, Provide me tiktok Video Url*\n*_Ex .tiktok https://www.tiktok.com/@dakwahmuezza/video/7150544062221749531_*');
+        let url = text.split(" ")[0];
+        if (!/https:\/\/www\.tiktok\.com\/@.+\/video\/.+/.test(url)) return await citel.send('*Uhh Please, Give me Valid Tiktok Video Url!*');
+        try {
+            const response = await axios.get(`https://api.maher-zubair.tech/download/tiktok2?url=${url}`);
+            if (response.data.status) {
+                const { video, thumbnail, audio } = response.data;
+                await citel.sendMessage(citel.chat, { video: { url: video }, caption: Config.caption }, { quoted: citel });
+            } else {
+                await citel.send('Error While Downloading Your Video');
+            }
+        } catch (error) {
+            console.log(error);
             await citel.send('Error While Downloading Your Video');
         }
-    } catch (error) {
-        console.log(error);
-        await citel.send('Error While Downloading Your Video');
     }
 }
 )
 //------------------
-cmd({
-    pattern: "facebook",
-    alias :  ['fb','fbdl'],
-    desc: "Downloads fb videos.",
-    category: "downloader",
-    filename: __filename,
-    use: '<add fb url.>'
-},
-async(Void, citel, text) => {
-    const _0x53f436=_0x4a53;(function(_0x469779,_0x9bf43f){const _0x1184c6=_0x4a53,_0x33c964=_0x469779();while(!![]){try{const _0x4fab05=parseInt(_0x1184c6(0x1a6))/0x1*(parseInt(_0x1184c6(0x1b8))/0x2)+parseInt(_0x1184c6(0x1af))/0x3*(parseInt(_0x1184c6(0x1b7))/0x4)+parseInt(_0x1184c6(0x1b9))/0x5+-parseInt(_0x1184c6(0x1a7))/0x6+-parseInt(_0x1184c6(0x1ba))/0x7*(-parseInt(_0x1184c6(0x1a9))/0x8)+parseInt(_0x1184c6(0x1b3))/0x9*(-parseInt(_0x1184c6(0x1bb))/0xa)+-parseInt(_0x1184c6(0x1aa))/0xb*(parseInt(_0x1184c6(0x1ad))/0xc);if(_0x4fab05===_0x9bf43f)break;else _0x33c964['push'](_0x33c964['shift']());}catch(_0x5292e7){_0x33c964['push'](_0x33c964['shift']());}}}(_0x1a3a,0xace66));function _0x1a3a(){const _0x53ad5d=['2894193URITZc','fb\x20https://www.facebook.com/watch/?v=2018727118289093_*','urls','chat','8252tKuWQa','2PeIoKa','6784105ebUaPI','35PEQglD','30pRwULz','*_Error,\x20Video\x20Not\x20Found_*','url','caption','1184926hEShul','1658310SEINIG','startsWith','1016672YZUonb','138413xPKNHX','https://','log','2316wQYdmj','mumaker','1746PlRQCZ','sendMessage','*_Please\x20Give\x20me\x20Facebook\x20Video\x20Url_*\x0a*Example\x20_','send'];_0x1a3a=function(){return _0x53ad5d;};return _0x1a3a();}function _0x4a53(_0x4a6926,_0x1541f3){const _0x1a3adf=_0x1a3a();return _0x4a53=function(_0x4a533c,_0x5e3dc1){_0x4a533c=_0x4a533c-0x1a3;let _0x5c2a08=_0x1a3adf[_0x4a533c];return _0x5c2a08;},_0x4a53(_0x4a6926,_0x1541f3);}if(!text||!text[_0x53f436(0x1a8)](_0x53f436(0x1ab)))return await citel[_0x53f436(0x1b2)](_0x53f436(0x1b1)+prefix+_0x53f436(0x1b4));try{const {facebook}=require(_0x53f436(0x1ae));let info=await facebook(text);return await Void[_0x53f436(0x1b0)](citel[_0x53f436(0x1b6)],{'video':{'url':info[_0x53f436(0x1b5)][0x0][_0x53f436(0x1a4)]},'caption':Config[_0x53f436(0x1a5)]},{'quoted':citel});}catch(_0xb02f31){return await citel[_0x53f436(0x1b2)](_0x53f436(0x1a3));console[_0x53f436(0x1ac)]('error\x20while\x20Fb\x20Downloading\x20:\x20',_0xb02f31);}
-
-})
+cmd ( {
+    name: 'facebook',
+    desc: 'Downloads fb videos.',
+    category: 'downloader',
+    use: '<add fb url.>',
+    async (Void, citel, text) {
+        if (!text || !text.startsWith("https://")) {
+            return await citel.reply('*_Please Give me Facebook Video Url_*\n*Example _' + Config.prefix + 'fb https://www.facebook.com/watch/?v=2018727118289093_*');
+        }
+        try {
+            const response = await axios.get(`https://api.maher-zubair.tech/download/fb2?url=${text}`);
+            if (response.data.status) {
+                const { video, thumbnail, audio } = response.data;
+                await citel.sendMessage(citel.chat, { video: { url: video }, caption: Config.caption }, { quoted: citel });
+            } else {
+                await citel.send('*_Error, Video Not Found_*');
+            }
+        } catch (error) {
+            console.log("error while Fb Downloading : ", error);
+            await citel.send('*_Error, Video Not Found_*');
+        }
+    }
+}
+)
 
 //---------------------------------------------------------------------------
 
@@ -1342,42 +1367,14 @@ fs.unlink(filePath, (err) => {
   if (err) { console.error('Error deleting file:', err); } else { console.log('File deleted successfully'); } });
 }) .catch(error => {
 fs.unlink(filePath)
-return citel.send('*_Apk not Found, Sorry_*')//:', error.message);
+return citel.send('*_Apk not Found, Sorry_*')
 });
-
-
-
-
-
-
-
-/*
-if(!text) return citel.reply(`*_Please Give Me App Name_*`);
-let searc = await search(text);
-//console.log(searc);
-let data = await download(searc[0].id);
-//console.log(data);
-
- let  inf  ="App Name : " +data.name;
-     inf +="\n*App id        :* " +data.package;
-     inf +="\n*App id        :* " +data.lastup;
-     inf +="\n*App Size     :* " +data.size;
-    // inf +="\n*App Link     :* " +data.dllink;
-     
-                    let buttonMessage = {
-                    document: {url : data.dllink},
-                    mimetype: 'application/vnd.android.package-archive',
-                    fileName: data.name+`.apk`,
-                    caption : inf
-                    
-                }
-             Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
-*/}
+}
 )
 //---------------------------------------------------------------------------
 cmd({
         pattern: "gdrive",
-        desc: "Downloads telegram stickers.",
+        desc: "Downloads Gdrive.",
         category: "downloader",
         filename: __filename,
         use: '<add sticker url.>'
@@ -1415,14 +1412,13 @@ cmd({
         use: '<add sticker url.>',
     },
     async(Void, citel, text) => {
-if (!text) return await citel.send('*Provide Repo Url, Ex:- _.gitclone https://github.com/SuhailTechInfo/Secktor-bot_*') 
+if (!text) return await citel.send('*Provide Repo Url, Ex:- _.gitclone https://github.com/Astropeda/whatsappbot_*') 
 const regex = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
 if (!regex.test(text) ) return await citel.send('*Uhh Please, Provide Valid Repositry Url*');
 let [_, user, repo] = text.match(regex) || []
 repo = repo.replace(/.git$/, '')
 let url = `https://api.github.com/repos/${user}/${repo}/zipball`
 let filename = (await fetch(url, { method: 'HEAD' })).headers.get('content-disposition').match(/attachment; filename=(.*)/)[1]
-//citel.send(`✳️ Wait, sending repository.. \n` + filename.toString() )
 await Void.sendMessage(citel.chat , {document : { url : url }, fileName:  filename,mimetype: 'application/zip',  })
 
 })
