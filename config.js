@@ -28,10 +28,10 @@ global.audio = '' ;
 global.video = '' ;
 global.blockJids = process.env.BLOCK_JID ||'120363023983262391@g.us' ;
 global.allowJids = process.env.ALLOW_JID ||'120363022922797633@g.us' ;
-global.email = '' ;
-global.github = '' ;
-global.location = '' ;
-global.timezone  = process.env.TIME_ZONE || ''
+global.email = process.env.EMAIL || '';
+global.github = process.env.GITHUB || '';
+global.location = process.env.LOCATION || '';
+global.timezone = process.env.TIME_ZONE || '';
 global.gurl = '' ;
 global.sudo =  process.env.SUDO || "" ;
 global.devs = "";
@@ -58,12 +58,12 @@ module.exports = {
   MsgsInLog:process.env.MSGS_IN_LOG ||'false',
   pmMsgsInLog:process.env.PM_MSGS_IN_LOGS ||'false',
   levelupmessage: process.env.LEVEL_UP_MESSAGE || 'false',
-  antilink_values: process.env.ANTILINK_VALUES || 'https://,chat.whatsapp.com',
+  antilink_values: process.env.ANTILINK_VALUES || 'https://chat.whatsapp.com',
   BRANCH: process.env.BRANCH || 'main',
   HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
   HEROKU_API_KEY: process.env.HEROKU_API_KEY,
   REMOVE_BG_KEY: process.env.REMOVE_BG_KEY || "Nh4iTxEH5k3vmHugFqoYktGM",
-  caption :process.env.CAPTION || "\t*•ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴜʜᴀɪʟ²²¹-ᴍᴅ•* ",
+  caption :process.env.CAPTION || "ASTA-MD",
   OPENAI_API_KEY: process.env.OPENAI_API_KEY ||'' ,
   VERSION: process.env.VERSION || 'v.0.0.3',
   LANG: process.env.THEME || 'ASTA',
