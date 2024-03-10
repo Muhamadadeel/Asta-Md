@@ -10,6 +10,14 @@ const {
     prefix,
     Config
 } = require('../lib')
+const Config = require('../config');
+const cheerio = require('cheerio');
+const {
+    Void,
+    citel,
+    text,
+    isCreator
+} = require('../lib');
 const {
     mediafire
 } = require("../lib/mediafire.js");
@@ -142,6 +150,100 @@ cmd({
             }
         }
     })
+    cmd({
+        pattern: "twitter",
+        alias: ["tw", "twt"],
+        desc: "Download Twitter media.",
+        category: "downloader",
+        filename: __filename
+    }, async (Void, citel, text, {
+        isCreator
+    }) => {
+        if (!text) {
+            return citel.send("Please provide a Twitter media URL.");
+        }
+        try {
+            const { data } = await axios.get(`https://api.maher-zubair.tech/download/twitter?url=${text}`);
+            if (data.status) {
+                const $ = cheerio.load(data.media);
+                const media = $('a').attr('href');
+                if (media) {
+                    await Void.sendFileUrl(citel.chat, media, `Downloaded Media from Twitter.\n${Config.caption}`, citel);
+                } else {
+                    await citel.send("Error while downloading media.");
+                }
+            } else {
+                await citel.send("Error while downloading media.");
+            }
+        } catch (error) {
+            console.log("Error while downloading Twitter media: ", error);
+            await citel.send("Error while downloading media.");
+        }
+    });
+    //==============================================================================
+    cmd({
+        pattern: "tiktokimg",
+        alias: ["tti"],
+        desc: "Download TikTok image.",
+        category: "downloader",
+        filename: __filename
+    }, async (Void, citel, text, {
+        isCreator
+    }) => {
+        if (!text) {
+            return citel.send("Please provide a TikTok image URL.");
+        }
+        try {
+            const { data } = await axios.get(`https://api.maher-zubair.tech/download/tiktokimg?url=${text}`);
+            if (data.status) {
+                const $ = cheerio.load(data.media);
+                const img = $('img').attr('src');
+                if (img) {
+                    await Void.sendFileUrl(citel.chat, img, `Downloaded Media from TikTok.\n${Config.caption}`, citel);
+                } else {
+                    await citel.send("Error while downloading image.");
+                }
+            } else {
+                await citel.send("Error while downloading image.");
+            }
+        } catch (error) {
+            console.log("Error while downloading TikTok image: ", error);
+            await citel.send("Error while downloading image.");
+        }
+    });
+    //===================================================================================
+    cmd({
+        pattern: "threads",
+        alias: ["thread"],
+        desc: "Download threads videos, reels, and images.",
+        category: "downloader",
+        filename: __filename
+    }, async (Void, citel, text, {
+        isCreator
+    }) => {
+        if (!text) {
+            return citel.send("Please provide a threads URL.");
+        }
+        try {
+            const { data } = await axios.get(`https://api.maher-zubair.tech/download/threads?url=${text}`);
+            if (data.status) {
+                const $ = cheerio.load(data.media);
+                const media = $('a').attr('href');
+                if (media) {
+                    await Void.sendFileUrl(citel.chat, media, `Downloaded Media from threads.\n${Config.caption}`, citel);
+                } else {
+                    await citel.send("Error while downloading media.");
+                }
+            } else {
+                await citel.send("Error while downloading media.");
+            }
+        } catch (error) {
+            console.log("Error while downloading threads media: ", error);
+            await citel.send("Error while downloading media.");
+        }
+    });
+//=========================================================================================
+
 //==========================================================================================
 cmd({
         pattern: "tiktok",
