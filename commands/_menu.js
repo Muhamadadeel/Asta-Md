@@ -191,8 +191,8 @@ astro_patch.cmd({
       }
     });
     const time = moment(moment()).format("HH:mm:ss");
-    moment.tz.setDefault("Asia/karachi").locale("id");
-    const date = moment.tz("asia/karachi").format("DD/MM/YYYY");
+    moment.tz.setDefault("Africa/Lagos").locale("id");
+    const date = moment.tz("Africa/Lagos").format("DD/MM/YYYY");
     let total = await sck1.countDocuments();
     let str = up_up + "\n" + up_mid + " Theme:- " + tlang().title + "\n" + up_mid + " Owner:- " + Config.ownername + "\n" + up_mid + " Plugins:- " + commands.length + "\n" + up_mid + " Uptime:- " + runtime(process.uptime()) + "\n" + up_mid + " Mem:- " + formatp(os.totalmem() - os.freemem()) + "/" + formatp(os.totalmem()) + "\n" + up_mid + " Time:- " + time + "\n" + up_mid + " Date:- " + date + "\n" + up_btm + "\n\n";
     for (const category in cmds) {
@@ -288,8 +288,8 @@ astro_patch.cmd({
     }
   
     const time = moment(moment()).format("HH:mm:ss");
-    moment.tz.setDefault("Asia/karachi").locale("id");
-    const date = moment.tz("asia/karachi").format("DD/MM/YYYY");
+    moment.tz.setDefault("Africa/Lagos").locale("id");
+    const date = moment.tz("Africa/Lagos").format("DD/MM/YYYY");
     let total = await sck1.countDocuments();
   
     str =

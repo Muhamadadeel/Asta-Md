@@ -138,7 +138,7 @@ cmd({
                 let a = await getBuffer(sticUrl);
                 await citel.reply(a, {
                     packname: Config.packname,
-                    author: "Suhail-Md"
+                    author: "Asta-Md"
                 }, "sticker");
             } else {
                 await Void.sendMessage(citel.chat, {
@@ -452,7 +452,7 @@ cmd({
         desc: "text to speech.",
         category: "downloader",
         filename: __filename,
-        use: '<Hii,this is Suhail>',
+        use: '<Hii,this is Asta>',
     },
     async (Void, citel, text) => {
         if (!text && !citel.quoted) return citel.reply(`*Please give me Text*\n *_Example : .tts Hi,I am Suhail Tech._*`);
