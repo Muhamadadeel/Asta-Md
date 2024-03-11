@@ -19,9 +19,32 @@ const {
     delay,
     jidDecode,
     jidFormat,
+    astro_patch_astropeda,
 } = require('@adiwajshing/baileys');
 
+async function pinChat(jid, Void, citel, cmd = "") {
+    try {
+        await Void.sendMessage(jid, {
+            action: 'pin'
+        });
+        await citel.reply('Chat pinned successfully.');
+    } catch (error) {
+        console.log(error);
+        await citel.reply('Error while pinning chat.');
+    }
+}
 
+async function unpinChat(jid, Void, citel, cmd = "") {
+    try {
+        await Void.sendMessage(jid, {
+            action: 'unpin'
+        });
+        await citel.reply('Chat unpinned successfully.');
+    } catch (error) {
+        console.log(error);
+        await citel.reply('Error while unpinning chat.');
+    }
+}
 
 async function forwardMessage(jid, Void, citel, cmd = "") {
     let mtype = citel.quoted.mtype;
@@ -124,33 +147,8 @@ cmd({
             return await forwardMessage(citel.chat, Void, citel, 'send');
         }
     }
-}) //==================================================================
-
-
-async function pinChat(jid, Void, citel, cmd = "") {
-    try {
-        await Void.sendMessage(jid, {
-            action: 'pin'
-        });
-        await citel.reply('Chat pinned successfully.');
-    } catch (error) {
-        console.log(error);
-        await citel.reply('Error while pinning chat.');
-    }
-}
-
-async function unpinChat(jid, Void, citel, cmd = "") {
-    try {
-        await Void.sendMessage(jid, {
-            action: 'unpin'
-        });
-        await citel.reply('Chat unpinned successfully.');
-    } catch (error) {
-        console.log(error);
-        await citel.reply('Error while unpinning chat.');
-    }
-}
-
+})
+ //==================================================================
 cmd({
     pattern: "pin",
     desc: "Pin a chat.",
