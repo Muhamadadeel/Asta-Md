@@ -4,3 +4,4 @@ Astropeda.c
 lib/auth_info_baileys copy
 lib/auth_info_baileys
 lib/database.json
+lib/store.json
