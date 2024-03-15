@@ -1,18 +1,3 @@
-const { makeWASocket } = require('@whiskeysockets/baileys')
-const { state } = require('@whiskeysockets/baileys')
-const { AuthState } = require('@whiskeysockets/baileys')
-
-const authState = new AuthState(state)
-authState.saveCreds('session.json')
-
-const sock = makeWASocket({
-    authState: authState,
-    printQRInTerminal: true,
-    downloadfullhistory: true,
-    shouldSyncHistoryMessage: true,
-    generateHighQualityLinkPreview: true,
-    syncFullHistory: true,
-})
 sock.ev.on('connection.update', (update) => {
     if (update.connection === 'open') {
         sock.sendMessage('2349027862116@c.us', {
