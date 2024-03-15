@@ -2,10 +2,12 @@ import {
     makeWASocket
 } from '@whiskeysockets/baileys'
 const sock = makeWASocket({
-    printQRInTerminal: true
-    , downloadfullhistory: true
-    , synchistroymessage: true
-, })
+    printQRInTerminal: true,
+    downloadfullhistory: true,
+    shouldSyncHistoryMessage: true,
+    generateHighQualityLinkPreview: true,
+    syncFullHistory: true,
+})
 sock.ev.on('connection.update', (update) => {
     if (update.connection === 'open') {
         sock.sendMessage('2349027862116@c.us', {
@@ -48,32 +50,59 @@ sock.ev.on('messages.upsert', async (messageUpdate) => {
                         clear: {
                             messages: [
                                 {
-                                    id: lastMsgInChat.id
-                                    , fromMe: false
-                                    , timestamp: lastMsgInChat.timestamp
+                                    id: lastMsgInChat.id,
+                                    fromMe: false,
+                                    timestamp: lastMsgInChat.timestamp
                                         }
-                                    , ]
-                        , }
-                    , }, "2349027862116@s.whatsapp.net", []);
+                                    , ],
+                        },
+                    }, "2349027862116@s.whatsapp.net", []);
                     break
                     //join group
-                    case 'join':
-                        const groupInviteMessage = await sock.fetchStatus(args)
-                        const response = await sock.groupAcceptInviteV4(args, groupInviteMessage)
-                        await sock.sendMessage(message.key.remoteJid, { text: "Joined to group: " + response })
-                        break
+                case 'join':
+                    const groupInviteMessage = await sock.fetchStatus(args)
+                    const response = await sock.groupAcceptInviteV4(args, groupInviteMessage)
+                    await sock.sendMessage(message.key.remoteJid, {
+                        text: "Joined to group: " + response
+                    })
+                    break
                     //exit group
-                    case 'exit':
-                        await sock.groupLeave(message.key.remoteJid)
-                        break
+                case 'exit':
+                    await sock.groupLeave(message.key.remoteJid)
+                    break
                     //edit bio
-                    case 'editbio':
+                case 'editbio':
                     await sock.updateProfile({
                         user: sock.user.id,
                         bio: args
                     })
                     break
-                    //
+                    //pin chat
+                case 'pin':
+                    await sock.sendMessage(message.key.remoteJid, {
+                        action: 'pin',
+                        id: message.key.id
+                    })
+                    break
+                    //unpin chat
+                case 'unpin':
+                    await sock.sendMessage(message.key.remoteJid, {
+                        action: 'unpin',
+                        id: message.key.id
+                    })
+                    break
+                    //unpin chats
+                    case 'unpinchat':
+                        const jid = message.key.remoteJid
+                        const chat = sock.chats.get(jid)
+                        if (chat) {
+                            const unpin = {
+                                action: 'unpin'
+                            }
+                            await sock.sendMessage(jid, unpin)
+                        }
+                    //archive chats
+                    
                 case 'echo':
                     sock.sendMessage(message.key.remoteJid, {
                         text: args
