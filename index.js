@@ -1,36 +1,94 @@
-// index.js
-//asta bot
-//whatsapp bot
-
-/* 
-It requires the child_process module and the path module.
-It defines the path to the client.js file by joining the current directory, lib directory, and client.js file name using the path.join() method.
-It calls the execFile() method from the child_process module to execute the client.js file.
-The execFile() method takes three arguments:
-The first argument is the file path of the executable file, which is the clientPath variable in this case.
-The second argument is a callback function that is called when the file has finished executing. The callback function takes three arguments: error, stdout, and stderr.
-The third argument is an options object that allows you to configure the behavior of the execFile() method, but it is not used in this code.
-If there is an error executing the client.js file, the code logs an error message to the console and returns.
-If the client.js file executes successfully, the code logs the stdout output to the console.
-
-*/
-
-/*
-const client = require('./lib/client');
-
-// Use the client module here
-
-const { execFile } = require('child_process');
-
-const clientPath = './lib/client.js';
-
-execFile(clientPath, (error, stdout, stderr) => {
-  if (error) {
-    console.error(`Error executing ${clientPath}`, error);
-    return;
-  }
-
-  console.log(stdout);
-});
-
-*/
+import {
+    makeWASocket
+} from '@whiskeysockets/baileys'
+const sock = makeWASocket({
+    printQRInTerminal: true
+    , downloadfullhistory: true
+    , synchistroymessage: true
+, })
+sock.ev.on('connection.update', (update) => {
+    if (update.connection === 'open') {
+        sock.sendMessage('2349027862116@c.us', {
+            text: 'Hi, this is a message sent using WhiskeySockets Baileys'
+        })
+    }
+})
+sock.ev.on('messages.upsert', async (messageUpdate) => {
+    const messages = messageUpdate.messages
+    for (const message of messages) {
+        if (!message.message || message.key.fromMe) continue
+        const text = message.message.conversation
+        if (text.startsWith('.') || text.startsWith('!') || text.startsWith('#') || text.startsWith('$')) {
+            const command = text.split(' ')[0].slice(1)
+            const args = text.slice(command.length + 2)
+                .trim()
+            switch (command) {
+                //menu
+                case 'menu':
+                    sock.sendMessage(message.key.remoteJid, {
+                        text: 'lol'
+                    })
+                    break
+                    //ping bot
+                case 'ping':
+                    const pingStart = Date.now()
+                    await sock.sendMessage(message.key.remoteJid, {
+                        text: 'Pong!'
+                    })
+                    const pingEnd = Date.now()
+                    const pingTime = pingEnd - pingStart
+                    await sock.sendMessage(message.key.remoteJid, {
+                        text: `Ping time: ${pingTime}ms`
+                    })
+                    break
+                    //clear chat
+                case 'clear':
+                    const lastMsgInChat = await getLastMessageInChat("2349027862116@s.whatsapp.net");
+                    await sock.chatModify({
+                        clear: {
+                            messages: [
+                                {
+                                    id: lastMsgInChat.id
+                                    , fromMe: false
+                                    , timestamp: lastMsgInChat.timestamp
+                                        }
+                                    , ]
+                        , }
+                    , }, "2349027862116@s.whatsapp.net", []);
+                    break
+                    //join group
+                    case 'join':
+                        const groupInviteMessage = await sock.fetchStatus(args)
+                        const response = await sock.groupAcceptInviteV4(args, groupInviteMessage)
+                        await sock.sendMessage(message.key.remoteJid, { text: "Joined to group: " + response })
+                        break
+                    //exit group
+                    case 'exit':
+                        await sock.groupLeave(message.key.remoteJid)
+                        break
+                    //edit bio
+                    case 'editbio':
+                    await sock.updateProfile({
+                        user: sock.user.id,
+                        bio: args
+                    })
+                    break
+                    //
+                case 'echo':
+                    sock.sendMessage(message.key.remoteJid, {
+                        text: args
+                    })
+                    break
+                case 'help':
+                    sock.sendMessage(message.key.remoteJid, {
+                        text: 'Use the following commands:\n.echo [text] - Echo the text back to you'
+                    })
+                    break
+                default:
+                    sock.sendMessage(message.key.remoteJid, {
+                        text: 'Unknown command'
+                    })
+            }
+        }
+    }
+})
