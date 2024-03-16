@@ -5,7 +5,7 @@ if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/co
 
 //═══════[Required Variables]════════\\
 global.owner = process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, ''): '2348039607375';
-global.mongodb = process.env.MONGODB_URI || "mongodb+srv://astromedia0010:beka10beka10@cluster0.pxc8ulo.mongodb.net/" ;
+global.mongodb = process.env.MONGODB_URI || "mongodb+srv://astro:astro@cluster0.pxc8ulo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0" ;
 global.port= randomPort  ;
 global.audio = '' ; 
 global.video = '' ;
