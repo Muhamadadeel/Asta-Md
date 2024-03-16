@@ -126,3 +126,6 @@ dist
 .yarn/install-state.gz
 .pnp.*
 package-lock.json
+/lib/auth_info_baileys
+/lib/store.json
+/lib/database.json
