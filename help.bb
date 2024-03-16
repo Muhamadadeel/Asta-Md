@@ -1,10 +1,3 @@
-sock.ev.on('connection.update', (update) => {
-    if (update.connection === 'open') {
-        sock.sendMessage('2349027862116@c.us', {
-            text: 'Hi, this is a message sent using WhiskeySockets Baileys'
-        })
-    }
-})
 sock.ev.on('messages.upsert', async (messageUpdate) => {
     const messages = messageUpdate.messages
     for (const message of messages) {
@@ -118,3 +111,4 @@ sock.ev.on('messages.upsert', async (messageUpdate) => {
         }
     }
 })
+}
