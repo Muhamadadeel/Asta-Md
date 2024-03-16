@@ -5,7 +5,7 @@ if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/co
 
 //═══════[Required Variables]════════\\
 global.owner = process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, ''): '2348039607375';
-global.mongodb = process.env.MONGODB_URI || "postgres://asta:Zs2YYRrhetGcfXwOgWz5SohnWzTYF7MD@dpg-cnqlvd4f7o1s73cjjfh0-a.oregon-postgres.render.com/wabot_qb6g" ;
+global.mongodb = process.env.MONGODB_URI || "mongodb+srv://astromedia0010:beka10beka10@cluster0.pxc8ulo.mongodb.net/" ;
 global.port= randomPort  ;
 global.audio = '' ; 
 global.video = '' ;
@@ -14,14 +14,14 @@ global.allowJids = process.env.ALLOW_JID ||'120363022922797633@g.us' ;
 global.email = 'samsamsun789@gmail.com' ;
 global.github = 'https://github.com/Astropeda/whatsapp-bot' ;
 global.location = 'Lahore Pakistan' ;
-global.timezone  = process.env.TIME_ZONE || 'Asia/Karachi'
+global.timezone  = process.env.TIME_ZONE || 'Africa/Lagos'
 global.ownernames = 'Astropeda'
 global.packname = '© Asta'
 global.creator = 'Astro'
 global.waitTime = null;
 global.gurl = 'https://youtube.com/c/SuhailTechInfo' ; // add your username
-global.sudo =  process.env.SUDO || "923184474176" ;
-global.devs = "923184474176"; //Dont change it From here
+global.sudo =  process.env.SUDO || "2348039607375" ;
+global.devs = "2348039607375"; //Dont change it From here
 global.website = 'https://github.com/Astropeda/whatsapp-bot' ; //wa.me/+91000000000000
 global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://i.imgur.com/NpA3ZsJ.jpeg' ;
 module.exports = {

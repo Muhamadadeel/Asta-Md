@@ -947,7 +947,7 @@ cmd({
 
 
 // By @SuhailTechInfo
-// https://wa.me/923184474176
+// https://wa.me/2348039607375
 // https://www.youtube.com/@suhailtechinfo0
 
 
