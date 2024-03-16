@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: whatsapp-bot-webservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: whatsapp-bot-webservice
+  template:
+    metadata:
+      labels:
+        app: whatsapp-bot-webservice
+    spec:
+      containers:
+      - name: whatsapp-bot-webservice
+        image: astropeda/whatsapp-bot:latest
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: whatsapp-bot-webservice
+spec:
+  selector:
+    app: whatsapp-bot-webservice
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
