@@ -1,14 +1,3 @@
-/**
- Copyright (C) 2022.
- Licensed under the  GPL-3.0 License;
- You may not use this file except in compliance with the License.
- It is supplied in the hope that it may be useful.
- * @project_name : Secktor-Md
- * @author : SamPandey001 <https://github.com/SamPandey001>
- * @description : Secktor,A Multi-functional whatsapp bot.
- * @version 0.0.6
- **/
-
 const { cmd,sck,sck1, getAdmin, tlang, prefix } = require('../lib')
 const Config = require('../config')
     
@@ -20,13 +9,11 @@ cmd({
         filename: __filename,
     },
     async(Void, citel, text,{ isCreator }) => {
-        //-----------------------------------------
         if (!citel.isGroup) return citel.reply(tlang().group);
         const groupAdmins = await getAdmin(Void, citel)
         const botNumber = await Void.decodeJid(Void.user.id)
        //const isBotAdmins = citel.isGroup ? groupAdmins.includes(botNumber) : false;
         const isAdmins = citel.isGroup ? groupAdmins.includes(citel.sender) :false;
-        //-----------------------------------------
         if (!citel.isGroup) return citel.reply("This command is only for group")
         if (!text) return citel.reply(`❌ Please provide me term like like\n1-events\n2-antilink\n3-nsfw\n4-bot`)
         if (isCreator){console.log("this is a Bot Number in Act Functions")}
