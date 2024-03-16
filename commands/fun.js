@@ -13,7 +13,7 @@ const { dare, truth, random_question ,Config } = require('../lib/truth-dare.js')
 const axios = require('axios')
 const { cmd } = require('../lib')
 const fetch = require('node-fetch');
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "question",
             desc: "Random Question.",
@@ -24,7 +24,7 @@ cmd({
             return await citel.reply(`${random_question()}`);
         }
     )
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "truth",
             desc: "truth and dare(truth game.).",
@@ -35,7 +35,7 @@ cmd({
             return await citel.reply(`${truth()}`);
         }
     )
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "dare",
             desc: "truth and dare(dare game.).",
@@ -46,7 +46,7 @@ cmd({
             return await citel.reply(`${dare()}`);
         }
     )
-//--------------------------------------------------------------------------------
+-----
 cmd({
             pattern: "joke",
             desc: "Sends Joke in chat.",
@@ -60,7 +60,7 @@ const response =await  fetch('https://official-joke-api.appspot.com/random_joke'
 citel.reply( `Joke: ${joke.setup}\nPunchline :  ${joke.punchline}`);
 
 })
-//---------------------------------------------------------------------------
+
 cmd({
             pattern: "joke2",
             desc: "Sends Joke in chat.",
@@ -80,7 +80,7 @@ cmd({
         }
     )
 
-//---------------------------------------------------------------------------
+
 cmd({
         pattern: "fact",
         desc: "Sends fact in chat.",
@@ -93,7 +93,7 @@ cmd({
     }
 
 )
-    //---------------------------------------------------------------------------
+    
     cmd({
         pattern: "quotes",
         desc: "Sends quotes in chat.",
@@ -112,7 +112,7 @@ return citel.reply(replyf)
     }
  
 )
-    //---------------------------------------------------------------------------
+    
     cmd({
         pattern: "define",
         desc: "urban dictionary.",

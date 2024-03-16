@@ -15,7 +15,7 @@ let gis ='' // require("g-i-s");
 const axios = require('axios')
 const fetch = require('node-fetch')
 
-   //---------------------------------------------------------------------------
+   
    const { shazam } = require('../lib')
    let yts = require("secktor-pack");
    cmd({
@@ -60,7 +60,7 @@ const fetch = require('node-fetch')
                await Void.sendMessage(citel.chat, buttonMessaged, { quoted: citel, });
        }
     )
-    //------------------------------------------------------------------------------------
+    ---------
 cmd({
             pattern: 'ss',
             alias :['webss' , 'fullss'],
@@ -84,7 +84,7 @@ catch (err) { return citel.reply("```Error While Fetching Snapshot```")}
 
 
 
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "imdb",
             category: "search",
@@ -120,7 +120,7 @@ cmd({
 
         }
     )
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "weather",
             category: "search",
@@ -151,7 +151,7 @@ cmd({
 
         }
     )
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "horo",
             category: "search",
@@ -187,7 +187,7 @@ cmd({
             } catch (e) {   console.log(e)  }
         }
     )
-    //---------------------------------------------------------------------------
+    
 
 cmd({
             pattern: "cric",
@@ -219,7 +219,7 @@ text +="\n*Match Ended:* " + dat.data[i].matchEnded;
 
 })
 
-//---------------------------------------------------------------------------
+
 cmd({
             pattern: "google",
             alias :['search','gsearch'],
@@ -243,7 +243,7 @@ cmd({
             })
         }
     )
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "image",
             alias: ["img" , "pic"],
@@ -329,7 +329,7 @@ else return citel.reply("*Google Images Not Working, Try it Later*");
             
             */
  })
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "couplepp",
             category: "search",
@@ -343,7 +343,7 @@ cmd({
             Void.sendMessage(citel.chat, { image: { url: random.female }, caption: `Couple Female` }, { quoted: citel })
         }
     ) 
-    //---------------------------------------------------------------------------
+    
 cmd({
         pattern: "iswa",
         alias: ["oldwa","bio","onwa"],

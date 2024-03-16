@@ -21,7 +21,7 @@
          category: "economy",
      },
      */
-     //---------------------------------------------------------------------------
+     
  cmd({
          pattern: "daily",
          desc: "daily gold.",
@@ -64,7 +64,7 @@
         return await citel.reply(`⛩️ User: @${users.split('@')[0]} \n *🧧 @${users.split('@')[0]} lost all 🪙 in wallet.*\n_Now live with that poverty.🫡_`,{mentions:[users]})
  }
  )
-    //---------------------------------------------------------------------------
+    
  cmd({
     pattern: "capacity",
     desc: "update capacity.",
@@ -120,7 +120,7 @@ default:
 }
 )
 
-     //---------------------------------------------------------------------------
+     
      cmd({
         pattern: "deposit",
         desc: "deposit gold.",
@@ -205,7 +205,7 @@ async(Void, citel, text,{ isCreator }) => {
 }
 )
 
-     //---------------------------------------------------------------------------
+     
      cmd({
         pattern: "wallet",
         desc: "shows wallet.",
@@ -230,7 +230,7 @@ async(Void, citel, text,{ isCreator }) => {
     }
 )
 
-     //---------------------------------------------------------------------------
+     
      cmd({
         pattern: "give",
         desc: "Add money in wallet.",
@@ -250,7 +250,7 @@ async(Void, citel, text,{ isCreator }) => {
     }
 )
 
-     //---------------------------------------------------------------------------
+     
      cmd({
         pattern: "bank",
         desc: "shows bank amount.",
@@ -269,7 +269,7 @@ async(Void, citel, text,{ isCreator }) => {
     }
 )
 
-     //---------------------------------------------------------------------------
+     
      cmd({
         pattern: "rob",
         desc: "rob bank amount.",
@@ -322,7 +322,7 @@ default:
     }
 )
 
-     //---------------------------------------------------------------------------
+     
      cmd({
         pattern: "withdraw",
         desc: "withdraw money from bank account.",
@@ -345,7 +345,7 @@ default:
     }
 )
 
-     //---------------------------------------------------------------------------
+     
      cmd({
         pattern: "gamble",
         desc: "gamble money.",
@@ -407,7 +407,7 @@ default:
 
 
 
-     //---------------------------------------------------------------------------
+     
      cmd({
         pattern: "slot2",
         desc: "withdraw money from bank account.",

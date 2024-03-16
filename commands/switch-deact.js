@@ -12,7 +12,7 @@
  const { sck,sck1,cmd, getAdmin, tlang, prefix } = require('../lib')
  const Config = require('../config')
   
-     //---------------------------------------------------------------------------
+     
  cmd({
          pattern: "deact",
   alias : ['deactive','deactivate'],

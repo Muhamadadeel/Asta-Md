@@ -170,7 +170,7 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, { headers })
 .catch(error => citel.reply('Error retrieving app variable:'+ error));
   
 });
-//----------------------------------------------------------------------------------
+-------
 cmd({
         pattern: "addvar",
         desc: "To Set Heroku Vars",
@@ -203,7 +203,7 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`,
   .then(data => {  return citel.reply(`*${varName} updated Succesfully.*\n${varName}  :  ${newVarValue}`);   })
   .catch(error => citel.reply('Error Adding app variable:'));
   });
-//-----------------------------------------------------------------------------------
+--------
 
 cmd({
         pattern: "getvar",
@@ -232,7 +232,7 @@ fetch(`https://api.heroku.com/apps/${appName}/config-vars`, { headers })
 });
 
 
-//----------------------------------------------------------------------------------
+-------
 cmd({
         pattern: "setvar",
         desc: "To Set Heroku Vars",

@@ -20,7 +20,7 @@ const fs  = require('fs-extra');
 const axios= require('axios');
 var videotime = 3600 // 30 min
 var dlsize = 100 // 100mb
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "tgs",
             desc: "Downloads telegram stickers.",
@@ -64,7 +64,7 @@ cmd({
 	
  
  })
-//---------------------------------------------------------------------------
+
 /*cmd({
             pattern: "fb",
             desc: "Downloads fb videos  .",
@@ -103,7 +103,7 @@ let vurl=res.url[0].url;
 }
 )*/
 
-//---------------------------------------------------------------------------
+
 
 async function tiktokdl (url) {
     const gettoken = await axios.get("https://tikdown.org/id");
@@ -135,7 +135,7 @@ async function tiktokdl (url) {
 
 
 
-//---------------------------------------------------------------------------
+
 
 cmd({
             pattern: "tiktok",
@@ -155,7 +155,7 @@ cmd({
  if (status) return await Void.sendMessage(citel.chat, {video : {url : video } , caption : Config.caption } , {quoted : citel });
  else return await citel.send("Error While Downloading Your Video") 
 })
-//---------------------------------------------------------------------------
+
 /*
 cmd({
             pattern: "tiktok",
@@ -236,7 +236,7 @@ let vurl=info.video.url_video;
 
 })
 
-//---------------------------------------------------------------------------
+
 
 cmd({
             pattern: "apk",
@@ -329,7 +329,7 @@ let data = await download(searc[0].id);
                  Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
 */}
 )
-  //---------------------------------------------------------------------------
+  
 cmd({
             pattern: "gdrive",
             desc: "Downloads telegram stickers.",
@@ -361,7 +361,7 @@ try {
  } catch (error) {  return citel.reply("```File Not Found```" ) }
 	
 })
-//---------------------------------------------------------------------------
+
 cmd({
             pattern: "gitclone",
             desc: "Downloads apks  .",
@@ -382,7 +382,7 @@ cmd({
 
 	})
 
-  //---------------------------------------------------------------------------
+  
 cmd({
             pattern: "tts",
             desc: "text to speech.",
@@ -403,7 +403,7 @@ cmd({
         }
 
     )
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "video",
             desc: "Downloads video from yt.",
@@ -475,7 +475,7 @@ cmd({
 */
         }
     )
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "play",
             alias: ["music"],
@@ -534,7 +534,7 @@ async(Void, citel, text) => {
 })
     
 
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "sound",
             desc: "Downloads ringtone.",
@@ -558,7 +558,7 @@ cmd({
 	return Void.sendMessage(citel.chat,buttonMessage, { quoted: citel } )
 })
 
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "ringtone",
             desc: "Downloads ringtone.",
@@ -579,7 +579,7 @@ cmd({
 	return Void.sendMessage(citel.chat,buttonMessage, { quoted: citel } )
 })
 
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "pint",
             desc: "Downloads image from pinterest.",
@@ -611,7 +611,7 @@ cmd({
                 return Void.sendMessage(citel.chat, buttonMessage, {  quoted: citel })
             } catch (e) {  return citel.reply("Uhh Plese, Give me a Name. Ex .pint apple")  }
         })
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "mediafire",
             alias :['mf','mfire'],
@@ -654,7 +654,7 @@ let result4 = ` *Mᴇᴅɪᴀғɪʀᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ*
 
         }
     )
-    //---------------------------------------------------------------------------
+    
 
 cmd({
             pattern: "song",
@@ -715,7 +715,7 @@ cmd({
             */
     })
 
-    //---------------------------------------------------------------------------
+    
 cmd({
             pattern: "yts",
             alias: ["ytsearch","getyt"],
@@ -746,7 +746,7 @@ cmd({
             });
         }
     )
-    //---------------------------------------------------------------------------
+    
 
 cmd({
             pattern: "ytmp4",
@@ -812,7 +812,7 @@ cmd({
             }
         }
     )
-    //---------------------------------------------------------------------------
+    
 cmd({
         pattern: "ytmp3",
 	alias : ["yta"],
@@ -882,7 +882,7 @@ cmd({
     }
 )
 
-  //---------------------------------------------------------------------------
+  
 cmd({
         pattern: "ytdoc",
             alias: ["ytd"],

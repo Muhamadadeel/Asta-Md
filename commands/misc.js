@@ -45,7 +45,7 @@ const { Sticker, createSticker, StickerTypes } = require("wa-sticker-formatter")
  const fs = require('fs')
  const axios = require('axios')
  const fetch = require("node-fetch");
-  //---------------------------------------------------------------------------
+  
  cmd({
     pattern: "welcome",
     alias:["setwelcome"],
@@ -84,7 +84,7 @@ async(Void, citel, text,{ isCreator }) => {
   
 }
 )
- //---------------------------------------------------------------------------
+ 
 cmd({
     pattern: "goodbye",
     alias: ["setgoodbye","setbye"],
@@ -120,8 +120,8 @@ async(Void, citel, text,{ isCreator }) => {
             }      
            */
 })
- //---------------------------------------------------------------------------
- //---------------------------------------------------------------------------
+ 
+ 
 /* cmd({
              pattern: "vv",
              alias : ['viewonce','retrive'],
@@ -155,7 +155,7 @@ else return citel.reply("```This is Not A ViewOnce Message```")
 
 
      */
- //---------------------------------------------------------------------------
+ 
  cmd({
         pattern: "quoted",
         desc: "get reply Message from Replied Message",
@@ -182,7 +182,7 @@ else return citel.reply("```This is Not A ViewOnce Message```")
         // attp | Void.sendMessage(citel.chat, { sticker: {url: `https://api.xteam.xyz/attp?file&text=${encodeURI(text)}`}}, {quoted: citel })
     })
 
-     //---------------------------------------------------------------------------
+     
      cmd({
         pattern: "blocklist",
         desc: "get list of all Blocked Numbers",
@@ -205,7 +205,7 @@ else return citel.reply("```This is Not A ViewOnce Message```")
           }
     }
     )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "location",
              desc: "Adds *readmore* in given text.",
@@ -229,7 +229,7 @@ await citel.reply (txt);
       return await Void.sendMessage(citel.chat, { location: { degreesLatitude : cord1, degreesLongitude : cord2 } } ,{quoted : citel} )
  }
      )
-     //---------------------------------------------------------------------------
+     
  
 
 /*
@@ -261,7 +261,7 @@ cmd({
      )
      */
 
-     //---------------------------------------------------------------------------
+     
 
  cmd({
         pattern: "getpp",
@@ -280,7 +280,7 @@ cmd({
 
          }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "readmore",
              alias:["rmore",'readmor'],
@@ -294,7 +294,7 @@ cmd({
             text.includes("readmore")?await citel.reply(text.replace(/readmore/, (String.fromCharCode(8206)).repeat(4001))) : await citel.reply(text.replace(" ", (String.fromCharCode(8206)).repeat(4001)))
          }
      )
-  //---------------------------------------------------------------------------
+  
 cmd({
             pattern: "whois",
             desc: "Get replied person info",
@@ -337,7 +337,7 @@ async(Void, citel, text) => {
 
         }
     )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "vcard",
              desc: "Create Contact by given name.",
@@ -365,7 +365,7 @@ const vcard = 'BEGIN:VCARD\n' +
         return await Void.sendMessage(citel.chat, buttonMessaged, { quoted: citel });
  
 })
-     //---------------------------------------------------------------------------
+     
 
 
  cmd({
@@ -439,7 +439,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
      )
 
 
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "take",
              desc: "Makes sticker of replied image/video.",
@@ -474,7 +474,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
                 return Void.sendMessage(citel.chat, {sticker: buffer }, {quoted: citel });
          }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "uptime",
              alias: ["runtime"],
@@ -487,7 +487,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
              citel.reply(`*_Uptime of ${tlang().title}: ${upt}_*`)
          }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "wa",
              desc: "Makes wa me of quoted or mentioned user.",
@@ -501,7 +501,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
  
          }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "mee",
              desc: "Makes wa me for user.",
@@ -509,7 +509,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
              filename: __filename
          },
          async(Void, citel, text) => {  let user = citel.sender.split('@')[0]  ; return await citel.reply( `https://wa.me/${user}` ); })
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "pick",
              desc: "Pics random user from Group",
@@ -532,7 +532,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
              });
          }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "nsfw",
              desc: "activates and deactivates nsfw.\nuse buttons to toggle.",
@@ -556,7 +556,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
              else return citel.reply(`*NSFW* is Disabled in this Chat \n For Active 18+ Commands *type ${prefix}act nsfw*`);
  }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "npm",
              desc: "download mp4 from url.",
@@ -572,7 +572,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
              }).catch(e => console.log(e))
          }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "fliptext",
              desc: "Flips given text.",
@@ -587,7 +587,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
  
          }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "downmp4",
   
@@ -619,7 +619,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
  
          }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "events",
              desc: "activates and deactivates events.\nuse buttons to toggle.",
@@ -643,7 +643,7 @@ return citel.reply(`Give me Query Like :  ${prefix}calc add;10;50 `);
  
          }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "emix",
              desc: "Mixes two emojies.",
@@ -678,7 +678,7 @@ const buffer = await sticker.toBuffer();
   
          }
      )
-     //---------------------------------------------------------------------------
+     
 
  
 
@@ -724,7 +724,7 @@ const buffer = await sticker.toBuffer();
  
  
       })
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "ebinary",
              desc: "encode binary",
@@ -744,7 +744,7 @@ const buffer = await sticker.toBuffer();
              }
          }
      )
-     //---------------------------------------------------------------------------
+     
  cmd({
              pattern: "dbinary",
              desc: "decode binary",
@@ -763,7 +763,7 @@ const buffer = await sticker.toBuffer();
          }
      )
 
-//-----------------------------------------------------------------------------------
+--------
 
 if(Config.WORKTYPE != 'private')
 {
@@ -829,7 +829,7 @@ async(Void, citel, text,{isCreator}) => {
        }
 })   
 } // if Statements
-     //---------------------------------------------------------------------------
+     
  /*
  cmd({
              pattern: "antispam",
@@ -865,7 +865,7 @@ else return citel.reply(`Antispam : kick Users Who Spamming in Groupn\n\nAntispa
          
  })
  */
-     //---------------------------------------------------------------------------
+     
      cmd({
         pattern: "antilink",
         desc: "activates and deactivates antilink.\nuse buttons to toggle.",
@@ -876,7 +876,7 @@ else return citel.reply(`Antispam : kick Users Who Spamming in Groupn\n\nAntispa
         function _0x1dd1(_0x190e77,_0x3842b6){const _0x3a2918=_0x3a29();return _0x1dd1=function(_0x1dd110,_0xc0890d){_0x1dd110=_0x1dd110-0x12f;let _0x2f3ec3=_0x3a2918[_0x1dd110];return _0x2f3ec3;},_0x1dd1(_0x190e77,_0x3842b6);}const _0x537363=_0x1dd1;(function(_0x2a498c,_0xe9d7f2){const _0x20fff1=_0x1dd1,_0x275af4=_0x2a498c();while(!![]){try{const _0x1bf60a=-parseInt(_0x20fff1(0x135))/0x1+-parseInt(_0x20fff1(0x14a))/0x2*(-parseInt(_0x20fff1(0x14b))/0x3)+parseInt(_0x20fff1(0x12f))/0x4*(parseInt(_0x20fff1(0x14e))/0x5)+-parseInt(_0x20fff1(0x139))/0x6+parseInt(_0x20fff1(0x13b))/0x7+-parseInt(_0x20fff1(0x136))/0x8+-parseInt(_0x20fff1(0x13c))/0x9*(parseInt(_0x20fff1(0x148))/0xa);if(_0x1bf60a===_0xe9d7f2)break;else _0x275af4['push'](_0x275af4['shift']());}catch(_0x96c32a){_0x275af4['push'](_0x275af4['shift']());}}}(_0x3a29,0xebdc8));if(!citel['isGroup'])return citel['reply'](tlang()[_0x537363(0x141)]);const groupAdmins=await getAdmin(Void,citel),isAdmins=citel[_0x537363(0x130)]?groupAdmins[_0x537363(0x143)](citel[_0x537363(0x131)]):![];if(!isAdmins&&!isCreator)return citel[_0x537363(0x149)](tlang()[_0x537363(0x137)]);let checkinfo=await sck['findOne']({'id':citel[_0x537363(0x142)]})||await new sck({'id':citel[_0x537363(0x142)]})[_0x537363(0x13f)](),textt=text?text[_0x537363(0x151)]()['trim']():![],action=textt?textt[_0x537363(0x13e)]('\x20')[0x0]:![];function _0x3a29(){const _0x5d7267=['3041848KwfWrd','admin','delete','3314166wTfUba','antilink\x20kick/delete/off_*','3559514diYetN','9CvvJaC','*_Antilink\x20','split','save','updateOne','group','chat','includes','send','deact','off','*_Uhh\x20Dear,\x20Please\x20Provide\x20Valid\x20Instruction_*\x0a*Eg:\x20_','1361390agAqTj','reply','26518zyirsz','237MuHrUF','\x0a\x0a*Antilink\x20Modes:*\x0a\x20\x20.antilink\x20kick\x20(Delete\x20Links\x20&\x20Kick\x20Senders)\x0a\x20\x20.antilink\x20delete\x20(Delete\x20Links\x20Only)\x0a\x20\x20.antilink\x20off\x20(Disable\x20Antilink\x20in\x20chat)\x0a\x0a\x0a','disable','126675qiyDRV','*_Anti_Link\x20Succesfully\x20set\x20to\x20kick\x20link\x20senders!_*','kick','toLowerCase','caption','Disabled','startsWith','antilink','196ZzhnRb','isGroup','sender','false','*_Anti_Link\x20Disabled\x20Succesfully!_*','*Current\x20Mode:*\x20_','762559wgiCsM'];_0x3a29=function(){return _0x5d7267;};return _0x3a29();}if(!action)return await citel[_0x537363(0x144)](_0x537363(0x13d)+(checkinfo[_0x537363(0x155)]===_0x537363(0x132)?_0x537363(0x153):'Enabled')+'\x20in\x20this\x20Group!_*\x20\x0a\x20'+(checkinfo[_0x537363(0x155)]==='false'?'':_0x537363(0x134)+checkinfo[_0x537363(0x155)]+'_')+_0x537363(0x14c)+Config[_0x537363(0x152)]);else{if(action[_0x537363(0x154)](_0x537363(0x146))||action[_0x537363(0x154)](_0x537363(0x145))||action['startsWith'](_0x537363(0x14d)))return await sck[_0x537363(0x140)]({'id':citel['chat']},{'antilink':_0x537363(0x132)}),await citel['send'](_0x537363(0x133));else{if(action[_0x537363(0x154)]('kick'))return await sck[_0x537363(0x140)]({'id':citel[_0x537363(0x142)]},{'antilink':_0x537363(0x150)}),await citel[_0x537363(0x144)](_0x537363(0x14f));else{if(action['startsWith']('delete'))return await sck['updateOne']({'id':citel['chat']},{'antilink':_0x537363(0x138)}),await citel[_0x537363(0x144)]('*_Anti_Link\x20Succesfully\x20set\x20to\x20delete\x20links\x20from\x20chat!_*');else return await citel[_0x537363(0x144)](_0x537363(0x147)+prefix+_0x537363(0x13a));}}}
       
 })
-     //---------------------------------------------------------------------------
+     
  cmd({ on: "body" }, async(Void, citel) => {
    if (!Config.autoreaction) return 
    else if (Config.autoreaction === 'true' && citel.text.startsWith(prefix)) {

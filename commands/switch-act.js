@@ -11,7 +11,7 @@
 
 const { cmd,sck,sck1, getAdmin, tlang, prefix } = require('../lib')
 const Config = require('../config')
-    //---------------------------------------------------------------------------
+    
 cmd({
         pattern: "act",
         alias:['activate','active'],

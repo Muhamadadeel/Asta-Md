@@ -13,7 +13,7 @@ for (let i=0;i<response.length;i++) {
 await Void.sendFileUrl(citel.chat, response[i], `*Downloaded Media from instagram.*` +  Config.caption, citel)
 }
     });
-//----------------------------------------------------------------------------------
+-------
 cmd({
     pattern: "ig",
     desc: "Downloads Instagram videos.",
@@ -28,4 +28,3 @@ async(Void, citel, text) => {
 
 })
 
-//---------------------------------------------------------------------------
