@@ -1,12 +1,58 @@
-const { tlang, cmd, sleep, getBuffer, prefix, Config } = require('../lib')
+
+/**
+//══════════════════════════════════════════════════════════════════════════════════════════════════════//
+//                                                                                                      //
+//                                ＷＨＡＴＳＡＰＰ ＢＯＴ－ＭＤ ＢＥＴＡ                                   //
+//                                                                                                      // 
+//                                         Ｖ：１．０．１                                                // 
+//                                                                                                      // 
+//            ███████╗██╗   ██╗██╗  ██╗ █████╗ ██╗██╗         ███╗   ███╗██████╗                        //
+//            ██╔════╝██║   ██║██║  ██║██╔══██╗██║██║         ████╗ ████║██╔══██╗                       //
+//            ███████╗██║   ██║███████║███████║██║██║         ██╔████╔██║██║  ██║                       //
+//            ╚════██║██║   ██║██╔══██║██╔══██║██║██║         ██║╚██╔╝██║██║  ██║                       //
+//            ███████║╚██████╔╝██║  ██║██║  ██║██║███████╗    ██║ ╚═╝ ██║██████╔╝                       //
+//            ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝    ╚═╝     ╚═╝╚═════╝                        //
+//                                                                                                      //
+//                                                                                                      //
+//                                                                                                      //
+//══════════════════════════════════════════════════════════════════════════════════════════════════════//
+
+CURRENTLY RUNNING ON BETA VERSION!!
+*
+   * @project_name : sᴜʜᴀɪʟ-ᴍᴅ
+   * @author : Suhail Tech Info
+   * @youtube : https://www.youtube.com/c/@SuhailTechInfo0
+   * @description : Suhail-Md ,A Multi-functional whatsapp user bot.
+   * @version 1.0.9
+*
+   * Licensed under the  GPL-3.0 License;
+* 
+   * Created By Suhail Tech Info.
+   * © 2023 Suhail-Md.
+* 
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   * SOFTWARE.
+**/
+
+
+
+
+
+
+/*const { tlang, smd, sleep, getBuffer, prefix, Config } = require('../lib')
 const ytdl = require('ytdl-secktor')
 const yts = require('secktor-pack')
 const fs = require('fs')
 var videotime = 60000 // 1000 min
 var dlsize = 250 // 250mb
 
-
-cmd({
+ 
+smd({
             pattern: "playlist",
             desc: "Downloads video from playlist.",
             category: "downloader",
@@ -134,8 +180,14 @@ yts( opts, async function ( err, playlist ) {
                 console.log(e)
             }
             }})
-            */
+
+
+
+
+            
+            //
 
 
 })
 
+*/

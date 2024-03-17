@@ -3,14 +3,14 @@ entrypoint = "lib/client.js"
 hidden = [".config", "package-lock.json"]
  
 [languages]
-
+   
 [languages.javascript]
 pattern = "**/{*.js,*.jsx,*.ts,*.tsx}"
-
+ 
 [languages.javascript.languageServer]
 start = "typescript-language-server --stdio"
-
-[debugger]
+  
+[debugger] 
 support = true
 
 [debugger.interactive]

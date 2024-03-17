@@ -23,7 +23,7 @@ CURRENTLY RUNNING ON BETA VERSION!!
    * @author : Suhail Tech Info
    * @youtube : https://www.youtube.com/c/@SuhailTechInfo0
    * @description : Suhail-Md ,A Multi-functional whatsapp user bot.
-   * @version 1.0.1
+   * @version 1.0.9
 *
    * Licensed under the  GPL-3.0 License;
 * 
@@ -41,40 +41,57 @@ CURRENTLY RUNNING ON BETA VERSION!!
  ⛥
  **/
 
-  const moment = require("moment-timezone")
-  const Config = require('../config')
-  let { fancytext, tlang, tiny, botpic ,prefix,cmd } = require("../lib");
-  const long = String.fromCharCode(8206)
-  const readmore = long.repeat(4001)
-  let sᴜʜᴀɪʟ_ᴍᴅ ;
-  
+ const moment = require("moment-timezone")
+ const Config = require('../config')
+ let { fancytext, tlang, tiny, botpic ,prefix,smd } = require("../lib");
+ let sᴜʜᴀɪʟ_ᴍᴅ ;
+ 
+const {updateProfilePicture,forwardMessage, getAdmin} = require("../lib")
 
 
 
-async function forwardMessage(jid, Void, citel, cmd='' ){
-const _0x3c0522=_0x2ab3;(function(_0x42e49e,_0x4e2d41){const _0x1434b0=_0x2ab3,_0x3008e6=_0x42e49e();while(!![]){try{const _0x339e5a=parseInt(_0x1434b0(0xe6))/0x1+parseInt(_0x1434b0(0xeb))/0x2*(parseInt(_0x1434b0(0xdb))/0x3)+parseInt(_0x1434b0(0xe0))/0x4+parseInt(_0x1434b0(0xda))/0x5*(-parseInt(_0x1434b0(0xd6))/0x6)+parseInt(_0x1434b0(0xe8))/0x7*(-parseInt(_0x1434b0(0xe4))/0x8)+-parseInt(_0x1434b0(0xe5))/0x9*(-parseInt(_0x1434b0(0xdc))/0xa)+-parseInt(_0x1434b0(0xe1))/0xb;if(_0x339e5a===_0x4e2d41)break;else _0x3008e6['push'](_0x3008e6['shift']());}catch(_0x147fd6){_0x3008e6['push'](_0x3008e6['shift']());}}}(_0x5d35,0x66d09));function _0x5d35(){const _0x3a283c=['mtype','*Error,\x20Request\x20not\x20be\x20proceed*','documentMessage','270695uTSNmQ','2418510Iffpec','10DCBpiz','save','log','send','906280npzxwg','2436412bgsfYC','quoted','imageMessage','63608cveTAW','934947kHphkG','793264fnJIbn','conversation','609aBETxq','videoMessage','ptv','2fVbfhc','extendedTextMessage','audioMessage','66SxJVPa'];_0x5d35=function(){return _0x3a283c;};return _0x5d35();}let mtype=citel[_0x3c0522(0xe2)][_0x3c0522(0xd7)],message;if(mtype===_0x3c0522(0xe9)&&cmd===_0x3c0522(0xea))message={'ptvMessage':{...citel['quoted']}};else{if(mtype===_0x3c0522(0xe9))message={'videoMessage':{...citel[_0x3c0522(0xe2)]}};else{if(mtype===_0x3c0522(0xe3))message={'imageMessage':{...citel[_0x3c0522(0xe2)]}};else{if(mtype===_0x3c0522(0xd5))message={'audioMessage':{...citel['quoted']}};else{if(mtype===_0x3c0522(0xd9))message={'documentMessage':{...citel[_0x3c0522(0xe2)]}};else{if(mtype===_0x3c0522(0xe7)||mtype===_0x3c0522(0xd4))return await citel[_0x3c0522(0xdf)](citel[_0x3c0522(0xe2)]['text']);}}}}}function _0x2ab3(_0x3f21c7,_0x57cc24){const _0x5d3507=_0x5d35();return _0x2ab3=function(_0x2ab3f1,_0x391603){_0x2ab3f1=_0x2ab3f1-0xd4;let _0x3290e8=_0x5d3507[_0x2ab3f1];return _0x3290e8;},_0x2ab3(_0x3f21c7,_0x57cc24);}if(message){sᴜʜᴀɪʟ_ᴍᴅ=Void;try{await sᴜʜᴀɪʟ_ᴍᴅ['relayMessage'](jid,message,{'messageId':citel['key']['id']});}catch(_0x272ed5){(cmd==='ptv'||cmd===_0x3c0522(0xdd))&&await citel['send'](_0x3c0522(0xd8)),console[_0x3c0522(0xde)]('Error\x20in\x20'+cmd+'-cmd\x20in\x20forwardMessage\x20\x0a',_0x272ed5);}}
-}
+
 ///============================================================================================
-cmd({ pattern: "ptv", desc: "send ptv Message of video", category: "whatsapp",filename: __filename},async(Void, citel, text,{cmdName , isCreator}) => {
-    if(!citel.quoted) return await citel.send("*Uhh please, reply to a video Message*")
-    let mtype = citel.quoted.mtype 
-    if(mtype !== "videoMessage") return await citel.send("*Replied Message is not a video, Idiot.*")
-    return await forwardMessage(citel.chat, Void, citel, cmdName )
+smd({ pattern: "ptv", desc: "send ptv Message of video", category: "whatsapp",filename: __filename},async(Suhail, msg, text,{cmdName , isCreator}) => {
+   if(!msg.quoted) return await msg.send("*Uhh please, reply to a video Message*")
+   let mtype = msg.quoted.mtype 
+   if(mtype !== "videoMessage") return await msg.send("*Replied Message is not a video, Idiot.*")
+   return await forwardMessage(msg.chat, Suhail, msg, cmdName )
 })////------------------------------------------------------------
-cmd({pattern: "#", desc: "Save whatsapp status",category: "whatsapp",filename: __filename},async(Void, citel, text,{cmdName , isCreator}) => {
-    if(!citel.quoted) return await citel.send("*Uhh Please, reply to whatsapp status*")
-    let sᴜʜᴀɪʟ_ᴍᴅ_num = await Void.decodeJid(Void.user.id)
-    return await forwardMessage(sᴜʜᴀɪʟ_ᴍᴅ_num, Void, citel, cmdName )
+smd({pattern: "#", desc: "Save whatsapp status",category: "whatsapp",filename: __filename},async(Suhail, msg, text,{cmdName , isCreator}) => {
+   if(!msg.quoted) return await msg.send("*Uhh Please, reply to whatsapp status*")
+   let sᴜʜᴀɪʟ_ᴍᴅ_num = await Suhail.bot.decodeJid(msg.user)
+   return await forwardMessage(sᴜʜᴀɪʟ_ᴍᴅ_num, Suhail, msg, cmdName )
 })//--------------------------------------------------------------------
-cmd({pattern: "save",desc: "Save Message to log number",category: "whatsapp",filename: __filename},async(Void, citel, text,{cmdName , isCreator}) => {
-    if(!isCreator) return await citel.send(tlang().owner)
-    if(!citel.quoted) return await citel.send("*Uhh Please, reply to a Message*")
-    let sᴜʜᴀɪʟ_ᴍᴅ_num = await Void.decodeJid(Void.user.id)
-    return await forwardMessage(sᴜʜᴀɪʟ_ᴍᴅ_num, Void, citel, cmdName )
+smd({pattern: "save",desc: "Save Message to log number",category: "whatsapp",filename: __filename},async(Suhail, msg, text,{cmdName , isCreator}) => {
+   if(!isCreator) return await msg.send(tlang().owner)
+   if(!msg.quoted) return await msg.send("*Uhh Please, reply to a Message*")
+   let sᴜʜᴀɪʟ_ᴍᴅ_num = await Suhail.bot.decodeJid(msg.user)
+   return await forwardMessage(sᴜʜᴀɪʟ_ᴍᴅ_num, Suhail, msg, cmdName )
 })///================================================================================
-cmd({ on: "text" }, async (Void,citel,text)=> {
-    if(citel.quoted && citel.text.toLowerCase().includes("send") ){
-        let sᴜʜᴀɪʟ_ᴍᴅ_num = await Void.decodeJid(Void.user.id)
-        if(citel.quoted.sender === sᴜʜᴀɪʟ_ᴍᴅ_num && citel.quoted.chat === 'status@broadcast' ){ return await forwardMessage(citel.chat, Void, citel, 'send' ); }
-    }
+smd({ on: "text" }, async (Suhail,msg,text)=> {
+   if(msg.quoted && msg.text.toLowerCase().includes("send") ){
+       let sᴜʜᴀɪʟ_ᴍᴅ_num = await Suhail.bot.decodeJid(msg.user)
+       if(msg.quoted.sender === sᴜʜᴀɪʟ_ᴍᴅ_num && msg.quoted.chat === 'status@broadcast' ){ return await forwardMessage(msg.chat, Suhail.bot, msg, 'send' ); }
+   }
 })//==================================================================
+
+smd({pattern: "pp",desc: "Set profile picture",category: "whatsapp",use: '<reply to image>', filename: __filename,},
+async(Suhail, msg,text) => {
+   if (!msg.quoted) return await msg.reply("*Reply to an image, dear*");
+   if(msg.quoted.mtype !='imageMessage') return await msg.reply("*_Uhh please, Reply to an image._*");    
+   const sᴜʜᴀɪʟ_ᴍᴅ_num = await Suhail.bot.decodeJid(msg.user)
+   return await updateProfilePicture(Suhail , sᴜʜᴀɪʟ_ᴍᴅ_num , msg , 'pp' );
+ })
+smd({ pattern: "fullpp", desc: "Set full screen profile picture", category: "whatsapp", use: '<reply to image>', filename: __filename,},
+ async(Suhail, msg,text) => {
+   if (!msg.quoted) return await msg.reply("*Reply to an image, dear*");
+   if(msg.quoted.mtype !='imageMessage') return await msg.reply("*_Uhh please, Reply to an image._*");
+   const sᴜʜᴀɪʟ_ᴍᴅ_num = await Suhail.bot.decodeJid(msg.user)
+   return await updateProfilePicture(Suhail , sᴜʜᴀɪʟ_ᴍᴅ_num , msg , 'fullpp' );    
+});
+
+
+
+
+const _0x49af65=_0x5217;function _0x5217(_0x2ac705,_0x414c84){const _0xcfd375=_0xcfd3();return _0x5217=function(_0x5217b5,_0x50b6ad){_0x5217b5=_0x5217b5-0x142;let _0x46e770=_0xcfd375[_0x5217b5];return _0x46e770;},_0x5217(_0x2ac705,_0x414c84);}function _0xcfd3(){const _0x20a299=['owner','*Message\x20you\x20replied\x20does\x20not\x20contain\x20a\x20reply\x20Message*','sendMessage','serializeM','405104eeZWQC','chat','20tvuDUy','location\x2024.121231,55.1121221','25821XQagms','END:VCARD','└───────────','\x0a\x20Latitude\x20\x20\x20\x20\x20:\x20\x20','location','50KcapPB',':-\x20wa.me/','_\x0a\x0a┌─⊷\x20\x09*BLOCKED\x20USERS*\x0a','```Cordinates\x20Not\x20In\x20Formate,\x20Try\x20Again```','vcard','split','caption','vcard\x20Suhail\x20Tech\x20Info*\x20','error\x20while\x20geting\x20Quoted\x20Message\x20:\x20','*Please\x20Reply\x20to\x20User\x20With\x20Name*','35973uOXNpL','user','\x0a\x20Longitude\x20\x20:\x20\x20','reply','3624UGzuOA','Create\x20Contact\x20by\x20given\x20name.','send','getQuotedObj','BEGIN:VCARD\x0a','444999BlKiwp','sender','blocklist','ORG:;\x0a','slice','26683500PNNkdj','15uAJSoQ','Give\x20Coordinates\x20To\x20Send\x20Location\x0a\x20*Example:*\x20','21205HISCIB','bot','log','*----------LOCATION------------*','654IuGhBV','whatsapp','join','Please\x20Give\x20Me\x20User\x20Name,\x20\x0a\x20*Example\x20:\x20','copyNForward','error','FN:','2319537iFWrEA','length','VERSION:3.0\x0a','quoted','```\x20\x0a\x20Sending\x20Location\x20Of\x20Given\x20Data:\x20'];_0xcfd3=function(){return _0x20a299;};return _0xcfd3();}(function(_0x2dd1f9,_0x24e43d){const _0x11d3b5=_0x5217,_0x53abec=_0x2dd1f9();while(!![]){try{const _0x248c32=parseInt(_0x11d3b5(0x165))/0x1*(parseInt(_0x11d3b5(0x143))/0x2)+-parseInt(_0x11d3b5(0x15d))/0x3+-parseInt(_0x11d3b5(0x179))/0x4*(-parseInt(_0x11d3b5(0x163))/0x5)+-parseInt(_0x11d3b5(0x169))/0x6*(-parseInt(_0x11d3b5(0x154))/0x7)+-parseInt(_0x11d3b5(0x158))/0x8*(parseInt(_0x11d3b5(0x145))/0x9)+-parseInt(_0x11d3b5(0x14a))/0xa*(parseInt(_0x11d3b5(0x170))/0xb)+parseInt(_0x11d3b5(0x162))/0xc;if(_0x248c32===_0x24e43d)break;else _0x53abec['push'](_0x53abec['shift']());}catch(_0x42af59){_0x53abec['push'](_0x53abec['shift']());}}}(_0xcfd3,0xc2a91),smd({'pattern':'quoted','desc':'get\x20reply\x20Message\x20from\x20Replied\x20Message','category':_0x49af65(0x155),'filename':__filename},async(_0xee7bd2,_0x191822,_0x1202a6)=>{const _0xa30a3e=_0x49af65;if(!_0x191822[_0xa30a3e(0x173)])return await _0x191822[_0xa30a3e(0x15a)]('*_Uhh\x20Dear,\x20Reply\x20to\x20a\x20Message_*');var _0x637d73;try{_0x637d73=await _0xee7bd2[_0xa30a3e(0x166)][_0xa30a3e(0x178)](await _0x191822[_0xa30a3e(0x15b)]());}catch(_0x17c536){return console[_0xa30a3e(0x167)](_0xa30a3e(0x152),_0x17c536);}if(!_0x637d73['quoted'])return await _0x191822['replay'](_0xa30a3e(0x176));else await _0xee7bd2[_0xa30a3e(0x166)][_0xa30a3e(0x177)](_0x191822['chat'],{'react':{'text':'✨','key':_0x191822['key']}});try{let _0x8465b1=await _0xee7bd2[_0xa30a3e(0x166)][_0xa30a3e(0x178)](await _0x637d73['getQuotedObj']());return await _0xee7bd2[_0xa30a3e(0x166)][_0xa30a3e(0x16d)](_0x191822[_0xa30a3e(0x142)],_0x8465b1,![]);}catch(_0x2f5e88){const _0x4746f3={};_0xee7bd2[_0xa30a3e(0x166)]['forward'](_0x191822[_0xa30a3e(0x142)],_0x637d73[_0xa30a3e(0x173)],_0x4746f3,_0x191822);}}),smd({'pattern':_0x49af65(0x15f),'desc':'get\x20list\x20of\x20all\x20Blocked\x20Numbers','category':_0x49af65(0x16a),'filename':__filename,'use':'<text>'},async(_0x317178,_0x5a8601,_0x1039cb,{isCreator:_0x2e42e2})=>{const _0xe4f378=_0x49af65;if(!_0x2e42e2)return await _0x5a8601[_0xe4f378(0x157)](tlang()[_0xe4f378(0x175)]);try{const _0x4b3b6f=await _0x317178[_0xe4f378(0x166)]['fetchBlocklist']();if(_0x4b3b6f['length']===0x0)return await _0x5a8601[_0xe4f378(0x157)]('*Uhh\x20Dear,\x20You\x20don\x27t\x20have\x20any\x20Blocked\x20Numbers.*');let _0x27e7b3='\x0a*≡\x20List*\x0a\x0a*_Total\x20Users:*\x20'+_0x4b3b6f[_0xe4f378(0x171)]+_0xe4f378(0x14c);for(let _0x7b6791=0x0;_0x7b6791<_0x4b3b6f['length'];_0x7b6791++){_0x27e7b3+='▢\x20'+(_0x7b6791+0x1)+_0xe4f378(0x14b)+_0x4b3b6f[_0x7b6791][_0xe4f378(0x14f)]('@')[0x0]+'\x0a';}return _0x27e7b3+=_0xe4f378(0x147),await _0x317178[_0xe4f378(0x166)][_0xe4f378(0x177)](_0x5a8601['chat'],{'text':_0x27e7b3});}catch(_0x40961b){return console[_0xe4f378(0x16e)](_0x40961b),await _0x5a8601[_0xe4f378(0x16e)](_0x40961b);}}),smd({'pattern':_0x49af65(0x149),'desc':'Adds\x20*readmore*\x20in\x20given\x20text.','category':_0x49af65(0x16a),'filename':__filename},async(_0x433828,_0x4c63a9,_0x241dfd)=>{const _0x2a6c63=_0x49af65;if(!_0x241dfd)return await _0x4c63a9['reply'](_0x2a6c63(0x164)+prefix+_0x2a6c63(0x144));let _0xe78590=parseFloat(_0x241dfd[_0x2a6c63(0x14f)](',')[0x0])||'',_0x14423b=parseFloat(_0x241dfd[_0x2a6c63(0x14f)](',')[0x1])||'';if(!_0xe78590||isNaN(_0xe78590)||!_0x14423b||isNaN(_0x14423b))return await _0x4c63a9[_0x2a6c63(0x157)](_0x2a6c63(0x14d));let _0x2ebe57=_0x2a6c63(0x168);return _0x2ebe57+=_0x2a6c63(0x174),_0x2ebe57+=_0x2a6c63(0x148)+_0xe78590,_0x2ebe57+=_0x2a6c63(0x156)+_0x14423b+'```\x0a'+Config[_0x2a6c63(0x150)],await _0x4c63a9[_0x2a6c63(0x157)](_0x2ebe57),await _0x433828[_0x2a6c63(0x166)][_0x2a6c63(0x177)](_0x4c63a9['chat'],{'location':{'degreesLatitude':_0xe78590,'degreesLongitude':_0x14423b}},{'quoted':_0x4c63a9});}),smd({'pattern':_0x49af65(0x14e),'desc':_0x49af65(0x159),'category':_0x49af65(0x16a),'filename':__filename},async(_0x168ad2,_0x27b6a6,_0x562df1)=>{const _0x1fc475=_0x49af65;if(!_0x27b6a6['quoted'])return _0x27b6a6[_0x1fc475(0x157)](_0x1fc475(0x153));if(!_0x562df1)return _0x27b6a6[_0x1fc475(0x157)](_0x1fc475(0x16c)+prefix+_0x1fc475(0x151));var _0x33ee17=_0x562df1['split']('\x20');_0x33ee17[_0x1fc475(0x171)]>0x3&&(_0x562df1=_0x33ee17[_0x1fc475(0x161)](0x0,0x3)[_0x1fc475(0x16b)]('\x20'));const _0x4a1e23=_0x1fc475(0x15c)+_0x1fc475(0x172)+_0x1fc475(0x16f)+_0x562df1+'\x0a'+_0x1fc475(0x160)+'TEL;type=CELL;type=VOICE;waid='+_0x27b6a6[_0x1fc475(0x173)][_0x1fc475(0x15e)][_0x1fc475(0x14f)]('@')[0x0]+':+'+owner[0x0]+'\x0a'+_0x1fc475(0x146);let _0x1f2633={'contacts':{'displayName':_0x562df1,'contacts':[{'vcard':_0x4a1e23}]}};return await _0x168ad2[_0x1fc475(0x166)][_0x1fc475(0x177)](_0x27b6a6[_0x1fc475(0x142)],_0x1f2633,{'quoted':_0x27b6a6});}));

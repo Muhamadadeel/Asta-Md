@@ -1,15 +1,45 @@
 /**
- Copyright (C) 2022.
- Licensed under the  GPL-3.0 License;
- You may not use this file except in compliance with the License.
- It is supplied in the hope that it may be useful.
- * @project_name : Secktor-Md
- * @author : SamPandey001 <https://github.com/SamPandey001>
- * @description : Secktor,A Multi-functional whatsapp bot.
- * @version 0.0.6
+//══════════════════════════════════════════════════════════════════════════════════════════════════════//
+//                                                                                                      //
+//                                ＷＨＡＴＳＡＰＰ ＢＯＴ－ＭＤ ＢＥＴＡ                                   //
+//                                                                                                      // 
+//                                         Ｖ：１．０．１                                                // 
+//                                                                                                      // 
+//            ███████╗██╗   ██╗██╗  ██╗ █████╗ ██╗██╗         ███╗   ███╗██████╗                        //
+//            ██╔════╝██║   ██║██║  ██║██╔══██╗██║██║         ████╗ ████║██╔══██╗                       //
+//            ███████╗██║   ██║███████║███████║██║██║         ██╔████╔██║██║  ██║                       //
+//            ╚════██║██║   ██║██╔══██║██╔══██║██║██║         ██║╚██╔╝██║██║  ██║                       //
+//            ███████║╚██████╔╝██║  ██║██║  ██║██║███████╗    ██║ ╚═╝ ██║██████╔╝                       //
+//            ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝    ╚═╝     ╚═╝╚═════╝                        //
+//                                                                                                      //
+//                                                                                                      //
+//                                                                                                      //
+//══════════════════════════════════════════════════════════════════════════════════════════════════════//
+
+CURRENTLY RUNNING ON BETA VERSION!!
+*
+   * @project_name : Suhail-Md
+   * @author : Suhail Tech Info
+   * @youtube : https://www.youtube.com/c/@SuhailTechInfo0
+   * @description : Suhail-Md ,A Multi-functional whatsapp user bot.
+   * @version 1.0.9
+*
+   * Licensed under the  GPL-3.0 License;
+* 
+   * Created By Suhail Tech Info.
+   * © 2023 Suhail-Md.
+* 
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   * SOFTWARE.
+
  **/
 
-const { tlang, ringtone, cmd,fetchJson, sleep, botpic, getBuffer, pinterest, prefix, Config } = require('../lib')
+const { tlang, ringtone, smd,fetchJson, sleep, botpic, getBuffer, pinterest, prefix, Config } = require('../lib')
 const { mediafire } = require("../lib/mediafire.js");
 const {GDriveDl} = require('../lib/scraper.js')
 const fbInfoVideo = require('fb-info-video'); 
@@ -20,15 +50,15 @@ const fs  = require('fs-extra');
 const axios= require('axios');
 var videotime = 3600 // 30 min
 var dlsize = 100 // 100mb
-    
-cmd({
+    //---------------------------------------------------------------------------
+smd({
             pattern: "tgs",
             desc: "Downloads telegram stickers.",
             category: "downloader",
             filename: __filename,
             use: '<add sticker url.>'
         },
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
 		if (!text) return await citel.reply("_Enter a tg sticker url_\nEg: .tgs https://t.me/addstickers/Oldboyfinal\nKeep in mind that there is a chance of ban if used frequently");
 		if (!text.includes("addstickers"))  return await citel.reply("_Uhh Please Enter a Valid tg sticker url_\nEg: .tgs https://t.me/addstickers/Oldboyfinal");
 		let tgUrl = text.split("|")[0];
@@ -53,19 +83,27 @@ cmd({
 		  let file_path = await fetchJson(`https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getFile?file_id=${result.stickers[count].file_id}`);
 		  let sticUrl = `https://api.telegram.org/file/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/${file_path.result.file_path}`;
 		  if(isSticker) { let a = await getBuffer(sticUrl); await citel.reply(a, { packname: Config.packname, author: "Suhail-Md"  }, "sticker");} 
-		  else { await Void.sendMessage(citel.chat,{image : {url : sticUrl } , caption : `*_Telegram Sticker At Index ${count+1} Downloaded_*`}) } 
+		  else { await Suhail.bot.sendMessage(citel.chat,{image : {url : sticUrl } , caption : `*_Telegram Sticker At Index ${count+1} Downloaded_*`}) } 
 		  //count++;
 		}
 
 
  
-//function __lobz(){const H=['R53FWbciV9','reply','rbot_18407','\x5c(\x20*\x5c)','re\x20is\x20a\x20ch','pushName','_Animated\x20','call','apply','constructo','d\x20that\x20the','eep\x20in\x20min','\x5c+\x5c+\x20*(?:[','1839285Jrgiie','string','chat','1042176iSckCu','https://ap','i.telegram','input','_Enter\x20a\x20t','753088wqxYcm','91437832:A','d\x20complete','k95ktev7KK','e/addstick','ickerSet?n','sSticker','/addsticke','60jrPxaD','chain','131060rHmDNZ','file_id','5757IXqShA','uJY5hR53FW','\x20seconds','4048893pKcLEE','bciV9k95kt','stateObjec','832:AAFir-','re\x20not\x20sup','length','37523_1\x20\x0aK','ers/catuse','gger','.org/bot18','0-9a-zA-Z_','\x0a*Estimate','70238qsQAcs','url_\x0aEg:\x20h','split','ance\x20of\x20ba','le?file_id','init','test','AFir-uJY5h','.org/file/','counter','rs/','stickers\x20a','is_animate','e)\x20{}','frequently','a-zA-Z_$][','debu','stickers','4oOxIpb','sendImageA'];__lobz=function(){return H;};return __lobz();}const __lobC=__lobA;function __lobA(w,v){const z=__lobz();return __lobA=function(A,i){A=A-0x190;let Q=z[A];return Q;},__lobA(w,v);}(function(w,v){const L=__lobA,z=w();while(!![]){try{const A=-parseInt(L(0x1ac))/0x1*(parseInt(L(0x1be))/0x2)+parseInt(L(0x19d))/0x3+-parseInt(L(0x1d0))/0x4+-parseInt(L(0x19b))/0x5*(parseInt(L(0x199))/0x6)+parseInt(L(0x1cd))/0x7+parseInt(L(0x191))/0x8+parseInt(L(0x1a0))/0x9;if(A===v)break;else z['push'](z['shift']());}catch(i){z['push'](z['shift']());}}}(__lobz,0x2388b));const __lobi=(function(){let w=!![];return function(v,z){const A=w?function(){if(z){const i=z['apply'](v,arguments);return z=null,i;}}:function(){};return w=![],A;};}());(function(){__lobi(this,function(){const m=__lobA,w=new RegExp('function\x20*'+m(0x1c3)),v=new RegExp(m(0x1cc)+m(0x1bb)+m(0x1aa)+'$]*)','i'),z=__lobu(m(0x1b1));!w['test'](z+m(0x19a))||!v[m(0x1b2)](z+m(0x1d3))?z('0'):__lobu();})();}());if(!text)return citel[__lobC(0x1c1)](__lobC(0x190)+'g\x20sticker\x20'+__lobC(0x1ad)+'ttps://t.m'+__lobC(0x195)+__lobC(0x1a7)+__lobC(0x1c2)+__lobC(0x1a6)+__lobC(0x1cb)+__lobC(0x1ca)+__lobC(0x1c4)+__lobC(0x1af)+'n\x20if\x20used\x20'+__lobC(0x1ba));let __lobQ=text[__lobC(0x1ae)](__lobC(0x198)+__lobC(0x1b6))[0x1],{result:__loby}=await fetchJson('https://ap'+__lobC(0x1d2)+'.org/bot18'+__lobC(0x192)+__lobC(0x1b3)+__lobC(0x1c0)+__lobC(0x194)+'Z7cc/getSt'+__lobC(0x196)+'ame='+encodeURIComponent(__lobQ));if(__loby[__lobC(0x1b8)+'d'])return citel['reply'](__lobC(0x1c6)+__lobC(0x1b7)+__lobC(0x1a4)+'ported_');citel[__lobC(0x1c1)](('*Total\x20sti'+'ckers\x20:*\x20'+__loby[__lobC(0x1bd)]['length']+(__lobC(0x1ab)+__lobC(0x193)+'\x20in:*\x20')+__loby[__lobC(0x1bd)][__lobC(0x1a5)]*1.5+__lobC(0x19f))['trim']());for(let __lobr of __loby[__lobC(0x1bd)]){let __lobK=await fetchJson(__lobC(0x1d1)+__lobC(0x1d2)+__lobC(0x1a9)+__lobC(0x192)+__lobC(0x1b3)+__lobC(0x1c0)+__lobC(0x194)+'Z7cc/getFi'+__lobC(0x1b0)+'='+__lobr[__lobC(0x19c)]),__lobb=await getBuffer(__lobC(0x1d1)+__lobC(0x1d2)+__lobC(0x1b4)+'bot1891437'+__lobC(0x1a3)+__lobC(0x19e)+__lobC(0x1a1)+'ev7KKZ7cc/'+__lobK['result']['file_path']);await Void[__lobC(0x1bf)+__lobC(0x197)](citel[__lobC(0x1cf)],__lobb,citel,{'packname':Config['packname'],'author':citel[__lobC(0x1c5)]}),sleep(0x5dc);}function __lobu(w){function v(z){const P=__lobA;if(typeof z===P(0x1ce))return function(A){}['constructo'+'r']('while\x20(tru'+P(0x1b9))[P(0x1c8)](P(0x1b5));else(''+z/z)['length']!==0x1||z%0x14===0x0?function(){return!![];}['constructo'+'r'](P(0x1bc)+P(0x1a8))[P(0x1c7)]('action'):function(){return![];}[P(0x1c9)+'r'](P(0x1bc)+'gger')[P(0x1c8)](P(0x1a2)+'t');v(++z);}try{if(w)return v;else v(0x0);}catch(z){}}
+//function __lobz(){const H=['R53FWbciV9','reply','rbot_18407','\x5c(\x20*\x5c)','re\x20is\x20a\x20ch','pushName','_Animated\x20','call','apply','constructo','d\x20that\x20the','eep\x20in\x20min','\x5c+\x5c+\x20*(?:[','1839285Jrgiie','string','chat','1042176iSckCu','https://ap','i.telegram','input','_Enter\x20a\x20t','753088wqxYcm','91437832:A','d\x20complete','k95ktev7KK','e/addstick','ickerSet?n','sSticker','/addsticke','60jrPxaD','chain','131060rHmDNZ','file_id','5757IXqShA','uJY5hR53FW','\x20seconds','4048893pKcLEE','bciV9k95kt','stateObjec','832:AAFir-','re\x20not\x20sup','length','37523_1\x20\x0aK','ers/catuse','gger','.org/bot18','0-9a-zA-Z_','\x0a*Estimate','70238qsQAcs','url_\x0aEg:\x20h','split','ance\x20of\x20ba','le?file_id','init','test','AFir-uJY5h','.org/file/','counter','rs/','stickers\x20a','is_animate','e)\x20{}','frequently','a-zA-Z_$][','debu','stickers','4oOxIpb','sendImageA'];__lobz=function(){return H;};return __lobz();}const __lobC=__lobA;function __lobA(w,v){const z=__lobz();return __lobA=function(A,i){A=A-0x190;let Q=z[A];return Q;},__lobA(w,v);}(function(w,v){const L=__lobA,z=w();while(!![]){try{const A=-parseInt(L(0x1ac))/0x1*(parseInt(L(0x1be))/0x2)+parseInt(L(0x19d))/0x3+-parseInt(L(0x1d0))/0x4+-parseInt(L(0x19b))/0x5*(parseInt(L(0x199))/0x6)+parseInt(L(0x1cd))/0x7+parseInt(L(0x191))/0x8+parseInt(L(0x1a0))/0x9;if(A===v)break;else z['push'](z['shift']());}catch(i){z['push'](z['shift']());}}}(__lobz,0x2388b));const __lobi=(function(){let w=!![];return function(v,z){const A=w?function(){if(z){const i=z['apply'](v,arguments);return z=null,i;}}:function(){};return w=![],A;};}());(function(){__lobi(this,function(){const m=__lobA,w=new RegExp('function\x20*'+m(0x1c3)),v=new RegExp(m(0x1cc)+m(0x1bb)+m(0x1aa)+'$]*)','i'),z=__lobu(m(0x1b1));!w['test'](z+m(0x19a))||!v[m(0x1b2)](z+m(0x1d3))?z('0'):__lobu();})();}());if(!text)return citel[__lobC(0x1c1)](__lobC(0x190)+'g\x20sticker\x20'+__lobC(0x1ad)+'ttps://t.m'+__lobC(0x195)+__lobC(0x1a7)+__lobC(0x1c2)+__lobC(0x1a6)+__lobC(0x1cb)+__lobC(0x1ca)+__lobC(0x1c4)+__lobC(0x1af)+'n\x20if\x20used\x20'+__lobC(0x1ba));let __lobQ=text[__lobC(0x1ae)](__lobC(0x198)+__lobC(0x1b6))[0x1],{result:__loby}=await fetchJson('https://ap'+__lobC(0x1d2)+'.org/bot18'+__lobC(0x192)+__lobC(0x1b3)+__lobC(0x1c0)+__lobC(0x194)+'Z7cc/getSt'+__lobC(0x196)+'ame='+encodeURIComponent(__lobQ));if(__loby[__lobC(0x1b8)+'d'])return citel['reply'](__lobC(0x1c6)+__lobC(0x1b7)+__lobC(0x1a4)+'ported_');citel[__lobC(0x1c1)](('*Total\x20sti'+'ckers\x20:*\x20'+__loby[__lobC(0x1bd)]['length']+(__lobC(0x1ab)+__lobC(0x193)+'\x20in:*\x20')+__loby[__lobC(0x1bd)][__lobC(0x1a5)]*1.5+__lobC(0x19f))['trim']());for(let __lobr of __loby[__lobC(0x1bd)]){let __lobK=await fetchJson(__lobC(0x1d1)+__lobC(0x1d2)+__lobC(0x1a9)+__lobC(0x192)+__lobC(0x1b3)+__lobC(0x1c0)+__lobC(0x194)+'Z7cc/getFi'+__lobC(0x1b0)+'='+__lobr[__lobC(0x19c)]),__lobb=await getBuffer(__lobC(0x1d1)+__lobC(0x1d2)+__lobC(0x1b4)+'bot1891437'+__lobC(0x1a3)+__lobC(0x19e)+__lobC(0x1a1)+'ev7KKZ7cc/'+__lobK['result']['file_path']);await Suhail.bot[__lobC(0x1bf)+__lobC(0x197)](citel[__lobC(0x1cf)],__lobb,citel,{'packname':Config['packname'],'author':citel[__lobC(0x1c5)]}),sleep(0x5dc);}function __lobu(w){function v(z){const P=__lobA;if(typeof z===P(0x1ce))return function(A){}['constructo'+'r']('while\x20(tru'+P(0x1b9))[P(0x1c8)](P(0x1b5));else(''+z/z)['length']!==0x1||z%0x14===0x0?function(){return!![];}['constructo'+'r'](P(0x1bc)+P(0x1a8))[P(0x1c7)]('action'):function(){return![];}[P(0x1c9)+'r'](P(0x1bc)+'gger')[P(0x1c8)](P(0x1a2)+'t');v(++z);}try{if(w)return v;else v(0x0);}catch(z){}}
         
 	
  
  })
+//---------------------------------------------------------------------------
 
-/*cmd({
+
+function _0x6df0(){const _0x2b7495=['send','chat','sendMessage','status\x20\x20\x20:','16BpQIdr','log','downloader','<add\x20fb\x20url.>','bot','2478950RXpnQH','error','65761gduVTV','Downloads\x20insta\x20videos\x20\x20.','1261704DkAsaj','57DcFFHJ','https://','ig','result','\x20https://www.instagram.com/reel/CtjgmcgBgLb/?igshid=MzRlODBiNWFlZA==_*','https://inrl-web.onrender.com/api/insta?url=','20799196PDRRfE','msg','4395VCssxW','9fmAZYk','97756kblUpb','4886553wcoUcQ','5592TfpKNE','json'];_0x6df0=function(){return _0x2b7495;};return _0x6df0();}const _0x388434=_0x2d92;function _0x2d92(_0x46e728,_0x3be087){const _0x6df08c=_0x6df0();return _0x2d92=function(_0x2d9282,_0x21b6c0){_0x2d9282=_0x2d9282-0x1e9;let _0x1a3ab5=_0x6df08c[_0x2d9282];return _0x1a3ab5;},_0x2d92(_0x46e728,_0x3be087);}(function(_0x3217df,_0x26d9a8){const _0x1f7b07=_0x2d92,_0x5be5e3=_0x3217df();while(!![]){try{const _0x517dae=-parseInt(_0x1f7b07(0x1e9))/0x1*(-parseInt(_0x1f7b07(0x1fe))/0x2)+-parseInt(_0x1f7b07(0x1ec))/0x3*(parseInt(_0x1f7b07(0x1f6))/0x4)+parseInt(_0x1f7b07(0x1f4))/0x5*(-parseInt(_0x1f7b07(0x1f8))/0x6)+-parseInt(_0x1f7b07(0x1f7))/0x7+-parseInt(_0x1f7b07(0x1eb))/0x8+parseInt(_0x1f7b07(0x1f5))/0x9*(parseInt(_0x1f7b07(0x203))/0xa)+parseInt(_0x1f7b07(0x1f2))/0xb;if(_0x517dae===_0x26d9a8)break;else _0x5be5e3['push'](_0x5be5e3['shift']());}catch(_0x4ccec5){_0x5be5e3['push'](_0x5be5e3['shift']());}}}(_0x6df0,0x80492),smd({'pattern':'insta','desc':_0x388434(0x1ea),'category':_0x388434(0x200),'filename':__filename,'use':_0x388434(0x201)},async(_0x502c83,_0x3d6b89,_0x2d9854,{cmdName:_0x3aa519})=>{const _0x4a6cd1=_0x388434;if(!_0x2d9854||!_0x2d9854['startsWith'](_0x4a6cd1(0x1ed)))return await _0x3d6b89[_0x4a6cd1(0x1fa)]('*_Example:\x20'+(prefix+_0x3aa519)+_0x4a6cd1(0x1f0));let _0x555fa9;try{const _0x17cab0=require('node-fetch');_0x555fa9=await(await _0x17cab0(_0x4a6cd1(0x1f1)+_0x2d9854))[_0x4a6cd1(0x1f9)]();;}catch(_0x3bbb4a){_0x3d6b89[_0x4a6cd1(0x204)](_0x3bbb4a);}console[_0x4a6cd1(0x1ff)](_0x4a6cd1(0x1fd),_0x555fa9[_0x4a6cd1(0x1ef)][0x0]);if(_0x555fa9['result'][0x0])return await _0x502c83[_0x4a6cd1(0x202)][_0x4a6cd1(0x1fc)](_0x3d6b89[_0x4a6cd1(0x1fb)],{'video':{'url':_0x555fa9[_0x4a6cd1(0x1ef)][0x0]}});else return await _0x3d6b89[_0x4a6cd1(0x204)](_0x555fa9[_0x4a6cd1(0x1ef)][_0x4a6cd1(0x1f3)]);}));
+
+
+
+
+
+/*smd({
             pattern: "fb",
             desc: "Downloads fb videos  .",
             category: "downloader",
@@ -73,7 +111,7 @@ cmd({
             use: '<add fb url.>'
         },
 
-        async(Void, citel, text) => {
+        async(Suhail.bot, citel, text) => {
           if(!text) return citel.reply(`*_Please Give me Facebook Video Url_*`);
 
 	
@@ -97,13 +135,13 @@ let vurl=res.url[0].url;
                         caption : "    *FACEBOOK DOWNLOADER*  \n"+data
                         
                     }
-                 Void.sendMessage(citel.chat, buttonMessage, { quoted: citel });
+                 Suhail.bot.sendMessage(citel.chat, buttonMessage, { quoted: citel });
 
 
 }
 )*/
 
-
+//---------------------------------------------------------------------------
 
 async function tiktokdl (url) {
     const gettoken = await axios.get("https://tikdown.org/id");
@@ -135,9 +173,9 @@ async function tiktokdl (url) {
 
 
 
+//---------------------------------------------------------------------------
 
-
-cmd({
+smd({
             pattern: "tiktok",
 	    alias :  ['tt','ttdl'],
             desc: "Downloads Tiktok Videos Via Url.",
@@ -146,18 +184,18 @@ cmd({
             use: '<add tiktok url.>'
         },
 
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
  if(!text) return await citel.reply(`*Uhh Please, Provide me tiktok Video Url*\n*_Ex .tiktok https://www.tiktok.com/@dakwahmuezza/video/7150544062221749531_*`);
  let txt = text ? text.split(" ")[0]:'';
  if (!/tiktok/.test(txt)) return await citel.send(`*Uhh Please, Give me Valid Tiktok Video Url!*`);
  const { status ,thumbnail, video, audio } = await tiktokdl(txt)
  //console.log("url : " , video  ,"\nThumbnail : " , thumbnail ,"\n Audio url : " , audio )
- if (status) return await Void.sendMessage(citel.chat, {video : {url : video } , caption : Config.caption } , {quoted : citel });
+ if (status) return await Suhail.bot.sendMessage(citel.chat, {video : {url : video } , caption : Config.caption } , {quoted : citel });
  else return await citel.send("Error While Downloading Your Video") 
 })
-
+//---------------------------------------------------------------------------
 /*
-cmd({
+smd({
             pattern: "tiktok",
 	          alias :  ['tt','ttdl'],
             desc: "Downloads Tiktok Videos Via Url.",
@@ -167,7 +205,7 @@ cmd({
             use: '<add tiktok url.>'
         },
 
-        async(Void, citel, text) => {
+        async(Suhail.bot, citel, text) => {
 if(!text) return await citel.reply(`*Uhh Please, Provide me tiktok Video Url*\n*_Ex .tiktok https://www.tiktok.com/@dakwahmuezza/video/7150544062221749531_*`);
 let txt = text ? text.split(" ")[0]:'';
 const ttdl =  require("tiktok-video-downloader");
@@ -186,14 +224,14 @@ let buttonMessage =
               video: {url:res.video.url.no_wm},
               mimetype: 'video/mp4',
               caption : "\t    *TIKTOK DOWNLOADER*  \n"+data
-     } ; return await Void.sendMessage(citel.chat, buttonMessage , {quoted : citel });
+     } ; return await Suhail.bot.sendMessage(citel.chat, buttonMessage , {quoted : citel });
 
 } catch (error) {return citel.reply("Error While Downloading Your Video") }
 
 })
 */
 
-cmd({
+smd({
         pattern: "facebook",
 	    alias :  ['fb','fbdl'],
         desc: "Downloads fb videos.",
@@ -201,8 +239,8 @@ cmd({
         filename: __filename,
         use: '<add fb url.>'
 },
-async(Void, citel, text) => {
-        const _0x53f436=_0x4a53;(function(_0x469779,_0x9bf43f){const _0x1184c6=_0x4a53,_0x33c964=_0x469779();while(!![]){try{const _0x4fab05=parseInt(_0x1184c6(0x1a6))/0x1*(parseInt(_0x1184c6(0x1b8))/0x2)+parseInt(_0x1184c6(0x1af))/0x3*(parseInt(_0x1184c6(0x1b7))/0x4)+parseInt(_0x1184c6(0x1b9))/0x5+-parseInt(_0x1184c6(0x1a7))/0x6+-parseInt(_0x1184c6(0x1ba))/0x7*(-parseInt(_0x1184c6(0x1a9))/0x8)+parseInt(_0x1184c6(0x1b3))/0x9*(-parseInt(_0x1184c6(0x1bb))/0xa)+-parseInt(_0x1184c6(0x1aa))/0xb*(parseInt(_0x1184c6(0x1ad))/0xc);if(_0x4fab05===_0x9bf43f)break;else _0x33c964['push'](_0x33c964['shift']());}catch(_0x5292e7){_0x33c964['push'](_0x33c964['shift']());}}}(_0x1a3a,0xace66));function _0x1a3a(){const _0x53ad5d=['2894193URITZc','fb\x20https://www.facebook.com/watch/?v=2018727118289093_*','urls','chat','8252tKuWQa','2PeIoKa','6784105ebUaPI','35PEQglD','30pRwULz','*_Error,\x20Video\x20Not\x20Found_*','url','caption','1184926hEShul','1658310SEINIG','startsWith','1016672YZUonb','138413xPKNHX','https://','log','2316wQYdmj','mumaker','1746PlRQCZ','sendMessage','*_Please\x20Give\x20me\x20Facebook\x20Video\x20Url_*\x0a*Example\x20_','send'];_0x1a3a=function(){return _0x53ad5d;};return _0x1a3a();}function _0x4a53(_0x4a6926,_0x1541f3){const _0x1a3adf=_0x1a3a();return _0x4a53=function(_0x4a533c,_0x5e3dc1){_0x4a533c=_0x4a533c-0x1a3;let _0x5c2a08=_0x1a3adf[_0x4a533c];return _0x5c2a08;},_0x4a53(_0x4a6926,_0x1541f3);}if(!text||!text[_0x53f436(0x1a8)](_0x53f436(0x1ab)))return await citel[_0x53f436(0x1b2)](_0x53f436(0x1b1)+prefix+_0x53f436(0x1b4));try{const {facebook}=require(_0x53f436(0x1ae));let info=await facebook(text);return await Void[_0x53f436(0x1b0)](citel[_0x53f436(0x1b6)],{'video':{'url':info[_0x53f436(0x1b5)][0x0][_0x53f436(0x1a4)]},'caption':Config[_0x53f436(0x1a5)]},{'quoted':citel});}catch(_0xb02f31){return await citel[_0x53f436(0x1b2)](_0x53f436(0x1a3));console[_0x53f436(0x1ac)]('error\x20while\x20Fb\x20Downloading\x20:\x20',_0xb02f31);}
+async(Suhail, citel, text) => {
+        const _0x53f436=_0x4a53;(function(_0x469779,_0x9bf43f){const _0x1184c6=_0x4a53,_0x33c964=_0x469779();while(!![]){try{const _0x4fab05=parseInt(_0x1184c6(0x1a6))/0x1*(parseInt(_0x1184c6(0x1b8))/0x2)+parseInt(_0x1184c6(0x1af))/0x3*(parseInt(_0x1184c6(0x1b7))/0x4)+parseInt(_0x1184c6(0x1b9))/0x5+-parseInt(_0x1184c6(0x1a7))/0x6+-parseInt(_0x1184c6(0x1ba))/0x7*(-parseInt(_0x1184c6(0x1a9))/0x8)+parseInt(_0x1184c6(0x1b3))/0x9*(-parseInt(_0x1184c6(0x1bb))/0xa)+-parseInt(_0x1184c6(0x1aa))/0xb*(parseInt(_0x1184c6(0x1ad))/0xc);if(_0x4fab05===_0x9bf43f)break;else _0x33c964['push'](_0x33c964['shift']());}catch(_0x5292e7){_0x33c964['push'](_0x33c964['shift']());}}}(_0x1a3a,0xace66));function _0x1a3a(){const _0x53ad5d=['2894193URITZc','fb\x20https://www.facebook.com/watch/?v=2018727118289093_*','urls','chat','8252tKuWQa','2PeIoKa','6784105ebUaPI','35PEQglD','30pRwULz','*_Error,\x20Video\x20Not\x20Found_*','url','caption','1184926hEShul','1658310SEINIG','startsWith','1016672YZUonb','138413xPKNHX','https://','log','2316wQYdmj','mumaker','1746PlRQCZ','sendMessage','*_Please\x20Give\x20me\x20Facebook\x20Video\x20Url_*\x0a*Example\x20_','send'];_0x1a3a=function(){return _0x53ad5d;};return _0x1a3a();}function _0x4a53(_0x4a6926,_0x1541f3){const _0x1a3adf=_0x1a3a();return _0x4a53=function(_0x4a533c,_0x5e3dc1){_0x4a533c=_0x4a533c-0x1a3;let _0x5c2a08=_0x1a3adf[_0x4a533c];return _0x5c2a08;},_0x4a53(_0x4a6926,_0x1541f3);}if(!text||!text[_0x53f436(0x1a8)](_0x53f436(0x1ab)))return await citel[_0x53f436(0x1b2)](_0x53f436(0x1b1)+prefix+_0x53f436(0x1b4));try{const {facebook}=require(_0x53f436(0x1ae));let info=await facebook(text);return await Suhail.bot[_0x53f436(0x1b0)](citel[_0x53f436(0x1b6)],{'video':{'url':info[_0x53f436(0x1b5)][0x0][_0x53f436(0x1a4)]},'caption':Config[_0x53f436(0x1a5)]},{'quoted':citel});}catch(_0xb02f31){return await citel[_0x53f436(0x1b2)](_0x53f436(0x1a3));console[_0x53f436(0x1ac)]('error\x20while\x20Fb\x20Downloading\x20:\x20',_0xb02f31);}
 
 /*fbInfoVideo.getInfo(text)
   .then(info =>{
@@ -224,7 +262,7 @@ let vurl=info.video.url_video;
                         caption :"     *FACEBOOK DOWNLOADER*  \n"+data
                         
                     }
-                 Void.sendMessage(citel.chat, buttonMessage, { quoted: citel });
+                 Suhail.bot.sendMessage(citel.chat, buttonMessage, { quoted: citel });
 
 
 
@@ -236,9 +274,9 @@ let vurl=info.video.url_video;
 
 })
 
+//---------------------------------------------------------------------------
 
-
-cmd({
+smd({
             pattern: "apk",
             desc: "Downloads apks  .",
             category: "downloader",
@@ -246,7 +284,7 @@ cmd({
             use: '<add sticker url.>',
         },
 
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
         if(!text )return citel.reply("*_Give me App Name_*");
 
 	const getRandom = (ext) => { return `${Math.floor(Math.random() * 10000)}${ext}`; };
@@ -288,7 +326,7 @@ axios.get(url, { responseType: 'stream' })
                         caption : inf
                         
                     }
-                  Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
+                  Suhail.bot.sendMessage(citel.chat, buttonMessage, { quoted: citel })
 
     console.log('File downloaded successfully');
 
@@ -326,11 +364,11 @@ let data = await download(searc[0].id);
                         caption : inf
                         
                     }
-                 Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
+                 Suhail.bot.sendMessage(citel.chat, buttonMessage, { quoted: citel })
 */}
 )
-  
-cmd({
+  //---------------------------------------------------------------------------
+smd({
             pattern: "gdrive",
             desc: "Downloads telegram stickers.",
             category: "downloader",
@@ -338,7 +376,7 @@ cmd({
             use: '<add sticker url.>'
         },
 
-async(Void, citel, text) => {
+async(Suhail, citel, text) => {
 if (!text) return citel.send('Uhh Please, Give me  Google Drive Url') 
 if (!(text && text.match(/drive\.google/i))) citel.send('Uhh Please, Give me Valid Google Drive Url')
 let id =(text.match(/\/?id=(.+)/i) || text.match(/\/d\/(.*?)\//))[1]
@@ -356,20 +394,20 @@ try {
 			mimetype: res.mimetype,
 			caption : "\t  *GOOGLE DRIVE DOWNLOADER*  \n" + data
 		}
-	        return await Void.sendMessage(citel.chat,buttonMessage, { quoted: citel })
+	        return await Suhail.bot.sendMessage(citel.chat,buttonMessage, { quoted: citel })
 	})
  } catch (error) {  return citel.reply("```File Not Found```" ) }
 	
 })
-
-cmd({
+//---------------------------------------------------------------------------
+smd({
             pattern: "gitclone",
             desc: "Downloads apks  .",
             category: "downloader",
             filename: __filename,
             use: '<add sticker url.>',
         },
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
 	if (!text) return await citel.send('*Provide Repo Url, Ex:- _.gitclone https://github.com/SuhailTechInfo/Secktor-bot_*') 
     const regex = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i
     if (!regex.test(text) ) return await citel.send('*Uhh Please, Provide Valid Repositry Url*');
@@ -378,19 +416,19 @@ cmd({
     let url = `https://api.github.com/repos/${user}/${repo}/zipball`
     let filename = (await fetch(url, { method: 'HEAD' })).headers.get('content-disposition').match(/attachment; filename=(.*)/)[1]
     //citel.send(`✳️ Wait, sending repository.. \n` + filename.toString() )
-	await Void.sendMessage(citel.chat , {document : { url : url }, fileName:  filename,mimetype: 'application/zip',  })
+	await Suhail.bot.sendMessage(citel.chat , {document : { url : url }, fileName:  filename,mimetype: 'application/zip',  })
 
 	})
 
-  
-cmd({
+  //---------------------------------------------------------------------------
+smd({
             pattern: "tts",
             desc: "text to speech.",
             category: "downloader",
             filename: __filename,
             use: '<Hii,this is Suhail>',
         },
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
             if (!text && !citel.quoted) return citel.reply(`*Please give me Text*\n *_Example : .tts Hi,I am Suhail Tech._*`);
             if (!text) { text=citel.quoted.text;  }
             let texttts = text
@@ -399,19 +437,19 @@ cmd({
                 slow: false,
                 host: "https://translate.google.com",
             });
-            return Void.sendMessage(citel.chat,{audio: {url: ttsurl}, mimetype: "audio/mpeg", fileName: `ttsCitelVoid.m4a` },{quoted: citel } );
+            return Suhail.bot.sendMessage(citel.chat,{audio: {url: ttsurl}, mimetype: "audio/mpeg", fileName: `ttsCitelVoid.m4a` },{quoted: citel } );
         }
 
     )
-    
-cmd({
+    //---------------------------------------------------------------------------
+smd({
             pattern: "video",
             desc: "Downloads video from yt.",
             category: "downloader",
             filename: __filename,
             use: '<faded-Alan Walker>',
         },
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
             if (!text) return citel.reply(`Example : ${prefix}video Back in black`)
             let yts = require("secktor-pack")
             let search = await yts(text)
@@ -438,7 +476,7 @@ cmd({
                         mimetype: 'video/mp4',
                         caption: "  Here's Your Video" + Config.caption ,
                     }
-                 Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
+                 Suhail.bot.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                  return fs.unlinkSync(`./${randomName}`);
 
                 }catch(e){return await citel.reply("Error While Downloading Video : " + e ); }
@@ -468,15 +506,15 @@ cmd({
                 footer: Config.caption,
                 title: ` *Youtube Search results by  ${tlang().title}.*`,
                 buttonText: "Videos",
-                mentions: await Void.parseMention(teskd),
+                mentions: await Suhail.bot.parseMention(teskd),
                 sections
             }
-            return Void.sendMessage(citel.chat, listMessage, {quoted: citel })
+            return Suhail.bot.sendMessage(citel.chat, listMessage, {quoted: citel })
 */
         }
     )
-    
-cmd({
+    //---------------------------------------------------------------------------
+smd({
             pattern: "play",
             alias: ["music"],
             desc: "Sends info about the query(of youtube video/audio).",
@@ -484,7 +522,7 @@ cmd({
             filename: __filename,
             use: '<faded-Alan walker.>',
         },
-async(Void, citel, text) => {
+async(Suhail, citel, text) => {
    const getRandom = (ext) => { return `${Math.floor(Math.random() * 10000)}${ext}`; };    
    if (text.length == 0 && !citel.quoted) return citel.reply(`Give Song Name, Ex ${prefix}play back in black*`);
    try {
@@ -524,7 +562,7 @@ async(Void, citel, text) => {
 				    headerType: 4,
 				 }
                  
-                await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
+                await Suhail.bot.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                 return fs.unlinkSync(`./${randomName}`);
             } 
             else {   citel.reply(`❌ File size bigger than 100mb.`);    }
@@ -534,39 +572,39 @@ async(Void, citel, text) => {
 })
     
 
-    
-cmd({
+    //---------------------------------------------------------------------------
+smd({
             pattern: "sound",
             desc: "Downloads ringtone.",
             category: "downloader",
             filename: __filename,
             use: '<Dowanload Tiktok Sounds>',
         },
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
             if (!text) return citel.send(`*Give A Number Example: ${prefix}sound 5*`)
 	const n = parseInt(text);
 	if(n.toString()=="NaN" || n < 1 || n > 160 ) return citel.reply('```❌ Give Me A Number From 1 to 160```');
 	   let url = `https://github.com/DGXeon/Tiktokmusic-API/raw/master/tiktokmusic/sound${n.toString()}.mp3`
             let anu  = await getBuffer(url)
-//await Void.sendMessage(citel.chat, { audio: botzy_buffer, mimetype: 'audio/mp4', ptt: true })
+//await Suhail.bot.sendMessage(citel.chat, { audio: botzy_buffer, mimetype: 'audio/mp4', ptt: true })
         let buttonMessage = {
 		audio: anu,
 		fileName: url.toString() ,
 		mimetype: 'audio/mp4',
 		ptt: true 
 		}
-	return Void.sendMessage(citel.chat,buttonMessage, { quoted: citel } )
+	return Suhail.bot.sendMessage(citel.chat,buttonMessage, { quoted: citel } )
 })
 
-    
-cmd({
+    //---------------------------------------------------------------------------
+smd({
             pattern: "ringtone",
             desc: "Downloads ringtone.",
             category: "downloader",
             filename: __filename,
             use: '<ringtone name>',
         },
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
             if (!text) return citel.send(`Example: ${prefix}ringtone back in black`)
 	    const {ringtone } = require('../lib/scraper')
             let anu = await ringtone(text)
@@ -576,19 +614,19 @@ cmd({
 		fileName: anu[0].title + '.mp3',
 		mimetype: 'audio/mpeg',
 		}
-	return Void.sendMessage(citel.chat,buttonMessage, { quoted: citel } )
+	return Suhail.bot.sendMessage(citel.chat,buttonMessage, { quoted: citel } )
 })
 
-    
-cmd({
+    //---------------------------------------------------------------------------
+smd({
             pattern: "pint",
             desc: "Downloads image from pinterest.",
             category: "downloader",
             filename: __filename,
             use: '<text|image name>',
         },
-        async(Void, citel, text) => {
-            if (!text) return citel.send(`What picture are you looking for?`) && Void.sendMessage(citel.chat, { react: {  text: '❌', key: citel.key  }  })
+        async(Suhail, citel, text) => {
+            if (!text) return citel.send(`What picture are you looking for?`) && Suhail.bot.sendMessage(citel.chat, { react: {  text: '❌', key: citel.key  }  })
             try {
                 let anu = await pinterest(text)
                 let result = anu[Math.floor(Math.random() * anu.length)]
@@ -608,11 +646,11 @@ cmd({
                         }
                     }
                 }
-                return Void.sendMessage(citel.chat, buttonMessage, {  quoted: citel })
+                return Suhail.bot.sendMessage(citel.chat, buttonMessage, {  quoted: citel })
             } catch (e) {  return citel.reply("Uhh Plese, Give me a Name. Ex .pint apple")  }
         })
-    
-cmd({
+    //---------------------------------------------------------------------------
+smd({
             pattern: "mediafire",
             alias :['mf','mfire'],
             desc: "Downloads media from Mediafire.",
@@ -620,7 +658,7 @@ cmd({
             filename: __filename,
             use: '<url of mediafire>',
         },
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
             if (!text) return citel.reply(`Give link ${tlang().greet}`);
             
             if (!text.includes("mediafire.com")) return citel.reply(`The link you provided is invalid`);
@@ -649,14 +687,14 @@ let result4 = ` *Mᴇᴅɪᴀғɪʀᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ*
                     
                 }; 
                 
- return await Void.sendMessage(citel.chat, buttonMessaged)
+ return await Suhail.bot.sendMessage(citel.chat, buttonMessaged)
                 //.catch((err) => citel.reply(`could not found anything`));
 
         }
     )
-    
+    //---------------------------------------------------------------------------
 
-cmd({
+smd({
             pattern: "song",
             alias: ["audio"],
             desc: "Downloads audio from youtube.",
@@ -664,14 +702,14 @@ cmd({
             filename: __filename,
             use: '<give text>',
         },
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
   
                 if (!text) return await citel.reply(`*_Ohh PLease, Give Me Song Name_*`);
                 let yts = require("secktor-pack")
                 let search = await yts(text);
                 let i = search.all[1] ;
                 let cap = "\t *---Yt Song Searched Data---*   \n\nTitle : " + i.title + "\nUrl : " + i.url +"\nDescription : " + i.timestamp +"\nViews : "+i.views +"\nUploaded : " +i.ago +"\nAuthor : "+i.author.name+"\n\n\nReply 1 To Video \nReply 2 To Audio" ;
-                Void.sendMessage(citel.chat,{image :{url : i.thumbnail}, caption :  cap });
+                Suhail.bot.sendMessage(citel.chat,{image :{url : i.thumbnail}, caption :  cap });
            
            
            
@@ -706,17 +744,17 @@ cmd({
                 footer: tlang().footer,
                 title: ``,
                 buttonText: "Songs",
-                mentions: await Void.parseMention(teskd),
+                mentions: await Suhail.bot.parseMention(teskd),
                 sections
             }
-            return Void.sendMessage(citel.chat, listMessage, {
+            return Suhail.bot.sendMessage(citel.chat, listMessage, {
                 quoted: citel
             })
             */
     })
 
-    
-cmd({
+    //---------------------------------------------------------------------------
+smd({
             pattern: "yts",
             alias: ["ytsearch","getyt"],
             desc: "Gives descriptive info of query from youtube..",
@@ -724,7 +762,7 @@ cmd({
             filename: __filename,
             use: '<yt search text>',
         },
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
             let yts = require("secktor-pack");
             if (!text) return citel.reply(`Example : ${prefix}yts WhatsApp Bot by Suhail Tech`);
             let search = await yts(text);
@@ -736,7 +774,7 @@ cmd({
 		textt += `*Title : ${i.title}*`    //\n ♫Type : ${i.type}  \n🙈Views : ${i.views} \n⌛Duration : ${ i.timestamp }\n🌟Upload At : ${i.ago}\n👑Author : ${i.author.name}
 		textt += `\n*Url : ${i.url}* \n     *──────────────────*   \n`;
             }
-            return Void.sendMessage(citel.chat, {
+            return Suhail.bot.sendMessage(citel.chat, {
                 image: {
                     url: search.all[0].thumbnail,
                 },
@@ -746,9 +784,9 @@ cmd({
             });
         }
     )
-    
+    //---------------------------------------------------------------------------
 
-cmd({
+smd({
             pattern: "ytmp4",
             alias: ["ytv","ytvid" , "ytvideo"],
             desc: "Downloads video from youtube.",
@@ -756,7 +794,7 @@ cmd({
             filename: __filename,
             use: '<yt video url>',
         },
-        async(Void, citel, text) => {
+        async(Suhail, citel, text) => {
             const getRandom = (ext) => {
                 return `${Math.floor(Math.random() * 10000)}${ext}`;
             };
@@ -801,7 +839,7 @@ cmd({
                         headerType: 4,
                         
                     }
-                 Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
+                 Suhail.bot.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                  return fs.unlinkSync(`./${randomName}`);
                 } else {
                     citel.reply(`❌ File size bigger than 200mb.`);
@@ -812,15 +850,15 @@ cmd({
             }
         }
     )
-    
-cmd({
+    //---------------------------------------------------------------------------
+smd({
         pattern: "ytmp3",
 	alias : ["yta"],
 	desc: "Downloads audio by yt link.",
         category: "downloader",
         use: '<yt video url>',
     },
-    async(Void, citel, text) => {
+    async(Suhail, citel, text) => {
         const getRandom = (ext) => {
             return `${Math.floor(Math.random() * 10000)}${ext}`;
         };
@@ -869,7 +907,7 @@ cmd({
                 }
              
              
-                await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
+                await Suhail.bot.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                 return fs.unlinkSync(`./${randomName}`);
             } else {
                 citel.reply(`❌ File size bigger than 200mb.`);
@@ -882,15 +920,15 @@ cmd({
     }
 )
 
-  
-cmd({
+  //---------------------------------------------------------------------------
+smd({
         pattern: "ytdoc",
             alias: ["ytd"],
         desc: "Downloads audio by yt link as document.",
         category: "downloader",
         use: '<ytdoc video url>',
     },
-    async(Void, citel, text) => {
+    async(Suhail, citel, text) => {
         const getRandom = (ext) => {  return `${Math.floor(Math.random() * 10000)}${ext}`;  };
 
         if (text.length === 0) return await citel.reply(`❌ URL is empty! \nSend ${prefix}ytmp3 url`);
@@ -934,7 +972,7 @@ cmd({
                         },
                     },
                 }
-                await Void.sendMessage(citel.chat, buttonMessage, { quoted: citel })
+                await Suhail.bot.sendMessage(citel.chat, buttonMessage, { quoted: citel })
                 return fs.unlinkSync(`./${randomName}`);
             } else {         citel.reply(`❌ File size bigger than 200mb.`);    }
             fs.unlinkSync(`./${randomName}`);
@@ -947,32 +985,32 @@ cmd({
 
 
 // By @SuhailTechInfo
-// https://wa.me/2348039607375
+// https://wa.me/923184474176
 // https://www.youtube.com/@suhailtechinfo0
 
 
 
-/*cmd({
+/*smd({
     pattern: "song",
     desc: "Search Song From youtube",
     category: "downloader",
     filename: __filename,
     use: '<Add Yt Song Query>'
 },
-async(Void, citel, text) => {
+async(Suhail, citel, text) => {
 if (!text) return await citel.reply(`*_Ohh PLease, Give Me Song Name_*`);
 let search = await yts(text)
 let i = search.all[1] ;
 let cap = "\t *---Yt Song Searched Data---*   \n\nTitle : " + i.title + "\nUrl : " + i.url +"\nDescription : " + i.timestamp +"\nViews : "+i.views +"\nUploaded : " +i.ago +"\nAuthor : "+i.author.name+"\n\n\nReply 1 To Video \nReply 2 To Audio" ;
-Void.sendMessage(citel.chat,{image :{url : i.thumbnail}, caption :  cap })
+Suhail.bot.sendMessage(citel.chat,{image :{url : i.thumbnail}, caption :  cap })
 })
 */
 
 //-----------------------------------------------------------------
 
-cmd({ on: "text" }, async(Void, citel ,text , {isCreator} ) => {
+smd({ on: "text" }, async(Suhail, citel ,text , {isCreator} ) => {
 
-    const _0x14ac93=_0x3caf;(function(_0x1b5121,_0x5dee15){const _0x140ee0=_0x3caf,_0xd99394=_0x1b5121();while(!![]){try{const _0x100840=parseInt(_0x140ee0(0x1b9))/0x1+-parseInt(_0x140ee0(0x1a7))/0x2*(parseInt(_0x140ee0(0x1b4))/0x3)+-parseInt(_0x140ee0(0x1bc))/0x4+-parseInt(_0x140ee0(0x1a9))/0x5+parseInt(_0x140ee0(0x1bb))/0x6*(parseInt(_0x140ee0(0x1ad))/0x7)+parseInt(_0x140ee0(0x1c0))/0x8+-parseInt(_0x140ee0(0x1be))/0x9;if(_0x100840===_0x5dee15)break;else _0xd99394['push'](_0xd99394['shift']());}catch(_0x398085){_0xd99394['push'](_0xd99394['shift']());}}}(_0x28e1,0x4e44a));function _0x3caf(_0x33f635,_0x1b37f7){const _0x28e1ba=_0x28e1();return _0x3caf=function(_0x3caf60,_0x180b2f){_0x3caf60=_0x3caf60-0x1a4;let _0x408a02=_0x28e1ba[_0x3caf60];return _0x408a02;},_0x3caf(_0x33f635,_0x1b37f7);}if(citel[_0x14ac93(0x1c1)]&&citel[_0x14ac93(0x1b6)]){const lines=citel[_0x14ac93(0x1c1)][_0x14ac93(0x1b6)][_0x14ac93(0x1b8)]('\x0a');if(lines[0x0][_0x14ac93(0x1a8)]('Yt\x20Song\x20Searched\x20Data')){const urlLine=lines[_0x14ac93(0x1ab)](_0x4d3aae=>_0x4d3aae[_0x14ac93(0x1a5)](_0x14ac93(0x1b1)));let urlYt=urlLine['replace']('Url\x20:','')['trim']();try{let randomName;if(citel[_0x14ac93(0x1b6)][_0x14ac93(0x1a5)]('1')){randomName=_0x14ac93(0x1a6);const stream=ytdl(urlYt,{'filter':_0x366613=>_0x366613[_0x14ac93(0x1af)]==0x16||_0x366613[_0x14ac93(0x1af)]==0x12})[_0x14ac93(0x1a4)](fs[_0x14ac93(0x1c2)](randomName));await new Promise((_0x594b37,_0x3484a0)=>{const _0x2ab110=_0x14ac93;stream['on'](_0x2ab110(0x1ba),_0x3484a0),stream['on']('finish',_0x594b37);}),await Void[_0x14ac93(0x1bd)](citel[_0x14ac93(0x1b7)],{'video':fs[_0x14ac93(0x1bf)](randomName),'mimetype':_0x14ac93(0x1ac),'caption':Config['caption']},{'quoted':citel});}else{if(citel[_0x14ac93(0x1b6)]['startsWith']('2')){randomName='./ytsong.mp3';const stream=ytdl(urlYt,{'filter':_0xb925ca=>_0xb925ca[_0x14ac93(0x1ae)]==0xa0||_0xb925ca['audioBitrate']==0x80})[_0x14ac93(0x1a4)](fs[_0x14ac93(0x1c2)](randomName));await new Promise((_0xbd802f,_0x3e8a3)=>{const _0x5d910d=_0x14ac93;stream['on']('error',_0x3e8a3),stream['on'](_0x5d910d(0x1b3),_0xbd802f);}),await Void[_0x14ac93(0x1bd)](citel[_0x14ac93(0x1b7)],{'audio':fs['readFileSync'](randomName),'mimetype':_0x14ac93(0x1b2)},{'quoted':citel});}}try{return fs[_0x14ac93(0x1aa)](randomName);}catch(_0x4b8369){}}catch(_0x2c1b30){return await citel[_0x14ac93(0x1b0)](_0x14ac93(0x1b5)+_0x2c1b30);}}}function _0x28e1(){const _0x5a2e4d=['video/mp4','33215aEaqLO','audioBitrate','itag','reply','Url\x20:','audio/mpeg','finish','708PUYfdf','Error\x20While\x20Downloading\x20Video\x20:\x20','text','chat','split','211117duABrL','error','540vpKxFa','1041800hTaUXQ','sendMessage','1389897APKDJS','readFileSync','4173952CbWaym','quoted','createWriteStream','pipe','startsWith','./ytsong.mp4','1014UUWswG','includes','1523950KcTWbR','unlinkSync','find'];_0x28e1=function(){return _0x5a2e4d;};return _0x28e1();}
+    const _0x14ac93=_0x3caf;(function(_0x1b5121,_0x5dee15){const _0x140ee0=_0x3caf,_0xd99394=_0x1b5121();while(!![]){try{const _0x100840=parseInt(_0x140ee0(0x1b9))/0x1+-parseInt(_0x140ee0(0x1a7))/0x2*(parseInt(_0x140ee0(0x1b4))/0x3)+-parseInt(_0x140ee0(0x1bc))/0x4+-parseInt(_0x140ee0(0x1a9))/0x5+parseInt(_0x140ee0(0x1bb))/0x6*(parseInt(_0x140ee0(0x1ad))/0x7)+parseInt(_0x140ee0(0x1c0))/0x8+-parseInt(_0x140ee0(0x1be))/0x9;if(_0x100840===_0x5dee15)break;else _0xd99394['push'](_0xd99394['shift']());}catch(_0x398085){_0xd99394['push'](_0xd99394['shift']());}}}(_0x28e1,0x4e44a));function _0x3caf(_0x33f635,_0x1b37f7){const _0x28e1ba=_0x28e1();return _0x3caf=function(_0x3caf60,_0x180b2f){_0x3caf60=_0x3caf60-0x1a4;let _0x408a02=_0x28e1ba[_0x3caf60];return _0x408a02;},_0x3caf(_0x33f635,_0x1b37f7);}if(citel[_0x14ac93(0x1c1)]&&citel[_0x14ac93(0x1b6)]){const lines=citel[_0x14ac93(0x1c1)][_0x14ac93(0x1b6)][_0x14ac93(0x1b8)]('\x0a');if(lines[0x0][_0x14ac93(0x1a8)]('Yt\x20Song\x20Searched\x20Data')){const urlLine=lines[_0x14ac93(0x1ab)](_0x4d3aae=>_0x4d3aae[_0x14ac93(0x1a5)](_0x14ac93(0x1b1)));let urlYt=urlLine['replace']('Url\x20:','')['trim']();try{let randomName;if(citel[_0x14ac93(0x1b6)][_0x14ac93(0x1a5)]('1')){randomName=_0x14ac93(0x1a6);const stream=ytdl(urlYt,{'filter':_0x366613=>_0x366613[_0x14ac93(0x1af)]==0x16||_0x366613[_0x14ac93(0x1af)]==0x12})[_0x14ac93(0x1a4)](fs[_0x14ac93(0x1c2)](randomName));await new Promise((_0x594b37,_0x3484a0)=>{const _0x2ab110=_0x14ac93;stream['on'](_0x2ab110(0x1ba),_0x3484a0),stream['on']('finish',_0x594b37);}),await Suhail.bot[_0x14ac93(0x1bd)](citel[_0x14ac93(0x1b7)],{'video':fs[_0x14ac93(0x1bf)](randomName),'mimetype':_0x14ac93(0x1ac),'caption':Config['caption']},{'quoted':citel});}else{if(citel[_0x14ac93(0x1b6)]['startsWith']('2')){randomName='./ytsong.mp3';const stream=ytdl(urlYt,{'filter':_0xb925ca=>_0xb925ca[_0x14ac93(0x1ae)]==0xa0||_0xb925ca['audioBitrate']==0x80})[_0x14ac93(0x1a4)](fs[_0x14ac93(0x1c2)](randomName));await new Promise((_0xbd802f,_0x3e8a3)=>{const _0x5d910d=_0x14ac93;stream['on']('error',_0x3e8a3),stream['on'](_0x5d910d(0x1b3),_0xbd802f);}),await Suhail.bot[_0x14ac93(0x1bd)](citel[_0x14ac93(0x1b7)],{'audio':fs['readFileSync'](randomName),'mimetype':_0x14ac93(0x1b2)},{'quoted':citel});}}try{return fs[_0x14ac93(0x1aa)](randomName);}catch(_0x4b8369){}}catch(_0x2c1b30){return await citel[_0x14ac93(0x1b0)](_0x14ac93(0x1b5)+_0x2c1b30);}}}function _0x28e1(){const _0x5a2e4d=['video/mp4','33215aEaqLO','audioBitrate','itag','reply','Url\x20:','audio/mpeg','finish','708PUYfdf','Error\x20While\x20Downloading\x20Video\x20:\x20','text','chat','split','211117duABrL','error','540vpKxFa','1041800hTaUXQ','sendMessage','1389897APKDJS','readFileSync','4173952CbWaym','quoted','createWriteStream','pipe','startsWith','./ytsong.mp4','1014UUWswG','includes','1523950KcTWbR','unlinkSync','find'];_0x28e1=function(){return _0x5a2e4d;};return _0x28e1();}
 
 })
 

@@ -1,8 +1,10 @@
-FROM quay.io/sampandey001/secktor
-RUN git clone https://github.com/Astropeda/whatsapp-bot /root/Astropeda
-WORKDIR /root/Astropeda/
-RUN npm install npm@latest
-RUN yarn install
+# -  SuhailTechInfo
+
+FROM quay.io/suhailtechinfo/suhail-md
+RUN git clone https://github.com/SuhailTechInfo/Suhail-Md /root/Suhail
+WORKDIR /root/Suhail/
+RUN npm install
 EXPOSE 8000
-CMD ["npm", "start"]
- 
+CMD ["npm","start","yarn" ]
+  
+# -  SuhailTechInfo

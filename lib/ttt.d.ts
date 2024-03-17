@@ -13,3 +13,5 @@ export declare class TicTacToe {
     turn(player, index: number): boolean;
     turn(player, x: number, y: number): boolean;
 }
+
+   
