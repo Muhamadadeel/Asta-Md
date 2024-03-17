@@ -129,3 +129,5 @@ package-lock.json
 /lib/auth_info_baileys
 /lib/store.json
 /lib/database.json
+/lib/database/group.json
+/lib/database/user.json
