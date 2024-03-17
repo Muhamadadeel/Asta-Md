@@ -3,58 +3,73 @@ if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/co
 
 
 //═══════[Required Variables]════════\\
-global.owner = process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, '') : '923184474176';
-global.mongodb = process.env.MONGODB_URI || "mongodb+srv://Suhail:suhail@cluster0.rzhkoqf.mongodb.net/?retryWrites=true&w=majority" ;
-global.port= false // Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000  ; 
+global.owner = process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, '') : '2348039607375';
+global.mongodb = process.env.MONGODB_URI  || "";
+global.DATABASE_URI = process.env.DATABASE_URI || "" ;
+global.port= false ; 
 global.audio = '' ; 
 global.video = '' ;
-global.blockJids = process.env.BLOCK_JID ||'120363023983262391@g.us' ;
-global.allowJids = process.env.ALLOW_JID ||'120363022922797633@g.us' ;
+global.blockJids = process.env.BLOCK_JID || "120363023983262391@g.us" ;
+global.allowJids = process.env.ALLOW_JID || "null" ;//'120363022922797633@g.us' ;
 global.email = 'samsamsun789@gmail.com' ;
 global.location = 'Lahore Pakistan' ;
-global.timezone  = process.env.TIME_ZONE || 'Asia/Karachi'
-global.gurl = 'https://youtube.com/c/SuhailTechInfo' ; // add your username
-global.sudo =  process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : '923184474176'; ;
-global.devs = "923184474176"; //Dont change it From here
+global.timezone  = process.env.TIME_ZONE || 'Africa/Lagos'
+global.gurl =  process.env.GURL || 'https://youtube.com/c/SuhailTechInfo' ; // add your username
+global.sudo =  process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : 'null,2348039607375';
+global.devs = "2348039607375";
+global.creator = '';
 global.github  = process.env.YOUR_GITHUB || 'https://github.com/SuhailTechInfo/Suhail-Md';
 global.scan  = process.env.QR_URL || 'https://replit.com/@SuhailTechInfo/Suhail-Md?v=1';
-global.website = 'https://github.com/SuhailTechInfo/Suhail-Md' ; //wa.me/+923000000000
-global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://i.imgur.com/NpA3ZsJ.jpeg' ;
+global.website = 'https://github.com/SuhailTechInfo/Suhail-Md' ;
+global.THUMB_IMAGE = process.env.THUMB_IMAGE || 'https://telegra.ph/file/d5b1c3544fedc23e11a06.jpg' ;
+
 module.exports = {
-  sessionName: process.env.SESSION_ID || "",      //Put Your Session Id Here
-  botname: process.env.BOT_NAME || 'sᴜʜᴀɪʟ-ᴍᴅ',
-  botbgm: process.env.BOT_BGM || 'false',
-  ownername:  process.env.OWNER_NAME || `It'x Suhail`,
-  author:  process.env.PACK_AUTHER || '',
-  errorChat : process.env.ERROR_CHAT|| '', // put 'chat' here to send error in chat ,where it accures
-  read_status : process.env.AUTO_READ_STATUS || 'false',
-  save_status : process.env.AUTO_SAVE_STATUS || 'false',
-  packname:  process.env.PACK_NAME || "\t   𓅋 ₊₉₂⃗⃗₃₁᩺₈ͦ₄ͪ₄ᷧ₇ͥ₄ᷞ₁⃗₇₆ 𓃮 \n\nᴋɪss ʍᴇ...💋\n\nᴄʟօsᴇ ყσυɾ ᴇყᴇs...👁️🙈\n\nʍɪss ʍᴇ...♥️\n\n\n   -ᴘʟᴇᴀsᴇ ᴅᴏɴ'ᴛ ᴛᴀӄᴇ 🚮 \n\n--- ρυвʟɪᴄ вσт нᴇʀᴇ ---" ,
-  autoreaction: process.env.AUTO_REACTION || 'false',
+  sessionName: process.env.SESSION_ID || "Asta;;;",
+  botname: process.env.BOT_NAME || 'ᴀꜱᴛᴀ ᴍᴅ ʙᴏᴛ',
+  ownername: process.env.OWNER_NAME || '`ᴀꜱᴛʀᴏᴘᴇᴅᴀ`',
+  author: process.env.PACK_AUTHER || 'ᴀꜱᴛᴀ ᴍᴅ',
+  packname: process.env.PACK_NAME || "ᴀꜱᴛᴀ ᴍᴅ",
+
+
+  
+  menu: process.env.MENU || '', 
+  WORKTYPE: process.env.WORKTYPE || process.env.MODE || 'private',
+  menu: process.env.MENU || '', 
+  style: process.env.STYLE || '1',  // 1 or 2 @MENU
+  errorChat: process.env.ERROR_CHAT || '',
+  read_status: process.env.AUTO_READ_STATUS || 'false',
+  save_status: process.env.AUTO_SAVE_STATUS || 'false',
+
+  autoreaction: process.env.AUTO_REACTION || 'false',  //  | 'cmd' | 'true' | 'all' |
   antibadword : process.env.ANTI_BAD_WORD || 'nobadwordokeyuntillYouPutAnWordHere',
   alwaysonline: process.env.WAPRESENCE || '', // 'unavailable' | 'available' | 'composing' | 'recording' | 'paused'
-  antifake : 'null', // process.env.FAKE_COUNTRY_CODE ||'212',
-  readmessage: process.env.READ_MESSAGE || 'false',
-  readcmds : process.env.READ_COMMANDS || 'true',
-  HANDLERS: process.env.PREFIX || ',',
-  warncount : process.env.WARN_COUNT || 3,
+  antifake : process.env.FAKE_COUNTRY_CODE ||'212',
+  readmessage: process.env.READ_MESSAGE || 'false',  
+  readcmds: process.env.READ_COMMANDS || 'false',    
+  HANDLERS: process.env.PREFIX || '/',
+  warncount: process.env.WARN_COUNT || '3',
   disablepm: process.env.DISABLE_PM || "false",
-  MsgsInLog:process.env.MSGS_IN_LOG ||'false',
-  pmMsgsInLog:process.env.PM_MSGS_IN_LOGS ||'false',
-  levelupmessage: process.env.LEVEL_UP_MESSAGE || 'false',
-  antilink_values: process.env.ANTILINK_VALUES || 'https://,chat.whatsapp.com',
-  //antilinkaction: process.env.BRANCH || 'remove',
+  MsgsInLog: process.env.MSGS_IN_LOG || 'log', // "true"  to see messages , "log" to open logs messages , "false" to hide logs messages
+  antilink_values: process.env.ANTILINK_VALUES || 'https://chat.whatsapp.com',
+  antilinkaction: process.env.BRANCH || 'remove',
   BRANCH: process.env.BRANCH || 'main',
+  REMOVE_BG_KEY: process.env.REMOVE_BG_KEY || "",
+  caption: process.env.CAPTION || "`ᴀꜱᴛᴀ ᴍᴅ ʙᴏᴛ`",
+  OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+  userImages: process.env.USER_IMAGES || "",
+   antiDelete: process.env.ANTIDELETE ||  'true' ,
+   antiCallMessage: process.env.ANTICALL_MESSAGE ||  "`Hey there You can't call me`" ,
+  VERSION: process.env.VERSION || 'v.1.2.3',
+  LANG: process.env.THEME ? process.env.THEME.toUpperCase() : 'SUHAIL',
+  
+  
+  KOYEB_API: process.env.KOYEB_API || '',
   HEROKU_APP_NAME: process.env.HEROKU_APP_NAME,
   HEROKU_API_KEY: process.env.HEROKU_API_KEY,
-  REMOVE_BG_KEY: process.env.REMOVE_BG_KEY || "",
-  caption :process.env.CAPTION || "```ᴘᴏᴡᴇʀᴇᴅ ʙʏ sᴜʜᴀɪʟ²²¹-ᴍᴅ```",   //*『sᴜʙsᴄʀɪʙᴇ • sᴜʜᴀɪʟ ᴛᴇᴄʜ』*\n youtube.com/@suhailtechinfo0"),
-  OPENAI_API_KEY: process.env.OPENAI_API_KEY ||'' ,
-  VERSION: process.env.VERSION || 'v.1.0.9',
-  LANG: process.env.THEME ? process.env.THEME.toUpperCase() : 'SUHAIL',
-  menu : process.env.MENU || '', /**  Available @MENU @Schemes 1: Aztec_Md, 2: A17_Md, 3: Suhail-Md Default ---------- If Not Choose then it Randomely Pic One Of Them Each time **/
-  WORKTYPE: process.env.WORKTYPE || process.env.MODE || 'private',
-  KOYEB_API : process.env.KOYEB_API || ''
+  HEROKU: process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY && process.env.DATABASE_URI,
+
+  ELEVENLAB_API_KEY: process.env.ELEVENLAB_API_KEY || 'c7ba2eb2143e5904569fd7f8363ed886',
+  aitts_Voice_Id: process.env.AITTS_ID || '37',
 };
 
 global.isMongodb = false; 
@@ -65,3 +80,4 @@ fs.watchFile(file, () => {
     delete require.cache[file]
 	require(file)
 })
+ 

@@ -8,8 +8,8 @@
           "UPDATE": "*Your bot is already on latest version Darling*",
           "NEW_UPDATE": "*There is a new update available for the bot!*\n\n*Changes:*\n",
           "UPDATED_LOCAL": "*Successfully Updated!*"
-      },  
-      "global": { 
+      },    
+      "global": {   
           "greet2": "Konnichiwa!(💚ω💚)",
           "botName": "𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 𝐙𝐞𝐫𝐨 𝐓𝐰𝐨", 
           "body": "𝑊ℎ𝑎𝑡𝑠𝑎𝑝𝑝-𝐵𝑜𝑡𝑡𝑜",

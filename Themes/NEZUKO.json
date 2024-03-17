@@ -9,8 +9,8 @@
             "UPDATE": "Your bot is already on latest version Nii-Chan",
             "NEW_UPDATE": "There is a new update available for the bot!\n\n*Changes:*\n",
             "UPDATED_LOCAL": "Fresh Updates Installed!"
-        }, 
-        "global": { 
+        },   
+        "global": {   
             "botName": "𝐍𝐞𝐳𝐮𝐤𝐨",
   
             "body": "𝑊ℎ𝑎𝑡𝑠𝑎𝑝𝑝 𝐵𝑜𝑡",

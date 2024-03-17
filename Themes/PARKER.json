@@ -8,7 +8,7 @@
             "UPDATE": "*Your bot is already on latest version Darling*",
             "NEW_UPDATE": "*There is a new update available for the bot!*\n\n*Changes:*\n",
             "UPDATED_LOCAL": "*Successfully Updated!*"
-        },  
+        },      
         "global": { 
             "botName": "𝐏𝐚𝐫𝐤𝐞𝐫", 
             "body": "𝑊ℎ𝑎𝑡𝑠𝑎𝑝𝑝 𝐵𝑜𝑡",
