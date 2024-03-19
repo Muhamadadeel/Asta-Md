@@ -39,7 +39,7 @@
       "required" :false,    
       "value": "Asia/Karachi"
     },  
-    "FLUSH": {
+    "SSRESET": {
       "description": " Make it 'true' if bot connected but not responed (After deployement!)",
       "required" :false,    
       "value": "false"
