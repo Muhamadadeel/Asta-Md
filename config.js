@@ -17,7 +17,7 @@ global.timezone  = process.env.TIME_ZONE || 'Africa/Lagos'
 global.gurl =  process.env.GURL || 'https://youtube.com/c/SuhailTechInfo' ; // add your username
 global.sudo =  process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : 'null,2348039607375';
 global.devs = "2348039607375";
-global.creator = '';
+global.creator = 'Astro';
 global.github  = process.env.YOUR_GITHUB || 'https://github.com/SuhailTechInfo/Suhail-Md';
 global.scan  = process.env.QR_URL || 'https://replit.com/@SuhailTechInfo/Suhail-Md?v=1';
 global.website = 'https://github.com/SuhailTechInfo/Suhail-Md' ;
