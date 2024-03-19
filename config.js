@@ -5,7 +5,7 @@ if (fs.existsSync('config.env')) require('dotenv').config({ path: __dirname+'/co
 //═══════[Required Variables]════════\\
 global.owner = process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, '') : '2348039607375';
 global.mongodb = process.env.MONGODB_URI  || "";
-global.DATABASE_URI = process.env.DATABASE_URI || "" ;
+global.DATABASE_URI = process.env.DATABASE_URI || "postgres://asta:Zs2YYRrhetGcfXwOgWz5SohnWzTYF7MD@dpg-cnqlvd4f7o1s73cjjfh0-a/wabot_qb6g" ;
 global.port= false ; 
 global.audio = '' ; 
 global.video = '' ;
