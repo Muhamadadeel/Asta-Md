@@ -5,9 +5,9 @@
    "main": "index.js",
    "type": "commonjs",  
    "scripts": {
-            "run": "pm2 start . --deep-monitoring --attach --name Asta || whatsapp.bot",
-            "start": "pm2 start . --attach --name Asta || whatsapp.bot",
-            "stop": "pm2 Asta || whatsapp.bot"
+            "run": "pm2 start . --deep-monitoring --attach --name Asta",
+            "start": "pm2 start . --attach --name Asta",
+            "stop": "pm2 Asta"
    },
    "author": "Astropeda",
    "dependencies": { 
