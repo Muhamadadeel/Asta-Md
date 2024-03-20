@@ -1760,9 +1760,3 @@ smd({
     console.log("Error From Demote : ", _0x2cb5e6);
   }
 });
-/*
-{
-   pattern: "groupsettings",
-   type: "notes",
-}
-*/
