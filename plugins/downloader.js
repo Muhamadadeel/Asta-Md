@@ -2,7 +2,7 @@
 
 
 
-let Asta_Md = "Suhail MD Whatsapp bot md"
+let Asta_Md = "Asta"
 let baseApi = process.env.API_SMD || global.api_smd || "https://api-smd-1.vercel.app"
 // let baseApi= 'https://api-smd.vercel.app';
 

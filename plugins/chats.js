@@ -30,7 +30,7 @@
 
 
 
-let Asta_Md = "Suhail MD Whatsapp bot md"
+let Asta_Md = "Asta"
 let {smd , prefix,Config} = require("../lib")
 
 // ============================ CHATS SETTINGS ============================ 

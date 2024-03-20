@@ -2,7 +2,7 @@
 
 
 
-let Asta_Md = "Suhail MD Whatsapp bot md"
+let Asta_Md = "Asta"
 
  
 
