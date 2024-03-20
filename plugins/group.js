@@ -1,13 +1,1237 @@
-
-
-
-
-let Asta_Md = "Asta"
-
-const {updateProfilePicture,parsedJid  } = require("../lib")
-
-const _0x27feee=_0x49f4;(function(_0x5670ca,_0x401845){const _0x76c959=_0x49f4,_0x255423=_0x5670ca();while(!![]){try{const _0x364063=parseInt(_0x76c959(0x1ec))/0x1+parseInt(_0x76c959(0x248))/0x2+-parseInt(_0x76c959(0x19f))/0x3*(-parseInt(_0x76c959(0x1df))/0x4)+-parseInt(_0x76c959(0x152))/0x5+-parseInt(_0x76c959(0x13b))/0x6*(-parseInt(_0x76c959(0x1b0))/0x7)+parseInt(_0x76c959(0x14b))/0x8*(-parseInt(_0x76c959(0x237))/0x9)+-parseInt(_0x76c959(0x144))/0xa;if(_0x364063===_0x401845)break;else _0x255423['push'](_0x255423['shift']());}catch(_0x3f59a4){_0x255423['push'](_0x255423['shift']());}}}(_0x18cb,0x79a95));const {sck,smd,sck1,jsonformat,botpic,TelegraPh,RandomXP,send,Config,tlang,warndb,sleep,getAdmin,getBuffer,prefix}=require(_0x27feee(0x11e)),{Sticker,createSticker,StickerTypes}=require(_0x27feee(0x1e7)),moment=require(_0x27feee(0x12e)),Levels=require(_0x27feee(0x187)),fs=require(_0x27feee(0x22f)),Jimp=require(_0x27feee(0x179)),sᴜʜᴀɪʟ_ᴍᴅ=require(_0x27feee(0x1c5)),{cmd}=sᴜʜᴀɪʟ_ᴍᴅ,grouppattern=/https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{22}/g;function _0x49f4(_0x2cbe7c,_0x4f8a04){const _0x18cb78=_0x18cb();return _0x49f4=function(_0x49f429,_0x4934fc){_0x49f429=_0x49f429-0xed;let _0x23b0a4=_0x18cb78[_0x49f429];return _0x23b0a4;},_0x49f4(_0x2cbe7c,_0x4f8a04);}smd({'cmdname':_0x27feee(0x166),'info':_0x27feee(0x123),'type':'whatsapp','fromMe':!![],'filename':__filename,'use':'<group\x20link.>'},async(_0x466dd8,_0x5b1338)=>{const _0x411773=_0x27feee;try{if(_0x466dd8[_0x411773(0x1a1)]&&_0x466dd8[_0x411773(0x1a1)][_0x411773(0xf7)]){var _0x29e5fc=await _0x466dd8[_0x411773(0x201)]['groupAcceptInviteV4'](_0x466dd8[_0x411773(0x120)],_0x466dd8['reply_message'][_0x411773(0x138)]);if(_0x29e5fc&&_0x29e5fc[_0x411773(0x172)](_0x411773(0x1a2)))return await send(_0x466dd8,_0x411773(0x167),{},'',_0x466dd8);}let _0x208739=_0x5b1338?_0x5b1338:_0x466dd8[_0x411773(0x1c4)];const _0x47ed60=_0x208739['match'](grouppattern);if(!_0x47ed60)return await _0x466dd8[_0x411773(0x238)]('*_Uhh\x20Please,\x20provide\x20group\x20link_*');let _0x4263be=_0x47ed60[0x0][_0x411773(0x134)](_0x411773(0x19b))[0x1][_0x411773(0x213)]();await _0x466dd8[_0x411773(0x201)][_0x411773(0x130)](_0x4263be)[_0x411773(0x240)](_0x7f3222=>send(_0x466dd8,_0x411773(0x167),{},'',_0x466dd8))[_0x411773(0x1db)](_0x1d6aea=>_0x466dd8[_0x411773(0x176)](_0x411773(0x249)));}catch(_0x5d3484){await _0x466dd8[_0x411773(0x133)](_0x5d3484+_0x411773(0x18c),_0x5d3484,_0x411773(0x18d));}}),smd({'cmdname':'newgc','info':_0x27feee(0x175),'type':'whatsapp','filename':__filename,'use':_0x27feee(0x221)},async(_0x1d2f1f,_0x3c558e,{smd:_0x2e7a79,cmdName:_0x49994a})=>{const _0x507d9c=_0x27feee;try{if(!_0x1d2f1f[_0x507d9c(0x1c6)])return _0x1d2f1f['reply'](tlang()['owner']);if(!_0x3c558e)return await _0x1d2f1f[_0x507d9c(0x238)](_0x507d9c(0x15f)+(prefix+_0x2e7a79)+_0x507d9c(0x1ce));let _0x379d99=_0x3c558e;if(_0x379d99[_0x507d9c(0x216)]()==='info')return await _0x1d2f1f['send']((_0x507d9c(0x1e5)+(prefix+cmd)+_0x507d9c(0x1b3))[_0x507d9c(0x213)]());let _0x5a5c26=[_0x1d2f1f[_0x507d9c(0x185)]];_0x1d2f1f[_0x507d9c(0x20e)]&&_0x5a5c26['push'](_0x1d2f1f[_0x507d9c(0x20e)][_0x507d9c(0x185)]);if(_0x1d2f1f[_0x507d9c(0x190)]&&_0x1d2f1f[_0x507d9c(0x190)][0x0]){_0x5a5c26[_0x507d9c(0x12d)](..._0x1d2f1f[_0x507d9c(0x190)]);try{mentionJids[_0x507d9c(0x131)](_0x3e3852=>{const _0x59a1f3=_0x507d9c;var _0x30af68=_0x3e3852[_0x59a1f3(0x134)]('@')[0x0][_0x59a1f3(0x213)]();_0x379d99=_0x379d99['replace'](new RegExp('@'+_0x30af68,'g'),'');});}catch{}}const _0x37b490=_0x379d99['substring'](0x0,0x3c),_0x417018=await Suhail[_0x507d9c(0x201)][_0x507d9c(0x194)](_0x37b490,[..._0x5a5c26]);if(_0x417018){let _0x2c6495=await _0x1d2f1f[_0x507d9c(0x201)]['sendMessage'](_0x417018['id'],{'text':_0x507d9c(0x205)+Config[_0x507d9c(0x1b9)]});try{var _0x3a49e9=await Suhail['bot'][_0x507d9c(0x244)](_0x417018['id']);}catch{var _0x3a49e9=![];}var _0x2608ab=_0x507d9c(0x19b),_0x2fe2c7=''+_0x2608ab+_0x3a49e9,_0x539d8f={'externalAdReply':{'title':_0x507d9c(0x197),'body':''+_0x37b490,'renderLargerThumbnail':!![],'thumbnail':log0,'mediaType':0x1,'mediaUrl':_0x2fe2c7,'sourceUrl':_0x2fe2c7}};return await send(_0x1d2f1f,(_0x507d9c(0x1de)+(_0x3a49e9?'*_'+_0x2fe2c7+'_*':''))[_0x507d9c(0x213)](),{'contextInfo':_0x539d8f},'',_0x2c6495);}else await _0x1d2f1f[_0x507d9c(0x176)](_0x507d9c(0x1b5));}catch(_0x33d6f3){await _0x1d2f1f[_0x507d9c(0x133)](_0x33d6f3+'\x0a\x0acommand:\x20'+_0x49994a,_0x33d6f3,_0x507d9c(0x1b5));}}),smd({'pattern':'ginfo','desc':_0x27feee(0x117),'type':_0x27feee(0x148),'filename':__filename,'use':'<group\x20link.>'},async(_0x4f7c88,_0x1490e0)=>{const _0x57c2f9=_0x27feee;try{let _0x3eb855=_0x1490e0?_0x1490e0:_0x4f7c88['reply_text'];const _0x3e5033=_0x3eb855['match'](grouppattern)||![];if(!_0x3e5033)return await _0x4f7c88[_0x57c2f9(0x238)]('*_Uhh\x20Please,\x20provide\x20group\x20link_*');let _0x5ced5d=_0x3e5033[0x0][_0x57c2f9(0x134)]('https://chat.whatsapp.com/')[0x1][_0x57c2f9(0x213)]();const _0x5f4890=await _0x4f7c88[_0x57c2f9(0x201)]['groupGetInviteInfo'](_0x5ced5d);if(_0x5f4890){const _0x40ced5=new Date(_0x5f4890[_0x57c2f9(0x102)]*0x3e8);var _0x10288a=_0x40ced5[_0x57c2f9(0x1ac)](),_0x436585=_0x40ced5[_0x57c2f9(0x1cf)]()+0x1,_0x511884=_0x40ced5[_0x57c2f9(0x16a)](),_0x236a49=_0x10288a+'-'+_0x436585[_0x57c2f9(0x226)]()[_0x57c2f9(0xfa)](0x2,'0')+'-'+_0x511884[_0x57c2f9(0x226)]()[_0x57c2f9(0xfa)](0x2,'0'),_0x56eaaf={'externalAdReply':{'title':_0x57c2f9(0x197),'body':_0x5f4890[_0x57c2f9(0x14d)],'renderLargerThumbnail':!![],'thumbnail':log0,'mediaType':0x1,'mediaUrl':_0x3e5033[0x0],'sourceUrl':_0x3e5033[0x0]}};return await send(_0x4f7c88,(_0x5f4890[_0x57c2f9(0x14d)]+_0x57c2f9(0x1c0)+_0x5f4890[_0x57c2f9(0x149)][_0x57c2f9(0x134)]('@')[0x0]+_0x57c2f9(0x1f3)+_0x5f4890['id']+'\x20\x20```\x0a\x20\x20*Muted:*\x20'+(_0x5f4890[_0x57c2f9(0x156)]?'\x20yes':'\x20no')+_0x57c2f9(0x146)+(_0x5f4890[_0x57c2f9(0x1f5)]?_0x57c2f9(0x236):'\x20no')+_0x57c2f9(0x184)+_0x236a49+'\x0a\x20\x20*participents:*\x20'+(_0x5f4890[_0x57c2f9(0x1b6)]>0x3?_0x5f4890['size']+'th':_0x5f4890[_0x57c2f9(0x1b6)])+'\x0a\x20\x20'+(_0x5f4890[_0x57c2f9(0x1d9)]?_0x57c2f9(0x1f8)+_0x5f4890[_0x57c2f9(0x1d9)]+'\x0a':'')+'\x0a\x20\x20'+Config['caption']+'\x0a\x20\x20')[_0x57c2f9(0x213)](),{'mentions':[_0x5f4890[_0x57c2f9(0x149)]],'contextInfo':_0x56eaaf},'',_0x4f7c88);}else await _0x4f7c88['send'](_0x57c2f9(0x19c));}catch(_0x36c345){await _0x4f7c88[_0x57c2f9(0x133)](_0x36c345+'\x0a\x0acommand:\x20ginfo',_0x36c345,_0x57c2f9(0x19c));}}),smd({'cmdname':_0x27feee(0x1e4),'alias':[_0x27feee(0x140)],'info':'reject\x20all\x20request\x20to\x20join!','type':_0x27feee(0x148),'filename':__filename},async(_0xb81e45,_0x3dda5f)=>{const _0x39c6c2=_0x27feee;try{if(!_0xb81e45[_0x39c6c2(0x125)])return _0xb81e45[_0x39c6c2(0x238)](tlang()['group']);if(!_0xb81e45[_0x39c6c2(0x1c1)]||!_0xb81e45[_0x39c6c2(0x1dd)])return await _0xb81e45['reply'](!_0xb81e45['isBotAdmin']?_0x39c6c2(0x21d)+(!_0xb81e45[_0x39c6c2(0x1c6)]?_0x39c6c2(0x1f6):'')+'_*':tlang()[_0x39c6c2(0x1e3)]);const _0x4ea369=await _0xb81e45[_0x39c6c2(0x201)][_0x39c6c2(0x145)](_0xb81e45[_0x39c6c2(0x120)]);if(!_0x4ea369||!_0x4ea369[0x0])return await _0xb81e45[_0x39c6c2(0x238)]('*_No\x20Request\x20Join\x20Yet_*');let _0x3b870c=[],_0x32f437=_0x39c6c2(0x1fa);for(let _0x164385=0x0;_0x164385<_0x4ea369['length'];_0x164385++){try{await _0xb81e45['bot'][_0x39c6c2(0x20a)](_0xb81e45['from'],[_0x4ea369[_0x164385][_0x39c6c2(0x235)]],_0x39c6c2(0xee)),_0x32f437+='@'+_0x4ea369[_0x164385][_0x39c6c2(0x235)]['split']('@')[0x0]+'\x0a',_0x3b870c=[..._0x3b870c,_0x4ea369[_0x164385][_0x39c6c2(0x235)]];}catch{}}await _0xb81e45[_0x39c6c2(0x176)](_0x32f437,{'mentions':[_0x3b870c]});}catch(_0x13cc87){await _0xb81e45['error'](_0x13cc87+_0x39c6c2(0x206),_0x13cc87);}}),smd({'cmdname':_0x27feee(0x135),'alias':[_0x27feee(0x181)],'info':_0x27feee(0x207),'type':_0x27feee(0x148),'filename':__filename},async(_0x90a6de,_0x5537ca)=>{const _0x333af5=_0x27feee;try{if(!_0x90a6de['isGroup'])return _0x90a6de['reply'](tlang()[_0x333af5(0x148)]);if(!_0x90a6de[_0x333af5(0x1c1)]||!_0x90a6de[_0x333af5(0x1dd)])return await _0x90a6de['reply'](!_0x90a6de[_0x333af5(0x1c1)]?_0x333af5(0x21d)+(!_0x90a6de['isCreator']?',\x20Idiot':'')+'_*':tlang()[_0x333af5(0x1e3)]);const _0x3da7c6=await _0x90a6de[_0x333af5(0x201)][_0x333af5(0x145)](_0x90a6de['chat']);if(!_0x3da7c6||!_0x3da7c6[0x0])return await _0x90a6de[_0x333af5(0x238)](_0x333af5(0x121));let _0x4f391e=[],_0x26ddf1=_0x333af5(0xed);for(let _0x5ed6e8=0x0;_0x5ed6e8<_0x3da7c6[_0x333af5(0x157)];_0x5ed6e8++){try{await _0x90a6de[_0x333af5(0x201)][_0x333af5(0x20a)](_0x90a6de['from'],[_0x3da7c6[_0x5ed6e8]['jid']],_0x333af5(0x17d)),_0x26ddf1+='@'+_0x3da7c6[_0x5ed6e8][_0x333af5(0x235)][_0x333af5(0x134)]('@')[0x0]+'\x0a',_0x4f391e=[..._0x4f391e,_0x3da7c6[_0x5ed6e8][_0x333af5(0x235)]];}catch{}}await _0x90a6de[_0x333af5(0x176)](_0x26ddf1,{'mentions':[_0x4f391e]});}catch(_0x366bd4){await _0x90a6de['error'](_0x366bd4+_0x333af5(0x1c8),_0x366bd4);}}),smd({'cmdname':_0x27feee(0x16f),'alias':['requestjoin'],'info':_0x27feee(0x1ae),'type':_0x27feee(0x148),'filename':__filename,'use':_0x27feee(0xf5)},async(_0x13cccd,_0x38cc41)=>{const _0x265407=_0x27feee;try{if(!_0x13cccd[_0x265407(0x125)])return _0x13cccd[_0x265407(0x238)](tlang()[_0x265407(0x148)]);if(!_0x13cccd['isBotAdmin']||!_0x13cccd[_0x265407(0x1dd)])return await _0x13cccd['reply'](!_0x13cccd[_0x265407(0x1c1)]?'*_I\x27m\x20Not\x20Admin\x20In\x20This\x20Group'+(!_0x13cccd[_0x265407(0x1c6)]?',\x20Idiot':'')+'_*':tlang()[_0x265407(0x1e3)]);const _0x3115b1=await _0x13cccd['bot'][_0x265407(0x145)](_0x13cccd[_0x265407(0x120)]);if(!_0x3115b1||!_0x3115b1[0x0])return await _0x13cccd['reply'](_0x265407(0x1bc));let _0x4af6be=[],_0x59a317='*List\x20of\x20User\x20Request\x20to\x20join*\x0a\x0a';for(let _0x3230c3=0x0;_0x3230c3<_0x3115b1[_0x265407(0x157)];_0x3230c3++){_0x59a317+='@'+_0x3115b1[_0x3230c3]['jid'][_0x265407(0x134)]('@')[0x0]+'\x0a',_0x4af6be=[..._0x4af6be,_0x3115b1[_0x3230c3][_0x265407(0x235)]];}return await _0x13cccd['send'](_0x59a317,{'mentions':[_0x4af6be]});}catch(_0x5c8e97){await _0x13cccd[_0x265407(0x133)](_0x5c8e97+_0x265407(0x116),_0x5c8e97);}}),smd({'cmdname':'setdesc','alias':[_0x27feee(0x1e1),_0x27feee(0x1b8)],'info':_0x27feee(0x1ae),'type':'group','filename':__filename,'use':_0x27feee(0xf5)},async(_0x160b96,_0x4ef0da)=>{const _0x450617=_0x27feee;try{if(!_0x160b96[_0x450617(0x125)])return _0x160b96[_0x450617(0x238)](tlang()['group']);if(!_0x4ef0da)return await _0x160b96['reply'](_0x450617(0x178));if(!_0x160b96['isBotAdmin']||!_0x160b96[_0x450617(0x1dd)])return await _0x160b96[_0x450617(0x238)](!_0x160b96[_0x450617(0x1c1)]?_0x450617(0x21d)+(!_0x160b96[_0x450617(0x1c6)]?_0x450617(0x1f6):'')+'_*':tlang()[_0x450617(0x1e3)]);try{await _0x160b96['bot'][_0x450617(0x104)](_0x160b96['chat'],_0x4ef0da+_0x450617(0x10e)+Config['caption']),_0x160b96['reply'](_0x450617(0x1f0));}catch(_0x986809){await _0x160b96[_0x450617(0x238)](_0x450617(0x137));}}catch(_0x526bb2){await _0x160b96['error'](_0x526bb2+_0x450617(0xf4),_0x526bb2);}}),smd({'cmdname':'setname','alias':[_0x27feee(0x22e),_0x27feee(0x103)],'info':_0x27feee(0x1ae),'type':_0x27feee(0x148),'filename':__filename,'use':_0x27feee(0xf5)},async(_0x25d56b,_0x332d77)=>{const _0x287d7c=_0x27feee;try{if(!_0x25d56b[_0x287d7c(0x125)])return _0x25d56b['reply'](tlang()[_0x287d7c(0x148)]);if(!_0x332d77)return await _0x25d56b[_0x287d7c(0x238)]('*Uhh\x20Dear,\x20Give\x20text\x20to\x20Update\x20This\x20Group\x20Name*');if(!_0x25d56b[_0x287d7c(0x1c1)]||!_0x25d56b[_0x287d7c(0x1dd)])return await _0x25d56b[_0x287d7c(0x238)](!_0x25d56b['isBotAdmin']?_0x287d7c(0x21d)+(!_0x25d56b[_0x287d7c(0x1c6)]?_0x287d7c(0x1f6):'')+'_*':tlang()[_0x287d7c(0x1e3)]);try{await _0x25d56b[_0x287d7c(0x201)][_0x287d7c(0x12f)](_0x25d56b[_0x287d7c(0x120)],_0x332d77),_0x25d56b[_0x287d7c(0x238)](_0x287d7c(0x171));}catch(_0x379b84){await _0x25d56b[_0x287d7c(0x238)](_0x287d7c(0x22b));}}catch(_0x1eee32){await _0x25d56b['error'](_0x1eee32+_0x287d7c(0xf4),_0x1eee32);}}),smd({'cmdname':_0x27feee(0x1a3),'info':'left\x20from\x20a\x20group.','fromMe':!![],'type':_0x27feee(0x148),'filename':__filename},async(_0x37841c,_0x260aed)=>{const _0x139f73=_0x27feee;try{if(!_0x37841c[_0x139f73(0x125)])return await _0x37841c[_0x139f73(0x176)](tlang()['group'],{},'',_0x37841c);let _0x6118c5=_0x260aed['toLowerCase']()[_0x139f73(0x213)]();if(_0x6118c5[_0x139f73(0x21f)]('sure')||_0x6118c5['startsWith']('ok')||_0x6118c5[_0x139f73(0x21f)](_0x139f73(0x1ba)))await _0x37841c[_0x139f73(0x201)][_0x139f73(0x1a8)](_0x37841c[_0x139f73(0x120)],[_0x37841c[_0x139f73(0x170)]],'remove'),_0x37841c[_0x139f73(0x176)]('*Group\x20Left!!*',{},'',_0x37841c,_0x37841c[_0x139f73(0x170)]);else return await _0x37841c[_0x139f73(0x176)]('*_Use:\x20'+prefix+_0x139f73(0x22d),{},'',_0x37841c);}catch(_0x34f4a6){await _0x37841c[_0x139f73(0x133)](_0x34f4a6+_0x139f73(0x18e),_0x34f4a6,![]);}});let mtypes=['imageMessage'];smd({'pattern':_0x27feee(0x1e2),'desc':_0x27feee(0x247),'category':_0x27feee(0x148),'use':_0x27feee(0x105),'filename':__filename},async _0x5ac912=>{const _0x17d3e2=_0x27feee;try{if(!_0x5ac912['isGroup'])return await _0x5ac912[_0x17d3e2(0x176)](tlang()[_0x17d3e2(0x148)],{},'',_0x5ac912);if(!_0x5ac912[_0x17d3e2(0x1c1)]||!_0x5ac912[_0x17d3e2(0x1dd)])return await _0x5ac912['reply'](!_0x5ac912[_0x17d3e2(0x1c1)]?_0x17d3e2(0x21d)+(!_0x5ac912['isCreator']?_0x17d3e2(0x1f6):'')+'_*':tlang()[_0x17d3e2(0x1e3)]);let _0xc0618e=mtypes['includes'](_0x5ac912[_0x17d3e2(0x23d)])?_0x5ac912:_0x5ac912[_0x17d3e2(0x1a1)];if(!_0xc0618e||!mtypes[_0x17d3e2(0x172)](_0xc0618e?.[_0x17d3e2(0x23d)]||_0x17d3e2(0x15a)))return await _0x5ac912[_0x17d3e2(0x238)](_0x17d3e2(0x16d));return await updateProfilePicture(_0x5ac912,_0x5ac912[_0x17d3e2(0x120)],_0xc0618e,'gpp');}catch(_0x5abd07){await _0x5ac912[_0x17d3e2(0x133)](_0x5abd07+_0x17d3e2(0xf9),_0x5abd07);}}),smd({'pattern':_0x27feee(0x20c),'desc':_0x27feee(0x20f),'category':_0x27feee(0x148),'use':'<reply\x20to\x20image>','filename':__filename},async _0x31201a=>{const _0x10f7d4=_0x27feee;try{if(!_0x31201a[_0x10f7d4(0x125)])return await _0x31201a[_0x10f7d4(0x176)](tlang()[_0x10f7d4(0x148)],{},'',_0x31201a);if(!_0x31201a[_0x10f7d4(0x1c1)]||!_0x31201a['isAdmin'])return await _0x31201a[_0x10f7d4(0x238)](!_0x31201a[_0x10f7d4(0x1c1)]?_0x10f7d4(0x21d)+(!_0x31201a[_0x10f7d4(0x1c6)]?_0x10f7d4(0x1f6):'')+'_*':tlang()[_0x10f7d4(0x1e3)]);let _0x3fba56=mtypes[_0x10f7d4(0x172)](_0x31201a['mtype'])?_0x31201a:_0x31201a[_0x10f7d4(0x1a1)];if(!_0x3fba56||!mtypes[_0x10f7d4(0x172)](_0x3fba56?.['mtype']||_0x10f7d4(0x15a)))return await _0x31201a['reply']('*Reply\x20to\x20an\x20image,\x20dear*');return await updateProfilePicture(_0x31201a,_0x31201a['chat'],_0x3fba56,_0x10f7d4(0x20c));}catch(_0x1f879e){await _0x31201a[_0x10f7d4(0x133)](_0x1f879e+'\x0a\x0acommand\x20:\x20fullgpp',_0x1f879e);}{}}),cmd({'pattern':'common','desc':'Get\x20common\x20participants\x20in\x20two\x20groups,\x20and\x20kick\x20using\x20.common\x20kick,\x20jid','category':_0x27feee(0x149),'fromMe':!![],'filename':__filename},async(_0x3a5b8e,_0x227613)=>{const _0x5ac726=_0x27feee;try{let _0x37477b=await parsedJid(_0x227613);var _0x57bd9a,_0x2f2665;if(_0x37477b['length']>0x1)_0x57bd9a=_0x37477b[0x0][_0x5ac726(0x172)](_0x5ac726(0x243))?_0x37477b[0x0]:_0x3a5b8e['chat'],_0x2f2665=_0x37477b[0x1][_0x5ac726(0x172)](_0x5ac726(0x243))?_0x37477b[0x1]:_0x3a5b8e['chat'];else{if(_0x37477b[_0x5ac726(0x157)]==0x1)_0x57bd9a=_0x3a5b8e[_0x5ac726(0x120)],_0x2f2665=_0x37477b[0x0]['includes'](_0x5ac726(0x243))?_0x37477b[0x0]:_0x3a5b8e[_0x5ac726(0x120)];else return await _0x3a5b8e[_0x5ac726(0x176)](_0x5ac726(0x23c));}if(_0x2f2665===_0x57bd9a)return await _0x3a5b8e[_0x5ac726(0x176)](_0x5ac726(0x219));var _0x4f45c0=await _0x3a5b8e[_0x5ac726(0x201)]['groupMetadata'](_0x57bd9a),_0x1a80c3=await _0x3a5b8e[_0x5ac726(0x201)]['groupMetadata'](_0x2f2665),_0x1bab1d=_0x4f45c0[_0x5ac726(0xef)]['filter'](({id:_0x2f922b})=>_0x1a80c3[_0x5ac726(0xef)][_0x5ac726(0x108)](({id:_0x39bca2})=>_0x39bca2===_0x2f922b))||[];if(_0x1bab1d[_0x5ac726(0x157)]==0x0)return await _0x3a5b8e['send'](_0x5ac726(0x222));let _0x4fbd42=_0x227613['split']('\x20')[0x0][_0x5ac726(0x213)]()===_0x5ac726(0x199)?!![]:![],_0x543a19=![];var _0x1abfb8=_0x5ac726(0x223);if(_0x4fbd42){let _0x263e00={'chat':_0x57bd9a};_0x1abfb8='\x20\x20*Kicking\x20Common\x20Participants*';const _0x3f3652=await getAdmin(_0x3a5b8e[_0x5ac726(0x201)],_0x263e00)||[];var _0x1df1fa=_0x3f3652[_0x5ac726(0x172)](_0x3a5b8e[_0x5ac726(0x170)])||![],_0x16096e=_0x3f3652[_0x5ac726(0x172)](_0x3a5b8e[_0x5ac726(0x185)])||![];(!_0x1df1fa||!_0x16096e)&&(_0x4fbd42=![],_0x1abfb8=_0x5ac726(0x22a)),!_0x1df1fa&&(_0x543a19=_0x5ac726(0x153)),!_0x16096e&&(_0x543a19=_0x5ac726(0x155));}var _0x7e4285='\x20'+_0x1abfb8+'\x20\x20\x20\x0a'+(_0x543a19?_0x543a19:'')+_0x5ac726(0x1e8)+_0x4f45c0[_0x5ac726(0x14d)]+_0x5ac726(0x245)+_0x1a80c3['subject']+_0x5ac726(0x1a5)+_0x1bab1d[_0x5ac726(0x157)]+'_Members_\x0a\x0a\x0a',_0x2b9a05=[];_0x1bab1d[_0x5ac726(0x16b)](async _0x4258ad=>{const _0x62ba65=_0x5ac726;_0x7e4285+=_0x62ba65(0x182)+_0x4258ad['id']['split']('@')[0x0]+'\x0a',_0x2b9a05[_0x62ba65(0x12d)](_0x4258ad['id'][_0x62ba65(0x134)]('@')[0x0]+_0x62ba65(0x17f));}),await _0x3a5b8e[_0x5ac726(0x176)](_0x7e4285+(_0x5ac726(0x1d1)+Config[_0x5ac726(0x1b9)]),{'mentions':_0x2b9a05});if(_0x4fbd42&&!_0x543a19)try{for(const _0x12caf4 of _0x2b9a05){if(_0x3a5b8e['user']===_0x12caf4||_0x12caf4===_0x5ac726(0x110)||_0x12caf4===_0x5ac726(0x21b))continue;await new Promise(_0x2c0467=>setTimeout(_0x2c0467,0x3e8)),await _0x3a5b8e[_0x5ac726(0x201)][_0x5ac726(0x1a8)](_0x57bd9a,[_0x12caf4],_0x5ac726(0x1bd));}}catch(_0x5dd6a9){console['error'](_0x5ac726(0x11d),_0x5dd6a9);}}catch(_0x4754fd){await _0x3a5b8e[_0x5ac726(0x133)](_0x4754fd+'\x0a\x0acommand:\x20common',_0x4754fd,_0x5ac726(0x14a));}}),cmd({'pattern':_0x27feee(0x23a),'desc':_0x27feee(0x18a),'category':_0x27feee(0x149),'filename':__filename},async(_0x210433,_0x375183)=>{const _0x34d53c=_0x27feee;try{let _0x53f916=await parsedJid(_0x375183);var _0x38b8f9,_0x2728f1;if(_0x53f916[_0x34d53c(0x157)]>0x1)_0x38b8f9=_0x53f916[0x0][_0x34d53c(0x172)](_0x34d53c(0x243))?_0x53f916[0x0]:_0x210433[_0x34d53c(0x120)],_0x2728f1=_0x53f916[0x1][_0x34d53c(0x172)](_0x34d53c(0x243))?_0x53f916[0x1]:_0x210433['chat'];else{if(_0x53f916[_0x34d53c(0x157)]==0x1)_0x38b8f9=_0x210433[_0x34d53c(0x120)],_0x2728f1=_0x53f916[0x0]['includes'](_0x34d53c(0x243))?_0x53f916[0x0]:_0x210433[_0x34d53c(0x120)];else return await _0x210433['send'](_0x34d53c(0x1d8));}if(_0x2728f1===_0x38b8f9)return await _0x210433[_0x34d53c(0x176)](_0x34d53c(0x15d));var _0x236ddc=await _0x210433[_0x34d53c(0x201)][_0x34d53c(0x234)](_0x38b8f9),_0x18f508=await _0x210433[_0x34d53c(0x201)][_0x34d53c(0x234)](_0x2728f1),_0x223a29=_0x236ddc['participants']['filter'](({id:_0x378856})=>!_0x18f508['participants']['some'](({id:_0x46f0d1})=>_0x46f0d1===_0x378856))||[];if(_0x223a29[_0x34d53c(0x157)]==0x0)return await _0x210433['send'](_0x34d53c(0x13c));var _0x47d176=_0x34d53c(0x17e)+_0x236ddc[_0x34d53c(0x14d)]+_0x34d53c(0x245)+_0x18f508[_0x34d53c(0x14d)]+_0x34d53c(0x246)+_0x223a29[_0x34d53c(0x157)]+'_Members_\x0a\x0a\x0a',_0x152c58=[];return _0x223a29['map'](async _0xcd9ce2=>{const _0x11c526=_0x34d53c;_0x47d176+=_0x11c526(0x182)+_0xcd9ce2['id'][_0x11c526(0x134)]('@')[0x0]+'\x0a',_0x152c58[_0x11c526(0x12d)](_0xcd9ce2['id']['split']('@')[0x0]+_0x11c526(0x17f));}),await _0x210433[_0x34d53c(0x176)](_0x47d176+(_0x34d53c(0x1d1)+Config['caption']),{'mentions':_0x152c58});}catch(_0x4907d4){await _0x210433[_0x34d53c(0x133)](_0x4907d4+'\x0a\x0acommand:\x20unblock',_0x4907d4,_0x34d53c(0x14a));}}),cmd({'pattern':_0x27feee(0x10a),'desc':_0x27feee(0x1d4),'category':'group','filename':__filename},async _0x53f8e3=>{const _0x5364e2=_0x27feee;try{if(!_0x53f8e3['isGroup'])return _0x53f8e3[_0x5364e2(0x238)](tlang()[_0x5364e2(0x148)]);if(!_0x53f8e3[_0x5364e2(0x1c1)])return _0x53f8e3[_0x5364e2(0x238)](_0x5364e2(0x18b));var _0x53ec11=await _0x53f8e3[_0x5364e2(0x201)]['groupInviteCode'](_0x53f8e3[_0x5364e2(0x120)]),_0x2e549f=_0x5364e2(0x19b),_0x41db31=''+_0x2e549f+_0x53ec11;return _0x53f8e3['reply'](_0x5364e2(0x1a7)+_0x41db31+'*');}catch(_0x4e30e8){await _0x53f8e3[_0x5364e2(0x133)](_0x4e30e8+_0x5364e2(0x159),_0x4e30e8,_0x5364e2(0xf3));}}),cmd({'pattern':_0x27feee(0x113),'desc':_0x27feee(0x1d4),'category':_0x27feee(0x148),'filename':__filename},async _0x451b0f=>{const _0x3f4ceb=_0x27feee;try{if(!_0x451b0f[_0x3f4ceb(0x125)])return _0x451b0f[_0x3f4ceb(0x238)](tlang()['group']);if(!_0x451b0f['isBotAdmin'])return _0x451b0f[_0x3f4ceb(0x238)](_0x3f4ceb(0x23f));return await _0x451b0f[_0x3f4ceb(0x201)]['groupRevokeInvite'](_0x451b0f[_0x3f4ceb(0x120)]),_0x451b0f[_0x3f4ceb(0x238)](_0x3f4ceb(0x11a));}catch(_0x142e95){await _0x451b0f[_0x3f4ceb(0x133)](_0x142e95+_0x3f4ceb(0x1a4),_0x142e95,'*Can\x27t\x20revoke\x20data\x20due\x20to\x20error,\x20Sorry!!*');}}),cmd({'pattern':_0x27feee(0x1e9),'desc':_0x27feee(0x107),'category':'group','filename':__filename},async(_0x1ed055,_0x929954)=>{const _0x1b8452=_0x27feee;try{if(!_0x1ed055[_0x1b8452(0x125)])return _0x1ed055[_0x1b8452(0x238)](tlang()[_0x1b8452(0x148)]);const _0x5d614a=_0x1ed055[_0x1b8452(0x204)]['participants']||{};if(!_0x1ed055['isAdmin']&&!_0x1ed055[_0x1b8452(0x1c6)])return _0x1ed055[_0x1b8452(0x238)](tlang()[_0x1b8452(0x1e3)]);let _0x392a2d='\x0a══✪〘\x20\x20\x20*Tag\x20All*\x20\x20\x20〙✪══\x0a\x0a➲\x20*Message\x20:*\x20'+(_0x929954?_0x929954:_0x1b8452(0x1fe))+_0x1b8452(0x1d2)+Config[_0x1b8452(0x1b9)]+'\x20\x0a\x0a\x0a➲\x20*Author:*\x20'+_0x1ed055['pushName']+'\x20🔖\x0a';for(let _0x502431 of _0x5d614a){!_0x502431['id'][_0x1b8452(0x21f)](_0x1b8452(0x211))&&(_0x392a2d+=_0x1b8452(0x1d7)+_0x502431['id'][_0x1b8452(0x134)]('@')[0x0]+'\x0a');}await _0x1ed055['bot'][_0x1b8452(0x112)](_0x1ed055[_0x1b8452(0x120)],{'text':_0x392a2d,'mentions':_0x5d614a['map'](_0x3696c5=>_0x3696c5['id'])},{'quoted':_0x1ed055});}catch(_0x4450f8){await _0x1ed055[_0x1b8452(0x133)](_0x4450f8+_0x1b8452(0x1ab),_0x4450f8,![]);}}),cmd({'pattern':_0x27feee(0x10f),'alias':[_0x27feee(0x1bb)],'desc':'Kick\x20all\x20numbers\x20from\x20a\x20certain\x20country','category':_0x27feee(0x148),'filename':__filename},async(_0x19564c,_0x1d2bb7)=>{const _0xa1f4e5=_0x27feee;try{if(!_0x19564c[_0xa1f4e5(0x125)])return _0x19564c[_0xa1f4e5(0x238)](tlang()[_0xa1f4e5(0x148)]);if(!_0x1d2bb7)return await _0x19564c[_0xa1f4e5(0x238)](_0xa1f4e5(0x227));if(!_0x19564c[_0xa1f4e5(0x1c1)])return _0x19564c['reply'](_0xa1f4e5(0x161));if(!_0x19564c[_0xa1f4e5(0x1dd)]&&!_0x19564c[_0xa1f4e5(0x1c6)])return _0x19564c[_0xa1f4e5(0x238)](tlang()[_0xa1f4e5(0x1e3)]);let _0x35a368=_0x1d2bb7?.['split']('\x20')[0x0][_0xa1f4e5(0x168)]('+','')||_0xa1f4e5(0x1b1),_0x3250a0=_0xa1f4e5(0x1d6),_0x5f29e6=_0x19564c['metadata'][_0xa1f4e5(0xef)],_0x3f4d10=0x0,_0xff4f2e=![];for(let _0x723896 of _0x5f29e6){let _0x527887=_0x19564c[_0xa1f4e5(0x1a6)]?.[_0xa1f4e5(0x172)](_0x723896['id'])||![];if(_0x723896['id']['startsWith'](_0x35a368)&&!_0x527887&&_0x723896['id']!==_0x19564c[_0xa1f4e5(0x170)]&&!_0x723896['id']['startsWith'](_0xa1f4e5(0x211))){!_0xff4f2e&&(_0xff4f2e=!![],await _0x19564c[_0xa1f4e5(0x238)]('*_Kicking\x20ALL\x20the\x20Users\x20With\x20'+_0x35a368+_0xa1f4e5(0x16c)));try{await _0x19564c[_0xa1f4e5(0x201)][_0xa1f4e5(0x1a8)](_0x19564c[_0xa1f4e5(0x120)],[_0x723896['id']],_0xa1f4e5(0x1bd)),_0x3f4d10++;}catch{}}}if(_0x3f4d10==0x0)return await _0x19564c['reply'](_0xa1f4e5(0x1b4)+_0x35a368+'\x20Country\x20Code_*');else return await _0x19564c[_0xa1f4e5(0x238)]('*_Hurray,\x20'+_0x3f4d10+'\x20Users\x20With\x20'+_0x35a368+_0xa1f4e5(0x1f7));}catch(_0x54eec1){await _0x19564c[_0xa1f4e5(0x133)](_0x54eec1+_0xa1f4e5(0x218),_0x54eec1,_0xa1f4e5(0x115));}}),cmd({'pattern':_0x27feee(0x1c2),'desc':'get\x20all\x20numbers\x20from\x20a\x20certain\x20country','category':_0x27feee(0x148),'filename':__filename},async(_0x4bd51e,_0x2ee3cb)=>{const _0x21d324=_0x27feee;try{if(!_0x4bd51e[_0x21d324(0x125)])return _0x4bd51e[_0x21d324(0x238)](tlang()[_0x21d324(0x148)]);if(!_0x2ee3cb)return await _0x4bd51e[_0x21d324(0x238)](_0x21d324(0x1a0));if(!_0x4bd51e['isAdmin']&&!_0x4bd51e[_0x21d324(0x1c6)])return _0x4bd51e[_0x21d324(0x238)](tlang()['admin']);let _0x16cbaf=_0x2ee3cb['split']('\x20')[0x0],_0x2ab0b4=_0x4bd51e['metadata']?.[_0x21d324(0xef)]||{},_0x122db1=_0x21d324(0x14c)+_0x16cbaf+_0x21d324(0x195),_0x2cdd38='';for(let _0x510326 of _0x2ab0b4){if(_0x510326['id'][_0x21d324(0x21f)](_0x16cbaf))_0x2cdd38+=_0x510326['id']['split']('@')[0x0]+'\x0a';}!_0x2cdd38?_0x122db1=_0x21d324(0x1c7)+_0x16cbaf+_0x21d324(0x1fd):_0x122db1+=_0x2cdd38+Config['caption'],await _0x4bd51e[_0x21d324(0x238)](_0x122db1);}catch(_0x2f93a0){await _0x4bd51e[_0x21d324(0x133)](_0x2f93a0+'\x0a\x0acommand:\x20num',_0x2f93a0,'*Can\x27t\x20fetch\x20users\x20data\x20due\x20to\x20error,\x20Sorry!!*');}}),smd({'pattern':_0x27feee(0x220),'desc':'Makes\x20poll\x20in\x20group.','category':_0x27feee(0x148),'fromMe':!![],'filename':__filename,'use':_0x27feee(0x11c)},async(_0x480cbc,_0x4bb8d5)=>{const _0x68bcd9=_0x27feee;try{let [_0x5e42d2,_0x75678e]=_0x4bb8d5[_0x68bcd9(0x134)](';');if(_0x4bb8d5['split'](';')<0x2)return await _0x480cbc[_0x68bcd9(0x238)](prefix+_0x68bcd9(0x214));let _0x1cad49=[];for(let _0x280e3c of _0x75678e[_0x68bcd9(0x134)](',')){if(_0x280e3c&&_0x280e3c!='')_0x1cad49[_0x68bcd9(0x12d)](_0x280e3c);}await _0x480cbc['bot'][_0x68bcd9(0x112)](_0x480cbc[_0x68bcd9(0x120)],{'poll':{'name':_0x5e42d2,'values':_0x1cad49}});}catch(_0x2e1b2b){await _0x480cbc['error'](_0x2e1b2b+_0x68bcd9(0x12a),_0x2e1b2b);}}),cmd({'pattern':'promote','desc':_0x27feee(0x174),'category':_0x27feee(0x148),'filename':__filename,'use':_0x27feee(0x1f1)},async _0x324f8b=>{const _0x237d1b=_0x27feee;try{if(!_0x324f8b['isGroup'])return _0x324f8b[_0x237d1b(0x238)](tlang()[_0x237d1b(0x148)]);if(!_0x324f8b[_0x237d1b(0x1c1)])return _0x324f8b['reply'](_0x237d1b(0x1cd));if(!_0x324f8b[_0x237d1b(0x1dd)])return _0x324f8b[_0x237d1b(0x238)](tlang()[_0x237d1b(0x1e3)]);let _0x8f9e68=_0x324f8b['mentionedJid'][0x0]?_0x324f8b['mentionedJid'][0x0]:_0x324f8b['quoted']?_0x324f8b[_0x237d1b(0x20e)][_0x237d1b(0x185)]:![];if(!_0x8f9e68)return await _0x324f8b[_0x237d1b(0x238)]('*Uhh\x20dear,\x20reply/mention\x20an\x20User*');await _0x324f8b[_0x237d1b(0x201)]['groupParticipantsUpdate'](_0x324f8b[_0x237d1b(0x120)],[_0x8f9e68],'promote'),await _0x324f8b[_0x237d1b(0x176)]('*_@'+_0x8f9e68[_0x237d1b(0x134)]('@')[0x0]+_0x237d1b(0x1fc),{'mentions':[_0x8f9e68]});}catch(_0x39a11b){await _0x324f8b['error'](_0x39a11b+_0x237d1b(0x11f),_0x39a11b);}}),cmd({'pattern':_0x27feee(0x199),'desc':_0x27feee(0x169),'category':_0x27feee(0x148),'filename':__filename,'use':_0x27feee(0x1f1)},async(_0x5e533c,_0x2a29f6)=>{const _0x24e716=_0x27feee;try{if(!_0x5e533c[_0x24e716(0x125)])return _0x5e533c[_0x24e716(0x238)](tlang()['group']);if(!_0x5e533c['isBotAdmin'])return await _0x5e533c['reply']('*_I\x27m\x20Not\x20Admin\x20In\x20This\x20Group,\x20Idiot_*');if(!_0x5e533c['isAdmin'])return _0x5e533c['reply'](tlang()[_0x24e716(0x1e3)]);let _0x4e844a=_0x5e533c[_0x24e716(0x20e)]?_0x5e533c[_0x24e716(0x20e)][_0x24e716(0x185)]:_0x5e533c[_0x24e716(0x190)][0x0]?_0x5e533c[_0x24e716(0x190)][0x0]:![];if(!_0x4e844a)return await _0x5e533c[_0x24e716(0x238)]('*Uhh\x20dear,\x20reply/mention\x20an\x20User*');if(_0x5e533c[_0x24e716(0x150)](_0x4e844a))return await _0x5e533c[_0x24e716(0x238)](_0x24e716(0x151));await _0x5e533c['bot'][_0x24e716(0x1a8)](_0x5e533c[_0x24e716(0x120)],[_0x4e844a],'remove'),await _0x5e533c[_0x24e716(0x176)]('*Hurray,\x20@'+_0x4e844a['split']('@')[0x0]+_0x24e716(0x14e),{'mentions':[_0x4e844a]});}catch(_0x14d7b9){await _0x5e533c['error'](_0x14d7b9+_0x24e716(0x242),_0x14d7b9);}}),smd({'pattern':'group','desc':_0x27feee(0x229),'category':_0x27feee(0x148),'filename':__filename},async(_0x27d001,_0x358db8)=>{const _0x34e9be=_0x27feee;if(!_0x27d001[_0x34e9be(0x125)])return _0x27d001[_0x34e9be(0x238)](tlang()['group']);if(!_0x27d001[_0x34e9be(0x1dd)]&&!_0x27d001['isCreator'])return _0x27d001[_0x34e9be(0x238)](tlang()[_0x34e9be(0x1e3)]);let _0xf64c00=_0x358db8[_0x34e9be(0x216)]();try{const _0x385ed7=await _0x27d001['bot'][_0x34e9be(0x1ef)](_0x27d001[_0x34e9be(0x120)],_0x34e9be(0x15e))['catch'](_0x1a1b89=>THUMB_IMAGE)||THUMB_IMAGE,_0x403b56=_0x27d001['metadata'],_0x13feea=_0x27d001['admins'],_0x3f1b32=_0x13feea['map']((_0x3899cb,_0x245676)=>'\x20\x20'+(_0x245676+0x1)+_0x34e9be(0x22c)+_0x3899cb['id'][_0x34e9be(0x134)]('@')[0x0])['join']('\x0a');console[_0x34e9be(0x13e)]('listAdmin\x20,\x20',_0x3f1b32);const _0x375a91=_0x403b56[_0x34e9be(0x149)]||_0x13feea[_0x34e9be(0x1cb)](_0x33de13=>_0x33de13['admin']===_0x34e9be(0x136))?.['id']||![];let _0x57941c=_0x34e9be(0x239)+_0x403b56['id']+_0x34e9be(0x23b)+_0x403b56[_0x34e9be(0x14d)]+_0x34e9be(0x154)+_0x403b56[_0x34e9be(0xef)][_0x34e9be(0x157)]+_0x34e9be(0x132)+(_0x375a91?_0x34e9be(0xf2)+_0x375a91[_0x34e9be(0x134)]('@')[0x0]:'notFound')+_0x34e9be(0x1ad)+_0x3f1b32+'\x0a*▢\x20Description\x20:*\x0a\x20\x20\x20•\x20'+(_0x403b56['desc']?.[_0x34e9be(0x226)]()||_0x34e9be(0xf0))+_0x34e9be(0x1f9),_0x5a5b81=isMongodb?await sck[_0x34e9be(0x21e)]({'id':_0x27d001[_0x34e9be(0x120)]}):![];_0x5a5b81&&(_0x57941c+=(_0x34e9be(0x200)+(_0x5a5b81['nsfw']=='true'?'✅':'❎')+_0x34e9be(0x233)+(_0x5a5b81[_0x34e9be(0x225)]==_0x34e9be(0x1b2)?'✅':'❎')+_0x34e9be(0x1dc)+(_0x5a5b81[_0x34e9be(0x217)]==_0x34e9be(0x1b2)?'✅':'❎')+'\x0a')[_0x34e9be(0x213)](),_0x5a5b81[_0x34e9be(0x162)]=='true'&&(_0x57941c+=_0x34e9be(0x128)+_0x5a5b81['welcometext'],_0x57941c+=_0x34e9be(0x1b7)+_0x5a5b81[_0x34e9be(0x10c)]));try{await _0x27d001[_0x34e9be(0x201)]['sendMessage'](_0x27d001[_0x34e9be(0x120)],{'image':{'url':_0x385ed7},'caption':_0x57941c},{'quoted':_0x27d001});}catch(_0x6ae2fc){return await _0x27d001[_0x34e9be(0x176)](_0x57941c,{},'',_0x27d001),console[_0x34e9be(0x13e)](_0x34e9be(0x163),_0x6ae2fc);}}catch(_0x5a81f0){return await _0x27d001[_0x34e9be(0x133)](_0x5a81f0+_0x34e9be(0x228)),console[_0x34e9be(0x13e)](_0x34e9be(0x163),_0x5a81f0);}}),cmd({'pattern':_0x27feee(0x17c),'desc':'Pics\x20random\x20user\x20from\x20Group','category':_0x27feee(0x148),'filename':__filename},async(_0xb552a2,_0x39ba38)=>{const _0x22ec4f=_0x27feee;try{if(!_0xb552a2[_0x22ec4f(0x125)])return _0xb552a2[_0x22ec4f(0x238)](tlang()[_0x22ec4f(0x148)]);if(!_0x39ba38)return _0xb552a2[_0x22ec4f(0x238)]('*Which\x20type\x20of\x20User\x20you\x20want?*');let _0x4fd8bc=_0xb552a2[_0x22ec4f(0x204)]['participants']['map'](_0x8b1e4d=>_0x8b1e4d['id']),_0x2dfc12=_0x4fd8bc[Math[_0x22ec4f(0x17b)](Math[_0x22ec4f(0x147)]()*_0x4fd8bc['length'])];_0xb552a2[_0x22ec4f(0x201)][_0x22ec4f(0x112)](_0xb552a2['jid'],{'text':'The\x20most\x20'+_0x39ba38+'\x20around\x20us\x20is\x20*@'+_0x2dfc12['split']('@')[0x0]+'*','mentions':[_0x2dfc12]},{'quoted':_0xb552a2});}catch(_0x1a5f73){await _0xb552a2[_0x22ec4f(0x133)](_0x1a5f73+'\x0a\x0acommand\x20:\x20pick',_0x1a5f73);}}),smd({'pattern':_0x27feee(0x241),'category':'group','filename':__filename},async _0x8c602e=>{const _0x1895fc=_0x27feee;if(!_0x8c602e[_0x1895fc(0x125)])return _0x8c602e[_0x1895fc(0x238)](tlang()[_0x1895fc(0x148)]);let _0x456468=_0x8c602e['metadata']['participants'][_0x1895fc(0x16b)](_0x119157=>_0x119157['id']);var _0x37f2d4=_0x8c602e[_0x1895fc(0x1a1)]?_0x8c602e['reply_message'][_0x1895fc(0x185)]:_0x8c602e['mentionedJid'][0x0]?_0x8c602e[_0x1895fc(0x190)][0x0]:![],_0x7fa6d0;_0x37f2d4?_0x7fa6d0=_0x37f2d4:_0x7fa6d0=_0x456468[Math['floor'](Math[_0x1895fc(0x147)]()*_0x456468[_0x1895fc(0x157)])];if(_0x8c602e[_0x1895fc(0x185)]===_0x7fa6d0)return _0x8c602e['reply'](_0x1895fc(0x15b));async function _0x30a2ec(){const _0x53686d=_0x1895fc;var _0x523d04;const _0x4e5253=Math[_0x53686d(0x17b)](Math[_0x53686d(0x147)]()*0x64);if(_0x4e5253<0x19)_0x523d04=_0x53686d(0x212)+_0x4e5253+_0x53686d(0x15c);else{if(_0x4e5253<0x32)_0x523d04=_0x53686d(0x212)+_0x4e5253+_0x53686d(0x23e);else{if(_0x4e5253<0x4b)_0x523d04='\x09\x09\x09\x09\x09*RelationShip\x20Percentage\x20:\x20'+_0x4e5253+_0x53686d(0x203);else _0x4e5253<0x5a?_0x523d04=_0x53686d(0x212)+_0x4e5253+'%*\x20\x0a\x09Amazing!\x20You\x20two\x20will\x20be\x20a\x20good\x20couple\x20💖\x20':_0x523d04=_0x53686d(0x212)+_0x4e5253+_0x53686d(0x19e);}}return _0x523d04;}var _0x1a1a8e={...await _0x8c602e[_0x1895fc(0x201)][_0x1895fc(0x1ca)]('Matchmaking',_0x1895fc(0xf1))};await _0x8c602e[_0x1895fc(0x238)](_0x1895fc(0x1c3)+_0x8c602e[_0x1895fc(0x185)][_0x1895fc(0x134)]('@')[0x0]+_0x1895fc(0x1ea)+_0x7fa6d0[_0x1895fc(0x134)]('@')[0x0]+_0x1895fc(0xff)+await _0x30a2ec()+'\x0a\x0a'+Config[_0x1895fc(0x1b9)],{'contextInfo':_0x1a1a8e,'mentions':[_0x7fa6d0]},_0x1895fc(0x230));}),smd({'pattern':_0x27feee(0x19d),'desc':_0x27feee(0x174),'category':_0x27feee(0x148),'filename':__filename,'use':_0x27feee(0x1f1)},async _0xadbad4=>{const _0x2eb53d=_0x27feee;try{if(!_0xadbad4[_0x2eb53d(0x125)])return _0xadbad4[_0x2eb53d(0x238)](tlang()['group']);if(_0xadbad4['metadata']?.['announce'])return await _0xadbad4[_0x2eb53d(0x238)]('*Uhh\x20'+(_0xadbad4[_0x2eb53d(0x232)]?_0x2eb53d(0x12c):_0x2eb53d(0x177))+_0x2eb53d(0xfb));if(!_0xadbad4['isBotAdmin'])return _0xadbad4[_0x2eb53d(0x238)](tlang()['botAdmin']);if(!_0xadbad4[_0x2eb53d(0x1c6)]&&!_0xadbad4[_0x2eb53d(0x1dd)])return _0xadbad4[_0x2eb53d(0x238)](tlang()[_0x2eb53d(0x1e3)]);await _0xadbad4[_0x2eb53d(0x201)][_0x2eb53d(0x183)](_0xadbad4[_0x2eb53d(0x120)],_0x2eb53d(0x1be))[_0x2eb53d(0x240)](_0x150a20=>_0xadbad4[_0x2eb53d(0x238)](_0x2eb53d(0x106)))[_0x2eb53d(0x1db)](_0x5d5c82=>_0xadbad4['reply']('*_Can\x27t\x20change\x20Group\x20Setting,\x20Sorry!_*'));}catch(_0x2bea0d){await _0xadbad4[_0x2eb53d(0x133)](_0x2bea0d+_0x2eb53d(0x17a),_0x2bea0d);}}),smd({'pattern':_0x27feee(0x20b),'desc':_0x27feee(0x174),'category':_0x27feee(0x148),'filename':__filename,'use':_0x27feee(0x1f1)},async _0x5d1afd=>{const _0x241060=_0x27feee;try{if(!_0x5d1afd[_0x241060(0x125)])return _0x5d1afd['reply'](tlang()['group']);if(!_0x5d1afd[_0x241060(0x204)]?.['announce'])return await _0x5d1afd[_0x241060(0x238)]('*Hey\x20'+(_0x5d1afd[_0x241060(0x232)]?_0x241060(0x12c):'Sir')+_0x241060(0x160));if(!_0x5d1afd[_0x241060(0x1c1)])return _0x5d1afd[_0x241060(0x238)](tlang()[_0x241060(0x13f)]);if(!_0x5d1afd[_0x241060(0x1c6)]&&!_0x5d1afd['isAdmin'])return _0x5d1afd[_0x241060(0x238)](tlang()[_0x241060(0x1e3)]);await _0x5d1afd[_0x241060(0x201)]['groupSettingUpdate'](_0x5d1afd[_0x241060(0x120)],'not_announcement')['then'](_0x5993c4=>_0x5d1afd[_0x241060(0x238)]('*_Group\x20Chat\x20UnMute\x20successfully!!_*'))['catch'](_0x293794=>_0x5d1afd[_0x241060(0x238)](_0x241060(0x1af)));}catch(_0x3ea023){await _0x5d1afd[_0x241060(0x133)](_0x3ea023+_0x241060(0x141),_0x3ea023);}}),smd({'pattern':'lock','fromMe':!![],'desc':_0x27feee(0x12b),'type':_0x27feee(0x148)},async(_0x1dca9f,_0x44b327)=>{const _0x52f52d=_0x27feee;try{if(!_0x1dca9f[_0x52f52d(0x125)])return _0x1dca9f[_0x52f52d(0x238)](tlang()[_0x52f52d(0x148)]);if(_0x1dca9f[_0x52f52d(0x204)]['restrict'])return await _0x1dca9f[_0x52f52d(0x238)](_0x52f52d(0x21a)+(_0x1dca9f[_0x52f52d(0x232)]?_0x52f52d(0x12c):_0x52f52d(0x177))+',\x20Group\x20setting\x20already\x20locked*');if(!_0x1dca9f['isBotAdmin'])return await _0x1dca9f[_0x52f52d(0x238)]('*_I\x27m\x20not\x20admin!_*');;if(!_0x1dca9f[_0x52f52d(0x1c6)]&&!_0x1dca9f[_0x52f52d(0x1dd)])return _0x1dca9f[_0x52f52d(0x238)](tlang()['admin']);await _0x1dca9f['bot'][_0x52f52d(0x183)](_0x1dca9f[_0x52f52d(0x120)],_0x52f52d(0x188))['then'](_0x49c387=>_0x1dca9f[_0x52f52d(0x238)](_0x52f52d(0x13a)))[_0x52f52d(0x1db)](_0x100d44=>_0x1dca9f['reply'](_0x52f52d(0x1af)));}catch(_0x9e6207){await _0x1dca9f[_0x52f52d(0x133)](_0x9e6207+_0x52f52d(0x196),_0x9e6207);}}),smd({'pattern':'unlock','fromMe':!![],'desc':_0x27feee(0x1e0),'type':_0x27feee(0x148)},async(_0xe880ee,_0x2dce84)=>{const _0x50d60a=_0x27feee;try{if(!_0xe880ee[_0x50d60a(0x125)])return _0xe880ee['reply'](tlang()[_0x50d60a(0x148)]);if(!_0xe880ee[_0x50d60a(0x204)][_0x50d60a(0x1f5)])return await _0xe880ee[_0x50d60a(0x238)](_0x50d60a(0x21a)+(_0xe880ee[_0x50d60a(0x232)]?_0x50d60a(0x12c):_0x50d60a(0x177))+',\x20Group\x20setting\x20already\x20unlocked*');if(!_0xe880ee[_0x50d60a(0x1c1)])return await _0xe880ee['reply'](_0x50d60a(0x1cc));;if(!_0xe880ee['isCreator']&&!_0xe880ee['isAdmin'])return _0xe880ee['reply'](tlang()['admin']);await _0xe880ee[_0x50d60a(0x201)][_0x50d60a(0x183)](_0xe880ee[_0x50d60a(0x120)],'unlocked')[_0x50d60a(0x240)](_0x282118=>_0xe880ee['reply'](_0x50d60a(0x13d)))[_0x50d60a(0x1db)](_0x320353=>_0xe880ee[_0x50d60a(0x238)](_0x50d60a(0x1af)));}catch(_0x20d64c){await _0xe880ee[_0x50d60a(0x133)](_0x20d64c+_0x50d60a(0x1d3),_0x20d64c);}}),smd({'pattern':_0x27feee(0x231),'alias':['hidetag'],'desc':_0x27feee(0x101),'category':_0x27feee(0x148),'filename':__filename,'use':_0x27feee(0x109)},async(_0x378ec3,_0x5398f9)=>{const _0x378217=_0x27feee;try{if(!_0x378ec3[_0x378217(0x125)])return _0x378ec3['reply'](tlang()[_0x378217(0x148)]);if(!_0x5398f9&&!_0x378ec3[_0x378217(0x1a1)])return _0x378ec3[_0x378217(0x238)](_0x378217(0x18f)+prefix+'tag\x20Hi\x20Everyone,\x20How\x20are\x20you\x20Doing*');if(!_0x378ec3[_0x378217(0x1dd)]&&!_0x378ec3['isCreator'])return _0x378ec3[_0x378217(0x238)](tlang()[_0x378217(0x1e3)]);let _0x48f50b=_0x378ec3['reply_message']?_0x378ec3[_0x378217(0x1a1)]:_0x378ec3,_0x9ec626=_0x378ec3['reply_message']?_0x378ec3[_0x378217(0x1a1)][_0x378217(0x16e)]:_0x5398f9,_0xf9a75d='',_0x48bdf1,_0x1384c7=_0x48f50b[_0x378217(0x23d)];if(_0x1384c7==_0x378217(0x100))_0xf9a75d=_0x378217(0x15e),_0x48bdf1=await _0x48f50b[_0x378217(0xfd)]();else{if(_0x1384c7==_0x378217(0x1f2))_0xf9a75d=_0x378217(0x1e6),_0x48bdf1=await _0x48f50b[_0x378217(0xfd)]();else{if(!_0x5398f9&&_0x378ec3[_0x378217(0x20e)])_0x48bdf1=_0x378ec3['quoted'][_0x378217(0x16e)];else _0x48bdf1=_0x5398f9;}}if(!_0x48bdf1)return await _0x378ec3['send']('*_Uhh\x20dear,\x20reply\x20to\x20message!!!_*');return await _0x378ec3[_0x378217(0x176)](_0x48bdf1,{'caption':_0x9ec626,'mentions':_0x378ec3[_0x378217(0x204)][_0x378217(0xef)][_0x378217(0x16b)](_0x3c9928=>_0x3c9928['id'])},_0xf9a75d,_0x48f50b);}catch(_0x3d62a9){await _0x378ec3[_0x378217(0x133)](_0x3d62a9+_0x378217(0x126),_0x3d62a9);}}),cmd({'pattern':'tagadmin','desc':_0x27feee(0x1f4),'category':_0x27feee(0x148),'filename':__filename,'use':_0x27feee(0x109)},async(_0x1f096a,_0x942e5e)=>{const _0x5aa149=_0x27feee;try{if(!_0x1f096a[_0x5aa149(0x125)])return _0x1f096a[_0x5aa149(0x238)](tlang()[_0x5aa149(0x148)]);if(!_0x1f096a[_0x5aa149(0x1dd)]&&!_0x1f096a['isCreator'])return _0x1f096a[_0x5aa149(0x238)](tlang()[_0x5aa149(0x1e3)]);const _0x13a9c9=_0x1f096a['admins'][_0x5aa149(0x16b)]((_0x22ca40,_0x5b8acb)=>'\x20*|\x20\x20@'+_0x22ca40['id'][_0x5aa149(0x134)]('@')[0x0]+'*')[_0x5aa149(0x166)]('\x0a');let _0x20f7aa=(_0x5aa149(0x1ee)+_0x1f096a[_0x5aa149(0x185)][_0x5aa149(0x134)]('@')[0x0]+'\x0a'+(_0x942e5e?_0x5aa149(0x1a9)+_0x942e5e:'')+_0x5aa149(0x1d5)+_0x13a9c9+'\x0a*└───────────⊷*\x0a\x0a'+Config[_0x5aa149(0x1b9)])[_0x5aa149(0x213)]();return await _0x1f096a[_0x5aa149(0x201)][_0x5aa149(0x112)](_0x1f096a[_0x5aa149(0x120)],{'text':_0x20f7aa,'mentions':[_0x1f096a[_0x5aa149(0x185)],..._0x1f096a[_0x5aa149(0x1a6)][_0x5aa149(0x16b)](_0x48778b=>_0x48778b['id'])]});}catch(_0x445304){await _0x1f096a[_0x5aa149(0x133)](_0x445304+_0x5aa149(0x14f),_0x445304);}}),cmd({'pattern':_0x27feee(0x202),'desc':'Add\x20that\x20person\x20in\x20group','category':_0x27feee(0x148),'filename':__filename,'use':_0x27feee(0x122)},async(_0x3d5ec9,_0xa86e2f)=>{const _0x4b8fb1=_0x27feee;try{if(!_0x3d5ec9[_0x4b8fb1(0x125)])return _0x3d5ec9[_0x4b8fb1(0x238)](tlang()[_0x4b8fb1(0x148)]);if(!_0x3d5ec9[_0x4b8fb1(0x1c1)])return await _0x3d5ec9[_0x4b8fb1(0x238)](_0x4b8fb1(0x189)+(_0x3d5ec9[_0x4b8fb1(0x232)]?_0x4b8fb1(0x12c):_0x4b8fb1(0x177))+'_*');if(!_0x3d5ec9[_0x4b8fb1(0x1dd)])return _0x3d5ec9['reply'](tlang()[_0x4b8fb1(0x1e3)]);let _0x23d1da=_0x3d5ec9[_0x4b8fb1(0x20e)]?_0x3d5ec9[_0x4b8fb1(0x20e)][_0x4b8fb1(0x185)]:_0x3d5ec9[_0x4b8fb1(0x190)][0x0]?_0x3d5ec9['mentionedJid'][0x0]:_0xa86e2f?_0xa86e2f[_0x4b8fb1(0x168)](/[^0-9]/g,'')[_0x4b8fb1(0x168)](/[\s+]/g,'')+_0x4b8fb1(0x17f):![];if(!_0x23d1da)return await _0x3d5ec9[_0x4b8fb1(0x238)](_0x4b8fb1(0x21c));try{await _0x3d5ec9[_0x4b8fb1(0x201)]['groupParticipantsUpdate'](_0x3d5ec9['chat'],[_0x23d1da],_0x4b8fb1(0x202)),await _0x3d5ec9[_0x4b8fb1(0x238)](_0x4b8fb1(0x186)),_0x3d5ec9['react']('✨');}catch(_0x381769){await _0x3d5ec9[_0x4b8fb1(0x191)]('❌'),await _0x3d5ec9['bot'][_0x4b8fb1(0x112)](_0x23d1da,{'text':_0x4b8fb1(0xfc)+_0x3d5ec9[_0x4b8fb1(0x185)]['split']('@')[0x0]+_0x4b8fb1(0x164)+await _0x3d5ec9[_0x4b8fb1(0x201)][_0x4b8fb1(0x244)](_0x3d5ec9[_0x4b8fb1(0x120)])+'_*\x0a\x20---------------------------------\x20\x20\x0a*_Join\x20If\x20YOu\x20Feel\x20Free?_*','mentions':[_0x3d5ec9[_0x4b8fb1(0x185)]]},{'quoted':_0x3d5ec9}),await _0x3d5ec9[_0x4b8fb1(0x238)]('*_Can\x27t\x20add\x20user,\x20Invite\x20sent\x20in\x20pm_*');}}catch(_0x247325){await _0x3d5ec9[_0x4b8fb1(0x133)](_0x247325+'\x0a\x0acommand:\x20add',_0x247325);}}),cmd({'pattern':'getjids','alias':['gjid','gjids','allgc',_0x27feee(0x1c9)],'desc':_0x27feee(0xf8),'category':_0x27feee(0x148),'filename':__filename},async(_0x124deb,_0x4744d0,{cmdName:_0x374ed3})=>{const _0x1f268b=_0x27feee;try{if(!_0x124deb[_0x1f268b(0x1c6)])return _0x124deb['reply'](tlang()['owner']);n=await _0x124deb['bot'][_0x1f268b(0x11b)]();const _0x32bb60=Object[_0x1f268b(0x111)](n)['slice'](0x0)['map'](_0x9d4955=>_0x9d4955[0x1]);let _0x1494d8='',_0x30a9fa=![],_0x4fb9fb=![];if(_0x4744d0['includes'](_0x1f268b(0x235)))_0x30a9fa=!![];else _0x4744d0[_0x1f268b(0x172)](_0x1f268b(0x114))&&(_0x4fb9fb=!![]);await _0x124deb[_0x1f268b(0x238)](_0x1f268b(0x118)+(_0x30a9fa?_0x1f268b(0x1bf):_0x4fb9fb?_0x1f268b(0x198):_0x1f268b(0x1aa))+'\x20from\x20'+_0x32bb60[_0x1f268b(0x157)]+'\x20Groups'),await sleep(0x7d0);for(var _0x4d64ac of _0x32bb60[_0x1f268b(0x16b)](_0x19e435=>_0x19e435['id'])){_0x1494d8+=_0x30a9fa?'':_0x1f268b(0x215)+n[_0x4d64ac][_0x1f268b(0x14d)]+'\x20',_0x1494d8+=_0x4fb9fb?'':_0x1f268b(0x142)+_0x4d64ac+'\x0a';}return await _0x124deb['send'](_0x1494d8);}catch(_0x1bb5e0){await _0x124deb['error'](_0x1bb5e0+'\x0a\x0acommand:\x20'+_0x374ed3,_0x1bb5e0);}}),cmd({'pattern':_0x27feee(0x119),'desc':_0x27feee(0x193),'category':'group','filename':__filename,'use':'<quote|reply|number>'},async _0x118677=>{const _0x5819af=_0x27feee;try{if(!_0x118677[_0x5819af(0x125)])return _0x118677[_0x5819af(0x238)](tlang()[_0x5819af(0x148)]);if(!_0x118677['isBotAdmin'])return await _0x118677['reply'](_0x5819af(0x1fb));if(!_0x118677[_0x5819af(0x1dd)])return _0x118677[_0x5819af(0x238)](tlang()[_0x5819af(0x1e3)]);let _0x3ce3f1=_0x118677[_0x5819af(0x190)][0x0]?_0x118677['mentionedJid'][0x0]:_0x118677[_0x5819af(0x1a1)]?_0x118677[_0x5819af(0x1a1)][_0x5819af(0x185)]:![];if(!_0x3ce3f1)return await _0x118677[_0x5819af(0x238)](_0x5819af(0x20d));if(_0x118677[_0x5819af(0x150)](_0x3ce3f1))return await _0x118677['reply'](_0x5819af(0x209));try{await _0x118677[_0x5819af(0x201)][_0x5819af(0x1a8)](_0x118677['chat'],[_0x3ce3f1],_0x5819af(0x119)),await _0x118677[_0x5819af(0x238)](_0x5819af(0x208));}catch(_0x5e7b02){await _0x118677['reply'](_0x5819af(0x129));}}catch(_0x307b66){await _0x118677[_0x5819af(0x133)](_0x307b66+_0x5819af(0x1da),_0x307b66);}}),smd({'pattern':_0x27feee(0x1ed),'alias':['delete','dlt'],'desc':_0x27feee(0xfe),'category':_0x27feee(0x148),'filename':__filename,'use':'<quote/reply\x20message.>'},async _0x320d81=>{const _0x4d7f37=_0x27feee;try{if(!_0x320d81[_0x4d7f37(0x1a1)])return _0x320d81[_0x4d7f37(0x238)]('*_Please\x20reply\x20to\x20a\x20message!!!_*');let _0x3776d3=_0x320d81['reply_message'];if(_0x3776d3&&_0x3776d3[_0x4d7f37(0xf6)]&&_0x320d81[_0x4d7f37(0x1c6)])return _0x3776d3[_0x4d7f37(0x124)]();else{if(_0x3776d3&&_0x320d81['isGroup']){if(!_0x320d81[_0x4d7f37(0x1c1)])return _0x320d81['reply'](_0x4d7f37(0x127));if(!_0x320d81[_0x4d7f37(0x1dd)])return _0x320d81[_0x4d7f37(0x238)](tlang()[_0x4d7f37(0x1e3)]);await _0x3776d3[_0x4d7f37(0x124)]();}else return await _0x320d81[_0x4d7f37(0x238)](tlang()['owner']);}}catch(_0x4ac639){await _0x320d81['error'](_0x4ac639+_0x4d7f37(0x165),_0x4ac639);}}),cmd({'pattern':'broadcast','desc':_0x27feee(0x10d),'fromMe':!![],'category':_0x27feee(0x148),'filename':__filename,'use':_0x27feee(0x1ff)},async(_0x553d05,_0x5d14a3)=>{const _0x38300a=_0x27feee;try{if(!_0x5d14a3)return await _0x553d05[_0x38300a(0x238)](_0x38300a(0x143));let _0x387241=await _0x553d05[_0x38300a(0x201)][_0x38300a(0x11b)](),_0x32f9c9=Object[_0x38300a(0x111)](_0x387241)[_0x38300a(0x192)](0x0)['map'](_0x3ccabe=>_0x3ccabe[0x1]),_0x4ef191=_0x32f9c9[_0x38300a(0x16b)](_0x5ea155=>_0x5ea155['id']);await _0x553d05[_0x38300a(0x176)](_0x38300a(0x180)+_0x4ef191[_0x38300a(0x157)]+'\x20Group\x20Chat,\x20Finish\x20Time\x20'+_0x4ef191[_0x38300a(0x157)]*1.5+_0x38300a(0x19a));let _0x552932=_0x38300a(0x173)+tlang()[_0x38300a(0x210)]+_0x38300a(0x10b)+_0x5d14a3,_0x305de9={'forwardingScore':0x3e7,'isForwarded':!![],'externalAdReply':{'title':_0x38300a(0x224),'body':_0x553d05[_0x38300a(0x1d0)],'renderLargerThumbnail':!![],'thumbnail':log0,'mediaType':0x1,'mediaUrl':'','sourceUrl':gurl,'showAdAttribution':!![]}};for(let _0x4c9688 of _0x4ef191){try{await sleep(0x5dc),await send(_0x553d05,_0x552932,{'contextInfo':_0x305de9},'','',_0x4c9688);}catch{}}return await _0x553d05['reply'](_0x38300a(0x139)+_0x4ef191[_0x38300a(0x157)]+_0x38300a(0x158));}catch(_0x2a8ad8){await _0x553d05[_0x38300a(0x133)](_0x2a8ad8+_0x38300a(0x1eb),_0x2a8ad8);}});function _0x18cb(){const _0x39e06b=['Error\x20removing\x20participants:','../lib','\x0a\x0acommand:\x20promote','chat','*_No\x20Join\x20Request\x20Yet_*','<number|reply|mention>','joins\x20group\x20by\x20link','delete','isGroup','\x0a\x0acommand:\x20tag','*I\x20can\x27t\x20delete\x20messages\x20without\x20getting\x20Admin\x20Role.*','\x0a*▢\x20Wellcome\x20Message\x20:*\x20\x0a\x20\x20•\x20','*_Can,t\x20demote\x20user,\x20try\x20it\x20manually,\x20Sorry!!_*','\x0a\x0acommand:\x20poll','only\x20allow\x20admins\x20to\x20modify\x20the\x20group\x27s\x20settings.','Buddy','push','moment-timezone','groupUpdateSubject','groupAcceptInvite','forEach','\x0a*▢\x20Group\x20Owner\x20:*\x0a\x20\x20\x20•\x20','error','split','acceptall','superadmin','*_Can\x27t\x20update\x20description,\x20Group\x20Id\x20not\x20found!!_*','msg','*Successful\x20Sending\x20Broadcast\x20To\x20','*_Group\x20locked,\x20Only\x20Admin\x20can\x20change\x20group\x20settinggs!!_*','6vDjfMB','Theres\x20no\x20Different\x20Users\x20in\x20Both\x20Groups','*_Group\x20unlocked,\x20everyone\x20change\x20group\x20settings!!_*','log','botAdmin','rejectjoin','\x0a\x0acommand:\x20gunmute','\x0a*JID:*\x20','*_Uhh\x20Dear,\x20Provide\x20text\x20to\x20broadcast\x20in\x20all\x20groups_*','10000710YAAVlo','groupRequestParticipantsList','\x0a\x20\x20*Locked:*\x20','random','group','owner','*Can\x27t\x20fetch\x20data\x20due\x20to\x20error,\x20Sorry!!*','8OcgSoA','*List\x20Of\x20Users\x20With\x20','subject','\x20Kicked\x20Succesfully!*','\x0a\x0acommand:\x20tagadmin','checkBot','*Huh,\x20I\x20can\x27t\x20kick\x20my\x20Creator!!*','3450550aLMcdD','*❲❒❳\x20Reason:*\x20_I\x20Can\x27t\x20Kick\x20Common\x20Participants\x20Without\x20Getting\x20Admin\x20Role,So\x20Provide\x20Admin\x20Role\x20First,_\x0a','\x0a*▢\x20Members\x20:*\x0a\x20\x20\x20•\x20','*❲❒❳\x20Reason:*\x20_Uhh\x20Dear,\x20Only\x20Group\x20Admin\x20Can\x20Kick\x20Common\x20Users\x20Through\x20This\x20Cmd_\x0a','announce','length','\x20Group*','\x0a\x0acommand:\x20invite','need_Media','*Wait...\x20What!!!,You\x20wanna\x20do\x20matchmaking\x20with\x20yourself!*','%*\x20\x0a\x09\x09There\x27s\x20still\x20time\x20to\x20reconsider\x20your\x20choices','Please\x20Provide\x20Valid\x20Group\x20Jid','image','*_provide\x20Name\x20to\x20Create\x20new\x20Group!!!_*\x0a*_Ex:\x20',',\x20Group\x20already\x20unmute*','*_I\x27m\x20Not\x20Admin,\x20So\x20I\x20can\x27t\x20kik\x20anyone!_*','welcome','error\x20in\x20group\x20info,\x0a','\x20Wants\x20to\x20add\x20you\x20in\x20below\x20group\x0a\x0a*_https://chat.whatsapp.com/','\x0a\x0acommand:\x20del','join','*_Joined_*','replace','Kicks\x20replied/quoted\x20user\x20from\x20group.','getDate','map','\x20Country\x20Code_*','*Reply\x20to\x20an\x20image,\x20dear*','text','listrequest','user','*_✅Group\x20Name\x20Updated\x20Successfuly.!_*','includes','*--❗','Provides\x20admin\x20role\x20to\x20replied/quoted\x20user','Create\x20New\x20Group','send','Sir' ,'*Provide\x20Description\x20text,\x20You\x20wants\x20to\x20Set*','jimp','\x0a\x0acommand:\x20gmute','floor','pick','approve','\x20\x20*乂\x20List\x20Of\x20Different\x20Participants*\x20\x0a\x0a*❲❒❳\x20Group1:*\x20','@s.whatsapp.net','*_Sending\x20Broadcast\x20To\x20','acceptjoin','\x20\x20*⬡*\x20@','groupSettingUpdate','\x0a\x20\x20*createdAt:*\x20','sender','*_User\x20Added\x20in\x20Group!!_*','discord-xp','locked','*_I\x27m\x20Not\x20Admin\x20In\x20This\x20Group,\x20','Get\x20difference\x20of\x20participants\x20in\x20two\x20groups','*_I\x27m\x20Not\x20Admin,\x20So\x20I\x20can\x27t\x20Send\x20Invite\x20Link_*','\x0a\x0acommand:\x20join','*_Can\x27t\x20Join,\x20Group\x20Id\x20not\x20found,\x20Sorry!!_*','\x0a\x0acommand:\x20left','*Example\x20:\x20','mentionedJid','react','slice','Demotes\x20replied/quoted\x20user\x20from\x20group','groupCreate','\x20Country\x20Code*\x0a','\x0a\x0acommand:\x20lock','𝗦𝗨𝗛𝗔𝗜𝗟-𝗠𝗗','Only\x20Names','kick','\x20second_*','https://chat.whatsapp.com/','*_Group\x20Id\x20not\x20found,\x20Sorry!!_*','mute','%*\x20\x0a\x09You\x20both\x20are\x20fit\x20to\x20be\x20together\x20💙','312291vmDbMs','*Provide\x20Me\x20Country\x20Code.\x20Example:\x20.num\x2091*','reply_message','joined\x20to:','left','\x0a\x0acommand:\x20revoke','\x0a*❲❒❳\x20Common\x20Counts:*\x20_','admins','*Group\x20Invite\x20Link\x20Is\x20Here*\x20\x0a*','groupParticipantsUpdate','≡\x20Message\x20:','Names\x20and\x20Jids','\x0a\x0acommand:\x20tagall','getFullYear','\x0a*▢\x20Admins\x20:*\x0a','Set\x20Description\x20of\x20Group','*_Can\x27t\x20change\x20Group\x20Setting,\x20Sorry!_*','4747813Cgcffo','suhalSer','true','\x20My\x20new\x20Group```\x0a\x20\x20\x0a*You\x20also\x20add\x20peoples\x20in\x20newGc*\x0a\x20\x20\x09```just\x20reply\x20or\x20mention\x20Users```\x0a\x20\x20','*_Ahh,\x20There\x20Is\x20No\x20User\x20Found\x20With\x20','*_Can\x27t\x20create\x20new\x20group,\x20Sorry!!_*','size','\x0a\x0a*▢\x20Goodbye\x20Message\x20:*\x20\x0a\x20\x20•\x20','gdesc','caption','yes','fkik','*_No\x20Request\x20Join\x20Yet_*','remove','announcement','Only\x20jids','\x0a\x20\x20\x0a\x20\x20Creator:\x20wa.me/','isBotAdmin','num','\x09❣️\x20*Matchmaking...*\x20❣️\x0a\x09*✯────────────────────✯*\x0a@','reply_text','../lib/plugins','isCreator','*There\x20Is\x20No\x20Users\x20With\x20','\x0a\x0acommand:\x20acceptall','gclist','contextInfo','find','*_I\x27m\x20not\x20admin!_*','*_I\x27m\x20Not\x20Admin\x20Here,\x20So\x20I\x20Can\x27t\x20Promote\x20Someone_*','\x20My\x20Name\x20Group\x20@user1,2,3.._*','getMonth','senderName','\x0a\x0a\x0a©','\x20\x0a\x20','\x0a\x0acommand:\x20unlock','get\x20group\x20link.','\x0a\x0a*┌─⊷\x20GROUP\x20ADMINS*\x0a','*These\x20Users\x20Not\x20Kicked*\x20\x0a\x09','\x20📍\x20@','Uhh\x20Dear,\x20Please\x20Provide\x20a\x20Group\x20Jid','desc','\x0a\x0acommand:\x20demote','catch','\x0a\x20\x20•\x20Economy\x20:\x20\x20\x20\x20','isAdmin','*_Hurray,\x20New\x20group\x20created!!!_*\x0a','36odjAnb','allow\x20everyone\x20to\x20modify\x20the\x20group\x27s\x20settings.','setgdesc','gpp','admin','rejectall','\x0a\x20\x20*Its\x20a\x20command\x20to\x20create\x20new\x20Gc*\x0a\x20\x20\x09```Ex:\x20','video','wa-sticker-formatter','\x0a*❲❒❳\x20Group1:*\x20','tagall','\x20\x20x\x20\x20@','\x0a\x0acommand:\x20broadcast','893889BMHVAa','del','\x0a▢\x20Tag\x20by\x20:\x20@','profilePictureUrl','*_✅Group\x20description\x20Updated\x20Successfuly!_*','<quote|reply|number>','videoMessage','\x20\x0a\x20\x20GJid;\x20```','Tags\x20only\x20Admin\x20numbers','restrict',',\x20Idiot','\x20Country\x20Code\x20kicked_*','*description:*\x20','\x0a\x20\x20\x20','*List\x20of\x20rejected\x20users*\x0a\x0a','*_I\x27m\x20Not\x20Admin\x20In\x20This\x20Group,\x20Idiot_*','\x20promoted\x20Succesfully!_*','\x20Country\x20Code*','blank\x20Message','<text\x20for\x20broadcast.>','*▢\x20🪢\x20Extra\x20Group\x20Configuration\x20:*\x0a\x20\x20•\x20Group\x20Nsfw\x20:\x20\x20\x20\x20','bot','add','%*\x20\x0a\x09\x09\x09Stay\x20together\x20and\x20you\x27ll\x20find\x20a\x20way\x20⭐️','metadata','*_Hey\x20Buddy,\x20Welcome\x20to\x20new\x20Group_*\x0a','\x0a\x0acommand:\x20rejectall','accept\x20all\x20request\x20to\x20join!','*_User\x20demote\x20sucessfully!!_*','*_Huh,\x20I\x20can\x27t\x20demote\x20my\x20creator!!_*','groupRequestParticipantsUpdate','unmute','fullgpp','*Uhh\x20dear,\x20reply/mention\x20an\x20User*','quoted','Set\x20full\x20screen\x20group\x20profile\x20picture','title','923184474176','\x09\x09\x09\x09\x09*RelationShip\x20Percentage\x20:\x20','trim','poll\x20question;option1,option2,option3.....','\x0a*Group:*\x20','toLowerCase','economy','\x0a\x0acommand:\x20kik','*Please\x20Provide\x20Valid\x20Group\x20Jid*','*Hey\x20','923184474176@s.whatsapp.net','*_Uhh\x20Dear,\x20Please\x20Provide\x20An\x20User._*','*_I\x27m\x20Not\x20Admin\x20In\x20This\x20Group','findOne','startsWith','poll','<group\x20link.>','Theres\x20no\x20Common\x20Users\x20in\x20Both\x20Groups','\x20\x20\x20*List\x20Of\x20Common\x20Participants*','Suhail-Md\x20Broadcast','antilink','toString','*Provide\x20Me\x20Country\x20Code.\x20Example:\x20.kik\x20212*','\x0acmdName:\x20Group\x20info','mute\x20and\x20unmute\x20group.','\x20\x20*乂\x20Can\x27t\x20Kick\x20Common\x20Participants*','*_Can\x27t\x20update\x20name,\x20Group\x20Id\x20not\x20found!!_*','.\x20wa.me/','left\x20sure/yes/ok,\x20For\x20security\x20threats_*','setgname','fs-extra','suhail','tag','isSuhail','\x20\x0a\x20\x20•\x20Antilink\x20:\x20\x20\x20\x20','groupMetadata','jid','\x20yes','3190725qDObom','reply','\x0a\x20\x20\x20\x20\x20\x20*「\x20INFO\x20GROUP\x20」*\x0a*▢\x20ID\x20:*\x0a\x20\x20\x20•\x20','diff','\x0a*▢\x20NAME\x20:*\x20\x0a\x20\x20\x20•\x20','*Uhh\x20Dear,\x20Please\x20Provide\x20a\x20Group\x20Jid*','mtype','%*\x20\x0a\x09\x09\x20Good\x20enough,\x20I\x20guess!\x20💫','*_I\x27m\x20Not\x20Admin,\x20So\x20I\x20Can\x27t\x20ReSet\x20Group\x20Invite\x20Link_*','then','ship','\x0a\x0acommand:\x20kick','@g.us','groupInviteCode','\x0a*❲❒❳\x20Group2:*\x20','\x0a*❲❒❳\x20Differ\x20Counts:*\x20_','Set\x20Group\x20profile\x20picture','68020LRAjUD','*_Can\x27t\x20Join,\x20Group\x20Id\x20not\x20found!!_*','*List\x20of\x20accepted\x20users*\x0a\x0a','reject','participants','unknown','\x20\x20\x20˚ʚ♡ɞ˚','wa.me/','*_Can\x27t\x20fetch\x20data\x20due\x20to\x20error,\x20Sorry!!_*','\x0a\x0acommand:\x20setdesc','<enter\x20Description\x20Text>','fromMe','groupInvite','Sends\x20chat\x20id\x20of\x20every\x20groups.','\x0a\x0acommand\x20:\x20gpp','padStart',',\x20Group\x20already\x20muted*','*_Here\x27s\x20The\x20Group\x20Invite\x20Link!!_*\x0a\x0a\x20@','download','Deletes\x20message\x20of\x20any\x20user','\x0a\x09*✯────────────────────✯*\x0a\x0a','imageMessage','Tags\x20everyperson\x20of\x20group\x20without\x20mentioning\x20their\x20numbers','creation','gname','groupUpdateDescription','<reply\x20to\x20image>','*_Group\x20Chat\x20Muted\x20successfully!!_*','Tags\x20every\x20person\x20of\x20group.','some','<text>','invite','\x20Broadcast❗--*\x0a\x0a\x20*🍀Message:*\x20','goodbyetext','Bot\x20makes\x20a\x20broadcast\x20in\x20all\x20groups','\x0a\x0a\x09','kik','923004591719@s.whatsapp.net','entries','sendMessage','revoke','name','*Can\x27t\x20kik\x20user\x20due\x20to\x20error,\x20Sorry!!*','\x0a\x0acommand:\x20listrequest','get\x20group\x20info\x20by\x20link','Fetching\x20','demote','*_Group\x20Link\x20Revoked\x20SuccesFully_*','groupFetchAllParticipating','question;option1,option2,option3.....'];_0x18cb=function(){return _0x39e06b;};return _0x18cb();}
-
+let Asta_Md = "Asta";
+const {
+  updateProfilePicture,
+  parsedJid
+} = require("../lib");
+const {
+  sck,
+  smd,
+  sck1,
+  jsonformat,
+  botpic,
+  TelegraPh,
+  RandomXP,
+  send,
+  Config,
+  tlang,
+  warndb,
+  sleep,
+  getAdmin,
+  getBuffer,
+  prefix
+} = require("../lib");
+const {
+  Sticker,
+  createSticker,
+  StickerTypes
+} = require("wa-sticker-formatter");
+const moment = require("moment-timezone");
+const Levels = require("discord-xp");
+const fs = require("fs-extra");
+const Jimp = require("jimp");
+const sᴜʜᴀɪʟ_ᴍᴅ = require("../lib/plugins");
+const {
+  cmd
+} = sᴜʜᴀɪʟ_ᴍᴅ;
+const grouppattern = /https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{22}/g;
+smd({
+  cmdname: "join",
+  info: "joins group by link",
+  type: "whatsapp",
+  fromMe: true,
+  filename: __filename,
+  use: "<group link.>"
+}, async (_0x466dd8, _0x5b1338) => {
+  try {
+    if (_0x466dd8.reply_message && _0x466dd8.reply_message.groupInvite) {
+      var _0x29e5fc = await _0x466dd8.bot.groupAcceptInviteV4(_0x466dd8.chat, _0x466dd8.reply_message.msg);
+      if (_0x29e5fc && _0x29e5fc.includes("joined to:")) {
+        return await send(_0x466dd8, "*_Joined_*", {}, "", _0x466dd8);
+      }
+    }
+    let _0x208739 = _0x5b1338 ? _0x5b1338 : _0x466dd8.reply_text;
+    const _0x47ed60 = _0x208739.match(grouppattern);
+    if (!_0x47ed60) {
+      return await _0x466dd8.reply("*_Uhh Please, provide group link_*");
+    }
+    let _0x4263be = _0x47ed60[0].split("https://chat.whatsapp.com/")[1].trim();
+    await _0x466dd8.bot.groupAcceptInvite(_0x4263be).then(_0x7f3222 => send(_0x466dd8, "*_Joined_*", {}, "", _0x466dd8)).catch(_0x1d6aea => _0x466dd8.send("*_Can't Join, Group Id not found!!_*"));
+  } catch (_0x5d3484) {
+    await _0x466dd8.error(_0x5d3484 + "\n\ncommand: join", _0x5d3484, "*_Can't Join, Group Id not found, Sorry!!_*");
+  }
+});
+smd({
+  cmdname: "newgc",
+  info: "Create New Group",
+  type: "whatsapp",
+  filename: __filename,
+  use: "<group link.>"
+}, async (_0x1d2f1f, _0x3c558e, {
+  smd: _0x2e7a79,
+  cmdName: _0x49994a
+}) => {
+  try {
+    if (!_0x1d2f1f.isCreator) {
+      return _0x1d2f1f.reply(tlang().owner);
+    }
+    if (!_0x3c558e) {
+      return await _0x1d2f1f.reply("*_provide Name to Create new Group!!!_*\n*_Ex: " + (prefix + _0x2e7a79) + " My Name Group @user1,2,3.._*");
+    }
+    let _0x379d99 = _0x3c558e;
+    if (_0x379d99.toLowerCase() === "info") {
+      return await _0x1d2f1f.send(("\n  *Its a command to create new Gc*\n  \t```Ex: " + (prefix + cmd) + " My new Group```\n  \n*You also add peoples in newGc*\n  \t```just reply or mention Users```\n  ").trim());
+    }
+    let _0x5a5c26 = [_0x1d2f1f.sender];
+    if (_0x1d2f1f.quoted) {
+      _0x5a5c26.push(_0x1d2f1f.quoted.sender);
+    }
+    if (_0x1d2f1f.mentionedJid && _0x1d2f1f.mentionedJid[0]) {
+      _0x5a5c26.push(..._0x1d2f1f.mentionedJid);
+      try {
+        mentionJids.forEach(_0x3e3852 => {
+          var _0x30af68 = _0x3e3852.split("@")[0].trim();
+          _0x379d99 = _0x379d99.replace(new RegExp("@" + _0x30af68, "g"), "");
+        });
+      } catch {}
+    }
+    const _0x37b490 = _0x379d99.substring(0, 60);
+    const _0x417018 = await Suhail.bot.groupCreate(_0x37b490, [..._0x5a5c26]);
+    if (_0x417018) {
+      let _0x2c6495 = await _0x1d2f1f.bot.sendMessage(_0x417018.id, {
+        text: "*_Hey Buddy, Welcome to new Group_*\n" + Config.caption
+      });
+      try {
+        var _0x3a49e9 = await Suhail.bot.groupInviteCode(_0x417018.id);
+      } catch {
+        var _0x3a49e9 = false;
+      }
+      var _0x2608ab = "https://chat.whatsapp.com/";
+      var _0x2fe2c7 = "" + _0x2608ab + _0x3a49e9;
+      var _0x539d8f = {
+        externalAdReply: {
+          title: "𝗦𝗨𝗛𝗔𝗜𝗟-𝗠𝗗",
+          body: "" + _0x37b490,
+          renderLargerThumbnail: true,
+          thumbnail: log0,
+          mediaType: 1,
+          mediaUrl: _0x2fe2c7,
+          sourceUrl: _0x2fe2c7
+        }
+      };
+      return await send(_0x1d2f1f, ("*_Hurray, New group created!!!_*\n" + (_0x3a49e9 ? "*_" + _0x2fe2c7 + "_*" : "")).trim(), {
+        contextInfo: _0x539d8f
+      }, "", _0x2c6495);
+    } else {
+      await _0x1d2f1f.send("*_Can't create new group, Sorry!!_*");
+    }
+  } catch (_0x33d6f3) {
+    await _0x1d2f1f.error(_0x33d6f3 + "\n\ncommand: " + _0x49994a, _0x33d6f3, "*_Can't create new group, Sorry!!_*");
+  }
+});
+smd({
+  pattern: "ginfo",
+  desc: "get group info by link",
+  type: "group",
+  filename: __filename,
+  use: "<group link.>"
+}, async (_0x4f7c88, _0x1490e0) => {
+  try {
+    let _0x3eb855 = _0x1490e0 ? _0x1490e0 : _0x4f7c88.reply_text;
+    const _0x3e5033 = _0x3eb855.match(grouppattern) || false;
+    if (!_0x3e5033) {
+      return await _0x4f7c88.reply("*_Uhh Please, provide group link_*");
+    }
+    let _0x5ced5d = _0x3e5033[0].split("https://chat.whatsapp.com/")[1].trim();
+    const _0x5f4890 = await _0x4f7c88.bot.groupGetInviteInfo(_0x5ced5d);
+    if (_0x5f4890) {
+      const _0x40ced5 = new Date(_0x5f4890.creation * 1000);
+      var _0x10288a = _0x40ced5.getFullYear();
+      var _0x436585 = _0x40ced5.getMonth() + 1;
+      var _0x511884 = _0x40ced5.getDate();
+      var _0x236a49 = _0x10288a + "-" + _0x436585.toString().padStart(2, "0") + "-" + _0x511884.toString().padStart(2, "0");
+      var _0x56eaaf = {
+        externalAdReply: {
+          title: "𝗦𝗨𝗛𝗔𝗜𝗟-𝗠𝗗",
+          body: _0x5f4890.subject,
+          renderLargerThumbnail: true,
+          thumbnail: log0,
+          mediaType: 1,
+          mediaUrl: _0x3e5033[0],
+          sourceUrl: _0x3e5033[0]
+        }
+      };
+      return await send(_0x4f7c88, (_0x5f4890.subject + "\n  \n  Creator: wa.me/" + _0x5f4890.owner.split("@")[0] + " \n  GJid; ```" + _0x5f4890.id + "  ```\n  *Muted:* " + (_0x5f4890.announce ? " yes" : " no") + "\n  *Locked:* " + (_0x5f4890.restrict ? " yes" : " no") + "\n  *createdAt:* " + _0x236a49 + "\n  *participents:* " + (_0x5f4890.size > 3 ? _0x5f4890.size + "th" : _0x5f4890.size) + "\n  " + (_0x5f4890.desc ? "*description:* " + _0x5f4890.desc + "\n" : "") + "\n  " + Config.caption + "\n  ").trim(), {
+        mentions: [_0x5f4890.owner],
+        contextInfo: _0x56eaaf
+      }, "", _0x4f7c88);
+    } else {
+      await _0x4f7c88.send("*_Group Id not found, Sorry!!_*");
+    }
+  } catch (_0x36c345) {
+    await _0x4f7c88.error(_0x36c345 + "\n\ncommand: ginfo", _0x36c345, "*_Group Id not found, Sorry!!_*");
+  }
+});
+smd({
+  cmdname: "rejectall",
+  alias: ["rejectjoin"],
+  info: "reject all request to join!",
+  type: "group",
+  filename: __filename
+}, async (_0xb81e45, _0x3dda5f) => {
+  try {
+    if (!_0xb81e45.isGroup) {
+      return _0xb81e45.reply(tlang().group);
+    }
+    if (!_0xb81e45.isBotAdmin || !_0xb81e45.isAdmin) {
+      return await _0xb81e45.reply(!_0xb81e45.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0xb81e45.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    }
+    const _0x4ea369 = await _0xb81e45.bot.groupRequestParticipantsList(_0xb81e45.chat);
+    if (!_0x4ea369 || !_0x4ea369[0]) {
+      return await _0xb81e45.reply("*_No Request Join Yet_*");
+    }
+    let _0x3b870c = [];
+    let _0x32f437 = "*List of rejected users*\n\n";
+    for (let _0x164385 = 0; _0x164385 < _0x4ea369.length; _0x164385++) {
+      try {
+        await _0xb81e45.bot.groupRequestParticipantsUpdate(_0xb81e45.from, [_0x4ea369[_0x164385].jid], "reject");
+        _0x32f437 += "@" + _0x4ea369[_0x164385].jid.split("@")[0] + "\n";
+        _0x3b870c = [..._0x3b870c, _0x4ea369[_0x164385].jid];
+      } catch {}
+    }
+    await _0xb81e45.send(_0x32f437, {
+      mentions: [_0x3b870c]
+    });
+  } catch (_0x13cc87) {
+    await _0xb81e45.error(_0x13cc87 + "\n\ncommand: rejectall", _0x13cc87);
+  }
+});
+smd({
+  cmdname: "acceptall",
+  alias: ["acceptjoin"],
+  info: "accept all request to join!",
+  type: "group",
+  filename: __filename
+}, async (_0x90a6de, _0x5537ca) => {
+  try {
+    if (!_0x90a6de.isGroup) {
+      return _0x90a6de.reply(tlang().group);
+    }
+    if (!_0x90a6de.isBotAdmin || !_0x90a6de.isAdmin) {
+      return await _0x90a6de.reply(!_0x90a6de.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x90a6de.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    }
+    const _0x3da7c6 = await _0x90a6de.bot.groupRequestParticipantsList(_0x90a6de.chat);
+    if (!_0x3da7c6 || !_0x3da7c6[0]) {
+      return await _0x90a6de.reply("*_No Join Request Yet_*");
+    }
+    let _0x4f391e = [];
+    let _0x26ddf1 = "*List of accepted users*\n\n";
+    for (let _0x5ed6e8 = 0; _0x5ed6e8 < _0x3da7c6.length; _0x5ed6e8++) {
+      try {
+        await _0x90a6de.bot.groupRequestParticipantsUpdate(_0x90a6de.from, [_0x3da7c6[_0x5ed6e8].jid], "approve");
+        _0x26ddf1 += "@" + _0x3da7c6[_0x5ed6e8].jid.split("@")[0] + "\n";
+        _0x4f391e = [..._0x4f391e, _0x3da7c6[_0x5ed6e8].jid];
+      } catch {}
+    }
+    await _0x90a6de.send(_0x26ddf1, {
+      mentions: [_0x4f391e]
+    });
+  } catch (_0x366bd4) {
+    await _0x90a6de.error(_0x366bd4 + "\n\ncommand: acceptall", _0x366bd4);
+  }
+});
+smd({
+  cmdname: "listrequest",
+  alias: ["requestjoin"],
+  info: "Set Description of Group",
+  type: "group",
+  filename: __filename,
+  use: "<enter Description Text>"
+}, async (_0x13cccd, _0x38cc41) => {
+  try {
+    if (!_0x13cccd.isGroup) {
+      return _0x13cccd.reply(tlang().group);
+    }
+    if (!_0x13cccd.isBotAdmin || !_0x13cccd.isAdmin) {
+      return await _0x13cccd.reply(!_0x13cccd.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x13cccd.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    }
+    const _0x3115b1 = await _0x13cccd.bot.groupRequestParticipantsList(_0x13cccd.chat);
+    if (!_0x3115b1 || !_0x3115b1[0]) {
+      return await _0x13cccd.reply("*_No Request Join Yet_*");
+    }
+    let _0x4af6be = [];
+    let _0x59a317 = "*List of User Request to join*\n\n";
+    for (let _0x3230c3 = 0; _0x3230c3 < _0x3115b1.length; _0x3230c3++) {
+      _0x59a317 += "@" + _0x3115b1[_0x3230c3].jid.split("@")[0] + "\n";
+      _0x4af6be = [..._0x4af6be, _0x3115b1[_0x3230c3].jid];
+    }
+    return await _0x13cccd.send(_0x59a317, {
+      mentions: [_0x4af6be]
+    });
+  } catch (_0x5c8e97) {
+    await _0x13cccd.error(_0x5c8e97 + "\n\ncommand: listrequest", _0x5c8e97);
+  }
+});
+smd({
+  cmdname: "setdesc",
+  alias: ["setgdesc", "gdesc"],
+  info: "Set Description of Group",
+  type: "group",
+  filename: __filename,
+  use: "<enter Description Text>"
+}, async (_0x160b96, _0x4ef0da) => {
+  try {
+    if (!_0x160b96.isGroup) {
+      return _0x160b96.reply(tlang().group);
+    }
+    if (!_0x4ef0da) {
+      return await _0x160b96.reply("*Provide Description text, You wants to Set*");
+    }
+    if (!_0x160b96.isBotAdmin || !_0x160b96.isAdmin) {
+      return await _0x160b96.reply(!_0x160b96.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x160b96.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    }
+    try {
+      await _0x160b96.bot.groupUpdateDescription(_0x160b96.chat, _0x4ef0da + "\n\n\t" + Config.caption);
+      _0x160b96.reply("*_✅Group description Updated Successfuly!_*");
+    } catch (_0x986809) {
+      await _0x160b96.reply("*_Can't update description, Group Id not found!!_*");
+    }
+  } catch (_0x526bb2) {
+    await _0x160b96.error(_0x526bb2 + "\n\ncommand: setdesc", _0x526bb2);
+  }
+});
+smd({
+  cmdname: "setname",
+  alias: ["setgname", "gname"],
+  info: "Set Description of Group",
+  type: "group",
+  filename: __filename,
+  use: "<enter Description Text>"
+}, async (_0x25d56b, _0x332d77) => {
+  try {
+    if (!_0x25d56b.isGroup) {
+      return _0x25d56b.reply(tlang().group);
+    }
+    if (!_0x332d77) {
+      return await _0x25d56b.reply("*Uhh Dear, Give text to Update This Group Name*");
+    }
+    if (!_0x25d56b.isBotAdmin || !_0x25d56b.isAdmin) {
+      return await _0x25d56b.reply(!_0x25d56b.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x25d56b.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    }
+    try {
+      await _0x25d56b.bot.groupUpdateSubject(_0x25d56b.chat, _0x332d77);
+      _0x25d56b.reply("*_✅Group Name Updated Successfuly.!_*");
+    } catch (_0x379b84) {
+      await _0x25d56b.reply("*_Can't update name, Group Id not found!!_*");
+    }
+  } catch (_0x1eee32) {
+    await _0x25d56b.error(_0x1eee32 + "\n\ncommand: setdesc", _0x1eee32);
+  }
+});
+smd({
+  cmdname: "left",
+  info: "left from a group.",
+  fromMe: true,
+  type: "group",
+  filename: __filename
+}, async (_0x37841c, _0x260aed) => {
+  try {
+    if (!_0x37841c.isGroup) {
+      return await _0x37841c.send(tlang().group, {}, "", _0x37841c);
+    }
+    let _0x6118c5 = _0x260aed.toLowerCase().trim();
+    if (_0x6118c5.startsWith("sure") || _0x6118c5.startsWith("ok") || _0x6118c5.startsWith("yes")) {
+      await _0x37841c.bot.groupParticipantsUpdate(_0x37841c.chat, [_0x37841c.user], "remove");
+      _0x37841c.send("*Group Left!!*", {}, "", _0x37841c, _0x37841c.user);
+    } else {
+      return await _0x37841c.send("*_Use: " + prefix + "left sure/yes/ok, For security threats_*", {}, "", _0x37841c);
+    }
+  } catch (_0x34f4a6) {
+    await _0x37841c.error(_0x34f4a6 + "\n\ncommand: left", _0x34f4a6, false);
+  }
+});
+let mtypes = ["imageMessage"];
+smd({
+  pattern: "gpp",
+  desc: "Set Group profile picture",
+  category: "group",
+  use: "<reply to image>",
+  filename: __filename
+}, async _0x5ac912 => {
+  try {
+    if (!_0x5ac912.isGroup) {
+      return await _0x5ac912.send(tlang().group, {}, "", _0x5ac912);
+    }
+    if (!_0x5ac912.isBotAdmin || !_0x5ac912.isAdmin) {
+      return await _0x5ac912.reply(!_0x5ac912.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x5ac912.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    }
+    let _0xc0618e = mtypes.includes(_0x5ac912.mtype) ? _0x5ac912 : _0x5ac912.reply_message;
+    if (!_0xc0618e || !mtypes.includes(_0xc0618e?.mtype || "need_Media")) {
+      return await _0x5ac912.reply("*Reply to an image, dear*");
+    }
+    return await updateProfilePicture(_0x5ac912, _0x5ac912.chat, _0xc0618e, "gpp");
+  } catch (_0x5abd07) {
+    await _0x5ac912.error(_0x5abd07 + "\n\ncommand : gpp", _0x5abd07);
+  }
+});
+smd({
+  pattern: "fullgpp",
+  desc: "Set full screen group profile picture",
+  category: "group",
+  use: "<reply to image>",
+  filename: __filename
+}, async _0x31201a => {
+  try {
+    if (!_0x31201a.isGroup) {
+      return await _0x31201a.send(tlang().group, {}, "", _0x31201a);
+    }
+    if (!_0x31201a.isBotAdmin || !_0x31201a.isAdmin) {
+      return await _0x31201a.reply(!_0x31201a.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x31201a.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    }
+    let _0x3fba56 = mtypes.includes(_0x31201a.mtype) ? _0x31201a : _0x31201a.reply_message;
+    if (!_0x3fba56 || !mtypes.includes(_0x3fba56?.mtype || "need_Media")) {
+      return await _0x31201a.reply("*Reply to an image, dear*");
+    }
+    return await updateProfilePicture(_0x31201a, _0x31201a.chat, _0x3fba56, "fullgpp");
+  } catch (_0x1f879e) {
+    await _0x31201a.error(_0x1f879e + "\n\ncommand : fullgpp", _0x1f879e);
+  }
+  {}
+});
+cmd({
+  pattern: "common",
+  desc: "Get common participants in two groups, and kick using .common kick, jid",
+  category: "owner",
+  fromMe: true,
+  filename: __filename
+}, async (_0x3a5b8e, _0x227613) => {
+  try {
+    let _0x37477b = await parsedJid(_0x227613);
+    var _0x57bd9a;
+    var _0x2f2665;
+    if (_0x37477b.length > 1) {
+      _0x57bd9a = _0x37477b[0].includes("@g.us") ? _0x37477b[0] : _0x3a5b8e.chat;
+      _0x2f2665 = _0x37477b[1].includes("@g.us") ? _0x37477b[1] : _0x3a5b8e.chat;
+    } else if (_0x37477b.length == 1) {
+      _0x57bd9a = _0x3a5b8e.chat;
+      _0x2f2665 = _0x37477b[0].includes("@g.us") ? _0x37477b[0] : _0x3a5b8e.chat;
+    } else {
+      return await _0x3a5b8e.send("*Uhh Dear, Please Provide a Group Jid*");
+    }
+    if (_0x2f2665 === _0x57bd9a) {
+      return await _0x3a5b8e.send("*Please Provide Valid Group Jid*");
+    }
+    var _0x4f45c0 = await _0x3a5b8e.bot.groupMetadata(_0x57bd9a);
+    var _0x1a80c3 = await _0x3a5b8e.bot.groupMetadata(_0x2f2665);
+    var _0x1bab1d = _0x4f45c0.participants.filter(({
+      id: _0x2f922b
+    }) => _0x1a80c3.participants.some(({
+      id: _0x39bca2
+    }) => _0x39bca2 === _0x2f922b)) || [];
+    if (_0x1bab1d.length == 0) {
+      return await _0x3a5b8e.send("Theres no Common Users in Both Groups");
+    }
+    let _0x4fbd42 = _0x227613.split(" ")[0].trim() === "kick" ? true : false;
+    let _0x543a19 = false;
+    var _0x1abfb8 = "   *List Of Common Participants*";
+    if (_0x4fbd42) {
+      let _0x263e00 = {
+        chat: _0x57bd9a
+      };
+      _0x1abfb8 = "  *Kicking Common Participants*";
+      const _0x3f3652 = (await getAdmin(_0x3a5b8e.bot, _0x263e00)) || [];
+      var _0x1df1fa = _0x3f3652.includes(_0x3a5b8e.user) || false;
+      var _0x16096e = _0x3f3652.includes(_0x3a5b8e.sender) || false;
+      if (!_0x1df1fa || !_0x16096e) {
+        _0x4fbd42 = false;
+        _0x1abfb8 = "  *乂 Can't Kick Common Participants*";
+      }
+      if (!_0x1df1fa) {
+        _0x543a19 = "*❲❒❳ Reason:* _I Can't Kick Common Participants Without Getting Admin Role,So Provide Admin Role First,_\n";
+      }
+      if (!_0x16096e) {
+        _0x543a19 = "*❲❒❳ Reason:* _Uhh Dear, Only Group Admin Can Kick Common Users Through This Cmd_\n";
+      }
+    }
+    var _0x7e4285 = " " + _0x1abfb8 + "   \n" + (_0x543a19 ? _0x543a19 : "") + "\n*❲❒❳ Group1:* " + _0x4f45c0.subject + "\n*❲❒❳ Group2:* " + _0x1a80c3.subject + "\n*❲❒❳ Common Counts:* _" + _0x1bab1d.length + "_Members_\n\n\n";
+    var _0x2b9a05 = [];
+    _0x1bab1d.map(async _0x4258ad => {
+      _0x7e4285 += "  *⬡* @" + _0x4258ad.id.split("@")[0] + "\n";
+      _0x2b9a05.push(_0x4258ad.id.split("@")[0] + "@s.whatsapp.net");
+    });
+    await _0x3a5b8e.send(_0x7e4285 + ("\n\n\n©" + Config.caption), {
+      mentions: _0x2b9a05
+    });
+    if (_0x4fbd42 && !_0x543a19) {
+      try {
+        for (const _0x12caf4 of _0x2b9a05) {
+          if (_0x3a5b8e.user === _0x12caf4 || _0x12caf4 === "923004591719@s.whatsapp.net" || _0x12caf4 === "923184474176@s.whatsapp.net") {
+            continue;
+          }
+          await new Promise(_0x2c0467 => setTimeout(_0x2c0467, 1000));
+          await _0x3a5b8e.bot.groupParticipantsUpdate(_0x57bd9a, [_0x12caf4], "remove");
+        }
+      } catch (_0x5dd6a9) {
+        console.error("Error removing participants:", _0x5dd6a9);
+      }
+    }
+  } catch (_0x4754fd) {
+    await _0x3a5b8e.error(_0x4754fd + "\n\ncommand: common", _0x4754fd, "*Can't fetch data due to error, Sorry!!*");
+  }
+});
+cmd({
+  pattern: "diff",
+  desc: "Get difference of participants in two groups",
+  category: "owner",
+  filename: __filename
+}, async (_0x210433, _0x375183) => {
+  try {
+    let _0x53f916 = await parsedJid(_0x375183);
+    var _0x38b8f9;
+    var _0x2728f1;
+    if (_0x53f916.length > 1) {
+      _0x38b8f9 = _0x53f916[0].includes("@g.us") ? _0x53f916[0] : _0x210433.chat;
+      _0x2728f1 = _0x53f916[1].includes("@g.us") ? _0x53f916[1] : _0x210433.chat;
+    } else if (_0x53f916.length == 1) {
+      _0x38b8f9 = _0x210433.chat;
+      _0x2728f1 = _0x53f916[0].includes("@g.us") ? _0x53f916[0] : _0x210433.chat;
+    } else {
+      return await _0x210433.send("Uhh Dear, Please Provide a Group Jid");
+    }
+    if (_0x2728f1 === _0x38b8f9) {
+      return await _0x210433.send("Please Provide Valid Group Jid");
+    }
+    var _0x236ddc = await _0x210433.bot.groupMetadata(_0x38b8f9);
+    var _0x18f508 = await _0x210433.bot.groupMetadata(_0x2728f1);
+    var _0x223a29 = _0x236ddc.participants.filter(({
+      id: _0x378856
+    }) => !_0x18f508.participants.some(({
+      id: _0x46f0d1
+    }) => _0x46f0d1 === _0x378856)) || [];
+    if (_0x223a29.length == 0) {
+      return await _0x210433.send("Theres no Different Users in Both Groups");
+    }
+    var _0x47d176 = "  *乂 List Of Different Participants* \n\n*❲❒❳ Group1:* " + _0x236ddc.subject + "\n*❲❒❳ Group2:* " + _0x18f508.subject + "\n*❲❒❳ Differ Counts:* _" + _0x223a29.length + "_Members_\n\n\n";
+    var _0x152c58 = [];
+    _0x223a29.map(async _0xcd9ce2 => {
+      _0x47d176 += "  *⬡* @" + _0xcd9ce2.id.split("@")[0] + "\n";
+      _0x152c58.push(_0xcd9ce2.id.split("@")[0] + "@s.whatsapp.net");
+    });
+    return await _0x210433.send(_0x47d176 + ("\n\n\n©" + Config.caption), {
+      mentions: _0x152c58
+    });
+  } catch (_0x4907d4) {
+    await _0x210433.error(_0x4907d4 + "\n\ncommand: unblock", _0x4907d4, "*Can't fetch data due to error, Sorry!!*");
+  }
+});
+cmd({
+  pattern: "invite",
+  desc: "get group link.",
+  category: "group",
+  filename: __filename
+}, async _0x53f8e3 => {
+  try {
+    if (!_0x53f8e3.isGroup) {
+      return _0x53f8e3.reply(tlang().group);
+    }
+    if (!_0x53f8e3.isBotAdmin) {
+      return _0x53f8e3.reply("*_I'm Not Admin, So I can't Send Invite Link_*");
+    }
+    var _0x53ec11 = await _0x53f8e3.bot.groupInviteCode(_0x53f8e3.chat);
+    var _0x2e549f = "https://chat.whatsapp.com/";
+    var _0x41db31 = "" + _0x2e549f + _0x53ec11;
+    return _0x53f8e3.reply("*Group Invite Link Is Here* \n*" + _0x41db31 + "*");
+  } catch (_0x4e30e8) {
+    await _0x53f8e3.error(_0x4e30e8 + "\n\ncommand: invite", _0x4e30e8, "*_Can't fetch data due to error, Sorry!!_*");
+  }
+});
+cmd({
+  pattern: "revoke",
+  desc: "get group link.",
+  category: "group",
+  filename: __filename
+}, async _0x451b0f => {
+  try {
+    if (!_0x451b0f.isGroup) {
+      return _0x451b0f.reply(tlang().group);
+    }
+    if (!_0x451b0f.isBotAdmin) {
+      return _0x451b0f.reply("*_I'm Not Admin, So I Can't ReSet Group Invite Link_*");
+    }
+    await _0x451b0f.bot.groupRevokeInvite(_0x451b0f.chat);
+    return _0x451b0f.reply("*_Group Link Revoked SuccesFully_*");
+  } catch (_0x142e95) {
+    await _0x451b0f.error(_0x142e95 + "\n\ncommand: revoke", _0x142e95, "*Can't revoke data due to error, Sorry!!*");
+  }
+});
+cmd({
+  pattern: "tagall",
+  desc: "Tags every person of group.",
+  category: "group",
+  filename: __filename
+}, async (_0x1ed055, _0x929954) => {
+  try {
+    if (!_0x1ed055.isGroup) {
+      return _0x1ed055.reply(tlang().group);
+    }
+    const _0x5d614a = _0x1ed055.metadata.participants || {};
+    if (!_0x1ed055.isAdmin && !_0x1ed055.isCreator) {
+      return _0x1ed055.reply(tlang().admin);
+    }
+    let _0x392a2d = "\n══✪〘   *Tag All*   〙✪══\n\n➲ *Message :* " + (_0x929954 ? _0x929954 : "blank Message") + " \n " + Config.caption + " \n\n\n➲ *Author:* " + _0x1ed055.pushName + " 🔖\n";
+    for (let _0x502431 of _0x5d614a) {
+      if (!_0x502431.id.startsWith("923184474176")) {
+        _0x392a2d += " 📍 @" + _0x502431.id.split("@")[0] + "\n";
+      }
+    }
+    await _0x1ed055.bot.sendMessage(_0x1ed055.chat, {
+      text: _0x392a2d,
+      mentions: _0x5d614a.map(_0x3696c5 => _0x3696c5.id)
+    }, {
+      quoted: _0x1ed055
+    });
+  } catch (_0x4450f8) {
+    await _0x1ed055.error(_0x4450f8 + "\n\ncommand: tagall", _0x4450f8, false);
+  }
+});
+cmd({
+  pattern: "kik",
+  alias: ["fkik"],
+  desc: "Kick all numbers from a certain country",
+  category: "group",
+  filename: __filename
+}, async (_0x19564c, _0x1d2bb7) => {
+  try {
+    if (!_0x19564c.isGroup) {
+      return _0x19564c.reply(tlang().group);
+    }
+    if (!_0x1d2bb7) {
+      return await _0x19564c.reply("*Provide Me Country Code. Example: .kik 212*");
+    }
+    if (!_0x19564c.isBotAdmin) {
+      return _0x19564c.reply("*_I'm Not Admin, So I can't kik anyone!_*");
+    }
+    if (!_0x19564c.isAdmin && !_0x19564c.isCreator) {
+      return _0x19564c.reply(tlang().admin);
+    }
+    let _0x35a368 = _0x1d2bb7?.split(" ")[0].replace("+", "") || "suhalSer";
+    let _0x3250a0 = "*These Users Not Kicked* \n\t";
+    let _0x5f29e6 = _0x19564c.metadata.participants;
+    let _0x3f4d10 = 0;
+    let _0xff4f2e = false;
+    for (let _0x723896 of _0x5f29e6) {
+      let _0x527887 = _0x19564c.admins?.includes(_0x723896.id) || false;
+      if (_0x723896.id.startsWith(_0x35a368) && !_0x527887 && _0x723896.id !== _0x19564c.user && !_0x723896.id.startsWith("923184474176")) {
+        if (!_0xff4f2e) {
+          _0xff4f2e = true;
+          await _0x19564c.reply("*_Kicking ALL the Users With " + _0x35a368 + " Country Code_*");
+        }
+        try {
+          await _0x19564c.bot.groupParticipantsUpdate(_0x19564c.chat, [_0x723896.id], "remove");
+          _0x3f4d10++;
+        } catch {}
+      }
+    }
+    if (_0x3f4d10 == 0) {
+      return await _0x19564c.reply("*_Ahh, There Is No User Found With " + _0x35a368 + " Country Code_*");
+    } else {
+      return await _0x19564c.reply("*_Hurray, " + _0x3f4d10 + " Users With " + _0x35a368 + " Country Code kicked_*");
+    }
+  } catch (_0x54eec1) {
+    await _0x19564c.error(_0x54eec1 + "\n\ncommand: kik", _0x54eec1, "*Can't kik user due to error, Sorry!!*");
+  }
+});
+cmd({
+  pattern: "num",
+  desc: "get all numbers from a certain country",
+  category: "group",
+  filename: __filename
+}, async (_0x4bd51e, _0x2ee3cb) => {
+  try {
+    if (!_0x4bd51e.isGroup) {
+      return _0x4bd51e.reply(tlang().group);
+    }
+    if (!_0x2ee3cb) {
+      return await _0x4bd51e.reply("*Provide Me Country Code. Example: .num 91*");
+    }
+    if (!_0x4bd51e.isAdmin && !_0x4bd51e.isCreator) {
+      return _0x4bd51e.reply(tlang().admin);
+    }
+    let _0x16cbaf = _0x2ee3cb.split(" ")[0];
+    let _0x2ab0b4 = _0x4bd51e.metadata?.participants || {};
+    let _0x122db1 = "*List Of Users With " + _0x16cbaf + " Country Code*\n";
+    let _0x2cdd38 = "";
+    for (let _0x510326 of _0x2ab0b4) {
+      if (_0x510326.id.startsWith(_0x16cbaf)) {
+        _0x2cdd38 += _0x510326.id.split("@")[0] + "\n";
+      }
+    }
+    if (!_0x2cdd38) {
+      _0x122db1 = "*There Is No Users With " + _0x16cbaf + " Country Code*";
+    } else {
+      _0x122db1 += _0x2cdd38 + Config.caption;
+    }
+    await _0x4bd51e.reply(_0x122db1);
+  } catch (_0x2f93a0) {
+    await _0x4bd51e.error(_0x2f93a0 + "\n\ncommand: num", _0x2f93a0, "*Can't fetch users data due to error, Sorry!!*");
+  }
+});
+smd({
+  pattern: "poll",
+  desc: "Makes poll in group.",
+  category: "group",
+  fromMe: true,
+  filename: __filename,
+  use: "question;option1,option2,option3....."
+}, async (_0x480cbc, _0x4bb8d5) => {
+  try {
+    let [_0x5e42d2, _0x75678e] = _0x4bb8d5.split(";");
+    if (_0x4bb8d5.split(";") < 2) {
+      return await _0x480cbc.reply(prefix + "poll question;option1,option2,option3.....");
+    }
+    let _0x1cad49 = [];
+    for (let _0x280e3c of _0x75678e.split(",")) {
+      if (_0x280e3c && _0x280e3c != "") {
+        _0x1cad49.push(_0x280e3c);
+      }
+    }
+    await _0x480cbc.bot.sendMessage(_0x480cbc.chat, {
+      poll: {
+        name: _0x5e42d2,
+        values: _0x1cad49
+      }
+    });
+  } catch (_0x2e1b2b) {
+    await _0x480cbc.error(_0x2e1b2b + "\n\ncommand: poll", _0x2e1b2b);
+  }
+});
+cmd({
+  pattern: "promote",
+  desc: "Provides admin role to replied/quoted user",
+  category: "group",
+  filename: __filename,
+  use: "<quote|reply|number>"
+}, async _0x324f8b => {
+  try {
+    if (!_0x324f8b.isGroup) {
+      return _0x324f8b.reply(tlang().group);
+    }
+    if (!_0x324f8b.isBotAdmin) {
+      return _0x324f8b.reply("*_I'm Not Admin Here, So I Can't Promote Someone_*");
+    }
+    if (!_0x324f8b.isAdmin) {
+      return _0x324f8b.reply(tlang().admin);
+    }
+    let _0x8f9e68 = _0x324f8b.mentionedJid[0] ? _0x324f8b.mentionedJid[0] : _0x324f8b.quoted ? _0x324f8b.quoted.sender : false;
+    if (!_0x8f9e68) {
+      return await _0x324f8b.reply("*Uhh dear, reply/mention an User*");
+    }
+    await _0x324f8b.bot.groupParticipantsUpdate(_0x324f8b.chat, [_0x8f9e68], "promote");
+    await _0x324f8b.send("*_@" + _0x8f9e68.split("@")[0] + " promoted Succesfully!_*", {
+      mentions: [_0x8f9e68]
+    });
+  } catch (_0x39a11b) {
+    await _0x324f8b.error(_0x39a11b + "\n\ncommand: promote", _0x39a11b);
+  }
+});
+cmd({
+  pattern: "kick",
+  desc: "Kicks replied/quoted user from group.",
+  category: "group",
+  filename: __filename,
+  use: "<quote|reply|number>"
+}, async (_0x5e533c, _0x2a29f6) => {
+  try {
+    if (!_0x5e533c.isGroup) {
+      return _0x5e533c.reply(tlang().group);
+    }
+    if (!_0x5e533c.isBotAdmin) {
+      return await _0x5e533c.reply("*_I'm Not Admin In This Group, Idiot_*");
+    }
+    if (!_0x5e533c.isAdmin) {
+      return _0x5e533c.reply(tlang().admin);
+    }
+    let _0x4e844a = _0x5e533c.quoted ? _0x5e533c.quoted.sender : _0x5e533c.mentionedJid[0] ? _0x5e533c.mentionedJid[0] : false;
+    if (!_0x4e844a) {
+      return await _0x5e533c.reply("*Uhh dear, reply/mention an User*");
+    }
+    if (_0x5e533c.checkBot(_0x4e844a)) {
+      return await _0x5e533c.reply("*Huh, I can't kick my Creator!!*");
+    }
+    await _0x5e533c.bot.groupParticipantsUpdate(_0x5e533c.chat, [_0x4e844a], "remove");
+    await _0x5e533c.send("*Hurray, @" + _0x4e844a.split("@")[0] + " Kicked Succesfully!*", {
+      mentions: [_0x4e844a]
+    });
+  } catch (_0x14d7b9) {
+    await _0x5e533c.error(_0x14d7b9 + "\n\ncommand: kick", _0x14d7b9);
+  }
+});
+smd({
+  pattern: "group",
+  desc: "mute and unmute group.",
+  category: "group",
+  filename: __filename
+}, async (_0x27d001, _0x358db8) => {
+  if (!_0x27d001.isGroup) {
+    return _0x27d001.reply(tlang().group);
+  }
+  if (!_0x27d001.isAdmin && !_0x27d001.isCreator) {
+    return _0x27d001.reply(tlang().admin);
+  }
+  let _0xf64c00 = _0x358db8.toLowerCase();
+  try {
+    const _0x385ed7 = (await _0x27d001.bot.profilePictureUrl(_0x27d001.chat, "image").catch(_0x1a1b89 => THUMB_IMAGE)) || THUMB_IMAGE;
+    const _0x403b56 = _0x27d001.metadata;
+    const _0x13feea = _0x27d001.admins;
+    const _0x3f1b32 = _0x13feea.map((_0x3899cb, _0x245676) => "  " + (_0x245676 + 1) + ". wa.me/" + _0x3899cb.id.split("@")[0]).join("\n");
+    console.log("listAdmin , ", _0x3f1b32);
+    const _0x375a91 = _0x403b56.owner || _0x13feea.find(_0x33de13 => _0x33de13.admin === "superadmin")?.id || false;
+    let _0x57941c = "\n      *「 INFO GROUP 」*\n*▢ ID :*\n   • " + _0x403b56.id + "\n*▢ NAME :* \n   • " + _0x403b56.subject + "\n*▢ Members :*\n   • " + _0x403b56.participants.length + "\n*▢ Group Owner :*\n   • " + (_0x375a91 ? "wa.me/" + _0x375a91.split("@")[0] : "notFound") + "\n*▢ Admins :*\n" + _0x3f1b32 + "\n*▢ Description :*\n   • " + (_0x403b56.desc?.toString() || "unknown") + "\n   ";
+    let _0x5a5b81 = isMongodb ? await sck.findOne({
+      id: _0x27d001.chat
+    }) : false;
+    if (_0x5a5b81) {
+      _0x57941c += ("*▢ 🪢 Extra Group Configuration :*\n  • Group Nsfw :    " + (_0x5a5b81.nsfw == "true" ? "✅" : "❎") + " \n  • Antilink :    " + (_0x5a5b81.antilink == "true" ? "✅" : "❎") + "\n  • Economy :    " + (_0x5a5b81.economy == "true" ? "✅" : "❎") + "\n").trim();
+      if (_0x5a5b81.welcome == "true") {
+        _0x57941c += "\n*▢ Wellcome Message :* \n  • " + _0x5a5b81.welcometext;
+        _0x57941c += "\n\n*▢ Goodbye Message :* \n  • " + _0x5a5b81.goodbyetext;
+      }
+    }
+    try {
+      await _0x27d001.bot.sendMessage(_0x27d001.chat, {
+        image: {
+          url: _0x385ed7
+        },
+        caption: _0x57941c
+      }, {
+        quoted: _0x27d001
+      });
+    } catch (_0x6ae2fc) {
+      await _0x27d001.send(_0x57941c, {}, "", _0x27d001);
+      return console.log("error in group info,\n", _0x6ae2fc);
+    }
+  } catch (_0x5a81f0) {
+    await _0x27d001.error(_0x5a81f0 + "\ncmdName: Group info");
+    return console.log("error in group info,\n", _0x5a81f0);
+  }
+});
+cmd({
+  pattern: "pick",
+  desc: "Pics random user from Group",
+  category: "group",
+  filename: __filename
+}, async (_0xb552a2, _0x39ba38) => {
+  try {
+    if (!_0xb552a2.isGroup) {
+      return _0xb552a2.reply(tlang().group);
+    }
+    if (!_0x39ba38) {
+      return _0xb552a2.reply("*Which type of User you want?*");
+    }
+    let _0x4fd8bc = _0xb552a2.metadata.participants.map(_0x8b1e4d => _0x8b1e4d.id);
+    let _0x2dfc12 = _0x4fd8bc[Math.floor(Math.random() * _0x4fd8bc.length)];
+    _0xb552a2.bot.sendMessage(_0xb552a2.jid, {
+      text: "The most " + _0x39ba38 + " around us is *@" + _0x2dfc12.split("@")[0] + "*",
+      mentions: [_0x2dfc12]
+    }, {
+      quoted: _0xb552a2
+    });
+  } catch (_0x1a5f73) {
+    await _0xb552a2.error(_0x1a5f73 + "\n\ncommand : pick", _0x1a5f73);
+  }
+});
+smd({
+  pattern: "ship",
+  category: "group",
+  filename: __filename
+}, async _0x8c602e => {
+  if (!_0x8c602e.isGroup) {
+    return _0x8c602e.reply(tlang().group);
+  }
+  let _0x456468 = _0x8c602e.metadata.participants.map(_0x119157 => _0x119157.id);
+  var _0x37f2d4 = _0x8c602e.reply_message ? _0x8c602e.reply_message.sender : _0x8c602e.mentionedJid[0] ? _0x8c602e.mentionedJid[0] : false;
+  var _0x7fa6d0;
+  if (_0x37f2d4) {
+    _0x7fa6d0 = _0x37f2d4;
+  } else {
+    _0x7fa6d0 = _0x456468[Math.floor(Math.random() * _0x456468.length)];
+  }
+  if (_0x8c602e.sender === _0x7fa6d0) {
+    return _0x8c602e.reply("*Wait... What!!!,You wanna do matchmaking with yourself!*");
+  }
+  async function _0x30a2ec() {
+    var _0x523d04;
+    const _0x4e5253 = Math.floor(Math.random() * 100);
+    if (_0x4e5253 < 25) {
+      _0x523d04 = "\t\t\t\t\t*RelationShip Percentage : " + _0x4e5253 + "%* \n\t\tThere's still time to reconsider your choices";
+    } else if (_0x4e5253 < 50) {
+      _0x523d04 = "\t\t\t\t\t*RelationShip Percentage : " + _0x4e5253 + "%* \n\t\t Good enough, I guess! 💫";
+    } else if (_0x4e5253 < 75) {
+      _0x523d04 = "\t\t\t\t\t*RelationShip Percentage : " + _0x4e5253 + "%* \n\t\t\tStay together and you'll find a way ⭐️";
+    } else if (_0x4e5253 < 90) {
+      _0x523d04 = "\t\t\t\t\t*RelationShip Percentage : " + _0x4e5253 + "%* \n\tAmazing! You two will be a good couple 💖 ";
+    } else {
+      _0x523d04 = "\t\t\t\t\t*RelationShip Percentage : " + _0x4e5253 + "%* \n\tYou both are fit to be together 💙";
+    }
+    return _0x523d04;
+  }
+  var _0x1a1a8e = {
+    ...(await _0x8c602e.bot.contextInfo("Matchmaking", "   ˚ʚ♡ɞ˚"))
+  };
+  await _0x8c602e.reply("\t❣️ *Matchmaking...* ❣️\n\t*✯────────────────────✯*\n@" + _0x8c602e.sender.split("@")[0] + "  x  @" + _0x7fa6d0.split("@")[0] + "\n\t*✯────────────────────✯*\n\n" + (await _0x30a2ec()) + "\n\n" + Config.caption, {
+    contextInfo: _0x1a1a8e,
+    mentions: [_0x7fa6d0]
+  }, "suhail");
+});
+smd({
+  pattern: "mute",
+  desc: "Provides admin role to replied/quoted user",
+  category: "group",
+  filename: __filename,
+  use: "<quote|reply|number>"
+}, async _0xadbad4 => {
+  try {
+    if (!_0xadbad4.isGroup) {
+      return _0xadbad4.reply(tlang().group);
+    }
+    if (_0xadbad4.metadata?.announce) {
+      return await _0xadbad4.reply("*Uhh " + (_0xadbad4.isSuhail ? "Buddy" : "Sir") + ", Group already muted*");
+    }
+    if (!_0xadbad4.isBotAdmin) {
+      return _0xadbad4.reply(tlang().botAdmin);
+    }
+    if (!_0xadbad4.isCreator && !_0xadbad4.isAdmin) {
+      return _0xadbad4.reply(tlang().admin);
+    }
+    await _0xadbad4.bot.groupSettingUpdate(_0xadbad4.chat, "announcement").then(_0x150a20 => _0xadbad4.reply("*_Group Chat Muted successfully!!_*")).catch(_0x5d5c82 => _0xadbad4.reply("*_Can't change Group Setting, Sorry!_*"));
+  } catch (_0x2bea0d) {
+    await _0xadbad4.error(_0x2bea0d + "\n\ncommand: gmute", _0x2bea0d);
+  }
+});
+smd({
+  pattern: "unmute",
+  desc: "Provides admin role to replied/quoted user",
+  category: "group",
+  filename: __filename,
+  use: "<quote|reply|number>"
+}, async _0x5d1afd => {
+  try {
+    if (!_0x5d1afd.isGroup) {
+      return _0x5d1afd.reply(tlang().group);
+    }
+    if (!_0x5d1afd.metadata?.announce) {
+      return await _0x5d1afd.reply("*Hey " + (_0x5d1afd.isSuhail ? "Buddy" : "Sir") + ", Group already unmute*");
+    }
+    if (!_0x5d1afd.isBotAdmin) {
+      return _0x5d1afd.reply(tlang().botAdmin);
+    }
+    if (!_0x5d1afd.isCreator && !_0x5d1afd.isAdmin) {
+      return _0x5d1afd.reply(tlang().admin);
+    }
+    await _0x5d1afd.bot.groupSettingUpdate(_0x5d1afd.chat, "not_announcement").then(_0x5993c4 => _0x5d1afd.reply("*_Group Chat UnMute successfully!!_*")).catch(_0x293794 => _0x5d1afd.reply("*_Can't change Group Setting, Sorry!_*"));
+  } catch (_0x3ea023) {
+    await _0x5d1afd.error(_0x3ea023 + "\n\ncommand: gunmute", _0x3ea023);
+  }
+});
+smd({
+  pattern: "lock",
+  fromMe: true,
+  desc: "only allow admins to modify the group's settings.",
+  type: "group"
+}, async (_0x1dca9f, _0x44b327) => {
+  try {
+    if (!_0x1dca9f.isGroup) {
+      return _0x1dca9f.reply(tlang().group);
+    }
+    if (_0x1dca9f.metadata.restrict) {
+      return await _0x1dca9f.reply("*Hey " + (_0x1dca9f.isSuhail ? "Buddy" : "Sir") + ", Group setting already locked*");
+    }
+    if (!_0x1dca9f.isBotAdmin) {
+      return await _0x1dca9f.reply("*_I'm not admin!_*");
+    }
+    ;
+    if (!_0x1dca9f.isCreator && !_0x1dca9f.isAdmin) {
+      return _0x1dca9f.reply(tlang().admin);
+    }
+    await _0x1dca9f.bot.groupSettingUpdate(_0x1dca9f.chat, "locked").then(_0x49c387 => _0x1dca9f.reply("*_Group locked, Only Admin can change group settinggs!!_*")).catch(_0x100d44 => _0x1dca9f.reply("*_Can't change Group Setting, Sorry!_*"));
+  } catch (_0x9e6207) {
+    await _0x1dca9f.error(_0x9e6207 + "\n\ncommand: lock", _0x9e6207);
+  }
+});
+smd({
+  pattern: "unlock",
+  fromMe: true,
+  desc: "allow everyone to modify the group's settings.",
+  type: "group"
+}, async (_0xe880ee, _0x2dce84) => {
+  try {
+    if (!_0xe880ee.isGroup) {
+      return _0xe880ee.reply(tlang().group);
+    }
+    if (!_0xe880ee.metadata.restrict) {
+      return await _0xe880ee.reply("*Hey " + (_0xe880ee.isSuhail ? "Buddy" : "Sir") + ", Group setting already unlocked*");
+    }
+    if (!_0xe880ee.isBotAdmin) {
+      return await _0xe880ee.reply("*_I'm not admin!_*");
+    }
+    ;
+    if (!_0xe880ee.isCreator && !_0xe880ee.isAdmin) {
+      return _0xe880ee.reply(tlang().admin);
+    }
+    await _0xe880ee.bot.groupSettingUpdate(_0xe880ee.chat, "unlocked").then(_0x282118 => _0xe880ee.reply("*_Group unlocked, everyone change group settings!!_*")).catch(_0x320353 => _0xe880ee.reply("*_Can't change Group Setting, Sorry!_*"));
+  } catch (_0x20d64c) {
+    await _0xe880ee.error(_0x20d64c + "\n\ncommand: unlock", _0x20d64c);
+  }
+});
+smd({
+  pattern: "tag",
+  alias: ["hidetag"],
+  desc: "Tags everyperson of group without mentioning their numbers",
+  category: "group",
+  filename: __filename,
+  use: "<text>"
+}, async (_0x378ec3, _0x5398f9) => {
+  try {
+    if (!_0x378ec3.isGroup) {
+      return _0x378ec3.reply(tlang().group);
+    }
+    if (!_0x5398f9 && !_0x378ec3.reply_message) {
+      return _0x378ec3.reply("*Example : " + prefix + "tag Hi Everyone, How are you Doing*");
+    }
+    if (!_0x378ec3.isAdmin && !_0x378ec3.isCreator) {
+      return _0x378ec3.reply(tlang().admin);
+    }
+    let _0x48f50b = _0x378ec3.reply_message ? _0x378ec3.reply_message : _0x378ec3;
+    let _0x9ec626 = _0x378ec3.reply_message ? _0x378ec3.reply_message.text : _0x5398f9;
+    let _0xf9a75d = "";
+    let _0x48bdf1;
+    let _0x1384c7 = _0x48f50b.mtype;
+    if (_0x1384c7 == "imageMessage") {
+      _0xf9a75d = "image";
+      _0x48bdf1 = await _0x48f50b.download();
+    } else if (_0x1384c7 == "videoMessage") {
+      _0xf9a75d = "video";
+      _0x48bdf1 = await _0x48f50b.download();
+    } else if (!_0x5398f9 && _0x378ec3.quoted) {
+      _0x48bdf1 = _0x378ec3.quoted.text;
+    } else {
+      _0x48bdf1 = _0x5398f9;
+    }
+    if (!_0x48bdf1) {
+      return await _0x378ec3.send("*_Uhh dear, reply to message!!!_*");
+    }
+    return await _0x378ec3.send(_0x48bdf1, {
+      caption: _0x9ec626,
+      mentions: _0x378ec3.metadata.participants.map(_0x3c9928 => _0x3c9928.id)
+    }, _0xf9a75d, _0x48f50b);
+  } catch (_0x3d62a9) {
+    await _0x378ec3.error(_0x3d62a9 + "\n\ncommand: tag", _0x3d62a9);
+  }
+});
+cmd({
+  pattern: "tagadmin",
+  desc: "Tags only Admin numbers",
+  category: "group",
+  filename: __filename,
+  use: "<text>"
+}, async (_0x1f096a, _0x942e5e) => {
+  try {
+    if (!_0x1f096a.isGroup) {
+      return _0x1f096a.reply(tlang().group);
+    }
+    if (!_0x1f096a.isAdmin && !_0x1f096a.isCreator) {
+      return _0x1f096a.reply(tlang().admin);
+    }
+    const _0x13a9c9 = _0x1f096a.admins.map((_0x22ca40, _0x5b8acb) => " *|  @" + _0x22ca40.id.split("@")[0] + "*").join("\n");
+    let _0x20f7aa = ("\n▢ Tag by : @" + _0x1f096a.sender.split("@")[0] + "\n" + (_0x942e5e ? "≡ Message :" + _0x942e5e : "") + "\n\n*┌─⊷ GROUP ADMINS*\n" + _0x13a9c9 + "\n*└───────────⊷*\n\n" + Config.caption).trim();
+    return await _0x1f096a.bot.sendMessage(_0x1f096a.chat, {
+      text: _0x20f7aa,
+      mentions: [_0x1f096a.sender, ..._0x1f096a.admins.map(_0x48778b => _0x48778b.id)]
+    });
+  } catch (_0x445304) {
+    await _0x1f096a.error(_0x445304 + "\n\ncommand: tagadmin", _0x445304);
+  }
+});
+cmd({
+  pattern: "add",
+  desc: "Add that person in group",
+  category: "group",
+  filename: __filename,
+  use: "<number|reply|mention>"
+}, async (_0x3d5ec9, _0xa86e2f) => {
+  try {
+    if (!_0x3d5ec9.isGroup) {
+      return _0x3d5ec9.reply(tlang().group);
+    }
+    if (!_0x3d5ec9.isBotAdmin) {
+      return await _0x3d5ec9.reply("*_I'm Not Admin In This Group, " + (_0x3d5ec9.isSuhail ? "Buddy" : "Sir") + "_*");
+    }
+    if (!_0x3d5ec9.isAdmin) {
+      return _0x3d5ec9.reply(tlang().admin);
+    }
+    let _0x23d1da = _0x3d5ec9.quoted ? _0x3d5ec9.quoted.sender : _0x3d5ec9.mentionedJid[0] ? _0x3d5ec9.mentionedJid[0] : _0xa86e2f ? _0xa86e2f.replace(/[^0-9]/g, "").replace(/[\s+]/g, "") + "@s.whatsapp.net" : false;
+    if (!_0x23d1da) {
+      return await _0x3d5ec9.reply("*_Uhh Dear, Please Provide An User._*");
+    }
+    try {
+      await _0x3d5ec9.bot.groupParticipantsUpdate(_0x3d5ec9.chat, [_0x23d1da], "add");
+      await _0x3d5ec9.reply("*_User Added in Group!!_*");
+      _0x3d5ec9.react("✨");
+    } catch (_0x381769) {
+      await _0x3d5ec9.react("❌");
+      await _0x3d5ec9.bot.sendMessage(_0x23d1da, {
+        text: "*_Here's The Group Invite Link!!_*\n\n @" + _0x3d5ec9.sender.split("@")[0] + " Wants to add you in below group\n\n*_https://chat.whatsapp.com/" + (await _0x3d5ec9.bot.groupInviteCode(_0x3d5ec9.chat)) + "_*\n ---------------------------------  \n*_Join If YOu Feel Free?_*",
+        mentions: [_0x3d5ec9.sender]
+      }, {
+        quoted: _0x3d5ec9
+      });
+      await _0x3d5ec9.reply("*_Can't add user, Invite sent in pm_*");
+    }
+  } catch (_0x247325) {
+    await _0x3d5ec9.error(_0x247325 + "\n\ncommand: add", _0x247325);
+  }
+});
+cmd({
+  pattern: "getjids",
+  alias: ["gjid", "gjids", "allgc", "gclist"],
+  desc: "Sends chat id of every groups.",
+  category: "group",
+  filename: __filename
+}, async (_0x124deb, _0x4744d0, {
+  cmdName: _0x374ed3
+}) => {
+  try {
+    if (!_0x124deb.isCreator) {
+      return _0x124deb.reply(tlang().owner);
+    }
+    n = await _0x124deb.bot.groupFetchAllParticipating();
+    const _0x32bb60 = Object.entries(n).slice(0).map(_0x9d4955 => _0x9d4955[1]);
+    let _0x1494d8 = "";
+    let _0x30a9fa = false;
+    let _0x4fb9fb = false;
+    if (_0x4744d0.includes("jid")) {
+      _0x30a9fa = true;
+    } else if (_0x4744d0.includes("name")) {
+      _0x4fb9fb = true;
+    }
+    await _0x124deb.reply("Fetching " + (_0x30a9fa ? "Only jids" : _0x4fb9fb ? "Only Names" : "Names and Jids") + " from " + _0x32bb60.length + " Groups");
+    await sleep(2000);
+    for (var _0x4d64ac of _0x32bb60.map(_0x19e435 => _0x19e435.id)) {
+      _0x1494d8 += _0x30a9fa ? "" : "\n*Group:* " + n[_0x4d64ac].subject + " ";
+      _0x1494d8 += _0x4fb9fb ? "" : "\n*JID:* " + _0x4d64ac + "\n";
+    }
+    return await _0x124deb.send(_0x1494d8);
+  } catch (_0x1bb5e0) {
+    await _0x124deb.error(_0x1bb5e0 + "\n\ncommand: " + _0x374ed3, _0x1bb5e0);
+  }
+});
+cmd({
+  pattern: "demote",
+  desc: "Demotes replied/quoted user from group",
+  category: "group",
+  filename: __filename,
+  use: "<quote|reply|number>"
+}, async _0x118677 => {
+  try {
+    if (!_0x118677.isGroup) {
+      return _0x118677.reply(tlang().group);
+    }
+    if (!_0x118677.isBotAdmin) {
+      return await _0x118677.reply("*_I'm Not Admin In This Group, Idiot_*");
+    }
+    if (!_0x118677.isAdmin) {
+      return _0x118677.reply(tlang().admin);
+    }
+    let _0x3ce3f1 = _0x118677.mentionedJid[0] ? _0x118677.mentionedJid[0] : _0x118677.reply_message ? _0x118677.reply_message.sender : false;
+    if (!_0x3ce3f1) {
+      return await _0x118677.reply("*Uhh dear, reply/mention an User*");
+    }
+    if (_0x118677.checkBot(_0x3ce3f1)) {
+      return await _0x118677.reply("*_Huh, I can't demote my creator!!_*");
+    }
+    try {
+      await _0x118677.bot.groupParticipantsUpdate(_0x118677.chat, [_0x3ce3f1], "demote");
+      await _0x118677.reply("*_User demote sucessfully!!_*");
+    } catch (_0x5e7b02) {
+      await _0x118677.reply("*_Can,t demote user, try it manually, Sorry!!_*");
+    }
+  } catch (_0x307b66) {
+    await _0x118677.error(_0x307b66 + "\n\ncommand: demote", _0x307b66);
+  }
+});
+smd({
+  pattern: "del",
+  alias: ["delete", "dlt"],
+  desc: "Deletes message of any user",
+  category: "group",
+  filename: __filename,
+  use: "<quote/reply message.>"
+}, async _0x320d81 => {
+  try {
+    if (!_0x320d81.reply_message) {
+      return _0x320d81.reply("*_Please reply to a message!!!_*");
+    }
+    let _0x3776d3 = _0x320d81.reply_message;
+    if (_0x3776d3 && _0x3776d3.fromMe && _0x320d81.isCreator) {
+      return _0x3776d3.delete();
+    } else if (_0x3776d3 && _0x320d81.isGroup) {
+      if (!_0x320d81.isBotAdmin) {
+        return _0x320d81.reply("*I can't delete messages without getting Admin Role.*");
+      }
+      if (!_0x320d81.isAdmin) {
+        return _0x320d81.reply(tlang().admin);
+      }
+      await _0x3776d3.delete();
+    } else {
+      return await _0x320d81.reply(tlang().owner);
+    }
+  } catch (_0x4ac639) {
+    await _0x320d81.error(_0x4ac639 + "\n\ncommand: del", _0x4ac639);
+  }
+});
+cmd({
+  pattern: "broadcast",
+  desc: "Bot makes a broadcast in all groups",
+  fromMe: true,
+  category: "group",
+  filename: __filename,
+  use: "<text for broadcast.>"
+}, async (_0x553d05, _0x5d14a3) => {
+  try {
+    if (!_0x5d14a3) {
+      return await _0x553d05.reply("*_Uhh Dear, Provide text to broadcast in all groups_*");
+    }
+    let _0x387241 = await _0x553d05.bot.groupFetchAllParticipating();
+    let _0x32f9c9 = Object.entries(_0x387241).slice(0).map(_0x3ccabe => _0x3ccabe[1]);
+    let _0x4ef191 = _0x32f9c9.map(_0x5ea155 => _0x5ea155.id);
+    await _0x553d05.send("*_Sending Broadcast To " + _0x4ef191.length + " Group Chat, Finish Time " + _0x4ef191.length * 1.5 + " second_*");
+    let _0x552932 = "*--❗" + tlang().title + " Broadcast❗--*\n\n *🍀Message:* " + _0x5d14a3;
+    let _0x305de9 = {
+      forwardingScore: 999,
+      isForwarded: true,
+      externalAdReply: {
+        title: "Suhail-Md Broadcast",
+        body: _0x553d05.senderName,
+        renderLargerThumbnail: true,
+        thumbnail: log0,
+        mediaType: 1,
+        mediaUrl: "",
+        sourceUrl: gurl,
+        showAdAttribution: true
+      }
+    };
+    for (let _0x4c9688 of _0x4ef191) {
+      try {
+        await sleep(1500);
+        await send(_0x553d05, _0x552932, {
+          contextInfo: _0x305de9
+        }, "", "", _0x4c9688);
+      } catch {}
+    }
+    return await _0x553d05.reply("*Successful Sending Broadcast To " + _0x4ef191.length + " Group*");
+  } catch (_0x2a8ad8) {
+    await _0x553d05.error(_0x2a8ad8 + "\n\ncommand: broadcast", _0x2a8ad8);
+  }
+});
 /*
 {
    pattern: "group",
