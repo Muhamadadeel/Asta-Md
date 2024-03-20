@@ -1,46 +1,46 @@
 {
-  "name": "suhail-md@1.2.8",
-  "description": "I am Suhail-Md Whatsapp Chuddy Buddy built in NodeJs to make experience better\n\t if Any Problem : www.youtube.com/c/SuhailTechInfo",
-  "logo": "https://telegra.ph/file/d5b1c3544fedc23e11a06.jpg",
+  "name": "asta-md",
+  "description": "Simple WhatsApp Bot with nice Features.",
+  "logo": "",
   "keywords": ["whatsappbot"],
-  "success_url": "/suhail/",
+  "success_url": "/asta/",
   "app_url": "/qr/",
   
   "env": {
     "OWNER_NAME": {
-      "description": "Name of Bot Owner",    
-      "value": "Suhail Ser",
+      "description": "Bot Owner's name.",    
+      "value": "Astro",
       "required" :true
     },   
      
     "WELCOME": {
-      "description": "put 'false' or 'true' to enable & disable WELCOME ",
+      "description": "WELCOME Messages.",
       "value": "true",
       "required" :false
     },
      
     "GOODBYE": {
-      "description": "put 'false' or 'true' to enable & disable GOODBYE ",
+      "description": "GOODBYE Messages.",
       "value": "false",
       "required" :false
     },
     "BOT_NAME": {
       "description": " NAME FOR BOT",
       "required" :false,    
-      "value": "sᴜʜᴀɪʟ-ᴍᴅ"
+      "value": "ᴀꜱᴛᴀ ᴍᴅ"
     }, 
     "IMAGE": {
       "description": "Image for bot",
       "required" :false,    
-      "value": "https://telegra.ph/file/d5b1c3544fedc23e11a06.jpg"
+      "value": ""
     }, 
     "TZ": {
       "description": "Put TIME_ZONE according to your location",
       "required" :false,    
-      "value": "Asia/Karachi"
+      "value": "Africa/Lagos"
     },  
     "SSRESET": {
-      "description": " Make it 'true' if bot connected but not responed (After deployement!)",
+      "description": " If bot doesn't work (After deployement!)",
       "required" :false,    
       "value": "false"
     }, 
@@ -55,60 +55,60 @@
       "value": "false"
     }, 
     "HEROKU_API_KEY": {
-      "description": "Put Your Heroku Api Key Here",
+      "description": "Put Your Heroku Api Key.",
       "value": "",
       "required" :true 
     },   
     "HEROKU_APP_NAME": {
-      "description": "Put Your Heroku App Name Here",
+      "description": "Put Your Heroku App Name.",
       "value": "",
     "required" :true
     }, 
     "WAPRESENCE": {
-      "description": "Fill the value: 'unavailable'(for nothing) | 'available'(for alwaysonline) | 'composing'(for typing) | 'recording' | 'paused' ",
+      "description": "'unavailable'(for nothing) | 'available'(for alwaysonline) | 'composing'(for typing) | 'recording' | 'paused' ",
       "required" :false,
       "value": "unavailable"
     },
     "AUTO_READ_STATUS": {
-      "description": "Fill the value true if you want bot view your Statuses.",
+      "description": "To Auto View Status.",
       "required" :false,
       "value": "true"
     }, 
     "MSGS_IN_LOG": {
-      "description": "Fill the value -true- if you want to see Messages in logs.",
+      "description": "To See Messages on console.",
       "required" :false,
       "value": "false"
     },
     "READ_MESSAGE": {
-      "description": "Fill the value true if you want bot to read all messages.",
+      "description": "To Read All Messages.",
       "required" :false,
       "value": "false"
     },
     "DISABLE_PM": {
-      "description": "Disable bot in pm, Take it false if you wanna run bot in your pm (if MODE is Public)",
+      "description": "Disable Dm",
       "value": "false",
       "required" :false
     },
     "PREFIX": {
-      "description": "Enter your desired prefix for bot. you can set `all | . | .!*`",
-      "value": "."
+      "description": "Bot Trigger",
+      "value": "/"
     },
     "OWNER_NUMBER": {
-      "description": "The phone numbers of the users who you want to be admin for the bot (should be in international format without + and multiple numbers must be separated by a comma \",\")",
-      "value": "923184474176"
+      "description": "Bot Owners, without +",
+      "value": ""
     },
     "SESSION_ID": {
-      "description": "put your SESSION_ID here.",
+      "description": "Session ID.",
       "value": ""
   
     },
     "OPENAI_API_KEY": {
-      "description": "put your OPENAI api key here.Get it from beta.openai.com ",
+      "description": "OpenAi API Key.",
       "value": "",
       "required" :false
     }, 
     "ELEVENLAB_API_KEY": {
-      "description": "Put your ElevenLab api key here for Aitts. Watch tutorial from https://youtu.be/HCDcdPtkwg4 ",
+      "description": "Eleven Labs API Key.",
       "value": "",
       "required" :false
     }, 

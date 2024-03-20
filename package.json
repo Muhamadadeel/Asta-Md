@@ -10,7 +10,6 @@
             "stop": "pm2 Asta || whatsapp.bot"
    },
    "author": "Astropeda",
-   "license" :"Apache-2.0",
    "dependencies": { 
              "@adiwajshing/keyed-db": "^0.2.4",
              "@hapi/boom": "^9.1.4",
