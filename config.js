@@ -14,30 +14,41 @@ global.timezone= process.env.TZ || process.env.TIME_ZONE || "Africa/Lagos";
 global.github=process.env.GITHUB|| "https://github.com/Astropeda/whatsapp-bot";
 global.gurl  = process.env.GURL || "null";
 global.website= process.env.GURL|| "null" ; 
-global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "null" ;
-global.SESSION_ID = process.env.SESSION_ID ||  "" ;
+global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/dMwGOUP.jpeg" ;
+global.SESSION_ID = process.env.SESSION_ID ||  "Asta;;;" ;
 global.devs = "2348039607375"
 global.sudo = process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : "null";
 global.owner= process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, '') : "null";
 global.custom = process.env.STYLE   || '5',  // 1,2,3,4,5
 global.ssrest = process.env.SSRESET   || "false";
 global.goodbyemsg = process.env.GOODBYE || "false"; 
-global.welcomemsg  = process.env.WELCOME || "true";
+global.welcomemsg  = process.env.WELCOME || "false";
 global.warncount = process.env.WARN_COUNT || 3,
 global.disablepm = process.env.DISABLE_PM || "false",
 global.disablegroup = process.env.DISABLE_GROUPS || "false",
 global.MsgsInLog = process.env.MSGS_IN_LOG|| "false",
-global.userImages= process.env.USER_IMAGES|| "null",
-global.waPresence= process.env.WAPRESENCE ||  "null" ;
+global.userImages= process.env.USER_IMAGES|| "https://i.imgur.com/dMwGOUP.jpeg",
+global.waPresence= process.env.WAPRESENCE ||  "online" ;
 global.readcmds = process.env.READ_COMMAND || "false"
-global.readmessage = process.env.READ_MESSAGE || "false"
+global.readmessage = process.env.READ_MESSAGE || "true"
 global.readmessagefrom = process.env.READ_MESSAGE_FROM || "null";
 global.read_status = process.env.AUTO_READ_STATUS || "false"
 global.save_status = process.env.AUTO_SAVE_STATUS || "false"
 global.save_status_from =  process.env.SAVE_STATUS_FROM  || "null";
 global.read_status_from =  process.env.READ_STATUS_FROM  ||  "null";
 global.api_smd = "https://api-smd-1.vercel.app"
-global.scan = "https://suhail-md-vtsf.onrender.com/";
+global.scan = "https://gnime-qr.onrender.com/";
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * 
+░█████╗░░██████╗████████╗░█████╗░  ███╗░░░███╗██████╗░  ██████╗░░█████╗░██████╗░░░██╗██╗
+██╔══██╗██╔════╝╚══██╔══╝██╔══██╗  ████╗░████║██╔══██╗  ╚════██╗██╔══██╗╚════██╗░██╔╝██║
+███████║╚█████╗░░░░██║░░░███████║  ██╔████╔██║██║░░██║  ░░███╔═╝██║░░██║░░███╔═╝██╔╝░██║
+██╔══██║░╚═══██╗░░░██║░░░██╔══██║  ██║╚██╔╝██║██║░░██║  ██╔══╝░░██║░░██║██╔══╝░░███████║
+██║░░██║██████╔╝░░░██║░░░██║░░██║  ██║░╚═╝░██║██████╔╝  ███████╗╚█████╔╝███████╗╚════██║
+╚═╝░░╚═╝╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝  ╚═╝░░░░░╚═╝╚═════╝░  ╚══════╝░╚════╝░╚══════╝░░░░░╚═╝
+
+*/
 module.exports = {
   menu: process.env.MENU || "",
   HANDLERS: process.env.PREFIX  || ".",
