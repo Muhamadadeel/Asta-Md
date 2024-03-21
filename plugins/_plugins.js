@@ -28,43 +28,17 @@ smd({
   _0x1912df("pm2 restart all");
 });
 smd({
-  cmdname: "listplugin",
-  type: "owner",
-  info: "Shows list of all external modules",
-  filename: __filename,
-  use: "<name>"
-}, async _0x8756ab => {
-  try {
-    let _0x1314ee = await smdJson("https://raw.githubusercontent.com/SuhailTechInfo/Suhail-Md-Media/main/plugins/listPlugin.json");
-    if (_0x1314ee && _0x1314ee.result && _0x1314ee.result[0]) {
-      let _0x11de04 = "";
-      for (let _0x24bb13 = 0; _0x24bb13 < _0x1314ee.result.length; _0x24bb13++) {
-        _0x11de04 += _0x1314ee.result[_0x24bb13].name + ": _" + _0x1314ee.result[_0x24bb13].url + "_\n\n";
-      }
-      let _0x296ab0 = await smdBuffer("https://telegra.ph/file/2fa8e0e24eea3f363d5f6.jpg");
-      var _0x35be1d = {
-        ...(await _0x8756ab.bot.contextInfo("ꜱᴜʜᴀɪʟ-ᴍᴅ", "Pʟᴜɢɪɴꜱ", _0x296ab0 ? _0x296ab0 : log0, 1, gurl, "1"))
-      };
-      await _0x8756ab.reply(_0x11de04, {
-        contextInfo: _0x35be1d
-      });
-    }
-    if (_0x1314ee && _0x1314ee.external && _0x1314ee.external[0]) {
-      let _0x29d9e5 = "";
-      let _0xeb34e7 = await smdBuffer("https://telegra.ph/file/369a41986ee5c49db251d.jpg");
-      var _0x35be1d = {
-        ...(await _0x8756ab.bot.contextInfo("ꜱᴜʜᴀɪʟ-ᴍᴅ", "ᴇxᴛᴇʀɴᴀʟ ᴍᴏᴅᴜʟᴇ", _0xeb34e7 ? _0xeb34e7 : log0, 1, gurl, "1"))
-      };
-      for (let _0x52c268 = 0; _0x52c268 < _0x1314ee.external.length; _0x52c268++) {
-        _0x29d9e5 += _0x1314ee.external[_0x52c268].name + ": _" + _0x1314ee.external[_0x52c268].url + "_\n\n";
-      }
-      await _0x8756ab.reply(_0x29d9e5, {
-        contextInfo: _0x35be1d
-      });
-    }
-  } catch (_0x560f3d) {
-    _0x8756ab.error(_0x560f3d + " \n\ncmdName listplugin", _0x560f3d);
-  }
+  cmdname: "shutdown",
+  info: "To shutdown bot",
+  type: "tools",
+  fromMe: s_ser,
+  filename: __filename
+}, async _0x514d3c => {
+  const {
+    exec: _0x1912df
+  } = require("child_process");
+  _0x514d3c.reply("shuttingdown");
+  _0x1912df("pm2 stop all");
 });
 smd({
   cmdname: "plugins",
