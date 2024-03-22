@@ -91,7 +91,7 @@ smd({
 smd({
 	pattern: 'read <mark message as read>',
 	fromMe: true,
-	
+	alias: ["read", "markread"],
 	desc: 'mark as readed',
 	type: 'chats'
 }, async (message, match) => {
@@ -102,12 +102,12 @@ smd({
 		{ markRead: true, lastMessages: [message] }, 
     message.jid
     );
-	//await message.send('_Chat mark as Readed!_')
     }catch(e){ message.error(`${e}\n\nCommand : markread` , e, false) }
 })
 smd({
 	pattern: 'unread <mark message as unread>',  
 	fromMe: true,
+	
 	desc: 'mark as UnRead',
 	type: 'chats'
 }, async (message, match) => {
