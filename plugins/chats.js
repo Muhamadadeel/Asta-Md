@@ -76,7 +76,7 @@ smd({
 })
 smd({
 	pattern: 'unpin <unpin chat>',
-  alias :["unpinchat","chatunpin"],
+  alias :["unpinchat","unpin","chatunpin"],
 	fromMe: true,
 	desc: 'unpin a msg',
 	type: 'chats'
@@ -91,6 +91,7 @@ smd({
 smd({
 	pattern: 'read <mark message as read>',
 	fromMe: true,
+	
 	desc: 'mark as readed',
 	type: 'chats'
 }, async (message, match) => {
