@@ -203,42 +203,6 @@ smd({
      }
  )
 
-    //---------------------------------------------------------------------------
-/*
-smd({
-            pattern: "horo",
-            category: "search",
-            desc: "Gives horoscope info of user.",
-            use: '<sign>\n:Example: horo libra',
-            filename: __filename,
-        },
-        async(message, text) => {            
-            try {
-                if (!text) return message.reply(`*_Provide me a horoscope sign name!_*`)
-                const URL = `https://aztro.sameerkumar.website/?sign=${text}&day=today`;
-                fetch(URL, {  method: 'POST' })
-                    .then(response => response.json())
-                    .then(json => {
-                      console.log(json)
-                        let textw = `*🌟 Horoscope of  ${text}*\n\n`;
-                        textw += `*Current Date:* ${json.current_date}.\n`;
-                        textw += `*Sign:* ${text}.\n`;
-                        textw += `*Lucky Time:* ${json.lucky_time}.\n`;
-                        textw += `*Compatibility:* ${json.compatibility}.\n`;
-                        textw += `*Lucky Number:* ${json.lucky_number}.\n`;
-                        textw += `*Lucky Color:* ${json.color}.\n`;
-                        textw += `*Today Mood:* ${json.mood}.\n`;
-                        textw += `*Overall:* ${json.description}.\n\n`;
-                        textw +=Config.caption ;
-                        message.bot.sendUi(message.jid, { caption: textw,  },{quoted : message} ,"text",'true' );
-                       // message.reply(textw)
-                    });
-
-            }catch(e){return await message.error(`${e}\n\n command: horo`,e,`*_Uhh dear, Didn't get any results!_*`) }
-        }
-    )
-    */
-    //---------------------------------------------------------------------------
 
 smd({
             pattern: "cric",
