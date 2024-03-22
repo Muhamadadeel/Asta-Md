@@ -21,7 +21,7 @@ let text = `╭═══ ━ ━ ━ ━ • ━ ━ ━ ━ ═══♡᭄
 
  //---------------------------------------------------------------------------
  smd({
-             pattern: "intro",
+             pattern: "alive",
              desc: "Show intro of user",
              category: "fun",
              filename: __filename,
