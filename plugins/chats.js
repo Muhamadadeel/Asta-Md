@@ -107,7 +107,7 @@ smd({
 smd({
 	pattern: 'unread <mark message as unread>',  
 	fromMe: true,
-	
+	alias: ["unread", "markunread"],
 	desc: 'mark as UnRead',
 	type: 'chats'
 }, async (message, match) => {
@@ -124,7 +124,7 @@ smd({
 
 smd({
 	pattern: 'chatunmute <unmute chat notifications>',
-	alias: ["unmutechat"],
+	alias: ["unmutechat", "unmutec"],
 	fromMe: true,
 	desc: 'unmute a chat',
 	type: 'chats'
@@ -139,6 +139,7 @@ smd({
 smd({
 	pattern: 'name <change whatsapp name>',
 	fromMe: true,
+	alias: ["name", "profilename", "proname", "pname"],
 	desc: 'To change your profile name',
 	type: 'whatsapp'
 }, async (message, match) => {
@@ -153,6 +154,7 @@ smd({
 smd({
 	pattern: 'wasettings <whatsapp settings>',
 	fromMe: true,
+	alias: ["wasettings", "wasetting", "settingswa", "privacy"],
 	desc: 'get your privacy settings',
 	type: 'privacy'
 }, async (message, match) => {
@@ -201,8 +203,9 @@ smd({
 
 
 smd({
-	pattern: 'online <online on or off>',
+	pattern: 'online-mode <online on or off>',
 	fromMe: true,
+	alias: ["onlinemode", "online", "online-mode"],
 	desc: 'to change online privacy',
 	type: 'privacy'
 }, async (message, match,) => {
@@ -219,6 +222,7 @@ smd({
 smd({
 	pattern: 'mypp <profile picture settings>',
 	fromMe: true,
+	alias: ["dp", "pp", "profilepic", "wadp"],
 	desc: 'privacy setting profile picture',
 	type: 'privacy'
 }, async (message, match) => {
@@ -234,7 +238,7 @@ smd({
 smd({
 	pattern: 'mystatus <status settings>',
 	fromMe: true,
-	alias: ["mystatus"],
+	alias: ["mystatus", "status"],
 	desc: 'privacy for my status',
 	type: 'privacy'
 }, async (message, match,) => {
@@ -266,7 +270,7 @@ smd({
 smd({
 	pattern: 'groupadd <group add settings>',
 	fromMe: true,
-	alias: ["groupadd"],
+	alias: ["groupadd", "gcadd"],
 	desc: 'privacy for group add',
 	type: 'privacy'
 }, async (message, match, smd) => {
