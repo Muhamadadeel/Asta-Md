@@ -43,6 +43,7 @@ smd({
 smd({
 	pattern: 'unarchive <unarchive chat>',
 	fromMe: true,
+	alias: ["unarchive", "unarchivechat"],
 	desc: 'unarchive whatsapp chat',
 	type: 'chats'
 }, async (message, match) => {
