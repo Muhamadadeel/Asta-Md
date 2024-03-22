@@ -1,14 +1,11 @@
 let Asta_Md = "Asta"
 let {smd , prefix,Config} = require("../lib")
 const moment = require("moment-timezone");
-const Config = require("../config");
 let {
   fancytext,
-  smd,
   tlang,
   tiny,
   botpic,
-  prefix,
   updateProfilePicture,
   parsedJid
 } = require("../lib");
