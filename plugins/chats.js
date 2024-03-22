@@ -1,43 +1,9 @@
-/**
- * ```js
-//══════════════════════════════════════════════════════════════════════════════════════════════════════//
-//                                                                                                      //
-//                                ＷＨＡＴＳＡＰＰ ＢＯＴ－ＭＤ ＢＥＴＡ                                   //
-//                                                                                                      // 
-//                                         Ｖ：1．2．8                                                   // 
-//                                                                                                      // 
-//            ███████╗██╗   ██╗██╗  ██╗ █████╗ ██╗██╗         ███╗   ███╗██████╗                        //
-//            ██╔════╝██║   ██║██║  ██║██╔══██╗██║██║         ████╗ ████║██╔══██╗                       //
-//            ███████╗██║   ██║███████║███████║██║██║         ██╔████╔██║██║  ██║                       //
-//            ╚════██║██║   ██║██╔══██║██╔══██║██║██║         ██║╚██╔╝██║██║  ██║                       //
-//            ███████║╚██████╔╝██║  ██║██║  ██║██║███████╗    ██║ ╚═╝ ██║██████╔╝                       //
-//            ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝    ╚═╝     ╚═╝╚═════╝                        //
-//                                                                                                      //
-//                                                                                                      //
-//                                                                                                      //
-//══════════════════════════════════════════════════════════════════════════════════════════════════════//
-*```
-   * @project_name : Suhail-Md
-   * @author : Suhail Tech Info
-   * @youtube : https://www.youtube.com/@SuhailTechInfo
-   * @description : Suhail-Md ,A Multi-functional whatsapp user bot.
-   * @version 1.2.8
-*
-* 
-   * Created By Suhail Tech Info.
-   * © 2024 Suhail-Md.
-*/
-
-
-
 let Asta_Md = "Asta"
 let {smd , prefix,Config} = require("../lib")
-
-// ============================ CHATS SETTINGS ============================ 
-
 smd({
-	pattern: 'clear',
+	pattern: 'clear <chats clear>',
 	fromMe: true,
+	alias: ["clear", "clearchat"],
 	desc: 'delete whatsapp chat',
 	type: 'chats'
 }, async (message, match) => { 
@@ -54,12 +20,8 @@ smd({
 	await message.send('_Cleared!_')
     }catch(e){ message.error(`${e}\n\nCommand : clear` , e, false) }
 })
-
-
-
-
 smd({
-	pattern: 'archive',
+	pattern: 'archive <archive chat>',
 	fromMe: true,
 	desc: 'archive whatsapp chat',
 	type: 'chats'
@@ -77,12 +39,8 @@ smd({
 	await message.send('_Archived_')
 }catch(e){ message.error(`${e}\n\nCommand : archive` , e, false) }
 })
-
-
-
-
 smd({
-	pattern: 'unarchive',
+	pattern: 'unarchive <unarchive chat>',
 	fromMe: true,
 	desc: 'unarchive whatsapp chat',
 	type: 'chats'
@@ -100,11 +58,8 @@ smd({
 	await message.send('_Unarchived_')
 }catch(e){ message.error(`${e}\n\nCommand : unarchive` , e, false) }
 })
-
-
-
 smd({
-	pattern: 'chatpin',
+	pattern: 'pin <pin chat>',
   alias :["pinchat"],
 	fromMe: true,
 	desc: 'pin a chat',
@@ -117,11 +72,8 @@ smd({
 	await message.send('_Pined_')
 }catch(e){ message.error(`${e}\n\nCommand : chatpin` , e, false) }
 })
-
-
-
 smd({
-	pattern: 'unpin',
+	pattern: 'unpin <unpin chat>',
   alias :["unpinchat","chatunpin"],
 	fromMe: true,
 	desc: 'unpin a msg',
@@ -134,11 +86,8 @@ smd({
 	await message.send('_Unpined_')
 }catch(e){ message.error(`${e}\n\nCommand : unpin` , e, false) }
 })
-
-
-
 smd({
-	pattern: 'markread',
+	pattern: 'read <mark message as read>',
 	fromMe: true,
 	desc: 'mark as readed',
 	type: 'chats'
@@ -153,11 +102,8 @@ smd({
 	//await message.send('_Chat mark as Readed!_')
     }catch(e){ message.error(`${e}\n\nCommand : markread` , e, false) }
 })
-
-
-
 smd({
-	pattern: 'markunread',  
+	pattern: 'unread <mark message as unread>',  
 	fromMe: true,
 	desc: 'mark as UnRead',
 	type: 'chats'
@@ -170,17 +116,12 @@ smd({
 		{ markRead: false, lastMessages: [message] }, 
     message.jid
     );
-
-
-	//await message.send('_Chat mark as UnRead!_')
     }catch(e){ message.error(`${e}\n\nCommand : markunread` , e, false) }
 })
 
-
-
-
 smd({
-	pattern: 'unmutechat',
+	pattern: 'chatunmute <unmute chat notifications>',
+	alias: ["unmutechat"],
 	fromMe: true,
 	desc: 'unmute a chat',
 	type: 'chats'
@@ -193,7 +134,7 @@ smd({
 })
 
 smd({
-	pattern: 'profilename',
+	pattern: 'name <change whatsapp name>',
 	fromMe: true,
 	desc: 'To change your profile name',
 	type: 'whatsapp'
@@ -206,19 +147,8 @@ smd({
 }catch(e){ message.error(`${e}\n\nCommand : profilename` , e, false) }
 })
 
-
-// ============================ PRIVACY SETTINGS ============================    
-
-
-
-
-
-
-
-
-
 smd({
-	pattern: 'getprivacy',
+	pattern: 'wasettings <whatsapp settings>',
 	fromMe: true,
 	desc: 'get your privacy settings',
 	type: 'privacy'
@@ -232,7 +162,7 @@ smd({
 		groupadd,
 		calladd
 	} = await message.bot.fetchPrivacySettings(true);
-	const msg = `*♺ whatsapp privacy settings*
+	const msg = `*♺ whatsapp settings*
 
 *ᝄ name :* ${(message.fromMe &&  message.pushName ? message.pushName :  message.bot.user.name).split("\n").join("  ") }
 *ᝄ number :* ${message.user.split("@")[0]}
@@ -251,12 +181,8 @@ smd({
 	}, 'img');
 })
 
-
-
-
-
 smd({
-	pattern: 'lastseen',
+	pattern: 'lastseen <lastseen on or off>',
 	fromMe: true,
 	desc: 'to change lastseen privacy',
 	type: 'privacy'
@@ -272,7 +198,7 @@ smd({
 
 
 smd({
-	pattern: 'online',
+	pattern: 'online <online on or off>',
 	fromMe: true,
 	desc: 'to change online privacy',
 	type: 'privacy'
@@ -288,7 +214,7 @@ smd({
 
 
 smd({
-	pattern: 'mypp',
+	pattern: 'mypp <profile picture settings>',
 	fromMe: true,
 	desc: 'privacy setting profile picture',
 	type: 'privacy'
@@ -303,8 +229,9 @@ smd({
 })
 
 smd({
-	pattern: 'mystatus',
+	pattern: 'mystatus <status settings>',
 	fromMe: true,
+	alias: ["mystatus"],
 	desc: 'privacy for my status',
 	type: 'privacy'
 }, async (message, match,) => {
@@ -318,13 +245,14 @@ smd({
 })
 
 smd({
-	pattern: 'read',
+	pattern: 'readmsgs <settings for read message>',
 	fromMe: true,
+	alias: ["readmmsgs"],
 	desc: 'privacy for read message',
 	type: 'privacy'
-}, async (message, match, cmd) => {
+}, async (message, match, smd) => {
     try{
-	if (!match) return await message.send(`_*Example:-* .read all_\n_to change *read and receipts message*  privacy settings_`);
+	if (!match) return await message.send(`*Example:-* .read all`);
 	const available_privacy = ['all', 'none'];
 	if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join('/')}* values_`);
 	await message.bot.updateReadReceiptsPrivacy(match)
@@ -333,13 +261,14 @@ smd({
 })
 
 smd({
-	pattern: 'groupadd',
+	pattern: 'groupadd <group add settings>',
 	fromMe: true,
+	alias: ["groupadd"],
 	desc: 'privacy for group add',
 	type: 'privacy'
-}, async (message, match, cmd) => {
+}, async (message, match, smd) => {
     try{
-	if (!match) return await message.send(`_*Example:-* .groupadd all_\n_to change *group add*  privacy settings_`);
+	if (!match) return await message.send(`*Example:-* .groupadd 'all', 'contacts', 'contact_blacklist', 'none'`);
 	const available_privacy = ['all', 'contacts', 'contact_blacklist', 'none'];
 	if (!available_privacy.includes(match)) return await message.send(`_action must be *${available_privacy.join('/')}* values_`);
 	await message.bot.updateGroupsAddPrivacy(match)
