@@ -62,7 +62,7 @@ smd({
 })
 smd({
 	pattern: 'pin <pin chat>',
-  alias :["pinchat"],
+  alias :["pinchat", "pin"],
 	fromMe: true,
 	desc: 'pin a chat',
 	type: 'chats'
