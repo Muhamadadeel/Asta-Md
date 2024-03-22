@@ -16,7 +16,7 @@ const PORT = () => {
 };
 //==================IMPORTANT CONFIGURATIONS==========================\\
    global.SESSION_ID = process.env.SESSION_ID ||  "" ; 
-   global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/ifWwGIl.jpeg" ;
+   global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/dMwGOUP.jpeg" ;
    global.DATABASE_URI = process.env.DATABASE_URL || "";
    global.mongodb= process.env.MONGODB_URI || "";
    global.sudo = process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : "null";
@@ -34,6 +34,7 @@ const PORT = () => {
 //=============OPTIONAL CONFIGURATIONS===================\\
    global.audio= "" ;  
    global.video= "" ;
+   global.creator= "`Astro`"
    global.appUrl=process.env.APP_URL || "" 
    global.email ="astromedia0010@outlook.com"
    global.location="Nigeria,Lagos."
@@ -46,7 +47,7 @@ const PORT = () => {
 
 //================CHATS CONFIGURATIONS=======================\\
    global.allowJids= process.env.ALLOW_JID || "null" 
-   global.botstyle = process.env.STYLE   || '5',  // 1,2,3,4,5
+   global.botstyle = process.env.STYLE   || '1',  // 1,2,3,4,5
    global.blockJids= process.env.BLOCK_JID || "null"
    global.waPresence= process.env.WAPRESENCE ||  "online" ;
    global.readcmds = process.env.READ_COMMAND || "false"
@@ -65,15 +66,16 @@ const PORT = () => {
 //=====================.............===============================\\
 
 module.exports = {
-  menu: process.env.MENU || "",
+  menu: process.env.MENU || "", //menu1, menu2
   HANDLERS: process.env.PREFIX  || ".",
   BRANCH  : process.env.BRANCH  || "main",
-  VERSION : process.env.VERSION || "1.3.0",
+  VERSION : process.env.VERSION || "1.8.0",
   caption : process.env.CAPTION || "`©botinfo`" ,
-  author : process.env.PACK_AUTHER|| "`©botinfo`",
-  packname: process.env.PACK_NAME || "`©botinfo`",
-  botname : process.env.BOT_NAME  || "botinfo",
-  ownername:process.env.OWNER_NAME|| "`©botinfo`",
+  author : process.env.PACK_AUTHER|| "`©ᴀꜱᴛʀᴏᴘᴇᴅᴀ`",
+  packname: process.env.PACK_NAME || "`©ᴀꜱᴛᴀ ᴍᴅ 2024`",
+  botname : process.env.BOT_NAME  || "©ᴀꜱᴛᴀ ᴍᴅ",
+  ownername:process.env.OWNER_NAME|| "`ᴀꜱᴛʀᴏ`",
+  creator:process.env.CREATOR_NAME || "`ᴀꜱᴛʀᴏᴘᴇᴅᴀ`",
   errorChat : process.env.ERROR_CHAT || "",
   KOYEB_API : process.env.KOYEB_API  || "false",
   REMOVE_BG_KEY : process.env.REMOVE_BG_KEY  || "",
