@@ -16,7 +16,7 @@ const PORT = () => {
 };
 //==================IMPORTANT CONFIGURATIONS==========================\\
    global.SESSION_ID = process.env.SESSION_ID ||  "" ; 
-   global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/dMwGOUP.jpeg" ;
+   global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/ifWwGIl.jpeg" ;
    global.DATABASE_URI = process.env.DATABASE_URL || "";
    global.mongodb= process.env.MONGODB_URI || "";
    global.sudo = process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : "null";
