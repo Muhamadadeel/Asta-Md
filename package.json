@@ -5,8 +5,9 @@
    "main": "index.js",
    "type": "commonjs",  
    "scripts": {
-      "start": "pm2 index.js --deep-monitoring --attach --name Asta",
-      "stop": "pm2 stop Asta"
+      "run": "pm2 start . --deep-monitoring --attach --name Asta || node .",
+            "start": "pm2 start . --attach --name Asta",
+            "stop": "pm2 stop Asta"
    },
    "author": "Astropeda",
    "dependencies": { 
