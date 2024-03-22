@@ -132,7 +132,7 @@ cmd({
   }
 });
 cmd({
-  pattern: "mee",
+  pattern: "wame",
   desc: "Makes wa me for user.",
   category: "user",
   filename: __filename
