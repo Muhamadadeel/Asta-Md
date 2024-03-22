@@ -5,7 +5,7 @@ smd({
 	fromMe: true,
 	alias: ["clear", "clearchat"],
 	desc: 'delete whatsapp chat',
-	type: 'chats'
+	type: 'whatsapp settings'
 }, async (message, match) => { 
     try{   
 	await message.bot.chatModify({
@@ -25,7 +25,7 @@ smd({
 	fromMe: true,
 	alias: ["archive", "archivechat"],
 	desc: 'archive whatsapp chat',
-	type: 'chats'
+	type: 'whatsapp settings'
 }, async (message, match) => {
     try{
 	const lstMsg = {
@@ -45,7 +45,7 @@ smd({
 	fromMe: true,
 	alias: ["unarchive", "unarchivechat"],
 	desc: 'unarchive whatsapp chat',
-	type: 'chats'
+	type: 'whatsapp settings'
 }, async (message, match) => {
     try{
 	const lstMsg = {
@@ -65,7 +65,7 @@ smd({
   alias :["pinchat", "pin"],
 	fromMe: true,
 	desc: 'pin a chat',
-	type: 'chats'
+	type: 'whatsapp settings'
 }, async (message, match) => {
     try{
 	await message.bot.chatModify({
@@ -79,7 +79,7 @@ smd({
   alias :["unpinchat","unpin","chatunpin"],
 	fromMe: true,
 	desc: 'unpin a msg',
-	type: 'chats'
+	type: 'whatsapp settings'
 }, async (message, match) => {
     try{
 	await message.bot.chatModify({
@@ -93,7 +93,7 @@ smd({
 	fromMe: true,
 	alias: ["read", "markread"],
 	desc: 'mark as readed',
-	type: 'chats'
+	type: 'whatsapp settings'
 }, async (message, match) => {
 
     try{
@@ -109,7 +109,7 @@ smd({
 	fromMe: true,
 	alias: ["unread", "markunread"],
 	desc: 'mark as UnRead',
-	type: 'chats'
+	type: 'whatsapp settings'
 }, async (message, match) => {
 
     try{
@@ -127,7 +127,7 @@ smd({
 	alias: ["unmutechat", "unmutec"],
 	fromMe: true,
 	desc: 'unmute a chat',
-	type: 'chats'
+	type: 'whatsapp settings'
 }, async (message, match) => {
     try{
 	await message.bot.chatModify( { mute: null }, message.jid );
