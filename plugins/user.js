@@ -678,7 +678,7 @@ cmd({
 	  let _0x1bc847 = {
 		key: _0x1fd65b.key,
 		message: {
-		  conversation: "```[VIEWONCE FOUND DOWNLOAD 100%]```"
+		  conversation: "`[VIEWONCE FOUND DOWNLOAD 100%]`"
 		}
 	  };
 	  let _0x201e84 = await _0x9034b9.bot.downloadAndSaveMediaMessage(_0x1fd65b.msg);
