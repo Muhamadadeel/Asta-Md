@@ -2,7 +2,7 @@ const fs = require('fs-extra')
 if (fs.existsSync('.env')) require('dotenv').config({ path: __dirname+'/.env' })
 global.audio= "" ;  
 global.video= "" ;
-global.port =process.env.PORT
+global.port =3000
 global.appUrl=process.env.APP_URL || "" 
 global.email ="astromedia0010@outlook.com"
 global.location="Nigeria,Lagos."
