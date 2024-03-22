@@ -16,7 +16,7 @@ smd({
 }) => {
   try {
     if (!_0x2b5c03) {
-      return _0x2f68fa.reply("*_Example : " + (prefix + _0x568b22) + " Suhail_*");
+      return _0x2f68fa.reply("*_Example : " + (prefix + _0x568b22) + " Asta*");
     }
     return await textToLogoGenerator(_0x2f68fa, "create-light-glow-sliced-text-effect-online-1068", _0x2b5c03);
   } catch (_0x27ccc0) {
@@ -33,7 +33,7 @@ smd({
 }) => {
   try {
     if (!_0xed6526) {
-      return _0x5a9863.reply("*_Example : " + (prefix + _0x3cb071) + " Suhail_*");
+      return _0x5a9863.reply("*_Example : " + (prefix + _0x3cb071) + " Asta*");
     }
     return await textToLogoGenerator(_0x5a9863, "free-advanced-glow-text-effect-873", _0xed6526);
   } catch (_0x1b80b5) {
@@ -50,7 +50,7 @@ smd({
 }) => {
   try {
     if (!_0x38f836) {
-      return _0x5e7e37.reply("*_Example : " + (prefix + _0x123e5d) + " Suhail_*");
+      return _0x5e7e37.reply("*_Example : " + (prefix + _0x123e5d) + " Asta*");
     }
     return await textToLogoGenerator(_0x5e7e37, "create-impressive-glitch-text-effects-online-1027", _0x38f836);
   } catch (_0x45bbe4) {
