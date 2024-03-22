@@ -5,7 +5,7 @@ const start = async () => {
     Debug.info(`ᴀꜱᴛᴀ ${VERSION}`)
   try {
     await bot.init()
-    bot.logger.info('❗ᴄʜᴇᴄᴋɪɴɢ ᴅᴀᴛᴀʙᴀꜱᴇ...')
+    bot.logger.info('ℹ️ ᴄʜᴇᴄᴋɪɴɢ ᴅᴀᴛᴀʙᴀꜱᴇ...')
     await bot.DATABASE.sync()
     await bot.connect()
   } catch (error) {
