@@ -16,14 +16,16 @@ const PORT = () => {
 };
 //==================IMPORTANT CONFIGURATIONS==========================\\
    global.SESSION_ID = process.env.SESSION_ID ||  "" ; 
-   global.port = PORT       
-   global.ssrest = process.env.SSRESET   || "false";                          
-   global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/dMwGOUP.jpeg" ;  
-   global.devs = "2348039607375"
-   global.sudo = process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : "null";
-   global.owner= process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, '') : "null";
+   global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/dMwGOUP.jpeg" ;
    global.DATABASE_URI = process.env.DATABASE_URL || "";
    global.mongodb= process.env.MONGODB_URI || "";
+   global.sudo = process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : "null";
+   global.owner= process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, '') : "null";
+   global.port = PORT  
+   global.rank = "updated"
+   global.isMongodb = false;      
+   global.ssrest = process.env.SSRESET   || "false";                            
+   global.devs = "2348039607375";
    global.api_smd = "https://api-smd-1.vercel.app";
    global.scan = "https://gnime-qr.onrender.com/";
    global.timezone= process.env.TZ || process.env.TIME_ZONE || "Africa/Lagos";
@@ -85,7 +87,5 @@ module.exports = {
   WORKTYPE: process.env.WORKTYPE||process.env.MODE || "private",
   LANG: process.env.THEME ? process.env.THEME.toUpperCase() : "bot",
 };
-global.rank = "updated"
-global.isMongodb = false; 
 let file = require.resolve(__filename)
 fs.watchFile(file, () => { fs.unwatchFile(file);console.log(`Update'${__filename}'`);delete require.cache[file];	require(file); })
