@@ -23,6 +23,7 @@ smd({
 smd({
 	pattern: 'archive <archive chat>',
 	fromMe: true,
+	alias: ["archive", "archivechat"],
 	desc: 'archive whatsapp chat',
 	type: 'chats'
 }, async (message, match) => {
