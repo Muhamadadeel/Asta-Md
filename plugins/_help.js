@@ -3,7 +3,7 @@ let menus = false
 const moment = require("moment-timezone")
 const fs = require("fs")
 const Config = require('../config')
-let { fancytext, tlang, tiny,bot_,alive, runtime, formatp, smsg ,getAdmin , send , react ,botpic,sleep, getBuffer ,prefix, sck1,smd,sck ,getTime ,formatDate  , groupdb,smdJson,smdBuffer, isAdmin  } = require("../lib");
+let { fancytext, tlang, tiny, serif_B,bot_,alive, runtime, formatp, smsg ,getAdmin , send , react ,botpic,sleep, getBuffer ,prefix, sck1,smd,sck ,getTime ,formatDate  , groupdb,smdJson,smdBuffer, isAdmin  } = require("../lib");
 const long = String.fromCharCode(8206)
 const readmore = long.repeat(4001)
 const astro_patch = require('../lib/plugins')
@@ -18,11 +18,13 @@ const translatte = require("translatte");
 const cheerio = require('cheerio');
 const path = require('path');
 const cron = require('node-cron');
+const { fancy32, fancy31, serif_I,serif_BI, createMap, fancy28, fancy13 } = require('../lib/stylish-font')
 var cronStart = false
 smd({
     cmdname: "help",
     alias: ["categories", "ctgry", "category"],
     desc: "category list",
+    react: "💁🏽‍♂️",
     category: "general"
   }, async (message, query) => {
     try {
@@ -30,18 +32,19 @@ smd({
         let response = [];
         const command = commands.find(cmd => cmd.pattern === query.split(" ")[0].toLowerCase());
         if (command) {
-          response.push(`*🍁Command:* ${command.pattern}`);
+          response.push(`*ᴄᴏᴍᴍᴀɴᴅ:* ${command.pattern}`);
           if (command.category) {
-            response.push(`*🧩Category:* ${command.category}`);
+            response.push(`*ᴄᴀᴛᴇɢᴏʀʏ
+            :* ${command.category}`);
           }
           if (command.alias && command.alias[0]) {
-            response.push(`*🧩Alias:* ${command.alias.join(", ")}`);
+            response.push(`*ᴀʟɪᴀꜱ:* ${command.alias.join(", ")}`);
           }
           if (command.desc) {
-            response.push(`*🧩Description:* ${command.desc}`);
+            response.push(`*ᴅᴇꜱᴄʀɪᴘᴛɪᴏɴ:* ${command.desc}`);
           }
           if (command.use) {
-            response.push(`*〽️Usage:*\n \`\`\`${prefix}${command.pattern} ${command.use}\`\`\``);
+            response.push(`*〽️ᴜꜱᴀɢᴇ:*\n \`\`\`${prefix}${command.pattern} ${command.use}\`\`\``);
           }
           await message.reply(response.join("\n"));
         }
@@ -57,7 +60,7 @@ smd({
       });
       let randomNumber = Math.round(Math.random());
       let menuType = randomNumber === 0 ? "MENU" : "COMMANDS";
-      let menuList = `┏━━━━━━━━━━━━━━━━━━━━━━━━\n┃\t *ASTA-MD_${menuType}_LIST* \n┗━━━━━━━━━━━━━━━━━━━━━━━━\n\n\t\`\`\`Reply the number you wants to select\`\`\`\n\n`;
+      let menuList = ` *ASTA-MD_${menuType}_LIST* \`Reply the message with a number.\n\n`;
       let counter = 1;
       let categoryCounter = 0;
       for (const category in categories) {
@@ -85,35 +88,36 @@ smd({
     }
   });
   smd({
-    pattern: "menus",
+    pattern: "info",
     type: "MENU list",
     info: "general",
+    react: "ℹ️",
     dontAddCommandList: true
   }, async message => {
     try {
       let menuText = `
-   *🦄 ᴜᴘ ᴛɪᴍᴇ :* ${runtime(process.uptime())}
-   *🍁 ᴛᴏᴅᴀʏ ɪs :* ${message.date}
-   *🎗 ɴᴏᴡ ᴛɪᴍᴇ :* ${message.time}
+   *⌚ ᴜᴘ ᴛɪᴍᴇ :* ${runtime(process.uptime())}
+   *📅 ᴛᴏᴅᴀʏ ɪs :* ${message.date}
+   *🕧 ɴᴏᴡ ᴛɪᴍᴇ :* ${message.time}
    
-   ➮Fᴏᴜɴᴅᴇʀ- Asta𝛁
-   ➮Oᴡɴᴇʀ - ${Config.ownername}
-   ➮Nᴜᴍ - ${owner.split(",")[0]}
-   ➮Mᴇᴍᴏ - ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
+   ▹Fᴏᴜɴᴅᴇʀ- ᴀꜱᴛʀᴏ𝛁
+   ▹Oᴡɴᴇʀ - ${Config.ownername}
+   ▹Nᴜᴍ - ${owner.split(",")[0]}
+   ▹Mᴇᴍᴏ - ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
    
-   *🧑‍💻 :*  Sᴜʜᴀɪʟ-Mᴜʟᴛɪᴅᴇᴠɪᴄᴇ ɪꜱ ɴᴏᴡ Aᴠᴀɪʟᴀʙʟᴇ
+   *ℹ️ :*  ᴀꜱᴛᴀ ᴍᴅ 2024 ᴏɴ ᴡʜᴀᴛꜱᴀᴘᴘ
    
    ${readmore}
    ╭──❰ *ALL MENU* ❱
-   │🏮 Lɪꜱᴛ
-   │🏮 Cᴀᴛᴇɢᴏʀʏ
-   │🏮 Hᴇʟᴘ
-   │🏮 Aʟɪᴠᴇ
-   │🏮 Uᴘᴛɪᴍᴇ
-   │🏮 Wᴇᴀᴛʜᴇʀ
-   │🏮 Lɪɴᴋ
-   │🏮 Cᴘᴜ
-   │🏮 Rᴇᴘᴏꜱɪᴛᴏʀʏ
+   │ℹ️ Lɪꜱᴛ
+   │ℹ️ Cᴀᴛᴇɢᴏʀʏ
+   │ℹ️ Hᴇʟᴘ
+   │ℹ️ Aʟɪᴠᴇ
+   │ℹ️ Uᴘᴛɪᴍᴇ
+   │ℹ️ Wᴇᴀᴛʜᴇʀ
+   │ℹ️ Lɪɴᴋ
+   │ℹ️ Cᴘᴜ
+   │ℹ️ Rᴇᴘᴏꜱɪᴛᴏʀʏ
    ╰─────────────⦁
    `.trim();
       return await message.bot.sendUi(message.from, {
@@ -121,6 +125,39 @@ smd({
       });
     } catch (error) {
       await message.error(`${error}\nCommand:menus`, error);
+    }
+  });
+  astro_patch.cmd({
+    pattern: "menuhelp",
+    desc: "list menu",
+    category: "general",
+    react: "🥀"
+  }, async message => {
+    try {
+      const {
+        commands
+      } = require("../lib");
+      let listText = `
+    ╭━〘 *${Config.botname}* 〙─⊷     
+    ┃ ℹ️ Prefix: ${prefix}
+    ┃ ℹ️ Owner: ${Config.ownername}
+    ┃ ℹ️ Commands: ${commands.length}
+    ┃ ℹ️ Runtime: ${runtime(process.uptime())}
+    ┃ ℹ️ Memory: ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
+    ╰━━━━━━━━━━━━━━⊷
+   `;
+      for (let i = 0; i < commands.length; i++) {
+        if (commands[i].pattern === undefined) {
+          continue;
+        }
+        listText += `*${i + 1} ${fancytext(commands[i].pattern, 1)}*\n`;
+        listText += `  ${fancytext(commands[i].desc, 1)}\n`;
+      }
+      return await message.sendUi(message.chat, {
+        caption: listText + Config.caption
+      });
+    } catch (error) {
+      await message.error(`${error}\nCommand:list`, error);
     }
   });
   astro_patch.cmd({
@@ -134,7 +171,7 @@ smd({
   }) => {
     try {
       if (!query) {
-        return await message.send("*_Please provide cmd name by replying to a sticker or providing a new name and command name separated by a comma_*");
+        return await message.send("`Please provide cmd name by replying to a sticker or providing a new name and command name separated by a comma`");
       }
       let [newCmdName, cmdName] = query.split(",");
       let isSticker = false;
@@ -151,7 +188,7 @@ smd({
         newCmdName = newCmdName.trim().toLowerCase();
         cmdName = cmdName.trim().toLowerCase();
       } else if (!isSticker) {
-        return await message.send("*_Uhh Dear, Give Cmd With New Name_*\n*Eg: _.setcmd New_Name, Cmd_Name_*");
+        return await message.send("*_Uhh Dear, Give Cmd With New Name_*\n `Eg: _.setcmd New_Name, Cmd_Name`");
       }
       if (newCmdName.length < 1) {
         return await message.reply("*_Uhh Please, Provide New_Cmd Name First_*");
@@ -187,10 +224,10 @@ smd({
           isSticker = true;
           cmdAlias = "sticker-" + message.quoted.msg.fileSha256;
         } else if (!query) {
-          return await message.send("*_Please reply to a Sticker that set for a Cmd_*");
+          return await message.send("`Please reply to a Sticker that set for a Cmd`");
         }
       } else if (!query) {
-        return await message.send("*_Uhh Dear, provide Name that set to a cmd_*\n*Eg: _.delcmd Cmd_Name_*");
+        return await message.send("*Uhh Dear, provide Name that set to a cmd*\n`Eg: delcmd Cmd_Name`");
       }
       if (global.setCmdAlias[cmdAlias]) {
         await message.send(`*_"${isSticker ? "Given Sticker" : cmdAlias}" deleted Succesfully at "${global.setCmdAlias[cmdAlias]}" cmd_*`);
@@ -207,6 +244,7 @@ smd({
     pattern: "ping",
     desc: "To check ping",
     category: "general",
+    react: "📡",
     filename: __filename
   }, async message => {
     const startTime = new Date().getTime();
@@ -214,19 +252,20 @@ smd({
       key
     } = await message.reply("*Testing Ping!!!*");
     const endTime = new Date().getTime();
-    return await message.send(`*Bot Speed*\n *${endTime - startTime} ms*`, {
+    return await message.send(`"*ʏᴏᴜʀ ʙᴏᴛ'ꜱ ꜱᴘᴇᴇᴅ ɪꜱ...*"\n *${endTime - startTime} ᴍɪʟʟɪꜱᴇᴄᴏɴᴅꜱ*`, {
       edit: key
     }, "", message);
   });
   astro_patch.cmd({
     pattern: "uptime",
     alias: ["runtime"],
+    react: "⌚",
     desc: "Tells runtime/uptime of bot.",
     category: "misc",
     filename: __filename
   }, async message => {
     try {
-      message.reply(`*_Uptime of ${tlang().title}: ${runtime(process.uptime())}_*`);
+      message.reply(`*${tlang().title}Running Since: ${runtime(process.uptime())}*`);
     } catch (error) {
       await message.error(`${error}\n\ncommand : uptime`, error, false);
     }
@@ -235,6 +274,7 @@ smd({
     cmdname: "menu",
     desc: "Help list",
     type: "general",
+    react: "📑",
     filename: __filename
   }, async (message, query) => {
     try {
@@ -245,21 +285,21 @@ smd({
         let response = [];
         const command = commands.find(cmd => cmd.pattern === query.split(" ")[0].toLowerCase());
         if (command) {
-          response.push(`*🍁Command:* ${command.pattern}`);
+          response.push(`*ᴄᴏᴍᴍᴀɴᴅꜱ:* ${command.pattern}`);
           if (command.category) {
-            response.push(`*🧩Category:* ${command.category}`);
+            response.push(`*ᴄᴀᴛᴇɢᴏʀʏ:* ${command.category}`);
           }
           if (command.alias && command.alias[0]) {
-            response.push(`*🧩Alias:* ${command.alias.join(", ")}`);
+            response.push(`*ᴀʟɪᴀꜱ:* ${command.alias.join(", ")}`);
           }
           if (command.desc) {
-            response.push(`*🧩Description:* ${command.desc}`);
+            response.push(`*ᴅᴇꜱᴄʀɪᴘᴛɪᴏɴ:* ${command.desc}`);
           }
           if (command.use) {
-            response.push(`*〽️Usa:*\n \`\`\`${prefix}${command.pattern} ${command.use}\`\`\``);
+            response.push(`*〽️ᴜꜱᴀ:*\n \`\`\`${prefix}${command.pattern} ${command.use}\`\`\``);
           }
           if (command.usage) {
-            response.push(`*〽️Usage:*\n \`\`\`${command.usage}\`\`\``);
+            response.push(`*〽️ᴜꜱᴀɢᴇ:*\n \`\`\`${command.usage}\`\`\``);
           }
           await message.reply(response.join("\n"));
         }
@@ -269,30 +309,30 @@ smd({
       if (Config.menu === "") {
         menuType = Math.floor(Math.random() * 4) + 1;
       }
-      if (menuType === 1 || Config.menu.trim().startsWith("1") || Config.menu.toLowerCase().includes("aztec")) {
-        header = "┏━━⟪ *" + Config.botname + "* ⟫━━⦿";
-        cmdListIcon = "┃ ✗";
-        footer = "┗━━━━━━━━━━━━━━━⦿";
-        categoryHeader = "┌──『";
-        categoryFooter = "』──❖\n";
-        cmdIcon = " | ";
-        cmdFooter = "\n└──────────────◉";
-      } else if (menuType === 2 || Config.menu.trim().startsWith("2") || Config.menu.toLowerCase().includes("a17")) {
-        header = "┌───═[ *" + Config.botname + "* ]═──▸\n│╭────────────···▸\n┴│▸";
-        cmdListIcon = "⬡│▸";
-        footer = "┬│▸\n│╰─────────────···▸\n└───────────────···▸";
-        categoryHeader = "┌───〈";
-        categoryFooter = "〉───◆\n│╭─────────────···▸\n┴│▸";
-        cmdIcon = "⬡│▸ ";
-        cmdFooter = "┬│▸\n│╰────────────···▸▸\n└───────────────···▸";
-      } else {
-        header = "╭────《  " + Config.botname + "  》────⊷\n│ ╭──────✧❁✧──────◆";
-        cmdListIcon = "│ │";
-        footer = "│ ╰──────✧❁✧──────◆\n╰══════════════════⊷";
-        categoryHeader = "╭────❏";
+      if (menuType === 1 || Config.menu.trim().startsWith("1") || Config.menu.toLowerCase().includes("menu1")) {
+        header = "╭═〘 *`" + Config.botname + "`* 〙";
+        cmdListIcon = "┃";
+        footer = "╰══════════════⊷";
+        categoryHeader = "┌─❏";
         categoryFooter = "❏";
-        cmdIcon = "│";
-        cmdFooter = "╰━━━━━━━━━━━━━━──⊷";
+        cmdIcon = " | ";
+        cmdFooter = " ╰═══════════════⊷";
+      } else if (menuType === 2 || Config.menu.trim().startsWith("2") || Config.menu.toLowerCase().includes("menu2")) {
+        header = "╭═[ *`" + Config.botname + "`* ]";
+        cmdListIcon = " │ ";
+        footer = " ╰═══════════════⊷";
+        categoryHeader = "┌─❐";
+        categoryFooter = "❏\n│╭═════════════⊷\n│▸";
+        cmdIcon = " │ ";
+        cmdFooter = " ╰═══════════════⊷";
+      } else {
+        header = "╭─❒ *`" + Config.botname + "`* ❒\n│ ╭────────────❍";
+        cmdListIcon = "│ │";
+        footer = "│ ╰══════════════❍\n╰═══════════════⊷";
+        categoryHeader = "╭─❏";
+        categoryFooter = "❏";
+        cmdIcon = " │ ";
+        cmdFooter = " ╰═══════════════⊷";
       }
       const categories = {};
       commands.map(async (cmd, index) => {
@@ -305,19 +345,20 @@ smd({
       });
       const currentTime = message.time;
       const currentDate = message.date;
-      let menuText = `${header}\n${cmdListIcon} Theme:- ${tlang().title}\n${cmdListIcon} Owner:- ${Config.ownername}\n${cmdListIcon} Plugins:- ${commands.length}\n${cmdListIcon} Uptime:- ${runtime(process.uptime())}\n${cmdListIcon} Mem:- ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}\n${cmdListIcon} Time:- ${currentTime}\n${cmdListIcon} Date:- ${currentDate}\n${footer}\n\n`;
+      let menuText = `${header}\n${cmdListIcon} \n${cmdListIcon} *ᴏᴡɴᴇʀ:-* ${Config.ownername}\n${cmdListIcon} *ᴄʀᴇᴀᴛᴏʀ:-* ${Config.creator}\n${cmdListIcon} *ᴘʟᴜɢɪɴꜱ:
+      * ${commands.length}\n${cmdListIcon} *ʀᴜɴᴛɪᴍᴇ:-* ${runtime(process.uptime())}\n${cmdListIcon} *ʀᴀᴍ ᴜꜱᴀɢᴇ:-* ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}\n${cmdListIcon} *ᴛɪᴍᴇ:-* ${currentTime}\n${cmdListIcon} *ᴅᴀᴛᴇ:-* ${currentDate}\n${footer}\n\n`;
       for (const category in categories) {
         menuText += `${categoryHeader} *${tiny(category)}* ${categoryFooter}\n`;
-        if (query.toLowerCase() === category.toLowerCase()) {
+        if (query.toUpperCase() === category.toUpperCase()) {
           menuText = `${categoryHeader} *${tiny(category)}* ${categoryFooter}\n`;
           for (const pattern of categories[category]) {
-            menuText += `${cmdIcon} ${fancytext(pattern, 1)}\n`;
+            menuText += `${cmdIcon} ${fancy13(pattern, 1)}\n`;
           }
           menuText += `${cmdFooter}\n`;
           break;
         } else {
           for (const pattern of categories[category]) {
-            menuText += `${cmdIcon} ${fancytext(pattern, 1)}\n`;
+            menuText += `${cmdIcon} ${fancy13(pattern, 1)}\n`;
           }
           menuText += `${cmdFooter}\n`;
         }
@@ -326,49 +367,31 @@ smd({
       let menuOptions = {
         caption: menuText
       };
-      return await message.sendUi(message.chat, menuOptions, message);
+      return await message.sendUi(message.chat, menuOptions,{
+        contextInfo: {
+          forwardingScore: 999,
+          isForwarded: true,
+          externalAdReply: {
+            title: "ᴀꜱᴛᴀ ᴍᴅ",
+            body: "",
+            renderLargerThumbnail: true,
+            thumbnail: null,
+            mediaType: 1,
+            mediaUrl: "",
+            sourceUrl: null,
+            showAdAttribution: true
+          }
+        }
+      }, message);
     } catch (error) {
       await message.error(`${error}\nCommand:menu`, error);
-    }
-  });
-  astro_patch.cmd({
-    pattern: "list",
-    desc: "list menu",
-    category: "general",
-    react: "🥀"
-  }, async message => {
-    try {
-      const {
-        commands
-      } = require("../lib");
-      let listText = `
-    ╭━━〘 *${Config.botname}* 〙────⊷     
-    ┃ ✭ Theme: ${tlang().title}
-    ┃ ✭ Prefix: ${prefix}
-    ┃ ✭ Owner: ${Config.ownername}
-    ┃ ✭ Commands: ${commands.length}
-    ┃ ✭ Uptime: ${runtime(process.uptime())}
-    ┃ ✭ Mem: ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
-    ╰━━━━━━━━━━━━━━⊷
-   `;
-      for (let i = 0; i < commands.length; i++) {
-        if (commands[i].pattern === undefined) {
-          continue;
-        }
-        listText += `*${i + 1} ${fancytext(commands[i].pattern, 1)}*\n`;
-        listText += `  ${fancytext(commands[i].desc, 1)}\n`;
-      }
-      return await message.sendUi(message.chat, {
-        caption: listText + Config.caption
-      });
-    } catch (error) {
-      await message.error(`${error}\nCommand:list`, error);
     }
   });
   astro_patch.smd({
     pattern: "owner",
     desc: "To check ping",
     category: "general",
+    react: "🎫",
     filename: __filename
   }, async message => {
     try {
@@ -447,7 +470,7 @@ smd({
       let targetLanguage = query ? query.split(" ")[0].toLowerCase() : "en";
       let text = !message.reply_text ? query.replace(targetLanguage, "")?.trim() || false : message.reply_text;
       if (!text) {
-        return await message.reply(`*Please Give Me Text. Example: _${prefix}trt en Who are you_*`);
+        return await message.reply("*Please Give Me Text.* `Example: trt en Who are you`");
       }
       const translation = await translatte(text, {
         from: "auto",
@@ -502,26 +525,26 @@ smd({
       let cmdPattern = query.split(" ")[0].toLowerCase().trim();
       let command = events.commands.find(cmd => cmd.pattern === cmdPattern) || events.commands.find(cmd => cmd.alias && cmd.alias.includes(cmdPattern));
       if (!command) {
-        return await message.reply("*❌No Such commands.*");
+        return await message.reply("`INVAILD COMMAND`");
       }
-      response.push(`*🍁Command:* ${command.pattern}`);
+      response.push(`*ᴄᴏᴍᴍᴀɴᴅ:* ${command.pattern}`);
       if (command.category) {
-        response.push(`*🧩Type:* ${command.category}`);
+        response.push(`*ᴛʏᴘᴇ:* ${command.category}`);
       }
       if (command.alias && command.alias[0]) {
-        response.push(`*🧩Alias:* ${command.alias.join(", ")}`);
+        response.push(`*ᴀʟɪᴀꜱ:* ${command.alias.join(", ")}`);
       }
       if (command.desc) {
-        response.push(`*✨Description:* ${command.desc}`);
+        response.push(`*ᴅᴇꜱᴄʀɪᴘᴛɪᴏɴ:* ${command.desc}`);
       }
       if (command.use) {
-        response.push(`*〽️Usa:*\n \`\`\`${prefix}${command.pattern} ${command.use}\`\`\``);
+        response.push(`*〽️ᴜꜱᴀ:*\n \`\`\`${prefix}${command.pattern} ${command.use}\`\`\``);
       }
       if (command.usage) {
-        response.push(`*〽️Usage:*\n \`\`\`${command.usage}\`\`\``);
+        response.push(`*〽ᴜꜱᴀɢᴇ:*\n \`\`\`${command.usage}\`\`\``);
       }
       if (command.filename) {
-        response.push(`*✨FileName:* ${command.filename}`);
+        response.push(`*ꜰɪʟᴇɴᴀᴍᴇ:* ${command.filename}`);
       }
       try {
         if (query.includes("function") && command.function && message.isSuhail && command.pattern !== "file") {
