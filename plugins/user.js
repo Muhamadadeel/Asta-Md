@@ -141,3 +141,15 @@ cmd({
     return await _0x12ac1b.reply("https://wa.me/" + _0x12ac1b.sender.split("@")[0]);
   } catch {}
 });
+
+
+
+
+
+
+
+
+
+
+
+
