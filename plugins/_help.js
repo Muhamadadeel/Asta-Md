@@ -346,7 +346,7 @@ smd({
       const currentTime = message.time;
       const currentDate = message.date;
       let menuText = `${header}\n${cmdListIcon} \n${cmdListIcon} *ᴏᴡɴᴇʀ:-* ${Config.ownername}\n${cmdListIcon} *ᴄʀᴇᴀᴛᴏʀ:-* ${Config.creator}\n${cmdListIcon} *ᴘʟᴜɢɪɴꜱ:
-      * ${commands.length}\n${cmdListIcon} *ʀᴜɴᴛɪᴍᴇ:-* ${runtime(process.uptime())}\n${cmdListIcon} *ʀᴀᴍ ᴜꜱᴀɢᴇ:-* ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}\n${cmdListIcon} *ᴛɪᴍᴇ:-* ${currentTime}\n${cmdListIcon} *ᴅᴀᴛᴇ:-* ${currentDate}\n${footer}\n\n`;
+      * ${commands.length}\n${cmdListIcon} *ʀᴜɴᴛɪᴍᴇ:-* ${runtime(process.uptime())}\n${cmdListIcon} *ʀᴀᴍ ᴜꜱᴀɢᴇ:-* ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}\n${cmdListIcon} *ᴛɪᴍᴇ:-* ${currentTime}\n${cmdListIcon} *ᴅᴀᴛᴇ:-* ${currentDate}\n\n${cmdListIcon} *ᴅᴀᴛᴀʙᴀꜱᴇ:-* ${Config.database}\n${footer}\n\n`;
       for (const category in categories) {
         menuText += `${categoryHeader} *${tiny(category)}* ${categoryFooter}\n`;
         if (query.toUpperCase() === category.toUpperCase()) {
