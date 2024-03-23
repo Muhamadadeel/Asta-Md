@@ -310,26 +310,26 @@ smd({
         menuType = Math.floor(Math.random() * 4) + 1;
       }
       if (menuType === 1 || Config.menu.trim().startsWith("1") || Config.menu.toLowerCase().includes("menu1")) {
-        header = "╭═〘 *`" + Config.botname + "`* 〙";
-        cmdListIcon = "┃";
-        footer = "╰══════════════⊷";
+        header = " ╭═〘 *`" + Config.botname + "`* 〙";
+        cmdListIcon = " │ ";
+        footer = " ╰══════════════⊷";
         categoryHeader = "┌─❏";
         categoryFooter = "❏";
         cmdIcon = " | ";
-        cmdFooter = " ╰═══════════════⊷";
+        cmdFooter = "╰═══════════════⊷";
       } else if (menuType === 2 || Config.menu.trim().startsWith("2") || Config.menu.toLowerCase().includes("menu2")) {
         header = "╭═[ *`" + Config.botname + "`* ]";
         cmdListIcon = " │ ";
-        footer = " ╰═══════════════⊷";
-        categoryHeader = "┌─❐";
-        categoryFooter = "❏\n│╭═════════════⊷\n│▸";
+        footer = " ╰═══════════════⊷\n╰═════════════⊷";
+        categoryHeader = " ┌─❐";
+        categoryFooter = "❏\n │╭═════════════⊷";
         cmdIcon = " │ ";
         cmdFooter = " ╰═══════════════⊷";
       } else {
-        header = "╭─❒ *`" + Config.botname + "`* ❒\n│ ╭────────────❍";
-        cmdListIcon = "│ │";
-        footer = "│ ╰══════════════❍\n╰═══════════════⊷";
-        categoryHeader = "╭─❏";
+        header = " ╭─❒ *`" + Config.botname + "`* ❒\n │╭────────────❍";
+        cmdListIcon = " │ ";
+        footer = " │ ╰══════════════❍\n ╰═══════════════⊷";
+        categoryHeader = " ╭─❏";
         categoryFooter = "❏";
         cmdIcon = " │ ";
         cmdFooter = " ╰═══════════════⊷";
@@ -346,11 +346,11 @@ smd({
       const currentTime = message.time;
       const currentDate = message.date;
       const startTime = new Date().getTime();
-      let menuText = `${header}\n${cmdListIcon} \n${cmdListIcon} *ᴏᴡɴᴇʀ:-* ${Config.ownername}\n${cmdListIcon} *ᴄʀᴇᴀᴛᴏʀ:-* ${Config.creator}\n${cmdListIcon} *ᴘʟᴜɢɪɴꜱ:-* ${commands.length}\n${cmdListIcon} *ʀᴜɴᴛɪᴍᴇ:-* ${runtime(process.uptime())}\n${cmdListIcon} *ʀᴀᴍ ᴜꜱᴀɢᴇ:-* ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}\n${cmdListIcon} *ᴛɪᴍᴇ:-* ${currentTime}\n${cmdListIcon} *ᴅᴀᴛᴇ:-* ${currentDate}\n${cmdListIcon} *ᴜꜱᴀɢᴇ ᴛʀᴇɴᴅ:-* ${Config.pings}\n${cmdListIcon} *ᴅᴀᴛᴀʙᴀꜱᴇ:-* ${Config.database}\n${footer}\n\n`;
+      let menuText = `${header}\n${cmdListIcon} \n${cmdListIcon} *ᴏᴡɴᴇʀ:-* ${Config.ownername}\n${cmdListIcon} *ᴄʀᴇᴀᴛᴏʀ:-* ${Config.creator}\n${cmdListIcon} *ᴘʟᴜɢɪɴꜱ:-* ${commands.length}\n${cmdListIcon} *ʀᴜɴᴛɪᴍᴇ:-* ${runtime(process.uptime())}\n${cmdListIcon} *ʀᴀᴍ ᴜꜱᴀɢᴇ:-* ${formatp(os.totalmem() - os.freemem())}\n${cmdListIcon} *ᴛɪᴍᴇ:-* ${currentTime}\n${cmdListIcon} *ᴅᴀᴛᴇ:-* ${currentDate}\n${cmdListIcon} *ᴜꜱᴀɢᴇ ᴛʀᴇɴᴅ:-* ${Config.pings}\n${cmdListIcon} *ᴅᴀᴛᴀʙᴀꜱᴇ:-* ${Config.database}\n${footer}\n\n`;
       for (const category in categories) {
-        menuText += `${categoryHeader} *${tiny(category)}* ${categoryFooter}\n`;
+        menuText += `${categoryHeader} _*${tiny(category)}*_ ${categoryFooter}\n`;
         if (query.toUpperCase() === category.toUpperCase()) {
-          menuText = `${categoryHeader} *${tiny(category)}* ${categoryFooter}\n`;
+          menuText = `${categoryHeader} _*${tiny(category)}*_ ${categoryFooter}\n`;
           for (const pattern of categories[category]) {
             menuText += `${cmdIcon} ${fancy13(pattern, 1)}\n`;
           }
