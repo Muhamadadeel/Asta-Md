@@ -15,7 +15,7 @@ const {
 const long = String.fromCharCode(8206);
 const readmore = long.repeat(4001);
 smd({
-	pattern: 'clear <chats clear>',
+	pattern: 'clear',
 	fromMe: true,
 	alias: ["clear", "clearchat"],
 	desc: 'delete whatsapp chat',
@@ -35,7 +35,7 @@ smd({
     }catch(e){ message.error(`${e}\n\nCommand : clear` , e, false) }
 })
 smd({
-	pattern: 'archive <archive chat>',
+	pattern: 'archive',
 	fromMe: true,
 	alias: ["archive", "archivechat"],
 	desc: 'archive whatsapp chat',
@@ -55,7 +55,7 @@ smd({
 }catch(e){ message.error(`${e}\n\nCommand : archive` , e, false) }
 })
 smd({
-	pattern: 'unarchive <unarchive chat>',
+	pattern: 'unarchive',
 	fromMe: true,
 	alias: ["unarchive", "unarchivechat"],
 	desc: 'unarchive whatsapp chat',
@@ -75,7 +75,7 @@ smd({
 }catch(e){ message.error(`${e}\n\nCommand : unarchive` , e, false) }
 })
 smd({
-	pattern: 'pin <pin chat>',
+	pattern: 'pin',
   alias :["pinchat", "pin"],
 	fromMe: true,
 	desc: 'pin a chat',
@@ -89,7 +89,7 @@ smd({
 }catch(e){ message.error(`${e}\n\nCommand : chatpin` , e, false) }
 })
 smd({
-	pattern: 'unpin <unpin chat>',
+	pattern: 'unpin',
   alias :["unpinchat","unpin","chatunpin"],
 	fromMe: true,
 	desc: 'unpin a msg',
@@ -103,7 +103,7 @@ smd({
 }catch(e){ message.error(`${e}\n\nCommand : unpin` , e, false) }
 })
 smd({
-	pattern: 'read <mark message as read>',
+	pattern: 'read',
 	fromMe: true,
 	alias: ["read", "markread"],
 	desc: 'mark as readed',
@@ -119,7 +119,7 @@ smd({
     }catch(e){ message.error(`${e}\n\nCommand : markread` , e, false) }
 })
 smd({
-	pattern: 'unread <mark message as unread>',  
+	pattern: 'unread',  
 	fromMe: true,
 	alias: ["unread", "markunread"],
 	desc: 'mark as UnRead',
@@ -137,7 +137,7 @@ smd({
 })
 
 smd({
-	pattern: 'chatunmute <unmute chat notifications>',
+	pattern: 'chatunmute',
 	alias: ["unmutechat", "unmutec"],
 	fromMe: true,
 	desc: 'unmute a chat',
@@ -151,7 +151,7 @@ smd({
 })
 
 smd({
-	pattern: 'name <change whatsapp name>',
+	pattern: 'name',
 	fromMe: true,
 	alias: ["name", "profilename", "proname", "pname"],
 	desc: 'To change your profile name',
@@ -166,7 +166,7 @@ smd({
 })
 
 smd({
-	pattern: 'wasettings <whatsapp settings>',
+	pattern: 'wasettings',
 	fromMe: true,
 	alias: ["wasettings", "wasetting", "settingswa", "privacy"],
 	desc: 'get your privacy settings',
@@ -201,8 +201,9 @@ smd({
 })
 
 smd({
-	pattern: 'lastseen <lastseen on or off>',
+	pattern: 'lastseen-mode',
 	fromMe: true,
+	alias: ["lastseen"],
 	desc: 'to change lastseen privacy',
 	type: 'privacy'
 }, async (message, match, {smd }) => {
@@ -217,7 +218,7 @@ smd({
 
 
 smd({
-	pattern: 'online-mode <online on or off>',
+	pattern: 'online-mode',
 	fromMe: true,
 	alias: ["onlinemode", "online", "online-mode"],
 	desc: 'to change online privacy',
@@ -234,9 +235,9 @@ smd({
 
 
 smd({
-	pattern: 'mypp <profile picture settings>',
+	pattern: 'set-mypp',
 	fromMe: true,
-	alias: ["dp", "pp", "profilepic", "wadp"],
+	alias: ["dp","set-mypp", "pp", "profilepic", "wadp"],
 	desc: 'privacy setting profile picture',
 	type: 'privacy'
 }, async (message, match) => {
@@ -250,9 +251,9 @@ smd({
 })
 
 smd({
-	pattern: 'mystatus <status settings>',
+	pattern: 'set-mystatus',
 	fromMe: true,
-	alias: ["mystatus", "status"],
+	alias: ["mystatus","set-mystatus", "status"],
 	desc: 'privacy for my status',
 	type: 'privacy'
 }, async (message, match,) => {
@@ -266,7 +267,7 @@ smd({
 })
 
 smd({
-	pattern: 'readmsgs <settings for read message>',
+	pattern: 'readmsgs',
 	fromMe: true,
 	alias: ["readmmsgs"],
 	desc: 'privacy for read message',
@@ -282,9 +283,9 @@ smd({
 })
 
 smd({
-	pattern: 'groupadd <group add settings>',
+	pattern: 'set-groupadd',
 	fromMe: true,
-	alias: ["groupadd", "gcadd"],
+	alias: ["groupadd","set-groupadd", "gcadd"],
 	desc: 'privacy for group add',
 	type: 'privacy'
 }, async (message, match, smd) => {
@@ -296,93 +297,123 @@ smd({
 	await message.send(`_Privacy Updated to *${match}*_`);
 }catch(e){ message.error(`${e}\n\nCommand : groupadd` , e, false) }
 })
-cmd({
-	pattern: "privacysettings",
-	desc: "send ptv Message of video",
-	category: "whatsapp",
-	filename: __filename
-  }, async (_0x1de00b, _0x3a059e, {
-	cmdName: _0x25ae6c
-  }) => {
-	try {
-	  const _0x5a7352 = await _0x1de00b.bot.fetchPrivacySettings();
-	  txt = "*[WHATSAPP PRIVACY SETTINGS]*\n\n*PROFILE:* " + _0x5a7352.profile + "\n*STATUS:* " + _0x5a7352.status + "\n*ONLINE:* " + _0x5a7352.online + "\n*LASTSEEN:* " + _0x5a7352.last + "\n*MESSAGE READ:* " + _0x5a7352.readreceipts + "\n\n*Who can add in group:* " + _0x5a7352.groupadd + "\n*Who can call:* " + _0x5a7352.calladd + "\n    ";
-	  await _0x1de00b.send(txt);
-	} catch (_0x450710) {
-	  await _0x1de00b.error(_0x450710 + "\n\ncommand : privacy", _0x450710);
+cmd(
+	{
+	  pattern: "privacysettings",
+	  desc: "send ptv Message of video",
+	  category: "whatsapp",
+	  filename: __filename,
+	},
+	async (message, _, { cmdName }) => {
+	  try {
+		const privacySettings = await message.bot.fetchPrivacySettings();
+  
+		const text = `*[WHATSAPP PRIVACY SETTINGS]*\n\n*PROFILE:* ${privacySettings.profile}\n*STATUS:* ${privacySettings.status}\n*ONLINE:* ${privacySettings.online}\n*LASTSEEN:* ${privacySettings.last}\n*MESSAGE READ:* ${privacySettings.readreceipts}\n\n*Who can add in group:* ${privacySettings.groupadd}\n*Who can call:* ${privacySettings.calladd}\n `;
+  
+		await message.send(text);
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : ${cmdName}`, error);
+	  }
 	}
-  });
+  );
   let mtypes = ["imageMessage"];
-  smd({
-	pattern: "pp",
-	desc: "Set profile picture",
-	category: "whatsapp",
-	use: "<reply to image>",
-	fromMe: true,
-	filename: __filename
-  }, async _0x26822e => {
-	try {
-	  let _0x39e1fd = mtypes.includes(_0x26822e.mtype) ? _0x26822e : _0x26822e.reply_message;
-	  if (!_0x39e1fd || !mtypes.includes(_0x39e1fd?.mtype || "need_Media")) {
-		return await _0x26822e.reply("*Reply to an image, dear*");
+  smd(
+	{
+	  pattern: "pp",
+	  desc: "Set profile picture",
+	  category: "whatsapp",
+	  use: "<reply to image>",
+	  fromMe: true,
+	  filename: __filename,
+	},
+	async (message) => {
+	  try {
+		let replyMessage =
+		  mtypes.includes(message.mtype)
+			? message
+			: message.reply_message;
+  
+		if (!replyMessage || !mtypes.includes(replyMessage?.mtype || "need_Media")) {
+		  return await message.reply("*Reply to an image, dear*");
+		}
+  
+		return await updateProfilePicture(message, message.user, replyMessage, "pp");
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : pp`, error);
 	  }
-	  return await updateProfilePicture(_0x26822e, _0x26822e.user, _0x39e1fd, "pp");
-	} catch (_0x554ad1) {
-	  await _0x26822e.error(_0x554ad1 + "\n\ncommand : pp", _0x554ad1);
 	}
-  });
-  smd({
-	pattern: "fullpp",
-	desc: "Set full screen profile picture",
-	category: "whatsapp",
-	use: "<reply to image>",
-	fromMe: true,
-	filename: __filename
-  }, async _0x29e300 => {
-	try {
-	  let _0x19d7fb = mtypes.includes(_0x29e300.mtype) ? _0x29e300 : _0x29e300.reply_message;
-	  if (!_0x19d7fb || !mtypes.includes(_0x19d7fb?.mtype || "need_Media")) {
-		return await _0x29e300.reply("*Reply to an image, dear*");
+  );
+  
+  smd(
+	{
+	  pattern: "fullpp",
+	  desc: "Set full screen profile picture",
+	  category: "whatsapp",
+	  use: "<reply to image>",
+	  fromMe: true,
+	  filename: __filename,
+	},
+	async (message) => {
+	  try {
+		let replyMessage =
+		  mtypes.includes(message.mtype)
+			? message
+			: message.reply_message;
+  
+		if (!replyMessage || !mtypes.includes(replyMessage?.mtype || "need_Media")) {
+		  return await message.reply("*Reply to an image, dear*");
+		}
+  
+		return await updateProfilePicture(message, message.user, replyMessage, "fullpp");
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : fullpp`, error);
 	  }
-	  return await updateProfilePicture(_0x29e300, _0x29e300.user, _0x19d7fb, "fullpp");
-	} catch (_0x24ab42) {
-	  await _0x29e300.error(_0x24ab42 + "\n\ncommand : fullpp", _0x24ab42);
 	}
-	{}
-  });
-  smd({
-	pattern: "rpp",
-	desc: "remove profile picture",
-	category: "whatsapp",
-	use: "<chat>",
-	fromMe: true,
-	filename: __filename
-  }, async _0x576c66 => {
-	try {
-	  await _0x576c66.removepp();
-	  _0x576c66.send("*_Profile picture removed successfully!_*");
-	} catch (_0x5426bd) {
-	  await _0x576c66.error(_0x5426bd + "\n\ncommand : rpp", _0x5426bd);
-	}
-  });
-  smd({
-	pattern: "bio",
-	desc: "update profile status of whatsapp",
-	category: "whatsapp",
-	use: "<text>",
-	fromMe: true,
-	filename: __filename
-  }, async (_0x142a55, _0x46608a) => {
-	try {
-	  if (!_0x46608a) {
-		return await _0x142a55.send("*_provide text to update profile status!_*\n*_Example: " + prefix + "bio Suhail Md_*");
+  );
+  
+  smd(
+	{
+	  pattern: "rpp",
+	  desc: "remove profile picture",
+	  category: "whatsapp",
+	  use: "<chat>",
+	  fromMe: true,
+	  filename: __filename,
+	},
+	async (message) => {
+	  try {
+		await message.removepp();
+		message.send("*_Profile picture removed successfully!_*");
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : rpp`, error);
 	  }
-	  await _0x142a55.bot.updateProfileStatus(_0x46608a);
-	  _0x142a55.send("*Profile status updated successfully!*");
-	} catch (_0x431ce8) {
-	  await _0x142a55.error(_0x431ce8 + "\n\ncommand : bio", _0x431ce8);
 	}
-  });
+  );
+  
+  smd(
+	{
+	  pattern: "bio",
+	  desc: "update profile status of whatsapp",
+	  category: "whatsapp",
+	  use: "<text>",
+	  fromMe: true,
+	  filename: __filename,
+	},
+	async (message, text) => {
+	  try {
+		if (!text) {
+		  return await message.send(
+			`*_provide text to update profile status!_*\n*_Example: ${prefix}bio Suhail Md_*`
+		  );
+		}
+  
+		await message.bot.updateProfileStatus(text);
+		message.send("*Profile status updated successfully!*");
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : bio`, error);
+	  }
+	}
+  );
   cmd({
 	pattern: "ptv",
 	desc: "send ptv Message of video",
