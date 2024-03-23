@@ -132,119 +132,124 @@ smd({
     await msg.error(error + "\n\ncommand: " + cmdName, error, "*_Can't create new group, Sorry!!_*");
   }
  });
+// Command to get group info by link
 smd({
-  pattern: "ginfo",
+  pattern: "groupinfo",
   desc: "get group info by link",
   type: "group",
   filename: __filename,
   use: "<group link.>"
-}, async (_0x4f7c88, _0x1490e0) => {
+ }, async (msg, text) => {
   try {
-    let _0x3eb855 = _0x1490e0 ? _0x1490e0 : _0x4f7c88.reply_text;
-    const _0x3e5033 = _0x3eb855.match(grouppattern) || false;
-    if (!_0x3e5033) {
-      return await _0x4f7c88.reply("*_Uhh Please, provide group link_*");
+    let groupLink = text ? text : msg.reply_text;
+    const match = groupLink.match(grouppattern) || false;
+    if (!match) {
+      return await msg.reply("*_Uhh Please, provide group link_*");
     }
-    let _0x5ced5d = _0x3e5033[0].split("https://chat.whatsapp.com/")[1].trim();
-    const _0x5f4890 = await _0x4f7c88.bot.groupGetInviteInfo(_0x5ced5d);
-    if (_0x5f4890) {
-      const _0x40ced5 = new Date(_0x5f4890.creation * 1000);
-      var _0x10288a = _0x40ced5.getFullYear();
-      var _0x436585 = _0x40ced5.getMonth() + 1;
-      var _0x511884 = _0x40ced5.getDate();
-      var _0x236a49 = _0x10288a + "-" + _0x436585.toString().padStart(2, "0") + "-" + _0x511884.toString().padStart(2, "0");
-      var _0x56eaaf = {
+    let groupId = match[0].split("https://chat.whatsapp.com/")[1].trim();
+    const groupInfo = await msg.bot.groupGetInviteInfo(groupId);
+    if (groupInfo) {
+      const creationDate = new Date(groupInfo.creation * 1000);
+      var year = creationDate.getFullYear();
+      var month = creationDate.getMonth() + 1;
+      var day = creationDate.getDate();
+      var formattedDate = year + "-" + month.toString().padStart(2, "0") + "-" + day.toString().padStart(2, "0");
+      var contextInfo = {
         externalAdReply: {
-          title: "��𝗦�𝗔-𝗠𝗗",
-          body: _0x5f4890.subject,
+          title: "𝗔𝗦𝗧𝗔-𝗠𝗗",
+          body: groupInfo.subject,
           renderLargerThumbnail: true,
           thumbnail: log0,
           mediaType: 1,
-          mediaUrl: _0x3e5033[0],
-          sourceUrl: _0x3e5033[0]
+          mediaUrl: match[0],
+          sourceUrl: match[0]
         }
       };
-      return await send(_0x4f7c88, (_0x5f4890.subject + "\n  \n  Creator: wa.me/" + _0x5f4890.owner.split("@")[0] + " \n  GJid; ```" + _0x5f4890.id + "  ```\n  *Muted:* " + (_0x5f4890.announce ? " yes" : " no") + "\n  *Locked:* " + (_0x5f4890.restrict ? " yes" : " no") + "\n  *createdAt:* " + _0x236a49 + "\n  *participents:* " + (_0x5f4890.size > 3 ? _0x5f4890.size + "th" : _0x5f4890.size) + "\n  " + (_0x5f4890.desc ? "*description:* " + _0x5f4890.desc + "\n" : "") + "\n  " + Config.caption + "\n  ").trim(), {
-        mentions: [_0x5f4890.owner],
-        contextInfo: _0x56eaaf
-      }, "", _0x4f7c88);
+      return await send(msg, (`${groupInfo.subject}\n  \n  Creator: wa.me/${groupInfo.owner.split("@")[0]} \n  GJid; \`\`\`${groupInfo.id}  \`\`\`\n  *Muted:* ${groupInfo.announce ? " yes" : " no"}\n  *Locked:* ${groupInfo.restrict ? " yes" : " no"}\n  *createdAt:* ${formattedDate}\n  *participents:* ${groupInfo.size > 3 ? groupInfo.size + "th" : groupInfo.size}\n  ${groupInfo.desc ? "*description:* " + groupInfo.desc + "\n" : ""}\n  ${Config.caption}\n  `).trim(), {
+        mentions: [groupInfo.owner],
+        contextInfo
+      }, "", msg);
     } else {
-      await _0x4f7c88.send("*_Group Id not found, Sorry!!_*");
+      await msg.send("*_Group Id not found, Sorry!!_*");
     }
-  } catch (_0x36c345) {
-    await _0x4f7c88.error(_0x36c345 + "\n\ncommand: ginfo", _0x36c345, "*_Group Id not found, Sorry!!_*");
+  } catch (error) {
+    await msg.error(error + "\n\ncommand: ginfo", error, "*_Group Id not found, Sorry!!_*");
   }
-});
-smd({
+ });
+ 
+ // Command to reject all join requests
+ smd({
   cmdname: "rejectall",
   alias: ["rejectjoin"],
   info: "reject all request to join!",
   type: "group",
   filename: __filename
-}, async (_0xb81e45, _0x3dda5f) => {
+ }, async (msg, text) => {
   try {
-    if (!_0xb81e45.isGroup) {
-      return _0xb81e45.reply(tlang().group);
+    if (!msg.isGroup) {
+      return msg.reply(tlang().group);
     }
-    if (!_0xb81e45.isBotAdmin || !_0xb81e45.isAdmin) {
-      return await _0xb81e45.reply(!_0xb81e45.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0xb81e45.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    if (!msg.isBotAdmin || !msg.isAdmin) {
+      return await msg.reply(!msg.isBotAdmin ? "*_I'm Not Admin In This Group" + (!msg.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
     }
-    const _0x4ea369 = await _0xb81e45.bot.groupRequestParticipantsList(_0xb81e45.chat);
-    if (!_0x4ea369 || !_0x4ea369[0]) {
-      return await _0xb81e45.reply("*_No Request Join Yet_*");
+    const joinRequests = await msg.bot.groupRequestParticipantsList(msg.chat);
+    if (!joinRequests || !joinRequests[0]) {
+      return await msg.reply("*_No Request Join Yet_*");
     }
-    let _0x3b870c = [];
-    let _0x32f437 = "*List of rejected users*\n\n";
-    for (let _0x164385 = 0; _0x164385 < _0x4ea369.length; _0x164385++) {
+    let mentionedJids = [];
+    let rejectedUsers = "*List of rejected users*\n\n";
+    for (let i = 0; i < joinRequests.length; i++) {
       try {
-        await _0xb81e45.bot.groupRequestParticipantsUpdate(_0xb81e45.from, [_0x4ea369[_0x164385].jid], "reject");
-        _0x32f437 += "@" + _0x4ea369[_0x164385].jid.split("@")[0] + "\n";
-        _0x3b870c = [..._0x3b870c, _0x4ea369[_0x164385].jid];
+        await msg.bot.groupRequestParticipantsUpdate(msg.from, [joinRequests[i].jid], "reject");
+        rejectedUsers += "@" + joinRequests[i].jid.split("@")[0] + "\n";
+        mentionedJids = [...mentionedJids, joinRequests[i].jid];
       } catch {}
     }
-    await _0xb81e45.send(_0x32f437, {
-      mentions: [_0x3b870c]
+    await msg.send(rejectedUsers, {
+      mentions: [mentionedJids]
     });
-  } catch (_0x13cc87) {
-    await _0xb81e45.error(_0x13cc87 + "\n\ncommand: rejectall", _0x13cc87);
+  } catch (error) {
+    await msg.error(error + "\n\ncommand: rejectall", error);
   }
-});
-smd({
+ });
+ 
+ // Command to accept all join requests
+ smd({
   cmdname: "acceptall",
   alias: ["acceptjoin"],
   info: "accept all request to join!",
   type: "group",
   filename: __filename
-}, async (_0x90a6de, _0x5537ca) => {
+ }, async (msg, text) => {
   try {
-    if (!_0x90a6de.isGroup) {
-      return _0x90a6de.reply(tlang().group);
+    if (!msg.isGroup) {
+      return msg.reply(tlang().group);
     }
-    if (!_0x90a6de.isBotAdmin || !_0x90a6de.isAdmin) {
-      return await _0x90a6de.reply(!_0x90a6de.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x90a6de.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    if (!msg.isBotAdmin || !msg.isAdmin) {
+      return await msg.reply(!msg.isBotAdmin ? "*_I'm Not Admin In This Group" + (!msg.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
     }
-    const _0x3da7c6 = await _0x90a6de.bot.groupRequestParticipantsList(_0x90a6de.chat);
-    if (!_0x3da7c6 || !_0x3da7c6[0]) {
-      return await _0x90a6de.reply("*_No Join Request Yet_*");
+    const joinRequests = await msg.bot.groupRequestParticipantsList(msg.chat);
+    if (!joinRequests || !joinRequests[0]) {
+      return await msg.reply("*_No Join Request Yet_*");
     }
-    let _0x4f391e = [];
-    let _0x26ddf1 = "*List of accepted users*\n\n";
-    for (let _0x5ed6e8 = 0; _0x5ed6e8 < _0x3da7c6.length; _0x5ed6e8++) {
+    let mentionedJids = [];
+    let acceptedUsers = "*List of accepted users*\n\n";
+    for (let i = 0; i < joinRequests.length; i++) {
       try {
-        await _0x90a6de.bot.groupRequestParticipantsUpdate(_0x90a6de.from, [_0x3da7c6[_0x5ed6e8].jid], "approve");
-        _0x26ddf1 += "@" + _0x3da7c6[_0x5ed6e8].jid.split("@")[0] + "\n";
-        _0x4f391e = [..._0x4f391e, _0x3da7c6[_0x5ed6e8].jid];
+        await msg.bot.groupRequestParticipantsUpdate(msg.from, [joinRequests[i].jid], "approve");
+        acceptedUsers += "@" + joinRequests[i].jid.split("@")[0] + "\n";
+        mentionedJids = [...mentionedJids, joinRequests[i].jid];
       } catch {}
     }
-    await _0x90a6de.send(_0x26ddf1, {
-      mentions: [_0x4f391e]
+    await msg.send(acceptedUsers, {
+      mentions: [mentionedJids]
     });
-  } catch (_0x366bd4) {
-    await _0x90a6de.error(_0x366bd4 + "\n\ncommand: acceptall", _0x366bd4);
+  } catch (error) {
+    await msg.error(error + "\n\ncommand: acceptall", error);
   }
-});
+ });
 smd({
-  cmdname: "listrequest",
+  cmdname: "joinrequests",
   alias: ["requestjoin"],
   info: "Set Description of Group",
   type: "group",
@@ -276,8 +281,8 @@ smd({
   }
 });
 smd({
-  cmdname: "setdesc",
-  alias: ["setgdesc", "gdesc"],
+  cmdname: "setgcdesc",
+  alias: ["setgdesc","setdesc", "gdesc"],
   info: "Set Description of Group",
   type: "group",
   filename: __filename,
@@ -332,7 +337,8 @@ smd({
   }
 });
 smd({
-  cmdname: "left",
+  cmdname: "leavegc",
+  alias: ["leave", "left"],
   info: "left from a group.",
   fromMe: true,
   type: "group",
@@ -355,7 +361,8 @@ smd({
 });
 let mtypes = ["imageMessage"];
 smd({
-  pattern: "gpp",
+  pattern: "setgpp",
+  alias: ["gpp","setgpic"],
   desc: "Set Group profile picture",
   category: "group",
   use: "<reply to image>",
@@ -887,7 +894,7 @@ smd({
   }, "suhail");
 });
 smd({
-  pattern: "mute",
+  pattern: "mutegc",
   desc: "Provides admin role to replied/quoted user",
   category: "group",
   filename: __filename,
@@ -912,7 +919,7 @@ smd({
   }
 });
 smd({
-  pattern: "unmute",
+  pattern: "unmutegc",
   desc: "Provides admin role to replied/quoted user",
   category: "group",
   filename: __filename,
