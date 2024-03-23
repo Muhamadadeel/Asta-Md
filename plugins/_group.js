@@ -1389,59 +1389,42 @@ smd({
   cmdName: _0xa03141
 }) => {
   try {
-    let _0x5cdb67 = _0x2c2791.split(" ")[0].toLowerCase().trim();
-    let _0x423726 = (await groupdb.findOne({
-      id: _0x5ab8b7.chat
-    })) || (await groupdb.new({
-      id: _0x5ab8b7.chat
-    }));
-    let _0x22c3bd = (await bot_.findOne({
-      id: "bot_" + _0x5ab8b7.user
-    })) || (await groupdb.new({
-      id: "bot_" + _0x5ab8b7.user
-    })) || {
-      chatbot: "false"
-    };
-    if (_0x5cdb67 == "all" || _0x5cdb67 === "global") {
-      if (_0x22c3bd.chatbot == "true") {
-        return await _0x5ab8b7.send("*" + _0xa03141 + " was already enabled to all chat!.*");
+    const action = args.split(" ")[0].toLowerCase().trim();
+
+    // Get the group and user chatbot settings
+    const groupSettings = (await groupdb.findOne({ id: message.chat })) || (await groupdb.new({ id: message.chat }));
+    const userSettings = (await bot_.findOne({ id: "bot_" + message.user })) || (await groupdb.new({ id: "bot_" + message.user })) || { chatbot: "false" };
+
+    // Check if the action is for all chats
+    if (action === "all" || action === "global") {
+      if (userSettings.chatbot === "true") {
+        return await message.send(`*${cmdName} was already enabled to all chat!.*`);
       }
-      await bot_.updateOne({
-        id: "bot_" + _0x5ab8b7.user
-      }, {
-        chatbot: "true"
-      });
-      return await _0x5ab8b7.send("*" + _0xa03141 + " successfully enabled to all chats!.*");
-    } else if (_0x5cdb67.startsWith("on") || _0x5cdb67.startsWith("act") || _0x5cdb67.startsWith("enable")) {
-      if (_0x423726.chatbot == "true" || _0x22c3bd.chatbot == "true") {
-        return await _0x5ab8b7.send("*" + _0xa03141 + " was already enabled.*");
-      }
-      await groupdb.updateOne({
-        id: _0x5ab8b7.chat
-      }, {
-        chatbot: "true"
-      });
-      return await _0x5ab8b7.send("*" + _0xa03141 + " activated successfully.*");
-    } else if (_0x5cdb67.startsWith("off") || _0x5cdb67.startsWith("deact") || _0x5cdb67.startsWith("disable")) {
-      if (_0x423726.chatbot == "false" && _0x22c3bd.chatbot == "false") {
-        return await _0x5ab8b7.send("*" + _0xa03141 + " was already disabled.*");
-      }
-      await bot_.updateOne({
-        id: "bot_" + _0x5ab8b7.user
-      }, {
-        chatbot: "false"
-      });
-      await groupdb.updateOne({
-        id: _0x5ab8b7.chat
-      }, {
-        chatbot: "false"
-      });
-      return await _0x5ab8b7.send("*" + _0xa03141 + " deactivated successfully.*");
-    } else {
-      return await _0x5ab8b7.reply("*_" + _0xa03141 + " Currently *" + (_0x22c3bd.chatbot == "true" ? "Enabled in 'all' Chats" : _0x423726.chatbot == "true" ? "Enabled in Chat" : "Disabled in Chat") + "!_*\n*_Use On/Off/all to enable/disable " + _0xa03141 + "_*");
+      await bot_.updateOne({ id: "bot_" + message.user }, { chatbot: "true" });
+      return await message.send(`*${cmdName} successfully enabled to all chats!.*`);
     }
-  } catch (_0x2cce1b) {
-    _0x5ab8b7.error(_0x2cce1b + "\n\ncommand: lydea(chatbot)", _0x2cce1b);
+    // Check if the action is to enable the chatbot
+    else if (action.startsWith("on") || action.startsWith("act") || action.startsWith("enable")) {
+      if (groupSettings.chatbot === "true" || userSettings.chatbot === "true") {
+        return await message.send(`*${cmdName} was already enabled.*`);
+      }
+      await groupdb.updateOne({ id: message.chat }, { chatbot: "true" });
+      return await message.send(`*${cmdName} activated successfully.*`);
+    }
+    // Check if the action is to disable the chatbot
+    else if (action.startsWith("off") || action.startsWith("deact") || action.startsWith("disable")) {
+      if (groupSettings.chatbot === "false" && userSettings.chatbot === "false") {
+        return await message.send(`*${cmdName} was already disabled.*`);
+      }
+      await bot_.updateOne({ id: "bot_" + message.user }, { chatbot: "false" });
+      await groupdb.updateOne({ id: message.chat }, { chatbot: "false" });
+      return await message.send(`*${cmdName} deactivated successfully.*`);
+    } else {
+      // Show the current chatbot status
+      return await message.reply(`*_${cmdName} Currently *${userSettings.chatbot === "true" ? "Enabled in 'all' Chats" : groupSettings.chatbot === "true" ? "Enabled in Chat" : "Disabled in Chat"}_*\n*_Use On/Off/all to enable/disable ${cmdName}_*`);
+    }
+  } catch (error) {
+    message.error(`${error}\n\ncommand: lydea(chatbot)`, error);
   }
 });
 let warn = {};
