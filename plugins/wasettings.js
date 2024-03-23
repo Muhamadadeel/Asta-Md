@@ -549,81 +549,124 @@ cmd(
 	  await _0x4ee956.error(_0x4d92d0 + "\n\ncommand : location", _0x4d92d0);
 	}
   });
-  smd({
-	pattern: "listpc",
-	category: "whatsapp settings",
-	desc: "Finds info about personal chats",
-	filename: __filename
-  }, async (_0x144fd0, _0x21857a, {
-	store: _0x563c73
-  }) => {
-	try {
-	  _0x144fd0.react("🫡");
-	  let _0x196bf6 = await _0x563c73.chats.all().filter(_0x8b2b5 => _0x8b2b5.id.endsWith(".net")).map(_0x434198 => _0x434198);
-	  let _0x4b7ff3 = " 「  " + Config.botname + "'s pm user list  」\n\nTotal " + _0x196bf6.length + " users are text in personal chat.";
-	  for (let _0x15740d of _0x196bf6) {
-		_0x4b7ff3 += "\n\nUser: @" + _0x15740d.id.split("@")[0] + "\nMessages : " + _0x15740d.unreadCount + "\nLastchat : " + moment(_0x15740d.conversationTimestamp * 1000).tz(timezone).format("DD/MM/YYYY HH:mm:ss");
-	  }
-	  _0x144fd0.bot.sendTextWithMentions(_0x144fd0.chat, _0x4b7ff3, _0x144fd0);
-	} catch (_0x170045) {
-	  return await _0x144fd0.error(_0x170045 + "\n\n command: listpc", _0x170045, "*_Didn't get any results, Sorry!_*");
-	}
-  });
-  smd({
-	pattern: "listgc",
-	category: "whatsapp settings",
-	desc: "Finds info about all active groups",
-	filename: __filename
-  }, async (_0xa220f, _0x123a92, {
-	store: _0x4ff3e9,
-	Void: _0x573654
-  }) => {
-	try {
-	  _0xa220f.react("🫡");
-	  let _0x369bef = await _0x4ff3e9.chats.all().filter(_0x17a722 => _0x17a722.id.endsWith("@g.us")).map(_0x2555de => _0x2555de);
-	  let _0x162811 = " 「  " + Config.botname + "'s group user list  」\n\nTotal " + _0x369bef.length + " active Groups found!";
-	  for (let _0x37fd61 of _0x369bef) {
-		let _0x10ff83 = await _0x573654.groupMetadata(_0x37fd61.id);
-		_0x162811 += "\n\nName : " + _0x10ff83.subject + " " + (_0x10ff83.owner ? "\nOwner : @" + _0x10ff83.owner.split("@")[0] : "") + "\nID : " + _0x37fd61.id + "\nMade : " + (_0x10ff83.creation ? moment(_0x10ff83.creation * 1000).tz("Asia/Kolkata").format("DD/MM/YYYY HH:mm:ss") : _0x10ff83.creation) + "\nMember : " + (_0x10ff83.participants.length || 0) + "\n\nMessages : " + _0x37fd61.unreadCount + "\nLastchat : " + moment(_0x37fd61.conversationTimestamp * 1000).tz(timezone).format("DD/MM/YYYY HH:mm:ss");
-	  }
-	  _0xa220f.send(_0x162811, {}, "suhail", _0xa220f);
-	} catch (_0x383d75) {
-	  return await _0xa220f.error(_0x383d75 + "\n\n command: listpc", _0x383d75, "*_Didn't get any results, Sorry!_*");
-	}
-  });
-  cmd({
-	pattern: "vcard",
-	desc: "Create Contact by given name.",
-	category: "whatsapp settings",
-	filename: __filename
-  }, async (_0x2721c0, _0x4a39c4) => {
-	try {
-	  if (!_0x2721c0.quoted) {
-		return _0x2721c0.reply("*Please Reply to User With Name*");
-	  }
-	  if (!_0x4a39c4) {
-		return _0x2721c0.reply("Please Give Me User Name, \n *Example : " + prefix + "vcard Suhail Tech Info* ");
-	  }
-	  var _0x96de1e = _0x4a39c4.split(" ");
-	  if (_0x96de1e.length > 3) {
-		_0x4a39c4 = _0x96de1e.slice(0, 3).join(" ");
-	  }
-	  const _0x4ef0e2 = "BEGIN:VCARD\nVERSION:3.0\nFN:" + _0x4a39c4 + "\nORG:;\nTEL;type=CELL;type=VOICE;waid=" + _0x2721c0.quoted.sender.split("@")[0] + ":+" + owner[0] + "\nEND:VCARD";
-	  let _0x2438e1 = {
-		contacts: {
-		  displayName: _0x4a39c4,
-		  contacts: [{
-			vcard: _0x4ef0e2
-		  }]
+  smd(
+	{
+	  pattern: "listpc",
+	  category: "whatsapp settings",
+	  desc: "Finds info about personal chats",
+	  filename: __filename,
+	},
+	async (message, _, { store }) => {
+	  try {
+		message.react("🫡");
+		const personalChats = await store.chats
+		  .all()
+		  .filter((chat) => chat.id.endsWith(".net"))
+		  .map((chat) => chat);
+  
+		let listText = ` 「 ${Config.botname}'s pm user list 」\n\nTotal ${personalChats.length} users are text in personal chat.`;
+  
+		for (const chat of personalChats) {
+		  listText += `\n\nUser: @${chat.id.split("@")[0]}\nMessages : ${chat.unreadCount}\nLastchat : ${moment(chat.conversationTimestamp * 1000)
+			.tz(timezone)
+			.format("DD/MM/YYYY HH:mm:ss")}`;
 		}
-	  };
-	  return await _0x2721c0.bot.sendMessage(_0x2721c0.chat, _0x2438e1, {
-		quoted: _0x2721c0
-	  });
-	} catch (_0x4812de) {
-	  await _0x2721c0.error(_0x4812de + "\n\ncommand : vcard", _0x4812de);
+  
+		message.bot.sendTextWithMentions(message.chat, listText, message);
+	  } catch (error) {
+		return await message.error(
+		  `${error}\n\n command: listpc`,
+		  error,
+		  "*_Didn't get any results, Sorry!_*"
+		);
+	  }
 	}
-  });
+  );
+  
+  smd(
+	{
+	  pattern: "listgc",
+	  category: "whatsapp settings",
+	  desc: "Finds info about all active groups",
+	  filename: __filename,
+	},
+	async (message, _, { store, Void }) => {
+	  try {
+		message.react("🫡");
+		const groups = await store.chats
+		  .all()
+		  .filter((chat) => chat.id.endsWith("@g.us"))
+		  .map((chat) => chat);
+  
+		let listText = ` 「 ${Config.botname}'s group user list 」\n\nTotal ${groups.length} active Groups found!`;
+  
+		for (const group of groups) {
+		  const groupMetadata = await Void.groupMetadata(group.id);
+		  listText += `\n\nName : ${groupMetadata.subject} ${
+			groupMetadata.owner ? `\nOwner : @${groupMetadata.owner.split("@")[0]}` : ""
+		  }\nID : ${group.id}\nMade : ${
+			groupMetadata.creation
+			  ? moment(groupMetadata.creation * 1000).tz("Asia/Kolkata").format("DD/MM/YYYY HH:mm:ss")
+			  : groupMetadata.creation
+		  }\nMember : ${groupMetadata.participants.length || 0}\n\nMessages : ${
+			group.unreadCount
+		  }\nLastchat : ${moment(group.conversationTimestamp * 1000)
+			.tz(timezone)
+			.format("DD/MM/YYYY HH:mm:ss")}`;
+		}
+  
+		message.send(listText, {}, "suhail", message);
+	  } catch (error) {
+		return await message.error(
+		  `${error}\n\n command: listpc`,
+		  error,
+		  "*_Didn't get any results, Sorry!_*"
+		);
+	  }
+	}
+  );
+  cmd(
+	{
+	  pattern: "vcard",
+	  desc: "Create Contact by given name.",
+	  category: "whatsapp settings",
+	  filename: __filename,
+	},
+	async (message, userName) => {
+	  try {
+		if (!message.quoted) {
+		  return message.reply("*Please Reply to User With Name*");
+		}
+  
+		if (!userName) {
+		  return message.reply(
+			`Please Give Me User Name, \n *Example : ${prefix}vcard Suhail Tech Info* `
+		  );
+		}
+  
+		const nameArray = userName.split(" ");
+		if (nameArray.length > 3) {
+		  userName = nameArray.slice(0, 3).join(" ");
+		}
+  
+		const vcard =
+		  `BEGIN:VCARD\nVERSION:3.0\nFN:${userName}\nORG:;\nTEL;type=CELL;type=VOICE;waid=${message.quoted.sender.split("@")[0]}:+${owner[0]}\nEND:VCARD`;
+  
+		const contactData = {
+		  contacts: {
+			displayName: userName,
+			contacts: [{ vcard }],
+		  },
+		};
+  
+		return await message.bot.sendMessage(message.chat, contactData, {
+		  quoted: message,
+		});
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : vcard`, error);
+	  }
+	}
+  );
   smd(
 	{
 	  pattern: "edit",
@@ -742,35 +785,39 @@ cmd(
 	  }
 	}
   );
-  cmd({
-	pattern: "vv",
-	alias: ["viewonce", "retrive"],
-	desc: "download viewOnce Message.",
-	category: "whatsapp settings",
-	use: "<query>",
-	filename: __filename
-  }, async (_0x9034b9, _0x25fb23) => {
-	try {
-	  var _0x1fd65b = _0x9034b9.reply_message && _0x9034b9.reply_message.viewOnce ? _0x9034b9.reply_message : false;
-	  if (!_0x1fd65b) {
-		return _0x9034b9.reply("```Please Reply A ViewOnce Message```");
-	  }
-	  let _0x1bc847 = {
-		key: _0x1fd65b.key,
-		message: {
-		  conversation: "```[VIEWONCE FOUND DOWNLOAD 100%]```"
+  cmd(
+	{
+	  pattern: "vv",
+	  alias: ["viewonce", "retrive"],
+	  desc: "download viewOnce Message.",
+	  category: "whatsapp settings",
+	  use: "<query>",
+	  filename: __filename,
+	},
+	async (message) => {
+	  try {
+		const viewOnceMessage = message.reply_message && message.reply_message.viewOnce
+		  ? message.reply_message
+		  : false;
+  
+		if (!viewOnceMessage) {
+		  return message.reply("```Please Reply A ViewOnce Message```");
 		}
-	  };
-	  let _0x201e84 = await _0x9034b9.bot.downloadAndSaveMediaMessage(_0x1fd65b.msg);
-	  await _0x9034b9.bot.sendMessage(_0x9034b9.jid, {
-		[_0x1fd65b.mtype2.split("Mes")[0]]: {
-		  url: _0x201e84
-		},
-		caption: _0x1fd65b.body
-	  }, {
-		quoted: _0x1bc847
-	  });
-	} catch (_0x1a1295) {
-	  await message.error(_0x1a1295 + "\n\ncommand: vv", _0x1a1295);
+  
+		const forwardMessage = {
+		  key: viewOnceMessage.key,
+		  message: {
+			conversation: "```[VIEWONCE FOUND DOWNLOAD 100%]```",
+		  },
+		};
+  
+		const mediaPath = await message.bot.downloadAndSaveMediaMessage(viewOnceMessage.msg);
+		await message.bot.sendMessage(message.jid, {
+		  [viewOnceMessage.mtype2.split("Mes")[0]]: { url: mediaPath },
+		  caption: viewOnceMessage.body,
+		}, { quoted: forwardMessage });
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand: vv`, error);
+	  }
 	}
-  });
+  );
