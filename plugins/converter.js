@@ -325,7 +325,7 @@ smd({
   filename: __filename
 }, async (_0x230c03, _0x3b568a) => {
   try {
-    let _0x365550 = "┏━━━━━━━━━━━━━━━━━━━━━━━━\n┃\t*💬SUHAIL-MD_FANCY_TEXT💬* \n┗━━━━━━━━━━━━━━━━━━━━━━━━\n\n " + (_0x3b568a ? "```🔢Reply the number you wants to select``` \n\n" : "```\t\t" + prefix + "fancy Suhail(For all text)\n\t\t" + prefix + "fancy 25 Suhail(For specific text)```\n\n");
+    let _0x365550 = "┏━━━━━━━━━━━━━━━━━━━━━━━━\n┃\t*💬ASTA_MD_FANCY_TEXT💬* \n┗━━━━━━━━━━━━━━━━━━━━━━━━\n\n " + (_0x3b568a ? "```🔢Reply the number you wants to select``` \n\n" : "```\t\t" + prefix + "fancy Asta(For all text)\n\t\t" + prefix + "fancy 25 Suhail(For specific text)```\n\n");
     let _0x50c7d9 = parseInt(_0x3b568a);
     if (isNaN(_0x50c7d9)) {
       let _0x4ca942 = _0x3b568a ? _0x3b568a : "Suhail";
@@ -695,10 +695,3 @@ smd({
     return await _0x54e3dc.error(_0x72e5d + "\n\ncmdName: ttp\n");
   }
 });
-
-/*
-{
-   pattern: "converter",
-   type: "notes",
-}
-*/

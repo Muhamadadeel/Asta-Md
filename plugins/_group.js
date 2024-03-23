@@ -247,66 +247,77 @@ smd({
     await msg.error(error + "\n\ncommand: acceptall", error);
   }
  });
-smd({
+ smd({
   cmdname: "joinrequests",
   alias: ["requestjoin"],
   info: "Set Description of Group",
   type: "manage group",
   filename: __filename,
   use: "<enter Description Text>"
-}, async (_0x13cccd, _0x38cc41) => {
+}, async (message, args) => {
   try {
-    if (!_0x13cccd.isGroup) {
-      return _0x13cccd.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x13cccd.isBotAdmin || !_0x13cccd.isAdmin) {
-      return await _0x13cccd.reply(!_0x13cccd.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x13cccd.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+
+    if (!message.isBotAdmin || !message.isAdmin) {
+      return await message.reply(!message.isBotAdmin
+        ? `*_I'm Not Admin In This Group${!message.isCreator ? ", Idiot" : ""}_*`
+        : tlang().admin);
     }
-    const _0x3115b1 = await _0x13cccd.bot.groupRequestParticipantsList(_0x13cccd.chat);
-    if (!_0x3115b1 || !_0x3115b1[0]) {
-      return await _0x13cccd.reply("*_No Request Join Yet_*");
+
+    const requestList = await message.bot.groupRequestParticipantsList(message.chat);
+    if (!requestList || !requestList[0]) {
+      return await message.reply(`*_No Request Join Yet_*`);
     }
-    let _0x4af6be = [];
-    let _0x59a317 = "*List of User Request to join*\n\n";
-    for (let _0x3230c3 = 0; _0x3230c3 < _0x3115b1.length; _0x3230c3++) {
-      _0x59a317 += "@" + _0x3115b1[_0x3230c3].jid.split("@")[0] + "\n";
-      _0x4af6be = [..._0x4af6be, _0x3115b1[_0x3230c3].jid];
+
+    let mentionedUsers = [];
+    let requestMessage = "*List of User Request to join*\n\n";
+    for (let i = 0; i < requestList.length; i++) {
+      requestMessage += `@${requestList[i].jid.split("@")[0]}\n`;
+      mentionedUsers = [...mentionedUsers, requestList[i].jid];
     }
-    return await _0x13cccd.send(_0x59a317, {
-      mentions: [_0x4af6be]
-    });
-  } catch (_0x5c8e97) {
-    await _0x13cccd.error(_0x5c8e97 + "\n\ncommand: listrequest", _0x5c8e97);
+
+    return await message.send(requestMessage, { mentions: [mentionedUsers] });
+  } catch (error) {
+    await message.error(`${error}\n\ncommand: listrequest`, error);
   }
 });
+
 smd({
   cmdname: "setgcdesc",
-  alias: ["setgdesc","setdesc", "gdesc"],
+  alias: ["setgdesc", "setdesc", "gdesc"],
   info: "Set Description of Group",
   type: "manage group",
   filename: __filename,
   use: "<enter Description Text>"
-}, async (_0x160b96, _0x4ef0da) => {
+}, async (message, description) => {
   try {
-    if (!_0x160b96.isGroup) {
-      return _0x160b96.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x4ef0da) {
-      return await _0x160b96.reply("*Provide Description text, You wants to Set*");
+
+    if (!description) {
+      return await message.reply("*Provide Description text, You wants to Set*");
     }
-    if (!_0x160b96.isBotAdmin || !_0x160b96.isAdmin) {
-      return await _0x160b96.reply(!_0x160b96.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x160b96.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+
+    if (!message.isBotAdmin || !message.isAdmin) {
+      return await message.reply(!message.isBotAdmin
+        ? `*_I'm Not Admin In This Group${!message.isCreator ? ", Idiot" : ""}_*`
+        : tlang().admin);
     }
+
     try {
-      await _0x160b96.bot.groupUpdateDescription(_0x160b96.chat, _0x4ef0da + "\n\n\t" + Config.caption);
-      _0x160b96.reply("*_✅Group description Updated Successfuly!_*");
-    } catch (_0x986809) {
-      await _0x160b96.reply("*_Can't update description, Group Id not found!!_*");
+      await message.bot.groupUpdateDescription(message.chat, `${description}\n\n\t${Config.caption}`);
+      message.reply("*_✅Group description Updated Successfuly!_*");
+    } catch (error) {
+      await message.reply("*_Can't update description, Group Id not found!!_*");
     }
-  } catch (_0x526bb2) {
-    await _0x160b96.error(_0x526bb2 + "\n\ncommand: setdesc", _0x526bb2);
+  } catch (error) {
+    await message.error(`${error}\n\ncommand: setdesc`, error);
   }
 });
+
 smd({
   cmdname: "setname",
   alias: ["setgname", "gname"],
@@ -314,25 +325,30 @@ smd({
   type: "manage group",
   filename: __filename,
   use: "<enter Description Text>"
-}, async (_0x25d56b, _0x332d77) => {
+}, async (message, newName) => {
   try {
-    if (!_0x25d56b.isGroup) {
-      return _0x25d56b.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x332d77) {
-      return await _0x25d56b.reply("*Uhh Dear, Give text to Update This Group Name*");
+
+    if (!newName) {
+      return await message.reply("*Uhh Dear, Give text to Update This Group Name*");
     }
-    if (!_0x25d56b.isBotAdmin || !_0x25d56b.isAdmin) {
-      return await _0x25d56b.reply(!_0x25d56b.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x25d56b.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+
+    if (!message.isBotAdmin || !message.isAdmin) {
+      return await message.reply(!message.isBotAdmin
+        ? `*_I'm Not Admin In This Group${!message.isCreator ? ", Idiot" : ""}_*`
+        : tlang().admin);
     }
+
     try {
-      await _0x25d56b.bot.groupUpdateSubject(_0x25d56b.chat, _0x332d77);
-      _0x25d56b.reply("*_✅Group Name Updated Successfuly.!_*");
-    } catch (_0x379b84) {
-      await _0x25d56b.reply("*_Can't update name, Group Id not found!!_*");
+      await message.bot.groupUpdateSubject(message.chat, newName);
+      message.reply("*_✅Group Name Updated Successfuly.!_*");
+    } catch (error) {
+      await message.reply("*_Can't update name, Group Id not found!!_*");
     }
-  } catch (_0x1eee32) {
-    await _0x25d56b.error(_0x1eee32 + "\n\ncommand: setdesc", _0x1eee32);
+  } catch (error) {
+    await message.error(`${error}\n\ncommand: setdesc`, error);
   }
 });
 smd({
