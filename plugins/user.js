@@ -624,7 +624,7 @@ cmd({
 	cmdname: "block",
 	info: "blocks a person",
 	fromMe: true,
-	type: "whatsapp",
+	type: "whatsapp settings",
 	filename: __filename,
 	use: "<quote/reply user.>"
   }, async _0x51ddfa => {
@@ -646,7 +646,7 @@ cmd({
   smd({
 	cmdname: "unblock",
 	info: "Unblocked user.",
-	type: "whatsapp",
+	type: "whatsapp settings",
 	fromMe: true,
 	filename: __filename
   }, async _0x372598 => {

@@ -624,90 +624,124 @@ cmd(
 	  await _0x2721c0.error(_0x4812de + "\n\ncommand : vcard", _0x4812de);
 	}
   });
-  smd({
-	pattern: "edit",
-	fromMe: true,
-	desc: "edit message that sended by bot",
-	type: "whatsapp"
-  }, async (_0x248e32, _0x36d92f) => {
-	try {
-	  let _0x38f991 = _0x248e32.reply_message && _0x248e32.reply_message.fromMe ? _0x248e32.reply_message : false;
-	  if (!_0x38f991) {
-		return await _0x248e32.reply("_Reply to a message that sent by you!_");
+  smd(
+	{
+	  pattern: "edit",
+	  fromMe: true,
+	  desc: "edit message that sended by bot",
+	  type: "whatsapp settings",
+	},
+	async (message, newText) => {
+	  try {
+		const replyMessage = message.reply_message && message.reply_message.fromMe ? message.reply_message : false;
+		if (!replyMessage) {
+		  return await message.reply("_Reply to a message that sent by you!_");
+		}
+		if (!newText) {
+		  return await message.reply("_Need text, Example: edit hi_");
+		}
+		return await message.edit(newText, { edit: replyMessage });
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : edit`, error);
 	  }
-	  if (!_0x36d92f) {
-		return await _0x248e32.reply("_Need text, Example: edit hi_");
-	  }
-	  return await _0x248e32.edit(_0x36d92f, {
-		edit: _0x38f991
-	  });
-	} catch (_0x1ebf78) {
-	  await _0x248e32.error(_0x1ebf78 + "\n\ncommand : edit", _0x1ebf78);
 	}
-  });
-  smd({
-	pattern: "forward",
-	alias: ["send"],
-	desc: "forward your messages in your jid",
-	type: "whatsapp"
-  }, async (_0x33c3ba, _0xc4c33d) => {
-	try {
-	  if (!_0x33c3ba.reply_message) {
-		return _0x33c3ba.reply("*_Reply to something!_*");
+  );
+  
+  smd(
+	{
+	  pattern: "forward",
+	  alias: ["send"],
+	  desc: "forward your messages in your jid",
+	  type: "whatsapp settings",
+	},
+	async (message, targetJid) => {
+	  try {
+		if (!message.reply_message) {
+		  return message.reply("*_Reply to something!_*");
+		}
+		const parsedJids = await parsedJid(targetJid);
+		if (!targetJid || !parsedJids || !parsedJids[0]) {
+		  return await message.send(`*Provide jid to forward message*\n*use _${prefix}jid,_ to get jid of users!*`);
+		}
+		for (let i = 0; i < parsedJids.length; i++) {
+		  message.bot.forwardOrBroadCast(parsedJids[i], message.reply_message);
+		}
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : forward`, error);
 	  }
-	  let _0x336179 = await parsedJid(_0xc4c33d);
-	  if (!_0xc4c33d || !_0x336179 || !_0x336179[0]) {
-		return await _0x33c3ba.send("*Provide jid to forward message*\n*use _" + prefix + "jid,_ to get jid of users!*");
-	  }
-	  for (let _0xcd7afa = 0; _0xcd7afa < _0x336179.length; _0xcd7afa++) {
-		_0x33c3ba.bot.forwardOrBroadCast(_0x336179[_0xcd7afa], _0x33c3ba.reply_message);
-	  }
-	} catch (_0x5c2093) {
-	  await _0x33c3ba.error(_0x5c2093 + "\n\ncommand : forward", _0x5c2093);
 	}
-  });
-  smd({
-	cmdname: "block",
-	info: "blocks a person",
-	fromMe: true,
-	type: "whatsapp",
-	filename: __filename,
-	use: "<quote/reply user.>"
-  }, async _0x51ddfa => {
-	try {
-	  let _0x237c49 = _0x51ddfa.reply_message ? _0x51ddfa.reply_message.sender : !_0x51ddfa.isGroup ? _0x51ddfa.from : _0x51ddfa.mentionedJid[0] ? _0x51ddfa.mentionedJid[0] : "";
-	  if (!_0x237c49 && !_0x237c49.includes("@s.whatsapp.net")) {
-		return await _0x51ddfa.reply("*Uhh dear, reply/mention an User*");
+  );
+  
+  smd(
+	{
+	  cmdname: "block",
+	  info: "blocks a person",
+	  fromMe: true,
+	  type: "whatsapp settings",
+	  filename: __filename,
+	  use: "<quote/reply user.>",
+	},
+	async (message) => {
+	  try {
+		let targetUser = message.reply_message
+		  ? message.reply_message.sender
+		  : !message.isGroup
+		  ? message.from
+		  : message.mentionedJid[0]
+		  ? message.mentionedJid[0]
+		  : "";
+  
+		if (!targetUser || !targetUser.includes("@s.whatsapp.net")) {
+		  return await message.reply("*Uhh dear, reply/mention an User*");
+		}
+  
+		if (message.checkBot(targetUser)) {
+		  return await message.reply("*Huh, I can't block my Creator!!*");
+		}
+  
+		await message.bot.updateBlockStatus(targetUser, "block")
+		  .then(() => {
+			message.react("✨", message);
+		  })
+		  .catch(() => message.reply("*_Can't block user, Sorry!!_*"));
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand: block`, error, false);
 	  }
-	  if (_0x51ddfa.checkBot(_0x237c49)) {
-		return await _0x51ddfa.reply("*Huh, I can't block my Creator!!*");
-	  }
-	  await _0x51ddfa.bot.updateBlockStatus(_0x237c49, "block").then(_0x3646b4 => {
-		_0x51ddfa.react("✨", _0x51ddfa);
-	  }).catch(_0x347137 => _0x51ddfa.reply("*_Can't block user, Sorry!!_*"));
-	} catch (_0x37166b) {
-	  await _0x51ddfa.error(_0x37166b + "\n\ncommand: block", _0x37166b, false);
 	}
-  });
-  smd({
-	cmdname: "unblock",
-	info: "Unblocked user.",
-	type: "whatsapp",
-	fromMe: true,
-	filename: __filename
-  }, async _0x372598 => {
-	try {
-	  let _0x4f0daf = _0x372598.reply_message ? _0x372598.reply_message.sender : !_0x372598.isGroup ? _0x372598.from : _0x372598.mentionedJid[0] ? _0x372598.mentionedJid[0] : "";
-	  if (!_0x4f0daf && !_0x4f0daf.includes("@s.whatsapp.net")) {
-		return await _0x372598.reply("*Uhh dear, reply/mention an User*");
+  );
+  
+  smd(
+	{
+	  cmdname: "unblock",
+	  info: "Unblocked user.",
+	  type: "whatsapp settings",
+	  fromMe: true,
+	  filename: __filename,
+	},
+	async (message) => {
+	  try {
+		let targetUser = message.reply_message
+		  ? message.reply_message.sender
+		  : !message.isGroup
+		  ? message.from
+		  : message.mentionedJid[0]
+		  ? message.mentionedJid[0]
+		  : "";
+  
+		if (!targetUser || !targetUser.includes("@s.whatsapp.net")) {
+		  return await message.reply("*Uhh dear, reply/mention an User*");
+		}
+  
+		await message.bot.updateBlockStatus(targetUser, "unblock")
+		  .then(() =>
+			message.send(`*@${targetUser.split("@")[0]} Unblocked Successfully..!*`, { mentions: [users] })
+		  )
+		  .catch(() => message.reply("*_Can't Unblock user, Make sure user blocked!!_*"));
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand: unblock`, error);
 	  }
-	  await _0x372598.bot.updateBlockStatus(_0x4f0daf, "unblock").then(_0xc1e4ca => _0x372598.send("*@" + _0x4f0daf.split("@")[0] + " Unblocked Successfully..!*", {
-		mentions: [users]
-	  })).catch(_0x1b7358 => _0x372598.reply("*_Can't Unblock user, Make sure user blocked!!_*"));
-	} catch (_0x181f50) {
-	  await _0x372598.error(_0x181f50 + "\n\ncommand: unblock", _0x181f50);
 	}
-  });
+  );
   cmd({
 	pattern: "vv",
 	alias: ["viewonce", "retrive"],
