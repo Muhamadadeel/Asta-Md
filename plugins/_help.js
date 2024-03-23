@@ -318,7 +318,7 @@ smd({
         cmdIcon = " | ";
         cmdFooter = "╰═══════════════⊷";
       } else if (menuType === 2 || Config.menu.trim().startsWith("2") || Config.menu.toLowerCase().includes("menu2")) {
-        header = "╭═[ *`" + Config.botname + "`* ]";
+        header = " ╭═[ *`" + Config.botname + "`* ]";
         cmdListIcon = " │ ";
         footer = " ╰═══════════════⊷\n╰═════════════⊷";
         categoryHeader = " ┌─❐";
