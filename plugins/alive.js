@@ -35,7 +35,7 @@ let text = `╭═══ ━ ━ ━ ━ • ━ ━ ━ ━ ═══
           let media ;try{ media = await smdBuffer(image) }catch{media = log0}
            const q =await message.bot.fakeMessage("contact",{},name) 
            let contextInfo = {...(await message.bot.contextInfo(name,body,media,1,surl, 2) )}
-           await message.send(text, {contextInfo : contextInfo },"suhail",  q )
+           await message.send(text, {contextInfo : contextInfo },"astro",  q )
     }catch(e){ await message.error(`${e}\n\ncommand: intro`,e,false)}
 
 
