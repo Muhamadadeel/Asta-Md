@@ -1,4 +1,4 @@
-const { cmd } = require('../lib');
+const { cmd } = require('../lib/plugins');
 const { updateProfilePicture, forwardMessage } = require("../lib");
 const Config = require('../config')
 
@@ -16,7 +16,7 @@ cmd({
   pattern: 'antidelete',
   fromMe: true,
   desc: 'Configure Anti-Delete preferences',
-  category: 'admin',
+  category: 'user mode',
 }, async (Void, citel, text) => {
   const args = text.split(' | ');
 
@@ -69,7 +69,7 @@ cmd({
   pattern: "gjid",
   fromMe: true,
   desc: "Get the JID of the current group",
-  category : "watsusi",
+  category : "user mode",
 }, async (Void, citel) => {
   if (!citel.isGroup) {
     await citel.reply("This command can only be used in a group.");

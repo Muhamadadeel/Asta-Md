@@ -20,7 +20,7 @@ async function loadMessages(store, chatId, userId = "") {
 smd({
  pattern: "delspam",
  alias: ["dlspam"],
- category: "tech",
+ category: "user mode",
  desc: "delete messages of user from chat",
  use: "[ 4/ 6/ 10 ]",
  usage: "delete messages of replied/@mentioned user from chat by giving number of messages!",

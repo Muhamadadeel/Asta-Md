@@ -25,7 +25,7 @@ smd({
     alias: ["categories", "ctgry", "category"],
     desc: "category list",
     react: "💁🏽‍♂️",
-    category: "general"
+    category: "main"
   }, async (message, query) => {
     try {
       if (query.split(" ")[0]) {
@@ -90,7 +90,7 @@ smd({
   smd({
     pattern: "info",
     type: "MENU list",
-    info: "general",
+    info: "main",
     react: "ℹ️",
     dontAddCommandList: true
   }, async message => {
@@ -130,7 +130,7 @@ smd({
   astro_patch.cmd({
     pattern: "menuhelp",
     desc: "list menu",
-    category: "general",
+    category: "main",
     react: "🥀"
   }, async message => {
     try {
@@ -163,7 +163,7 @@ smd({
   astro_patch.cmd({
     pattern: "setcmd",
     desc: "To set a custom command alias",
-    category: "general",
+    category: "main",
     fromMe: true,
     filename: __filename
   }, async (message, query, {
@@ -210,7 +210,7 @@ smd({
   astro_patch.cmd({
     pattern: "delcmd",
     desc: "To delete a custom command alias",
-    category: "general",
+    category: "main",
     fromMe: true,
     filename: __filename
   }, async (message, query, {
@@ -243,7 +243,7 @@ smd({
   astro_patch.smd({
     pattern: "ping",
     desc: "To check ping",
-    category: "general",
+    category: "main",
     react: "📡",
     filename: __filename
   }, async message => {
@@ -273,7 +273,7 @@ smd({
   astro_patch.cmd({
     cmdname: "menu",
     desc: "Help list",
-    type: "general",
+    type: "main",
     react: "📑",
     filename: __filename
   }, async (message, query) => {
@@ -390,7 +390,7 @@ smd({
   astro_patch.smd({
     pattern: "owner",
     desc: "To check ping",
-    category: "general",
+    category: "user mode",
     react: "🎫",
     filename: __filename
   }, async message => {
@@ -426,7 +426,7 @@ smd({
   astro_patch.smd({
     pattern: "creator",
     desc: "To check ping",
-    category: "general",
+    category: "user mode",
     filename: __filename
   }, async message => {
     try {
@@ -461,7 +461,7 @@ smd({
   astro_patch.cmd({
     pattern: "trt",
     alias: ["translate"],
-    category: "general",
+    category: "main",
     filename: __filename,
     use: "< text >",
     desc: "Translate's given text in desired language."
@@ -497,7 +497,7 @@ smd({
   astro_patch.cmd({
     pattern: "file",
     desc: "to get the exact filename and location where a command is defined in the repository. This allows the user to edit the command's code.",
-    category: "general",
+    category: "main",
     fromMe: true,
     filename: __filename
   }, async (message, query) => {
@@ -559,7 +559,7 @@ smd({
   astro_patch.cmd({
     pattern: "eval",
     alias: ["$"],
-    category: "owner",
+    category: "tools",
     filename: __filename,
     fromMe: true,
     desc: "Runs js code on node server.",
@@ -586,7 +586,7 @@ smd({
   });
   astro_patch.cmd({
     pattern: "shell",
-    category: "owner",
+    category: "tools",
     filename: __filename,
     fromMe: true,
     desc: "Runs command in Heroku(server) shell.",

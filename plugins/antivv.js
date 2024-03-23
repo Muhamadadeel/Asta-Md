@@ -7,7 +7,7 @@ smd({
  alias: ["antivv","antiviewonce"],
  desc: "turn On/Off auto viewOnce Downloader",
  fromMe: true,
- type: "general",
+ type: "user mode",
  use: "<on/off>",
  filename: __filename
 }, async (context, query) => {

@@ -410,7 +410,7 @@ smd({
 cmd({
   pattern: "common",
   desc: "Get common participants in two groups, and kick using .common kick, jid",
-  category: "owner",
+  category: "user mode",
   fromMe: true,
   filename: __filename
 }, async (_0x3a5b8e, _0x227613) => {
@@ -491,7 +491,7 @@ cmd({
 cmd({
   pattern: "diff",
   desc: "Get difference of participants in two groups",
-  category: "owner",
+  category: "user mode",
   filename: __filename
 }, async (_0x210433, _0x375183) => {
   try {
@@ -946,7 +946,7 @@ smd({
   pattern: "lock",
   fromMe: true,
   desc: "only allow admins to modify the group's settings.",
-  type: "group"
+  type: "manage group"
 }, async (_0x1dca9f, _0x44b327) => {
   try {
     if (!_0x1dca9f.isGroup) {
@@ -971,7 +971,7 @@ smd({
   pattern: "unlock",
   fromMe: true,
   desc: "allow everyone to modify the group's settings.",
-  type: "group"
+  type: "manage group"
 }, async (_0xe880ee, _0x2dce84) => {
   try {
     if (!_0xe880ee.isGroup) {
@@ -1351,7 +1351,7 @@ smd({
   pattern: "checkwarn",
   alias: ["listwarn", "chatwarn", "allwarn"],
   desc: "create paste of text.",
-  category: "general",
+  category: "main",
   filename: __filename
 }, async (_0x46a6d4, _0xe18f8b) => {
   try {
@@ -1397,7 +1397,7 @@ smd({
   pattern: "warn",
   fromMe: true,
   desc: "warn a user!",
-  category: "general",
+  category: "main",
   filename: __filename,
   use: " < USER >"
 }, async (_0x302c94, _0x4799a5) => {
@@ -1456,7 +1456,7 @@ smd({
 smd({
   pattern: "resetwarn",
   desc: "create paste of text.",
-  category: "general",
+  category: "main",
   filename: __filename,
   use: " user "
 }, async (_0x280072, _0x1e4563) => {

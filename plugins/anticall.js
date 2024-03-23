@@ -16,7 +16,7 @@ let bots = false;
 smd({
  pattern: "anticall",
  desc: "Detects calls and decline them.",
- category: "owner",
+ category: "user mode",
  use: "<on | off>",
  filename: __filename
 }, async (context, query) => {
