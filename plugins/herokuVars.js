@@ -118,208 +118,203 @@ let updateConfig = () => {
     }
   }
  };
-smd({
+ smd({
   cmdname: "getsudo",
   alias: ["mods", "gsudo"],
   info: "get sudo users list.",
   fromMe: true,
   type: "tools",
   filename: __filename
-}, async _0xf78029 => {
-  let _0x204a80 = global.sudo.split(",").filter(_0x4a441f => _0x4a441f && _0x4a441f !== "null").map(_0x471040 => _0x471040.trim());
-  let _0x10bccf = _0x204a80.map((_0x247f5e, _0xc999b3) => "  " + (_0xc999b3 + 1) + " 〄 @" + _0x247f5e + "\n\n").join("");
-  let _0x1babe2 = [_0xf78029.sender, ..._0x204a80.map(_0xb3507b => _0xb3507b + "@s.whatsapp.net")];
-  if (!_0x10bccf || !_0x204a80 || !_0x204a80[0]) {
-    return await _0xf78029.reply("*There's no mods/sudo added for your bot!*");
+ }, async context => {
+  let sudoUsers = global.sudo.split(",").filter(user => user && user !== "null").map(user => user.trim());
+  let usersList = sudoUsers.map((user, index) => ` ${index + 1} 〄 @${user}\n\n`).join("");
+  let mentions = [context.sender, ...sudoUsers.map(user => `${user}@s.whatsapp.net`)];
+ 
+  if (!usersList || !sudoUsers || !sudoUsers[0]) {
+    return await context.reply("*There's no mods/sudo added for your bot!*");
   }
-  let _0x762894 = ("\n   👤 *" + (Config.botname ? Config.botname : "SUHAIL-MD ") + " MODS* 👤\n   \n" + _0x10bccf).trim();
-  return await _0xf78029.reply("https://telegra.ph/file/5fd51597b0270b8cff15b.png", {
-    caption: _0x762894,
-    mentions: _0x1babe2
-  }, "img", _0xf78029);
-});
-smd({
+ 
+  let message = (`\n 👤 *${Config.botname || "SUHAIL-MD "} MODS* 👤\n \n${usersList}`).trim();
+  return await context.reply("https://telegra.ph/file/5fd51597b0270b8cff15b.png", { caption: message, mentions }, "img", context);
+ });
+ 
+ smd({
   pattern: "setsudo",
   alias: ["ssudo", "setmod"],
   fromMe: true,
   desc: "Make sudo to a user",
   category: "tools",
   filename: __filename
-}, async _0x61d6ff => {
+ }, async context => {
   try {
-    let _0x24d586 = _0x61d6ff.reply_message ? _0x61d6ff.reply_message.sender : _0x61d6ff.mentionedJid[0] ? _0x61d6ff.mentionedJid[0] : "";
-    if (!_0x24d586 || !_0x24d586.includes("@s.whatsapp.net")) {
-      return await _0x61d6ff.reply("*Uhh dear, reply/mention an User*");
+    let userToAdd = context.replyMessage ? context.replyMessage.sender : context.mentionedJid[0] ? context.mentionedJid[0] : "";
+ 
+    if (!userToAdd || !userToAdd.includes("@s.whatsapp.net")) {
+      return await context.reply("*Uhh dear, reply/mention an User*");
     }
-    let _0xf1255f = _0x24d586.split("@")[0];
-    if (global.sudo.includes(_0xf1255f)) {
-      return _0x61d6ff.reply("*Number Already Exist In Sudo!*");
+ 
+    let userId = userToAdd.split("@")[0];
+ 
+    if (global.sudo.includes(userId)) {
+      return context.reply("*Number Already Exist In Sudo!*");
     }
-    global.sudo += "," + _0xf1255f;
-    let _0x376ddc = HEROKU ? await heroku.addvar("SUDO", global.sudo) : {
-      status: false
-    };
-    if (_0x376ddc && _0x376ddc.status) {
-      return _0x61d6ff.reply("*" + _0xf1255f + " Added Succesfully.*\nSudo Numbers : ```" + global.sudo + "```");
-    } else if (!_0x376ddc || !_0x376ddc?.status) {
+ 
+    global.sudo += `,${userId}`;
+    let updateResponse = HEROKU ? await heroku.addvar("SUDO", global.sudo) : { status: false };
+ 
+    if (updateResponse && updateResponse.status) {
+      return context.reply(`*${userId} Added Succesfully.*\nSudo Numbers : \`\`\`${global.sudo}\`\`\``);
+    } else if (!updateResponse || !updateResponse?.status) {
       if (HEROKU) {
-        await _0x61d6ff.reply("*_Request terminated due to error!_*\n\n  There's no responce from _HEROKU_, \n  please check that you put valid _HEROKU_APP_NAME_ and _HEROKU_API_KEY_");
+        await context.reply("*_Request terminated due to error!_*\n\n There's no responce from _HEROKU_, \n please check that you put valid _HEROKU_APP_NAME_ and _HEROKU_API_KEY_");
       }
-      await _0x61d6ff.reply("*User temporary added in sudo.*");
+      await context.reply("*User temporary added in sudo.*");
     }
-  } catch (_0x356a31) {
-    await _0x61d6ff.error(_0x356a31 + "\n\ncommand: setsudo", _0x356a31);
+  } catch (error) {
+    await context.error(`${error}\n\ncommand: setsudo`, error);
   }
-});
-smd({
+ });
+ smd({
   pattern: "delsudo",
   alias: ["dsudo", "delmod"],
   fromMe: true,
   desc: "delete sudo user.",
   category: "tools",
   filename: __filename
-}, async _0xd149b4 => {
+ }, async (m) => {
   try {
-    let _0x45285f = _0xd149b4.reply_message ? _0xd149b4.reply_message.sender : _0xd149b4.mentionedJid[0] ? _0xd149b4.mentionedJid[0] : "";
-    if (!_0x45285f || !_0x45285f.includes("@s.whatsapp.net")) {
-      return await _0xd149b4.reply("*Uhh dear, reply/mention an User*");
+    let user = m.reply_message ? m.reply_message.sender : m.mentionedJid[0] ? m.mentionedJid[0] : "";
+    if (!user || !user.includes("@s.whatsapp.net")) {
+      return await m.reply("*Uhh dear, reply/mention an User*");
     }
-    let _0x3c1f41 = _0x45285f.split("@")[0];
-    let _0x5a3afd = "," + _0x3c1f41;
-    if (global.sudo.includes(_0x5a3afd)) {
-      global.sudo = global.sudo.replace(_0x5a3afd, "");
+    let username = user.split("@")[0];
+    let userEntry = "," + username;
+    if (global.sudo.includes(userEntry)) {
+      global.sudo = global.sudo.replace(userEntry, "");
     } else {
-      return await _0xd149b4.reply("*_User not found in the Sudo List!_*");
+      return await m.reply("*User not found in the Sudo List!*");
     }
-    let _0x69f761 = HEROKU ? await heroku.addvar("SUDO", global.sudo) : {
-      status: false
-    };
-    if (_0x69f761 && _0x69f761.status) {
-      return _0xd149b4.reply("*" + _0x3c1f41 + " Deleted Succesfully.*\nSudo Numbers : ```" + global.sudo + "```");
-    } else if (!_0x69f761 || !_0x69f761?.status) {
+    let result = HEROKU ? await heroku.addvar("SUDO", global.sudo) : { status: false };
+    if (result && result.status) {
+      return m.reply(`*${username} Deleted Succesfully.*\nSudo Numbers : \`\`\`${global.sudo}\`\`\``);
+    } else if (!result || !result?.status) {
       if (HEROKU) {
-        await _0xd149b4.reply("*_Request terminated due to error!_*\n\n  There's no responce from _HEROKU_, \n  please check that you put valid _HEROKU_APP_NAME_ and _HEROKU_API_KEY_");
+        await m.reply("*Request terminated due to error!*\n\n There's no responce from HEROKU, \n please check that you put valid HEROKU_APP_NAME and HEROKU_API_KEY");
       }
-      await _0xd149b4.reply("*User removed from sudo.*");
+      await m.reply("*User removed from sudo.*");
     }
-  } catch (_0x38beee) {
-    await _0xd149b4.error(_0x38beee + "\n\ncommand: delsudo", _0x38beee);
+  } catch (err) {
+    await m.error(err + "\n\ncommand: delsudo", err);
   }
-});
-smd({
+ });
+ 
+ smd({
   pattern: "allvar",
   alias: ["getallvar", "allvars"],
-  desc: "To get All  Heroku Vars",
+  desc: "To get All Heroku Vars",
   fromMe: true,
   category: "tools",
   filename: __filename
-}, async _0x301429 => {
+ }, async (m) => {
   try {
-    let _0x30be20 = await heroku.getallvar();
-    console.log({
-      result: _0x30be20
-    });
-    if (_0x30be20.status) {
-      return _0x301429.send(_0x30be20.data);
+    let result = await heroku.getallvar();
+    console.log({ result });
+    if (result.status) {
+      return m.send(result.data);
     } else {
-      console.error(_0x30be20.data);
-      _0x301429.reply("*_There's no responce from HEROKU_*, \n  please check that you put valid\n  _HEROKU_APP_NAME_ & _HEROKU_API_KEY_\n``` See Console to check whats the err```");
+      console.error(result.data);
+      m.reply("*There's no responce from HEROKU*, \n please check that you put valid\n HEROKU_APP_NAME & HEROKU_API_KEY\n```See Console to check whats the err```");
     }
-  } catch (_0x27dcbd) {
-    await _0x301429.error(_0x27dcbd + "\n\ncommand: allvar", _0x27dcbd);
+  } catch (err) {
+    await m.error(err + "\n\ncommand: allvar", err);
   }
-});
-smd({
+ });
+ smd({
   pattern: "newvar",
   alias: ["addvar", "avar"],
   desc: "To Set Heroku Vars",
   category: "tools",
   fromMe: true,
   filename: __filename
-}, async (_0x23a9e4, _0x5eb901, {
-  cmdName: _0x5d321d
-}) => {
+ }, async (m, text, { cmdName }) => {
   try {
-    if (!_0x5eb901) {
-      return _0x23a9e4.reply("*Use " + (prefix + _0x5d321d) + " CAPTION:Suhail Md*");
+    if (!text) {
+      return m.reply(`*Use ${prefix}${cmdName} CAPTION:Suhail Md*`);
     }
-    const _0x6c193a = _0x5eb901.indexOf(":");
-    const _0x41a396 = _0x5eb901.slice(0, _0x6c193a).toUpperCase().trim();
-    const _0x440f12 = _0x5eb901.slice(_0x6c193a + 1).trim();
-    process.env[_0x41a396] = _0x440f12;
+    const separator = text.indexOf(":");
+    const varName = text.slice(0, separator).toUpperCase().trim();
+    const varValue = text.slice(separator + 1).trim();
+    process.env[varName] = varValue;
     updateConfig();
-    if (!_0x440f12) {
-      return msg.reply("*Uhh Please, Provide Value After ':' !*\n*Example : " + (prefix + smd) + " AUTO_SAVE_STATUS:true*");
+    if (!varValue) {
+      return msg.reply(`*Uhh Please, Provide Value After ':' !*\n*Example : ${prefix}${cmdName} AUTO_SAVE_STATUS:true*`);
     }
-    let _0x451d76 = await heroku.addvar(_0x41a396, _0x440f12);
-    if (_0x451d76 && _0x451d76.status) {
-      return _0x23a9e4.reply("*" + _0x41a396 + ":* [ " + _0x440f12 + " ]  *Added successfully.*");
-    } else if (!_0x451d76 || !_0x451d76.status) {
+    let result = await heroku.addvar(varName, varValue);
+    if (result && result.status) {
+      return m.reply(`*${varName}:* [ ${varValue} ] *Added successfully.*`);
+    } else if (!result || !result.status) {
       console.error(result.data);
-      await _0x23a9e4.reply("*_Can't add " + _0x5d321d + " due to error!_*\n\n  _please check that you put valid_\n  _*HEROKU_APP_NAME* and *HEROKU_API_KEY*_");
+      await m.reply(`*Can't add ${cmdName} due to error!*\n\n please check that you put valid\n *HEROKU_APP_NAME* and *HEROKU_API_KEY*`);
     }
-  } catch (_0x5763ff) {
-    await _0x23a9e4.error(_0x5763ff + "\n\ncommand: " + _0x5d321d, _0x5763ff);
+  } catch (err) {
+    await m.error(err + "\n\ncommand: " + cmdName, err);
   }
-});
-smd({
+ });
+ 
+ smd({
   pattern: "getvar",
   desc: "To Get A Heroku Var",
   category: "tools",
   fromMe: true,
   filename: __filename
-}, async (_0x303701, _0x1d8719, {
-  cmdName: _0x4d5fc7
-}) => {
+ }, async (m, text, { cmdName }) => {
   try {
-    if (!_0x1d8719) {
-      return _0x303701.reply("*Please give me Variable Name*\n*Example : " + (prefix + _0x4d5fc7) + " CAPTION*");
+    if (!text) {
+      return m.reply(`*Please give me Variable Name*\n*Example : ${prefix}${cmdName} CAPTION*`);
     }
-    const _0x31c9ad = _0x1d8719.split(" ")[0].toUpperCase();
-    let _0x510fef = await heroku.getvar(_0x31c9ad);
-    if (_0x510fef.status) {
-      if (_0x510fef.data) {
-        return _0x303701.reply("*" + _0x31c9ad + " :* " + _0x510fef.data);
+    const varName = text.split(" ")[0].toUpperCase();
+    let result = await heroku.getvar(varName);
+    if (result.status) {
+      if (result.data) {
+        return m.reply(`*${varName} :* ${result.data}`);
       } else {
-        return _0x303701.reply("*" + _0x31c9ad + "* does not exist in Heroku *" + appName + "* app.");
+        return m.reply(`*${varName}* does not exist in Heroku *${appName}* app.`);
       }
-    } else if (!_0x510fef || !_0x510fef.status) {
+    } else if (!result || !result.status) {
       console.error(result.data);
-      await _0x303701.reply("*_There's no responce from HEROKU_*, \n  _please check that you put valid_\n  _*HEROKU_APP_NAME* & *HEROKU_API_KEY*_");
+      await m.reply("*There's no responce from HEROKU*, \n please check that you put valid\n *HEROKU_APP_NAME* & *HEROKU_API_KEY*");
     }
-  } catch (_0x3c6608) {
-    await _0x303701.error(_0x3c6608 + "\n\ncommand: " + _0x4d5fc7, _0x3c6608);
+  } catch (err) {
+    await m.error(err + "\n\ncommand: " + cmdName, err);
   }
-});
-smd({
+ });
+ smd({
   pattern: "setvar",
   desc: "To Set Heroku Vars",
   category: "tools",
   fromMe: true,
   filename: __filename
-}, async (_0xf720ad, _0x4492c1, {
-  smd: _0x14ba4c
-}) => {
+ }, async (m, text, { cmdName }) => {
   try {
-    if (!_0x4492c1) {
-      return _0xf720ad.reply("*Uhh dear, Give me variable name*\n*Example : " + prefix + "setvar PREFIX:null*");
+    if (!text) {
+      return m.reply(`*Uhh dear, Give me variable name*\n*Example : ${prefix}setvar PREFIX:null*`);
     }
-    const _0x3adbd0 = _0x4492c1.indexOf(":");
-    const _0x495c42 = _0x4492c1.slice(0, _0x3adbd0).toUpperCase().trim();
-    const _0xaca022 = _0x4492c1.slice(_0x3adbd0 + 1).trim();
-    if (!_0xaca022) {
-      return msg.reply("*Uhh Please, Provide value after ':' !*\n*Example : " + (prefix + _0x14ba4c) + " AUTO_READ_STATUS:true*");
+    const separator = text.indexOf(":");
+    const varName = text.slice(0, separator).toUpperCase().trim();
+    const varValue = text.slice(separator + 1).trim();
+    if (!varValue) {
+      return msg.reply(`*Uhh Please, Provide value after ':' !*\n*Example : ${prefix}${cmdName} AUTO_READ_STATUS:true*`);
     }
-    process.env[_0x495c42] = _0xaca022;
+    process.env[varName] = varValue;
     updateConfig();
-    let _0x20767c = await heroku.setvar(_0x495c42, _0xaca022);
-    if (_0x20767c.status) {
-      await _0xf720ad.reply("*" + _0x495c42 + ":* [ " + _0xaca022 + " ]  *updated successfully.*");
-    } else if (!_0x20767c || !_0x20767c.status) {
-      console.error(_0x20767c.data);
-      await _0xf720ad.reply(_0x20767c.data);
+    let result = await heroku.setvar(varName, varValue);
+    if (result.status) {
+      await m.reply(`*${varName}:* [ ${varValue} ] *updated successfully.*`);
+    } else if (!result || !result.status) {
+      console.error(result.data);
+      await m.reply(result.data);
     }
-  } catch (_0x536b03) {
-    await _0xf720ad.error(_0x536b03 + "\n\ncommand: " + _0x14ba4c, _0x536b03);
+  } catch (err) {
+    await m.error(err + "\n\ncommand: " + cmdName, err);
   }
-});
+ });
