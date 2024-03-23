@@ -106,7 +106,7 @@ smd({pattern: 'lyrics', alias :['lyric'],category: "search", desc: "Searche lyri
       const res = await ( await fetch(`https://inrl-web.onrender.com/api/lyrics?text=${text}`) ).json();
       if(!res.status) return message.send("*Please Provide valid name!!!*");
       if(!res.result) return message.send("*There's a problem, try again later!*");
-      const { thumb,lyrics,title,artist } = res.result, tbl= "```", tcl ="*", tdl = "_*", contextInfo = { externalAdReply: { ...(await message.bot.contextInfo("𝗦𝗨𝗛𝗔𝗜𝗟-𝗠𝗗",`Lyrics-${text}`))} }
+      const { thumb,lyrics,title,artist } = res.result, tbl= "```", tcl ="*", tdl = "_*", contextInfo = { externalAdReply: { ...(await message.bot.contextInfo("𝗔𝗦𝗧𝗔-𝗠𝗗",`Lyrics-${text}`))} }
   await send(message, `*𝚃𝚒𝚝𝚕𝚎:* ${title}\n*𝙰𝚛𝚝𝚒𝚜𝚝:* ${artist} \n${tbl}${lyrics}${tbl} `,{contextInfo  : contextInfo },"");
 
 }catch(e){return await message.error(`${e}\n\n command: ${cmdName}`,e,`*_Didn't get any lyrics, Sorry!_*`) }
