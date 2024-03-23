@@ -1385,7 +1385,7 @@ smd({
   fromMe: true,
   category: "misc",
   filename: __filename
-}, async (_0x5ab8b7, _0x2c2791, {
+}, async (message, args, {
   cmdName: _0xa03141
 }) => {
   try {
