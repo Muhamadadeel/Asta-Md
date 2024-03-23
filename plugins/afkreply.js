@@ -9,8 +9,8 @@ const {
     smdBuffer
   } = require("../lib");
   smd({
-    cmdname: "fakereply",
-    alias: ["freply"],
+    cmdname: "afkreply",
+    alias: ["freply", "afk", "fakereply"],
     desc: "Create fake Reply by given texts!",
     type: "general",
     use: " msg| reply_text | number ",
