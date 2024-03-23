@@ -3,8 +3,8 @@ const { smd, tlang, botpic, prefix, Config, bot_ } = require("../lib");
 let antiViewOnceEnabled = false;
 
 smd({
- cmdname: "antiviewonce",
- alias: ["antivv"],
+ cmdname: "antivv",
+ alias: ["antivv","antiviewonce"],
  desc: "turn On/Off auto viewOnce Downloader",
  fromMe: true,
  type: "general",
