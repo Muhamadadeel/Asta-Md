@@ -301,7 +301,7 @@ cmd(
 	{
 	  pattern: "privacysettings",
 	  desc: "send ptv Message of video",
-	  category: "whatsapp",
+	  category: "whatsapp settings",
 	  filename: __filename,
 	},
 	async (message, _, { cmdName }) => {
@@ -321,7 +321,7 @@ cmd(
 	{
 	  pattern: "pp",
 	  desc: "Set profile picture",
-	  category: "whatsapp",
+	  category: "whatsapp settings",
 	  use: "<reply to image>",
 	  fromMe: true,
 	  filename: __filename,
@@ -348,7 +348,7 @@ cmd(
 	{
 	  pattern: "fullpp",
 	  desc: "Set full screen profile picture",
-	  category: "whatsapp",
+	  category: "whatsapp settings",
 	  use: "<reply to image>",
 	  fromMe: true,
 	  filename: __filename,
@@ -375,7 +375,7 @@ cmd(
 	{
 	  pattern: "rpp",
 	  desc: "remove profile picture",
-	  category: "whatsapp",
+	  category: "whatsapp settings",
 	  use: "<chat>",
 	  fromMe: true,
 	  filename: __filename,
@@ -392,9 +392,10 @@ cmd(
   
   smd(
 	{
-	  pattern: "bio",
+	  pattern: "edit-bio",
 	  desc: "update profile status of whatsapp",
-	  category: "whatsapp",
+	  alias: ["bio", "editbio"],
+	  category: "whatsapp settings",
 	  use: "<text>",
 	  fromMe: true,
 	  filename: __filename,
@@ -414,100 +415,116 @@ cmd(
 	  }
 	}
   );
-  cmd({
-	pattern: "ptv",
-	desc: "send ptv Message of video",
-	category: "whatsapp",
-	filename: __filename
-  }, async (_0x3c447b, _0x380c98, {
-	cmdName: _0x1cc2ce
-  }) => {
-	try {
-	  if (!_0x3c447b.quoted) {
-		return await _0x3c447b.send("*Uhh Please, reply to video*");
-	  }
-	  let _0x3e5787 = _0x3c447b.quoted.mtype;
-	  if (_0x3e5787 !== "videoMessage") {
-		return await _0x3c447b.send("*Uhh Dear, reply to a video message*");
-	  }
-	  return await _0x3c447b.bot.forwardOrBroadCast2(_0x3c447b.chat, _0x3c447b.quoted, {}, _0x1cc2ce);
-	} catch (_0xdce52f) {
-	  await _0x3c447b.error(_0xdce52f + "\n\ncommand : ptv", _0xdce52f);
-	}
-  });
-  cmd({
-	pattern: "save",
-	desc: "Save Message to log number",
-	category: "whatsapp",
-	filename: __filename
-  }, async (_0x3516c9, _0x59b822, {
-	cmdName: _0xc432b
-  }) => {
-	try {
-	  let _0x575bb6 = _0x3516c9.reply_message;
-	  if (!_0x575bb6) {
-		return await _0x3516c9.send("*Uhh Please, reply to to a Message*");
-	  }
-	  let _0x5ac877 = await _0x3516c9.bot.forwardOrBroadCast(_0x3516c9.user, _0x575bb6);
-	} catch (_0x311f45) {
-	  await _0x3516c9.error(_0x311f45 + "\n\ncommand : save", _0x311f45);
-	}
-  });
-  cmd({
-	pattern: "quoted",
-	desc: "get reply Message from Replied Message",
-	category: "user",
-	filename: __filename
-  }, async _0x362f3c => {
-	try {
-	  if (!_0x362f3c.quoted) {
-		return await _0x362f3c.send("*_Uhh Dear, Reply to a Message_*");
-	  }
-	  var _0x42e5cf = await _0x362f3c.bot.serializeM(await _0x362f3c.getQuotedObj());
-	  if (!_0x42e5cf || !_0x42e5cf.quoted) {
-		return await _0x362f3c.replay("*Message you replied does not contain a reply Message*");
-	  }
+  cmd(
+	{
+	  pattern: "ptv",
+	  desc: "send ptv Message of video",
+	  category: "whatsapp settings",
+	  filename: __filename,
+	},
+	async (message, _, { cmdName }) => {
 	  try {
-		await _0x362f3c.react("✨", _0x362f3c);
-		let _0x1d5680 = await _0x362f3c.bot.serializeM(await _0x42e5cf.getQuotedObj());
-		return await _0x362f3c.bot.copyNForward(_0x362f3c.chat, _0x1d5680, false);
-	  } catch (_0x34eaa6) {
-		await _0x362f3c.bot.forward(_0x362f3c.chat, _0x42e5cf.quoted, {}, _0x362f3c);
-		console.log(_0x34eaa6);
+		if (!message.quoted) {
+		  return await message.send("*Uhh Please, reply to video*");
+		}
+  
+		const quoteType = message.quoted.mtype;
+		if (quoteType !== "videoMessage") {
+		  return await message.send("*Uhh Dear, reply to a video message*");
+		}
+  
+		return await message.bot.forwardOrBroadCast2(message.chat, message.quoted, {}, cmdName);
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : ${cmdName}`, error);
 	  }
-	} catch (_0x512af7) {
-	  await _0x362f3c.error(_0x512af7 + "\n\ncommand : quoted", _0x512af7);
 	}
-  });
-  cmd({
-	pattern: "blocklist",
-	desc: "get list of all Blocked Numbers",
-	category: "whatsapp",
-	fromMe: true,
-	filename: __filename,
-	use: "<text>"
-  }, async _0xfa0e7f => {
-	try {
-	  const _0x4bd729 = await _0xfa0e7f.bot.fetchBlocklist();
-	  if (_0x4bd729.length === 0) {
-		return await _0xfa0e7f.reply("Uhh Dear, You don't have any Blocked Numbers.");
+  );
+  
+  cmd(
+	{
+	  pattern: "save",
+	  desc: "Save Message to log number",
+	  category: "whatsapp settings",
+	  filename: __filename,
+	},
+	async (message, _, { cmdName }) => {
+	  try {
+		const replyMessage = message.reply_message;
+		if (!replyMessage) {
+		  return await message.send("*Uhh Please, reply to to a Message*");
+		}
+  
+		const forwardedMessage = await message.bot.forwardOrBroadCast(message.user, replyMessage);
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : ${cmdName}`, error);
 	  }
-	  let _0x5749d5 = "\n*≡ List*\n\n*_Total Users:* " + _0x4bd729.length + "_\n\n┌─⊷ \t*BLOCKED USERS*\n";
-	  for (let _0x2cd015 = 0; _0x2cd015 < _0x4bd729.length; _0x2cd015++) {
-		_0x5749d5 += "▢ " + (_0x2cd015 + 1) + ":- wa.me/" + _0x4bd729[_0x2cd015].split("@")[0] + "\n";
-	  }
-	  _0x5749d5 += "└───────────";
-	  return await _0xfa0e7f.bot.sendMessage(_0xfa0e7f.chat, {
-		text: _0x5749d5
-	  });
-	} catch (_0x1ed9b4) {
-	  await _0xfa0e7f.error(_0x1ed9b4 + "\n\ncommand : blocklist", _0x1ed9b4);
 	}
-  });
+  );
+  
+  cmd(
+	{
+	  pattern: "quoted",
+	  desc: "get reply Message from Replied Message",
+	  category: "user",
+	  filename: __filename,
+	},
+	async (message) => {
+	  try {
+		if (!message.quoted) {
+		  return await message.send("*_Uhh Dear, Reply to a Message_*");
+		}
+  
+		const serializedMessage = await message.bot.serializeM(await message.getQuotedObj());
+		if (!serializedMessage || !serializedMessage.quoted) {
+		  return await message.replay("*Message you replied does not contain a reply Message*");
+		}
+  
+		try {
+		  await message.react("✨", message);
+		  const quotedMessage = await message.bot.serializeM(await serializedMessage.getQuotedObj());
+		  return await message.bot.copyNForward(message.chat, quotedMessage, false);
+		} catch (error) {
+		  await message.bot.forward(message.chat, serializedMessage.quoted, {}, message);
+		  console.log(error);
+		}
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : quoted`, error);
+	  }
+	}
+  );
+  
+  cmd(
+	{
+	  pattern: "blocklist",
+	  desc: "get list of all Blocked Numbers",
+	  category: "whatsapp settings",
+	  fromMe: true,
+	  filename: __filename,
+	  use: "<text>",
+	},
+	async (message) => {
+	  try {
+		const blockedList = await message.bot.fetchBlocklist();
+		if (blockedList.length === 0) {
+		  return await message.reply("Uhh Dear, You don't have any Blocked Numbers.");
+		}
+  
+		let listText = "\n*≡ List*\n\n*_Total Users:* " + blockedList.length + "_\n\n┌─⊷ \t*BLOCKED USERS*\n";
+		for (let i = 0; i < blockedList.length; i++) {
+		  listText += `▢ ${i + 1}:- wa.me/${blockedList[i].split("@")[0]}\n`;
+		}
+		listText += "└───────────";
+  
+		return await message.bot.sendMessage(message.chat, { text: listText });
+	  } catch (error) {
+		await message.error(`${error}\n\ncommand : blocklist`, error);
+	  }
+	}
+  );
   cmd({
 	pattern: "location",
 	desc: "Adds *readmore* in given text.",
-	category: "whatsapp",
+	category: "whatsapp settings",
 	filename: __filename
   }, async (_0x4ee956, _0x22e2dc) => {
 	try {
@@ -534,7 +551,7 @@ cmd(
   });
   smd({
 	pattern: "listpc",
-	category: "whatsapp",
+	category: "whatsapp settings",
 	desc: "Finds info about personal chats",
 	filename: __filename
   }, async (_0x144fd0, _0x21857a, {
@@ -554,7 +571,7 @@ cmd(
   });
   smd({
 	pattern: "listgc",
-	category: "whatsapp",
+	category: "whatsapp settings",
 	desc: "Finds info about all active groups",
 	filename: __filename
   }, async (_0xa220f, _0x123a92, {
@@ -577,7 +594,7 @@ cmd(
   cmd({
 	pattern: "vcard",
 	desc: "Create Contact by given name.",
-	category: "whatsapp",
+	category: "whatsapp settings",
 	filename: __filename
   }, async (_0x2721c0, _0x4a39c4) => {
 	try {
@@ -695,7 +712,7 @@ cmd(
 	pattern: "vv",
 	alias: ["viewonce", "retrive"],
 	desc: "download viewOnce Message.",
-	category: "whatsapp",
+	category: "whatsapp settings",
 	use: "<query>",
 	filename: __filename
   }, async (_0x9034b9, _0x25fb23) => {
