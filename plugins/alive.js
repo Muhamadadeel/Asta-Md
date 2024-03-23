@@ -26,7 +26,7 @@ let text = `╭═══ ━ ━ ━ ━ • ━ ━ ━ ━ ═══
  smd({
              pattern: "alive",
              desc: "Show intro of user",
-             category: "fun",
+             category: "tools",
              filename: __filename,
              use: '<group link.>',
          },
