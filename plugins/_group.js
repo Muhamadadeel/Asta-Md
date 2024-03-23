@@ -1,3 +1,5 @@
+let Asta_Md = Asta_Md
+const astro_patch = require('../lib/plugins')
 const { updateProfilePicture, parsedJid } = require("../lib");
 const {
   sck,
@@ -28,8 +30,6 @@ const Jimp = require("jimp");
 const sᴜʜᴀɪʟ_ᴍᴅ = require("../lib/plugins");
 const axios = require("axios");
 const { count } = require("discord-mongoose-economy/models/economy");
-
-// Removed duplicate declarations
 const {
   cmd
 } = sᴜʜᴀɪʟ_ᴍᴅ;
@@ -37,97 +37,101 @@ const grouppattern = /https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{22}/g;
 smd({
   cmdname: "join",
   info: "joins group by link",
-  type: "whatsapp settings",
+  type: "user mode",
   fromMe: true,
   filename: __filename,
   use: "<group link.>"
-}, async (_0x466dd8, _0x5b1338) => {
+ }, async (msg, text) => {
   try {
-    if (_0x466dd8.reply_message && _0x466dd8.reply_message.groupInvite) {
-      var _0x29e5fc = await _0x466dd8.bot.groupAcceptInviteV4(_0x466dd8.chat, _0x466dd8.reply_message.msg);
-      if (_0x29e5fc && _0x29e5fc.includes("joined to:")) {
-        return await send(_0x466dd8, "*_Joined_*", {}, "", _0x466dd8);
+    if (msg.reply_message && msg.reply_message.groupInvite) {
+      var response = await msg.bot.groupAcceptInviteV4(msg.chat, msg.reply_message.msg);
+      if (response && response.includes("joined to:")) {
+        return await send(msg, "*_Joined_*", {}, "", msg);
       }
     }
-    let _0x208739 = _0x5b1338 ? _0x5b1338 : _0x466dd8.reply_text;
-    const _0x47ed60 = _0x208739.match(grouppattern);
-    if (!_0x47ed60) {
-      return await _0x466dd8.reply("*_Uhh Please, provide group link_*");
+    
+    let groupLink = text ? text : msg.reply_text;
+    const match = groupLink.match(grouppattern);
+    if (!match) {
+      return await msg.reply("`Give me group link!`");
     }
-    let _0x4263be = _0x47ed60[0].split("https://chat.whatsapp.com/")[1].trim();
-    await _0x466dd8.bot.groupAcceptInvite(_0x4263be).then(_0x7f3222 => send(_0x466dd8, "*_Joined_*", {}, "", _0x466dd8)).catch(_0x1d6aea => _0x466dd8.send("*_Can't Join, Group Id not found!!_*"));
-  } catch (_0x5d3484) {
-    await _0x466dd8.error(_0x5d3484 + "\n\ncommand: join", _0x5d3484, "*_Can't Join, Group Id not found, Sorry!!_*");
+    
+    let groupId = match[0].split("https://chat.whatsapp.com/")[1].trim();
+    await msg.bot.groupAcceptInvite(groupId)
+      .then(res => send(msg, "*_Joined_*", {}, "", msg))
+      .catch(err => msg.send("*_Can't Join, Group Id not found!!_*"));
+  } catch (error) {
+    await msg.error(error + "\n\ncommand: join", error, "`Can't Join, Group Id Error`*");
   }
-});
-smd({
-  cmdname: "newgc",
+ });
+ 
+ smd({
+  cmdname: "creategc",
   info: "Create New Group",
-  type: "whatsapp settings",
+  type: "user mode",
   filename: __filename,
   use: "<group link.>"
-}, async (_0x1d2f1f, _0x3c558e, {
-  smd: _0x2e7a79,
-  cmdName: _0x49994a
-}) => {
+ }, async (msg, text, { smd: cmd, cmdName: cmdName }) => {
   try {
-    if (!_0x1d2f1f.isCreator) {
-      return _0x1d2f1f.reply(tlang().owner);
+    if (!msg.isCreator) {
+      return msg.reply(tlang().owner);
     }
-    if (!_0x3c558e) {
-      return await _0x1d2f1f.reply("*_provide Name to Create new Group!!!_*\n*_Ex: " + (prefix + _0x2e7a79) + " My Name Group @user1,2,3.._*");
+    
+    if (!text) {
+      return await msg.reply("*_provide Name to Create new Group!!!_*\n*_Ex: " + (prefix + cmd) + " My Name Group @user1,2,3.._*");
     }
-    let _0x379d99 = _0x3c558e;
-    if (_0x379d99.toLowerCase() === "info") {
-      return await _0x1d2f1f.send(("\n  *Its a command to create new Gc*\n  \t```Ex: " + (prefix + cmd) + " My new Group```\n  \n*You also add peoples in newGc*\n  \t```just reply or mention Users```\n  ").trim());
+    
+    let groupName = text;
+    if (groupName.toLowerCase() === "info") {
+      return await msg.send((`\n *Its a command to create new Gc*\n \`\`\`Ex: ${prefix + cmd} My new Group\`\`\`\n \n*You also add peoples in newGc*\n \`\`\`just reply or mention Users\`\`\`\n `).trim());
     }
-    let _0x5a5c26 = [_0x1d2f1f.sender];
-    if (_0x1d2f1f.quoted) {
-      _0x5a5c26.push(_0x1d2f1f.quoted.sender);
+    
+    let mentionJids = [msg.sender];
+    if (msg.quoted) {
+      mentionJids.push(msg.quoted.sender);
     }
-    if (_0x1d2f1f.mentionedJid && _0x1d2f1f.mentionedJid[0]) {
-      _0x5a5c26.push(..._0x1d2f1f.mentionedJid);
+    
+    if (msg.mentionedJid && msg.mentionedJid[0]) {
+      mentionJids.push(...msg.mentionedJid);
       try {
-        mentionJids.forEach(_0x3e3852 => {
-          var _0x30af68 = _0x3e3852.split("@")[0].trim();
-          _0x379d99 = _0x379d99.replace(new RegExp("@" + _0x30af68, "g"), "");
+        mentionJids.forEach(user => {
+          let username = user.split("@")[0].trim();
+          groupName = groupName.replace(new RegExp("@" + username, "g"), "");
         });
       } catch {}
     }
-    const _0x37b490 = _0x379d99.substring(0, 60);
-    const _0x417018 = await Suhail.bot.groupCreate(_0x37b490, [..._0x5a5c26]);
-    if (_0x417018) {
-      let _0x2c6495 = await _0x1d2f1f.bot.sendMessage(_0x417018.id, {
-        text: "*_Hey Buddy, Welcome to new Group_*\n" + Config.caption
-      });
+    
+    const createdGroup = await Suhail.bot.groupCreate(groupName.substring(0, 60), [...mentionJids]);
+    if (createdGroup) {
+      let welcomeMsg = await msg.bot.sendMessage(createdGroup.id, { text: "*_Hey Buddy, Welcome to new Group_*\n" + Config.caption });
       try {
-        var _0x3a49e9 = await Suhail.bot.groupInviteCode(_0x417018.id);
+        var groupInviteCode = await Suhail.bot.groupInviteCode(createdGroup.id);
       } catch {
-        var _0x3a49e9 = false;
+        var groupInviteCode = false;
       }
-      var _0x2608ab = "https://chat.whatsapp.com/";
-      var _0x2fe2c7 = "" + _0x2608ab + _0x3a49e9;
-      var _0x539d8f = {
+      
+      var inviteLink = "https://chat.whatsapp.com/";
+      var fullInviteLink = "" + inviteLink + groupInviteCode;
+      var contextInfo = {
         externalAdReply: {
           title: "𝗦𝗨𝗛𝗔𝗜𝗟-𝗠𝗗",
-          body: "" + _0x37b490,
+          body: "" + groupName,
           renderLargerThumbnail: true,
           thumbnail: log0,
           mediaType: 1,
-          mediaUrl: _0x2fe2c7,
-          sourceUrl: _0x2fe2c7
+          mediaUrl: fullInviteLink,
+          sourceUrl: fullInviteLink
         }
       };
-      return await send(_0x1d2f1f, ("*_Hurray, New group created!!!_*\n" + (_0x3a49e9 ? "*_" + _0x2fe2c7 + "_*" : "")).trim(), {
-        contextInfo: _0x539d8f
-      }, "", _0x2c6495);
+      
+      return await send(msg, (`*_Hurray, New group created!!!_*\n${groupInviteCode ? `*_${fullInviteLink}_*` : ``}`).trim(), { contextInfo }, "", welcomeMsg);
     } else {
-      await _0x1d2f1f.send("*_Can't create new group, Sorry!!_*");
+      await msg.send("*_Can't create new group, Sorry!!_*");
     }
-  } catch (_0x33d6f3) {
-    await _0x1d2f1f.error(_0x33d6f3 + "\n\ncommand: " + _0x49994a, _0x33d6f3, "*_Can't create new group, Sorry!!_*");
+  } catch (error) {
+    await msg.error(error + "\n\ncommand: " + cmdName, error, "*_Can't create new group, Sorry!!_*");
   }
-});
+ });
 smd({
   pattern: "ginfo",
   desc: "get group info by link",
