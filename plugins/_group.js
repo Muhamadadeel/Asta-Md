@@ -135,7 +135,7 @@ smd({
 smd({
   pattern: "groupinfo",
   desc: "get group info by link",
-  type: "group",
+  type: "manage group",
   filename: __filename,
   use: "<group link.>"
  }, async (msg, text) => {
@@ -181,7 +181,7 @@ smd({
   cmdname: "rejectall",
   alias: ["rejectjoin"],
   info: "reject all request to join!",
-  type: "group",
+  type: "manage group",
   filename: __filename
  }, async (msg, text) => {
   try {
@@ -217,7 +217,7 @@ smd({
   cmdname: "acceptall",
   alias: ["acceptjoin"],
   info: "accept all request to join!",
-  type: "group",
+  type: "manage group",
   filename: __filename
  }, async (msg, text) => {
   try {
@@ -251,7 +251,7 @@ smd({
   cmdname: "joinrequests",
   alias: ["requestjoin"],
   info: "Set Description of Group",
-  type: "group",
+  type: "manage group",
   filename: __filename,
   use: "<enter Description Text>"
 }, async (_0x13cccd, _0x38cc41) => {
@@ -283,7 +283,7 @@ smd({
   cmdname: "setgcdesc",
   alias: ["setgdesc","setdesc", "gdesc"],
   info: "Set Description of Group",
-  type: "group",
+  type: "manage group",
   filename: __filename,
   use: "<enter Description Text>"
 }, async (_0x160b96, _0x4ef0da) => {
@@ -311,7 +311,7 @@ smd({
   cmdname: "setname",
   alias: ["setgname", "gname"],
   info: "Set Description of Group",
-  type: "group",
+  type: "manage group",
   filename: __filename,
   use: "<enter Description Text>"
 }, async (_0x25d56b, _0x332d77) => {
@@ -340,7 +340,7 @@ smd({
   alias: ["leave", "left"],
   info: "left from a group.",
   fromMe: true,
-  type: "group",
+  type: "manage group",
   filename: __filename
 }, async (_0x37841c, _0x260aed) => {
   try {
@@ -363,7 +363,7 @@ smd({
   pattern: "setgpp",
   alias: ["gpp","setgpic"],
   desc: "Set Group profile picture",
-  category: "group",
+  category: "manage group",
   use: "<reply to image>",
   filename: __filename
 }, async _0x5ac912 => {
@@ -386,7 +386,7 @@ smd({
 smd({
   pattern: "fullgpp",
   desc: "Set full screen group profile picture",
-  category: "group",
+  category: "manage group",
   use: "<reply to image>",
   filename: __filename
 }, async _0x31201a => {
@@ -536,7 +536,7 @@ cmd({
 cmd({
   pattern: "invite",
   desc: "get group link.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async _0x53f8e3 => {
   try {
@@ -557,7 +557,7 @@ cmd({
 cmd({
   pattern: "revoke",
   desc: "get group link.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async _0x451b0f => {
   try {
@@ -576,7 +576,7 @@ cmd({
 cmd({
   pattern: "tagall",
   desc: "Tags every person of group.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x1ed055, _0x929954) => {
   try {
@@ -607,7 +607,7 @@ cmd({
   pattern: "kik",
   alias: ["fkik"],
   desc: "Kick all numbers from a certain country",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x19564c, _0x1d2bb7) => {
   try {
@@ -653,7 +653,7 @@ cmd({
 cmd({
   pattern: "num",
   desc: "get all numbers from a certain country",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x4bd51e, _0x2ee3cb) => {
   try {
@@ -688,7 +688,7 @@ cmd({
 smd({
   pattern: "poll",
   desc: "Makes poll in group.",
-  category: "group",
+  category: "manage group",
   fromMe: true,
   filename: __filename,
   use: "question;option1,option2,option3....."
@@ -717,7 +717,7 @@ smd({
 cmd({
   pattern: "promote",
   desc: "Provides admin role to replied/quoted user",
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "<quote|reply|number>"
 }, async _0x324f8b => {
@@ -746,7 +746,7 @@ cmd({
 cmd({
   pattern: "kick",
   desc: "Kicks replied/quoted user from group.",
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "<quote|reply|number>"
 }, async (_0x5e533c, _0x2a29f6) => {
@@ -778,7 +778,7 @@ cmd({
 smd({
   pattern: "group",
   desc: "mute and unmute group.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x27d001, _0x358db8) => {
   if (!_0x27d001.isGroup) {
@@ -827,7 +827,7 @@ smd({
 cmd({
   pattern: "pick",
   desc: "Pics random user from Group",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0xb552a2, _0x39ba38) => {
   try {
@@ -851,7 +851,7 @@ cmd({
 });
 smd({
   pattern: "ship",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async _0x8c602e => {
   if (!_0x8c602e.isGroup) {
@@ -895,7 +895,7 @@ smd({
 smd({
   pattern: "mutegc",
   desc: "Provides admin role to replied/quoted user",
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "<quote|reply|number>"
 }, async _0xadbad4 => {
@@ -920,7 +920,7 @@ smd({
 smd({
   pattern: "unmutegc",
   desc: "Provides admin role to replied/quoted user",
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "<quote|reply|number>"
 }, async _0x5d1afd => {
@@ -996,7 +996,7 @@ smd({
   pattern: "tag",
   alias: ["hidetag"],
   desc: "Tags everyperson of group without mentioning their numbers",
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "<text>"
 }, async (_0x378ec3, _0x5398f9) => {
@@ -1040,7 +1040,7 @@ smd({
 cmd({
   pattern: "tagadmin",
   desc: "Tags only Admin numbers",
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "<text>"
 }, async (_0x1f096a, _0x942e5e) => {
@@ -1064,7 +1064,7 @@ cmd({
 cmd({
   pattern: "add",
   desc: "Add that person in group",
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "<number|reply|mention>"
 }, async (_0x3d5ec9, _0xa86e2f) => {
@@ -1104,7 +1104,7 @@ cmd({
   pattern: "getjids",
   alias: ["gjid", "gjids", "allgc", "gclist"],
   desc: "Sends chat id of every groups.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x124deb, _0x4744d0, {
   cmdName: _0x374ed3
@@ -1137,7 +1137,7 @@ cmd({
 cmd({
   pattern: "demote",
   desc: "Demotes replied/quoted user from group",
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "<quote|reply|number>"
 }, async _0x118677 => {
@@ -1172,7 +1172,7 @@ smd({
   pattern: "del",
   alias: ["delete", "dlt"],
   desc: "Deletes message of any user",
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "<quote/reply message.>"
 }, async _0x320d81 => {
@@ -1202,7 +1202,7 @@ cmd({
   pattern: "broadcast",
   desc: "Bot makes a broadcast in all groups",
   fromMe: true,
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "<text for broadcast.>"
 }, async (_0x553d05, _0x5d14a3) => {
@@ -1496,7 +1496,7 @@ smd({
   pattern: "act",
   alias: ["activate", "active"],
   desc: "Switches for varios works.",
-  category: "moderation",
+  category: "manage group",
   filename: __filename
 }, async (_0x265a14, _0x4a2b18) => {
   try {
@@ -1595,7 +1595,7 @@ smd({
   pattern: "deact",
   alias: ["deactive", "deactivate"],
   desc: "Switches for varios works.",
-  category: "moderation",
+  category: "manage group",
   filename: __filename
 }, async (_0x3692ba, _0x33a14d) => {
   try {
@@ -1791,7 +1791,7 @@ smd({
 smd({
   pattern: "antilink",
   desc: "activates and deactivates antilink.\nuse buttons to toggle.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x2533a7, _0x45be1e, {
   smd: _0x4d6aaa
@@ -1863,7 +1863,7 @@ smd({
   pattern: "welcome",
   alias: ["setwelcome"],
   desc: "sets welcome message in specific group.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x3c5cf3, _0x445e92) => {
   try {
@@ -1922,7 +1922,7 @@ smd({
   pattern: "goodbye",
   alias: ["setgoodbye", "setbye"],
   desc: "sets goodbye message in specific group.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0xb86e0c, _0x105b24) => {
   try {
@@ -1981,7 +1981,7 @@ smd({
   pattern: "onlyadmin",
   alias: ["antimessge"],
   desc: "activates and deactivates onlyadmin.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x1965b9, _0x7fa7bf, {
   cmdName: _0x510afb
@@ -2038,7 +2038,7 @@ smd({
 smd({
   pattern: "antibot",
   desc: "kick Bot Users from Group.!",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0xa43d98, _0xf97b24, {
   cmdName: _0x517093
@@ -2092,7 +2092,7 @@ smd({
 smd({
   pattern: "disable",
   desc: "disable cmds in Group.!",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x57fd77, _0x368830) => {
   try {
@@ -2142,7 +2142,7 @@ smd({
 smd({
   pattern: "enable",
   desc: "enable a cmd in Group.!",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x22dc90, _0x26f7a0) => {
   try {
@@ -2188,7 +2188,7 @@ smd({
 smd({
   pattern: "antifake",
   desc: "𝗗𝗲𝘁𝗲𝗰𝘁𝘀 𝗽𝗿𝗼𝗺𝗼𝘁𝗲/𝗱𝗲𝗺𝗼𝘁𝗲 𝗮𝗻𝗱 𝘀𝗲𝗻𝗱𝘀 𝗮𝗹𝗲𝗿𝘁. ",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x157a41, _0x12674f) => {
   try {
@@ -2237,7 +2237,7 @@ smd({
 smd({
   pattern: "antidemote",
   desc: "Detects Promote and Automaticaly demote promoted person.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x17b37d, _0x28540e) => {
   try {
@@ -2283,7 +2283,7 @@ smd({
 smd({
   pattern: "antipromote",
   desc: "Detects Promote and Automaticaly demote promoted person.",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x2eb558, _0x4b82b1) => {
   try {
@@ -2329,7 +2329,7 @@ smd({
 smd({
   pattern: "pdm",
   desc: "Detect Promote/Demote Users And Send Alerts in Chat ",
-  category: "group",
+  category: "manage group",
   filename: __filename
 }, async (_0x5e0b30, _0x3b1de0) => {
   try {
@@ -2375,7 +2375,7 @@ smd({
 smd({
   pattern: "amute",
   desc: "sets auto mute time in group.",
-  category: "moderation"
+  category: "manage group"
 }, async (_0x40a933, _0x42047d) => {
   try {
     if (!_0x40a933.isGroup) {
@@ -2410,7 +2410,7 @@ smd({
 smd({
   pattern: "aunmute",
   desc: "sets unmute time in group.",
-  category: "moderation"
+  category: "manage group"
 }, async (_0x20f896, _0x197285) => {
   try {
     if (!_0x20f896.isGroup) {
@@ -2445,7 +2445,7 @@ smd({
 smd({
   pattern: "dunmute",
   desc: "Delete unmute from group.",
-  category: "moderation"
+  category: "manage group"
 }, async _0x120fd5 => {
   try {
     if (!_0x120fd5.isGroup) {
@@ -2473,7 +2473,7 @@ smd({
 smd({
   pattern: "dmute",
   desc: "Delete mute from group.",
-  category: "moderation"
+  category: "manage group"
 }, async (_0x73ceb0, _0x1d3d47) => {
   try {
     if (!_0x73ceb0.isGroup) {
@@ -2509,7 +2509,7 @@ async function haveEqualMembers(_0x4299c5, _0x36f2ca) {
 smd({
   pattern: "antiword",
   desc: "Detects words from chat,and delete/warn senders.",
-  category: "group",
+  category: "manage group",
   filename: __filename,
   use: "< action | words >"
 }, async (_0x4ff73f, _0x41e8ca, {

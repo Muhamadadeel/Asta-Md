@@ -16,7 +16,7 @@ const {
 smd({
     cmdname: "getall",
     desc: "get jid of all members of groups/pm chats/all groups.",
-    type: "owner",
+    type: "user mode",
     fromMe:true,
     use:"[ members / user / groups ]",
     usage:"get jids of groups,personal chats, also members of group, so that used them for forward cmd!",

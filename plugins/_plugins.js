@@ -42,7 +42,7 @@ smd({
 smd({
  cmdname: "plugins",
  alias: ["plugin"],
- type: "owner",
+ type: "user mode",
  info: "Shows list of all externally installed modules",
  fromMe: s_ser,
  filename: __filename,
@@ -59,7 +59,7 @@ smd({
 smd({
  pattern: "remove",
  alias: ["uninstall"],
- type: "owner",
+ type: "user mode",
  info: "removes external modules.",
  fromMe: s_ser,
  filename: __filename,
@@ -78,7 +78,7 @@ smd({
 
 smd({
  cmdname: "install",
- type: "owner",
+ type: "user mode",
  info: "Installs external modules..",
  fromMe: s_ser,
  filename: __filename,

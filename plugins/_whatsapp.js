@@ -465,7 +465,7 @@ cmd(
 	{
 	  pattern: "quoted",
 	  desc: "get reply Message from Replied Message",
-	  category: "user",
+	  category: "user mode",
 	  filename: __filename,
 	},
 	async (message) => {

@@ -3,7 +3,7 @@ let antiCallMessage = process.env.ANTICALL_MESSAGE || "`Hello this number has di
 /*
 {
   cmdname: "anticall",
-  type: "owner",
+  type: "user mode",
 }
 */
 
