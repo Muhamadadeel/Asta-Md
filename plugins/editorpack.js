@@ -6,22 +6,6 @@ let Asta_Md = "Asta"
 let baseApi = process.env.API_SMD || global.api_smd || "https://api-smd-1.vercel.app"
 
 
-/*
-cmd({
-   cmdname :"editorpack",
-   type: "delete",
-   use:"< image >",
-   filename: __filename,
-}
- */
-
-
-
-
-
-
-
-
 
 const { smd ,prefix,Config,createUrl,photoEditor,smdBuffer} = require("../lib")
 let photo = ["imageMessage" ]
