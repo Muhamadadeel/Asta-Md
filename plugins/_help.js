@@ -252,7 +252,7 @@ smd({
       key
     } = await message.reply("*Testing Ping!!!*");
     const endTime = new Date().getTime();
-    return await message.send(`"*ʏᴏᴜʀ ʙᴏᴛ'ꜱ ꜱᴘᴇᴇᴅ ɪꜱ...*"\n *${endTime - startTime} ᴍɪʟʟɪꜱᴇᴄᴏɴᴅꜱ*`, {
+    return await message.send(`*ʏᴏᴜʀ ʙᴏᴛ'ꜱ ꜱᴘᴇᴇᴅ ɪꜱ...*\n *${endTime - startTime} ᴍɪʟʟɪꜱᴇᴄᴏɴᴅꜱ*`, {
       edit: key
     }, "", message);
   });
@@ -345,8 +345,8 @@ smd({
       });
       const currentTime = message.time;
       const currentDate = message.date;
-      let menuText = `${header}\n${cmdListIcon} \n${cmdListIcon} *ᴏᴡɴᴇʀ:-* ${Config.ownername}\n${cmdListIcon} *ᴄʀᴇᴀᴛᴏʀ:-* ${Config.creator}\n${cmdListIcon} *ᴘʟᴜɢɪɴꜱ:
-      * ${commands.length}\n${cmdListIcon} *ʀᴜɴᴛɪᴍᴇ:-* ${runtime(process.uptime())}\n${cmdListIcon} *ʀᴀᴍ ᴜꜱᴀɢᴇ:-* ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}\n${cmdListIcon} *ᴛɪᴍᴇ:-* ${currentTime}\n${cmdListIcon} *ᴅᴀᴛᴇ:-* ${currentDate}\n\n${cmdListIcon} *ᴅᴀᴛᴀʙᴀꜱᴇ:-* ${Config.database}\n${footer}\n\n`;
+      const startTime = new Date().getTime();
+      let menuText = `${header}\n${cmdListIcon} \n${cmdListIcon} *ᴏᴡɴᴇʀ:-* ${Config.ownername}\n${cmdListIcon} *ᴄʀᴇᴀᴛᴏʀ:-* ${Config.creator}\n${cmdListIcon} *ᴘʟᴜɢɪɴꜱ:-* ${commands.length}\n${cmdListIcon} *ʀᴜɴᴛɪᴍᴇ:-* ${runtime(process.uptime())}\n${cmdListIcon} *ʀᴀᴍ ᴜꜱᴀɢᴇ:-* ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}\n${cmdListIcon} *ᴛɪᴍᴇ:-* ${currentTime}\n${cmdListIcon} *ᴅᴀᴛᴇ:-* ${currentDate}\n${cmdListIcon} *ᴜꜱᴀɢᴇ ᴛʀᴇɴᴅ:-* ${Config.pings}\n${cmdListIcon} *ᴅᴀᴛᴀʙᴀꜱᴇ:-* ${Config.database}\n${footer}\n\n`;
       for (const category in categories) {
         menuText += `${categoryHeader} *${tiny(category)}* ${categoryFooter}\n`;
         if (query.toUpperCase() === category.toUpperCase()) {

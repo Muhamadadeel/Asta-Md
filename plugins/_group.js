@@ -1,4 +1,3 @@
-let Asta_Md = Asta_Md
 const astro_patch = require('../lib/plugins')
 const { updateProfilePicture, parsedJid } = require("../lib");
 const {

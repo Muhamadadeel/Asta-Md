@@ -15,6 +15,7 @@ const PORT = () => {
   return Math.floor(Math.random() * (maxPort - minPort + 1)) + minPort;
 };
 const BOT_DATBASE = Math.floor(Math.random() * 451);
+const PINGS = Math.floor(Math.random() * 99);
 //==================IMPORTANT CONFIGURATIONS==========================\\
    global.SESSION_ID = process.env.SESSION_ID ||  "" ; 
    global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/dMwGOUP.jpeg" ;
@@ -79,6 +80,7 @@ module.exports = {
   creator:process.env.CREATOR_NAME || "`ᴀꜱᴛʀᴏᴘᴇᴅᴀ`",
   errorChat : process.env.ERROR_CHAT || "",
   database : process.env.BOT_DATABASE || BOT_DATBASE,
+  pings: process.env.PING_TIMES || PINGS,
   KOYEB_API : process.env.KOYEB_API  || "false",
   REMOVE_BG_KEY : process.env.REMOVE_BG_KEY  || "",
   OPENAI_API_KEY: process.env.OPENAI_API_KEY || "",

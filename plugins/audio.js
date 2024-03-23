@@ -2,7 +2,7 @@ let Astro = "Owner";
 const { tlang, smd, audioEditor } = require("../lib");
 const fs = require("fs");
 
-const handleAudioEdit = async (context, commandName, context) => {
+const handleAudioEdit = async (context, commandName) => {
  try {
    return await audioEditor(context, commandName, context);
  } catch (error) {
