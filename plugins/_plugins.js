@@ -23,7 +23,7 @@ smd({
  filename: __filename
 }, async (context) => {
  const { exec } = require("child_process");
- context.reply("Restarting");
+ context.reply("`Restarting`");
  exec("pm2 restart all");
 });
 
@@ -35,7 +35,7 @@ smd({
  filename: __filename
 }, async (context) => {
  const { exec } = require("child_process");
- context.reply("shutting down");
+ context.reply("`shutting down`");
  exec("pm2 stop all");
 });
 
@@ -50,7 +50,7 @@ smd({
 }, async (context, query) => {
  try {
    let pluginsList = await plugins(context, "plugins", query);
-   return await context.send(!pluginsList ? `*_There's no plugin install in ${Config.botname}_*` : !query ? `*All Installed Modules are:-*\n\n${pluginsList}` : pluginsList);
+   return await context.send(!pluginsList ? `*There's no plugin install in ${Config.botname}*` : !query ? `*All Installed Plugins are:-*\n\n${pluginsList}` : pluginsList);
  } catch (error) {
    context.error(error + " \n\ncmdName plugins\n");
  }
@@ -66,7 +66,7 @@ smd({
  use: "<plugin name>"
 }, async (context, query) => {
  if (!query) {
-   return await context.reply("*_Uhh Please, Provide Me Plugin Name_*");
+   return await context.reply("`Provide A Plugin Name`");
  }
  if (query === "alls") {
    return await context.reply(await plugins("remove", "all", __dirname));
@@ -86,7 +86,7 @@ smd({
 }, async (context, query) => {
  let url = query ? query : context.quoted ? context.quoted.text : "";
  if (!url.toLowerCase().includes("https")) {
-   return await context.send("*_Uhh Please, Provide Me Plugin Url_*");
+   return await context.send("`Provide A Plugin Url`");
  }
  await context.reply(await plugins(context, "install", url, __dirname));
 });
