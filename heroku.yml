@@ -1,5 +1,0 @@
-build:
-  docker:
-      web: Asta_Md
-run:
-  web: npm start
