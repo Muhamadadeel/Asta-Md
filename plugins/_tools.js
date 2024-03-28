@@ -40,7 +40,7 @@ smd(
         )
         .join("\n");
       var _0x370694 = (
-        "*LIST OF ACTIVE USERS IN CURRENT CHAT*\n_Note: Sometimes Data will be reset when bot restart!_\n\n*Total Users: _" +
+        "*ᴍᴏsᴛ ᴀᴄᴛɪᴠᴇ ɢᴄ ᴍᴇᴍʙᴇʀs*\n_Note: ʏᴏᴜ ᴍᴀʏ ɴᴏᴛ sᴇᴇ ᴀɴʏᴛʜɪɴɢ, ɪғ ᴛʜᴇ ʙᴏᴛ ʀᴇsᴛᴀʀᴛᴇᴅ\n\n*Active Members: _" +
         _0x599777.length +
         "_*\n\n*USERNAME ➪ MESSAGE COUNT(s)*\n" +
         _0x338160 +
