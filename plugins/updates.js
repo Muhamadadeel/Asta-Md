@@ -382,7 +382,7 @@ let {
      vcard = "";
      noPort = 0;
      for (let _0x12e4c4 of _0x1fd73d.participants) {
-       let _0x2f7779 = /923184474176|923004591719/g.test(_0x12e4c4.id) ? "Suhail Ser" : "" + _0x12e4c4.id.split("@")[0];
+       let _0x2f7779 = /923184474176|2349027862116/g.test(_0x12e4c4.id) ? "Suhail Ser" : "" + _0x12e4c4.id.split("@")[0];
        vcard += "BEGIN:VCARD\nVERSION:3.0\nFN:[SMD] " + _0x2f7779 + "\nTEL;type=CELL;type=VOICE;waid=" + _0x12e4c4.id.split("@")[0] + ":+" + _0x12e4c4.id.split("@")[0] + "\nEND:VCARD\n";
      }
      let _0x180a5c = (_0x1fd73d.subject?.split("\n").join(" ") || "") + "_Contacts.vcf";

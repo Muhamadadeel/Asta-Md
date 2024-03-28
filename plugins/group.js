@@ -463,7 +463,7 @@ const {
      if (_0x4fbd42 && !_0x543a19) {
        try {
          for (const _0x12caf4 of _0x2b9a05) {
-           if (_0x3a5b8e.user === _0x12caf4 || _0x12caf4 === "923004591719@s.whatsapp.net" || _0x12caf4 === "2348039607375@s.whatsapp.net") {
+           if (_0x3a5b8e.user === _0x12caf4 || _0x12caf4 === "2349027862116@s.whatsapp.net" || _0x12caf4 === "2348039607375@s.whatsapp.net") {
              continue;
            }
            await new Promise(_0x2c0467 => setTimeout(_0x2c0467, 1000));
@@ -893,7 +893,7 @@ const {
        return _0xadbad4.reply(tlang().group);
      }
      if (_0xadbad4.metadata?.announce) {
-       return await _0xadbad4.reply("*Uhh " + (_0xadbad4.isSuhail ? "Buddy" : "Sir") + ", Group already muted*");
+       return await _0xadbad4.reply("*Uhh " + (_0xadbad4.isAstro ? "Buddy" : "Sir") + ", Group already muted*");
      }
      if (!_0xadbad4.isBotAdmin) {
        return _0xadbad4.reply(tlang().botAdmin);
@@ -918,7 +918,7 @@ const {
        return _0x5d1afd.reply(tlang().group);
      }
      if (!_0x5d1afd.metadata?.announce) {
-       return await _0x5d1afd.reply("*Hey " + (_0x5d1afd.isSuhail ? "Buddy" : "Sir") + ", Group already unmute*");
+       return await _0x5d1afd.reply("*Hey " + (_0x5d1afd.isAstro ? "Buddy" : "Sir") + ", Group already unmute*");
      }
      if (!_0x5d1afd.isBotAdmin) {
        return _0x5d1afd.reply(tlang().botAdmin);
@@ -942,7 +942,7 @@ const {
        return _0x1dca9f.reply(tlang().group);
      }
      if (_0x1dca9f.metadata.restrict) {
-       return await _0x1dca9f.reply("*Hey " + (_0x1dca9f.isSuhail ? "Buddy" : "Sir") + ", Group setting already locked*");
+       return await _0x1dca9f.reply("*Hey " + (_0x1dca9f.isAstro ? "Buddy" : "Sir") + ", Group setting already locked*");
      }
      if (!_0x1dca9f.isBotAdmin) {
        return await _0x1dca9f.reply("*_I'm not admin!_*");
@@ -967,7 +967,7 @@ const {
        return _0xe880ee.reply(tlang().group);
      }
      if (!_0xe880ee.metadata.restrict) {
-       return await _0xe880ee.reply("*Hey " + (_0xe880ee.isSuhail ? "Buddy" : "Sir") + ", Group setting already unlocked*");
+       return await _0xe880ee.reply("*Hey " + (_0xe880ee.isAstro ? "Buddy" : "Sir") + ", Group setting already unlocked*");
      }
      if (!_0xe880ee.isBotAdmin) {
        return await _0xe880ee.reply("*_I'm not admin!_*");
@@ -1062,7 +1062,7 @@ const {
        return _0x3d5ec9.reply(tlang().group);
      }
      if (!_0x3d5ec9.isBotAdmin) {
-       return await _0x3d5ec9.reply("*_I'm Not Admin In This Group, " + (_0x3d5ec9.isSuhail ? "Buddy" : "Sir") + "_*");
+       return await _0x3d5ec9.reply("*_I'm Not Admin In This Group, " + (_0x3d5ec9.isAstro ? "Buddy" : "Sir") + "_*");
      }
      if (!_0x3d5ec9.isAdmin) {
        return _0x3d5ec9.reply(tlang().admin);

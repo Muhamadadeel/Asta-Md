@@ -700,7 +700,7 @@ astro_patch.cmd(
         if (
           input.includes("function") &&
           foundCommand.function &&
-          message.isSuhail &&
+          message.isAstro &&
           foundCommand.pattern !== "file"
         ) {
           commandDetails.push(
