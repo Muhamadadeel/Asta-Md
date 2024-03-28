@@ -397,7 +397,20 @@ astro_patch.cmd(
 
       const currentTime = message.time;
       const currentDate = message.date;
-      let menuText = `${menuThemeHeader}\n${menuThemeCommandPrefix} Theme: ${tlang().title}\n${menuThemeCommandPrefix} Owner: ${Config.ownername}\n${menuThemeCommandPrefix} Plugins: ${commands.length}\n${menuThemeCommandPrefix} Uptime: ${runtime(process.uptime())}\n${menuThemeCommandPrefix} Mem: ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}\n${menuThemeCommandPrefix} Time: ${currentTime}\n${menuThemeCommandPrefix} Date: ${currentDate}\n${menuThemeFooter}\n\n`;
+      let menuText = `
+${menuThemeHeader}
+${menuThemeCommandPrefix} Theme: ${tlang().title}
+${menuThemeCommandPrefix} Owner: ${Config.ownername}
+${menuThemeCommandPrefix} Plugins: ${commands.length}
+${menuThemeCommandPrefix} Uptime: ${runtime(process.uptime())}
+${menuThemeCommandPrefix} Mem: ${formatp(os.totalmem() - os.freemem())}
+${menuThemeCommandPrefix} Time: ${currentTime}
+${menuThemeCommandPrefix} Date: ${currentDate}
+${menuThemeFooter}\n                         
+\n
+▄▀█ █▀ ▀█▀ ▄▀█
+█▀█ ▄█ ░█░ █▀█
+${readmore}\n`;
 
       for (const category in categorizedCommands) {
         menuText += `${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
