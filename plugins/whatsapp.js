@@ -241,7 +241,7 @@ smd({
       let _0x433157 = await _0x274b4e.groupMetadata(_0xd36fa.id);
       _0x21f6f4 += "\n\nName : " + _0x433157.subject + " " + (_0x433157.owner ? "\nOwner : @" + _0x433157.owner.split("@")[0] : "") + "\nID : " + _0xd36fa.id + "\nMade : " + (_0x433157.creation ? moment(_0x433157.creation * 1000).tz("Asia/Kolkata").format("DD/MM/YYYY HH:mm:ss") : _0x433157.creation) + "\nMember : " + (_0x433157.participants.length || 0) + "\n\nMessages : " + _0xd36fa.unreadCount + "\nLastchat : " + moment(_0xd36fa.conversationTimestamp * 1000).tz(timezone).format("DD/MM/YYYY HH:mm:ss");
     }
-    _0x281fb2.send(_0x21f6f4, {}, "suhail", _0x281fb2);
+    _0x281fb2.send(_0x21f6f4, {}, "Asta", _0x281fb2);
   } catch (_0x5633d6) {
     return await _0x281fb2.error(_0x5633d6 + "\n\n command: listpc", _0x5633d6, "*_Didn't get any results, Sorry!_*");
   }

@@ -349,7 +349,7 @@ smd({
     let _0x365550 = "┏━━━━━━━━━━━━━━━━━━━━━━━━\n┃\t*💬SUHAIL-MD_FANCY_TEXT💬* \n┗━━━━━━━━━━━━━━━━━━━━━━━━\n\n " + (_0x3b568a ? "```🔢Reply the number you wants to select``` \n\n" : "```\t\t" + prefix + "fancy Suhail(For all text)\n\t\t" + prefix + "fancy 25 Suhail(For specific text)```\n\n");
     let _0x50c7d9 = parseInt(_0x3b568a);
     if (isNaN(_0x50c7d9)) {
-      let _0x4ca942 = _0x3b568a ? _0x3b568a : "Suhail";
+      let _0x4ca942 = _0x3b568a ? _0x3b568a : "Asta";
       listall(_0x4ca942).forEach((_0x51f58f, _0x2be109) => {
         _0x365550 += "\n" + (_0x2be109 += 1) + " " + _0x51f58f + "\n";
       });
@@ -382,7 +382,7 @@ smd({
     } = require("../lib/scraper");
     let _0x2b12c6 = _0x48c907 ? parseInt(_0x48c907) : "";
     _0x48c907 = _0x2b12c6 && !isNaN(_0x2b12c6) ? _0x48c907.slice(2) : _0x48c907;
-    let _0x3743f7 = (await _0x515724(_0x48c907 ? _0x48c907 : "Suhail")) || [];
+    let _0x3743f7 = (await _0x515724(_0x48c907 ? _0x48c907 : "Asta")) || [];
     if (!_0x3743f7 || !_0x3743f7[0]) {
       return await _0xbd587f.send("*_No Results Found!_*");
     }

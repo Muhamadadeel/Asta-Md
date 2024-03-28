@@ -411,7 +411,7 @@ cmd({
     try {
       fs.unlink(_0x349452);
     } catch {}
-    await _0x4e4351.send(util.format(_0x536aa6), {}, "suhail", _0x680da4);
+    await _0x4e4351.send(util.format(_0x536aa6), {}, "Asta", _0x680da4);
   } catch (_0x2ee8cc) {
     await _0x4e4351.error(_0x2ee8cc + "\n\ncommand url", _0x2ee8cc);
   }
@@ -437,7 +437,7 @@ cmd({
     if (!_0x3e1ea8 || !_0x3e1ea8.url) {
       return _0xbda24.reply("*_Failed To Create Url!_*");
     }
-    await _0xbda24.send(util.format(_0x3e1ea8.url), {}, "suhail", _0x7d6de1);
+    await _0xbda24.send(util.format(_0x3e1ea8.url), {}, "Asta", _0x7d6de1);
   } catch (_0x1a2f02) {
     await _0xbda24.error(_0x1a2f02 + "\n\ncommand upload", _0x1a2f02);
   }

@@ -57,7 +57,7 @@ let {
        contextInfo: {
          ...(await _0x1cec94.bot.contextInfo("ACTIVE USERS", _0x1cec94.senderName))
        }
-     }, "suhail", _0x1cec94);
+     }, "Asta", _0x1cec94);
    } catch (_0x225db9) {
      console.log({
        e: _0x225db9
@@ -121,7 +121,7 @@ let {
          ...(await _0x297641.bot.contextInfo("HISTORY"))
        },
        mentions: [..._0x38bc51]
-     }, "suhail", _0x297641);
+     }, "Asta", _0x297641);
    } catch (_0x48863b) {
      await _0x297641.error(_0x48863b + "\n\ncommand : cmdused", _0x48863b, "*ERROR!*");
    }
@@ -144,7 +144,7 @@ let {
            thumbnail: await smdBuffer(await _0x17bb63.getpp())
          }
        }
-     }, "suhail");
+     }, "Asta");
    } catch (_0x2ace2e) {}
  });
  smd({
@@ -242,7 +242,7 @@ let {
  });
  smd({
    cmdname: "feature",
-   alias: ["totalfeature", "features", "suhail"],
+   alias: ["totalfeature", "features", "Asta"],
    category: "new",
    filename: __filename,
    info: "get counting for total features!"
@@ -253,21 +253,21 @@ let {
      try {
        let {
          key: _0x2d7cf6
-       } = await _0x4e7c63.send("Counting... 0", {}, "suhail", _0x4e7c63);
+       } = await _0x4e7c63.send("Counting... 0", {}, "Asta", _0x4e7c63);
        for (let _0x16a10f = 0; _0x16a10f <= _0x4cf8ed; _0x16a10f++) {
          if (_0x16a10f % 15 === 0) {
            await _0x4e7c63.send("Counting... " + _0x16a10f, {
              edit: _0x2d7cf6
-           }, "suhail", _0x4e7c63);
+           }, "Asta", _0x4e7c63);
          } else if (_0x4cf8ed - _0x16a10f < 10) {
            await _0x4e7c63.send("Counting... " + _0x16a10f, {
              edit: _0x2d7cf6
-           }, "suhail", _0x4e7c63);
+           }, "Asta", _0x4e7c63);
          }
        }
        await _0x4e7c63.send("*Feature Counting Done!*", {
          edit: _0x2d7cf6
-       }, "suhail", _0x4e7c63);
+       }, "Asta", _0x4e7c63);
      } catch (_0x28ce7e) {}
      let _0x50f17a = " *乂 ＳＵＨＡＩＬ ＭＤ - ＢＯＴ ＦＥＡＴＵＲＥ*\n\n\n  ◦ _Total Features ➪ " + _0x4cf8ed + "_\n  \n*◦ LIST DOWN THE FEATURES*\n\n      _Commands ➪ " + Object.values(_0x4de967.commands).filter(_0x54d4bf => _0x54d4bf.pattern).length + "_\n      _Msg Listener ➪ " + Object.values(_0x4de967.commands).filter(_0x2376a3 => _0x2376a3.on).length + "_\n      _Call Listener ➪ " + Object.values(_0x4de967.commands).filter(_0x54a19b => _0x54a19b.call).length + "_\n      _Group Listener ➪ " + Object.values(_0x4de967.commands).filter(_0x35381c => _0x35381c.group).length + "_\n  \n\n" + Config.caption;
      await _0x4e7c63.bot.relayMessage(_0x4e7c63.chat, {
@@ -308,7 +308,7 @@ let {
    let _0x3b31ed = "Character of @" + _0x32c078.split("@")[0] + "  is *" + _0x2f5d93 + "* 🔥⚡";
    _0x2a677e.send(_0x3b31ed, {
      mentions: [_0x32c078]
-   }, "suhail", _0x2a677e);
+   }, "Asta", _0x2a677e);
  });
  smd({
    cmdname: "poetry",
