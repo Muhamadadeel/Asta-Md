@@ -28,10 +28,10 @@ const {
  const Levels = require("discord-xp");
  const fs = require("fs-extra");
  const Jimp = require("jimp");
- const sᴜʜᴀɪʟ_ᴍᴅ = require("../lib/plugins");
+ const astro_patch = require("../lib/plugins");
  const {
    cmd
- } = sᴜʜᴀɪʟ_ᴍᴅ;
+ } = astro_patch;
  const grouppattern = /https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{22}/g;
  smd({
    cmdname: "join",

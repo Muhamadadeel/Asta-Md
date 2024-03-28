@@ -36,7 +36,7 @@ let {
 } = require("../lib");
 const long = String.fromCharCode(8206);
 const readmore = long.repeat(4001);
-let sᴜʜᴀɪʟ_ᴍᴅ;
+let astro_patch;
 const {
   cmd
 } = require("../lib/plugins");

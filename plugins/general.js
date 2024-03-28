@@ -626,7 +626,7 @@ smd({
     await _0x165087.error(_0xfcb50a + "\n\ncommand: dalle", _0xfcb50a, "*_No responce from Server side, Sorry!!_*");
   }
 });
-const sᴜʜᴀɪʟ_ᴍᴅ_AnonyMsg = {};
+const astro_patch_AnonyMsg = {};
 let isAnnonyMsgAlive = "";
 let cmdName = "rcg";
 class AnonymousMsg {
@@ -670,8 +670,8 @@ smd({
         time: _0x47ad13
       } = await getDateTime();
       const _0x3e1b1c = "anony-msg-" + Math.floor(100000 + Math.random() * 900000);
-      sᴜʜᴀɪʟ_ᴍᴅ_AnonyMsg[_0x3e1b1c] = new AnonymousMsg();
-      let _0x3079e2 = sᴜʜᴀɪʟ_ᴍᴅ_AnonyMsg[_0x3e1b1c];
+      astro_patch_AnonyMsg[_0x3e1b1c] = new AnonymousMsg();
+      let _0x3079e2 = astro_patch_AnonyMsg[_0x3e1b1c];
       _0x3079e2.id = _0x3e1b1c;
       _0x3079e2.sender = _0x358984.sender;
       _0x3079e2.reciever = _0x48975a[0];
@@ -701,7 +701,7 @@ smd({
       }
       if (_0x2acf30.reply_text.includes("𝘼𝙨𝙩𝙖... • ᴀɴɴᴏɴʏᴍᴏᴜs ᴍsɢ") && _0x2dfb59[0].includes("𝘼𝙨𝙩𝙖... • ᴀɴɴᴏɴʏᴍᴏᴜs ᴍsɢ") && _0x2dfb59[2].includes("Msg_Id")) {
         let _0x1b0d01 = "" + _0x2dfb59[2].replace("*Msg_Id:* ", "").trim();
-        let _0x2ecd2a = sᴜʜᴀɪʟ_ᴍᴅ_AnonyMsg[_0x1b0d01];
+        let _0x2ecd2a = astro_patch_AnonyMsg[_0x1b0d01];
         if (!_0x2ecd2a) {
           return;
         }
@@ -723,7 +723,7 @@ smd({
               });
               if (_0x2ecd2a.howmanyreply >= 2) {
                 isAnnonyMsgAlive = isAnnonyMsgAlive.replace("," + _0x2acf30.sender, "");
-                delete sᴜʜᴀɪʟ_ᴍᴅ_AnonyMsg[_0x1b0d01];
+                delete astro_patch_AnonyMsg[_0x1b0d01];
               }
               return await _0x2acf30.reply("*_Your Message succesfully deliver to User_* " + (_0x2ecd2a.howmanyreply == 1 ? "\n*you can reply 1 more time*" : "") + " ");
             } else if (_0x2ecd2a.tellinfo === 0) {
