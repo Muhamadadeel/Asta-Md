@@ -1,7 +1,4 @@
 let {smd , prefix,Config} = require("../lib")
-
-// ============================ CHATS SETTINGS ============================ 
-
 smd({
 	pattern: 'clear',
 	fromMe: true,
