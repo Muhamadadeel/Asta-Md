@@ -9,7 +9,7 @@
   "env": {
     "OWNER_NAME": {
       "description": "Name for Bot Owner",    
-      "value": "Suhail Ser",
+      "value": "Sir Astro",
       "required" :true
     },   
      
@@ -128,7 +128,7 @@
     },
     "PACK_NAME": {
       "description": "Put Sticker Pack_Name.",
-      "value": "Suhail Md",
+      "value": "AstaMd",
       "required": false 
     },
     "PACK_AUTHER": {

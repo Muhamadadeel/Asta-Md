@@ -53,7 +53,7 @@ smd({
            // console.log("commits:  ", commits)
             if (commits.total === 0) return await citel.reply(`*BOT IS UPTO DATE...!!*`) 
             let update = await DB.sync()
-            await citel.bot.sendMessage(citel.chat, { text: update.replace(/SuhailTechIMd/,"Suhail Tech Info"), },{ quoted : citel });
+            await citel.bot.sendMessage(citel.chat, { text: update.replace(/SuhailTechIMd/,"Astropeda"), },{ quoted : citel });
 
 
 if(text == 'start' && process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY ){

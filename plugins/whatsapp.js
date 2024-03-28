@@ -228,7 +228,7 @@ cmd({
       return _0xcffaeb.reply("*Please Reply to User With Name*");
     }
     if (!_0x4158fc) {
-      return _0xcffaeb.reply("Please Give Me User Name, \n *Example : " + prefix + "vcard Suhail Tech Info* ");
+      return _0xcffaeb.reply("Please Give Me User Name, \n *Example : " + prefix + "vcard Astropeda* ");
     }
     var _0x423556 = _0x4158fc.split(" ");
     if (_0x423556.length > 3) {

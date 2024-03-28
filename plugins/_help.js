@@ -818,7 +818,7 @@ smd(
       const lines = msg.message.text.split("\n");
       let lineNumber = parseInt(text.split(" ")[0]);
       if (!isNaN(lineNumber)) {
-        if (lines.length > 30 && lines[1].includes("SUHAIL-MD_FANCY_TEXT")) {
+        if (lines.length > 30 && lines[1].includes("ASTA-MD_FANCY_TEXT")) {
           const matchingLine = lines.find((line) =>
             line.startsWith(`${lineNumber} `),
           );
@@ -1005,7 +1005,7 @@ smd(
       const lines = msg.message.text.split("\n");
       let lineNumber = parseInt(text.split(" ")[0]);
       if (!isNaN(lineNumber)) {
-        if (lines.length > 30 && lines[1].includes("SUHAIL-MD_FANCY_TEXT")) {
+        if (lines.length > 30 && lines[1].includes("ASTA-MD_FANCY_TEXT")) {
           const matchingLine = lines.find((line) =>
             line.startsWith(`${lineNumber} `),
           );
@@ -1064,7 +1064,7 @@ smd(
           for (const category in categoryInfo) {
             const categoryName = category.toLowerCase();
             if (commandInfo.includes(categoryName)) {
-              result = `┏━━━━━━━━━━━━━━━━━━━━━━━\n┃\t*SUHAIL-MD_${category.toUpperCase()} CATEGORY*\n┗━━━━━━━━━━━━━━━━━━━━━━━\n\n\n`;
+              result = `┏━━━━━━━━━━━━━━━━━━━━━━━\n┃\t*ASTA-MD_${category.toUpperCase()} CATEGORY*\n┗━━━━━━━━━━━━━━━━━━━━━━━\n\n\n`;
               categoryInfo[category].forEach((cmdInfo) => {
                 result += `*${cmdInfo.command}*\n${cmdInfo.info ? `\n*💁Info:* \`\`\`${cmdInfo.info}\`\`\`\n` : ""}\n*📝Desc:* \`\`\`${cmdInfo.help}\`\`\`\n\n`;
               });

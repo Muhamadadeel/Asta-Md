@@ -62,7 +62,7 @@ smd({
     try{
         let mm =   m.image ? m : m.reply_message && m.reply_message.image ? m.reply_message : false; 
         
-  let too = `*Separate the text with _:_ sign!*\n*Example : ${prefix + smd} Suhail _:_ Bot*`
+  let too = `*Separate the text with _:_ sign!*\n*Example : ${prefix + smd} Asta_:_ Bot*`
   if(!mm) {
     let str = `┌───〈 *ᴇᴅɪᴛᴏʀ ᴍᴇɴᴜ*  〉───◆
 │╭─────────────···▸

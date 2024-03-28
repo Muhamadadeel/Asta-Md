@@ -67,7 +67,7 @@ global.SESSION_ID = process.env.SESSION_ID ||  "Secktor;;;eyJub2lzZUtleSI6eyJwcm
 
 module.exports = {
 
-  menu: process.env.MENU || "", /**  Available @MENU @Schemes 1: Aztec_Md, 2: A17_Md, 3: Suhail-Md Default ---------- If Not Choose then it Randomely Pic One Of Them Each time **/
+  menu: process.env.MENU || "", /**  Available @MENU @Schemes 1: Aztec_Md, 2: A17_Md, 3: Asta-Md Default ---------- If Not Choose then it Randomely Pic One Of Them Each time **/
 
   HANDLERS: process.env.PREFIX  || ".",
   BRANCH  : process.env.BRANCH  || "main",
@@ -77,7 +77,7 @@ module.exports = {
   author : process.env.PACK_AUTHER|| "Asta-Md",
   packname: process.env.PACK_NAME || "♥️",
   botname : process.env.BOT_NAME  || "𝘼𝙎𝙏𝘼 𝙈𝘿",
-  ownername:process.env.OWNER_NAME|| "It'x Suhail",
+  ownername:process.env.OWNER_NAME|| "It'x Astropeda",
 
 
   errorChat : process.env.ERROR_CHAT || "",

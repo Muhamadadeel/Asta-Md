@@ -204,7 +204,7 @@ smd(
     }
 
     let sudoUsersCaption =
-      `\n   👤 *${Config.botname || "SUHAIL-MD "} MODS* 👤\n   \n${sudoUsersList}`.trim();
+      `\n   👤 *${Config.botname || "ASTA-MD "} MODS* 👤\n   \n${sudoUsersList}`.trim();
     return await message.reply(
       "https://telegra.ph/file/5fd51597b0270b8cff15b.png",
       {

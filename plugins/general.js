@@ -131,7 +131,7 @@ smd({
   pattern: "chat",
   desc: "chat with an AI",
   category: "ai",
-  use: "<Hii, Suhail Tech Info>",
+  use: "<Hii, Astropeda>",
   filename: __filename
 }, async (_0x1c0160, _0x482db1) => {
   try {
@@ -144,14 +144,14 @@ smd({
   pattern: "gpt",
   desc: "chat with an AI",
   category: "ai",
-  use: "<Hii, Suhail Tech Info>",
+  use: "<Hii, Astropeda>",
   filename: __filename
 }, async (_0x5cb388, _0x302ad5) => {
   try {
     try {
       let _0x557719 = _0x302ad5 ? _0x302ad5 : bot.reply_text;
       if (!_0x557719) {
-        return man.reply("Provide me a query ex Who is Suhail");
+        return man.reply("Provide me a query ex Who is Asta");
       }
       const _0x50c8d3 = await fetch("https://aemt.me/openai?text=" + _0x557719);
       const _0x14c9d6 = await _0x50c8d3.json();
@@ -180,7 +180,7 @@ smd({
   try {
     let _0x1b0897 = _0x3f3887 ? _0x3f3887 : _0x42b3b8.reply_text;
     if (!_0x1b0897) {
-      return _0x42b3b8.reply("Provide me a query ex Who is Suhail");
+      return _0x42b3b8.reply("Provide me a query ex Who is Asta");
     }
     const _0x4c275e = await fetch("https://aemt.me/openai?text=" + _0x1b0897);
     const _0x4743c3 = await _0x4c275e.json();
@@ -198,7 +198,7 @@ smd({
   alias: ["dall", "dall-e"],
   desc: "chat with an AI",
   category: "ai",
-  use: "<Hii, Suhail Tech Info>",
+  use: "<Hii, Astropeda>",
   filename: __filename
 }, async (_0x21be87, _0x17d498) => {
   try {
@@ -494,7 +494,7 @@ smd({
     let {
       data: _0x44f98c
     } = await axios.get("https://api.github.com/repos/Astropeda/Asta-Md");
-    let _0x1c73f9 = ("\nI'm Suhail-Md. A whatsApp chuddy buddy bot with rich features, Created By *" + Config.ownername + "*. 🔰\n\n  *❲❒❳ Stars:* " + (_0x44f98c?.stargazers_count || "120+") + " stars\n  *❲❒❳ Forks:* " + (_0x44f98c?.forks_count || "1000+") + " forks\n  *❲❒❳ Auther:* SuhailTechInfo\n  *❲❒❳ Create:* " + (_0x44f98c?.created_at || "undefined") + "\n  *❲❒❳ Repo:* _https://github.com/Astropeda/Asta-Md_\n  *❲❒❳ Scan:* _" + scan + "_\n\n  *❲❒❳ Visit For Tutorial* _https://www.Youtube.com/c/SuhailTechInfo_\n" + (Config.caption ? "\n\n" + Config.caption : "")).trim();
+    let _0x1c73f9 = ("\nI'm Asta-Md. A whatsApp chuddy buddy bot with rich features, Created By *" + Config.ownername + "*. 🔰\n\n  *❲❒❳ Stars:* " + (_0x44f98c?.stargazers_count || "120+") + " stars\n  *❲❒❳ Forks:* " + (_0x44f98c?.forks_count || "1000+") + " forks\n  *❲❒❳ Auther:* Astropeda\n  *❲❒❳ Create:* " + (_0x44f98c?.created_at || "undefined") + "\n  *❲❒❳ Repo:* _https://github.com/Astropeda/Asta-Md_\n  *❲❒❳ Scan:* _" + scan + "_\n\n  *❲❒❳ Visit For Tutorial* _https://www.Youtube.com/c/SuhailTechInfo_\n" + (Config.caption ? "\n\n" + Config.caption : "")).trim();
     return await _0x45da98.sendUi(_0x45da98.jid, {
       caption: _0x1c73f9
     });
@@ -644,7 +644,7 @@ smd({
   alias: ["recognition", "anonychat"],
   desc: "Send message Annonymously",
   category: "ai",
-  use: "<Hii, Suhail Tech Info>",
+  use: "<Hii, Astropeda>",
   filename: __filename
 }, async (_0x358984, _0x20693a, {
   smd: _0x12d243
@@ -750,7 +750,7 @@ smd({
   pattern: "aitts",
   desc: "Text to Voice Using Eleven Lab Ai",
   category: "ai",
-  use: "<Hii, Suhail Tech Info>",
+  use: "<Hii, Astropeda>",
   filename: __filename
 }, async (_0x1a01af, _0x1ac85a) => {
   await aitts(_0x1a01af, _0x1ac85a || _0x1a01af.reply_text);

@@ -440,7 +440,7 @@ smd({
       var _0x3048ab = {
         ...(await _0xe5ea97.bot.contextInfo(Config.botname, "ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ"))
       };
-      let _0x3448d2 = _0x4e4465.title || _0x3e3caf || _0x421809[1] || "Suhail MD -- YT Video";
+      let _0x3448d2 = _0x4e4465.title || _0x3e3caf || _0x421809[1] || "AstaMD -- YT Video";
       if (_0x3e3caf) {
         await _0xe5ea97.bot.sendMessage(_0xe5ea97.chat, {
           [_0x5b10f0]: {
