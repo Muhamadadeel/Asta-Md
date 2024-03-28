@@ -24,7 +24,7 @@ const min = 1;
 const max = 99;
 const usage_trend = Math.floor(Math.random() * (max - min + 1)) + min;
 const min_dat = 1;
-const max_dat = 99;
+const max_dat = 499;
 const total_dat = Math.floor(Math.random() * (max_dat - min_dat + 1)) + min;
 
 //Command: menu
