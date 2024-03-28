@@ -40,8 +40,8 @@ let {
    info: "Suhail-MD Support Channels"
  }, async _0x5ce955 => {
    try {
-     let _0x1a71d9 = "https://whatsapp.com/channel/0029Va9thusJP20yWxQ6N643";
-     let _0x162ed5 = "*_https://whatsapp.com/channel/0029Va9thusJP20yWxQ6N643_*\n*_JOIN WHATSAPP CHANNEL TO GET UPDATES._*\n\n\n*_https://youtube.com/SuhailTechInfo !_*\n*_WATCH HELPFULL VIDEO TUTORIALS ABOUT WHATSAPP BOTS FROM YOUTUBE ♥._*\n";
+     let _0x1a71d9 = "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z/209";
+     let _0x162ed5 = "*_https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z/209_*\n*_JOIN WHATSAPP CHANNEL TO GET UPDATES._*\n\n\n*_https://youtube.com/SuhailTechInfo !_*\n*_WATCH HELPFULL VIDEO TUTORIALS ABOUT WHATSAPP BOTS FROM YOUTUBE ♥._*\n";
      let _0x39b0a0 = await _0x5ce955.bot.contextInfo("Suhail Md", "Hello " + _0x5ce955.senderName, await smdBuffer("https://telegra.ph/file/e2c8615df5a7f24b8eb37.jpg"), 1, _0x1a71d9, 3);
      _0x5ce955.send(_0x162ed5, {
        contextInfo: _0x39b0a0
