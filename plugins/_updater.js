@@ -8,7 +8,7 @@ const git = simpleGit();
 const fs = require('fs');
 
 
-if (!fs.existsSync('./.git')) { throw "UPDATE COMMAND NOT WORKS B'COZ GIT NOT FOUND IN APP!" }
+//if (!fs.existsSync('./.git')) { throw "UPDATE COMMAND NOT WORKS B'COZ GIT NOT FOUND IN APP!" }
 try{
 
 const Heroku = require('heroku-client');
