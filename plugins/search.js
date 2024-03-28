@@ -59,7 +59,7 @@ async(message, match) => {
 💕 Followers : ${gitdata.followers}
 👉 Following : ${gitdata.following}
 🔄 Updated At : ${gitdata.updated_at}
-🧩 Created At : ${gitdata.created_at}`
+💁 Created At : ${gitdata.created_at}`
          }, { quoted: message })
 
           }catch(e){return await message.error(`${e}\n\n command: github`,e,`*_Didn't get any results, Sorry!_*`) }
@@ -459,7 +459,7 @@ smd({
                   try { var anu1 = await message.bot.fetchStatus(anu[0].jid); } 
                   catch { var anu1 = '401' ; }
                   if (anu1 == '401' || anu1.status.length == 0) { nobio += `wa.me/${anu[0].jid.split("@")[0]}\n` ; } 
-                  else {  text += `🧐 *Number:* wa.me/${anu[0].jid.split("@")[0]}\n ✨*Bio :* ${anu1.status}\n🍁*Last update :* ${moment(anu1.setAt).tz('Asia/Karachi').format('HH:mm:ss DD/MM/YYYY')}\n\n` ;   }
+                  else {  text += `🧐 *Number:* wa.me/${anu[0].jid.split("@")[0]}\n ✨*Bio :* ${anu1.status}\n🔉*Last update :* ${moment(anu1.setAt).tz('Asia/Karachi').format('HH:mm:ss DD/MM/YYYY')}\n\n` ;   }
             } catch { nowhatsapp += ` ≛ ${number0}${i}${number1}\n`; }
         }
         return await message.reply(`${text}${nobio}${nowhatsapp}`)

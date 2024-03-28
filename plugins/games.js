@@ -750,7 +750,7 @@ cmd({
         delete astro_patch_Capital[_0x16aecb.sender];
         try {
           if (global.isMongodb) {
-            await eco.give(_0x2e9c6b.player, "Suhail", _0x15c4a0);
+            await eco.give(_0x2e9c6b.player, "asta", _0x15c4a0);
           }
         } catch {}
       } else if (_0x2e9c6b.attempts <= 3) {
@@ -839,7 +839,7 @@ class WordChainGame {
           let _0x3ed90a = "*Reminder : Game Terminates After " + this.currentRemTime + "s*\n\n*_Waiting For @" + this.currentPlayer.split("@")[0] + "'s Responce_*    \n_Take Your Turn, Otherwise Game Terminates_\n_Make Sure Your Word Must Start With *" + this.previousWord.slice(-1) + "* , and Must Have Atleast *" + this.wordLength + "* letters_\n\nYou Still Have *" + this.currentRemTime + "Secs* to Answer\nGive Your Best To Make Difficult For Opponent";
           _0x346961.send(_0x3ed90a, {
             mentions: [this.currentPlayer]
-          }, "suhail");
+          }, "asta");
         } else if (!this.player2 || !this.player1) {
           _0x346961.bot.sendMessage(_0x346961.jid, {
             text: "_Still Waiting For Player to Start Word Chain Game..._\n _Type *" + prefix + "wcg* to Join The Game_  \nOtherwise : _Wcg Session Expires After " + this.currentRemTime + "s_"
@@ -1043,7 +1043,7 @@ smd({
 });
 let A = ["😺", "👻", "⏳", "🍫"];
 let B = ["🥳", "🍂", "😎", "💀"];
-let C = ["💍", "🍁", "🔥", "💥"];
+let C = ["💍", "🔉", "🔥", "💥"];
 let D = ["✨", "❄️", "⭐", "🌚"];
 let gtc = {};
 function getEmojy(_0x87048e) {
@@ -1264,7 +1264,7 @@ smd({
       _0x5aaad7[_0x5aaad7.game._currentTurn ^ _0x560530 ? "x" : "o"] = _0x303e73.chat;
     }
     if (_0x3fbb59 && isMongodb) {
-      await eco.give(_0x303e73.sender, "Suhail", 2000);
+      await eco.give(_0x303e73.sender, "asta", 2000);
     }
     if (_0x3fbb59 || _0x1e00eb) {
       await _0x303e73.bot.sendMessage(_0x303e73.chat, {

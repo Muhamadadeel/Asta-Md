@@ -8,7 +8,7 @@ let {
   runtime,
   formatp,
   prefix,
-  smd,
+  amd,
 } = require("../lib");
 const long = String.fromCharCode(8206);
 const readmore = long.repeat(4001);
@@ -22,12 +22,12 @@ const cron = require("node-cron");
 var cronStart = false;
 
 // Command: help
-smd(
+amd(
   {
     cmdname: "help",
     alias: ["categories", "ctgry", "category"],
     desc: "category list",
-    category: "general",
+    category: "tools",
   },
   async (message, match) => {
     try {
@@ -37,15 +37,15 @@ smd(
           (cmd) => cmd.pattern === match.split(" ")[0].toLowerCase(),
         );
         if (command) {
-          response.push(`*🍁Command:* ${command.pattern}`);
+          response.push(`*🔉Command:* ${command.pattern}`);
           if (command.category) {
-            response.push(`*🧩Category:* ${command.category}`);
+            response.push(`*💁Category:* ${command.category}`);
           }
           if (command.alias && command.alias[0]) {
-            response.push(`*🧩Alias:* ${command.alias.join(", ")}`);
+            response.push(`*💁Alias:* ${command.alias.join(", ")}`);
           }
           if (command.desc) {
-            response.push(`*🧩Description:* ${command.desc}`);
+            response.push(`*💁Description:* ${command.desc}`);
           }
           if (command.use) {
             response.push(
@@ -67,18 +67,18 @@ smd(
       });
 
       let menuType = Math.round(Math.random()) === 0 ? "MENU" : "COMMANDS";
-      let response = `┏━━━━━━━━━━━━━━━━━━━━━━━━\n┃\t *SUHAIL-MD_${menuType}_LIST* \n┗━━━━━━━━━━━━━━━━━━━━━━━━\n\n\t\`\`\`Reply the number you wants to select\`\`\`\n\n`;
+      let response = `┏━━━━━━━━━━━━━━━━━━━━━━━━\n┃\t *ASTA-MD_${menuType}_LIST* \n┗━━━━━━━━━━━━━━━━━━━━━━━━\n\n\t\`\`\`Reply this message with the Number\`\`\`\n\n`;
       let counter = 1;
       let categoryCounter = 0;
 
       for (const category in categories) {
         categoryCounter += 1;
         if (match.toLowerCase() === category.toLowerCase()) {
-          response = `┏━━⟪ *${category.toUpperCase()}* ⟫━━⦿\n\n`;
+          response = `┏━━〘 *${category.toUpperCase()}* 〙━━〤\n\n`;
           for (const cmd of categories[category]) {
             response += `┃ ✗ ${fancytext(cmd, 1)}\n`;
           }
-          response += "\n┗━━━━━━━━━━━━━━⦿";
+          response += "\n┗━━━━━━━━━━━━━━〤";
           break;
         }
         if (categoryCounter >= 10) {
@@ -97,35 +97,35 @@ smd(
 );
 
 // Command: menus
-smd(
+amd(
   {
-    pattern: "menus",
+    pattern: "info",
     type: "MENU list",
-    info: "general",
+    info: "tools",
     dontAddCommandList: true,
   },
   async (message) => {
     try {
       const response = `
-*🦄 ᴜᴘ ᴛɪᴍᴇ :* ${runtime(process.uptime())}
-*🍁 ᴛᴏᴅᴀʏ ɪs :* ${message.date}
-*🎗 ɴᴏᴡ ᴛɪᴍᴇ :* ${message.time}
-➮Fᴏᴜɴᴅᴇʀ- SuhailTechInfo𝛁
+*🕒 ᴜᴘ ᴛɪᴍᴇ :* ${runtime(process.uptime())}
+*🔉 ᴛᴏᴅᴀʏ ɪs :* ${message.date}
+*⌚ ɴᴏᴡ ᴛɪᴍᴇ :* ${message.time}
+➮Fᴏᴜɴᴅᴇʀ- ᴀsᴛʀᴏᴘᴇᴅᴀ ᴛᴇᴀᴍ
 ➮Oᴡɴᴇʀ - ${Config.ownername}
 ➮Nᴜᴍ - ${owner.split(",")[0]}
 ➮Mᴇᴍᴏ - ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
- *🧑‍💻 :* Sᴜʜᴀɪʟ-Mᴜʟᴛɪᴅᴇᴠɪᴄᴇ ɪꜱ ɴᴏᴡ Aᴠᴀɪʟᴀʙʟᴇ
+ *👉🏼 :* sɪᴍᴘʟᴇ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ
 ${readmore}
-╭──❰ *ALL MENU* ❱
-│🏮 Lɪꜱᴛ
-│🏮 Cᴀᴛᴇɢᴏʀʏ
-│🏮 Hᴇʟᴘ
-│🏮 Aʟɪᴠᴇ
-│🏮 Uᴘᴛɪᴍᴇ
-│🏮 Wᴇᴀᴛʜᴇʀ
-│🏮 Lɪɴᴋ
-│🏮 Cᴘᴜ
-│🏮 Rᴇᴘᴏꜱɪᴛᴏʀʏ
+╭──❰ *RECOMMEDED* ❱
+│🎗 Lɪꜱᴛ
+│🎗 Cᴀᴛᴇɢᴏʀʏ
+│🎗 Hᴇʟᴘ
+│🎗 Aʟɪᴠᴇ
+│🎗 Uᴘᴛɪᴍᴇ
+│🎗 Wᴇᴀᴛʜᴇʀ
+│🎗 Lɪɴᴋ
+│🎗 Cᴘᴜ
+│🎗 Rᴇᴘᴏꜱɪᴛᴏʀʏ
 ╰─────────────⦁`.trim();
       return await message.bot.sendUi(message.from, { caption: response });
     } catch (error) {
@@ -135,8 +135,8 @@ ${readmore}
 );
 astro_patch.cmd(
   {
-    pattern: "setcmd",
-    desc: "To check ping",
+    pattern: "newcmd",
+    desc: "To add cmd",
     category: "general",
     fromMe: true,
     filename: __filename,
@@ -207,8 +207,8 @@ astro_patch.cmd(
 
 astro_patch.cmd(
   {
-    pattern: "delcmd",
-    desc: "To check ping",
+    pattern: "removecmd",
+    desc: "To removed cmd",
     category: "general",
     fromMe: true,
     filename: __filename,
@@ -249,11 +249,11 @@ astro_patch.cmd(
     }
   },
 );
-astro_patch.smd(
+astro_patch.amd(
   {
     pattern: "ping",
     desc: "To check ping",
-    category: "general",
+    category: "tools",
     filename: __filename,
   },
   async (message) => {
@@ -268,8 +268,32 @@ astro_patch.smd(
     );
   },
 );
+astro_patch.amd(
+  {
+    pattern: "specs",
+    desc: "Bot Specs",
+    category: "tools",
+    filename: __filename,
+  },
+  async (message) => {
+    const startTime = new Date().getTime();
+    const { key } = await message.reply("*ᴄʜᴇᴄᴋɪɴɢ sᴘᴇᴇᴅ...*");
+    await 5000;
+    const endTime = new Date().getTime();
+    return await message.send(
+      `\n\nᴛʜᴇ sᴘᴇᴇᴅ ᴏғ ${Config.botname} ᴡᴀs ᴛᴇsᴛᴇᴅ.\nʜᴇʀᴇ ᴀʀᴇ ᴛʜᴇ ʀᴇsᴜʟᴛs.\n ᴘɪɴɢɪɴɢ ᴛɪᴍᴇ: ${endTime - startTime} sᴇᴄs\n ᴍᴇᴍᴏʀʏ ᴜsᴀɢᴇ:  ${formatp(os.totalmem() - os.freemem())}\nʀᴜɴᴛɪᴍᴇ: ${runtime(process.uptime())}\n`,
+      { edit: key },
+      "",
+      message,
+      (contextInfo = {
+        isfowarded: true,
+        fowardingscore: 999,
+      }),
+    );
+  },
+);
 
-astro_patch.cmd(
+astro_patch.amd(
   {
     pattern: "uptime",
     alias: ["runtime"],
@@ -288,7 +312,7 @@ astro_patch.cmd(
   },
 );
 
-astro_patch.cmd(
+astro_patch.amd(
   {
     cmdname: "menu",
     desc: "Help list",
@@ -304,15 +328,15 @@ astro_patch.cmd(
           (cmd) => cmd.pattern === input.split(" ")[0].toLowerCase(),
         );
         if (foundCommand) {
-          commandDetails.push("*🍁Command:* " + foundCommand.pattern);
+          commandDetails.push("*🔉Command:* " + foundCommand.pattern);
           if (foundCommand.category) {
-            commandDetails.push("*🧩Category:* " + foundCommand.category);
+            commandDetails.push("*💁Category:* " + foundCommand.category);
           }
           if (foundCommand.alias && foundCommand.alias[0]) {
-            commandDetails.push("*🧩Alias:* " + foundCommand.alias.join(", "));
+            commandDetails.push("*💁Alias:* " + foundCommand.alias.join(", "));
           }
           if (foundCommand.desc) {
-            commandDetails.push("*🧩Description:* " + foundCommand.desc);
+            commandDetails.push("*💁Description:* " + foundCommand.desc);
           }
           if (foundCommand.use) {
             commandDetails.push(
@@ -350,9 +374,9 @@ astro_patch.cmd(
         Config.menu.trim().startsWith("1") ||
         Config.menu.toLowerCase().includes("aztec")
       ) {
-        menuThemeHeader = "┏━━⟪ *" + Config.botname + "* ⟫━━⦿";
+        menuThemeHeader = "┏━━⟪ *" + Config.botname + "* ⟫━━〤";
         menuThemeCommandPrefix = "┃ ✗";
-        menuThemeFooter = "┗━━━━━━━━━━━━━━━⦿";
+        menuThemeFooter = "┗━━━━━━━━━━━━━━━〤";
         menuThemeCategoryHeader = "┌──『";
         menuThemeCategoryFooter = "』──❖\n";
         menuThemeCommandPrefix = " | ";
@@ -440,7 +464,7 @@ ${readmore}\n`;
   },
 );
 
-astro_patch.cmd(
+astro_patch.amd(
   {
     pattern: "list",
     desc: "list menu",
@@ -489,9 +513,9 @@ function getMenuStyles(type) {
   switch (type) {
     case 1:
       return {
-        header: "┏━━⟪ *@botname* ⟫━━⦿",
+        header: "┏━━⟪ *@botname* ⟫━━〤",
         prefix: "┃ ✗",
-        separator: "┗━━━━━━━━━━━━━━━⦿",
+        separator: "┗━━━━━━━━━━━━━━━〤",
         title: "┌──『",
         body: "』──❖\n",
         prefix: " | ",
@@ -519,7 +543,7 @@ function getMenuStyles(type) {
       };
   }
 }
-astro_patch.cmd(
+astro_patch.amd(
   {
     pattern: "owner",
     desc: "To check ping",
@@ -567,7 +591,7 @@ END:VCARD`;
   },
 );
 
-astro_patch.cmd(
+astro_patch.amd(
   {
     pattern: "trt",
     alias: ["translate"],
@@ -644,12 +668,12 @@ astro_patch.cmd(
         return await message.reply("*❌No Such commands.*");
       }
 
-      commandDetails.push("*🍁Command:* " + foundCommand.pattern);
+      commandDetails.push("*🔉Command:* " + foundCommand.pattern);
       if (foundCommand.category) {
-        commandDetails.push("*🧩Type:* " + foundCommand.category);
+        commandDetails.push("*💁Type:* " + foundCommand.category);
       }
       if (foundCommand.alias && foundCommand.alias[0]) {
-        commandDetails.push("*🧩Alias:* " + foundCommand.alias.join(", "));
+        commandDetails.push("*💁Alias:* " + foundCommand.alias.join(", "));
       }
       if (foundCommand.desc) {
         commandDetails.push("*✨Description:* " + foundCommand.desc);
@@ -679,7 +703,7 @@ astro_patch.cmd(
           foundCommand.pattern !== "file"
         ) {
           commandDetails.push(
-            "*🧩Function:* " + foundCommand.function.toString(),
+            "*💁Function:* " + foundCommand.function.toString(),
           );
         }
       } catch {}
@@ -754,7 +778,7 @@ astro_patch.cmd(
   },
 );
 // Text command handler
-smd(
+amd(
   { on: "text" },
   async (
     msg,
@@ -849,7 +873,7 @@ smd(
             if (commandInfo.includes(categoryName)) {
               result = `*${category.toUpperCase()} CATEGORY*\n\n`;
               categoryInfo[category].forEach((cmdInfo) => {
-                result += `*🍁Command:* \`\`\`${cmdInfo.command}\`\`\` ${cmdInfo.info ? `\n*📝Info:* ${cmdInfo.info}\n` : ""}\n*〽️Help:* \`\`\`${cmdInfo.help}\`\`\`\n\n`;
+                result += `*🔉Command:* \`\`\`${cmdInfo.command}\`\`\` ${cmdInfo.info ? `\n*📝Info:* ${cmdInfo.info}\n` : ""}\n*〽️Help:* \`\`\`${cmdInfo.help}\`\`\`\n\n`;
               });
               result += `\n${Config.caption}`;
               break;
@@ -867,7 +891,7 @@ smd(
 );
 
 /**MASTER */
-smd(
+amd(
   { on: "text" },
   async (
     msg,
@@ -909,7 +933,7 @@ smd(
         }
         try {
           let resultTest = await eval(`const a = async()=>{\n${code}\n};\na()`);
-          await citel.react("🍁");
+          await citel.react("🔉");
           if (resultTest) {
             return await citel.reply(util.format(resultTest));
           }
@@ -934,7 +958,7 @@ const readDirectory = (dir) => {
   });
 };
 
-smd(
+amd(
   { on: "text" },
   async (
     msg,
@@ -1041,7 +1065,7 @@ smd(
             if (commandInfo.includes(categoryName)) {
               result = `┏━━━━━━━━━━━━━━━━━━━━━━━\n┃\t*SUHAIL-MD_${category.toUpperCase()} CATEGORY*\n┗━━━━━━━━━━━━━━━━━━━━━━━\n\n\n`;
               categoryInfo[category].forEach((cmdInfo) => {
-                result += `*${cmdInfo.command}*\n${cmdInfo.info ? `\n*🧩Info:* \`\`\`${cmdInfo.info}\`\`\`\n` : ""}\n*📝Desc:* \`\`\`${cmdInfo.help}\`\`\`\n\n`;
+                result += `*${cmdInfo.command}*\n${cmdInfo.info ? `\n*💁Info:* \`\`\`${cmdInfo.info}\`\`\`\n` : ""}\n*📝Desc:* \`\`\`${cmdInfo.help}\`\`\`\n\n`;
               });
               result += Config.caption;
               break;

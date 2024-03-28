@@ -1532,7 +1532,7 @@ smd({
             if (_0x39f91d.isBotAdmin) {
               await _0x39f91d.send("*[BAD WORD DETECTED] Hey @" + _0x39f91d.senderNum + "* " + _0x3dc4df + " *Deleting your message from chat!*\n", {
                 mentions: [_0x39f91d.sender]
-              }, "suhail", _0x39f91d);
+              }, "asta", _0x39f91d);
               await _0x39f91d.delete();
             } else {
               await _0x39f91d.reply("*_[BAD WORD DETECTED] provide admin to take action!_*", {
@@ -1591,7 +1591,7 @@ smd({
           data: _0x1a5d20
         } = await axios.get("http://api.brainshop.ai/get?bid=175685&key=Pg8Wu8mrDQjfr0uv&uid=[" + _0x39f91d.senderNum + "]&msg=[" + _0x47409a + "]");
         if (_0x1a5d20 && _0x1a5d20.cnt) {
-          _0x39f91d.send(_0x1a5d20.cnt, {}, "suhail", _0x39f91d);
+          _0x39f91d.send(_0x1a5d20.cnt, {}, "asta", _0x39f91d);
         } else {
           "";
         }

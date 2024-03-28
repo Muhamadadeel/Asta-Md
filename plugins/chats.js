@@ -112,7 +112,7 @@ smd({
 }, async (message, match) => {
 
     try{
-  let msg = await message.react("🍁")
+  let msg = await message.react("🔉")
 	await message.bot.chatModify(
 		{ markRead: true, lastMessages: [message] }, 
     message.jid
@@ -131,7 +131,7 @@ smd({
 }, async (message, match) => {
 
     try{
-  let msg = await message.send("🍁",{},"react")
+  let msg = await message.send("🔉",{},"react")
   console.log({msg})
 	await message.bot.chatModify(
 		{ markRead: false, lastMessages: [message] }, 

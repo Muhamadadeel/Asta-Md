@@ -73,7 +73,7 @@ let {
      let _0x39b0a0 = await _0x5ce955.bot.contextInfo("Suhail Md", "Hello " + _0x5ce955.senderName, await smdBuffer("https://telegra.ph/file/e2c8615df5a7f24b8eb37.jpg"), 1, _0x1a71d9, 3);
      _0x5ce955.send(_0x162ed5, {
        contextInfo: _0x39b0a0
-     }, "suhail", _0x5ce955);
+     }, "asta", _0x5ce955);
    } catch (_0x9e2a2c) {
      _0x5ce955.error(_0x9e2a2c + "\n\n" + info + "\nCommand: channel", _0x9e2a2c, false);
    }
@@ -118,7 +118,7 @@ let {
      });
      await _0x3b2ef2.reply(_0x2dca1f + _0x23711a + _0x3c1a2b, {
        mentions: [_0x3b2ef2.sender]
-     }, "suhail", _0x3b2ef2);
+     }, "asta", _0x3b2ef2);
    } catch (_0x29b74b) {
      _0x3b2ef2.error(_0x29b74b + "\n\nCommand: request", _0x29b74b, false);
    }
