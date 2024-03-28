@@ -15,3 +15,7 @@ npm-debug.log
 .pnp.*
 !.yarn/cache
 !.yarn/sdks
+lib/bot_.json
+lib/sck.json
+lib/sck1.json
+lib/Session
