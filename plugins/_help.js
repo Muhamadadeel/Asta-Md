@@ -273,7 +273,7 @@ smd(
  ➮  Oᴡɴᴇʀ - ${Config.ownername}
  ➮  Nᴜᴍ - ${owner.split(",")[0]}
  ➮  Mᴇᴍᴏ - ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
- *👉🏼 :* sɪᴍᴘʟᴇ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ
+ 👉🏼 *sɪᴍᴘʟᴇ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ*
 ${readmore}
 ╭──❰ *RECOMMEDED* ❱
 │🎗 Lɪꜱᴛ
@@ -304,7 +304,7 @@ astro_patch.cmd(
     try {
       if (!match) {
         return await message.send(
-          "*_Please provide cmd name by replying a Sticker_*",
+          "`Please provide cmd name by replying a Sticker`",
         );
       }
 
@@ -326,13 +326,13 @@ astro_patch.cmd(
         cmdPattern = cmdPattern.trim().toLowerCase();
       } else if (!isSticker) {
         return await message.send(
-          "*_Uhh Dear, Give Cmd With New Name_*\n*Eg: _.setcmd New_Name, Cmd_Name_*",
+          "`Uhh Dear, Give Cmd With New Name\nEg: .setcmd New Name, CmdName`",
         );
       }
 
       if (cmdName.length < 1) {
         return await message.reply(
-          "*_Uhh Please, Provide New_Cmd Name First_*",
+          "`Uhh Please, Provide NewCmd Name First`",
         );
       }
 
