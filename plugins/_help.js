@@ -8,7 +8,7 @@ let {
   runtime,
   formatp,
   prefix,
-  amd,
+  smd,
 } = require("../lib");
 const long = String.fromCharCode(8206);
 const readmore = long.repeat(4001);
@@ -20,14 +20,172 @@ const { exec } = require("child_process");
 const translatte = require("translatte");
 const cron = require("node-cron");
 var cronStart = false;
+const min = 1;
+const max = 99;
+const usage_trend = Math.floor(Math.random() * (max - min + 1)) + min;
+const min_dat = 1;
+const max_dat = 99;
+const total_dat = Math.floor(Math.random() * (max_dat - min_dat + 1)) + min;
+
+//Command: menu
+
+astro_patch.smd(
+  {
+    cmdname: "menu",
+    desc: "Help list",
+    react: "📃",
+    type: "general",
+    filename: __filename,
+  },
+  async (message, input) => {
+    try {
+      const { commands } = require("../lib");
+      if (input.split(" ")[0]) {
+        let commandDetails = [];
+        const foundCommand = commands.find(
+          (cmd) => cmd.pattern === input.split(" ")[0].toLowerCase(),
+        );
+        if (foundCommand) {
+          commandDetails.push("*🔉Command:* " + foundCommand.pattern);
+          if (foundCommand.category) {
+            commandDetails.push("*💁Category:* " + foundCommand.category);
+          }
+          if (foundCommand.alias && foundCommand.alias[0]) {
+            commandDetails.push("*💁Alias:* " + foundCommand.alias.join(", "));
+          }
+          if (foundCommand.desc) {
+            commandDetails.push("*💁Description:* " + foundCommand.desc);
+          }
+          if (foundCommand.use) {
+            commandDetails.push(
+              "*〽️Usage:*\n ```" +
+                prefix +
+                foundCommand.pattern +
+                " " +
+                foundCommand.use +
+                "```",
+            );
+          }
+          if (foundCommand.usage) {
+            commandDetails.push(
+              "*〽️Usage:*\n ```" + foundCommand.usage + "```",
+            );
+          }
+          await message.reply(commandDetails.join("\n"));
+        }
+      }
+
+      let menuThemeType;
+      let menuThemeHeader;
+      let menuThemeFooter;
+      let menuThemeCategoryHeader;
+      let menuThemeCategoryFooter;
+      let menuThemeCommandPrefix;
+      let menuThemeCommandFooter;
+
+      if (Config.menu === "") {
+        menuThemeType = Math.floor(Math.random() * 4) + 1;
+      }
+
+      if (
+        menuThemeType === 1 ||
+        Config.menu.trim().startsWith("1") ||
+        Config.menu.toLowerCase().includes("menu1")
+      ) {
+        menuThemeHeader = "┏﹝ *" + Config.botname + "* ﹞";
+        menuThemeCommandPrefix = "┃ ✗";
+        menuThemeFooter = "┗═════════════〤";
+        menuThemeCategoryHeader = "┌『";
+        menuThemeCategoryFooter = "』";
+        menuThemeCommandPrefix = " | ";
+        menuThemeCommandFooter = "\n└═════════════〤";
+      } else if (
+        menuThemeType === 2 ||
+        Config.menu.trim().startsWith("2") ||
+        Config.menu.toLowerCase().includes("menu2")
+      ) {
+        menuThemeHeader = "┌═[ *" + Config.botname + "* ]";
+        menuThemeCommandPrefix = "⬡│▸";
+        menuThemeFooter = "╰════════════···▸";
+        menuThemeCategoryHeader = "┌〈";
+        menuThemeCategoryFooter = "〉";
+        menuThemeCommandPrefix = "⬡│▸ ";
+        menuThemeCommandFooter = "\n│╰══════════···▸▸";
+      } else {
+        menuThemeHeader = "╭〘  " + Config.botname + "  〙";
+        menuThemeCommandPrefix = "│ │";
+        menuThemeFooter = "╰═══════════════⊷";
+        menuThemeCategoryHeader = "╭─❏";
+        menuThemeCategoryFooter = "❏";
+        menuThemeCommandPrefix = "│";
+        menuThemeCommandFooter = "╰════════════─⊷";
+      }
+
+      const categorizedCommands = {};
+      commands.map(async (command, index) => {
+        if (
+          command.dontAddCommandList === false &&
+          command.pattern !== undefined
+        ) {
+          if (!categorizedCommands[command.category]) {
+            categorizedCommands[command.category] = [];
+          }
+          categorizedCommands[command.category].push(command.pattern);
+        }
+      });
+
+      const currentTime = message.time;
+      const currentDate = message.date;
+      let menuText = `
+${menuThemeHeader}
+${menuThemeCommandPrefix} *ᴏᴡɴᴇʀ:* ${Config.ownername}
+${menuThemeCommandPrefix} *ᴜᴘᴛɪᴍᴇ:* ${runtime(process.uptime())}
+${menuThemeCommandPrefix} *ʀᴀᴍ ᴜsᴀɢᴇ:* ${formatp(os.totalmem() - os.freemem())}
+${menuThemeCommandPrefix} *ᴛɪᴍᴇ:* ${currentTime}
+${menuThemeCommandPrefix} *ᴅᴀᴛᴇ:* ${currentDate}
+${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
+${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${usage_trend}
+${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${total_dat}
+${menuThemeFooter}\n                         
+▄▀█ █▀ ▀█▀ ▄▀█
+█▀█ ▄█ ░█░ █▀█
+\n${readmore}\n`;
+
+      for (const category in categorizedCommands) {
+        menuText += `${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
+        if (input.toLowerCase() === category.toLowerCase()) {
+          menuText = `${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
+          for (const command of categorizedCommands[category]) {
+            menuText += `${menuThemeCommandPrefix} ${fancytext(command, 1)}\n`;
+          }
+          menuText += `${menuThemeCommandFooter}\n`;
+          break;
+        } else {
+          for (const command of categorizedCommands[category]) {
+            menuText += `${menuThemeCommandPrefix} ${fancytext(command, 1)}\n`;
+          }
+          menuText += `${menuThemeCommandFooter}\n`;
+        }
+      }
+      menuText += Config.caption;
+
+      const messageOptions = {
+        caption: menuText,
+      };
+      return await message.sendUi(message.chat, messageOptions, message);
+    } catch (error) {
+      await message.error(error + "\nCommand: menu", error);
+    }
+  },
+);
 
 // Command: help
-amd(
+smd(
   {
     cmdname: "help",
     alias: ["categories", "ctgry", "category"],
     desc: "category list",
-    category: "tools",
+    category: "user",
   },
   async (message, match) => {
     try {
@@ -97,11 +255,12 @@ amd(
 );
 
 // Command: menus
-amd(
+smd(
   {
     pattern: "info",
     type: "MENU list",
-    info: "tools",
+    info: "user",
+    react: "ℹ️",
     dontAddCommandList: true,
   },
   async (message) => {
@@ -110,10 +269,10 @@ amd(
 *🕒 ᴜᴘ ᴛɪᴍᴇ :* ${runtime(process.uptime())}
 *🔉 ᴛᴏᴅᴀʏ ɪs :* ${message.date}
 *⌚ ɴᴏᴡ ᴛɪᴍᴇ :* ${message.time}
-➮Fᴏᴜɴᴅᴇʀ- ᴀsᴛʀᴏᴘᴇᴅᴀ ᴛᴇᴀᴍ
-➮Oᴡɴᴇʀ - ${Config.ownername}
-➮Nᴜᴍ - ${owner.split(",")[0]}
-➮Mᴇᴍᴏ - ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
+ ➮  Fᴏᴜɴᴅᴇʀ- ᴀsᴛʀᴏᴘᴇᴅᴀ ᴛᴇᴀᴍ
+ ➮  Oᴡɴᴇʀ - ${Config.ownername}
+ ➮  Nᴜᴍ - ${owner.split(",")[0]}
+ ➮  Mᴇᴍᴏ - ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}
  *👉🏼 :* sɪᴍᴘʟᴇ ᴡʜᴀᴛsᴀᴘᴘ ʙᴏᴛ
 ${readmore}
 ╭──❰ *RECOMMEDED* ❱
@@ -137,7 +296,7 @@ astro_patch.cmd(
   {
     pattern: "newcmd",
     desc: "To add cmd",
-    category: "general",
+    category: "tools",
     fromMe: true,
     filename: __filename,
   },
@@ -209,7 +368,7 @@ astro_patch.cmd(
   {
     pattern: "removecmd",
     desc: "To removed cmd",
-    category: "general",
+    category: "tools",
     fromMe: true,
     filename: __filename,
   },
@@ -249,7 +408,7 @@ astro_patch.cmd(
     }
   },
 );
-astro_patch.amd(
+astro_patch.smd(
   {
     pattern: "ping",
     desc: "To check ping",
@@ -268,7 +427,7 @@ astro_patch.amd(
     );
   },
 );
-astro_patch.amd(
+astro_patch.smd(
   {
     pattern: "specs",
     desc: "Bot Specs",
@@ -278,22 +437,17 @@ astro_patch.amd(
   async (message) => {
     const startTime = new Date().getTime();
     const { key } = await message.reply("*ᴄʜᴇᴄᴋɪɴɢ sᴘᴇᴇᴅ...*");
-    await 5000;
     const endTime = new Date().getTime();
     return await message.send(
       `\n\nᴛʜᴇ sᴘᴇᴇᴅ ᴏғ ${Config.botname} ᴡᴀs ᴛᴇsᴛᴇᴅ.\nʜᴇʀᴇ ᴀʀᴇ ᴛʜᴇ ʀᴇsᴜʟᴛs.\n ᴘɪɴɢɪɴɢ ᴛɪᴍᴇ: ${endTime - startTime} sᴇᴄs\n ᴍᴇᴍᴏʀʏ ᴜsᴀɢᴇ:  ${formatp(os.totalmem() - os.freemem())}\nʀᴜɴᴛɪᴍᴇ: ${runtime(process.uptime())}\n`,
       { edit: key },
       "",
       message,
-      (contextInfo = {
-        isfowarded: true,
-        fowardingscore: 999,
-      }),
     );
   },
 );
 
-astro_patch.amd(
+astro_patch.smd(
   {
     pattern: "uptime",
     alias: ["runtime"],
@@ -311,164 +465,11 @@ astro_patch.amd(
     }
   },
 );
-
-astro_patch.amd(
-  {
-    cmdname: "menu",
-    desc: "Help list",
-    type: "general",
-    filename: __filename,
-  },
-  async (message, input) => {
-    try {
-      const { commands } = require("../lib");
-      if (input.split(" ")[0]) {
-        let commandDetails = [];
-        const foundCommand = commands.find(
-          (cmd) => cmd.pattern === input.split(" ")[0].toLowerCase(),
-        );
-        if (foundCommand) {
-          commandDetails.push("*🔉Command:* " + foundCommand.pattern);
-          if (foundCommand.category) {
-            commandDetails.push("*💁Category:* " + foundCommand.category);
-          }
-          if (foundCommand.alias && foundCommand.alias[0]) {
-            commandDetails.push("*💁Alias:* " + foundCommand.alias.join(", "));
-          }
-          if (foundCommand.desc) {
-            commandDetails.push("*💁Description:* " + foundCommand.desc);
-          }
-          if (foundCommand.use) {
-            commandDetails.push(
-              "*〽️Usage:*\n ```" +
-                prefix +
-                foundCommand.pattern +
-                " " +
-                foundCommand.use +
-                "```",
-            );
-          }
-          if (foundCommand.usage) {
-            commandDetails.push(
-              "*〽️Usage:*\n ```" + foundCommand.usage + "```",
-            );
-          }
-          await message.reply(commandDetails.join("\n"));
-        }
-      }
-
-      let menuThemeType;
-      let menuThemeHeader;
-      let menuThemeFooter;
-      let menuThemeCategoryHeader;
-      let menuThemeCategoryFooter;
-      let menuThemeCommandPrefix;
-      let menuThemeCommandFooter;
-
-      if (Config.menu === "") {
-        menuThemeType = Math.floor(Math.random() * 4) + 1;
-      }
-
-      if (
-        menuThemeType === 1 ||
-        Config.menu.trim().startsWith("1") ||
-        Config.menu.toLowerCase().includes("aztec")
-      ) {
-        menuThemeHeader = "┏━━⟪ *" + Config.botname + "* ⟫━━〤";
-        menuThemeCommandPrefix = "┃ ✗";
-        menuThemeFooter = "┗━━━━━━━━━━━━━━━〤";
-        menuThemeCategoryHeader = "┌──『";
-        menuThemeCategoryFooter = "』──❖\n";
-        menuThemeCommandPrefix = " | ";
-        menuThemeCommandFooter = "\n└──────────────◉";
-      } else if (
-        menuThemeType === 2 ||
-        Config.menu.trim().startsWith("2") ||
-        Config.menu.toLowerCase().includes("a17")
-      ) {
-        menuThemeHeader =
-          "┌───═[ *" + Config.botname + "* ]═──▸\n│╭────────────···▸\n┴│▸";
-        menuThemeCommandPrefix = "⬡│▸";
-        menuThemeFooter = "┬│▸\n│╰─────────────···▸\n└───────────────···▸";
-        menuThemeCategoryHeader = "┌───〈";
-        menuThemeCategoryFooter = "〉───◆\n│╭─────────────···▸\n┴│▸";
-        menuThemeCommandPrefix = "⬡│▸ ";
-        menuThemeCommandFooter =
-          "┬│▸\n│╰────────────···▸▸\n└───────────────···▸";
-      } else {
-        menuThemeHeader =
-          "╭────《  " + Config.botname + "  》────⊷\n│ ╭──────✧❁✧──────◆";
-        menuThemeCommandPrefix = "│ │";
-        menuThemeFooter = "│ ╰──────✧❁✧──────◆\n╰══════════════════⊷";
-        menuThemeCategoryHeader = "╭────❏";
-        menuThemeCategoryFooter = "❏";
-        menuThemeCommandPrefix = "│";
-        menuThemeCommandFooter = "╰━━━━━━━━━━━━━━──⊷";
-      }
-
-      const categorizedCommands = {};
-      commands.map(async (command, index) => {
-        if (
-          command.dontAddCommandList === false &&
-          command.pattern !== undefined
-        ) {
-          if (!categorizedCommands[command.category]) {
-            categorizedCommands[command.category] = [];
-          }
-          categorizedCommands[command.category].push(command.pattern);
-        }
-      });
-
-      const currentTime = message.time;
-      const currentDate = message.date;
-      let menuText = `
-${menuThemeHeader}
-${menuThemeCommandPrefix} Theme: ${tlang().title}
-${menuThemeCommandPrefix} Owner: ${Config.ownername}
-${menuThemeCommandPrefix} Plugins: ${commands.length}
-${menuThemeCommandPrefix} Uptime: ${runtime(process.uptime())}
-${menuThemeCommandPrefix} Mem: ${formatp(os.totalmem() - os.freemem())}
-${menuThemeCommandPrefix} Time: ${currentTime}
-${menuThemeCommandPrefix} Date: ${currentDate}
-${menuThemeFooter}\n                         
-\n
-▄▀█ █▀ ▀█▀ ▄▀█
-█▀█ ▄█ ░█░ █▀█
-${readmore}\n`;
-
-      for (const category in categorizedCommands) {
-        menuText += `${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
-        if (input.toLowerCase() === category.toLowerCase()) {
-          menuText = `${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
-          for (const command of categorizedCommands[category]) {
-            menuText += `${menuThemeCommandPrefix} ${fancytext(command, 1)}\n`;
-          }
-          menuText += `${menuThemeCommandFooter}\n`;
-          break;
-        } else {
-          for (const command of categorizedCommands[category]) {
-            menuText += `${menuThemeCommandPrefix} ${fancytext(command, 1)}\n`;
-          }
-          menuText += `${menuThemeCommandFooter}\n`;
-        }
-      }
-      menuText += Config.caption;
-
-      const messageOptions = {
-        caption: menuText,
-      };
-      return await message.sendUi(message.chat, messageOptions, message);
-    } catch (error) {
-      await message.error(error + "\nCommand: menu", error);
-    }
-  },
-);
-
-astro_patch.amd(
+astro_patch.smd(
   {
     pattern: "list",
     desc: "list menu",
-    category: "general",
+    category: "user",
     react: "🥀",
   },
   async (message) => {
@@ -543,11 +544,11 @@ function getMenuStyles(type) {
       };
   }
 }
-astro_patch.amd(
+astro_patch.smd(
   {
     pattern: "owner",
     desc: "To check ping",
-    category: "general",
+    category: "owner",
     filename: __filename,
   },
   async (message) => {
@@ -591,11 +592,11 @@ END:VCARD`;
   },
 );
 
-astro_patch.amd(
+astro_patch.smd(
   {
     pattern: "trt",
     alias: ["translate"],
-    category: "general",
+    category: "tools",
     filename: __filename,
     use: "< text >",
     desc: "Translate's given text in desired language.",
@@ -631,7 +632,7 @@ astro_patch.cmd(
   {
     pattern: "file",
     desc: "to get exact name where that command is in repo.\nSo user can edit that.",
-    category: "general",
+    category: "tools",
     fromMe: true,
     filename: __filename,
   },
@@ -778,7 +779,7 @@ astro_patch.cmd(
   },
 );
 // Text command handler
-amd(
+smd(
   { on: "text" },
   async (
     msg,
@@ -891,7 +892,7 @@ amd(
 );
 
 /**MASTER */
-amd(
+smd(
   { on: "text" },
   async (
     msg,
@@ -958,7 +959,7 @@ const readDirectory = (dir) => {
   });
 };
 
-amd(
+smd(
   { on: "text" },
   async (
     msg,

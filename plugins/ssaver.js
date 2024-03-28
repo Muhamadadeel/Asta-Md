@@ -73,7 +73,7 @@ smd(
    {  pattern: "#",
       alias : ["ssaver"],         
       desc: "Save whatsapp status",
-      category: "whatsapp",         
+      category: "whatsapp settings",         
       filename: __filename,
       use:"< status >",
    },

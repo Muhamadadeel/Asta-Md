@@ -36,7 +36,7 @@ const {
  smd({
    cmdname: "join",
    info: "joins group by link",
-   type: "whatsapp",
+   type: "whatsapp settings",
    fromMe: true,
    filename: __filename,
    use: "<group link.>"
@@ -62,7 +62,7 @@ const {
  smd({
    cmdname: "newgc",
    info: "Create New Group",
-   type: "whatsapp",
+   type: "whatsapp settings",
    filename: __filename,
    use: "<group link.>"
  }, async (_0x1d2f1f, _0x3c558e, {

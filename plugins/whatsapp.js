@@ -1,153 +1,102 @@
-/**
-//══════════════════════════════════════════════════════════════════════════════════════════════════════//
-//                                ＷＨＡＴＳＡＰＰ ＢＯＴ－ＭＤ ＢＥＴＡ                                   //
-//                                         Ｖ：1．2．9                                                   // 
-//            ███████╗██╗   ██╗██╗  ██╗ █████╗ ██╗██╗         ███╗   ███╗██████╗                        //
-//            ██╔════╝██║   ██║██║  ██║██╔══██╗██║██║         ████╗ ████║██╔══██╗                       //
-//            ███████╗██║   ██║███████║███████║██║██║         ██╔████╔██║██║  ██║                       //
-//            ╚════██║██║   ██║██╔══██║██╔══██║██║██║         ██║╚██╔╝██║██║  ██║                       //
-//            ███████║╚██████╔╝██║  ██║██║  ██║██║███████╗    ██║ ╚═╝ ██║██████╔╝                       //
-//            ╚══════╝ ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝    ╚═╝     ╚═╝╚═════╝                        //
-//══════════════════════════════════════════════════════════════════════════════════════════════════════//
-*
-   * @project_name : Suhail-Md
-   * @author : Suhail Tech Info
-   * @youtube : https://www.youtube.com/@SuhailTechInfo
-   * @description : Suhail-Md ,A Multi-functional whatsapp user bot.
-   * @version 1.2.9-vv
-*
-* 
-   * Created By Suhail Tech Info.
-   * © 2024 Suhail-Md.
-*/
-
-let Suhail_Md = "Suhail MD Whatsapp bot md";
 const moment = require("moment-timezone");
 const Config = require("../config");
 let {
-  fancytext,
   smd,
-  tlang,
-  tiny,
-  botpic,
   prefix,
   updateProfilePicture,
   parsedJid
 } = require("../lib");
-const long = String.fromCharCode(8206);
-const readmore = long.repeat(4001);
-let astro_patch;
-const {
-  cmd
-} = require("../lib/plugins");
+const {cmd} = require("../lib/plugins");
 let mtypes = ["imageMessage"];
+const setProfilePicture = async (msg, type) => {
+  try {
+    const message = mtypes.includes(msg.mtype) ? msg : msg.reply_message;
+    if (!message || !mtypes.includes(message?.mtype || "need_Media")) {
+      return await msg.reply("*Reply to an image, dear*");
+    }
+    return await updateProfilePicture(msg, msg.user, message, type);
+  } catch (error) {
+    await msg.error(`${error}\n\ncommand: ${type}`, error);
+  }
+};
 smd({
   pattern: "pp",
   desc: "Set profile picture",
-  category: "whatsapp",
+  category: "whatsapp settings",
   use: "<reply to image>",
   fromMe: true,
   filename: __filename
-}, async _0x4f9f9f => {
-  try {
-    let _0x3d8b6f = mtypes.includes(_0x4f9f9f.mtype) ? _0x4f9f9f : _0x4f9f9f.reply_message;
-    if (!_0x3d8b6f || !mtypes.includes(_0x3d8b6f?.mtype || "need_Media")) {
-      return await _0x4f9f9f.reply("*Reply to an image, dear*");
-    }
-    return await updateProfilePicture(_0x4f9f9f, _0x4f9f9f.user, _0x3d8b6f, "pp");
-  } catch (_0x18308f) {
-    await _0x4f9f9f.error(_0x18308f + "\n\ncommand : pp", _0x18308f);
-  }
-});
+}, async (msg) => await setProfilePicture(msg, "pp"));
 smd({
   pattern: "fullpp",
   desc: "Set full screen profile picture",
-  category: "whatsapp",
+  category: "whatsapp settings",
   use: "<reply to image>",
   fromMe: true,
   filename: __filename
-}, async _0x36432c => {
-  try {
-    let _0x312b1b = mtypes.includes(_0x36432c.mtype) ? _0x36432c : _0x36432c.reply_message;
-    if (!_0x312b1b || !mtypes.includes(_0x312b1b?.mtype || "need_Media")) {
-      return await _0x36432c.reply("*Reply to an image, dear*");
-    }
-    return await updateProfilePicture(_0x36432c, _0x36432c.user, _0x312b1b, "fullpp");
-  } catch (_0x8343ed) {
-    await _0x36432c.error(_0x8343ed + "\n\ncommand : fullpp", _0x8343ed);
-  }
-  {}
-});
+}, async (msg) => await setProfilePicture(msg, "fullpp"));
 smd({
   pattern: "rpp",
-  desc: "remove profile picture",
-  category: "whatsapp",
+  desc: "Remove profile picture",
+  category: "whatsapp settings",
   use: "<chat>",
   fromMe: true,
   filename: __filename
-}, async _0x1c9bb5 => {
+}, async (msg) => {
   try {
-    await _0x1c9bb5.removepp();
-    _0x1c9bb5.send("*_Profile picture removed successfully!_*");
-  } catch (_0x385cbc) {
-    await _0x1c9bb5.error(_0x385cbc + "\n\ncommand : rpp", _0x385cbc);
+    await msg.removepp();
+    msg.send("*_Profile picture removed successfully!_*");
+  } catch (error) {
+    await msg.error(`${error}\n\ncommand : rpp`, error);
   }
 });
 smd({
   pattern: "bio",
-  desc: "update profile status of whatsapp",
-  category: "whatsapp",
+  desc: "Update profile status of WhatsApp",
+  category: "whatsapp settings",
   use: "<text>",
   fromMe: true,
   filename: __filename
-}, async (_0xd700b1, _0xb45f41) => {
+}, async (msg, text) => {
   try {
-    if (!_0xb45f41) {
-      return await _0xd700b1.send("*_provide text to update profile status!_*\n*_Example: " + prefix + "bio Suhail Md_*");
+    if (!text) {
+      return await msg.send("*_Provide text to update profile status!_*\n*_Example: " + prefix + "bio Suhail Md_*");
     }
-    await _0xd700b1.bot.updateProfileStatus(_0xb45f41);
-    _0xd700b1.send("*Profile status updated successfully!*");
-  } catch (_0x365d42) {
-    await _0xd700b1.error(_0x365d42 + "\n\ncommand : bio", _0x365d42);
+    await msg.bot.updateProfileStatus(text);
+    msg.send("*Profile status updated successfully!*");
+  } catch (error) {
+    await msg.error(`${error}\n\ncommand : bio`, error);
   }
 });
 cmd({
   pattern: "ptv",
-  desc: "send ptv Message of video",
-  category: "whatsapp",
+  desc: "Send PTV Message of video",
+  category: "whatsapp settings",
   filename: __filename
-}, async (_0x235a20, _0x3f96d6, {
-  cmdName: _0x31c746
-}) => {
+}, async (msg) => {
   try {
-    if (!_0x235a20.quoted) {
-      return await _0x235a20.send("*Uhh Please, reply to video*");
+    if (!msg.quoted || msg.quoted.mtype !== "videoMessage") {
+      return await msg.send("*Uhh Dear, reply to a video message*");
     }
-    let _0x109aee = _0x235a20.quoted.mtype;
-    if (_0x109aee !== "videoMessage") {
-      return await _0x235a20.send("*Uhh Dear, reply to a video message*");
-    }
-    return await _0x235a20.bot.forwardOrBroadCast(_0x235a20.chat, _0x235a20.quoted, {}, "ptv");
-  } catch (_0x5ae8f7) {
-    await _0x235a20.error(_0x5ae8f7 + "\n\ncommand : ptv", _0x5ae8f7);
+    await msg.bot.forwardOrBroadCast(msg.chat, msg.quoted, {}, "ptv");
+  } catch (error) {
+    await msg.error(`${error}\n\ncommand : ptv`, error);
   }
 });
 cmd({
   pattern: "save",
   desc: "Save Message to log number",
-  category: "whatsapp",
+  category: "whatsapp settings",
   filename: __filename
-}, async (_0x23a729, _0x5ad999, {
-  cmdName: _0x2cb44f
-}) => {
+}, async (msg) => {
   try {
-    let _0x48ef43 = _0x23a729.reply_message;
-    if (!_0x48ef43) {
-      return await _0x23a729.send("*Uhh Please, reply to to a Message*");
+    const message = msg.reply_message;
+    if (!message) {
+      return await msg.send("*Uhh Please, reply to a Message*");
     }
-    let _0x114513 = await _0x23a729.bot.forwardOrBroadCast(_0x23a729.user, _0x48ef43);
-  } catch (_0x43530a) {
-    await _0x23a729.error(_0x43530a + "\n\ncommand : save", _0x43530a);
+    await msg.bot.forwardOrBroadCast(msg.user, message);
+  } catch (error) {
+    await msg.error(`${error}\n\ncommand : save`, error);
   }
 });
 cmd({
@@ -177,33 +126,31 @@ cmd({
 });
 cmd({
   pattern: "blocklist",
-  desc: "get list of all Blocked Numbers",
-  category: "whatsapp",
+  desc: "Get list of all Blocked Numbers",
+  category: "whatsapp settings",
   fromMe: true,
   filename: __filename,
   use: "<text>"
-}, async _0x48a6fc => {
+}, async (msg) => {
   try {
-    const _0x2c7cd9 = await _0x48a6fc.bot.fetchBlocklist();
-    if (_0x2c7cd9.length === 0) {
-      return await _0x48a6fc.reply("Uhh Dear, You don't have any Blocked Numbers.");
+    const blocklist = await msg.bot.fetchBlocklist();
+    if (blocklist.length === 0) {
+      return await msg.reply("Uhh Dear, You don't have any Blocked Numbers.");
     }
-    let _0x50c0a6 = "\n*≡ List*\n\n*_Total Users:* " + _0x2c7cd9.length + "_\n\n┌─⊷ \t*BLOCKED USERS*\n";
-    for (let _0x261860 = 0; _0x261860 < _0x2c7cd9.length; _0x261860++) {
-      _0x50c0a6 += "▢ " + (_0x261860 + 1) + ":- wa.me/" + _0x2c7cd9[_0x261860].split("@")[0] + "\n";
+    let blocklistText = "\n*≡ List*\n\n*_Total Users:* " + blocklist.length + "_\n\n┌─⊷ \t*BLOCKED USERS*\n";
+    for (let i = 0; i < blocklist.length; i++) {
+      blocklistText += "▢ " + (i + 1) + ":- wa.me/" + blocklist[i].split("@")[0] + "\n";
     }
-    _0x50c0a6 += "└───────────";
-    return await _0x48a6fc.bot.sendMessage(_0x48a6fc.chat, {
-      text: _0x50c0a6
-    });
-  } catch (_0x526b95) {
-    await _0x48a6fc.error(_0x526b95 + "\n\ncommand : blocklist", _0x526b95);
+    blocklistText += "└───────────";
+    return await msg.bot.sendMessage(msg.chat, { text: blocklistText });
+  } catch (error) {
+    await msg.error(`${error}\n\ncommand : blocklist`, error);
   }
 });
 cmd({
   pattern: "location",
   desc: "Adds *readmore* in given text.",
-  category: "whatsapp",
+  category: "whatsapp settings",
   filename: __filename
 }, async (_0x1de930, _0x4113fc) => {
   try {
@@ -230,7 +177,7 @@ cmd({
 });
 smd({
   pattern: "listpc",
-  category: "whatsapp",
+  category: "whatsapp settings",
   desc: "Finds info about personal chats",
   filename: __filename
 }, async (_0xc7dd0, _0x22efeb, {
@@ -250,7 +197,7 @@ smd({
 });
 smd({
   pattern: "listgc",
-  category: "whatsapp",
+  category: "whatsapp settings",
   desc: "Finds info about all active groups",
   filename: __filename
 }, async (_0x281fb2, _0x20e08d, {
@@ -273,7 +220,7 @@ smd({
 cmd({
   pattern: "vcard",
   desc: "Create Contact by given name.",
-  category: "whatsapp",
+  category: "whatsapp settings",
   filename: __filename
 }, async (_0xcffaeb, _0x4158fc) => {
   try {
@@ -307,7 +254,7 @@ smd({
   pattern: "edit",
   fromMe: true,
   desc: "edit message that sended by bot",
-  type: "whatsapp"
+  type: "whatsapp settings"
 }, async (_0x1afa64, _0x539d95) => {
   try {
     let _0x329b9f = _0x1afa64.reply_message && _0x1afa64.reply_message.fromMe ? _0x1afa64.reply_message : false;
@@ -328,7 +275,7 @@ smd({
   pattern: "forward",
   alias: ["send"],
   desc: "forward your messages in jid",
-  type: "whatsapp"
+  type: "whatsapp settings"
 }, async (_0x402cfa, _0x122b17) => {
   try {
     if (!_0x402cfa.reply_message) {
@@ -349,7 +296,7 @@ smd({
   cmdname: "block",
   info: "blocks a person",
   fromMe: true,
-  type: "whatsapp",
+  type: "whatsapp settings",
   filename: __filename,
   use: "<quote/reply user.>"
 }, async _0x1ed3b3 => {
@@ -371,7 +318,7 @@ smd({
 smd({
   cmdname: "unblock",
   info: "Unblocked user.",
-  type: "whatsapp",
+  type: "whatsapp settings",
   fromMe: true,
   filename: __filename
 }, async _0xdd6403 => {
@@ -391,7 +338,7 @@ cmd({
   pattern: "vv",
   alias: ["viewonce", "retrive"],
   desc: "download viewOnce Message.",
-  category: "whatsapp",
+  category: "whatsapp settings",
   use: "<query>",
   react: "🫦",
   filename: __filename
@@ -426,10 +373,3 @@ cmd({
     await _0x5e331d.error(_0x23316d + "\n\ncommand: vv", _0x23316d);
   }
 });
-/*
-{
-   pattern: "whatsapp",
-   type: "whatsapp",
-}
-*/
-// MADE WITH ❤️

@@ -1,4 +1,4 @@
-let { runtime, formatp, prefix, smd, amd, smdBuffer } = require("../lib");
+let { runtime, formatp, prefix, smd, smdBuffer } = require("../lib");
 const axios = require("axios");
 const fetch = require("node-fetch");
 const os = require("os");
@@ -404,9 +404,9 @@ smd(
         );
       } catch (_0x28ce7e) {}
       let _0x50f17a =
-        " *ＡＳＴＡ ＭＤ ＦＥＡＴＵＲＥＳ*\n\n\n  ◦ _ʙᴏᴛ ғᴇᴀᴛᴜʀᴇs ➪ " +
+        " *ＡＳＴＡ ＭＤ ＦＥＡＴＵＲＥ*\n\n\n  ◦ _ʙᴏᴛ ғᴇᴀᴛᴜʀᴇs ➪ " +
         _0x4cf8ed +
-        "_\n  \n*◦ LIST DOWN THE FEATURES*\n\n      _ᴄᴏᴍᴀɴᴅs ➪ " +
+        "_\n  \n*◦ ʜᴇʀᴇ ᴀʀᴇ ᴛʜᴇ ғᴇᴀᴛᴜʀᴇs*\n\n      _ᴄᴏᴍᴀɴᴅs ➪ " +
         Object.values(_0x4de967.commands).filter(
           (_0x54d4bf) => _0x54d4bf.pattern,
         ).length +
