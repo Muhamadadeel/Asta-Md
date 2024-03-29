@@ -1,18 +1,13 @@
 const os = require("os");
 const fs = require("fs");
 const Config = require("../config");
-let {
-  runtime,
-  formatp,
-  prefix,
-  smd,
-} = require("../lib");
+let { runtime, formatp, prefix, smd } = require("../lib");
 const astro_patch = require("../lib/plugins");
 const events = astro_patch;
 astro_patch.smd(
   {
-    pattern: "specs",
-    desc: "Bot Specs",
+    pattern: "ping2",
+    desc: "Ping the bot with more info.",
     category: "tools",
     filename: __filename,
   },
@@ -21,7 +16,12 @@ astro_patch.smd(
     const { key } = await message.reply("*ᴄʜᴇᴄᴋɪɴɢ sᴘᴇᴇᴅ...*");
     const endTime = new Date().getTime();
     return await message.send(
-      `\n\nᴛʜᴇ sᴘᴇᴇᴅ ᴏғ ${Config.botname} ᴡᴀs ᴛᴇsᴛᴇᴅ.\nʜᴇʀᴇ ᴀʀᴇ ᴛʜᴇ ʀᴇsᴜʟᴛs.\n ᴘɪɴɢɪɴɢ ᴛɪᴍᴇ: ${endTime - startTime} sᴇᴄs\n ᴍᴇᴍᴏʀʏ ᴜsᴀɢᴇ:  ${formatp(os.totalmem() - os.freemem())}\nʀᴜɴᴛɪᴍᴇ: ${runtime(process.uptime())}\n`,
+      `
+ᴛʜᴇ sᴘᴇᴇᴅ ᴏғ ${Config.botname} ᴡᴀs ᴛᴇsᴛᴇᴅ.
+ʜᴇʀᴇ ᴀʀᴇ ᴛʜᴇ ʀᴇsᴜʟᴛs.
+ᴘɪɴɢɪɴɢ ᴛɪᴍᴇ: ${endTime - startTime} sᴇᴄs
+ᴍᴇᴍᴏʀʏ ᴜsᴀɢᴇ:  ${formatp(os.totalmem() - os.freemem())}
+ʀᴜɴᴛɪᴍᴇ: ${runtime(process.uptime())}\n`,
       { edit: key },
       "",
       message,
