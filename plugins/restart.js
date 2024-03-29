@@ -1,5 +1,6 @@
 const { exec } = require("child_process");
 const { smd } = require("../lib");
+let s_ser = true
 smd(
   {
     cmdname: "restart",
