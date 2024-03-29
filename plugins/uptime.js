@@ -5,7 +5,7 @@ astro_patch.smd(
     pattern: "runtime",
     alias: ["uptime"],
     desc: "Shows how long the bot has been running.",
-    category: "misc",
+    category: "tools",
     filename: __filename,
   },
   async (message) => {
