@@ -1,8 +1,5 @@
 const Config = require("../config");
-let {
-  prefix,
-  smd,
-} = require("../lib");
+let { prefix, smd } = require("../lib");
 const astro_patch = require("../lib/plugins");
 const events = astro_patch;
 astro_patch.smd(
@@ -33,13 +30,13 @@ END:VCARD`;
         contextInfo: {
           externalAdReply: {
             title: Config.ownername,
-            body: "Touch here.",
+            body: "Tap Me",
             renderLargerThumbnail: true,
             thumbnailUrl: "",
             thumbnail: log0,
             mediaType: 1,
             mediaUrl: "",
-            sourceUrl: `https://wa.me/+${global.owner?.split(",")[0]}?text=Hii+${Config.ownername}`,
+            sourceUrl: `https://wa.me/+${global.owner?.split(",")[0]}?text=Hello+${Config.ownername}`,
           },
         },
       };
