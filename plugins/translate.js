@@ -1,10 +1,7 @@
 const os = require("os");
 const fs = require("fs");
 const Config = require("../config");
-let {
-  prefix,
-  smd,
-} = require("../lib");
+let { prefix, smd } = require("../lib");
 const astro_patch = require("../lib/plugins");
 const events = astro_patch;
 const translatte = require("translatte");
@@ -29,7 +26,6 @@ astro_patch.smd(
           `*Please Give Me Text. Example: _${prefix}trt en Who are you_*`,
         );
       }
-
       const translation = await translatte(text, {
         from: "auto",
         to: language,
