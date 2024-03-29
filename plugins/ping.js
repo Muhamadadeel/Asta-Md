@@ -3,7 +3,7 @@ const astro_patch = require("../lib/plugins");
 astro_patch.smd(
   {
     pattern: "ping",
-    desc: "To check ping",
+    desc: "To ping bot speed.",
     category: "tools",
     filename: __filename,
   },
