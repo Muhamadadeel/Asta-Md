@@ -11,7 +11,7 @@ astro_patch.smd(
   async (message) => {
     try {
       message.reply(
-        `*ʀᴜɴɴɪɴɢ sɪɴᴄᴇ ${tlang().title}: ${runtime(process.uptime())}*`,
+        `*${tlang().title} ʀᴜɴɴɪɴɢ sɪɴᴄᴇ: ${runtime(process.uptime())}*`,
       );
     } catch (error) {
       await message.error(`${error}\n\ncommand : uptime`, error, false);
