@@ -4,7 +4,7 @@ const events = astro_patch;
 astro_patch.cmd(
   {
     pattern: "file",
-    desc: "to get exact name where that command is in repo.\nSo user can edit that.",
+    desc: "Show the Location of a Command.",
     category: "tools",
     fromMe: true,
     filename: __filename,
