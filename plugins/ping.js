@@ -1,4 +1,4 @@
-let {smd} = require("../lib");
+let { smd } = require("../lib");
 const astro_patch = require("../lib/plugins");
 astro_patch.smd(
   {
@@ -12,7 +12,7 @@ astro_patch.smd(
     const { key } = await message.reply("*Testing Ping!!!*");
     const endTime = new Date().getTime();
     return await message.send(
-      `*Pong*\n *${endTime - startTime} ms* `,
+      `*Bot Speed*\n *${endTime - startTime} ms* `,
       { edit: key },
       "",
       message,
