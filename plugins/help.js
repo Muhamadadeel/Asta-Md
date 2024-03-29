@@ -6,6 +6,7 @@ smd(
     cmdname: "help",
     desc: "category list",
     category: "user",
+    react: "💁🏼",
   },
   async (message, match) => {
     try {
@@ -15,20 +16,12 @@ smd(
           (cmd) => cmd.pattern === match.split(" ")[0].toLowerCase(),
         );
         if (command) {
-          response.push(`*🔉Command:* ${command.pattern}`);
+          response.push(`*ᴄᴏᴍᴍᴀɴᴅ:* ${command.pattern}`);
           if (command.category) {
-            response.push(`*💁Category:* ${command.category}`);
-          }
-          if (command.alias && command.alias[0]) {
-            response.push(`*💁Alias:* ${command.alias.join(", ")}`);
+            response.push(`*ᴄᴀᴛᴇɢᴏʀʏ:* ${command.category}`);
           }
           if (command.desc) {
-            response.push(`*💁Description:* ${command.desc}`);
-          }
-          if (command.use) {
-            response.push(
-              `*〽️Usage:*\n \`\`\`${prefix}${command.pattern} ${command.use}\`\`\``,
-            );
+            response.push(`*ᴄᴏᴍᴍᴀɴᴅ ɪɴғᴏ:* ${command.desc}`);
           }
           await message.reply(response.join("\n"));
         }
@@ -45,7 +38,7 @@ smd(
       });
 
       let menuType = Math.round(Math.random()) === 0 ? "MENU" : "COMMANDS";
-      let response = `*ASTA-MD_${menuType}_LIST*\n\n\t\`\`\`Reply this message with the Number\`\`\`\n\n`;
+      let response = `\t*ASTA-MD_${menuType}_LIST*\n\n\t\`\`\`Reply this message with the Number\`\`\`\n\n`;
       let counter = 1;
       let categoryCounter = 0;
 

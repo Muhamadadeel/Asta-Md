@@ -1,8 +1,4 @@
-let {
-  tlang,
-  prefix,
-  smd,
-} = require("../lib");
+let { tlang, prefix, smd } = require("../lib");
 const astro_patch = require("../lib/plugins");
 astro_patch.cmd(
   {
@@ -11,7 +7,7 @@ astro_patch.cmd(
     filename: __filename,
     fromMe: true,
     desc: "Runs command in Heroku(server) shell.",
-    use: "<shell cmds | ls,cd >",
+    use: "shell cmd heroku",
     dontAddCommandList: true,
   },
   async (message, input) => {
@@ -21,7 +17,9 @@ astro_patch.cmd(
       }
 
       if (!input) {
-        return message.reply("`Sir! Please give me a command to run on heroku shell.`");
+        return message.reply(
+          "`Sir! Please give me a command to run on heroku shell.`",
+        );
       }
 
       exec(input, (error, stdout) => {
