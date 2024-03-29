@@ -9,6 +9,7 @@ smd(
     pattern: "info",
     type: "MENU list",
     info: "user",
+    desc: "About Bot Simply",
     react: "ℹ️",
     dontAddCommandList: true,
   },
