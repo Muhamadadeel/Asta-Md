@@ -7,21 +7,20 @@ const astro_patch = require("../lib/plugins");
 astro_patch.smd(
   {
     pattern: "list",
-    desc: "list menu",
+    desc: "list commmands with thier descriptions.",
     category: "user",
     react: "🥀",
   },
   async (message) => {
     try {
       const { commands } = require("../lib");
-      let menu = `\n\n
-╭━━〘 *${Config.botname}* 〙────⊷     
-┃ ✧ Theme: ${tlang().title}
-┃ ✧ Prefix: ${prefix}
-┃ ✧ Owner: ${Config.ownername}
-┃ ✧ Commands: ${commands.length}
-┃ ✧ Uptime: ${runtime(process.uptime())}
-┃ ✧ Mem: ${formatp(os.totalmem() - os.freemem())}
+      let menu = `
+╭━━〘 *${Config.botname}* 〙────⊷ 
+┃ ✧ *ᴘʀᴇғɪx:* ${prefix}
+┃ ✧ *ᴏᴡɴᴇʀ:* ${Config.ownername}
+┃ ✧ *ᴘʟᴜɢɪɴs:* ${commands.length}
+┃ ✧ *ʀᴜɴᴛɪᴍᴇ:* ${runtime(process.uptime())}
+┃ ✧ *ʀᴀᴍ ᴜsᴀɢᴇ:* ${formatp(os.totalmem() - os.freemem())}
 ╰━━━━━━━━━━━━━━⊷\n${readmore}\n`;
 
       for (let i = 0; i < commands.length; i++) {
