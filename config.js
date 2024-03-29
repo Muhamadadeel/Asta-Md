@@ -6,10 +6,11 @@ global.DATABASE_URL = process.env.DATABASE_URL || "";
 global.mongodb= process.env.MONGODB_URI || "";
 global.appUrl=process.env.APP_URL || "";
 global.timezone= process.env.TZ || process.env.TIME_ZONE || "Africa/Lagos";
-global.sudo = process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : "null";
+global.sudo = process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : "2348039607375";
 global.menuImg= process.env.USER_IMAGES || "https://i.imgur.com/lIo3cM2.jpeg,https://i.imgur.com/OQOH4Gn.jpeg"
 global.owner= process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, '') : "2348039607375";
 global.reset = process.env.RESET   || "false"; 
+global.devs = process.env.DEVS || "",
 global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/dMwGOUP.jpeg" ;
 //=========[ASTA MD WHATSAPP BOT]====================\\
 

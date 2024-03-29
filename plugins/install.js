@@ -10,6 +10,7 @@ const {
   smdJson,
   smdBuffer,
 } = require("../lib");
+let s_ser = true
 smd(
   {
     cmdname: "install",
