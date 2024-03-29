@@ -5,7 +5,7 @@ const events = astro_patch;
 astro_patch.smd(
   {
     pattern: "owner",
-    desc: "To check ping",
+    desc: "To check Bot Owner.",
     category: "owner",
     filename: __filename,
   },
