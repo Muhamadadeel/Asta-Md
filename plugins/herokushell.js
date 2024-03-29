@@ -6,7 +6,7 @@ astro_patch.cmd(
     category: "noderunner",
     filename: __filename,
     fromMe: true,
-    desc: "Runs command in Heroku(server) shell.",
+    desc: "Runs command in Heroku shell.",
     use: "shell cmd heroku",
     dontAddCommandList: true,
   },
