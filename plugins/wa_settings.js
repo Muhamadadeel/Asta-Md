@@ -24,9 +24,8 @@ smd({
 *ʟᴀsᴛ sᴇᴇɴ:* ${last}
 *sᴛᴀᴛᴜs:* ${status}
 *ʀᴇᴀᴅ ʀᴇᴄᴇɪᴘᴛ:* ${readreceipts}
-
-*ᴡʜᴏ ᴄᴀɴ ʏᴏᴜ ᴛᴏ ɢʀᴏᴜᴘ:* ${groupadd}
-*ᴡʜᴏ ᴄᴀɴ ᴄᴀʟʟ :* ${calladd}`;
+*ᴡʜᴏ ᴄᴀɴ ᴀᴅᴅ ʏᴏᴜ ᴛᴏ ɢʀᴏᴜᴘ:* ${groupadd}
+*ᴡʜᴏ ᴄᴀɴ ᴄᴀʟʟ ʏᴏᴜ:* ${calladd}`;
 	let img = await message.getpp(message.user)
 	await message.send(img, {
 		caption: msg
