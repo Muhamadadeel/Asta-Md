@@ -1,13 +1,8 @@
 const os = require("os");
 const Config = require("../config");
-let {
-  fancytext,
-  tlang,
-  runtime,
-  formatp,
-  prefix,
-  smd,
-} = require("../lib");
+let { fancytext, tlang, runtime, formatp, prefix, smd } = require("../lib");
+const long = String.fromCharCode(8206);
+const readmore = long.repeat(4001);
 const astro_patch = require("../lib/plugins");
 astro_patch.smd(
   {
@@ -19,7 +14,15 @@ astro_patch.smd(
   async (message) => {
     try {
       const { commands } = require("../lib");
-      let menu = `\n  ╭━━〘 *${Config.botname}* 〙────⊷     \n  ┃ ✭ Theme: ${tlang().title}\n  ┃ ✭ Prefix: ${prefix}\n  ┃ ✭ Owner: ${Config.ownername}\n  ┃ ✭ Commands: ${commands.length}\n  ┃ ✭ Uptime: ${runtime(process.uptime())}\n  ┃ ✭ Mem: ${formatp(os.totalmem() - os.freemem())}/${formatp(os.totalmem())}\n  ╰━━━━━━━━━━━━━━⊷\n`;
+      let menu = `\n\n
+╭━━〘 *${Config.botname}* 〙────⊷     
+┃ ✧ Theme: ${tlang().title}
+┃ ✧ Prefix: ${prefix}
+┃ ✧ Owner: ${Config.ownername}
+┃ ✧ Commands: ${commands.length}
+┃ ✧ Uptime: ${runtime(process.uptime())}
+┃ ✧ Mem: ${formatp(os.totalmem() - os.freemem())}
+╰━━━━━━━━━━━━━━⊷\n${readmore}\n`;
 
       for (let i = 0; i < commands.length; i++) {
         if (commands[i].pattern === undefined) {
