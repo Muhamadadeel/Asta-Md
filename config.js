@@ -32,25 +32,19 @@ global.owner= process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]
 
 
 //========================= [ BOT SETTINGS ] =========================\\
-global.style = process.env.STYLE   || '4'  // put '1' to "5" here to check bot styles
-global.flush = process.env.FLUSH   || "false"; // Make it "true" if bot not responed
+global.style = process.env.STYLE   || '4'
+global.flush = process.env.FLUSH   || "false";
 global.gdbye = process.env.GOODBYE || "false"; 
-global.wlcm  = process.env.WELCOME || "false";  // Make it "false" for disable WELCOME 
-
+global.wlcm  = process.env.WELCOME || "false";  
 global.warncount = process.env.WARN_COUNT || 3
 global.disablepm = process.env.DISABLE_PM || "false"
-global.disablegroup = process.env.DISABLE_GROUPS || "false", // disable bot in groups when public mode
-
-global.MsgsInLog = process.env.MSGS_IN_LOG|| "true" // "true"  to see messages , "log" to open logs , "false" to hide logs messages
+global.disablegroup = process.env.DISABLE_GROUPS || "false", 
+global.MsgsInLog = process.env.MSGS_IN_LOG|| "true"
 global.userImages= process.env.USER_IMAGES || "https://i.imgur.com/lIo3cM2.jpeg,https://i.imgur.com/OQOH4Gn.jpeg"
-global.waPresence= process.env.WAPRESENCE ||  "set according to your need" ; // 'unavailable' | 'available' | 'composing' | 'recording' | 'paused'
-
+global.waPresence= process.env.WAPRESENCE ||  "online" ; 
 global.readcmds = process.env.READ_COMMAND || "false"
 global.readmessage = process.env.READ_MESSAGE || "false"
 global.readmessagefrom = process.env.READ_MESSAGE_FROM || "2348039607375,923xxxxxxxx";
-
-
-//========================= [ AUTO SAVE & READ STATUS ] =========================\\
 global.read_status = process.env.AUTO_READ_STATUS || "false"
 global.save_status = process.env.AUTO_SAVE_STATUS || "false"
 global.save_status_from =  process.env.SAVE_STATUS_FROM  || "null,923xxxxxxxx";
