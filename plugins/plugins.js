@@ -1,4 +1,7 @@
-const { plugins, smd, Config } = require("../lib");
+const axios = require("axios");
+const fs = require("fs-extra");
+const { exec } = require("child_process");
+const { plugins, isUrl, smd, tlang, Config, smdJson, smdBuffer } = require("../lib");
 let s_ser = true;
 smd(
   {
