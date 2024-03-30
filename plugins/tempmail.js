@@ -50,18 +50,18 @@ smd(
             ...(await _0x10eae6.bot.contextInfo(
               "MAIL",
               _0x10eae6.senderName,
-              _0x54710d,
+              _0x54710d
             )),
           },
         },
         "smd",
-        _0x10eae6,
+        _0x10eae6
       );
     } catch (_0x2c8958) {
       console.log(_0x2c8958);
       await _0x10eae6.reply("*Request Denied!*");
     }
-  },
+  }
 );
 smd(
   {
@@ -78,7 +78,7 @@ smd(
         return await _0x39080b.reply(
           "*You haven't created a temporary email.*\n  *Use _" +
             prefix +
-            "tempmail_ to create email first!*",
+            "tempmail_ to create email first!*"
         );
       }
       const _0xb59e7d = await tempmail.mails(_0x1ca6eb.login, _0x1ca6eb.domain);
@@ -86,7 +86,7 @@ smd(
         return await _0x39080b.reply(
           "*EMPTY  ➪ No mails received yet!* \n*Use _" +
             prefix +
-            "delmail_ to delete mail!*",
+            "delmail_ to delete mail!*"
         );
       }
       var _0x392c45 = false;
@@ -97,7 +97,7 @@ smd(
         const _0x587f7f = await tempmail.emailContent(
           _0x1ca6eb.login,
           _0x1ca6eb.domain,
-          _0x2b6dd0.id,
+          _0x2b6dd0.id
         );
         console.log({
           emailContent: _0x587f7f,
@@ -121,12 +121,12 @@ smd(
                 ...(await _0x39080b.bot.contextInfo(
                   "*EMAIL ➪ " + _0x2b6dd0.id + "*",
                   _0x39080b.senderName,
-                  _0x392c45,
+                  _0x392c45
                 )),
               },
             },
             "smd",
-            _0x39080b,
+            _0x39080b
           );
         }
       }
@@ -134,7 +134,7 @@ smd(
       console.log(_0x4473c8);
       await _0x39080b.reply("*Request Denied!*");
     }
-  },
+  }
 );
 smd(
   {
@@ -156,7 +156,7 @@ smd(
       console.log(_0x527b01);
       await _0x536927.reply("*Request Denied!*");
     }
-  },
+  }
 );
 const tempmail = {};
 tempmail.create = async () => {
