@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 smd(
     {
       cmdname: "alexa",
-      category: "Ai",
+      category: "ai",
       use: "[text]",
       filename: __filename,
       info: "chat with simsimi alexa ai!",
