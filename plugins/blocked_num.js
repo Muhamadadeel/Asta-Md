@@ -4,8 +4,7 @@ let {
   cmd,
   parsedJid
 } = require("../lib");
-const {cmd} = require("../lib/plugins");
-cmd({
+smd({
   pattern: "blocked",
   desc: "Get list of all Blocked Numbers",
   category: "whatsapp settings",

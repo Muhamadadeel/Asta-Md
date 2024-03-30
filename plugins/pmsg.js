@@ -3,9 +3,8 @@ let {
   prefix,
   cmd
 } = require("../lib");
-const {cmd} = require("../lib/plugins");
 
-cmd({
+smd({
   pattern: "pmsg",
   desc: "Send circle Message of video",
   category: "whatsapp settings",

@@ -5,9 +5,8 @@ let {
   prefix,
   cmd
 } = require("../lib");
-const {cmd} = require("../lib/plugins");
 
-cmd({
+smd({
   pattern: "vcard",
   desc: "Create Contact by given name.",
   category: "whatsapp",

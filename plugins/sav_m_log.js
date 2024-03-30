@@ -6,7 +6,7 @@ let {
   prefix,
 } = require("../lib");
 
-cmd({
+smd({
   pattern: "save",
   desc: "Save Message to log number",
   category: "whatsapp settings",

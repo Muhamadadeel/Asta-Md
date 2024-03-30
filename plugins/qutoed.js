@@ -6,9 +6,8 @@ let {
   cmd,
   parsedJid
 } = require("../lib");
-const {cmd} = require("../lib/plugins");
 
-cmd({
+smd({
   pattern: "quoted",
   desc: "get reply Message from Replied Message",
   category: "user",
