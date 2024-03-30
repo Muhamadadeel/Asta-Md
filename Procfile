@@ -1,1 +1,1 @@
-web: node index.ja
+web: npm start
