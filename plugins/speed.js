@@ -6,7 +6,7 @@ smd(
     cmdname: "speed",
     alias: ["botstatus", "statusbot", "p2"],
     type: "tools",
-    info: "get randome poetry lines",
+    info: "Speed and more bot info",
   },
   async (_0xdfc3ca) => {
     try {
@@ -14,7 +14,7 @@ smd(
       const _0x4a72de = os.cpus().map((_0x39cb6a) => {
         _0x39cb6a.total = Object.keys(_0x39cb6a.times).reduce(
           (_0x432663, _0x5a155c) => _0x432663 + _0x39cb6a.times[_0x5a155c],
-          0,
+          0
         );
         return _0x39cb6a;
       });
@@ -39,7 +39,7 @@ smd(
             idle: 0,
             irq: 0,
           },
-        },
+        }
       );
       let _0xce26d = speed();
       let _0x3db049 = speed() - _0xce26d;
@@ -62,10 +62,10 @@ smd(
             (_0x19d575, _0x3942d9, _0x3fa08c) =>
               _0x19d575.padEnd(
                 Math.max(..._0x3fa08c.map((_0x6548cb) => _0x6548cb.length)),
-                " ",
+                " "
               ) +
               ": " +
-              formatp(_0x37ca41[_0x19d575]),
+              formatp(_0x37ca41[_0x19d575])
           )
           .join("\n") +
         "\n\n" +
@@ -85,7 +85,7 @@ smd(
                     (_0x410388.times[_0xffc60c] * 100) /
                     _0x410388.total
                   ).toFixed(2) +
-                  "%",
+                  "%"
               )
               .join("\n") +
             " "
@@ -97,8 +97,8 @@ smd(
       await _0xdfc3ca.error(
         _0x13d03e + "\n\ncommand : ping2",
         _0x13d03e,
-        false,
+        false
       );
     }
-  },
+  }
 );
