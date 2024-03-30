@@ -1,6 +1,3 @@
-
-
-
 const DB = require('../lib/scraper')
 const { Config,smd } = require('../lib')
 const simpleGit = require('simple-git');
