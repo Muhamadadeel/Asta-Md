@@ -31,7 +31,7 @@ smd(
             (_0x4630e3?.split("\n").join(" ") || "unknown") +
             "*  ➪  _" +
             _0x3a7f93 +
-            "_",
+            "_"
         )
         .join("\n");
       var _0x370694 = (
@@ -48,17 +48,17 @@ smd(
           contextInfo: {
             ...(await _0x1cec94.bot.contextInfo(
               "ACTIVE USERS",
-              _0x1cec94.senderName,
+              _0x1cec94.senderName
             )),
           },
         },
         "asta",
-        _0x1cec94,
+        _0x1cec94
       );
     } catch (_0x225db9) {
       console.log({
         e: _0x225db9,
       });
     }
-  },
+  }
 );
