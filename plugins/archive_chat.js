@@ -18,11 +18,11 @@ smd(
           archive: true,
           lastMessages: [lstMsg],
         },
-        message.jid,
+        message.jid
       );
       await message.send("_Archived_");
     } catch (e) {
       message.error(`${e}\n\nCommand : archive`, e, false);
     }
-  },
+  }
 );
