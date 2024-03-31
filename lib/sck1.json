@@ -1,16 +1,30 @@
 {
   "2349027862116@s.whatsapp.net": {
     "id": "2349027862116@s.whatsapp.net",
-    "name": "sir",
+    "name": "Astro",
     "times": 0,
     "permit": "false",
     "ban": "false",
     "warn": {},
     "rank": {
-      "exp": 1124,
-      "level": 5,
-      "ttms": 17,
-      "need": 5344
+      "exp": 4596,
+      "level": 6,
+      "ttms": 37,
+      "need": 10688
+    }
+  },
+  "2348086253714@s.whatsapp.net": {
+    "id": "2348086253714@s.whatsapp.net",
+    "name": "VIKSM",
+    "times": 0,
+    "permit": "false",
+    "ban": "false",
+    "warn": {},
+    "rank": {
+      "exp": 36,
+      "level": 1,
+      "ttms": 2,
+      "need": 167
     }
   }
 }
