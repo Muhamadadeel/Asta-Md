@@ -148,5 +148,30 @@
     "chatbot": "false",
     "mute": "false",
     "unmute": "false"
+  },
+  "120363227649190336@g.us": {
+    "id": "120363227649190336@g.us",
+    "events": "false",
+    "nsfw": "false",
+    "pdm": "false",
+    "antipromote": "false",
+    "antidemote": "false",
+    "welcome": "false",
+    "goodbye": "false",
+    "welcometext": "*@user @pp Welcome Bruhhh In @gname.....!!!!!😊👇🏻♥️* \n\n*_GROUP DESCRIPTION_*\n@desc\n\n\n *______________*\n   *Support us by Subscribing*\n*Youtube.com/suhailtechinfo*",
+    "goodbyetext": "*@user @pp Left From @gname.....!!!!!😒👆🏻♥️* \n\n*_GROUP DESCRIPTION_*\n@desc\n\n\n *______________*\n   *Support us by Subscribing*\n*Youtube.com/suhailtechinfo*",
+    "botenable": "true",
+    "antilink": "false",
+    "antiword": {},
+    "antifake": "false",
+    "antispam": "false",
+    "antitag": "false",
+    "antibot": "false",
+    "onlyadmin": "false",
+    "economy": "false",
+    "disablecmds": "false",
+    "chatbot": "false",
+    "mute": "false",
+    "unmute": "false"
   }
 }
