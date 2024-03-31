@@ -7,24 +7,10 @@
     "ban": "false",
     "warn": {},
     "rank": {
-      "exp": 768,
-      "level": 8,
-      "ttms": 97,
-      "need": 68030
-    }
-  },
-  "2348086253714@s.whatsapp.net": {
-    "id": "2348086253714@s.whatsapp.net",
-    "name": "VIKSM",
-    "times": 0,
-    "permit": "false",
-    "ban": "false",
-    "warn": {},
-    "rank": {
-      "exp": 36,
-      "level": 1,
-      "ttms": 2,
-      "need": 167
+      "exp": 296,
+      "level": 3,
+      "ttms": 6,
+      "need": 1336
     }
   }
 }
