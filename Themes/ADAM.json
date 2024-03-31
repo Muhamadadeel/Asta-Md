@@ -1,17 +1,18 @@
 {
 "_JSON_": true,
 "AUTHOR": "SuhailTechInfo",
+"theme": "Adam",
 "LANGUAGE": "English",
 "LANGCODE": "en",
-"STRINGS": { 
-"updater": {
+"STRINGS": {    
+"updater": {   
 "UPDATE": "Your bot is already on latest version Buddy",
 "NEW_UPDATE": "There is a new update available for the bot!\n\n*Changes:*\n",
 "UPDATED_LOCAL": "Fresh Updates Installed!"
-},
+},  
 "global": {
-"botName": " Powered by Suhail Tech Info",
-
+"botName": "ADAM", 
+    
 "body": "SHAZAM!",
 "greet2" : "Hey Buddy",
 "pic1": "https://wallpapercave.com/wp/wp9459573.jpg",
@@ -28,7 +29,7 @@
 "gif5": "https://tenor.com/bSOTj.gif",
 "gif6": "https://media.giphy.com/media/7vP6xnkkOrlGW4TmRR/giphy.gif",
 "gif7": "https://media.giphy.com/media/7vP6xnkkOrlGW4TmRR/giphy.gif",
-"greet" : "Pal",
+"greet" : "Pal", 
 "dotbody" : "I have returned..",
 "promote": "A new worthy hero arrived",
 "pmallow": "Hii,This is Black Adam\n*My Shazam seems  busy right now.\nKindly Leave your Message.\n\n_I will inform him about your message asap......_",

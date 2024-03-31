@@ -4,13 +4,13 @@
     "Theme": "Peter-Parker",
     "LANGCODE": "en",
     "STRINGS": { 
-        "updater": {
+        "updater": { 
             "UPDATE": "*Your bot is already on latest version Darling*",
             "NEW_UPDATE": "*There is a new update available for the bot!*\n\n*Changes:*\n",
             "UPDATED_LOCAL": "*Successfully Updated!*"
-        },
-        "global": {
-            "botName": " 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 𝐏𝐚𝐫𝐤𝐞𝐫",
+        },      
+        "global": { 
+            "botName": "𝐏𝐚𝐫𝐤𝐞𝐫", 
             "body": "𝑊ℎ𝑎𝑡𝑠𝑎𝑝𝑝 𝐵𝑜𝑡",
             "greet2" : "Dude",
             "pic1": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhf9367JxCqZ0Hf79cc3vQVF3A41g8egRXTQ&usqp=CAU",
@@ -20,7 +20,7 @@
             "pic5": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeSfyoQaA--E-YKL62Jh08moUnkjGTtUuqiw&usqp=CAU",
             "pic6": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW6lzA6SIvgcEPDG3KX8DwuFrcYYQjJudYBw&usqp=CAU",
             "pic7": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_rxSeh7S6OlDLO5G1ABXBYESaYvPqHe-1lg&usqp=CAU",
-             "greet" : "Bro",
+             "greet" : "Bro", 
            "dotbody" : "Hii Bro, I'm right here.",
             "promote": "Admin Role Privileged",
             "pmallow": "*Hii,This is Peter Parker*\n*An assistant of My Master.*\nMy Master is busy right now.\nKindly Leave your Message.\n\n_I will inform him about your message asap......_",

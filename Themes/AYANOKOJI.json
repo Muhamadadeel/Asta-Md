@@ -4,14 +4,14 @@
   "theme": "Ayanokji-kiyotaka",
   "LANGUAGE": "English",
   "LANGCODE": "en",
-  "STRINGS": { 
-      "updater": {
+  "STRINGS": {    
+      "updater": {  
           "UPDATE": "*I don’t like expending more effort than I have to.\nYour bot is already up-to-date*",
           "NEW_UPDATE": "*There is a new update available for the bot!*\n\n*Changes:*\n",
           "UPDATED_LOCAL": "*Successfully Updated!*"
-      },
+      },      
       "global": {
-          "botName": " 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 𝐀𝐲𝐚𝐧𝐨𝐤𝐨𝐣𝐢",
+          "botName": "𝐀𝐲𝐚𝐧𝐨𝐤𝐨𝐣𝐢",
           "body": "𝑊ℎ𝑎𝑡𝑠𝑎𝑝𝑝 𝐵𝑜𝑡",
           "greet2" : "Hey Dude",
           "pic1": "https://i.pinimg.com/originals/93/13/68/93136842d12d5865931e2950d351c81a.png",

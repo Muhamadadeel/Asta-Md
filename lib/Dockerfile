@@ -1,8 +1,11 @@
-FROM quay.io/sampandey001/secktor
-RUN git clone https://github.com/SuhailTechInfo/Secktor-bot /root/SuhailTech_BOt
-WORKDIR /root/SuhailTech_BOt/
-RUN npm install npm@latest
-RUN yarn install --network-concurrency 1
+# -  /SuhailTechInfo/
+
+FROM quay.io/suhailtechinfo/suhail-v2
+RUN git clone https://github.com/Astropeda/Asta-Md /root/Suhail
+WORKDIR /root/Suhail/
+RUN npm install
 EXPOSE 8000
-CMD ["npm", "start"]
- 
+CMD ["npm","start","yarn" ]
+  
+# -  /SuhailTechInfo/ Don't change this name,
+

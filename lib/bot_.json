@@ -1,0 +1,24 @@
+{
+  "bot_2349027862116@s.whatsapp.net": {
+    "id": "bot_2349027862116@s.whatsapp.net",
+    "alive_text": "*ι αм σηℓιηє нσω ¢αη ι нєℓρ уσυ* \n\n_ι αм ᴍυℓтι ԃєνιᴄє ωнαтѕαρρ вσт_ \n_Cʀєαtєd вყ : ѕυнαιℓ tєᴄʜ info_\n_If any query : wa.me/2348039607375_\n\n\n*_Update Alive Message by adding text with Alive_* \n*Eg: _.alive Your_Alive_Message_*",
+    "alive_get": "you did'nt set alive message yet\nType [.alive info] to get alive info",
+    "alive_url": "",
+    "alive_image": false,
+    "alive_video": false,
+    "permit": false,
+    "permit_values": "all",
+    "chatbot": "false",
+    "antiviewonce": "false",
+    "antidelete": "false",
+    "autobio": "false",
+    "levelup": "false",
+    "anticall": "false",
+    "autoreaction": "false",
+    "bgm": false,
+    "bgmarray": {},
+    "plugins": {},
+    "notes": {},
+    "warn": {}
+  }
+}

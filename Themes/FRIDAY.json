@@ -3,14 +3,14 @@
   "AUTHOR": "SuhailTechInfo",
   "Theme": "Friday",
   "LANGCODE": "en",
-  "STRINGS": { 
-      "updater": {
+  "STRINGS": {  
+      "updater": {  
           "UPDATE": "*Your bot is already on latest version Sir*",
           "NEW_UPDATE": "*There is a new update available for the bot!*\n\n*Changes:*\n",
           "UPDATED_LOCAL": "*Successfully Updated!*"
-      },
-      "global": {
-          "botName": " 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 𝐅𝐫𝐢𝐝𝐚𝐲",
+      },    
+      "global": {  
+          "botName": "𝐅𝐫𝐢𝐝𝐚𝐲",
           "body": "As always Sir.",
         "greet2" : "Hello Sir",
           "pic1": "https://img-9gag-fun.9cache.com/photo/aer54jB_460s.jpg",
@@ -20,7 +20,7 @@
           "pic5": "https://telegramchannels.me/storage/media-logo/2008/fridaysupportofficial.jpg",
           "pic6": "https://static.wikia.nocookie.net/marvelcinematicuniverse/images/b/bc/4k-capcivil-movie-screencaps.com-17122.jpg/revision/latest?cb=20210513001406",
           "pic7": "https://media.wired.co.uk/photos/606db957c99f3d4d31739e74/16:9/w_1360,h_765,c_limit/ed86af6ae5769fb3c72f82c959f0d422.png",
-           "greet" : "Sir",
+           "greet" : "Sir", 
          "dotbody" : "Oh, hello sir..",
           "promote": "Admin Role Privileged",
           "pmallow": "*Hii,This is Fridayr*\n*An assistant of My Master.*\nMy Master is busy right now.\nKindly Leave your Message.\n\n_I will inform him about your message asap......_",
