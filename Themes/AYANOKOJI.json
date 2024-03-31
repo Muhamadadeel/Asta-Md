@@ -4,14 +4,14 @@
   "theme": "Ayanokji-kiyotaka",
   "LANGUAGE": "English",
   "LANGCODE": "en",
-  "STRINGS": {      
-      "updater": {  
+  "STRINGS": { 
+      "updater": {
           "UPDATE": "*I don’t like expending more effort than I have to.\nYour bot is already up-to-date*",
           "NEW_UPDATE": "*There is a new update available for the bot!*\n\n*Changes:*\n",
           "UPDATED_LOCAL": "*Successfully Updated!*"
-      },       
+      },
       "global": {
-          "botName": "𝐀𝐲𝐚𝐧𝐨𝐤𝐨𝐣𝐢",
+          "botName": " 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 𝐀𝐲𝐚𝐧𝐨𝐤𝐨𝐣𝐢",
           "body": "𝑊ℎ𝑎𝑡𝑠𝑎𝑝𝑝 𝐵𝑜𝑡",
           "greet2" : "Hey Dude",
           "pic1": "https://i.pinimg.com/originals/93/13/68/93136842d12d5865931e2950d351c81a.png",
@@ -33,7 +33,7 @@
           "antlink": "Link Detected.\n*Good Bye Dude*",
           "session": "\n*This is your session.sam.json,keep it safe and store it properly*\n_Now Upload This json file in Your Forked Repo_\n Connect your repo to Heroku and *Deploy Branch* and Bot will run for Always\n\n*𝑷𝒐𝒘𝒆𝒓𝒆𝒅 𝒃𝒚 𝒁𝒆𝒓𝒐 𝑻𝒘𝒐*",
           "mention": " Please mention any user Darling",
-          "title": "𝐀𝐲𝐚𝐧𝐨𝐤𝐨𝐣𝐢-𝐦𝐝",
+          "title": "𝐀𝐲𝐚𝐧𝐨𝐤𝐨𝐣𝐢",
           "footer": "𝐀𝐲𝐚𝐧𝐨𝐤𝐨𝐣𝐢",
           "by": "Made by: *citelvoid*",
           "chat_desc": "Options Avilable* : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete",

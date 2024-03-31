@@ -3,16 +3,16 @@
     "AUTHOR": "Suhail",
     "theme": "Suhail-Md",
     "LANGUAGE": "English",
-    "LANGCODE": "en",  
+    "LANGCODE": "en",
     "STRINGS": { 
-        "updater": { 
+        "updater": {
             "UPDATE": "*Believe it.\nYour bot is already up-to-date*",
             "NEW_UPDATE": "*it's time to update the bot!*\n\n*Changes:*\n",
             "UPDATED_LOCAL": "*Successfully Updated!*"
-        },  
-        "global": {      
-            "botName": "Suhail-Md",
-            "body": "whatsapp User Bot", 
+        },
+        "global": {
+            "botName": " Powered by Suhail Tech Info",
+            "body": "whatsapp User Bot",
             "greet2" : "Thanks To Suhail Ser",
             "pic1": "https://telegra.ph/file/ec9bc5038601821f2eb84.jpg", 
             "pic2": "https://telegra.ph/file/bc21f6f60bd1e3805f2a3.jpg", 
@@ -23,7 +23,7 @@
             "pic7": "https://telegra.ph/file/9f4baac07a47983bc68fc.jpg",
             "greet" : "Believe it",
             "dotbody" : "I decided being Pirate King.",
-            "emojii" : "🍑", 
+            "emojii" : "🍑",
             "promote": "Admin Role Given to Suhail",
             "pmallow": "*Hii,This is Suhail Tech Info\n You have been blocked for spamming.\n\n _Powered by Suhail Tech Info_",
             "pmwarn": "✋Hii* \nPlease don't spam else I'll block you for spamming. _You have ${checkPermit.times} warning(s)._\n\n Join Public Support Group : \nhttps://chat.whatsapp.com/F0HqDfJTvz66zzApYHrHHo\n\n*Powered by Suhail_Md*",
@@ -52,6 +52,6 @@
         "error": {
             "text": "*You may come to regret trying to manipulate me.\nNow go get this Error fixed*"
         }
-    } 
+    }
   }
-   
+  

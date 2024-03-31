@@ -1,18 +1,17 @@
 {
 "_JSON_": true,
 "AUTHOR": "SuhailTechInfo",
-"theme": "Adam",
 "LANGUAGE": "English",
-"LANGCODE": "en", 
-"STRINGS": {    
-"updater": {    
+"LANGCODE": "en",
+"STRINGS": { 
+"updater": {
 "UPDATE": "Your bot is already on latest version Buddy",
 "NEW_UPDATE": "There is a new update available for the bot!\n\n*Changes:*\n",
 "UPDATED_LOCAL": "Fresh Updates Installed!"
-},     
+},
 "global": {
-"botName": "ADAM", 
-    
+"botName": " Powered by Suhail Tech Info",
+
 "body": "SHAZAM!",
 "greet2" : "Hey Buddy",
 "pic1": "https://wallpapercave.com/wp/wp9459573.jpg",
@@ -29,7 +28,7 @@
 "gif5": "https://tenor.com/bSOTj.gif",
 "gif6": "https://media.giphy.com/media/7vP6xnkkOrlGW4TmRR/giphy.gif",
 "gif7": "https://media.giphy.com/media/7vP6xnkkOrlGW4TmRR/giphy.gif",
-"greet" : "Pal", 
+"greet" : "Pal",
 "dotbody" : "I have returned..",
 "promote": "A new worthy hero arrived",
 "pmallow": "Hii,This is Black Adam\n*My Shazam seems  busy right now.\nKindly Leave your Message.\n\n_I will inform him about your message asap......_",
@@ -41,7 +40,7 @@
 "antlink": "Link Detected.\n*Good Bye Worthless*",
 "session": "\n*This is your session.sam.json,keep it safe and store it properly*\n_Now Upload This json file in Your Forked Repo_\n Connect your repo to Heroku and Deploy Branch and Bot will run for Always\n\n*𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 𝐁𝐥𝐚𝐜𝐤 𝐀𝐝𝐚𝐦*",
 "mention": " Please mention any user",
-"title": "Black_Adam-Md",
+"title": "Black Adam",
 "footer": "sᴜʜᴀɪʟ ᴛᴇᴄʜ ɪɴғᴏ \n www.youtube.com/c/SuhailTechInfo",
 "by": "Made by: CitelVoid",
 "chat_desc": "Options Avilable* : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete",

@@ -1,17 +1,16 @@
 {
     "__JSON__": true,
     "AUTHOR": "SamPandey001",
-    "theme": "Edith",
     "LANGUAGE": "English",
     "LANGCODE": "en",
-    "STRINGS": {  
-        "updater": {    
+    "STRINGS": {
+        "updater": { 
             "UPDATE": "*Edith is already on latest version Sir*",
             "NEW_UPDATE": "*There is a new update available for the bot!*\n\n*Changes:*\n",
             "UPDATED_LOCAL": "*Successfully Updated!*"
-        },      
-        "global": { 
-            "botName": "Edith",
+        },
+        "global": {
+            "botName": " Powered by Edith",
             "body": "𝑊ℎ𝑎𝑡𝑠𝑎𝑝𝑝 𝐵𝑜𝑡",
             "greet2": "Sir",
             "pic1": "https://cdn.inprnt.com/thumbs/5d/0b/5d0b7faa113233d7c2a49cd8dbb80ea5@2x.jpg",
@@ -22,7 +21,7 @@
             "pic6": "https://cdnb.artstation.com/p/assets/images/images/036/511/783/large/risha-afiska-nabilla-tom-holland.jpg?1617870136",
             "pic7": "https://preview.redd.it/a4x6rjp9hu271.jpg?auto=webp&s=bc7d6e52236d6534171f82d809e83d29e5d4c483",
             "greet": "Sir",
-            "dotbody": "Edith", 
+            "dotbody": "Edith",
             "promote": "Admin Role Given to my",
             "pmallow": "*Hii,This is Edith*\n*An assistant of My Master.*\nMy Master is busy right now.\nKindly Leave your Message.\n\n_I will inform him about your message asap......_",
             "pmblock": "❌ Blocked*\n\n You have been blocked for spamming.\n\n _ Powered by Edith_",
@@ -33,8 +32,8 @@
             "antlink": "Link Detected.\n*Good Bye Sir*",
             "session": "\n*This is your session.sam.json,keep it safe and store it properly*\n_Now Upload This json file in Your Forked Repo_\n Connect your repo to Heroku and *Deploy Branch* and Bot will run for Always\n\n*Powered by Edith*",
             "mention": " Please mention any user Sir",
-            "title": "Edith-Md",
-            "footer": "Edith",
+            "title": "Edith",
+            "footer": "Edith-Md",
             "by": "Made by: *CitelVoid*",
             "chat_desc": "Options Avilable* : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete",
             "success": "Done ✓",

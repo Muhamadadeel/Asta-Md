@@ -3,16 +3,16 @@
     "AUTHOR": "SamPandey001",
     "LANGUAGE": "English",
     "LANGCODE": "en",
-    "STRINGS": { 
-    "updater": {  
+    "STRINGS": {
+    "updater": { 
     "UPDATE": "Your bot is already on latest version Buddy",
     "NEW_UPDATE": "There is a new update available for the bot!\n\n*Changes:*\n",
     "UPDATED_LOCAL": "Fresh Updates Installed!"
-    },      
-    "global": {  
-    "botName": "𝐆𝐨𝐤𝐮",
-     
-    "body": "𝑊ℎ𝑎𝑡𝑠𝑎𝑝𝑝 𝐵𝑜𝑡", 
+    },
+    "global": {
+    "botName": " 𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 𝐆𝐨𝐤𝐮",
+    
+    "body": "𝑊ℎ𝑎𝑡𝑠𝑎𝑝𝑝 𝐵𝑜𝑡",
     "greet2" : "Buddy",
     "pic1": "https://wallpapercave.com/dwp1x/wp9172946.jpg",
     "pic2": "https://wallpapercave.com/dwp1x/wp9173073.jpg",
@@ -28,7 +28,7 @@
     "gif5": "https://tenor.com/bSOTj.gif",
     "gif6": "https://media.giphy.com/media/7vP6xnkkOrlGW4TmRR/giphy.gif",
     "gif7": "https://media.giphy.com/media/7vP6xnkkOrlGW4TmRR/giphy.gif",
-    "greet" : "Hi, There", 
+    "greet" : "Hi, There",
     "dotbody" : "Stop me if you can.",
     "promote": "A new worthy Saiyen arrived",
     "pmallow": "Hii,This is Gohan\n*Father is Finding Dragon Balls.*\n seems like he is busy right now.\nKindly Leave your Message.\n\n_I will inform him about your message asap......_",
@@ -40,7 +40,7 @@
     "antlink": "Link Detected.\n*Good Bye Worthless saiyan*",
     "session": "\n*This is your session.sam.json,keep it safe and store it properly*\n_Now Upload This json file in Your Forked Repo_\n Connect your repo to Heroku and Deploy Branch and Bot will run for Always\n\n*𝐏𝐨𝐰𝐞𝐫𝐞𝐝 𝐛𝐲 𝐆𝐨𝐤𝐮*",
     "mention": " Please mention any user Onii-Chan",
-    "title": "𝐆𝐨𝐤𝐮-𝐦𝐝",
+    "title": "𝐆𝐨𝐤𝐮",
     "footer": "𝐒𝐨𝐧-𝐆𝐨𝐤𝐮",
     "by": "Made by: CitelVoid",
     "chat_desc": "Options Avilable* : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete",

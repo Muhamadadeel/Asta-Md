@@ -3,15 +3,15 @@
   "AUTHOR": "Valiant.v()",
   "theme": "Naruto-Uzumaki",
   "LANGUAGE": "English",
-  "LANGCODE": "en", 
+  "LANGCODE": "en",
   "STRINGS": { 
-      "updater": { 
+      "updater": {
           "UPDATE": "*Believe it.\nYour bot is already up-to-date*",
           "NEW_UPDATE": "*it's time to update the bot!*\n\n*Changes:*\n",
           "UPDATED_LOCAL": "*Successfully Updated!*"
-      },      
-      "global": {   
-          "botName": "𝙽𝚊𝚛𝚞𝚝𝚘-𝚃𝚑𝚎𝚖𝚎", 
+      },
+      "global": {
+          "botName": " 𝙿𝚘𝚠𝚎𝚛𝚎𝚍 𝚋𝚢 𝙽𝚊𝚛𝚞𝚝𝚘-𝚃𝚑𝚎𝚖𝚎",
           "body": "𝑊ℎ𝑎𝑡𝑠𝑎𝑝𝑝 𝐵𝑜𝑡",
           "greet2" : "Hokage",
           "pic1": "https://i.pinimg.com/originals/d9/41/8b/d9418bc48ce0520e7cc96de465fe8fff.jpg",
@@ -23,7 +23,7 @@
           "pic7": "https://i.pinimg.com/originals/02/07/94/020794d07925b51b3f219f2639e56214.jpg",
            "greet" : "Believe it",
          "dotbody" : "are you hurt,Scaredy cat.",
-           "emijii": "🍥",  
+           "emijii": "🍥", 
           "promote": "Admin Role Given to genin",
           "pmallow": "*Hii,This is Naruto-Uzumaki *\nMy Man is busy right now.\nKindly Leave your Message.\n\n_I will inform him about your message asap......_",
           "pmblock": "❌ Blocked*\n\n You have been blocked for spamming.\n\n _ 𝚙𝚘𝚠𝚎𝚛𝚎𝚍 𝚋𝚢 𝚗𝚊𝚛𝚞𝚝𝚘-𝚝𝚑𝚎𝚖𝚎_",
@@ -34,7 +34,7 @@
           "antlink": "Link Detected.\n*Good Bye Rouge ninja*",
           "session": "\n*This is your session.sam.json,keep it safe and store it properly*\n_Now Upload This json file in Your Forked Repo_\n Connect your repo to Heroku and *Deploy Branch* and Bot will run for Always\n\n*𝑷𝒐𝒘𝒆𝒓𝒆𝒅 𝒃𝒚 𝒁𝒆𝒓𝒐 𝑻𝒘𝒐*",
           "mention": " Please mention any user shinobi",
-          "title": "ɴᴀʀᴜᴛᴏ-ᴍᴅ",
+          "title": "ɴᴀʀᴜᴛᴏ",
           "footer": "ɴᴀʀᴜᴛᴏ",
           "by": "Made by: *citelvoid*",
           "chat_desc": "Options Avilable* : 1. mute\n2. unmute\n3. archive\n4. unarchive\n5. read\n6. unread\n7. delete",
