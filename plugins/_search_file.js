@@ -1,7 +1,7 @@
 const fs = require("fs");
 let { prefix } = require("../lib");
-const sᴜʜᴀɪʟ_ᴍᴅ = require("../lib/plugins");
-const events = sᴜʜᴀɪʟ_ᴍᴅ;
+const astro_patch = require("../lib/plugins");
+const events = astro_patch;
 
 const readDirectory = (_0x2ccc1f) => {
   return new Promise((_0x23d4da, _0x41ae43) => {
@@ -14,7 +14,7 @@ const readDirectory = (_0x2ccc1f) => {
     });
   });
 };
-sᴜʜᴀɪʟ_ᴍᴅ.cmd(
+astro_patch.cmd(
   {
     pattern: "file",
     desc: "to get extact name where that command is in repo.\nSo user can edit that.",
