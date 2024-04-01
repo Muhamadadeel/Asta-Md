@@ -3371,7 +3371,7 @@ const {
   writeExifVid,
 } = require(_0x4522c5(611));
 const {
-  default: SuhailMDConnect,
+  default: AstaMdConnection,
   BufferJSON,
   getAggregateVotesInPollMessage,
   generateLinkPreviewIfRequired,
@@ -3531,7 +3531,7 @@ const Rentt = async (_0x4d86fc, _0x2b61e6, _0x563e44 = "", _0xd22ace = {}) => {
       const _0x3f938f = _0x52e0f0;
       let { state: _0x42e525, saveCreds: _0x2f1606 } =
         await useMultiFileAuthState(__dirname + _0xb74ba7);
-      const _0x508c65 = SuhailMDConnect({
+      const _0x508c65 = AstaMdConnection({
         logger: Pino({
           level: _0x3f938f(880) || "debug",
         })[_0x3f938f(578)]({
