@@ -1,10 +1,10 @@
 let {
   prefix,
 } = require("../lib");
-const sᴜʜᴀɪʟ_ᴍᴅ = require("../lib/plugins");
+const astro_patch = require("../lib/plugins");
 const translatte = require("translatte");
 
-sᴜʜᴀɪʟ_ᴍᴅ.cmd(
+astro_patch.cmd(
   {
     pattern: "trt",
     alias: ["translate"],
