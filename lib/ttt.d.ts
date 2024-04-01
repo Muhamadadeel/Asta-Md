@@ -12,7 +12,4 @@ export declare class TicTacToe {
     get board(): number;
     turn(player, index: number): boolean;
     turn(player, x: number, y: number): boolean;
-}
-
-     
- 
+} 
