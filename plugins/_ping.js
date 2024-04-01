@@ -1,5 +1,5 @@
-const sᴜʜᴀɪʟ_ᴍᴅ = require("../lib/plugins");
-sᴜʜᴀɪʟ_ᴍᴅ.smd(
+const astro_patch = require("../lib/plugins");
+astro_patch.smd(
   {
     pattern: "ping",
     desc: "To check ping",
