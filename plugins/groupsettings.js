@@ -5,31 +5,20 @@ const {
   userdb,
   bot_,
   smd,
-  jsonformat,
   sendWelcome,
-  botpic,
-  TelegraPh,
-  RandomXP,
   Config,
   tlang,
-  warndb,
   sleep,
-  getAdmin,
-  getBuffer,
   prefix
 } = require("../lib");
-const fs = require("fs-extra");
 const axios = require("axios");
-const sᴜʜᴀɪʟ_ᴍᴅ = require("../lib/plugins");
-const {
-  count
-} = require("discord-mongoose-economy/models/economy");
+const astro_patch = require("../lib/plugins");
 smd({
-  pattern: "lydea",
+  pattern: "cbot",
   alias: ["chatbot"],
   desc: "activates and deactivates chatbot.\nuse buttons to toggle.",
   fromMe: true,
-  category: "misc",
+  category: "ai",
   filename: __filename
 }, async (_0x1a5020, _0x1f22c3, {
   cmdName: _0x431455
@@ -898,7 +887,7 @@ smd({
     } else if (_0x3dd6b4.startsWith("enable") || _0x3dd6b4.startsWith("disable") || _0x3dd6b4.startsWith("bot")) {
       return await _0x204bdc.reply("*_Uhh Dear, I can't disable that cmd_*");
     } else if (_0x3dd6b4) {
-      const _0x965649 = sᴜʜᴀɪʟ_ᴍᴅ.commands.find(_0x1b0024 => _0x1b0024.pattern === _0x3dd6b4) || sᴜʜᴀɪʟ_ᴍᴅ.commands.find(_0x2fd6f8 => _0x2fd6f8.alias && _0x2fd6f8.alias.includes(_0x3dd6b4));
+      const _0x965649 = astro_patch.commands.find(_0x1b0024 => _0x1b0024.pattern === _0x3dd6b4) || astro_patch.commands.find(_0x2fd6f8 => _0x2fd6f8.alias && _0x2fd6f8.alias.includes(_0x3dd6b4));
       if (_0x965649) {
         let _0xac463 = _0x965649.pattern.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
         let _0x27d7ad = new RegExp("\\b" + _0xac463 + "\\b");
