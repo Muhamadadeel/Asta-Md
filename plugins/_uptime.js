@@ -1,6 +1,6 @@
 let { tlang, runtime } = require("../lib");
-const sᴜʜᴀɪʟ_ᴍᴅ = require("../lib/plugins");
-sᴜʜᴀɪʟ_ᴍᴅ.cmd(
+const astro_patch = require("../lib/plugins");
+astro_patch.cmd(
   {
     pattern: "uptime",
     alias: ["runtime"],
