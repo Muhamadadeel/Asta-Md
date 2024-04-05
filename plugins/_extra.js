@@ -293,7 +293,7 @@ smd({
 smd({
   cmdname: "poetry",
   alias: ["shairi", "shayeri"],
-  type: "new",
+  type: "fun",
   info: "get randome poetry lines"
 }, async _0x4d032f => {
   try {
