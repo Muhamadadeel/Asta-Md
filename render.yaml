@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  node_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: asta-md
+    ports:
+      - "5000:5000"
+    environment:
+      WAPRESENCE: online
+      OWNER_NAME: Astro
+      WELCOME: "true"
+      GOODBYE: "false"
+      BOT_NAME: ᴀꜱᴛᴀ-ᴍᴅ
+      USER_IMAGES: "https://i.imgur.com/lIo3cM2.jpeg,https://i.imgur.com/OQOH4Gn.jpeg"
+      TZ: Africa/Lagos
+      SS_RESET: "false"
+      READ_COMMAND: "false"
+      WARN_COUNT: "3"
+      AUTO_SAVE_STATUS: "false"
+      AUTO_READ_STATUS: "true"
+      MSGS_IN_LOG: "false"
+      READ_MESSAGE: "false"
+      DISABLE_PM: "false"
+      PREFIX: ""
+      OWNER_NUMBER: "2348039607375"
+      SESSION_ID: ""
+      OPENAI_API_KEY: ""
+      ELEVENLAB_API_KEY: ""
+      REMOVE_BG_KEY: ""
+      MODE: private
+      PACK_NAME: Asta Md
+      PACK_AUTHER: ""
