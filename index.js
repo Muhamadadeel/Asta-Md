@@ -1,15 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-const pluginsPath = path.join(__dirname,'plugins.js');
-let pluginsCode;
-try {
-    pluginsCode = fs.readFileSync(pluginsPath, 'utf8');
-} catch (error) {
-    console.error('Error reading plugins file:', error);
-    process.exit(1);
-}
-eval(pluginsCode);
-
 const bot = require(__dirname + '/lib/astro');
 const { VERSION } = require(__dirname + '/config');
 
