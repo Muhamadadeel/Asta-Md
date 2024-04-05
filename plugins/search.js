@@ -29,7 +29,6 @@ smd(
       let data = await shazam(buff);
       if (!data || !data.status) return message.send(data);
       let h = `*TITLE: _${data.title}_* \n*ARTIST: _${data.artists}_*\n *ALBUM:* _${data.album}_ `;
-      //   *𝚁𝚎𝚕𝚎𝚊𝚜𝚎:* _${data.release_date}
       await message.bot.sendUi(
         message.jid,
         { caption: h },
@@ -46,8 +45,6 @@ smd(
     }
   }
 );
-//------------------------------------------------------------------------------------
-
 smd(
   {
     pattern: "github",
@@ -101,8 +98,6 @@ smd(
     }
   }
 );
-
-//------------------------------------------------------------------------------------
 smd(
   {
     pattern: "coffe",
@@ -132,9 +127,6 @@ smd(
     }
   }
 );
-//------------------------------------------------------------------------------------
-
-//---------------------------------------------------------------------------
 smd(
   {
     pattern: "lyrics",
@@ -183,8 +175,6 @@ smd(
     }
   }
 );
-
-//---------------------------------------------------------------------------
 smd(
   {
     pattern: "imdb",
@@ -239,7 +229,6 @@ smd(
     }
   }
 );
-//---------------------------------------------------------------------------
 smd(
   {
     pattern: "weather",
@@ -287,7 +276,6 @@ smd(
     }
   }
 );
-//---------------------------------------------------------------------------
 smd(
   {
     pattern: "npm",
@@ -317,44 +305,6 @@ smd(
     }
   }
 );
-
-//---------------------------------------------------------------------------
-/*
-smd({
-            pattern: "horo",
-            category: "search",
-            desc: "Gives horoscope info of user.",
-            use: '<sign>\n:Example: horo libra',
-            filename: __filename,
-        },
-        async(message, text) => {            
-            try {
-                if (!text) return message.reply(`*_Provide me a horoscope sign name!_*`)
-                const URL = `https://aztro.sameerkumar.website/?sign=${text}&day=today`;
-                fetch(URL, {  method: 'POST' })
-                    .then(response => response.json())
-                    .then(json => {
-                      console.log(json)
-                        let textw = `*🌟 Horoscope of  ${text}*\n\n`;
-                        textw += `*Current Date:* ${json.current_date}.\n`;
-                        textw += `*Sign:* ${text}.\n`;
-                        textw += `*Lucky Time:* ${json.lucky_time}.\n`;
-                        textw += `*Compatibility:* ${json.compatibility}.\n`;
-                        textw += `*Lucky Number:* ${json.lucky_number}.\n`;
-                        textw += `*Lucky Color:* ${json.color}.\n`;
-                        textw += `*Today Mood:* ${json.mood}.\n`;
-                        textw += `*Overall:* ${json.description}.\n\n`;
-                        textw +=Config.caption ;
-                        message.bot.sendUi(message.jid, { caption: textw,  },{quoted : message} ,"text",'true' );
-                       // message.reply(textw)
-                    });
-
-            }catch(e){return await message.error(`${e}\n\n command: horo`,e,`*_Uhh dear, Didn't get any results!_*`) }
-        }
-    )
-    */
-//---------------------------------------------------------------------------
-
 smd(
   {
     pattern: "cric",
@@ -390,8 +340,6 @@ smd(
     }
   }
 );
-
-//---------------------------------------------------------------------------
 smd(
   {
     pattern: "google",
@@ -427,8 +375,6 @@ smd(
     }
   }
 );
-
-//---------------------------------------------------------------------------
 smd(
   {
     pattern: "image",
@@ -532,7 +478,6 @@ smd(
     }
   }
 );
-//---------------------------------------------------------------------------
 smd(
   {
     pattern: "couplepp",
@@ -578,12 +523,12 @@ smd(
   async (message, text) => {
     if (!text)
       return await message.reply(
-        "Give Me Number without + sign. Example: .iswa 9231844741xx"
+        "Give Me Number without + sign. Example: .iswa 2348039xx"
       );
     var inputnumber = text.split(" ")[0];
     if (!inputnumber.includes("x"))
       return message.reply(
-        `*You did not add x*\nExample: iswa 9231844741xx  \n ${Config.caption}`
+        `*You did not add x*\nExample: iswa 2348039xx  \n ${Config.caption}`
       );
     message.reply(
       `*Searching for WhatsApp account in given range...* \n ${Config.caption}`
@@ -652,7 +597,6 @@ smd(
     return await message.reply(`${text}${nobio}${nowhatsapp}`);
   }
 );
-
 smd(
   {
     pattern: "nowa",
@@ -664,12 +608,12 @@ smd(
   async (message, text) => {
     if (!text)
       return await message.reply(
-        "Give Me Number without + sign. Example: .nowa 9231844741xx"
+        "Give Me Number without + sign. Example: .nowa 2348039xx"
       );
     const inputNumber = text.split(" ")[0];
     if (!inputNumber.includes("x"))
       return message.reply(
-        `*You did not add x in number.*\nExample: ${prefix}nowa 9231844741xx  \n ${Config.caption}`
+        `*You did not add x in number.*\nExample: ${prefix}nowa 2348039xx  \n ${Config.caption}`
       );
     message.reply(
       `*Searching for WhatsApp account in the given range...*\n${Config.caption}`

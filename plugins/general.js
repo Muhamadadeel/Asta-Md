@@ -932,7 +932,7 @@ smd(
     alias: ["advertisement"],
     category: "ai",
     desc: "Advertise of your Message, by sending it to provided nmbr range.",
-    use: "9231844741xx,Your_text_here",
+    use: "2348039xx,Your_text_here",
     fromMe: true,
     filename: __filename,
   },
@@ -943,7 +943,7 @@ smd(
         return await _0x165087.reply(
           "*Advertise of your Message*\n*by sending it to provided nmbr range.*\n" +
             prefix +
-            "advt 9231844741xx,Your_text_here"
+            "advt 2348039xx,Your_text_here"
         );
       }
       const _0x94ba67 = _0x14810d.indexOf(",");
@@ -959,7 +959,7 @@ smd(
         return _0x165087.send(
           "*You did not add x in number.*\n*Ex: " +
             prefix +
-            "advt 9231844741xx,Your_Message_here*  \n " +
+            "advt 2348039xx,Your_Message_here*  \n " +
             Config.caption
         );
       }
