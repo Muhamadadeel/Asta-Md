@@ -1,13 +1,10 @@
 version: "3"
 
 services:
-    - type: web
-    name: GURU-BOT
-    env: docker
+  - type: web
+    name: Asta-Md
     region: Frankfurt
     plan: free
-    ports:
-      - "5000:5000"
     environment:
       WAPRESENCE: online
       OWNER_NAME: Astro
