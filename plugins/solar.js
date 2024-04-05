@@ -7,7 +7,7 @@ const {
  smd({
    cmdname: "hrt",
    alias: ["hearts"],
-   type: "emoji",
+   type: "designs",
    info: "sending hearts",
    filename: __filename
  }, async (_0x584db3, _0xab9fe9) => {
@@ -25,7 +25,7 @@ const {
  });
  smd({
    cmdname: "joy",
-   type: "emoji",
+   type: "designs",
    info: "sending joyful emojis",
    filename: __filename
  }, async (_0x9bd884, _0x4ca606) => {
@@ -43,7 +43,7 @@ const {
  });
  smd({
    cmdname: "sad",
-   type: "emoji",
+   type: "designs",
    info: "sending sad emojis",
    filename: __filename
  }, async (_0x2775a7, _0x2f072b) => {
@@ -61,7 +61,7 @@ const {
  });
  smd({
    cmdname: "angry",
-   type: "emoji",
+   type: "designs",
    info: "sending angry emojis",
    filename: __filename
  }, async (_0x4df42d, _0x4a1cef) => {
@@ -79,7 +79,7 @@ const {
  });
  smd({
    cmdname: "shy",
-   type: "emoji",
+   type: "designs",
    info: "sending shy emojis",
    filename: __filename
  }, async (_0x5f32e8, _0x2bcbaa) => {
@@ -97,7 +97,7 @@ const {
  });
  smd({
    cmdname: "conf",
-   type: "emoji",
+   type: "designs",
    info: "sending confused emojis",
    filename: __filename
  }, async (_0x5c6efd, _0x14e60b) => {
@@ -115,7 +115,7 @@ const {
  });
  smd({
    cmdname: "bored",
-   type: "emoji",
+   type: "designs",
    info: "sending bored emojis",
    filename: __filename
  }, async (_0x8d8013, _0x5b5ef7) => {
@@ -133,7 +133,7 @@ const {
  });
  smd({
    cmdname: "frust",
-   type: "emoji",
+   type: "designs",
    info: "sending frustrated emojis",
    filename: __filename
  }, async (_0x525398, _0x585416) => {
@@ -151,7 +151,7 @@ const {
  });
  smd({
    cmdname: "luv",
-   type: "edits",
+   type: "designs",
    info: "send hearts emojies with your text",
    filename: __filename
  }, async (_0x7b2cc4, _0x494e3e) => {
@@ -169,7 +169,7 @@ const {
  });
  smd({
    pattern: "world",
-   type: "edits",
+   type: "designs",
    info: "send world emojies with your text",
    filename: __filename
  }, async (_0x4848d8, _0xe96db7) => {
@@ -190,7 +190,7 @@ const {
  });
  smd({
    pattern: "solar",
-   type: "edits",
+   type: "designs",
    info: "shows solar system",
    filename: __filename
  }, async (_0x31a927, _0x31acce) => {
@@ -208,7 +208,7 @@ const {
  });
  smd({
    pattern: "snake",
-   type: "edits",
+   type: "designs",
    info: "Show snake room",
    filename: __filename
  }, async (_0xaf79b2, _0x2e8e68) => {
@@ -226,7 +226,7 @@ const {
  });
  smd({
    pattern: "plane",
-   type: "edits",
+   type: "designs",
    info: "Shows edits of plane",
    filename: __filename
  }, async (_0x4c8263, _0x3fd028) => {
@@ -244,7 +244,7 @@ const {
  });
  smd({
    pattern: "smoon",
-   type: "edits",
+   type: "designs",
    info: "shows moon system",
    filename: __filename
  }, async (_0x1a8365, _0x49e584) => {
@@ -262,7 +262,7 @@ const {
  });
  smd({
    pattern: "moon",
-   type: "edits",
+   type: "designs",
    info: "Show moon emojies edits with your text",
    filename: __filename
  }, async (_0x3473c8, _0x5ea14a) => {
@@ -285,7 +285,7 @@ const {
  smd({
    pattern: "hand",
    alias: ["handpractice", "muth"],
-   type: "edits",
+   type: "designs",
    info: "Hand practice edits, 18+",
    filename: __filename
  }, async (_0x3cd05a, _0x3aee5e) => {
@@ -303,7 +303,7 @@ const {
  });
  smd({
    pattern: "fire",
-   type: "edits",
+   type: "designs",
    info: "gun fire edits",
    filename: __filename
  }, async (_0x3aa496, _0x22279a) => {
@@ -321,7 +321,7 @@ const {
  });
  smd({
    pattern: "callhq",
-   type: "edits",
+   type: "designs",
    info: "Shows calling logs with whatsapp head quaters",
    filename: __filename
  }, async (_0x28198a, _0xbd1cc1) => {
@@ -344,7 +344,7 @@ const {
  });
  smd({
    pattern: "nikal",
-   type: "edits",
+   type: "designs",
    info: "show loduu edits",
    filename: __filename
  }, async (_0x5efd3c, _0xbf5b2c) => {
