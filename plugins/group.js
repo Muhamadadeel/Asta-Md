@@ -2,29 +2,13 @@ const { updateProfilePicture, parsedJid } = require("../lib");
 const {
   sck,
   smd,
-  sck1,
-  jsonformat,
-  botpic,
-  TelegraPh,
-  RandomXP,
   send,
   Config,
   tlang,
-  warndb,
   sleep,
   getAdmin,
-  getBuffer,
   prefix,
 } = require("../lib");
-const {
-  Sticker,
-  createSticker,
-  StickerTypes,
-} = require("wa-sticker-formatter");
-const moment = require("moment-timezone");
-const Levels = require("discord-xp");
-const fs = require("fs-extra");
-const Jimp = require("jimp");
 const astro_patch = require("../lib/plugins");
 const { cmd } = astro_patch;
 const grouppattern = /https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{22}/g;
@@ -471,6 +455,7 @@ smd(
 smd(
   {
     cmdname: "left",
+    alias: "leave",
     info: "left from a group.",
     fromMe: true,
     type: "group",
@@ -485,7 +470,8 @@ smd(
       if (
         _0x6118c5.startsWith("sure") ||
         _0x6118c5.startsWith("ok") ||
-        _0x6118c5.startsWith("yes")
+        _0x6118c5.startsWith("yes") ||
+        _0x6118c5.startsWith("y")
       ) {
         await _0x37841c.bot.groupParticipantsUpdate(
           _0x37841c.chat,
