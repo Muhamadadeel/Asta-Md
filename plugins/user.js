@@ -1,189 +1,193 @@
-const { Config, smd } = require("../lib");
-const cmd = smd;
-cmd(
-  {
-    pattern: "jid",
-    desc: "get jid of all user in a group.",
-    category: "user",
-    filename: __filename,
-    use: "<@user>",
-  },
-  async ({ jid: _0x317d9b, reply: _0x355aae, quoted: _0x5256f4 }) => {
-    if (_0x5256f4) {
-      return _0x355aae(_0x5256f4.sender);
-    } else {
-      return _0x355aae(_0x317d9b);
-    }
+// Get JID Command
+cmd({
+  pattern: "jid",
+  desc: "get jid of all user in a group.",
+  category: "user",
+  filename: __filename,
+  use: "<@user>",
+ }, async ({ jid, reply, quoted }) => {
+  if (quoted) {
+    return reply(quoted.sender);
+  } else {
+    return reply(jid);
   }
-);
-cmd(
-  {
-    pattern: "getpp",
-    desc: "Get Profile Pic For Given User",
-    category: "user",
-    filename: __filename,
-  },
-  async (_0x24b8a0) => {
+ });
+ 
+ // Get Profile Picture Command
+ cmd({
+  pattern: "getpp",
+  desc: "Get Profile Pic For Given User",
+  category: "user",
+  filename: __filename,
+ }, async (message) => {
+  try {
+    const user = message.reply_message
+      ? message.reply_message.sender
+      : message.mentionedJid[0]
+      ? message.mentionedJid[0]
+      : message.from;
+ 
+    let profilePicUrl;
     try {
-      let _0x4cd072 = _0x24b8a0.reply_message
-        ? _0x24b8a0.reply_message.sender
-        : _0x24b8a0.mentionedJid[0]
-        ? _0x24b8a0.mentionedJid[0]
-        : _0x24b8a0.from;
-      let _0x23f248;
-      try {
-        _0x23f248 = await _0x24b8a0.bot.profilePictureUrl(_0x4cd072, "image");
-      } catch (_0x42ab42) {
-        return _0x24b8a0.reply("```Profile Pic Not Fetched```");
+      profilePicUrl = await message.bot.profilePictureUrl(user, "image");
+    } catch (error) {
+      return message.reply("```Profile Pic Not Fetched```");
+    }
+ 
+    return await message.bot.sendMessage(
+      message.chat,
+      {
+        image: {
+          url: profilePicUrl,
+        },
+        caption: "  *---Profile Pic Is Here---*\n" + Config.caption,
+      },
+      {
+        quoted: message,
       }
-      return await _0x24b8a0.bot.sendMessage(
-        _0x24b8a0.chat,
+    );
+  } catch (error) {
+    await message.error(error + "\n\ncommand : getpp", error);
+  }
+ });
+ 
+ // Get User Information Command
+ cmd({
+  pattern: "whois",
+  desc: "Makes photo of replied sticker.",
+  category: "user",
+  use: "<reply to any person>",
+  filename: __filename,
+ }, async (message) => {
+  try {
+    const user = message.reply_message
+      ? message.reply_message.sender
+      : message.mentionedJid[0]
+      ? message.mentionedJid[0]
+      : false;
+ 
+    if (!user && message.isGroup) {
+      const groupPicUrl =
+        (await message.bot
+          .profilePictureUrl(message.chat, "image")
+          .catch(() => "https://telegra.ph/file/29a8c892a1d18fdb26028.jpg")) ||
+        THUMB_IMAGE;
+ 
+      const metadata = message.metadata;
+      const admins = message.admins
+        .map(
+          (admin, index) =>
+            `  ${index + 1}. wa.me/${admin.id.split("@")[0]}`
+        )
+        .join("\n");
+ 
+      const owner =
+        metadata.owner ||
+        message.admins.find((admin) => admin.admin === "superadmin")?.id ||
+        false;
+ 
+      let groupInfo =
+        "\n      *「 GROUP INFORMATION 」*\n*▢ NAME :* \n   • " +
+        metadata.subject +
+        "\n*▢ Members :*\n   • " +
+        metadata.participants.length +
+        "\n*▢ Group Owner :*\n   • " +
+        (owner ? "wa.me/" + owner.split("@")[0] : "notFound") +
+        "\n*▢ Admins :*\n" +
+        admins +
+        "\n*▢ Description :*\n   • " +
+        (metadata.desc?.toString() || "_not set_") +
+        "\n   ";
+ 
+      return await message.reply(
+        groupPicUrl,
+        {
+          caption: groupInfo,
+        },
+        "image"
+      );
+    } else {
+      if (!user) {
+        return message.reply("*_Please Reply To A Person!_*");
+      }
+ 
+      try {
+        const status = await message.bot.fetchStatus(user);
+        const statusText = status.status;
+        let statusTimestamp = status.setAt.toString();
+        let timestampArray = statusTimestamp.split(" ");
+ 
+        if (timestampArray.length > 3) {
+          statusTimestamp = timestampArray.slice(0, 5).join(" ");
+        }
+      } catch {
+        statusText = "undefined";
+        statusTimestamp = "";
+      }
+ 
+      const userId = user.split("@")[0];
+      let profilePicUrl;
+ 
+      try {
+        profilePicUrl = await message.bot.profilePictureUrl(user, "image");
+      } catch (error) {
+        profilePicUrl = "https://telegra.ph/file/29a8c892a1d18fdb26028.jpg";
+      }
+ 
+      const userName = await message.bot.getName(user);
+ 
+      return await message.bot.sendMessage(
+        message.jid,
         {
           image: {
-            url: _0x23f248,
+            url: profilePicUrl,
           },
-          caption: "  *---Profile Pic Is Here---*\n" + Config.caption,
+          caption: Config.ownername,
         },
         {
-          quoted: _0x24b8a0,
+          quoted: message,
         }
       );
-    } catch (_0x40b881) {
-      await _0x24b8a0.error(_0x40b881 + "\n\ncommand : getpp", _0x40b881);
     }
+  } catch (error) {
+    await message.error(error + "\n\ncommand : whois", error);
   }
-);
-cmd(
-  {
-    pattern: "whois",
-    desc: "Makes photo of replied sticker.",
-    category: "user",
-    use: "<reply to any person>",
-    filename: __filename,
-  },
-  async (_0x5b9714) => {
-    try {
-      let _0x354e18 = _0x5b9714.reply_message
-        ? _0x5b9714.reply_message.sender
-        : _0x5b9714.mentionedJid[0]
-        ? _0x5b9714.mentionedJid[0]
-        : false;
-      if (!_0x354e18 && _0x5b9714.isGroup) {
-        const _0x561b75 =
-          (await _0x5b9714.bot
-            .profilePictureUrl(_0x5b9714.chat, "image")
-            .catch(
-              (_0x1c3876) => "https://telegra.ph/file/29a8c892a1d18fdb26028.jpg"
-            )) || THUMB_IMAGE;
-        const _0x3bf573 = _0x5b9714.metadata;
-        const _0x3526c9 = _0x5b9714.admins
-          .map(
-            (_0x2df5bb, _0x5c8c6c) =>
-              "  " + (_0x5c8c6c + 1) + ". wa.me/" + _0x2df5bb.id.split("@")[0]
-          )
-          .join("\n");
-        const _0x46b7ba =
-          _0x3bf573.owner ||
-          _0x5b9714.admins.find((_0x297d66) => _0x297d66.admin === "superadmin")
-            ?.id ||
-          false;
-        let _0x204314 =
-          "\n      *「 GROUP INFORMATION 」*\n*▢ NAME :* \n   • " +
-          _0x3bf573.subject +
-          "\n*▢ Members :*\n   • " +
-          _0x3bf573.participants.length +
-          "\n*▢ Group Owner :*\n   • " +
-          (_0x46b7ba ? "wa.me/" + _0x46b7ba.split("@")[0] : "notFound") +
-          "\n*▢ Admins :*\n" +
-          _0x3526c9 +
-          "\n*▢ Description :*\n   • " +
-          (_0x3bf573.desc?.toString() || "_not set_") +
-          "\n   ";
-        return await _0x5b9714.reply(
-          _0x561b75,
-          {
-            caption: _0x204314,
-          },
-          "image"
-        );
-      } else {
-        if (!_0x354e18) {
-          return _0x5b9714.reply("*_Please Reply To A Person!_*");
-        }
-        try {
-          var _0x12d99e = await _0x5b9714.bot.fetchStatus(_0x354e18);
-          var _0x23847e = _0x12d99e.status;
-          var _0xfd4a68 = _0x12d99e.setAt.toString();
-          var _0x5d0d88 = _0xfd4a68.split(" ");
-          if (_0x5d0d88.length > 3) {
-            _0xfd4a68 = _0x5d0d88.slice(0, 5).join(" ");
-          }
-        } catch {
-          var _0x23847e = "undefined";
-          var _0xfd4a68 = "";
-        }
-        var _0x52ccee = _0x354e18.split("@")[0];
-        let _0x5ae446;
-        try {
-          _0x5ae446 = await _0x5b9714.bot.profilePictureUrl(_0x354e18, "image");
-        } catch (_0x17156a) {
-          _0x5ae446 = "https://telegra.ph/file/29a8c892a1d18fdb26028.jpg";
-        }
-        var _0xf3d6e0 = await _0x5b9714.bot.getName(_0x354e18);
-        return await _0x5b9714.bot.sendMessage(
-          _0x5b9714.jid,
-          {
-            image: {
-              url: _0x5ae446,
-            },
-            caption: Config.ownername,
-          },
-          {
-            quoted: _0x5b9714,
-          }
-        );
-      }
-    } catch (_0x31ca34) {
-      await _0x5b9714.error(_0x31ca34 + "\n\ncommand : whois", _0x31ca34);
-    }
+ });
+ 
+ // Get WhatsApp Link Command
+ cmd({
+  pattern: "wa",
+  desc: "Makes wa me of quoted or mentioned user.",
+  category: "user",
+  filename: __filename,
+ }, async (message) => {
+  try {
+    const user = message.reply_message
+      ? message.reply_message.sender
+      : message.mentionedJid[0]
+      ? message.mentionedJid[0]
+      : false;
+ 
+    await message.reply(
+      !user
+        ? "*Please Reply Or Mention A User*"
+        : "https://wa.me/" + user.split("@")[0]
+    );
+  } catch (error) {
+    await message.error(error + "\n\ncommand : wa", error, false);
   }
-);
-cmd(
-  {
-    pattern: "wa",
-    desc: "Makes wa me of quoted or mentioned user.",
-    category: "user",
-    filename: __filename,
-  },
-  async (_0x3186cd) => {
-    try {
-      let _0x3c71d6 = _0x3186cd.reply_message
-        ? _0x3186cd.reply_message.sender
-        : _0x3186cd.mentionedJid[0]
-        ? _0x3186cd.mentionedJid[0]
-        : false;
-      await _0x3186cd.reply(
-        !_0x3c71d6
-          ? "*Please Reply Or Mention A User*"
-          : "https://wa.me/" + _0x3c71d6.split("@")[0]
-      );
-    } catch (_0x100353) {
-      await _0x3186cd.error(_0x100353 + "\n\ncommand : wa", _0x100353, false);
-    }
-  }
-);
-cmd(
-  {
-    pattern: "mee",
-    desc: "Makes wa me for user.",
-    category: "user",
-    filename: __filename,
-  },
-  async (_0x12ac1b) => {
-    try {
-      return await _0x12ac1b.reply(
-        "https://wa.me/" + _0x12ac1b.sender.split("@")[0]
-      );
-    } catch {}
-  }
-);
+ });
+ 
+ // Get User's WhatsApp Link Command
+ cmd({
+  pattern: "mee",
+  desc: "Makes wa me for user.",
+  category: "user",
+  filename: __filename,
+ }, async (message) => {
+  try {
+    return await message.reply(
+      "https://wa.me/" + message.sender.split("@")[0]
+    );
+  } catch {}
+ });
