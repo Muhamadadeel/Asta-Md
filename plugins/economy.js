@@ -5,7 +5,7 @@ let ty = false;
 
 try {
   if (isMongodb) {
-    ty = eco.connect(mongodb);
+    ty = eco.connect(MONGODB);
     console.log("Connected with discord economy!!");
   }
 } catch (e) {
