@@ -1,4 +1,4 @@
-const { prefix } = require("../lib");
+const { prefix, smd } = require("../lib");
 
 smd(
   {

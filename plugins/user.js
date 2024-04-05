@@ -1,4 +1,5 @@
 // Get JID Command
+let {cmd} = require("../lib/plugins");
 cmd({
   pattern: "jid",
   desc: "get jid of all user in a group.",
