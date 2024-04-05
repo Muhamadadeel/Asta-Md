@@ -1,11 +1,6 @@
 version: "3"
 
 services:
-  node_app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    image: asta-md
     ports:
       - "5000:5000"
     environment:
@@ -33,10 +28,3 @@ services:
       MODE: private
       PACK_NAME: Asta Md
       PACK_AUTHER: ""
-      STACK: container | heroku-22 | 4246315815290786|01|2026|717
-    addons:
-      - plan: heroku-postgresql
-    formation:
-      worker:
-        quantity: 1
-        size: basic
