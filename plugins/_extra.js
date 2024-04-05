@@ -16,7 +16,7 @@ smd({
   cmdname: "messages",
   alias: ["countmessage", "msgcount"],
   desc: "Check how many users continuesly active in chat!",
-  category: "chats",
+  category: "whatsapp",
   filename: __filename
 }, async (_0x1cec94, _0x2535b1, {
   store: _0x264360
@@ -126,7 +126,7 @@ smd({
   cmdname: "tovv",
   alias: ["toviewonce"],
   desc: "send viewonce for Replied image/video Message",
-  category: "chats",
+  category: "whatsapp",
   filename: __filename
 }, async (_0x241c6f, _0x5ce27a) => {
   try {
@@ -209,7 +209,7 @@ smd({
 });
 smd({
   cmdname: "character",
-  category: "fun",
+  category: "pastime",
   use: "[@user]",
   filename: __filename,
   info: "Check character of replied USER!"
@@ -228,7 +228,7 @@ smd({
 smd({
   cmdname: "poetry",
   alias: ["shairi", "shayeri"],
-  type: "fun",
+  type: "pastime",
   info: "get randome poetry lines"
 }, async _0x4d032f => {
   try {

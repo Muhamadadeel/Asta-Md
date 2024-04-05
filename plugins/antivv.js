@@ -6,7 +6,7 @@ smd(
     alias: ["antivv"],
     desc: "turn On/Off auto viewOnce Downloder",
     fromMe: true,
-    type: "general",
+    type: "user",
     use: "<on/off>",
     filename: __filename,
   },

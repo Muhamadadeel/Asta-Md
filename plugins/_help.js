@@ -231,7 +231,7 @@ astro_patch.cmd(
   {
     pattern: "list",
     desc: "list menu",
-    category: "general",
+    category: "user",
     react: "🥀",
   },
   async (message) => {
@@ -323,7 +323,7 @@ astro_patch.cmd(
   {
     pattern: "trt",
     alias: ["translate"],
-    category: "general",
+    category: "user",
     filename: __filename,
     use: "< text >",
     desc: "Translates the given text to the desired language.",
@@ -372,7 +372,7 @@ astro_patch.cmd(
   {
     pattern: "file",
     desc: "to get the exact name and location of the command in the repository, so the user can edit it.",
-    category: "general",
+    category: "user",
     fromMe: true,
     filename: __filename,
   },

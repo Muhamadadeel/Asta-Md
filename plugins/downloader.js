@@ -618,7 +618,7 @@ smd({
   try {
     var _0x3f5fb9 = _0x3dfcd0.toLowerCase().includes("doc") ? "document" : _0x3dfcd0.toLowerCase().includes("mp3") ? "audio" : "video";
     if (!_0x3dfcd0) {
-      return await _0x3050b9.reply("*Uhh Please, Provide me tiktok Video Url*\n*_Ex " + prefix + "tiktok https://www.tiktok.com/@dakwahmuezza/video/7150544062221749531_*");
+      return await _0x3050b9.reply("*Uhh Please, Provide me tiktok Video Url*\n*_Ex " + prefix + "tiktok https://vm.tiktok.com/ZMMuSoaoq/_*");
     }
     let _0x149d79 = _0x3dfcd0 ? _0x3dfcd0.split(" ")[0] : "";
     if (!/tiktok/.test(_0x149d79)) {

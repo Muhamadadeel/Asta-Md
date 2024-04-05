@@ -8,7 +8,7 @@ const fetch = require("node-fetch");
 smd({
   cmdname: "question",
   info: "Random Question.",
-  type: "fun",
+  type: "pastime",
   filename: __filename
 }, async (_0x526dda, _0x570e21, {
   smd: _0x59940a
@@ -22,7 +22,7 @@ smd({
 smd({
   cmdname: "truth",
   info: "truth and dare(truth game.).",
-  type: "fun",
+  type: "pastime",
   filename: __filename
 }, async (_0xc2b276, _0x3b493e, {
   smd: _0x52be61
@@ -36,7 +36,7 @@ smd({
 smd({
   cmdname: "dare",
   info: "truth and dare(dare game.).",
-  type: "fun",
+  type: "pastime",
   filename: __filename
 }, async (_0x330b72, _0x34d36a, {
   smd: _0x2a0858
@@ -50,7 +50,7 @@ smd({
 smd({
   cmdname: "joke",
   info: "Sends Joke in chat.",
-  type: "fun",
+  type: "pastime",
   filename: __filename
 }, async (_0x330ac0, _0x8b468d, {
   smd: _0x2e3522
@@ -64,7 +64,7 @@ smd({
 smd({
   cmdname: "joke2",
   info: "Sends Joke in chat.",
-  type: "fun",
+  type: "pastime",
   filename: __filename
 }, async (_0x5c9c52, _0x6b6e25, {
   smd: _0x64ba
@@ -78,7 +78,7 @@ smd({
 smd({
   cmdname: "fact",
   info: "Sends fact in chat.",
-  type: "fun",
+  type: "pastime",
   filename: __filename
 }, async (_0x1dc7e3, _0x16aaa1, {
   smd: _0x375b98
@@ -92,7 +92,7 @@ smd({
 smd({
   cmdname: "quotes",
   info: "Sends quotes in chat.",
-  type: "fun",
+  type: "pastime",
   filename: __filename
 }, async (_0x12963f, _0x4f30d2, {
   smd: _0x3462d1
@@ -106,7 +106,7 @@ smd({
 smd({
   cmdname: "define",
   info: "urban dictionary.",
-  type: "fun",
+  type: "pastime",
   filename: __filename
 }, async (_0x460337, _0x614c0a) => {
   try {

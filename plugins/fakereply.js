@@ -5,7 +5,7 @@ smd(
     cmdname: "fakereply",
     alias: ["freply"],
     desc: "Create fake Reply by given texts!",
-    type: "general",
+    type: "user",
     use: " msg| reply_text | number ",
     usage: "generates fake messages of given text and number!",
     filename: __filename,

@@ -6,7 +6,7 @@ smd(
     alias: ["delete"],
     desc: "turn On/Off auto download deletes",
     fromMe: true,
-    category: "general",
+    category: "user",
     use: "<on/off>",
     filename: __filename,
   },

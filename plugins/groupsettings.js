@@ -176,7 +176,7 @@ smd(
     pattern: "checkwarn",
     alias: ["listwarn", "chatwarn", "allwarn"],
     desc: "create paste of text.",
-    category: "general",
+    category: "user",
     filename: __filename,
   },
   async (_0x598674, _0x1c4990) => {
@@ -253,7 +253,7 @@ smd(
     pattern: "warn",
     fromMe: true,
     desc: "warn a user!",
-    category: "general",
+    category: "user",
     filename: __filename,
     use: " < USER >",
   },
@@ -350,7 +350,7 @@ smd(
   {
     pattern: "resetwarn",
     desc: "create paste of text.",
-    category: "general",
+    category: "user",
     filename: __filename,
     use: " user ",
   },

@@ -55,7 +55,7 @@ smd(
     cmdname: "checkme",
     alias: ["aboutme"],
     desc: "Check randome information about your character!",
-    category: "updates",
+    category: "misc",
     filename: __filename,
   },
   async (_0x263d98, _0x3610bc) => {
@@ -120,7 +120,7 @@ smd(
 smd(
   {
     pattern: "channel",
-    type: "updates",
+    type: "misc",
     info: "Suhail-MD Support Channels",
   },
   async (_0x5ce955) => {
@@ -156,7 +156,7 @@ smd(
 smd(
   {
     pattern: "cleartmp",
-    type: "updates",
+    type: "misc",
     info: "Clear temporary files cache",
   },
   async (_0xadf9f3) => {
@@ -178,7 +178,7 @@ smd(
     cmdname: "request",
     alias: ["reportbug", "report"],
     desc: "report bug/features of bot to its creator!",
-    category: "updates",
+    category: "misc",
     filename: __filename,
   },
   async (_0x3b2ef2, _0x45bf7a) => {
@@ -231,7 +231,7 @@ smd(
     cmdname: "closetime",
     alias: ["setclose", "setmute"],
     desc: "set temporary timer to close a group chat!",
-    category: "updates",
+    category: "misc",
     filename: __filename,
   },
   async (_0x1067b4, _0x4d1cdb, { args: _0x58f103 }) => {
@@ -291,7 +291,7 @@ smd(
     cmdname: "opentime",
     alias: ["setopen", "setunmute"],
     desc: "set temporary timer to open a group chat!",
-    category: "updates",
+    category: "misc",
     filename: __filename,
   },
   async (_0x4f388a, _0x57db16, { args: _0x26380a }) => {
@@ -352,7 +352,7 @@ smd(
     cmdname: "ephemeral",
     alias: ["disapear"],
     desc: "enable disapearing messages from chat!",
-    category: "updates",
+    category: "misc",
     filename: __filename,
   },
   async (_0x49b265, _0x4a5d81, { args: _0x5295c9 }) => {
@@ -476,7 +476,7 @@ smd(
   {
     cmdname: "remini",
     desc: "enhance image quality!",
-    type: "updates",
+    type: "misc",
     filename: __filename,
   },
   async (_0x1bd29b) => {
@@ -502,7 +502,7 @@ smd(
   {
     cmdname: "dehaze",
     desc: "enhance image quality!",
-    type: "updates",
+    type: "misc",
     filename: __filename,
   },
   async (_0x2a1135) => {
@@ -528,7 +528,7 @@ smd(
   {
     cmdname: "recolor",
     desc: "enhance image quality!",
-    type: "updates",
+    type: "misc",
     filename: __filename,
   },
   async (_0x18f8e1) => {
@@ -555,7 +555,7 @@ smd(
     cmdname: "svcontact",
     alias: ["savecontact", "vcf"],
     desc: "get Contacts of group members!",
-    category: "updates",
+    category: "misc",
     filename: __filename,
   },
   async (_0x173fc2, _0x1e33bd) => {

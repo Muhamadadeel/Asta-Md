@@ -185,7 +185,7 @@ smd({
 	pattern: 'getprivacy',
 	fromMe: true,
 	desc: 'get your privacy settings',
-	type: 'privacy'
+	type: 'whatsapp settings'
 }, async (message, match) => {
 	const {
 		readreceipts,
@@ -223,7 +223,7 @@ smd({
 	pattern: 'lastseen',
 	fromMe: true,
 	desc: 'to change lastseen privacy',
-	type: 'privacy'
+	type: 'whatsapp settings'
 }, async (message, match, {smd }) => {
     try{
 	if (!match) return await message.send(`_*Example:-* .lastseen all_\n_to change last seen privacy settings_`);
@@ -239,7 +239,7 @@ smd({
 	pattern: 'online',
 	fromMe: true,
 	desc: 'to change online privacy',
-	type: 'privacy'
+	type: 'whatsapp settings'
 }, async (message, match,) => {
     try{
 	if (!match) return await message.send(`_*Example:-* .online all_\n_to change *online*  privacy settings_`);
@@ -255,7 +255,7 @@ smd({
 	pattern: 'mypp',
 	fromMe: true,
 	desc: 'privacy setting profile picture',
-	type: 'privacy'
+	type: 'whatsapp settings'
 }, async (message, match) => {
     try{
 	if (!match) return await message.send(`_*Example:-* .mypp all_\n_to change *profile picture*  privacy settings_`);
@@ -270,7 +270,7 @@ smd({
 	pattern: 'mystatus',
 	fromMe: true,
 	desc: 'privacy for my status',
-	type: 'privacy'
+	type: 'whatsapp settings'
 }, async (message, match,) => {
     try{
 	if (!match) return await message.send(`_*Example:-* .mystatus all_\n_to change *status*  privacy settings_`);
@@ -285,7 +285,7 @@ smd({
 	pattern: 'read',
 	fromMe: true,
 	desc: 'privacy for read message',
-	type: 'privacy'
+	type: 'whatsapp settings'
 }, async (message, match, cmd) => {
     try{
 	if (!match) return await message.send(`_*Example:-* .read all_\n_to change *read and receipts message*  privacy settings_`);
@@ -300,7 +300,7 @@ smd({
 	pattern: 'groupadd',
 	fromMe: true,
 	desc: 'privacy for group add',
-	type: 'privacy'
+	type: 'whatsapp settings'
 }, async (message, match, cmd) => {
     try{
 	if (!match) return await message.send(`_*Example:-* .groupadd all_\n_to change *group add*  privacy settings_`);

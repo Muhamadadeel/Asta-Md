@@ -575,7 +575,7 @@ smd(
     pattern: "readmore",
     alias: ["rmore", "readmor"],
     desc: "Adds *readmore* in given text.",
-    category: "general",
+    category: "user",
     filename: __filename,
   },
   async (_0x5db0de, _0x38fb87) => {
@@ -610,7 +610,7 @@ cmd(
   {
     pattern: "url",
     alias: ["createurl"],
-    category: "general",
+    category: "user",
     filename: __filename,
     desc: "image to url.",
     use: "<video | image>",
@@ -643,7 +643,7 @@ cmd(
   {
     pattern: "upload",
     alias: ["url2"],
-    category: "general",
+    category: "user",
     filename: __filename,
     desc: "image to url.",
     use: "<video | image>",
@@ -674,7 +674,7 @@ smd(
   {
     pattern: "calc",
     desc: "calculate an equation.",
-    category: "general",
+    category: "user",
     use: "<equation>",
     filename: __filename,
   },
@@ -729,7 +729,7 @@ smd(
     pattern: "repo",
     alias: ["git", "sc", "script"],
     desc: "Sends info about repo",
-    category: "general",
+    category: "user",
     filename: __filename,
   },
   async (_0x45da98) => {
@@ -764,7 +764,7 @@ smd(
     pattern: "status",
     alias: ["about", "info"],
     desc: "To check bot status",
-    category: "general",
+    category: "user",
     filename: __filename,
   },
   async (_0x397531) => {
@@ -800,7 +800,7 @@ smd(
   {
     pattern: "cpu",
     desc: "To check bot status",
-    category: "general",
+    category: "user",
     filename: __filename,
   },
   async (_0x51c639) => {
