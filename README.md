@@ -4,7 +4,7 @@
 
 ### SETUP
 <center>
-<a href="https://github.com/Astropeda/Asta-Md/fork"><img title="ASTA-MD" src="https://img.shields.io/badge/FORK ASTA-MD-h?color=black&style=for-the-badge&logo=stackshare"></a>  <a href="https://serene-beach-54692-d5c00ba4412f.herokuapp.com/"><img title="SCAN QR" src="https://img.shields.io/badge/SCAN QR SERVER 2-h?color=black&style=for-the-badge&logo=msi"></a>   <a href="https://asta-web-scan.onrender.com"><img title="SCAN QR" src="https://img.shields.io/badge/SCAN QR SERVER 1-h?color=black&style=for-the-badge&logo=msi"></a>  <a href=""><img title="SCAN QR" src="https://img.shields.io/badge/PARING CODE 1-h?color=black&style=for-the-badge&logo=msi"></a>  <a href=""><img title="SCAN QR" src="https://img.shields.io/badge/PARING CODE 2-h?color=black&style=for-the-badge&logo=msi"></a>
+<a href="https://github.com/Astropeda/Asta-Md/fork"><img title="ASTA-MD" src="https://img.shields.io/badge/FORK ASTA-MD-h?color=black&style=for-the-badge&logo=stackshare"></a>  <a href="https://serene-beach-54692-d5c00ba4412f.herokuapp.com/"><img title="SCAN QR" src="https://img.shields.io/badge/SCAN QR SERVER 1-h?color=black&style=for-the-badge&logo=msi"></a>   <a href="https://asta-web-scan.onrender.com"><img title="SCAN QR" src="https://img.shields.io/badge/SCAN QR SERVER 2-h?color=black&style=for-the-badge&logo=msi"></a>  <a href="https://replit.com/@astromedia0010/Asta-Paring-Code"><img title="SCAN QR" src="https://img.shields.io/badge/PARING CODE 1-h?color=black&style=for-the-badge&logo=msi"></a>  <a href=""><img title="SCAN QR" src="https://img.shields.io/badge/PARING CODE 2-h?color=black&style=for-the-badge&logo=msi"></a>
 </center>
 
 ### ASTA Deploy Methods
