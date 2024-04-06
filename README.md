@@ -19,4 +19,3 @@
  ### Support Channel
 
 <a href="https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z"><img title="ASTA-MD Deploy Glitch" src="https://img.shields.io/badge/WHATSAPP CHANNEL-h?color=black&style=for-the-badge&logo=whatsapp"></a>
-
