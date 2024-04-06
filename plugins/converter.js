@@ -63,7 +63,7 @@ smd({
     let _0x3d0871 = {
       pack: _0x47c982,
       author: _0x20f704,
-      type: StickerTypes.FULL,
+      type: StickerTypes,
       quality: 10
     };
     await generateSticker(_0x471740, _0x3ab776, _0x3d0871);
