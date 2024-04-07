@@ -23,7 +23,7 @@
     "BOT_NAME": {
       "description": " NAME FOR BOT",
       "required" :false,    
-      "value": "sᴜʜᴀɪʟ-ᴍᴅ"
+      "value": "Asta-Md"
     }, 
     "PREFIX": {
       "description": "Enter your desired prefix for bot. you can set `all | . | .!*`",
@@ -114,7 +114,7 @@
     },
     "PACK_NAME": {
       "description": "Put Sticker Pack_Name.",
-      "value": "Suhail Md",
+      "value": "Asta Md",
       "required": false 
     },
     "PACK_AUTHER": {
