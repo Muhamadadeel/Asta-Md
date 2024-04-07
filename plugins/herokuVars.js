@@ -10,10 +10,6 @@ const DB = require("../lib/scraper");
 const simpleGit = require("simple-git");
 const git = simpleGit();
 const fs = require("fs");
-
-if (!fs.existsSync("./.git")) {
-  throw "GIT NOT WORKING";
-}
 try {
   const Heroku = require("heroku-client");
   let updateConfig = () => {
