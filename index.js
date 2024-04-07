@@ -1,1 +1,17 @@
-const _0x5a8ebe=_0x561e;(function(_0x3639c3,_0x15bada){const _0x1aeac5=_0x561e,_0x106a79=_0x3639c3();while(!![]){try{const _0x3fbb18=-parseInt(_0x1aeac5(0x149))/0x1*(-parseInt(_0x1aeac5(0x141))/0x2)+-parseInt(_0x1aeac5(0x137))/0x3*(parseInt(_0x1aeac5(0x146))/0x4)+-parseInt(_0x1aeac5(0x148))/0x5+-parseInt(_0x1aeac5(0x142))/0x6+parseInt(_0x1aeac5(0x144))/0x7+-parseInt(_0x1aeac5(0x14a))/0x8+-parseInt(_0x1aeac5(0x147))/0x9*(-parseInt(_0x1aeac5(0x13f))/0xa);if(_0x3fbb18===_0x15bada)break;else _0x106a79['push'](_0x106a79['shift']());}catch(_0x3c52af){_0x106a79['push'](_0x106a79['shift']());}}}(_0x2217,0xe37e0));function _0x561e(_0x232979,_0x5ba4c6){const _0x221750=_0x2217();return _0x561e=function(_0x561ee2,_0x9f30e2){_0x561ee2=_0x561ee2-0x137;let _0xea3b40=_0x221750[_0x561ee2];return _0xea3b40;},_0x561e(_0x232979,_0x5ba4c6);}const bot=require(__dirname+_0x5a8ebe(0x13c)),{VERSION}=require(__dirname+_0x5a8ebe(0x13b)),start=async()=>{const _0xff48f9=_0x5a8ebe;Debug[_0xff48f9(0x13e)](_0xff48f9(0x145)+VERSION);try{await bot[_0xff48f9(0x13d)](),bot[_0xff48f9(0x139)]['info'](_0xff48f9(0x13a)),await bot[_0xff48f9(0x138)][_0xff48f9(0x143)](),await bot['connect']();}catch(_0x20ec92){Debug[_0xff48f9(0x140)](_0x20ec92),start();}};start();function _0x2217(){const _0x34ecaa=['logger','⏳\x20Starting\x20App!','/config','/lib/runner','init','info','100sIRhaT','error','3030IUkiwG','2082840JqqQKs','sync','12130881hAkSWT','Asta\x20','8SETIAc','484758Faawag','7905115YspNBQ','1149KvFqGK','6880920PHNVaA','438378VixZFd','DATABASE'];_0x2217=function(){return _0x34ecaa;};return _0x2217();}
+const bot = require(__dirname + '/lib/runner')
+const { VERSION } = require(__dirname + '/config')
+
+const start = async () => {
+    Debug.info(`Asta ${VERSION}`)
+  try {
+    await bot.init()
+    bot.logger.info('⏳ Starting App!')
+    await bot.DATABASE.sync()
+    await bot.connect()
+  } catch (error) {
+    Debug.error(error);
+    start();
+  }
+}
+start();
+
