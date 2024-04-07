@@ -1,90 +1,93 @@
-const axios = require("axios");
-const fs = require("fs-extra");
-const {
-  exec
-} = require("child_process");
-const {
-  plugins,
-  isUrl,
-  smd,
-  tlang,
-  Config,
-  smdJson,
-  smdBuffer
-} = require("../lib");
-let s_ser = true;
+const { plugins, smd, Config } = require("../lib");
+let senderIsAdmin = true;
+
 smd({
   cmdname: "restart",
   info: "To restart bot",
   type: "tools",
-  fromMe: s_ser,
-  filename: __filename
-}, async _0x514d3c => {
-  const {
-    exec: _0x1912df
-  } = require("child_process");
-  _0x514d3c.reply("Restarting");
-  _0x1912df("pm2 restart all");
+  fromMe: senderIsAdmin,
+  filename: __filename,
+}, async (message) => {
+  const { exec } = require("child_process");
+  message.reply("Restarting");
+  exec("pm2 restart all");
 });
+
 smd({
-   cmdname: "shutdown",
-   info: "To restart bot",
-   type: "tools",
-   fromMe: s_ser,
-   filename: __filename
- }, async _0x514d3c => {
-   const {
-     exec: _0x1912df
-   } = require("child_process");
-   _0x514d3c.reply("Shutting Down");
-   _0x1912df("pm2 stop all");
- });
+  cmdname: "shutdown",
+  info: "To restart bot",
+  type: "tools",
+  fromMe: senderIsAdmin,
+  filename: __filename,
+}, async (message) => {
+  const { exec } = require("child_process");
+  message.reply("Shutting Down");
+  exec("pm2 stop all");
+});
+
 smd({
   cmdname: "plugins",
   alias: ["plugin"],
   type: "owner",
   info: "Shows list of all externally installed modules",
-  fromMe: s_ser,
+  fromMe: senderIsAdmin,
   filename: __filename,
-  use: "<name>"
-}, async (_0x2a10d6, _0x2420b0) => {
+  use: "<name>",
+}, async (message, pluginName) => {
   try {
-    let _0x4e5e2e = await plugins(_0x2a10d6, "plugins", _0x2420b0);
-    return await _0x2a10d6.send(!_0x4e5e2e ? "*_There's no plugin install in " + Config.botname + "_*" : !_0x2420b0 ? "*All Installed Modules are:-*\n\n" + _0x4e5e2e : _0x4e5e2e);
-  } catch (_0x21e335) {
-    _0x2a10d6.error(_0x21e335 + " \n\ncmdName plugins\n");
+    let pluginsList = await plugins(message, "plugins", pluginName);
+    return await message.send(
+      !pluginsList
+        ? `*_There's no plugin install in ${Config.botname}_*`
+        : !pluginName
+        ? `*All Installed Modules are:-*\n\n${pluginsList}`
+        : pluginsList
+    );
+  } catch (error) {
+    message.error(`${error} \n\ncmdName plugins\n`);
   }
 });
+
 smd({
   pattern: "remove",
   alias: ["uninstall"],
   type: "owner",
   info: "removes external modules.",
-  fromMe: s_ser,
+  fromMe: senderIsAdmin,
   filename: __filename,
-  use: "<plugin name>"
-}, async (_0x1510c9, _0x40e763) => {
-  if (!_0x40e763) {
-    return await _0x1510c9.reply("*_Uhh Please, Provide Me Plugin Name_*");
+  use: "<plugin name>",
+}, async (message, pluginName) => {
+  if (!pluginName) {
+    return await message.reply("*_Uhh Please, Provide Me Plugin Name_*");
   }
-  if (_0x40e763 === "alls") {
-    return await _0x1510c9.reply(await plugins("remove", "all", __dirname));
+  if (pluginName === "alls") {
+    return await message.reply(await plugins("remove", "all", __dirname));
   }
   try {
-    await _0x1510c9.send(await plugins(_0x1510c9, "remove", _0x40e763, __dirname), {}, "", _0x1510c9);
+    await message.send(
+      await plugins(message, "remove", pluginName, __dirname),
+      {},
+      "",
+      message
+    );
   } catch {}
 });
+
 smd({
   cmdname: "install",
   type: "owner",
   info: "Installs external modules..",
-  fromMe: s_ser,
+  fromMe: senderIsAdmin,
   filename: __filename,
-  use: "<gist url>"
-}, async (_0xf71b5c, _0x2bdd09) => {
-  let _0x2b0828 = _0x2bdd09 ? _0x2bdd09 : _0xf71b5c.quoted ? _0xf71b5c.quoted.text : "";
-  if (!_0x2b0828.toLowerCase().includes("https")) {
-    return await _0xf71b5c.send("*_Uhh Please, Provide Me Plugin Url_*");
+  use: "<gist url>",
+}, async (message, pluginUrl) => {
+  let url = pluginUrl
+    ? pluginUrl
+    : message.quoted
+    ? message.quoted.text
+    : "";
+  if (!url.toLowerCase().includes("https")) {
+    return await message.send("*_Uhh Please, Provide Me Plugin Url_*");
   }
-  await _0xf71b5c.reply(await plugins(_0xf71b5c, "install", _0x2b0828, __dirname));
+  await message.reply(await plugins(message, "install", url, __dirname));
 });
