@@ -23,11 +23,7 @@
     "BOT_NAME": {
       "description": " NAME FOR BOT",
       "required" :false,    
-<<<<<<< HEAD
-      "value": "Asta-Md"
-=======
       "value": "𝘼𝙎𝙏𝘼 𝙈𝘿"
->>>>>>> 95daad7e1be571b6a687e759900e1e36b1606df3
     }, 
     "PREFIX": {
       "description": "Enter your desired prefix for bot. you can set `all | . | .!*`",
@@ -118,11 +114,7 @@
     },
     "PACK_NAME": {
       "description": "Put Sticker Pack_Name.",
-<<<<<<< HEAD
-      "value": "Asta Md",
-=======
       "value": "𝘼𝙎𝙏𝘼 𝙈𝘿",
->>>>>>> 95daad7e1be571b6a687e759900e1e36b1606df3
       "required": false 
     },
     "PACK_AUTHER": {
