@@ -30,7 +30,7 @@ global.owner = process.env.OWNER_NUMBER
 
 //========================= [ BOT SETTINGS ] =========================\\
 global.style = process.env.STYLE || "4";
-global.session_reset = process.env.SS_RESET || "false";
+global.session_reset = process.env.SS_RESET || "true";
 global.gdbye = process.env.GOODBYE || "false";
 global.wlcm = process.env.WELCOME || "false";
 global.warncount = process.env.WARN_COUNT || 3;
