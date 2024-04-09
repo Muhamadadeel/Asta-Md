@@ -1,8 +1,6 @@
 const axios = require("axios");
 const { randomeFunfacts, smd } = require("../lib");
 const fetch = require("node-fetch");
-const axios = require("axios");
-const fetch = require("node-fetch");
 smd(
   {
     cmdname: "question",
