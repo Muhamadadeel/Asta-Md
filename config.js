@@ -1,12 +1,10 @@
 const fs = require("fs-extra");
 if (fs.existsSync(".env"))
   require("dotenv").config({ path: __dirname + "/.env" });
-
-//═══════[Required Variables]════════\\
 global.audio = "";
 global.video = "";
 global.port = process.env.PORT;
-global.appUrl = process.env.APP_URL || ""; // put your app url here,
+global.appUrl = process.env.APP_URL || "";
 global.email = "astromedia0010@gmail.com";
 global.location = "Lahore,Pakistan.";
 global.mongodb = process.env.MONGODB_URI || "";
@@ -15,28 +13,21 @@ global.blockJids = process.env.BLOCK_JID || "null";
 global.DATABASE_URL = process.env.DATABASE_URL || "";
 global.timezone = process.env.TZ || process.env.TIME_ZONE || "Asia/Karachi";
 global.github = process.env.GITHUB || "https://github.com/Astropeda/Asta-Md";
-global.gurl =
-  process.env.GURL || "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z";
-global.website =
-  process.env.GURL || "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z";
+global.gurl = process.env.GURL || "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z";
+global.website = process.env.GURL || "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z";
 global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "";
 global.devs = "2348039607375";
-global.sudo = process.env.SUDO
-  ? process.env.SUDO.replace(/[\s+]/g, "")
-  : "2348039607375";
-global.owner = process.env.OWNER_NUMBER
-  ? process.env.OWNER_NUMBER.replace(/[\s+]/g, "")
-  : "2348039607375";
+global.sudo = process.env.SUDO || "2348039607375";
+global.owner = process.env.OWNER_NUMBER || "2348039607375";
 
-//========================= [ BOT SETTINGS ] =========================\\
-global.style = process.env.STYLE || "4";
+global.style = process.env.STYLE || "3";
 global.session_reset = process.env.SS_RESET || "true";
 global.gdbye = process.env.GOODBYE || "false";
 global.wlcm = process.env.WELCOME || "false";
 global.warncount = process.env.WARN_COUNT || 3;
 global.disablepm = process.env.DISABLE_PM || "false";
-(global.disablegroup = process.env.DISABLE_GROUPS || "false"),
-  (global.MsgsInLog = process.env.MSGS_IN_LOG || "false");
+global.disablegroup = process.env.DISABLE_GROUPS || "false",
+global.MsgsInLog = process.env.MSGS_IN_LOG || "false";
 global.userImages = process.env.USER_IMAGES || "";
 global.waPresence = process.env.WAPRESENCE || "online";
 global.readcmds = process.env.READ_COMMAND || "false";
