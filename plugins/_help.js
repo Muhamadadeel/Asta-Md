@@ -438,7 +438,7 @@ smd({
     const _0x1eb88a = _0x460b55[_0x210c92(396)][_0x210c92(374)].split("\n");
     let _0x56b5d3 = parseInt(_0x2fcc6c[_0x210c92(383)](" ")[0]);
     if (!isNaN(_0x56b5d3)) {
-      if (_0x1eb88a[_0x210c92(367)] > 30 && _0x1eb88a[1][_0x210c92(362)]("SUHAIL-MD_FANCY_TEXT")) {
+      if (_0x1eb88a[_0x210c92(367)] > 30 && _0x1eb88a[1][_0x210c92(362)]("ASTA-MD_FANCY_TEXT")) {
         var _0x7b7a13 = _0x1eb88a[_0x210c92(379)](_0x4377cc => _0x4377cc.startsWith(_0x56b5d3 + " "));
         try {
           if (_0x7b7a13) {
