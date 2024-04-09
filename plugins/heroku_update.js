@@ -18,7 +18,6 @@ let updateConfig = () => {
 };
 const heroku = {};
 const DB = require("../lib/scraper");
-const { tlang, name, smd } = require("../lib");
 const simpleGit = require("simple-git");
 const git = simpleGit();
 const Heroku = require("heroku-client");

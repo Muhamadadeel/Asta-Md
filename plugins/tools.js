@@ -2,6 +2,7 @@ let { smd, smdBuffer, Config } = require(global.lib_dir || "../lib");
 let fs = require("fs");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
+let s_ser = true
 smd(
   {
     pattern: "channel",

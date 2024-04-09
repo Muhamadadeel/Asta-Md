@@ -3,8 +3,6 @@ const axios = require("axios");
 const os = require("os");
 const speed = require("performance-now");
 const Config = require("../config");
-const fetch = require("node-fetch");
-const speed = require("performance-now");
 smd(
   {
     cmdname: "test",

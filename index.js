@@ -1,3 +1,4 @@
+// ASTA MD WHATSAPP BOT 2024 
 const bot = require(__dirname + '/lib/runner')
 const { VERSION } = require(__dirname + '/config')
 
