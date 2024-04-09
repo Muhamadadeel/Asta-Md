@@ -1081,7 +1081,7 @@ cmd(
         return _0x5e533c.reply(tlang().group);
       }
       if (!_0x5e533c.isBotAdmin) {
-        return await _0x5e533c.reply("*_I'm Not Admin In This Group, Idiot_*");
+        return await _0x5e533c.reply("*I am not an Administrator*");
       }
       if (!_0x5e533c.isAdmin) {
         return _0x5e533c.reply(tlang().admin);
@@ -1715,7 +1715,7 @@ cmd(
         return _0x118677.reply(tlang().group);
       }
       if (!_0x118677.isBotAdmin) {
-        return await _0x118677.reply("*_I'm Not Admin In This Group, Idiot_*");
+        return await _0x118677.reply("*I am not Administrator Sir!*");
       }
       if (!_0x118677.isAdmin) {
         return _0x118677.reply(tlang().admin);
