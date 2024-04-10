@@ -168,7 +168,6 @@ astro_patch.smd(
       const currentTime = message.time;
       const currentDate = message.date;
       let menuText = `
-  ${displayLoadingScreen}
   ${menuThemeHeader}
   ${menuThemeCommandPrefix} *ᴏᴡɴᴇʀ:* ${Config.ownername}
   ${menuThemeCommandPrefix} *ᴜᴘᴛɪᴍᴇ:* ${runtime(process.uptime())}
