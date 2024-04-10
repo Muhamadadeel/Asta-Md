@@ -50,7 +50,7 @@
     "TZ": {
       "description": "Put TIME_ZONE according to your location",
       "required" :false,    
-      "value": "Asia/Karachi"
+      "value": "Africa/Lagos"
     },  
     "SS_RESET": {
       "description": " Make it 'true' if bot connected but not responed (After deployement!)",
