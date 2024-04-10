@@ -10,16 +10,16 @@ const gitDirPath = path.join(__dirname, '.git');
 
 if (!fs.existsSync(gitDirPath)) {
   try {
-    child_process.execSync('git init', { cwd: __dirname });
+    child_process.execSync('git init', { cwd: __dirname, encoding: 'utf-8' });
     console.log('Git repository initialized and .git directory created successfully.');
   } catch (err) {
-    throw `Error initializing Git repository: ${err}`;
+    console.error(`Error initializing Git repository: ${err.stdout.trim()}`);
+    process.exit(1);
   }
 } else {
   console.log('.git directory already exists.');
 }
 
-// Rest of your code...
 
 const Heroku = require('heroku-client');
 //---------------------------------------------------------------------------
