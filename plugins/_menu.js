@@ -31,7 +31,34 @@ const trend_usage = (() => {
     })(1, 499);
     return dbNumber;
   })();
-
+  export default async function displayLoadingScreen(message, from) {
+    const loadingStages = [
+      "ʟᴏᴀᴅɪɴɢ 《 █▒▒▒▒▒▒▒▒▒▒▒》10%,",
+      "ʟᴏᴀᴅɪɴɢ 《 ████▒▒▒▒▒▒▒▒》30%,",
+      "ʟᴏᴀᴅɪɴɢ 《 ███████▒▒▒▒▒》50%,",
+      "ʟᴏᴀᴅɪɴɢ 《 ██████████▒▒》80%,",
+      "ʟᴏᴀᴅɪɴɢ 《 ████████████》100%,",
+      "ʟᴏᴀᴅɪɴɢ ᴄᴏᴍᴘʟᴇᴛᴇ"
+    ];
+  
+    try {
+      const { key } = await message.sendMessage(from, { text: 'ʟᴏᴀᴅɪɴɢ...' });
+  
+      for (let i = 0; i < loadingStages.length; i++) {
+        await message.relayMessage(from, {
+          protocolMessage: {
+            key: key,
+            type: 14,
+            editedMessage: {
+              conversation: loadingStages[i]
+            }
+          }
+        }, {});
+      }
+    } catch (error) {
+      console.error('Error displaying loading screen:', error);
+    }
+  }
 astro_patch.smd(
   {
     cmdname: "menu",
@@ -141,6 +168,7 @@ astro_patch.smd(
       const currentTime = message.time;
       const currentDate = message.date;
       let menuText = `
+  ${displayLoadingScreen}
   ${menuThemeHeader}
   ${menuThemeCommandPrefix} *ᴏᴡɴᴇʀ:* ${Config.ownername}
   ${menuThemeCommandPrefix} *ᴜᴘᴛɪᴍᴇ:* ${runtime(process.uptime())}

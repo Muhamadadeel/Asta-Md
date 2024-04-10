@@ -17,95 +17,6 @@ let updateConfig = () => {
   }
 };
 const heroku = {};
-const DB = require("../lib/scraper");
-const { tlang, name } = require("../lib");
-const simpleGit = require("simple-git");
-const git = simpleGit();
-const Heroku = require("heroku-client");
-//---------------------------------------------------------------------------
-
-async function updateHerokuApp() {
-  const heroku = new Heroku({ token: process.env.HEROKU_API_KEY });
-  await git.fetch();
-  const commits = await git.log(["main..origin/main"]);
-  if (commits.total === 0) {
-    return "Your Bot is Running on Latest Version.";
-  } else {
-    const app = await heroku.get(`/apps/${process.env.HEROKU_APP_NAME}`);
-    const gitUrl = app.git_url.replace(
-      "https://",
-      `https://api:${process.env.HEROKU_API_KEY}@`
-    );
-    try {
-      await git.addRemote("heroku", gitUrl);
-    } catch (e) {
-      console.log("Heroku remote adding error");
-    }
-    await git.push("heroku", "main");
-    return "*_Bot Updated SuccessFully_*\n*_Wait While Restarting_*";
-  }
-}
-//---------------------------------------------------------------------------
-smd(
-  {
-    cmdname: "update",
-    shortcut: ["ud"],
-    infocmd: "Shows repo's refreshed commits.",
-    category: "heroku",
-    filename: __filename,
-  },
-  async (Void, citel, text, { isCreator }) => {
-    if (!isCreator) return citel.reply(tlang().owner);
-    let commits = await DB.syncgit();
-    if (commits.total === 0)
-      return await citel.reply(
-        `*_HEY_* *_${name.ownername}_* *_Your Bot Is_*\n*_Running on Latest Version_*`
-      );
-    let update = await DB.sync();
-    await Void.sendMessage(citel.chat, { text: update }, { quoted: citel });
-
-    if (text == "all") {
-      citel.reply(`*_Started Updating You Bot..._*\n*_Please Wait..._*`);
-      const update = await updateHerokuApp();
-      return await citel.reply(update);
-    } else return;
-  }
-);
-
-//---------------------------------------------------------------------------
-//                  UPDATE COMMANDS
-//---------------------------------------------------------------------------
-if (name.HEROKU_APP_NAME && name.HEROKU_API_KEY) {
-  smd(
-    {
-      cmdname: "updatebot",
-      shortcut: ["ubot"],
-      infocmd: "Shows repo's refreshed commits.",
-      category: "heroku",
-      filename: __filename,
-    },
-    async (Void, citel, text, { isCreator }) => {
-      if (!isCreator) return await citel.reply(tlang().owner);
-      let commits = await DB.syncgit();
-      if (commits.total === 0)
-        return await citel.reply(
-          `*_HEY_* *_${Config.ownername}_* *_Your Bot Is_*\n*_Running on Latest Version_*`
-        );
-      let update = await DB.sync();
-      let buttonMessaged = {
-        text: "*Updating Your Bot...!* \n" + update + "*",
-        footer: "UPDATE",
-        headerType: 4,
-      };
-      await Void.sendMessage(citel.chat, buttonMessaged);
-      await require("simple-git")().reset("hard", ["HEAD"]);
-      await require("simple-git")().pull();
-      await citel.send(`*_Bot SuccessFully Updated_*`);
-      process.exit(0);
-    }
-  );
-}
-
 heroku.addvar = async (_0xd07de3, _0x48d352) => {
   try {
     const _0x5a040c = {
@@ -322,7 +233,7 @@ smd(
     alias: ["mods", "gsudo"],
     info: "get sudo users list.",
     fromMe: true,
-    type: "heroku",
+    type: "tools",
     filename: __filename,
   },
   async (_0xf78029) => {
@@ -347,7 +258,7 @@ smd(
     }
     let _0x762894 = (
       "\n   👤 *" +
-      (Config.botname ? Config.botname : "ASTA-MD ") +
+      (Config.botname ? Config.botname : "SUHAIL-MD ") +
       " MODS* 👤\n   \n" +
       _0x10bccf
     ).trim();
@@ -368,7 +279,7 @@ smd(
     alias: ["ssudo", "setmod"],
     fromMe: true,
     desc: "Make sudo to a user",
-    category: "heroku",
+    category: "tools",
     filename: __filename,
   },
   async (_0x61d6ff) => {
@@ -418,7 +329,7 @@ smd(
     alias: ["dsudo", "delmod"],
     fromMe: true,
     desc: "delete sudo user.",
-    category: "heroku",
+    category: "tools",
     filename: __filename,
   },
   async (_0xd149b4) => {
@@ -470,7 +381,7 @@ smd(
     alias: ["getallvar", "allvars"],
     desc: "To get All  Heroku Vars",
     fromMe: true,
-    category: "heroku",
+    category: "tools",
     filename: __filename,
   },
   async (_0x301429) => {
@@ -497,7 +408,7 @@ smd(
     pattern: "newvar",
     alias: ["addvar", "avar"],
     desc: "To Set Heroku Vars",
-    category: "heroku",
+    category: "tools",
     fromMe: true,
     filename: __filename,
   },
@@ -505,7 +416,7 @@ smd(
     try {
       if (!_0x5eb901) {
         return _0x23a9e4.reply(
-          "*Use " + (prefix + _0x5d321d) + " CAPTION:Asta Md*"
+          "*Use " + (prefix + _0x5d321d) + " CAPTION:Suhail Md*"
         );
       }
       const _0x6c193a = _0x5eb901.indexOf(":");
@@ -542,7 +453,7 @@ smd(
   {
     pattern: "getvar",
     desc: "To Get A Heroku Var",
-    category: "heroku",
+    category: "tools",
     fromMe: true,
     filename: __filename,
   },
@@ -584,7 +495,7 @@ smd(
   {
     pattern: "setvar",
     desc: "To Set Heroku Vars",
-    category: "heroku",
+    category: "tools",
     fromMe: true,
     filename: __filename,
   },
