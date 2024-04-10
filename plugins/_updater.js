@@ -5,7 +5,7 @@ const git = simpleGit();
 const fs = require('fs');
 const path = require('path');
 const child_process = require('child_process');
-
+/*
 const gitDirPath = path.join(__dirname, '.git');
 
 if (!fs.existsSync(gitDirPath)) {
@@ -19,6 +19,7 @@ if (!fs.existsSync(gitDirPath)) {
 } else {
   console.log('.git directory already exists.');
 }
+*/
 
 
 const Heroku = require('heroku-client');
