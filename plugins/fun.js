@@ -225,8 +225,6 @@ smd(
     }
   }
 );
-let { smd, smdBuffer, tlang, sleep } = require(global.lib_dir || "../lib");
-let fs = require("fs");
 var sifat = [
   "Fine",
   "Unfriendly",
