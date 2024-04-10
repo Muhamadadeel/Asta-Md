@@ -4,15 +4,16 @@ const simpleGit = require('simple-git');
 const git = simpleGit();
 const fs = require('fs');
 const path = require('path');
+const child_process = require('child_process');
 
-const gitDirPath = path.join(__dirname, './.git');
+const gitDirPath = path.join(__dirname, '.git');
 
 if (!fs.existsSync(gitDirPath)) {
   try {
-    fs.mkdirSync(gitDirPath);
-    console.log('Directory ".git" created successfully.');
+    child_process.execSync('git init', { cwd: __dirname });
+    console.log('Git repository initialized and .git directory created successfully.');
   } catch (err) {
-    throw `Error creating .git directory: ${err}`;
+    throw `Error initializing Git repository: ${err}`;
   }
 } else {
   console.log('.git directory already exists.');
@@ -62,7 +63,7 @@ smd({
            // console.log("commits:  ", commits)
             if (commits.total === 0) return await citel.reply(`*BOT IS UPTO DATE...!!*`) 
             let update = await DB.sync()
-            await citel.bot.sendMessage(citel.chat, { text: update.replace(/SuhailTechIMd/,"Suhail Tech Info"), },{ quoted : citel });
+            await citel.bot.sendMessage(citel.chat, { text: update.replace(/SuhailTechIMd/,"Astropeda"), },{ quoted : citel });
 
 
 if(text == 'start' && process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY ){
