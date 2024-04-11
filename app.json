@@ -80,7 +80,7 @@
     "MSGS_IN_LOG": {
       "description": "Fill the value -true- if you want to see Messages in logs.",
       "required" :false,
-      "value": "false"
+      "value": "true"
     },
     "READ_MESSAGE": {
       "description": "Fill the value true if you want bot to read all messages.",
