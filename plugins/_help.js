@@ -118,21 +118,21 @@ astro_patch.cmd({
     await _0xcfb3ed.error(_0x2252fb + "\nCommand:delcmd", _0x2252fb);
   }
 });
-astro_patch.smd({
-  pattern: "ping",
-  desc: "To check ping",
-  category: "user",
-  filename: __filename
-}, async _0x2c4176 => {
-  var _0x2d08de = new Date().getTime();
-  const {
-    key: _0x598979
-  } = await _0x2c4176.reply("*Testing Ping!!!*");
-  var _0x41515f = new Date().getTime();
-  return await _0x2c4176.send("*Pong*\n *" + (_0x41515f - _0x2d08de) + " ms* ", {
-    edit: _0x598979
-  }, "", _0x2c4176);
-});
+astro_patch.smd(
+  {
+    pattern: "ping",
+    desc: "To check ping",
+    category: "user",
+    filename: __filename,
+  },
+  async (context) => {
+    const startTime = new Date().getTime();
+    const { key: messageKey } = await context.reply("*𝖕𝖎𝖓𝖌𝖎𝖓𝖌...*");
+    const endTime = new Date().getTime();
+    const pingTime = endTime - startTime;
+    await context.send(`*𝓛𝓪𝓽𝓮𝓷𝓬𝔂〉〉〉*\n *${pingTime} 𝖒𝖘*`, { edit: messageKey }, "", context);
+  }
+);
 astro_patch.cmd({
   pattern: "uptime",
   alias: ["runtime"],
