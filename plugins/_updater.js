@@ -1,7 +1,6 @@
 const fs = require("fs");
 const Config = require(__dirname + "/../config.js");
 const axios = require("axios");
-const fs = require("fs-extra");
 const { smd, bot } = require("../lib");
 let s_ser = true;
 smd(
@@ -15,13 +14,6 @@ smd(
   },
   async (message, args) => {
     try {
-      try {
-        bot =
-          (await BotModel.findOne({ id: "bot_" + sessionId })) ||
-          (await BotModel.new({ id: "bot_" + sessionId }));
-      } catch {
-        bot = false;
-      }
 
       let pluginNames = [];
       let pluginUrls = {};
@@ -29,7 +21,7 @@ smd(
 
       try {
         const { data: response } = await axios.get(
-          "https://gist.github.com/SuhailTechInfo/185b7e3296e0104ab211daa5ea11e7dc/raw"
+          "https://gist.githubusercontent.com/Astropeda/c87ac3fa5ce0017deb8080544de9bd26/raw"
         );
         pluginUrls = {
           ...(typeof response.external === "object" ? response.external : {}),
@@ -115,7 +107,7 @@ smd(
           }
         }
 
-        log("\\n✅ External Plugins Installed!");
+        return await message.send("`ASTA MD UPDATE WAS SUCCESSFULL ✅`");
       } else {
         return await message.send(
           "*Auto Updated Failed, Unable to Download Update Please Manually Do It*"
