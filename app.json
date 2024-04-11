@@ -52,11 +52,6 @@
       "required" :false,    
       "value": "Africa/Lagos"
     },  
-    "SS_RESET": {
-      "description": " Make it 'true' if bot connected but not responed (After deployement!)",
-      "required" :false,    
-      "value": "false"
-    },     
     "READ_COMMAND": {
       "description": " Read bot cmds",
       "required" :false,    
