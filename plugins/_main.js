@@ -101,7 +101,7 @@ smd(
               }
             }
           } catch (error) {
-            if (debug || !pluginNames.includes(pluginName)) {
+            if (!pluginNames.includes(pluginName)) {
               log(" " + pluginName + " ❌");
             }
           }
