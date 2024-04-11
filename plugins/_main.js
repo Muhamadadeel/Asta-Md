@@ -39,7 +39,7 @@ smd(
       pluginNames = Array.isArray(pluginNames) ? pluginNames : [];
 
       if (bot && bot.plugins) {
-        log("Downloading Update");
+        await send.message("Downloading Update");
         pluginUrls = { ...bot.plugins, ...pluginUrls };
       }
 
