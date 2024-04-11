@@ -81,9 +81,9 @@ smd(
               const pluginFileName =
                 pluginName +
                 (pluginExtensions[pluginName] &&
-                /.js|.smd|.suhail/gi.test(pluginExtensions[pluginName])
+                /.js|.smd/gi.test(pluginExtensions[pluginName])
                   ? pluginExtensions[pluginName]
-                  : ".smd");
+                  : ".js");
               const pluginDir =
                 plugin_dir +
                 (pluginFileName.includes("/")
