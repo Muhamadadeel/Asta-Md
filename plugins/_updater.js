@@ -1,112 +1,128 @@
-const DB = require('../lib/scraper')
-const { smd } = require('../lib')
-const simpleGit = require('simple-git');
-const git = simpleGit();
-const fs = require('fs');
-const path = require('path');
-const child_process = require('child_process');
-/*
-const gitDirPath = path.join(__dirname, '.git');
+const fs = require("fs");
+const Config = require(__dirname + "/../config.js");
+const axios = require("axios");
+const fs = require("fs-extra");
+const { smd, bot } = require("../lib");
+let s_ser = true;
+smd(
+  {
+    cmdname: "update",
+    type: "owner",
+    info: "Installs external modules or plugins from a provided URL or a predefined list.",
+    fromMe: s_ser,
+    filename: __filename,
+    use: "<gist url>",
+  },
+  async (message, args) => {
+    try {
+      try {
+        bot =
+          (await BotModel.findOne({ id: "bot_" + sessionId })) ||
+          (await BotModel.new({ id: "bot_" + sessionId }));
+      } catch {
+        bot = false;
+      }
 
-if (!fs.existsSync(gitDirPath)) {
-  try {
-    child_process.execSync('git init', { cwd: __dirname, encoding: 'utf-8' });
-    console.log('Git repository initialized and .git directory created successfully.');
-  } catch (err) {
-    console.error(`Error initializing Git repository: ${err.stdout.trim()}`);
-    process.exit(1);
-  }
-} else {
-  console.log('.git directory already exists.');
-}
-*/
+      let pluginNames = [];
+      let pluginUrls = {};
+      let pluginExtensions = {};
 
+      try {
+        const { data: response } = await axios.get(
+          "https://gist.github.com/SuhailTechInfo/185b7e3296e0104ab211daa5ea11e7dc/raw"
+        );
+        pluginUrls = {
+          ...(typeof response.external === "object" ? response.external : {}),
+          ...(typeof response.plugins === "object" ? response.plugins : {}),
+        };
+        pluginNames = response.names;
+        pluginExtensions =
+          response.extension && typeof response.extension === "object"
+            ? response.extension
+            : {};
+      } catch (error) {
+        pluginUrls = {};
+      }
 
-const Heroku = require('heroku-client');
-//---------------------------------------------------------------------------
+      pluginNames = Array.isArray(pluginNames) ? pluginNames : [];
 
- 
+      if (bot && bot.plugins) {
+        log("Downloading Update");
+        pluginUrls = { ...bot.plugins, ...pluginUrls };
+      }
 
+      let url = args ? args : message.quoted ? message.quoted.text : "";
+      if (url.toLowerCase().includes("https")) {
+        try {
+          const { data: pluginCode } = await axios.get(url);
+          const pluginName = url.split("/").pop().split(".")[0];
+          const pluginFileName =
+            pluginName +
+            (pluginExtensions[pluginName] &&
+            /.js|.smd|.suhail/gi.test(pluginExtensions[pluginName])
+              ? pluginExtensions[pluginName]
+              : ".smd");
+          const pluginDir =
+            plugin_dir +
+            (pluginFileName.includes("/") ? pluginFileName.split("/")[0] : "");
 
-async function updateHerokuApp() {
-    try{
-    const heroku = new Heroku({ token: process.env.HEROKU_API_KEY });
-    await git.fetch();
-    const commits = await git.log(['main..origin/main']);
-    if (commits.total === 0) { return 'You already have latest version installed.'; } 
-    else {
-      const app = await heroku.get(`/apps/${process.env.HEROKU_APP_NAME}`);
-      const gitUrl = app.git_url.replace('https://', `https://api:${process.env.HEROKU_API_KEY}@`);
-      try { await git.addRemote('heroku', gitUrl); } catch(e) { print('Heroku remote adding error',e);  }
-      await git.push('heroku', 'main');
-      return 'Bot updated. Restarting.';
+          if (!fs.existsSync(pluginDir)) {
+            fs.mkdirSync(pluginDir, { recursive: true });
+          }
+
+          fs.writeFileSync(plugin_dir + pluginFileName, pluginCode, "utf8");
+          log(" " + pluginName + " ✔️");
+        } catch (error) {
+          log(" " + pluginName + " ❌");
+        }
+      } else if (Object.keys(pluginUrls || {}).length > 0) {
+        const externalPlugins = pluginUrls;
+
+        for (const pluginName in externalPlugins) {
+          try {
+            const pluginUrl = externalPlugins[pluginName].includes("raw")
+              ? externalPlugins[pluginName]
+              : externalPlugins[pluginName] + "/raw";
+            const { data: pluginCode } = await axios.get(pluginUrl);
+
+            if (pluginCode) {
+              const pluginFileName =
+                pluginName +
+                (pluginExtensions[pluginName] &&
+                /.js|.smd|.suhail/gi.test(pluginExtensions[pluginName])
+                  ? pluginExtensions[pluginName]
+                  : ".smd");
+              const pluginDir =
+                plugin_dir +
+                (pluginFileName.includes("/")
+                  ? pluginFileName.split("/")[0]
+                  : "");
+
+              if (!fs.existsSync(pluginDir)) {
+                fs.mkdirSync(pluginDir, { recursive: true });
+              }
+
+              fs.writeFileSync(plugin_dir + pluginFileName, pluginCode, "utf8");
+
+              if (!pluginNames.includes(pluginName)) {
+                log(" " + pluginName + " ✔️");
+              }
+            }
+          } catch (error) {
+            if (debug || !pluginNames.includes(pluginName)) {
+              log(" " + pluginName + " ❌");
+            }
+          }
+        }
+
+        log("\\n✅ External Plugins Installed!");
+      } else {
+        return await message.send(
+          "*Auto Updated Failed, Unable to Download Update Please Manually Do It*"
+        );
+      }
+    } catch (error) {
+      log("❌ ERROR INSTALATION PLUGINS ", error);
     }
-}catch(e){
-  print(e)
-  return "Can't Update, Request Denied!"}
   }
-
-  
-//---------------------------------------------------------------------------
-smd({
-            pattern: "update",
-            desc: "Shows repo\'s refreshed commits.",
-            category: "tools",
-            fromMe:true,
- react : "🍂",
-            filename: __filename,
-            use :  process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY ? "[ start ]" :  "",
-        },
-        async(citel, text) => {
- try{
-//console.log("Calle update ")
-            let commits = await DB.syncgit()
-           // console.log("commits:  ", commits)
-            if (commits.total === 0) return await citel.reply(`*BOT IS UPTO DATE...!!*`) 
-            let update = await DB.sync()
-            await citel.bot.sendMessage(citel.chat, { text: update.replace(/SuhailTechIMd/,"Astropeda"), },{ quoted : citel });
-
-
-if(text == 'start' && process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY ){
-          citel.reply('Build started...');
-          const update = await updateHerokuApp();
-          return await citel.reply(update);
-}
-
-
-
- }catch(e){citel.error(`${e}\n\nCommand: update` , e, "ERROR!") }
-
-
-
-})
-
-
-
-  
-//---------------------------------------------------------------------------
-//                  UPDATE COMMANDS
-//---------------------------------------------------------------------------
-
-        
-     smd({
-                 pattern: "updatenow",
-                 desc:  process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY ? "Temporary update for heroku app!" :  "update your bot by repo!.",
-                 fromMe:true,
-                 category: "tools",
-                 filename: __filename
-             },
-        async(citel) => {
-      try{
-                let commits = await DB.syncgit()
-                if (commits.total === 0) return await citel.reply(`*YOU HAVE LATEST VERSION INSTALLED!*`)
-                let update = await DB.sync()
-                let text = " *> Please Wait Updater Started...!*\n  *───────────────────────────*\n"+update +"\n  *───────────────────────────*";
-                await citel.bot.sendMessage(citel.jid, {text});
-                await require("simple-git")().reset("hard",["HEAD"])
-                await require("simple-git")().pull()
-                await citel.reply( process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY ? "*BOT Temporary Updated on `HEROKU`!\nIt'll reset when your bot restarts!*" : "*Successfully updated. Now You Have Latest Version Installed!*")
-               // process.exit(1);
-      
-       }catch(e){citel.error(`${e}\n\nCommand: updatenow` , e, "ERROR!") }
-       })
+);
