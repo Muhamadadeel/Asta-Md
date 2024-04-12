@@ -607,41 +607,40 @@ smd({
     return _0x2ee3dd.error(_0x223ebb + "\n\ncommand: sound", _0x223ebb, false);
   }
 });
+let maher_api = "https://api.maher-zubair.tech/"
 smd({
-  pattern: "tiktok",
-  alias: ["tt", "ttdl"],
-  desc: "Downloads Tiktok Videos Via Url.",
-  category: "downloader",
-  filename: __filename,
-  use: "<add tiktok url.>"
-}, async (_0x3050b9, _0x3dfcd0) => {
-  try {
-    var _0x3f5fb9 = _0x3dfcd0.toLowerCase().includes("doc") ? "document" : _0x3dfcd0.toLowerCase().includes("mp3") ? "audio" : "video";
-    if (!_0x3dfcd0) {
-      return await _0x3050b9.reply("*Uhh Please, Provide me tiktok Video Url*\n*_Ex " + prefix + "tiktok https://www.tiktok.com/@dakwahmuezza/video/7150544062221749531_*");
-    }
-    let _0x149d79 = _0x3dfcd0 ? _0x3dfcd0.split(" ")[0] : "";
-    if (!/tiktok/.test(_0x149d79)) {
-      return await _0x3050b9.reply("*Uhh Please, Give me Valid Tiktok Video Url!*");
-    }
-    var _0x3200a7 = false;
-    try {
-      let _0x410534 = await smdJson(baseApi + "/api/ttdl2?url=" + _0x149d79);
-      _0x3200a7 = _0x410534 && _0x410534?.video?.noWatermark || false;
-    } catch (_0x4f63b7) {
-      let _0x44d97e = await smdJson(baseApi + "/api/musically?url=" + _0x149d79);
-      _0x3200a7 = _0x44d97e && _0x44d97e?.result?.video || false;
-    }
-    if (_0x3200a7) {
-      return await _0x3050b9.send(_0x3200a7, {
-        caption: Config.caption
-      }, _0x3f5fb9, _0x3050b9);
-    } else {
-      return await _0x3050b9.reply("Error While Downloading Your Video");
-    }
-  } catch (_0x336a8b) {
-    return _0x3050b9.error(_0x336a8b + "\n\ncommand: tiktok", _0x336a8b);
-  }
+ pattern: "tiktok",
+ alias: ["tt", "ttdl"],
+ desc: "Downloads Tiktok Videos Via Url.",
+ category: "downloader",
+ filename: __filename,
+ use: "<add tiktok url.>"
+}, async (message, url) => {
+ try {
+   var format = url.toLowerCase().includes("doc") ? "document" : url.toLowerCase().includes("mp3") ? "audio" : "video";
+   if (!url) {
+     return await message.reply(`*Uhh Please, Provide me tiktok Video Url*\n*_Ex ${prefix}tiktok https://vm.tiktok.com/ZMMxTk5qr/_*`);
+   }
+   let videoUrl = url ? url.split(" ")[0] : "";
+   if (!/tiktok/.test(videoUrl)) {
+     return await message.reply("*Uhh Please, Give me Valid Tiktok Video Url!*");
+   }
+   var isVideoFound = false;
+   try {
+     let response = await smdJson(`${maher_api}download/tiktok2?url=${videoUrl}`);
+     isVideoFound = response && response?.video?.noWatermark || false;
+   } catch (error) {
+     let response = await smdJson(`${baseApi}/api/musically?url=${videoUrl}`);
+     isVideoFound = response && response?.result?.video || false;
+   }
+   if (isVideoFound) {
+     return await message.send(isVideoFound, { caption: Config.caption }, format, message);
+   } else {
+     return await message.reply("Error While Downloading Your Video");
+   }
+ } catch (error) {
+   return message.error(`${error}\n\ncommand: tiktok`, error);
+ }
 });
 smd({
   pattern: "ringtone",
