@@ -133,6 +133,17 @@ astro_patch.smd(
     await context.send(`*𝓛𝓪𝓽𝓮𝓷𝓬𝔂*\n *${pingTime} 𝖒𝖘*`, { edit: messageKey }, "", context);
   }
 );
+astro_patch.smd(
+  {
+    pattern: "alive",
+    desc: "To check ping",
+    category: "user",
+    filename: __filename,
+  },
+  async (message) => {
+    await context.send(`*ASTA MD STILL ALIVE*);
+  }
+);
 astro_patch.cmd({
   pattern: "uptime",
   alias: ["runtime"],
