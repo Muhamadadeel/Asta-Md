@@ -1,7 +1,6 @@
 let maher_api = "https://api.maher-zubair.tech/";
-let baseApi =
-  process.env.API_SMD || global.api_smd || "https://api-smd-1.vercel.app";
 const { smd} = require("../lib");
+const axios = require("axios")
 smd(
   {
     pattern: "tiktok",
@@ -11,18 +10,13 @@ smd(
     filename: __filename,
     use: "<add tiktok url.>",
   },
-  async (bot, message, url, { cmdName }) => {
+  async (bot, message, url) => {
     try {
       let videoUrl = url.split(" ")[0];
       if (!/tiktok/.test(videoUrl)) {
-        return await message.send(
-          "*_Please Give Me Valid Tiktok Video Link..!_*"
-        );
+        return await message.send("*`Please Give Me Valid Tiktok Video Link`*");
       }
-
-      let response = await axios.get(
-        `${maher_api}download/tiktok2?url=${encodeURIComponent(videoUrl)}`
-      );
+      let response = await axios.get(`${maher_api}download/tiktok2?url=${encodeURIComponent(videoUrl)}`);
       const data = response.data;
       const video = data.result.url.nowm;
       await message.send("*_Downloading Your Video Without WaterMark..._*");
