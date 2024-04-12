@@ -1,5 +1,4 @@
 const fs = require("fs");
-const Config = require(__dirname + "/../config.js");
 const axios = require("axios");
 const { smd, bot } = require("../lib");
 let s_ser = true;
