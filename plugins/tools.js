@@ -2,24 +2,26 @@ let { smd, smdBuffer} = require(global.lib_dir || "../lib");
 let fs = require("fs");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
-const Config = require("../config")
+const Config = require("../config");
+const { react } = require("../lib/Asta");
 let s_ser = true;
 smd(
   {
     pattern: "channel",
     desc: "To check ping",
+    react: "🗨️",
     category: "user",
     filename: __filename,
   },
   async (message) => {
-    await message.send(`
-𝘼𝙎𝙏𝘼 𝙈𝘿 𝘾𝙃𝘼𝙉𝙉𝙀𝙇 𝙎𝙐𝙋𝙋𝙊𝙍𝙏\n\n
-_ʜᴇʏ ʜᴇʀᴇ's ᴏᴜʀ ᴄʜᴀɴɴᴇʟ ʟɪɴᴋ,
-ᴘʟᴇᴀsᴇ ғᴏʟʟᴏᴡ ᴀɴᴅ sᴜᴘᴘᴏʀᴛ ᴜs
-ᴛᴏ ᴋᴇᴇᴘ ᴛʜɪs ᴘʀᴏᴊᴇᴄᴛ ᴀʟɪᴠᴇ_\n
-*ʟɪɴᴋ:* https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z\n\n
-${Config.botname} *WORKS*
-`);
+    const channelMessage = `𝘼𝙎𝙏𝘼 𝙈𝘿 𝘾𝙃𝘼𝙉𝙉𝙀𝙇 𝙎𝙐𝙋𝙋𝙊𝙍𝙏\n\n _ʜᴇʏ ʜᴇʀᴇ's ᴏᴜʀ ᴄʜᴀɴɴᴇʟ ʟɪɴᴋ, ᴘʟᴇᴀsᴇ ғᴏʟʟᴏᴡ ᴀɴᴅ sᴜᴘᴘᴏʀᴛ ᴜs ᴛᴏ ᴋᴇᴇᴘ ᴛʜɪs ᴘʀᴏᴊᴇᴄᴛ ᴀʟɪᴠᴇ_\n *ʟɪɴᴋ:* https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z\n\n ${Config.botname} *WORKS*`;
+
+    const contextInfo = {
+      forwardingScore: 999,
+      isForwarded: true,
+    };
+
+    await message.send(channelMessage, { contextInfo });
   }
 );
 smd(
