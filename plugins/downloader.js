@@ -609,39 +609,110 @@ smd({
 });
 let maher_api = "https://api.maher-zubair.tech/"
 smd({
- pattern: "tiktok",
- alias: ["tt", "ttdl"],
- desc: "Downloads Tiktok Videos Via Url.",
- category: "downloader",
- filename: __filename,
- use: "<add tiktok url.>"
-}, async (message, url) => {
- try {
-   var format = url.toLowerCase().includes("doc") ? "document" : url.toLowerCase().includes("mp3") ? "audio" : "video";
-   if (!url) {
-     return await message.reply(`*Uhh Please, Provide me tiktok Video Url*\n*_Ex ${prefix}tiktok https://vm.tiktok.com/ZMMxTk5qr/_*`);
-   }
-   let videoUrl = url ? url.split(" ")[0] : "";
-   if (!/tiktok/.test(videoUrl)) {
-     return await message.reply("*Uhh Please, Give me Valid Tiktok Video Url!*");
-   }
-   var isVideoFound = false;
-   try {
-     let response = await smdJson(`${maher_api}download/tiktok2?url=${videoUrl}`);
-     isVideoFound = response && response?.video?.noWatermark || false;
-   } catch (error) {
-     let response = await smdJson(`${baseApi}/api/musically?url=${videoUrl}`);
-     isVideoFound = response && response?.result?.video || false;
-   }
-   if (isVideoFound) {
-     return await message.send(isVideoFound, { caption: Config.caption }, format, message);
-   } else {
-     return await message.reply("Error While Downloading Your Video");
-   }
- } catch (error) {
-   return message.error(`${error}\n\ncommand: tiktok`, error);
- }
-});
+  pattern: "tiktok",
+  alias: ["tt", "ttdl"],
+  desc: "Downloads Tiktok Videos Via Url.",
+  category: "downloader",
+  filename: __filename,
+  use: "<add tiktok url.>"
+ }, async (bot, message, url, { cmdName }) => {
+  try {
+    let videoUrl = url.split(" ")[0];
+    let option = url.split(" ")[1];
+ 
+    if (option === "nwm") {
+      if (!/tiktok/.test(videoUrl)) {
+        return await message.send("*_Please Give Me Valid Tiktok Video Link..!_*");
+      }
+ 
+      let response = await axios.get(`${maher_api}download/tiktok2?url=${encodeURIComponent(videoUrl)}`);
+      const data = response.data;
+      const videoNoWatermark = data.result.url.nowm;
+ 
+      await message.sent("*_Downloading Your Video Without WaterMark..._*");
+ 
+      let videoMessage = {
+        video: { url: videoNoWatermark },
+        caption: "Tiktok Downloader",
+        headerType: 4,
+        contextInfo: {
+          externalAdReply: {
+            title: "ASTA-MD",
+            body: "ᴛɪᴋᴛᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ",
+            thumbnail: '',
+            mediaType: 4,
+            mediaUrl: "",
+            sourceUrl: ''
+          }
+        }
+      };
+ 
+      await bot.sendMessage(message.chat, videoMessage, { quoted: message });
+    } else if (option === "wm") {
+      if (!/tiktok/.test(videoUrl)) {
+        return await message.send("*_Please Give Me Valid Tiktok Video Link..!_*");
+      }
+ 
+      let response = await axios.get(`${maher_api}download/tiktok2?url=${encodeURIComponent(videoUrl)}`);
+      const data = response.data;
+      const videoWithWatermark = data.result.url.wm;
+ 
+      await message.sent("*_Downloading Your Video With WaterMark..._*");
+ 
+      let videoMessage = {
+        video: { url: videoWithWatermark },
+        caption: "Tiktok Downloader",
+        headerType: 4,
+        contextInfo: {
+          externalAdReply: {
+            title: "ASTA-MD",
+            body: "ᴛɪᴋᴛᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ",
+            thumbnail: '',
+            mediaType: 4,
+            mediaUrl: "",
+            sourceUrl: ''
+          }
+        }
+      };
+ 
+      await bot.sendMessage(message.chat, videoMessage, { quoted: message });
+    } else if (option === "mp3") {
+      if (!/tiktok/.test(videoUrl)) {
+        return await message.send("*_Please Give Me Valid Tiktok Video Link..!_*");
+      }
+ 
+      let response = await axios.get(`${maher_api}download/tiktok2?url=${encodeURIComponent(videoUrl)}`);
+      const data = response.data;
+      const audioUrl = data.result.url.audio;
+ 
+      await message.sent("*_Downloading Your Audio..._*");
+ 
+      let audioMessage = {
+        audio: { url: audioUrl },
+        mimetype: "audio/mpeg",
+       caption: "Tiktok Downloader",
+        headerType: 4,
+        contextInfo: {
+          externalAdReply: {
+            title: "ASTA-MD",
+            body: "ᴛɪᴋᴛᴏᴋ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ",
+            thumbnail: '',
+            mediaType: 4,
+            mediaUrl: "",
+            sourceUrl: ''
+          }
+        }
+      };
+ 
+      await bot.sendMessage(message.chat, audioMessage, { quoted: message });
+    } else {
+      return message.sent(`*_Give Me Command From Below Options_*\n\n*_#1 ${arr} ${prefix}tt <url> nwm_*\n*_#2 ${arr} ${prefix}tt <url> wm_*\n*_#3 ${arr} ${prefix}tt <url> mp3_*`);
+    }
+  } catch (error) {
+    message.sent(`${serror} *_User ${arr} ${sm}${message.sender.split("@")[0]}_*\n*_Command ${arr} ${cmdName}_*\n\n*_Error Occured While Downloading Your Media_*\n_${error}_`, { quoted: message });
+    console.log(error);
+  }
+ });
 smd({
   pattern: "ringtone",
   desc: "Downloads ringtone.",
