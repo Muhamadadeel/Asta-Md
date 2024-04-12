@@ -1,26 +1,24 @@
-let { smd, smdBuffer, Config } = require(global.lib_dir || "../lib");
+let { smd, smdBuffer} = require(global.lib_dir || "../lib");
 let fs = require("fs");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
+const Config = require("../config")
 let s_ser = true;
 smd(
-  { pattern: "channel", 
-  type: "tools", 
-  info: "Asta-MD Support Channels" 
-},
+  {
+    pattern: "channel",
+    desc: "To check ping",
+    category: "user",
+    filename: __filename,
+  },
   async (message) => {
-    try {
-      const channelUrl =
-        "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z";
-      const channelMessage = `here's our channel link, please follow and support us: ${channelUrl}`;
-      await message.send(`
-      Hello ${Config.ownername},
-      Look ${channelMessage}
-      ${channelUrl}
-      `)
-    } catch (error) {
-      message.error(`${error}\n\n${info}\nCommand: channel`, error, false);
-    }
+    await message.send(`
+𝘼𝙎𝙏𝘼 𝙈𝘿 𝘾𝙃𝘼𝙉𝙉𝙀𝙇 𝙎𝙐𝙋𝙋𝙊𝙍𝙏\n\n
+_ʜᴇʏ ʜᴇʀᴇ's ᴏᴜʀ ᴄʜᴀɴɴᴇʟ ʟɪɴᴋ,
+ᴘʟᴇᴀsᴇ ғᴏʟʟᴏᴡ ᴀɴᴅ sᴜᴘᴘᴏʀᴛ ᴜs
+ᴛᴏ ᴋᴇᴇᴘ ᴛʜɪs ᴘʀᴏᴊᴇᴄᴛ ᴀʟɪᴠᴇ_\n
+*ʟɪɴᴋ:* https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z
+`);
   }
 );
 smd(
