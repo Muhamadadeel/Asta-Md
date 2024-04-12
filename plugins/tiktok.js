@@ -1,7 +1,7 @@
 let maher_api = "https://api.maher-zubair.tech/";
 let baseApi =
   process.env.API_SMD || global.api_smd || "https://api-smd-1.vercel.app";
-const { smd, smdJson, prefix, Config } = require("../lib");
+const { smd} = require("../lib");
 smd(
   {
     pattern: "tiktok",
@@ -25,18 +25,12 @@ smd(
       );
       const data = response.data;
       const video = data.result.url.nowm;
-      await message.sent("*_Downloading Your Video Without WaterMark..._*");
-      let videoMessage = {
-        video: { url: video },
-      };
-      await bot.send(message.chat, videoMessage, { quoted: message });
+      await message.send("*_Downloading Your Video Without WaterMark..._*");
+      await bot.send(message.chat, (video = { url: video }), {
+        quoted: message,
+      });
     } catch (error) {
-      message.sent(
-        `${serror} *_User ${arr} ${sm}${
-          message.sender.split("@")[0]
-        }_*\n*_Command ${arr} ${cmdName}_*\n\n*_Error Occured While Downloading Your Media_*\n_${error}_`,
-        { quoted: message }
-      );
+      message.sent(`\n*_Error Occured While Downloading Your Media_*\n_${error}_`);
       console.log(error);
     }
   }
