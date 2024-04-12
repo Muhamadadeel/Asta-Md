@@ -12,16 +12,12 @@ smd(
     try {
       const channelUrl =
         "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z";
-      const channelMessage = `Hey ${message.senderName}, here's our channel link, please follow and support us: ${channelUrl}`;
-      const contextInfo = await message.bot.contextInfo(
-        "Asta Md",
-        "Hello " + message.senderName,
-        await smdBuffer(channelUrl),
-        1,
-        channelUrl,
-        10 // Set to 10 to indicate the message has been forwarded multiple times
-      );
-      message.send(channelMessage, { contextInfo }, "asta", message);
+      const channelMessage = `here's our channel link, please follow and support us: ${channelUrl}`;
+      await message.send(`
+      Hello ${Config.ownername},
+      Look ${channelMessage}
+      ${channelUrl}
+      `)
     } catch (error) {
       message.error(`${error}\n\n${info}\nCommand: channel`, error, false);
     }
