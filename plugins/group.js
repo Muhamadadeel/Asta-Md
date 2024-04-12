@@ -62,97 +62,84 @@ smd(
     }
   }
 );
-smd(
-  {
-    cmdname: "newgc",
-    info: "Create New Group",
-    type: "whatsapp",
-    filename: __filename,
-    use: "<group link.>",
-  },
-  async (_0x1d2f1f, _0x3c558e, { smd: _0x2e7a79, cmdName: _0x49994a }) => {
-    try {
-      if (!_0x1d2f1f.isCreator) {
-        return _0x1d2f1f.reply(tlang().owner);
-      }
-      if (!_0x3c558e) {
-        return await _0x1d2f1f.reply(
-          "*_provide Name to Create new Group!!!_*\n*_Ex: " +
-            (prefix + _0x2e7a79) +
-            " My Name Group @user1,2,3.._*"
-        );
-      }
-      let _0x379d99 = _0x3c558e;
-      if (_0x379d99.toLowerCase() === "info") {
-        return await _0x1d2f1f.send(
-          (
-            "\n  *Its a command to create new Gc*\n  \t```Ex: " +
-            (prefix + cmd) +
-            " My new Group```\n  \n*You also add peoples in newGc*\n  \t```just reply or mention Users```\n  "
-          ).trim()
-        );
-      }
-      let _0x5a5c26 = [_0x1d2f1f.sender];
-      if (_0x1d2f1f.quoted) {
-        _0x5a5c26.push(_0x1d2f1f.quoted.sender);
-      }
-      if (_0x1d2f1f.mentionedJid && _0x1d2f1f.mentionedJid[0]) {
-        _0x5a5c26.push(..._0x1d2f1f.mentionedJid);
-        try {
-          mentionJids.forEach((_0x3e3852) => {
-            var _0x30af68 = _0x3e3852.split("@")[0].trim();
-            _0x379d99 = _0x379d99.replace(new RegExp("@" + _0x30af68, "g"), "");
-          });
-        } catch {}
-      }
-      const _0x37b490 = _0x379d99.substring(0, 60);
-      const _0x417018 = await Suhail.bot.groupCreate(_0x37b490, [..._0x5a5c26]);
-      if (_0x417018) {
-        let _0x2c6495 = await _0x1d2f1f.bot.sendMessage(_0x417018.id, {
-          text: "*_Hey Buddy, Welcome to new Group_*\n" + Config.caption,
-        });
-        try {
-          var _0x3a49e9 = await Suhail.bot.groupInviteCode(_0x417018.id);
-        } catch {
-          var _0x3a49e9 = false;
-        }
-        var _0x2608ab = "https://chat.whatsapp.com/";
-        var _0x2fe2c7 = "" + _0x2608ab + _0x3a49e9;
-        var _0x539d8f = {
-          externalAdReply: {
-            title: "*ASTA*-𝗠𝗗",
-            body: "" + _0x37b490,
-            renderLargerThumbnail: true,
-            thumbnail: log0,
-            mediaType: 1,
-            mediaUrl: _0x2fe2c7,
-            sourceUrl: _0x2fe2c7,
-          },
-        };
-        return await send(
-          _0x1d2f1f,
-          (
-            "*_Hurray, New group created!!!_*\n" +
-            (_0x3a49e9 ? "*_" + _0x2fe2c7 + "_*" : "")
-          ).trim(),
-          {
-            contextInfo: _0x539d8f,
-          },
-          "",
-          _0x2c6495
-        );
-      } else {
-        await _0x1d2f1f.send("*_Can't create new group, Sorry!!_*");
-      }
-    } catch (_0x33d6f3) {
-      await _0x1d2f1f.error(
-        _0x33d6f3 + "\n\ncommand: " + _0x49994a,
-        _0x33d6f3,
-        "*_Can't create new group, Sorry!!_*"
+smd({
+  cmdname: "newgc",
+  info: "Create New Group",
+  type: "whatsapp",
+  filename: __filename,
+  use: "<group link>",
+ }, async (message, args, { smd, cmdName }) => {
+  try {
+    if (!message.isCreator) {
+      return message.reply(tlang().owner);
+    }
+ 
+    if (!args) {
+      return await message.reply(
+        `*_provide Name to Create new Group!!!_*\n*_Ex: ${prefix}${smd} My Name Group @user1,2,3.._*`
       );
     }
+ 
+    let groupName = args;
+ 
+    if (groupName.toLowerCase() === "info") {
+      return await message.send(
+        `\n *Its a command to create new Gc*\n \`\`\`Ex: ${prefix}${cmdName} My new Group\`\`\`\n \n*You also add peoples in newGc*\n \`\`\`just reply or mention Users\`\`\`\n`
+      ).trim();
+    }
+ 
+    let participants = [message.sender];
+ 
+    if (message.quoted) {
+      participants.push(message.quoted.sender);
+    }
+ 
+    if (message.mentionedJid && message.mentionedJid[0]) {
+      participants.push(...message.mentionedJid);
+      try {
+        message.mentionedJid.forEach((jid) => {
+          const userId = jid.split("@")[0].trim();
+          groupName = groupName.replace(new RegExp(`@${userId}`, "g"), "");
+        });
+      } catch {}
+    }
+ 
+    const groupNameTrimmed = groupName.substring(0, 60);
+    const createdGroup = await Suhail.bot.groupCreate(groupNameTrimmed, [...participants]);
+ 
+    if (createdGroup) {
+      let welcomeMessage = await message.bot.sendMessage(createdGroup.id, {
+        text: `*_Hey Buddy, Welcome to new Group_*\n${Config.caption}`,
+      });
+ 
+      try {
+        var groupInviteCode = await Suhail.bot.groupInviteCode(createdGroup.id);
+      } catch {
+        var groupInviteCode = false;
+      }
+ 
+      const baseUrl = "https://chat.whatsapp.com/";
+      const groupInviteLink = `${baseUrl}${groupInviteCode}`;
+      const contextInfo = {
+        externalAdReply: {
+          title: "*ASTA*-𝗠𝗗",
+        },
+      };
+ 
+      return await send(
+        message,
+        `*_Hurray, New group created!!!_*\n${groupInviteCode ? `*_${groupInviteLink}_*` : ""}`.trim(),
+        { contextInfo },
+        "",
+        welcomeMessage
+      );
+    } else {
+      await message.send("*_Can't create new group, Sorry!!_*");
+    }
+  } catch (error) {
+    await message.error(`${error}\n\ncommand: ${cmdName}`, error, "*_Can't create new group, Sorry!!_*");
   }
-);
+ });
 smd(
   {
     pattern: "ginfo",
