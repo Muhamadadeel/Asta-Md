@@ -500,9 +500,9 @@ smd(
       let _0x53eb40 = (
         " *I am " +
         Config.botname +
-        "* \n  *❲❒❳ About:* A Simple WhatsApp Bot, Created By *" +
+        "* \n  *❲❒❳ About:* A Simple WhatsApp Bot, Created By " +
         Config.ownername +
-        "*.\n\n  *❲❒❳ Speed:* " +
+        ".\n\n  *❲❒❳ Speed:* " +
         latensie.toFixed(4) +
         " ms\n  *❲❒❳ Uptime:* " +
         runtime(process.uptime()) +
