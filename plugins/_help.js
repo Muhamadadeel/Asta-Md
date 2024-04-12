@@ -141,7 +141,7 @@ astro_patch.smd(
     filename: __filename,
   },
   async (message) => {
-    await context.send(`*ASTA MD STILL ALIVE*`);
+    await message.send(`*ASTA MD STILL ALIVE*`);
   }
 );
 astro_patch.cmd({
