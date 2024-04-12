@@ -1,6 +1,8 @@
 let maher_api = "https://api.maher-zubair.tech/";
-const { smd} = require("../lib");
-const axios = require("axios")
+const axios = require("axios");
+const fetch = require("node-fetch");
+const { smd } = require("../lib");
+
 smd(
   {
     pattern: "tiktok",
@@ -16,15 +18,31 @@ smd(
       if (!/tiktok/.test(videoUrl)) {
         return await message.send("*`Please Give Me Valid Tiktok Video Link`*");
       }
-      let response = await axios.get(`${maher_api}download/tiktok2?url=${encodeURIComponent(videoUrl)}`);
+
+      // Use axios to fetch data from the API
+      let response = await axios.get(
+        `${maher_api}download/tiktok2?url=${encodeURIComponent(videoUrl)}`
+      );
       const data = response.data;
       const video = data.result.url.nowm;
+
       await message.send("*_Downloading Your Video Without WaterMark..._*");
-      await bot.send(message.chat, (video = { url: video }), {
-        quoted: message,
-      });
+
+      // Use node-fetch to download the video
+      const res = await fetch(video);
+      const buffer = await res.buffer();
+
+      // Send the downloaded video to the chat
+      await bot.send(
+        message.chat,
+        buffer,
+        { quoted: message },
+        { mimetype: "video/mp4" }
+      );
     } catch (error) {
-      message.sent(`\n*_Error Occured While Downloading Your Media_*\n_${error}_`);
+      message.sent(
+        `\n*_Error Occured While Downloading Your Media_*\n_${error}_`
+      );
       console.log(error);
     }
   }
