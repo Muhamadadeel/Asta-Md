@@ -2,40 +2,28 @@ let { smd, smdBuffer, Config } = require(global.lib_dir || "../lib");
 let fs = require("fs");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
-let s_ser = true
+let s_ser = true;
 smd(
-  {
-    pattern: "channel",
-    type: "tools",
-    info: "Asta-MD Support Channels",
-  },
-  async (_0x5ce955) => {
+  { pattern: "channel", 
+  type: "tools", 
+  info: "Asta-MD Support Channels" 
+},
+  async (message) => {
     try {
-      let _0x1a71d9 = "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z";
-      let _0x162ed5 =
-        "*_https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z_*\n*_JOIN WHATSAPP CHANNEL TO GET UPDATES._*\n";
-      let _0x39b0a0 = await _0x5ce955.bot.contextInfo(
+      const channelUrl =
+        "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z";
+      const channelMessage = `Hey ${message.senderName}, here's our channel link, please follow and support us: ${channelUrl}`;
+      const contextInfo = await message.bot.contextInfo(
         "Asta Md",
-        "Hello " + _0x5ce955.senderName,
-        await smdBuffer("https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z"),
+        "Hello " + message.senderName,
+        await smdBuffer(channelUrl),
         1,
-        _0x1a71d9,
-        3
+        channelUrl,
+        10 // Set to 10 to indicate the message has been forwarded multiple times
       );
-      _0x5ce955.send(
-        _0x162ed5,
-        {
-          contextInfo: _0x39b0a0,
-        },
-        "asta",
-        _0x5ce955
-      );
-    } catch (_0x9e2a2c) {
-      _0x5ce955.error(
-        _0x9e2a2c + "\n\n" + info + "\nCommand: channel",
-        _0x9e2a2c,
-        false
-      );
+      message.send(channelMessage, { contextInfo }, "asta", message);
+    } catch (error) {
+      message.error(`${error}\n\n${info}\nCommand: channel`, error, false);
     }
   }
 );
