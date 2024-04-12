@@ -130,7 +130,7 @@ astro_patch.smd(
     const { key: messageKey } = await context.reply("*𝖕𝖎𝖓𝖌𝖎𝖓𝖌...*");
     const endTime = new Date().getTime();
     const pingTime = endTime - startTime;
-    await context.send(`*𝓛𝓪𝓽𝓮𝓷𝓬𝔂〉〉〉*\n *${pingTime} 𝖒𝖘*`, { edit: messageKey }, "", context);
+    await context.send(`*𝓛𝓪𝓽𝓮𝓷𝓬𝔂*\n *${pingTime} 𝖒𝖘*`, { edit: messageKey }, "", context);
   }
 );
 astro_patch.cmd({
