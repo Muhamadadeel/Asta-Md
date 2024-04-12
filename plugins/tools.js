@@ -26,6 +26,25 @@ smd(
 );
 smd(
   {
+    pattern: "support",
+    desc: "To check ping",
+    react: "🗨️",
+    category: "user",
+    filename: __filename,
+  },
+  async (message) => {
+    const SupportMsg = `𝘼𝙎𝙏𝘼 𝙈𝘿 𝙎𝙐𝙋𝙋𝙊𝙍𝙏 𝙂𝙧𝙤𝙪𝙥\n\n *ʟɪɴᴋ:* https://chat.whatsapp.com/DIdy6VE79rj1LscpTBqvYL\n\n ${Config.botname} *WORKS*`;
+
+    const contextInfo = {
+      forwardingScore: 999,
+      isForwarded: true,
+    };
+
+    await message.send(SupportMsg, { contextInfo });
+  }
+);
+smd(
+  {
     pattern: "cleartmp",
     type: "tools",
     info: "Clear temporary files cache",
