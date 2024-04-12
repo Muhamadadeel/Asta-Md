@@ -5,7 +5,6 @@ const {
   sck,
   smd,
   send,
-  Config,
   tlang,
   sleep,
   getAdmin,
@@ -15,6 +14,7 @@ const {
   bot_,
   sendWelcome,
 } = require("../lib");
+const Config = require("../config")
 const axios = require("axios");
 const astro_patch = require("../lib/plugins");
 const { cmd } = astro_patch;
@@ -140,6 +140,18 @@ smd({
     await message.error(`${error}\n\ncommand: ${cmdName}`, error, "*_Can't create new group, Sorry!!_*");
   }
  });
+ smd({
+  pattern: "support",
+  desc: "Sends official support group link.",
+  category: "group",
+  filename: __filename,
+},
+async(message) => {
+  await message.send(`*Sir*${Config.ownername}\n *Here's the Link:* https://chat.whatsapp.com/DIdy6VE79rj1LscpTBqvYL`);
+
+}
+)
+
 smd(
   {
     pattern: "ginfo",
