@@ -897,7 +897,7 @@ smd(
       else message.reply(`*No Data FOUNd!* `);
     } catch (e) {
       console.error("Error:", e);
-      message.reply(`*ERROR!* `);
+      message.reply(`*YEAH IT'S ASTA* `);
     }
   }
 );
