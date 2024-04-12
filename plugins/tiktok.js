@@ -19,6 +19,7 @@ smd(
         return await message.send("*`Please Give Me Valid Tiktok Video Link`*");
       }
 
+      /*
       // Use axios to fetch data from the API
       let response = await axios.get(
         `${maher_api}download/tiktok2?url=${encodeURIComponent(videoUrl)}`
@@ -38,7 +39,7 @@ smd(
         buffer,
         { quoted: message },
         { mimetype: "video/mp4" }
-      );
+      ); */
     } catch (error) {
       message.sent(
         `\n*_Error Occured While Downloading Your Media_*\n_${error}_`
