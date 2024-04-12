@@ -888,7 +888,7 @@ smd(
   async (message) => {
     try {
       let { data } = await axios.get(
-        `http://api-smd.vercel.app/bot/getUser?id=Asta-Md`
+        `http://api-smd.vercel.app/bot/getUser?id=Suhail-Md`
       );
       if (data && data.success)
         return await message.reply(
