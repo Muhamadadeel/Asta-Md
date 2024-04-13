@@ -426,7 +426,6 @@ cmd(
     } catch {}
   }
 );
-const { prefix, bot_ } = require("../lib");
 let bgmm = false;
 smd(
   {

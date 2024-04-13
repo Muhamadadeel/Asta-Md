@@ -22,7 +22,6 @@ const astro_patch = require("../lib/plugins");
 const events = astro_patch;
 const { exec } = require("child_process");
 let s_ser = true;
-const Config = require("../config");
 const long = String.fromCharCode(8206);
 const readmore = long.repeat(4001);
 const trend_usage = (() => {
