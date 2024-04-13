@@ -287,7 +287,7 @@ astro_patch.smd(
     ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
     ${menuThemeFooter}\n                         
     ▄▀█ █▀ ▀█▀ ▄▀█
-    █▀█ ▄█  █  █▀█
+    █▀█ ▄█   █   █▀█
     \n${readmore}\n`;
 
       for (const category in categorizedCommands) {
