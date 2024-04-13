@@ -299,13 +299,13 @@ astro_patch.smd(
             category
           )}* ${menuThemeCategoryFooter}\n`;
           for (const command of categorizedCommands[category]) {
-            menuText += `${menuThemeCommandPrefix} ${tinyChrmap(command, 1)}\n`;
+            menuText += `${menuThemeCommandPrefix} ${tiny(command, 1)}\n`;
           }
           menuText += `${menuThemeCommandFooter}\n`;
           break;
         } else {
           for (const command of categorizedCommands[category]) {
-            menuText += `${menuThemeCommandPrefix} ${tinyChrmap(command, 1)}\n`;
+            menuText += `${menuThemeCommandPrefix} ${tiny(command, 1)}\n`;
           }
           menuText += `${menuThemeCommandFooter}\n`;
         }
