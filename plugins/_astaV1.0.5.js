@@ -286,8 +286,8 @@ astro_patch.smd(
     ${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
     ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
     ${menuThemeFooter}\n                         
-    ▄▀█ █▀ ▀█▀ ▄▀█
-    █▀█ ▄█   █   █▀█
+    *ᴍᴇɴᴜ ʙᴀsᴇᴅ: ᴘᴀᴛᴄʜ 𝟷.𝟶.𝟻*
+    \t*A͏S͏T͏A͏ M͏D͏ 2͏0͏2͏4͏*
     \n${readmore}\n`;
 
       for (const category in categorizedCommands) {
