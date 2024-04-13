@@ -6,3 +6,4 @@ RUN npm install
 WORKDIR /root/Astropeda
 EXPOSE 3000
 CMD ["npm","start" ] 
+#ASTA MD 2024

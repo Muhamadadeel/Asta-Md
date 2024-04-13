@@ -1,5 +1,4 @@
 import * as http from 'http';
-import Dockerfile from '../Dockerfile.ts'
 
 class ServerError extends Error {
     constructor(message: string) {

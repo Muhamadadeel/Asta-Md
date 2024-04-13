@@ -58,3 +58,4 @@ interaction_result = analyze_interaction(collect)
 print("Interaction Analysis:", interaction_result)
 
 print("Number of users who used 'input':", input_count)
+#LOVE PYTHON TO GET HOW MANY TIMES A FORM WAS FILLED, APLLIED IN THE FUTURE

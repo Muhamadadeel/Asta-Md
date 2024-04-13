@@ -41,3 +41,4 @@ const scanDirectory = (dir: string): void => {
 };
 
 scanDirectory(directoryPath);
+/**Simple BOt */

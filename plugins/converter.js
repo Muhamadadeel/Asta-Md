@@ -208,41 +208,6 @@ smd(
 );
 smd(
   {
-    cmdname: "wallpaper",
-    info: "To get Random Pics",
-    type: "Anime Pics",
-    filename: __filename,
-  },
-  async (_0x5c07ae) => {
-    try {
-      const _0x2b9570 = await (
-        await fetch(
-          "https://api.unsplash.com/photos/random?client_id=72utkjatCBC-PDcx7-Kcvgod7-QOFAm2fXwEeW8b8cc"
-        )
-      )?.json();
-      const _0x4cf39c = _0x2b9570?.urls?.regular || false;
-      if (_0x4cf39c) {
-        await _0x5c07ae.sendUi(
-          _0x5c07ae.jid,
-          {
-            caption: "*---Random Wallpapers Here---*",
-          },
-          {
-            quoted: _0x5c07ae,
-          },
-          "image",
-          _0x4cf39c
-        );
-      } else {
-        await _0x5c07ae.send("*_Request Failed, Wallpaper not be fetched!_*");
-      }
-    } catch (_0x27f4a6) {
-      return await _0x5c07ae.error(_0x27f4a6 + "\n\ncmdName: wallpaper\n");
-    }
-  }
-);
-smd(
-  {
     pattern: "memegen",
     desc: "Write text on quoted image.",
     category: "sticker",
