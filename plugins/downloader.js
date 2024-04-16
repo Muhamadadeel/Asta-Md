@@ -1,6 +1,3 @@
-let baseApi =
-  process.env.API_SMD || global.api_smd || "https://api-smd-1.vercel.app";
-let maher_api = "https://api.maher-zubair.tech/";
 const {
   smd,
   fetchJson,
@@ -23,33 +20,6 @@ const axios = require("axios");
 const fetch = require("node-fetch");
 var videotime = 2000;
 const { cmd } = require("../lib/plugins");
-smd(
-  {
-    pattern: "tiktok",
-    alias: ["tt", "ttdl"],
-    desc: "Downloads Tiktok Videos Via Url.",
-    category: "downloader",
-    filename: __filename,
-    use: "<add tiktok url.>",
-  },
-  async (bot, message, url) => {
-    try {
-      let videoUrl = url.split(" ")[0];
-      if (!/tiktok/.test(videoUrl)) {
-        return await message.send("*Please Give Me Valid Tiktok Video Link*");
-      }
-      let response = await axios.get(`${maher_api}download/tiktok2?url=${videoUrl}`);
-      const data = response.data;
-      const video = data.result.url.nowm;
-      const res = await fetch(video);
-      const buffer = await res.buffer();
-      await bot.send(message.chat, buffer); 
-    } catch (error) {
-      message.send(`\n*_Error Occured While Downloading Your Media_*\n_${error}_`);
-      console.log(error);
-    }
-  }
-);
 smd(
   {
     pattern: "tgs",
@@ -134,7 +104,7 @@ smd(
             _0x13ee38,
             {
               packname: Config.packname,
-              author: "Asta-Md",
+              author: "Suhail-Md",
             },
             "sticker"
           );
@@ -222,7 +192,7 @@ smd(
             "fb https://www.facebook.com/watch/?v=2018727118289093_*"
         );
       }
-      let _0x3f4693 = await smdJson(baseApi + "/api/fb?url=" + _0xef90cc);
+      let _0x3f4693 = await smdJson(api_smd + "/api/fb?url=" + _0xef90cc);
       if (!_0x3f4693 || !_0x3f4693.status) {
         return await _0x3a3af2.reply("*Invalid Video Url!*");
       }
@@ -354,7 +324,7 @@ cmd(
       if (_0x4ac8f2.length) {
         let _0x3d85b = await download(_0x4ac8f2[0].id);
         let _0x307e6f =
-          "*ᴀsᴛᴀ-ᴍᴅ • ᴀᴘᴋ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪsᴛ* \n*________________________________* \n\n*_Reply Any Number To Download._*\n_Results For : " +
+          "*ᴀsᴛᴀ ᴍᴅ • ᴀᴘᴋ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪsᴛ* \n*________________________________* \n\n*_Reply Any Number To Download._*\n_Results For : " +
           _0x1cb962 +
           "_ \n";
         for (let _0x5a5920 = 0; _0x5a5920 < _0x4ac8f2.length; _0x5a5920++) {
@@ -451,14 +421,14 @@ smd(
     desc: "text to speech.",
     category: "downloader",
     filename: __filename,
-    use: "<Hii,this is Asta>",
+    use: "<Hii,this is Suhail>",
   },
   async (_0x55aba2, _0x56da6b) => {
     try {
       let _0x204f81 = _0x55aba2.reply_text ? _0x55aba2.reply_text : _0x56da6b;
       if (!_0x204f81) {
         return _0x55aba2.reply(
-          "*_Example : .tts Hi,I am Asta-Md whatsapp bot._*"
+          "*_Example : .tts Hi,I am Suhail-Md whatsapp bot._*"
         );
       }
       try {
@@ -478,7 +448,7 @@ smd(
             },
             mimetype: "audio/mpeg",
             ptt: true,
-            fileName: "Asta-Md-tts.m4a",
+            fileName: "Suhail-Md-tts.m4a",
           },
           {
             quoted: _0x55aba2,
@@ -498,7 +468,7 @@ smd(
             },
             mimetype: "audio/mpeg",
             ptt: true,
-            fileName: "Asta-Md-tts.m4a",
+            fileName: "Suhail-Md-tts.m4a",
           },
           {
             quoted: _0x55aba2,
@@ -642,7 +612,10 @@ smd(
           )),
         };
         let _0x3448d2 =
-          _0x4e4465.title || _0x3e3caf || _0x421809[1] || "Asta MD -- YT Video";
+          _0x4e4465.title ||
+          _0x3e3caf ||
+          _0x421809[1] ||
+          "Suhail MD -- YT Video";
         if (_0x3e3caf) {
           await _0xe5ea97.bot.sendMessage(_0xe5ea97.chat, {
             [_0x5b10f0]: {
@@ -832,7 +805,7 @@ smd(
       };
       let _0x4737bb = {
         audio: _0x2ba501,
-        fileName: "Asta-Md tiktok Sound" + _0x19c223 + ".m4a",
+        fileName: "Suhail-Md tiktok Sound" + _0x19c223 + ".m4a",
         mimetype: "audio/mpeg",
         ptt: true,
         contextInfo: _0x29fdd9,
@@ -849,7 +822,62 @@ smd(
     }
   }
 );
-
+smd(
+  {
+    pattern: "tiktok",
+    alias: ["tt", "ttdl"],
+    desc: "Downloads Tiktok Videos Via Url.",
+    category: "downloader",
+    filename: __filename,
+    use: "<add tiktok url.>",
+  },
+  async (_0x3050b9, _0x3dfcd0) => {
+    try {
+      var _0x3f5fb9 = _0x3dfcd0.toLowerCase().includes("doc")
+        ? "document"
+        : _0x3dfcd0.toLowerCase().includes("mp3")
+        ? "audio"
+        : "video";
+      if (!_0x3dfcd0) {
+        return await _0x3050b9.reply(
+          "*Uhh Please, Provide me tiktok Video Url*\n*_Ex " +
+            prefix +
+            "tiktok https://www.tiktok.com/@dakwahmuezza/video/7150544062221749531_*"
+        );
+      }
+      let _0x149d79 = _0x3dfcd0 ? _0x3dfcd0.split(" ")[0] : "";
+      if (!/tiktok/.test(_0x149d79)) {
+        return await _0x3050b9.reply(
+          "*Uhh Please, Give me Valid Tiktok Video Url!*"
+        );
+      }
+      var _0x3200a7 = false;
+      try {
+        let _0x410534 = await smdJson(api_smd + "/api/ttdl2?url=" + _0x149d79);
+        _0x3200a7 = (_0x410534 && _0x410534?.video?.noWatermark) || false;
+      } catch (_0x4f63b7) {
+        let _0x44d97e = await smdJson(
+          api_smd + "/api/musically?url=" + _0x149d79
+        );
+        _0x3200a7 = (_0x44d97e && _0x44d97e?.result?.video) || false;
+      }
+      if (_0x3200a7) {
+        return await _0x3050b9.send(
+          _0x3200a7,
+          {
+            caption: Config.caption,
+          },
+          _0x3f5fb9,
+          _0x3050b9
+        );
+      } else {
+        return await _0x3050b9.reply("Error While Downloading Your Video");
+      }
+    } catch (_0x336a8b) {
+      return _0x3050b9.error(_0x336a8b + "\n\ncommand: tiktok", _0x336a8b);
+    }
+  }
+);
 smd(
   {
     pattern: "ringtone",
@@ -1005,7 +1033,7 @@ smd(
       let _0x3b2ca6 = await yts(_0x4ec99f);
       let _0x4123ae = _0x3b2ca6.all[0];
       let _0x5883a9 =
-        "\t *ᴀsᴛᴀ-ᴍᴅ • sᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*   \n\n*Title :* " +
+        "\t *ᴀsᴛᴀ ᴍᴅ • sᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*   \n\n*Title :* " +
         _0x4123ae.title +
         "\nUrl : " +
         _0x4123ae.url +
@@ -1056,7 +1084,7 @@ cmd(
       }
       let _0x2878ec = await yts(_0xca939c);
       let _0x4186e4 =
-        "*ᴀsᴛᴀ-ᴍᴅ • ʏᴏᴜᴛᴜʙᴇ ᴅᴏᴡɴʟᴏᴀᴅ* \n*_______________________________* \n\n_Reply Any Number To Download._\n  _For Audio: 1 mp3._\n  _For Video: 1 video._\n  _For document: 1 document._\n\n_Results For : " +
+        "*ᴀsᴛᴀ ᴍᴅ • ʏᴏᴜᴛᴜʙᴇ ᴅᴏᴡɴʟᴏᴀᴅ* \n*_______________________________* \n\n_Reply Any Number To Download._\n  _For Audio: 1 mp3._\n  _For Video: 1 video._\n  _For document: 1 document._\n\n_Results For : " +
         _0xca939c +
         "_ \n\n";
       let _0x463366 = 1;
@@ -1283,7 +1311,7 @@ smd(
       try {
         let _0x32b31a = await ytdl.getInfo(_0x1d542b[0]);
         _0x43c5ac = _0x32b31a.videoDetails.title;
-        let _0x4b47c3 = "./temp/Asta-Md " + _0x1d542b[1] + ".mp3";
+        let _0x4b47c3 = "./temp/Suhail-Md " + _0x1d542b[1] + ".mp3";
         const _0x212389 = ytdl(_0x1d542b[0], {
           filter: (_0xd2371a) =>
             _0xd2371a.audioBitrate == 160 || _0xd2371a.audioBitrate == 128,
@@ -1322,7 +1350,7 @@ smd(
           url: _0x59bbaa,
         },
         mimetype: "audio/mpeg",
-        fileName: "Asta-Md--" + _0x1d542b[1] + ".mp3",
+        fileName: "Suhail-Md--" + _0x1d542b[1] + ".mp3",
         caption: Config.caption,
         contextInfo: _0x10e2fa,
       };
@@ -1348,7 +1376,7 @@ cmd(
   async (_0xb75e78, _0x221e78, { isCreator: _0xfbeec5 }) => {
     if (_0xb75e78.quoted && _0xb75e78.text) {
       const _0x5b8ee5 = _0xb75e78.quoted.text.split("\n");
-      if (_0x5b8ee5[0].includes("ᴀsᴛᴀ-ᴍᴅ • sᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ")) {
+      if (_0x5b8ee5[0].includes("ᴀsᴛᴀ ᴍᴅ • sᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ")) {
         const _0x1724ba = _0x5b8ee5.find((_0x525632) =>
           _0x525632.startsWith("Url :")
         );
@@ -1421,7 +1449,7 @@ cmd(
             "Error While Downloading Video : " + _0x189dd8
           );
         }
-      } else if (_0x5b8ee5[0].includes("ᴀsᴛᴀ-ᴍᴅ • ʏᴏᴜᴛᴜʙᴇ ᴅᴏᴡɴʟᴏᴀᴅ")) {
+      } else if (_0x5b8ee5[0].includes("ᴀsᴛᴀ ᴍᴅ • ʏᴏᴜᴛᴜʙᴇ ᴅᴏᴡɴʟᴏᴀᴅ")) {
         let _0x307bb6 = "*" + _0xb75e78.text.split(" ")[0] + " : ";
         const _0x56275d = _0x5b8ee5.find((_0x3b5e74) =>
           _0x3b5e74.startsWith(_0x307bb6)
@@ -1485,7 +1513,7 @@ cmd(
             );
           }
         }
-      } else if (_0x5b8ee5[0].includes("ᴀsᴛᴀ-ᴍᴅ • ᴀᴘᴋ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪsᴛ")) {
+      } else if (_0x5b8ee5[0].includes("ᴀsᴛᴀ ᴍᴅ • ᴀᴘᴋ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪsᴛ")) {
         let _0x35d668 = "*" + _0xb75e78.text.split(" ")[0] + " : ";
         const _0x205a5f = _0x5b8ee5.find((_0x304058) =>
           _0x304058.startsWith(_0x35d668)
