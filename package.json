@@ -7,7 +7,10 @@
    "scripts": {
             "run": "pm2 start . --deep-monitoring --attach --name Asta || node .",
             "start": "pm2 start . --attach --name Asta",
-            "stop": "pm2 stop Asta"
+            "stop": "pm2 stop Asta",
+            "heroku-postbuild": "git clone https://github.com/Astropeda/Asta-Md.git temp && mv temp/.git .git && rm -rf temp && npx puppeteer@latest install  --y",
+            "fis-heroku-postbuild": "git clone https://github.com/Astropeda/Asta-Md.git temp1 && rsync -av temp1/* ./ && rsync -av temp1/.* ./ && rm -rf temp1 && npm i && npx puppeteer@latest install",
+            "postinstall": "npx puppeteer@latest install --y"
    },
    "devDependencies": {
       "pino": "^7.0.5",
