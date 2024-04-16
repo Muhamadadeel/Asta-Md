@@ -2,9 +2,9 @@
 
 ***
 
-### ᴀsᴛᴀ ᴍᴅ ᴜᴘᴅᴀᴛᴇ 𝟷.𝟶.𝟻 ᴘᴀᴛᴄʜ
+### ᴀsᴛᴀ ᴍᴅ ᴜᴘᴅᴀᴛᴇ 2.0.0 ᴘᴀᴛᴄʜ
 ##### Read Patch Notice Here
-[Docs](https://github.com/Astropeda/Asta-Md/blob/main/asset/Documentation_Patch_1.0.5.md)
+[Channel](https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z)
 
 ### SETUP
 <center>
