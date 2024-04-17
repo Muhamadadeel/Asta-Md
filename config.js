@@ -37,16 +37,17 @@ global.save_status = process.env.AUTO_SAVE_STATUS || "false";
 global.save_status_from = process.env.SAVE_STATUS_FROM || "";
 global.read_status_from = process.env.READ_STATUS_FROM || "";
 
-global.api_smd = "https://api-smd.onrender.com/";
-global.scan = "https://gnime-qr.onrender.com/";
+global.api_smd = "https://api-smd-1.vercel.app";
+global.scan = "https://secret-garden-43998-4daad95d4561.herokuapp.com/";
 
-global.SESSION_ID = process.env.SESSION_ID || "";
-
+global.SESSION_ID =
+  process.env.SESSION_ID ||
+  ""
 module.exports = {
   menu: process.env.MENU || "",
   HANDLERS: process.env.PREFIX || "",
   BRANCH: process.env.BRANCH || "main",
-  VERSION: process.env.VERSION || "2.0.0",
+  VERSION: process.env.VERSION || "1.0.0",
   caption: process.env.CAPTION || "©ᴀsᴛᴀ ᴍᴅ",
   author: process.env.PACK_AUTHER || "ᴀsᴛᴀ ᴍᴅ",
   packname: process.env.PACK_NAME || "♥️",
@@ -65,6 +66,8 @@ module.exports = {
   WORKTYPE: process.env.WORKTYPE || process.env.MODE || "private",
   LANG: (process.env.THEME || "ASTA").toUpperCase(),
 };
+global.rank = "updated";
+global.isMongodb = false;
 let file = require.resolve(__filename);
 fs.watchFile(file, () => {
   fs.unwatchFile(file);

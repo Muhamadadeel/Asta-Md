@@ -274,21 +274,19 @@ astro_patch.smd(
       const currentTime = message.time;
       const currentDate = message.date;
       let menuText = `
-    ${menuThemeHeader}
-    ${menuThemeCommandPrefix} *ᴏᴡɴᴇʀ:* ${Config.ownername}
-    ${menuThemeCommandPrefix} *ᴜᴘᴛɪᴍᴇ:* ${runtime(process.uptime())}
-    ${menuThemeCommandPrefix} *ʀᴀᴍ ᴜsᴀɢᴇ:* ${formatp(
-        os.totalmem() - os.freemem()
-      )}
-    ${menuThemeCommandPrefix} *ᴛɪᴍᴇ:* ${currentTime}
-    ${menuThemeCommandPrefix} *ᴅᴀᴛᴇ:* ${currentDate}
-    ${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
-    ${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
-    ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
-    ${menuThemeFooter}\n                         
-    *ᴍᴇɴᴜ ʙᴀsᴇᴅ: ᴘᴀᴛᴄʜ 𝟷.𝟶.𝟻*
-    \t*A͏S͏T͏A͏ M͏D͏ 2͏0͏2͏4͏*
-    \n${readmore}\n`;
+${menuThemeHeader}
+${menuThemeCommandPrefix} *ᴏᴡɴᴇʀ:* ${Config.ownername}
+${menuThemeCommandPrefix} *ᴜᴘᴛɪᴍᴇ:* ${runtime(process.uptime())}
+${menuThemeCommandPrefix} *ʀᴀᴍ ᴜsᴀɢᴇ:* ${formatp(os.totalmem() - os.freemem())}
+${menuThemeCommandPrefix} *ᴛɪᴍᴇ:* ${currentTime}
+${menuThemeCommandPrefix} *ᴅᴀᴛᴇ:* ${currentDate}
+${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
+${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
+${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
+${menuThemeFooter}\n                         
+\t*ᴀsᴛᴀ ᴘᴀᴛᴄʜ 𝟸.𝟶.𝟶*
+\t*A͏S͏T͏A͏ M͏D͏ 2͏0͏2͏4͏*
+\n${readmore}\n`;
 
       for (const category in categorizedCommands) {
         menuText += `${menuThemeCategoryHeader} *${tiny(
