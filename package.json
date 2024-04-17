@@ -4,12 +4,16 @@
    "description": "Simple WhatsApp Bot.",
    "main": "index.js",
    "type": "commonjs",  
+   "engines": {
+  "node": "20.x",
+  "npm": "10.5.2"
+   },
    "scripts": {
             "run": "pm2 start . --deep-monitoring --attach --name Asta || node .",
             "start": "pm2 start . --attach --name Asta",
             "stop": "pm2 stop Asta",
-            "heroku-postbuild": "git clone https://github.com/Astropeda/Asta-Md.git temp && mv temp/.git .git && rm -rf temp && npx puppeteer@latest install  --y",
-            "postinstall": "npx puppeteer@latest install --y"
+            "heroku-postbuild": "npx puppeteer@latest install --y"
+         
    },
    "devDependencies": {
       "pino": "^7.0.5",
