@@ -341,9 +341,9 @@ ${menuThemeCommandPrefix} *ᴅᴀᴛᴇ:* ${currentDate}
 ${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
 ${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
 ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
-${menuThemeFooter}\n                                        
-▀█    █▀█   █▀█
-█▄ ▄ █▄█ ▄ █▄█
+${menuThemeFooter}\n                                                            
+█▀█ ▄▀█ ▀█▀ █▀▀ █░█
+█▀▀ █▀█ ░█░ █▄▄ █▀█
 \n${readmore}\n`;
       for (const category in categorizedCommands) {
         menuText += `
