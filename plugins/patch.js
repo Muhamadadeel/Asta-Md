@@ -1455,7 +1455,7 @@ async function updateHerokuApp() {
   
 //---------------------------------------------------------------------------
 smd({
-            pattern: "update",
+            pattern: "checkupdate",
             desc: "Shows repo\'s refreshed commits.",
             category: "tools",
             fromMe:true,
