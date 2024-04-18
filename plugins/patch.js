@@ -237,20 +237,20 @@ astro_patch.smd(
         menuThemeFooter = "┃✯╰───────────────\n╰═════════════════⊷";
         menuThemeCategoryHeader = "╭════〘";
         menuThemeCategoryFooter = "〙════⊷❍";
-        menuThemeCommandPrefix = "┃✯│";
-        menuThemeCommandFooter = "┃✯╰─────────────────❍\n╰══════════════════⊷❍";
+        menuThemeCommandPrefix = "\n┃✯│";
+        menuThemeCommandFooter = "\n┃✯╰─────────────────❍\n╰══════════════════⊷❍";
       } else if (
         menuThemeType === 2 ||
         Config.menu.trim().startsWith("2") ||
         Config.menu.toLowerCase().includes("menu2")
       ) {
         menuThemeHeader = "╭━━━〔 *" + Config.botname + "* 〕━━━┈⊷\n┃✵╭──────────────";
-        menuThemeCommandPrefix = "┃✵│";
-        menuThemeFooter = "┃✵╰──────────────\n╰━━━━━━━━━━━━━━━┈⊷";
-        menuThemeCategoryHeader = "╭─────────────┈⊷\n│「";
+        menuThemeCommandPrefix = "\n┃✵│";
+        menuThemeFooter = "\n┃✵╰──────────────\n╰━━━━━━━━━━━━━━━┈⊷";
+        menuThemeCategoryHeader = "\n╭─────────────┈⊷\n│「";
         menuThemeCategoryFooter = "」\n╰┬────────────┈⊷";
-        menuThemeCommandPrefix = "┌┤\n││◦➛";
-        menuThemeCommandFooter = "│╰────────────┈⊷\n╰─────────────┈⊷";
+        menuThemeCommandPrefix = "\n┌┤\n││◦➛";
+        menuThemeCommandFooter = "\n│╰────────────┈⊷\n╰─────────────┈⊷";
       }
       else if (
         menuThemeType === 3 ||
