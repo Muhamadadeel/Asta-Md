@@ -235,11 +235,8 @@ astro_patch.smd(
         menuThemeHeader = `
 ╭═══〘 *${Config.botname}* 〙═══⊷❍
 ┃✯╭──────────────`;
-        menuThemeCommandPrefix = `
-┃✯│`;
-        menuThemeFooter = `
-┃✯╰───────────────
-╰═════════════════⊷`;
+        menuThemeCommandPrefix = `┃✯│`;
+        menuThemeFooter = `┃✯╰───────────────\n╰═════════════════⊷`;
         menuThemeCategoryHeader = `
 ╭════〘`;
         menuThemeCategoryFooter = `
@@ -258,11 +255,8 @@ astro_patch.smd(
         menuThemeHeader = `
 ╭━━━〔 *${Config.botname}* 〕━━━┈⊷
 ┃✵╭──────────────`;
-        menuThemeCommandPrefix = `
-┃✵│`;
-        menuThemeFooter = `
-┃✵╰──────────────
-╰━━━━━━━━━━━━━━━┈⊷`;
+        menuThemeCommandPrefix = `┃✵│`;
+        menuThemeFooter = `┃✵╰──────────────\n╰━━━━━━━━━━━━━━━┈⊷`;
         menuThemeCategoryHeader = `
 ╭─────────────┈⊷
 │「`;
@@ -284,17 +278,14 @@ astro_patch.smd(
         menuThemeHeader = `
 ╭═══ *${Config.botname}* ═══⊷
 ┃❃╭──────────────`;
-        menuThemeCommandPrefix = `
-┃❃│`;
+        menuThemeCommandPrefix = `┃❃│`;
         menuThemeFooter = `
 ┃❃╰───────────────
 ╰═════════════════⊷`;
         menuThemeCategoryHeader = `
 ╭─❏`;
-        menuThemeCategoryFooter = `
-❏`;
-        menuThemeCommandPrefix = `
-┃❃│`;
+        menuThemeCategoryFooter = `❏`;
+        menuThemeCommandPrefix = `┃❃│`;
         menuThemeCommandFooter = `
 ┃❃╰───────────────
 ╰═════════════════⊷`;
@@ -341,10 +332,10 @@ ${menuThemeCommandPrefix} *ᴅᴀᴛᴇ:* ${currentDate}
 ${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
 ${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
 ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
-${menuThemeFooter}\n                                                            
+${menuThemeFooter}                                                            
 █▀█ ▄▀█ ▀█▀ █▀▀ █░█
 █▀▀ █▀█ ░█░ █▄▄ █▀█
-\n${readmore}\n`;
+${readmore}\n`;
       for (const category in categorizedCommands) {
         menuText += `
         ${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}`;
