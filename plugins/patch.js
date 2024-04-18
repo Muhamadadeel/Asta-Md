@@ -232,79 +232,47 @@ astro_patch.smd(
         Config.menu.trim().startsWith("1") ||
         Config.menu.toLowerCase().includes("menu1")
       ) {
-        menuThemeHeader = `
-╭═══〘 *${Config.botname}* 〙═══⊷❍
-┃✯╭──────────────`;
-        menuThemeCommandPrefix = `┃✯│`;
-        menuThemeFooter = `┃✯╰───────────────\n╰═════════════════⊷`;
-        menuThemeCategoryHeader = `
-╭════〘`;
-        menuThemeCategoryFooter = `
-〙════⊷❍
-┃✯╭──────────────`;
-        menuThemeCommandPrefix = `
-┃✯│`;
-        menuThemeCommandFooter = `
-┃✯╰─────────────────❍
-╰══════════════════⊷❍`;
+        menuThemeHeader = "╭═══〘 *" + Config.botname + "* 〙═══⊷❍\n┃✯╭──────────────";
+        menuThemeCommandPrefix = "┃✯│";
+        menuThemeFooter = "┃✯╰───────────────\n╰═════════════════⊷";
+        menuThemeCategoryHeader = "╭════〘";
+        menuThemeCategoryFooter = "〙════⊷❍";
+        menuThemeCommandPrefix = "┃✯│";
+        menuThemeCommandFooter = "┃✯╰─────────────────❍\n╰══════════════════⊷❍";
       } else if (
         menuThemeType === 2 ||
         Config.menu.trim().startsWith("2") ||
         Config.menu.toLowerCase().includes("menu2")
       ) {
-        menuThemeHeader = `
-╭━━━〔 *${Config.botname}* 〕━━━┈⊷
-┃✵╭──────────────`;
-        menuThemeCommandPrefix = `┃✵│`;
-        menuThemeFooter = `┃✵╰──────────────\n╰━━━━━━━━━━━━━━━┈⊷`;
-        menuThemeCategoryHeader = `
-╭─────────────┈⊷
-│「`;
-        menuThemeCategoryFooter = `
-」
-╰┬────────────┈⊷`;
-        menuThemeCommandPrefix = `
-┌┤
-││◦➛`;
-        menuThemeCommandFooter = `
-╰────────────┈⊷
-╰─────────────┈⊷`;
+        menuThemeHeader = "╭━━━〔 *" + Config.botname + "* 〕━━━┈⊷";
+        menuThemeCommandPrefix = "┃✵│";
+        menuThemeFooter = "┃✵╰──────────────\n╰━━━━━━━━━━━━━━━┈⊷";
+        menuThemeCategoryHeader = "╭─────────────┈⊷\n│「";
+        menuThemeCategoryFooter = "」\n╰┬────────────┈⊷";
+        menuThemeCommandPrefix = "││◦➛";
+        menuThemeCommandFooter = "│╰────────────┈⊷\n╰─────────────┈⊷";
       }
       else if (
         menuThemeType === 3 ||
         Config.menu.trim().startsWith("3") ||
         Config.menu.toLowerCase().includes("menu3")
       ) {
-        menuThemeHeader = `
-╭═══ *${Config.botname}* ═══⊷
-┃❃╭──────────────`;
-        menuThemeCommandPrefix = `┃❃│`;
-        menuThemeFooter = `
-┃❃╰───────────────
-╰═════════════════⊷`;
-        menuThemeCategoryHeader = `
-╭─❏`;
-        menuThemeCategoryFooter = `❏`;
-        menuThemeCommandPrefix = `┃❃│`;
-        menuThemeCommandFooter = `
-┃❃╰───────────────
-╰═════════════════⊷`;
+        menuThemeHeader = "╭═══ *" + Config.botname + "* ═══⊷\n┃❃╭──────────────";
+        menuThemeCommandPrefix = "┃❃│";
+        menuThemeFooter = "┃❃╰───────────────\n╰═════════════════⊷";
+        menuThemeCategoryHeader = "╭─❏";
+        menuThemeCategoryFooter = "❏";
+        menuThemeCommandPrefix = "┃❃│";
+        menuThemeCommandFooter = "┃❃╰───────────────\n╰═════════════════⊷";
       }
       else {
-        menuThemeHeader = `
-╭〘  *${Config.botname}*  〙`;
-        menuThemeCommandPrefix = `
-│ │`;
-        menuThemeFooter = `
-╰═══════════════⊷`;
-        menuThemeCategoryHeader = `
-╭─❍`;
-        menuThemeCategoryFooter = `
-══⊷❍`;
-        menuThemeCommandPrefix = `
-│`;
-        menuThemeCommandFooter = `
-╰════════════─⊷`;
+        menuThemeHeader = "╭〘  " + Config.botname + "  〙";
+        menuThemeCommandPrefix = "│ │";
+        menuThemeFooter = "╰═══════════════⊷";
+        menuThemeCategoryHeader = "╭─❍";
+        menuThemeCategoryFooter = "══⊷❍";
+        menuThemeCommandPrefix = "│";
+        menuThemeCommandFooter = "╰════════════─⊷";
       }
 
       const categorizedCommands = {};
@@ -332,25 +300,26 @@ ${menuThemeCommandPrefix} *ᴅᴀᴛᴇ:* ${currentDate}
 ${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
 ${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
 ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
-${menuThemeFooter}                                                            
-█▀█ ▄▀█ ▀█▀ █▀▀ █░█
-█▀▀ █▀█ ░█░ █▄▄ █▀█
-${readmore}\n`;
+${menuThemeFooter}\n                         
+\t*ᴀsᴛᴀ ᴘᴀᴛᴄʜ 𝟸.𝟶.𝟶*
+\t*A͏S͏T͏A͏ M͏D͏ 2͏0͏2͏4͏*
+\n${readmore}\n`;
+
       for (const category in categorizedCommands) {
         menuText += `
-        ${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}`;
+        ${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
         if (input.toLowerCase() === category.toLowerCase()) {
           menuText = `${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
           for (const command of categorizedCommands[category]) {
-            menuText += `${menuThemeCommandPrefix} ${Config.HANDLERS} ${tiny(command, 1)}`;
+            menuText += `${menuThemeCommandPrefix} ${Config.HANDLERS} ${tiny(command, 1)}\n`;
           }
           menuText += `${menuThemeCommandFooter}\n`;
           break;
         } else {
           for (const command of categorizedCommands[category]) {
-            menuText += `${menuThemeCommandPrefix} ${Config.HANDLERS} ${tiny(command, 1)}`;
+            menuText += `${menuThemeCommandPrefix} ${Config.HANDLERS} ${tiny(command, 1)}\n`;
           }
-          menuText += `${menuThemeCommandFooter}`;
+          menuText += `${menuThemeCommandFooter}\n`;
         }
       }
       menuText += Config.caption;
