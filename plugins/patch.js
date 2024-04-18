@@ -311,13 +311,13 @@ ${menuThemeFooter}\n
         if (input.toLowerCase() === category.toLowerCase()) {
           menuText = `${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
           for (const command of categorizedCommands[category]) {
-            menuText += `${menuThemeCommandPrefix} ${tiny(command, 1)}\n`;
+            menuText += `${menuThemeCommandPrefix} ${Config.HANDLERS} ${tiny(command, 1)}\n`;
           }
           menuText += `${menuThemeCommandFooter}\n`;
           break;
         } else {
           for (const command of categorizedCommands[category]) {
-            menuText += `${menuThemeCommandPrefix} ${tiny(command, 1)}\n`;
+            menuText += `${menuThemeCommandPrefix} ${Config.HANDLERS} ${tiny(command, 1)}\n`;
           }
           menuText += `${menuThemeCommandFooter}\n`;
         }
