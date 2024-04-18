@@ -342,7 +342,7 @@ ${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
 ${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
 ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
 ${menuThemeFooter}\n                                        
-▀█   █▀█   █▀█
+▀█    █▀█   █▀█
 █▄ ▄ █▄█ ▄ █▄█
 \n${readmore}\n`;
       for (const category in categorizedCommands) {
