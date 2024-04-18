@@ -300,11 +300,10 @@ ${menuThemeCommandPrefix} *ᴅᴀᴛᴇ:* ${currentDate}
 ${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
 ${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
 ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
-${menuThemeFooter}\n                         
-\t*ᴀsᴛᴀ ᴘᴀᴛᴄʜ 𝟸.𝟶.𝟶*
-\t*A͏S͏T͏A͏ M͏D͏ 2͏0͏2͏4͏*
+${menuThemeFooter}\n                                        
+▀█   █▀█   █▀█
+█▄ ▄ █▄█ ▄ █▄█
 \n${readmore}\n`;
-
       for (const category in categorizedCommands) {
         menuText += `
         ${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
