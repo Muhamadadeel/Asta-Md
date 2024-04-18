@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 // Replace these values with your Heroku app details
-const herokuAppName = 'Asta-Md';
-const herokuApiKey = 'null';
+const herokuAppName = ''; //App Name  //   VERY
+const herokuApiKey = ''; // Api Key   //   IMPORTANT
 
 // Set the desired run duration in minutes
 const runDurationMinutes = 60; // 1 hour
