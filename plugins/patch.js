@@ -233,7 +233,7 @@ astro_patch.smd(
         Config.menu.toLowerCase().includes("menu1")
       ) {
         menuThemeHeader = `
-╭═══〘 *" + Config.botname + "* 〙═══⊷❍
+╭═══〘 *${Config.botname}* 〙═══⊷❍
 ┃✯╭──────────────`;
         menuThemeCommandPrefix = `
 ┃✯│`;
@@ -256,7 +256,7 @@ astro_patch.smd(
         Config.menu.toLowerCase().includes("menu2")
       ) {
         menuThemeHeader = `
-╭━━━〔 *" + Config.botname + "* 〕━━━┈⊷
+╭━━━〔 *${Config.botname}* 〕━━━┈⊷
 ┃✵╭──────────────`;
         menuThemeCommandPrefix = `
 ┃✵│`;
@@ -282,7 +282,7 @@ astro_patch.smd(
         Config.menu.toLowerCase().includes("menu3")
       ) {
         menuThemeHeader = `
-╭═══ *" + Config.botname + "* ═══⊷
+╭═══ *${Config.botname}* ═══⊷
 ┃❃╭──────────────`;
         menuThemeCommandPrefix = `
 ┃❃│`;
@@ -301,7 +301,7 @@ astro_patch.smd(
       }
       else {
         menuThemeHeader = `
-╭〘  " + Config.botname + "  〙`;
+╭〘  *${Config.botname}*  〙`;
         menuThemeCommandPrefix = `
 │ │`;
         menuThemeFooter = `
