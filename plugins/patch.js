@@ -347,19 +347,19 @@ ${menuThemeFooter}\n
 \n${readmore}\n`;
       for (const category in categorizedCommands) {
         menuText += `
-        ${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
+        ${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}`;
         if (input.toLowerCase() === category.toLowerCase()) {
           menuText = `${menuThemeCategoryHeader} *${tiny(category)}* ${menuThemeCategoryFooter}\n`;
           for (const command of categorizedCommands[category]) {
-            menuText += `${menuThemeCommandPrefix} ${Config.HANDLERS} ${tiny(command, 1)}\n`;
+            menuText += `${menuThemeCommandPrefix} ${Config.HANDLERS} ${tiny(command, 1)}`;
           }
           menuText += `${menuThemeCommandFooter}\n`;
           break;
         } else {
           for (const command of categorizedCommands[category]) {
-            menuText += `${menuThemeCommandPrefix} ${Config.HANDLERS} ${tiny(command, 1)}\n`;
+            menuText += `${menuThemeCommandPrefix} ${Config.HANDLERS} ${tiny(command, 1)}`;
           }
-          menuText += `${menuThemeCommandFooter}\n`;
+          menuText += `${menuThemeCommandFooter}`;
         }
       }
       menuText += Config.caption;
