@@ -233,10 +233,10 @@ astro_patch.smd(
         Config.menu.toLowerCase().includes("menu1")
       ) {
         menuThemeHeader = "╭═══〘 *" + Config.botname + "* 〙═══⊷❍\n┃✯╭──────────────";
-        menuThemeCommandPrefix = "┃✯│";
+        menuThemeCommandPrefix = "┃✯ │";
         menuThemeFooter = "┃✯╰───────────────\n╰═════════════════⊷";
         menuThemeCategoryHeader = "╭════〘";
-        menuThemeCategoryFooter = "〙════⊷❍";
+        menuThemeCategoryFooter = "〙════⊷❍\n┃✯╭──────────────";
         menuThemeCommandPrefix = "\n┃✯│";
         menuThemeCommandFooter = "\n┃✯╰─────────────────❍\n╰══════════════════⊷❍";
       } else if (
