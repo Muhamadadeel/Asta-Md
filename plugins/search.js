@@ -5,6 +5,42 @@ const axios = require("axios");
 const fetch = require("node-fetch");
 const { shazam } = require("../lib");
 smd({
+  pattern: "generatecc",
+  alias: ["gencc", "ccgen"],
+  desc: "Generate random credit card numbers.",
+  category: "misc",
+  filename: __filename,
+  use: "<count (optional)>"
+}, async (msg, query) => {
+  try {
+    let count = 10; // Default count
+    if (query) {
+      count = parseInt(query.trim());
+      if (isNaN(count) || count < 1 || count > 100) {
+        return await msg.reply("*Please provide a valid count between 1 and 100.*");
+      }
+    }
+
+    const apiUrl = `https://api.maher-zubair.tech/misc/bingen?query=${count}`;
+    const response = await fetch(apiUrl).then(res => res.json());
+
+    if (!response || response.status !== 200) {
+      return await msg.reply("*An error occurred while generating credit card numbers.*");
+    }
+
+    const results = response.result;
+    let resultText = `*Generated ${results.length} Credit Card Numbers:*\n\n`;
+
+    for (const result of results) {
+      resultText += `*Card Number:* ${result.CardNumber}\n*Expiration Date:* ${result.ExpirationDate}\n*CVV:* ${result.CVV}\n\n`;
+    }
+
+    await msg.reply(resultText);
+  } catch (err) {
+    await msg.error(err + "\n\ncommand: generatecc", err, "*An error occurred while generating credit card numbers.*");
+  }
+});
+smd({
   pattern: "bing",
   alias: ["bingsearch"],
   desc: "Search on Bing.",
