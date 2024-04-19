@@ -184,7 +184,7 @@ smd({
 
     if (!res.status === 200) return message.send("*There's a problem, try again later!*");
 
-    const { creator, result } = res;
+    const { result } = res;
 
     const tbl = "```";
     const tcl = "*";
@@ -195,7 +195,7 @@ smd({
       },
     };
 
-    await send(message, `${tcl}Creator:${tdl} ${creator}\n${tbl}${result}${tbl}`, { contextInfo }, "");
+    await send(message, `${tcl}ASTA-MD:${tdl} GPT4\n${tbl}${result}${tbl}`, { contextInfo }, "");
   } catch (e) {
     return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
   }
