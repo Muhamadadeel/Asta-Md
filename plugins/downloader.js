@@ -26,35 +26,38 @@ const {
     cmd
   } = require("../lib/plugins");
   
-  smd({
-    pattern: "facebook",
-    alias: ["fb", "fbdl"],
-    desc: "Downloads fb videos.",
-    category: "downloader",
-    filename: __filename,
-    use: "<add fb url.>"
-  }, async (_0x3a3af2, _0x5f4e7a) => {
+  async function downloadFacebookVideo(_0x3a3af2, _0x5f4e7a) {
     try {
       let _0xef90cc = _0x5f4e7a.split(" ")[0].trim();
       if (!_0xef90cc || !_0xef90cc.startsWith("https://")) {
-        return await _0x3a3af2.send("*_Please Give me Facebook Video Url_*\n*Example _" + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093_*");
+        return await _0x3a3af2.send("*Please provide a valid Facebook Video URL*\n*Example: " + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093*");
       }
-      let _0x3f4693 = await smdJson(api_smd + "/api/fb?url=" + _0xef90cc);
+      let _0x3f4693 = await smdJson("https://api.maher-zubair.tech/download/fb?url=" + _0xef90cc);
       if (!_0x3f4693 || !_0x3f4693.status) {
-        return await _0x3a3af2.reply("*Invalid Video Url!*");
+        return await _0x3a3af2.reply("*Invalid Video URL!*");
       }
       return await _0x3a3af2.bot.sendMessage(_0x3a3af2.chat, {
         video: {
-          url: _0x3f4693.result.urls[0].url
+          url: _0x3f4693.result.video_hd
         },
         caption: Config.caption
       }, {
         quoted: _0x3a3af2
       });
     } catch (_0x2c7814) {
-      await _0x3a3af2.error(_0x2c7814 + "\n\ncommand: facebook", _0x2c7814, "*_video not Found!!!_*");
+      await _0x3a3af2.error(_0x2c7814 + "\n\nCommand: facebook", _0x2c7814, "*Video not found!*");
     }
-  });
+  }
+  
+  smd({
+    pattern: "facebook",
+    alias: ["fb", "fbdl"],
+    desc: "Downloads Facebook videos.",
+    category: "downloader",
+    filename: __filename,
+    use: "<add Facebook video URL>"
+  }, downloadFacebookVideo);
+  
   smd({
     pattern: "tgs",
     desc: "Downloads telegram stickers.",
