@@ -184,7 +184,7 @@ smd({
     if (!res.status === 200) return message.send("*There's a problem, try again later!*");
 
     const { result } = res;
-    const astro = "𝘼𝙎𝙏𝘼 𝙂𝙋𝙏4 𝙏𝙐𝙍𝘽𝙊"
+    const astro = "𝘼𝙎𝙏𝘼 𝙂𝙋𝙏4\n "
     const tbl = "```";
     await send(message, `${astro}${tbl}${result}${tbl}`);
   } catch (e) {
