@@ -131,35 +131,39 @@ const {
       await _0x47fb55.error(_0x289d8e + "\n\ncommand: insta", _0x289d8e);
     }
   });
-  smd({
-    pattern: "facebook",
-    alias: ["fb", "fbdl"],
-    desc: "Downloads fb videos.",
-    category: "downloader",
-    filename: __filename,
-    use: "<add fb url.>"
-  }, async (_0x3a3af2, _0x5f4e7a) => {
-    try {
-      let _0xef90cc = _0x5f4e7a.split(" ")[0].trim();
-      if (!_0xef90cc || !_0xef90cc.startsWith("https://")) {
-        return await _0x3a3af2.send("*_Please Give me Facebook Video Url_*\n*Example _" + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093_*");
-      }
-      let _0x3f4693 = await smdJson(api_smd + "/api/fb?url=" + _0xef90cc);
-      if (!_0x3f4693 || !_0x3f4693.status) {
-        return await _0x3a3af2.reply("*Invalid Video Url!*");
-      }
-      return await _0x3a3af2.bot.sendMessage(_0x3a3af2.chat, {
-        video: {
-          url: _0x3f4693.result.urls[0].url
-        },
-        caption: Config.caption
-      }, {
-        quoted: _0x3a3af2
-      });
-    } catch (_0x2c7814) {
-      await _0x3a3af2.error(_0x2c7814 + "\n\ncommand: facebook", _0x2c7814, "*_video not Found!!!_*");
+ smd({
+  pattern: "facebook",
+  alias: ["fb", "fbdl"],
+  desc: "Downloads fb videos.",
+  category: "downloader",
+  filename: __filename,
+  use: "<add fb url.>"
+}, async (msg, query) => {
+  try {
+    let url = query.split(" ")[0].trim();
+    if (!url || !url.startsWith("https://")) {
+      return await msg.send("*_Please Give me Facebook Video Url_*\n*Example _" + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093_*");
     }
-  });
+
+    let apiUrl = `https://api-smd.onrender.com/api/fbdown?url=${encodeURIComponent(url)}`;
+    let response = await fetch(apiUrl).then(res => res.json());
+
+    if (!response || !response.status) {
+      return await msg.reply("*Invalid Video Url!*");
+    }
+
+    return await msg.bot.sendMessage(msg.chat, {
+      video: {
+        url: response.result.url
+      },
+      caption: Config.caption
+    }, {
+      quoted: msg
+    });
+  } catch (err) {
+    await msg.error(err + "\n\ncommand: facebook", err, "*_video not Found!!!_*");
+  }
+});
   smd({
     pattern: "apk",
     alias: ["modapk"],
