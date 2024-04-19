@@ -185,17 +185,8 @@ smd({
     if (!res.status === 200) return message.send("*There's a problem, try again later!*");
 
     const { result } = res;
-
     const tbl = "```";
-    const tcl = "*";
-    const tdl = "_*";
-    const contextInfo = {
-      externalAdReply: {
-        ...(await message.bot.contextInfo("*ASTA*-𝗠𝗗", `GPT-4 AI`)),
-      },
-    };
-
-    await send(message, `${tcl}ASTA-MD:${tdl} GPT4\n${tbl}${result}${tbl}`, { contextInfo }, "");
+    await send(message, `${tbl}${result}${tbl}`);
   } catch (e) {
     return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
   }
