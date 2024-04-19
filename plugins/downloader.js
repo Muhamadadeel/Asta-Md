@@ -149,7 +149,7 @@ const {
       if (!response || response.status !== 200) {
         return await msg.reply("*An error occurred while downloading the Facebook video.*");
       }
-  
+  //ASTA VD DOWNLOADER
       const result = response.result;
       const thumbnail = result.thumbnail;
       const caption = `*${result.title}*`;
