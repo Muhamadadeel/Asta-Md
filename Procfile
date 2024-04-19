@@ -1,3 +1,1 @@
-web: npm start 
-#asta
-#Simple WhatsApp Bot
+worker: npm start
