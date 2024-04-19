@@ -27,28 +27,36 @@ const {
     cmd
   } = require("../lib/plugins");
   
-  async function downloadFacebookVideo(_0x3a3af2, _0x5f4e7a) {
+  smd({
+    pattern: "facebook",
+    alias: ["fb", "fbdl"],
+    desc: "Downloads Facebook videos.",
+    category: "downloader",
+    filename: __filename,
+    use: "<add Facebook URL>"
+  }, async (message, input) => {
     try {
-      let _0xef90cc = _0x5f4e7a.split(" ")[0].trim();
-      if (!_0xef90cc || !_0xef90cc.startsWith("https://")) {
-        return await _0x3a3af2.send("*Please provide a valid Facebook Video URL*\n*Example: " + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093*");
+      let query = input.split(" ")[0].trim();
+      if (!query || !query.startsWith("https://")) {
+        return await message.send("*_Please provide a valid Facebook Video URL._*\n*Example: " + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093_*");
       }
-      let _0x3f4693 = await smdJson("https://api.maher-zubair.tech/download/fb?url=" + _0xef90cc);
-      if (!_0x3f4693 || !_0x3f4693.status) {
-        return await _0x3a3af2.reply("*Invalid Video URL!*");
+      let video = await smdJson("https://api-smd.onrender.com/api/fbdown?url=" + query);
+      if (!video || !video.status) {
+        return await message.reply("*Invalid Video URL!*");
       }
-      return await _0x3a3af2.bot.sendMessage(_0x3a3af2.chat, {
+      return await message.bot.sendMessage(message.chat, {
         video: {
-          url: _0x3f4693.result.video_hd
+          url: video.result.Normal_video // Assuming you want the normal quality video
         },
         caption: Config.caption
       }, {
-        quoted: _0x3a3af2
+        quoted: message
       });
-    } catch (_0x2c7814) {
-      await _0x3a3af2.error(_0x2c7814 + "\n\nCommand: facebook", _0x2c7814, "*Video not found!*");
+    } catch (error) {
+      await message.error(error + "\n\nCommand: facebook", error, "*_Video not found!_*");
     }
-  }
+  });
+
   
   smd({
     pattern: "facebook",
