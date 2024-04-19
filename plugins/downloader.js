@@ -155,7 +155,7 @@ const {
       const thumbnailUrl = result.thumb;
       const caption = `*Facebook Video*\n\n*Description:* ${result.desc}`;
   
-      await msg.bot.sendVideo(msg.chat, videoUrl, caption, thumbnailUrl, { quoted: msg });
+      await msg.sendMedia(videoUrl, { caption, thumbnail: thumbnailUrl, quoted: msg });
     } catch (err) {
       await msg.error(err + "\n\ncommand: facebook", err, "*_video not Found!!!_*");
     }
