@@ -26,12 +26,10 @@ const {
   const googleTTS = require("google-tts-api");
   const ytdl = require("ytdl-secktor");
   const yts = require("secktor-pack");
-  const cheerio = require("cheerio");
   const fs = require("fs-extra");
   const axios = require("axios");
   const fetch = require("node-fetch");
   var videotime = 2000;
-  var dlsize = 400;
   const {
     cmd
   } = require("../lib/plugins");
@@ -131,39 +129,37 @@ const {
       await _0x47fb55.error(_0x289d8e + "\n\ncommand: insta", _0x289d8e);
     }
   });
- smd({
-  pattern: "facebook",
-  alias: ["fb", "fbdl"],
-  desc: "Downloads fb videos.",
-  category: "downloader",
-  filename: __filename,
-  use: "<add fb url.>"
-}, async (msg, query) => {
-  try {
-    let url = query.split(" ")[0].trim();
-    if (!url || !url.startsWith("https://")) {
-      return await msg.send("*_Please Give me Facebook Video Url_*\n*Example _" + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093_*");
+  smd({
+    pattern: "facebook",
+    alias: ["fb", "fbdl"],
+    desc: "Downloads fb videos.",
+    category: "downloader",
+    filename: __filename,
+    use: "<add fb url.>"
+  }, async (msg, query) => {
+    try {
+      let url = query.split(" ")[0].trim();
+      if (!url || !url.startsWith("https://")) {
+        return await msg.send("*_Please Give me Facebook Video Url_*\n*Example _" + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093_*");
+      }
+  
+      let apiUrl = `https://api.maher-zubair.tech/download/fb?url=${encodeURIComponent(url)}`;
+      let response = await fetch(apiUrl).then(res => res.json());
+  
+      if (!response || response.status !== 200) {
+        return await msg.reply("*Invalid Video Url!*");
+      }
+  
+      const result = response.result;
+      const videoUrl = result.video_hd || result.video_sd; // Use HD video URL if available, else use SD
+      const thumbnailUrl = result.thumb;
+      const caption = `*Facebook Video*\n\n*Description:* ${result.desc}`;
+  
+      await msg.bot.sendVideo(msg.chat, videoUrl, caption, thumbnailUrl, { quoted: msg });
+    } catch (err) {
+      await msg.error(err + "\n\ncommand: facebook", err, "*_video not Found!!!_*");
     }
-
-    let apiUrl = `https://api-smd.onrender.com/api/fbdown?url=${encodeURIComponent(url)}`;
-    let response = await fetch(apiUrl).then(res => res.json());
-
-    if (!response || !response.status) {
-      return await msg.reply("*Invalid Video Url!*");
-    }
-
-    return await msg.bot.sendMessage(msg.chat, {
-      video: {
-        url: response.result.url
-      },
-      caption: Config.caption
-    }, {
-      quoted: msg
-    });
-  } catch (err) {
-    await msg.error(err + "\n\ncommand: facebook", err, "*_video not Found!!!_*");
-  }
-});
+  });
   smd({
     pattern: "apk",
     alias: ["modapk"],
@@ -261,6 +257,38 @@ const {
     }
   });
   smd({
+    pattern: "soundcloud",
+    alias: ["scdl", "scdownload"],
+    desc: "Download audio from SoundCloud.",
+    category: "downloader",
+    filename: __filename,
+    use: "<SoundCloud audio URL>"
+  }, async (msg, query) => {
+    try {
+      const url = query.trim();
+      if (!url) {
+        return await msg.reply("*Please provide a SoundCloud audio URL.*");
+      }
+  
+      const apiUrl = `https://api.maher-zubair.tech/download/soundcloud?url=${encodeURIComponent(url)}`;
+      const response = await fetch(apiUrl).then(res => res.json());
+  
+      if (!response || response.status !== 200) {
+        return await msg.reply("*An error occurred while downloading the SoundCloud audio.*");
+      }
+  
+      const result = response.result;
+      const audioUrl = result.link;
+      const thumbnailUrl = result.thumb;
+      const title = result.title;
+      const downloadCount = result.download_count;
+  
+      await msg.bot.sendAudio(msg.chat, audioUrl, title, downloadCount, thumbnailUrl, { quoted: msg });
+    } catch (err) {
+      await msg.error(err + "\n\ncommand: soundcloud", err, "*An error occurred while downloading the SoundCloud audio.*");
+    }
+  });
+  smd({
     pattern: "gitclone",
     desc: "Downloads apks  .",
     category: "downloader",
@@ -270,7 +298,7 @@ const {
     try {
       let _0x59e849 = _0x1c586e ? _0x1c586e : _0x1ae8f8.reply_message ? _0x1ae8f8.reply_message.text : "";
       if (!_0x1c586e) {
-        return await _0x1ae8f8.reply("*Provide Repo Url, _.gitclone https://github.com/SuhailTechInfo/Suhail-Md_*");
+        return await _0x1ae8f8.reply("*Provide Repo Url, _.gitclone https://github.com/Astropeda/Asta-Md_*");
       }
       const _0x5906ab = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i;
       if (!_0x5906ab.test(_0x1c586e)) {
@@ -294,6 +322,33 @@ const {
     }
   });
   const ytIdRegex = /(?:http(?:s|):\/\/|)(?:(?:www\.|)youtube(?:\-nocookie|)\.com\/(?:watch\?.*(?:|\&)v=|embed|shorts\/|v\/)|youtu\.be\/)([-_0-9A-Za-z]{11})/;
+  smd({
+    pattern: "tiktokimg",
+    alias: ["tiktokpic", "tiktokphoto"],
+    desc: "Download TikTok image.",
+    category: "downloader",
+    filename: __filename,
+    use: "<TikTok video URL>"
+  }, async (msg, query) => {
+    try {
+      const url = query.trim();
+      if (!url) {
+        return await msg.reply("*Please provide a TikTok video URL.*");
+      }
+  
+      const apiUrl = `api.maher-zubair.tech/download/tiktokimg?url=${encodeURIComponent(url)}`;
+      const response = await fetch(apiUrl).then(res => res.json());
+  
+      if (!response || response.status !== 200) {
+        return await msg.reply("*An error occurred while downloading the TikTok image.*");
+      }
+  
+      const imageUrl = response.result[0];
+      await msg.bot.sendImage(msg.chat, imageUrl, null, { quoted: msg });
+    } catch (err) {
+      await msg.error(err + "\n\ncommand: tiktokimg", err, "*An error occurred while downloading the TikTok image.*");
+    }
+  });
   smd({
     pattern: "tts",
     desc: "text to speech.",
