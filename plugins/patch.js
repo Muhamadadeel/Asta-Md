@@ -237,7 +237,7 @@ astro_patch.smd(
         menuThemeFooter = "┃✯╰───────────────\n╰═════════════════⊷";
         menuThemeCategoryHeader = "╭════〘";
         menuThemeCategoryFooter = "〙════⊷❍";
-        menuThemeCommandPrefix = "┃✯│";
+        menuThemeCommandPrefix = "\n┃✯│";
         menuThemeCommandFooter = "┃✯╰─────────────────❍\n╰══════════════════⊷❍";
       } else if (
         menuThemeType === 2 ||
@@ -300,10 +300,10 @@ ${menuThemeCommandPrefix} *ᴅᴀᴛᴇ:* ${currentDate}
 ${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
 ${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
 ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
-${menuThemeFooter}\n                         
+${menuThemeFooter}                         
 \t*ᴀsᴛᴀ ᴘᴀᴛᴄʜ 𝟸.𝟶.𝟶*
 \t*A͏S͏T͏A͏ M͏D͏ 2͏0͏2͏4͏*
-\n${readmore}\n`;
+${readmore}\n`;
 
       for (const category in categorizedCommands) {
         menuText += `
