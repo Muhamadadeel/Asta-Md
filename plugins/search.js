@@ -140,7 +140,7 @@ smd(
       );
     try {
       const res = await (
-        await fetch(`https://api.maher-zubair.tech/ai/chatgptv4?q=${text}`)
+        await fetch(`https://api.maher-zubair.tech/search/lyrics?q=${text}`)
       ).json();
       if (!res.status) return message.send("*Please Provide valid name!!!*");
       if (!res.result)
@@ -192,10 +192,6 @@ smd(
       if (!res.status) return message.send("*Please Provide valid name!!!*");
       if (!res.result)
         return message.send("*There's a problem, try again later!*");
-      const { thumb, lyrics, title, artist } = res.result,
-        tbl = "```",
-        tcl = "*",
-        tdl = "_*",
         contextInfo = {
           externalAdReply: {
             ...(await message.bot.contextInfo("*ASTA*-𝗠𝗗", `GPT-${text}`)),
@@ -209,7 +205,7 @@ smd(
       return await message.error(
         `${e}\n\n command: ${cmdName}`,
         e,
-        `*_Didn't get any lyrics, Sorry!_*`
+        `*_Failed_*`
       );
     }
   }
