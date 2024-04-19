@@ -117,11 +117,6 @@
       "value": "",
       "required": false 
     },
-    "STACK": {
-      "description": "STACK NAME ",
-      "value": "",
-      "required": false 
-    },
     "GOODBYE": {
       "description": "put 'false' or 'true' to enable & disable GOODBYE ",
       "value": "false",

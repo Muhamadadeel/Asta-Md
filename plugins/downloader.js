@@ -26,7 +26,53 @@ const {
   const {
     cmd
   } = require("../lib/plugins");
+  smd(
+    {
+      pattern: "twitter",
+      alias: ["tw", "twdl"],
+      desc: "Downloads Twitter videos.",
+      category: "downloader",
+      filename: __filename,
+      use: "<add Twitter URL>",
+    },
+    async (message, input) => {
+      try {
+        let query = input.split(" ")[0].trim();
+        if (!query || !query.startsWith("https://")) {
+          return await message.send(
+            "*_Please provide a valid Twitter Video URL._*\n*Example: " +
+              prefix +
+              "tw https://twitter.com/username/status/1234567890_*"
+          );
+        }
+  
+        let video = await smdJson(
+          "https://api.maher-zubair.tech/download/twitter?url=" + query
+        );
+  
+        if (!video || !video.status === 200) {
+          return await message.reply("*Invalid Video URL!*");
+        }
+  
+        let caption = video.data.caption
+          ? video.data.caption
+          : `*Twitter Video Download*\n\n*Username:* ${video.data.username}`;
+  
+        return await message.bot.sendMessage(
+          message.chat,
+          {
+            video: { url: video.data.HD },
+            caption: caption,
+          },
+          { quoted: message }
+        );
+      } catch (error) {
+        await message.error(error + "\n\nCommand: twitter", error, "*_Video not found!_*");
+      }
+    }
+  );
   //FIXED FB
+
   smd({
     pattern: "facebook",
     alias: ["fb", "fbdl"],

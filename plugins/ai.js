@@ -9,10 +9,8 @@ const {
   sleep,
 } = require("../lib");
 const axios = require("axios");
+const { send } = require("../lib");
 const fetch = require("node-fetch");
-const os = require("os");
-const speed = require("performance-now");
-const API_KEY = "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";
 function _0x2a0d(_0x32de74, _0xce23fd) {
   const _0x3ffb1a = _0x2953();
   _0x2a0d = function (_0x151552, _0x18c062) {
