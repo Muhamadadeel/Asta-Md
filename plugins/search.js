@@ -186,7 +186,7 @@ smd({
 
     const { result } = res;
     const tbl = "```";
-    await send(message, `${tbl}${result}${tbl}`);
+    await send(message, `𝘼𝙎𝙏𝘼 𝙂𝙋𝙏4 𝙏𝙐𝙍𝘽𝙊\n${tbl}${result}${tbl}`);
   } catch (e) {
     return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
   }
