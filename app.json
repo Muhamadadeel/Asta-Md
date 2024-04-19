@@ -5,11 +5,6 @@
   "keywords": "Asta-Md",
   
   "env": {
-    "OWNER_NAME": {
-      "description": "Name for Bot Owner",    
-      "value": "Astro",
-      "required" :true
-    },   
     "HEROKU_API_KEY": {
       "description": "Put Your Heroku Api Key Here",
       "value": "",
@@ -20,10 +15,15 @@
       "value": "",
     "required" :true
     },
+    "OWNER_NAME": {
+      "description": "Name for Bot Owner",    
+      "value": "Astro",
+      "required" :true
+    }, 
     "BOT_NAME": {
       "description": " NAME FOR BOT",
       "required" :false,    
-      "value": "𝘼𝙎𝙏𝘼 𝙈𝘿"
+      "value": "ᴀsᴛᴀ-ᴍᴅ"
     }, 
     "PREFIX": {
       "description": "Enter your desired prefix for bot. you can set `all | . | .!*`",
@@ -109,7 +109,7 @@
     },
     "PACK_NAME": {
       "description": "Put Sticker Pack_Name.",
-      "value": "𝘼𝙎𝙏𝘼 𝙈𝘿",
+      "value": "ᴀsᴛᴀ-ᴍᴅ",
       "required": false 
     },
     "PACK_AUTHER": {
