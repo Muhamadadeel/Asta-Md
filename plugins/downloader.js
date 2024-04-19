@@ -29,49 +29,30 @@ const {
   smd({
     pattern: "facebook",
     alias: ["fb", "fbdl"],
-    desc: "Downloads Facebook videos.",
+    desc: "Downloads fb videos.",
     category: "downloader",
     filename: __filename,
-    use: "<Facebook video URL>"
-  }, async (msg, query) => {
+    use: "<add fb url.>"
+  }, async (_0x3a3af2, _0x5f4e7a) => {
     try {
-      const url = query.trim();
-      if (!url || !url.startsWith("https://")) {
-        return await msg.send("*_Please provide a valid Facebook video URL._*\n*Example:* " + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093");
+      let _0xef90cc = _0x5f4e7a.split(" ")[0].trim();
+      if (!_0xef90cc || !_0xef90cc.startsWith("https://")) {
+        return await _0x3a3af2.send("*_Please Give me Facebook Video Url_*\n*Example _" + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093_*");
       }
-  
-      const apiUrl = `https://api.maher-zubair.tech/download/alldownload?url=${encodeURIComponent(url)}`;
-      const response = await fetch(apiUrl).then(res => res.json());
-  
-      if (!response || response.status !== 200) {
-        return await msg.reply("*An error occurred while downloading the Facebook video.*");
+      let _0x3f4693 = await smdJson(api_smd + "/api/fb?url=" + _0xef90cc);
+      if (!_0x3f4693 || !_0x3f4693.status) {
+        return await _0x3a3af2.reply("*Invalid Video Url!*");
       }
-  
-      const result = response.result;
-      const thumbnail = result.thumbnail;
-      const caption = `*${result.title}*`;
-  
-      const tempDir = path.join(__dirname, '..', 'temp');
-      fs.mkdirSync(tempDir, { recursive: true });
-  
-      for (const media of result.medias) {
-        if (media.videoAvailable) {
-          const mediaUrl = media.url;
-          const extension = media.extension;
-          const formattedSize = media.formattedSize;
-  
-          const tempFilePath = path.join(tempDir, `video.${extension}`);
-  
-          const mediaResponse = await fetch(mediaUrl);
-          const mediaBuffer = await mediaResponse.buffer();
-  
-          fs.writeFileSync(tempFilePath, mediaBuffer);
-  
-          await msg.bot.sendFile(msg.chat, tempFilePath, { caption, thumbnail, quoted: msg });
-        }
-      }
-    } catch (err) {
-      await msg.error(err + "\n\ncommand: facebook", err, "*An error occurred while downloading the Facebook video.*");
+      return await _0x3a3af2.bot.sendMessage(_0x3a3af2.chat, {
+        video: {
+          url: _0x3f4693.result.urls[0].url
+        },
+        caption: Config.caption
+      }, {
+        quoted: _0x3a3af2
+      });
+    } catch (_0x2c7814) {
+      await _0x3a3af2.error(_0x2c7814 + "\n\ncommand: facebook", _0x2c7814, "*_video not Found!!!_*");
     }
   });
   smd({
