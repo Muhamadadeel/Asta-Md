@@ -18,7 +18,6 @@ let {
   smd,
   bot,
 } = require("../lib");
-let tinyChrmap = require("../lib/stylish-font")
 const util = require("util");
 const { cmd } = require("../lib/plugins");
 const astro_patch = require("../lib/plugins");
@@ -264,7 +263,7 @@ astro_patch.smd(
       }
 
       const categorizedCommands = {};
-      commands.map(async (command, index) => {
+      commands.map(async (command) => {
         if (
           command.dontAddCommandList === false &&
           command.pattern !== undefined
@@ -940,7 +939,6 @@ smd(
     }
   ) => {
     const _0x210c92 = _0x213c;
-    let _0x3efef6 = _0x460b55;
     try {
       if (!cronStart) {
         cron[_0x210c92(372)](_0x210c92(394), () => {
@@ -1074,19 +1072,10 @@ smd(
   },
   async (
     msg,
-    text,
+    _text,
     {
-      mek,
-      body,
-      args,
-      botNumber,
-      isCreator,
-      icmd,
-      store,
       budy,
-      Suhail,
       Void,
-      proto,
     }
   ) => {
     const _0xd6a12a = _0x1571;
@@ -1142,13 +1131,7 @@ smd(
         }
       }
     })(_0x2edb, 731357);
-    let conn = Void;
-    let sock = Void;
     let citel = msg;
-    let message = msg;
-    let m = msg;
-    let jid = msg[_0xd6a12a(455)];
-    let client = Void;
     function _0x1571(_0x262039, _0x151011) {
       const _0x2edb64 = _0x2edb();
       _0x1571 = function (_0x15719d, _0x45ddb3) {
@@ -1159,7 +1142,6 @@ smd(
       return _0x1571(_0x262039, _0x151011);
     }
     const { send, reply, react, sendMessage } = msg;
-    let $ = "";
     if (msg[_0xd6a12a(462)]) {
       if (
         !Config.HANDLERS[_0xd6a12a(475)](">") &&
