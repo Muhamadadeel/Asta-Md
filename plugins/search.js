@@ -140,7 +140,7 @@ smd(
       );
     try {
       const res = await (
-        await fetch(`https://api.maher-zubair.tech/search/lyrics?q=${text}`)
+        await fetch(`https://api.maher-zubair.tech/ai/chatgptv4?q=${text}`)
       ).json();
       if (!res.status) return message.send("*Please Provide valid name!!!*");
       if (!res.result)
