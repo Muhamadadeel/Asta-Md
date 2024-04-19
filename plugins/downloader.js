@@ -151,7 +151,7 @@ const {
       }
   
       const result = response.result;
-      const videoUrl = result.video_hd || result.video_sd; // Use HD video URL if available, else use SD
+      const videoUrl = result.video_hd; //|| result.video_sd; // Use HD video URL if available, else use SD
       const thumbnailUrl = result.thumb;
       const caption = `*Facebook Video*\n\n*Description:* ${result.desc}`;
   
