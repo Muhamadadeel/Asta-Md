@@ -5,6 +5,7 @@ const {
     yt,
     getBuffer,
     smdBuffer,
+    smdJson,
     pinterest,
     prefix,
     Config,
