@@ -25,60 +25,55 @@ const {
   const {
     cmd
   } = require("../lib/plugins");
-
-smd({
-  pattern: "facebook",
-  alias: ["fb", "fbdl"],
-  desc: "Downloads Facebook videos.",
-  category: "downloader",
-  filename: __filename,
-  use: "<Facebook video URL>"
-}, async (msg, query) => {
-  try {
-    const url = query.trim();
-    if (!url || !url.startsWith("https://")) {
-      return await msg.send("*_Please provide a valid Facebook video URL._*\n*Example:* " + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093");
-    }
-
-    const apiUrl = `https://api.maher-zubair.tech/download/alldownload?url=${encodeURIComponent(url)}`;
-    const response = await fetch(apiUrl).then(res => res.json());
-
-    if (!response || response.status !== 200) {
-      return await msg.reply("*An error occurred while downloading the Facebook video.*");
-    }
-
-    const result = response.result;
-    const thumbnail = result.thumbnail;
-    const caption = `*${result.title}*`;
-
-    const tempDir = path.join(__dirname, '..', 'temp');
-    fs.mkdirSync(tempDir, { recursive: true });
-
-    for (const media of result.medias) {
-      if (media.videoAvailable) {
-        const mediaUrl = media.url;
-        const extension = media.extension;
-        const formattedSize = media.formattedSize;
-
-        const tempFilePath = path.join(tempDir, `video.${extension}`);
-
-        await msg.send(`*File:* ${mediaUrl}\n*Extension:* ${extension}\n*Size:* ${formattedSize}`);
-
-        // Download the media file
-        const mediaResponse = await fetch(mediaUrl);
-        const mediaBuffer = await mediaResponse.buffer();
-
-        // Save the media file to the temporary directory
-        fs.writeFileSync(tempFilePath, mediaBuffer);
-
-        // Send the media file from the temporary directory
-        await msg.bot.sendFile(msg.chat, tempFilePath, { caption, thumbnail, quoted: msg });
+  
+  smd({
+    pattern: "facebook",
+    alias: ["fb", "fbdl"],
+    desc: "Downloads Facebook videos.",
+    category: "downloader",
+    filename: __filename,
+    use: "<Facebook video URL>"
+  }, async (msg, query) => {
+    try {
+      const url = query.trim();
+      if (!url || !url.startsWith("https://")) {
+        return await msg.send("*_Please provide a valid Facebook video URL._*\n*Example:* " + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093");
       }
+  
+      const apiUrl = `https://api.maher-zubair.tech/download/alldownload?url=${encodeURIComponent(url)}`;
+      const response = await fetch(apiUrl).then(res => res.json());
+  
+      if (!response || response.status !== 200) {
+        return await msg.reply("*An error occurred while downloading the Facebook video.*");
+      }
+  
+      const result = response.result;
+      const thumbnail = result.thumbnail;
+      const caption = `*${result.title}*`;
+  
+      const tempDir = path.join(__dirname, '..', 'temp');
+      fs.mkdirSync(tempDir, { recursive: true });
+  
+      for (const media of result.medias) {
+        if (media.videoAvailable) {
+          const mediaUrl = media.url;
+          const extension = media.extension;
+          const formattedSize = media.formattedSize;
+  
+          const tempFilePath = path.join(tempDir, `video.${extension}`);
+  
+          const mediaResponse = await fetch(mediaUrl);
+          const mediaBuffer = await mediaResponse.buffer();
+  
+          fs.writeFileSync(tempFilePath, mediaBuffer);
+  
+          await msg.bot.sendFile(msg.chat, tempFilePath, { caption, thumbnail, quoted: msg });
+        }
+      }
+    } catch (err) {
+      await msg.error(err + "\n\ncommand: facebook", err, "*An error occurred while downloading the Facebook video.*");
     }
-  } catch (err) {
-    await msg.error(err + "\n\ncommand: facebook", err, "*An error occurred while downloading the Facebook video.*");
-  }
-});
+  });
   smd({
     pattern: "tgs",
     desc: "Downloads telegram stickers.",
