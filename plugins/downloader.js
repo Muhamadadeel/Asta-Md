@@ -26,7 +26,7 @@ const {
   const {
     cmd
   } = require("../lib/plugins");
-  
+  //FIXED FB
   smd({
     pattern: "facebook",
     alias: ["fb", "fbdl"],
