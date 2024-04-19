@@ -171,7 +171,6 @@ smd(
 );
 smd({
   pattern: "gpt4",
-  alias: ["chat"],
   category: "ai",
   desc: "Chat with GPT-4 AI model",
   use: "<text>",
