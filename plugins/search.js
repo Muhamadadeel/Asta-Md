@@ -4,6 +4,38 @@ let gis = require("async-g-i-s");
 const axios = require("axios");
 const fetch = require("node-fetch");
 const { shazam } = require("../lib");
+smd({
+  pattern: "bing",
+  alias: ["bingsearch"],
+  desc: "Search on Bing.",
+  category: "search",
+  filename: __filename,
+  use: "<search query>"
+}, async (msg, query) => {
+  try {
+    if (!query) {
+      return await msg.reply("*Please provide a search query.*");
+    }
+
+    const apiUrl = `https://api-smd.onrender.com/api/bingsearch?query=${encodeURIComponent(query)}`;
+    const response = await fetch(apiUrl).then(res => res.json());
+
+    if (!response || !response.status) {
+      return await msg.reply("*An error occurred while fetching the search results.*");
+    }
+
+    const results = response.result;
+    let resultText = `*Bing Search Results for "${query}"*\n\n`;
+
+    for (const result of results) {
+      resultText += `*Title:* ${result.title}\n*Description:* ${result.description}\n*URL:* ${result.url}\n\n`;
+    }
+
+    await msg.reply(resultText);
+  } catch (err) {
+    await msg.error(err + "\n\ncommand: bing", err, "*An error occurred while searching on Bing.*");
+  }
+});
 smd(
   {
     pattern: "shazam",
