@@ -289,9 +289,8 @@ ${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
 ${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
 ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
 ${menuThemeFooter}                         
-\t*ᴀsᴛᴀ ᴘᴀᴛᴄʜ 𝟸.𝟶.𝟶*
-\t*A͏S͏T͏A͏ M͏D͏ 2͏0͏2͏4͏*
-${readmore}\n`;
+*ᴀsᴛᴀ ᴘᴀᴛᴄʜ 𝟸.𝟶.𝟶*
+${readmore}`;
 
       for (const category in categorizedCommands) {
         menuText += `
@@ -502,7 +501,7 @@ astro_patch.smd(
     const endTime = new Date().getTime();
     const pingTime = endTime - startTime;
     await context.send(
-      `*𝓛𝓪𝓽𝓮𝓷𝓬𝔂*\n *${pingTime} 𝖒𝖘*`,
+      `*ʟᴀᴛᴇɴᴄʏ: ${pingTime} ᴍs*`,
       { edit: messageKey },
       "",
       context
