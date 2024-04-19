@@ -1,6 +1,6 @@
-# Security Policy
+# Security Notice
 
-## Supported Versions Node Versions
+## Supported Versions Node Versions to run this bot
 
 Please Use Node Version Higher to Get The Best Performance.
 
