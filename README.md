@@ -3,13 +3,12 @@
 ***
 
 ### ᴀsᴛᴀ ᴍᴅ ᴜᴘᴅᴀᴛᴇ 2.0.0 ᴘᴀᴛᴄʜ
-##### Read Patch Notice Here
+##### Get Latest Info
 [Channel](https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z)
 
 ### SETUP
 <center>
-<a href="https://github.com/Astropeda/Asta-Md/fork"><img title="ASTA-MD" src="https://img.shields.io/badge/FORK ASTA-MD-h?color=black&style=for-the-badge&logo=stackshare"></a>  <a href="https://serene-beach-54692-d5c00ba4412f.herokuapp.com/"><img title="SCAN QR" src="https://img.shields.io/badge/SCAN QR SERVER 1-h?color=black&style=for-the-badge&logo=msi"></a>   <a href="https://asta-web-scan.onrender.com"><img title="SCAN QR" src="https://img.shields.io/badge/SCAN QR SERVER 2-h?color=black&style=for-the-badge&logo=msi"></a>  <a href="https://replit.com/@astromedia0010/Asta-Paring-Code"><img title="SCAN QR" src="https://img.shields.io/badge/PARING CODE 1-h?color=black&style=for-the-badge&logo=msi"></a>  <a href=""><img title="SCAN QR" src="https://img.shields.io/badge/PARING CODE 2-h?color=black&style=for-the-badge&logo=msi"></a>
-</center>
+<a href="https://github.com/Astropeda/Asta-Md/fork"><img title="ASTA-MD" src="https://img.shields.io/badge/FORK ASTA-MD-h?color=black&style=for-the-badge&logo=stackshare"></a>  <a href="https://asta-code-app-9b7d929f3f62.herokuapp.com/"><img title="GET SESSION" src="https://img.shields.io/badge/GET SESSION -h?color=black&style=for-the-badge&logo=msi"></a>
 
 ### ASTA Deploy Methods
 
