@@ -56,16 +56,6 @@ const {
       await message.error(error + "\n\nCommand: facebook", error, "*_Video not found!_*");
     }
   });
-
-  
-  smd({
-    pattern: "facebook",
-    alias: ["fb", "fbdl"],
-    desc: "Downloads Facebook videos.",
-    category: "downloader",
-    filename: __filename,
-    use: "<add Facebook video URL>"
-  }, downloadFacebookVideo);
   
   smd({
     pattern: "tgs",
