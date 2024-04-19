@@ -3,6 +3,7 @@ const {
   TelegraPh,
   aitts,
   smd,
+  send,
   prefix,
   Config,
   parsedJid,
