@@ -191,6 +191,28 @@ smd({
     return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
   }
 });
+smd({
+  pattern: "bard",
+  category: "ai",
+  desc: "Chat with Bard AI model",
+  use: "<text>",
+  filename: __filename,
+}, async (message, text, { cmdName }) => {
+  if (!text) return message.reply(`*_Please provide a query_*\n*_Example ${prefix + cmdName} What is the meaning of life?_*`);
+
+  try {
+    const res = await (await fetch(`https://api.maher-zubair.tech/ai/bard?q=${text}`)).json();
+
+    if (!res.status === 200) return message.send("*There's a problem, try again later!*");
+
+    const { result } = res;
+    const astro = "𝘼𝙎𝙏𝘼 𝘽𝘼𝙍𝘿 𝘼𝙄"
+    const tbl = "```";
+    await send(message, `${astro}${tbl}${result}${tbl}`);
+  } catch (e) {
+    return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
+  }
+});
 smd(
   {
     pattern: "imdb",
