@@ -192,7 +192,7 @@ smd({
   }
 });
 smd({
-  pattern: "bard",
+  pattern: "gemini",
   category: "ai",
   desc: "Chat with Bard AI model",
   use: "<text>",
