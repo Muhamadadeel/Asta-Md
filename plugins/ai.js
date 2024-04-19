@@ -190,6 +190,50 @@ async function aiResponce(_0x109acf, _0xf00650, _0x2728a0 = "") {
     return _0x242f00(273);
   }
 }
+smd({
+  pattern: "gpt4",
+  category: "ai",
+  desc: "Chat with GPT-4 AI model",
+  use: "<text>",
+  filename: __filename,
+}, async (message, text, { cmdName }) => {
+  if (!text) return message.reply(`*_Please provide a query_*\n*_Example ${prefix + cmdName} What is the meaning of life?_*`);
+
+  try {
+    const res = await (await fetch(`https://api.maher-zubair.tech/ai/chatgptv4?q=${text}`)).json();
+
+    if (!res.status === 200) return message.send("*There's a problem, try again later!*");
+
+    const { result } = res;
+    const astro = "𝘼𝙎𝙏𝘼 𝙂𝙋𝙏4\n "
+    const tbl = "```";
+    await send(message, `${astro}${tbl}${result}${tbl}`);
+  } catch (e) {
+    return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
+  }
+});
+smd({
+  pattern: "gemini",
+  category: "ai",
+  desc: "Chat with Bard AI model",
+  use: "<text>",
+  filename: __filename,
+}, async (message, text, { cmdName }) => {
+  if (!text) return message.reply(`*_Please provide a query_*\n*_Example ${prefix + cmdName} What is the meaning of life?_*`);
+
+  try {
+    const res = await (await fetch(`https://api.maher-zubair.tech/ai/gemini?q=${text}`)).json();
+
+    if (!res.status === 200) return message.send("*There's a problem, try again later!*");
+
+    const { result } = res;
+    const astro = "𝘼𝙎𝙏𝘼*GEMINI* 𝘼𝙄"
+    const tbl = "```";
+    await send(message, `${astro}${tbl}${result}${tbl}`);
+  } catch (e) {
+    return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
+  }
+});
 smd(
   {
     cmdname: "alexa",
