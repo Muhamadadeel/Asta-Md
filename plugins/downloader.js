@@ -156,7 +156,7 @@ const {
   
       for (const media of result.medias) {
         if (media.videoAvailable) {
-          await msg.sendMessage(media.url, { caption, thumbnail, quoted: msg });
+          await msg.send( /*media.url, */ result, /*{ caption, thumbnail, quoted: msg }*/);
         }
       }
     } catch (err) {
