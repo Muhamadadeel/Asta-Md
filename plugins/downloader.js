@@ -132,32 +132,35 @@ const {
   smd({
     pattern: "facebook",
     alias: ["fb", "fbdl"],
-    desc: "Downloads fb videos.",
+    desc: "Downloads Facebook videos.",
     category: "downloader",
     filename: __filename,
-    use: "<add fb url.>"
+    use: "<Facebook video URL>"
   }, async (msg, query) => {
     try {
-      let url = query.split(" ")[0].trim();
+      const url = query.trim();
       if (!url || !url.startsWith("https://")) {
-        return await msg.send("*_Please Give me Facebook Video Url_*\n*Example _" + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093_*");
+        return await msg.send("*_Please provide a valid Facebook video URL._*\n*Example:* " + prefix + "fb https://www.facebook.com/watch/?v=2018727118289093");
       }
   
-      let apiUrl = `https://api.maher-zubair.tech/download/fb?url=${encodeURIComponent(url)}`;
-      let response = await fetch(apiUrl).then(res => res.json());
+      const apiUrl = `https://api.maher-zubair.tech/download/alldownload?url=${encodeURIComponent(url)}`;
+      const response = await fetch(apiUrl).then(res => res.json());
   
       if (!response || response.status !== 200) {
-        return await msg.reply("*Invalid Video Url!*");
+        return await msg.reply("*An error occurred while downloading the Facebook video.*");
       }
   
       const result = response.result;
-      const videoUrl = result.video_hd; //|| result.video_sd; // Use HD video URL if available, else use SD
-      const thumbnailUrl = result.thumb;
-      const caption = `*Facebook Video*\n\n*Description:* ${result.desc}`;
+      const thumbnail = result.thumbnail;
+      const caption = `*${result.title}*`;
   
-      await msg.sendMessage(videoUrl, { caption, thumbnail: thumbnailUrl, quoted: msg });
+      for (const media of result.medias) {
+        if (media.videoAvailable) {
+          await msg.sendMedia(media.url, { caption, thumbnail, quoted: msg });
+        }
+      }
     } catch (err) {
-      await msg.error(err + "\n\ncommand: facebook", err, "*_video not Found!!!_*");
+      await msg.error(err + "\n\ncommand: facebook", err, "*An error occurred while downloading the Facebook video.*");
     }
   });
   smd({
