@@ -169,47 +169,37 @@ smd(
     }
   }
 );
-smd(
-  {
-    pattern: "gpt4",
-    category: "ai",
-    desc: "Searche lyrics of given song name",
-    use: "<text | song>",
-    filename: __filename,
-  },
+smd({
+  pattern: "gpt4",
+  alias: ["chat"],
+  category: "ai",
+  desc: "Chat with GPT-4 AI model",
+  use: "<text>",
+  filename: __filename,
+}, async (message, text, { cmdName }) => {
+  if (!text) return message.reply(`*_Please provide a query_*\n*_Example ${prefix + cmdName} What is the meaning of life?_*`);
 
-  async (message, text, { cmdName }) => {
-    if (!text)
-      return message.reply(
-        `*Huh Ask me Something ${
-          prefix + cmdName
-        } blue eyes punjabi_*`
-      );
-    try {
-      const res = await (
-        await fetch(`https://api.maher-zubair.tech/ai/chatgptv4?q=${text}`)
-      ).json();
-      if (!res.status) return message.send("*Please Provide valid name!!!*");
-      if (!res.result)
-        return message.send("*There's a problem, try again later!*");
-        contextInfo = {
-          externalAdReply: {
-            ...(await message.bot.contextInfo("*ASTA*-𝗠𝗗", `GPT-${text}`)),
-          },
-        };
-      await send(
-        message,{ contextInfo: contextInfo },
-        ""
-      );
-    } catch (e) {
-      return await message.error(
-        `${e}\n\n command: ${cmdName}`,
-        e,
-        `*_Failed_*`
-      );
-    }
+  try {
+    const res = await (await fetch(`https://api.maher-zubair.tech/ai/chatgptv4?q=${text}`)).json();
+
+    if (!res.status === 200) return message.send("*There's a problem, try again later!*");
+
+    const { creator, result } = res;
+
+    const tbl = "```";
+    const tcl = "*";
+    const tdl = "_*";
+    const contextInfo = {
+      externalAdReply: {
+        ...(await message.bot.contextInfo("*ASTA*-𝗠𝗗", `GPT-4 AI`)),
+      },
+    };
+
+    await send(message, `${tcl}Creator:${tdl} ${creator}\n${tbl}${result}${tbl}`, { contextInfo }, "");
+  } catch (e) {
+    return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
   }
-);
+});
 smd(
   {
     pattern: "imdb",
