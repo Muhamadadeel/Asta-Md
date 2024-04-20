@@ -645,24 +645,6 @@ astro_patch.cmd(
   async (_0x1d5ddc) => {
     try {
       const { commands: _0x7cfe13 } = require("../lib");
-      let _0x95885d =
-        "\n  ╭━━〘 *" +
-        Config.botname +
-        "* 〙────⊷     \n  ┃ ✭ Theme: " +
-        tlang().title +
-        "\n  ┃ ✭ Prefix: " +
-        prefix +
-        "\n  ┃ ✭ Owner: " +
-        Config.ownername +
-        "\n  ┃ ✭ Commands: " +
-        _0x7cfe13.length +
-        "\n  ┃ ✭ Uptime: " +
-        runtime(process.uptime()) +
-        "\n  ┃ ✭ Mem: " +
-        formatp(os.totalmem() - os.freemem()) +
-        "/" +
-        formatp(os.totalmem()) +
-        "\n  ╰━━━━━━━━━━━━━━⊷\n";
       for (let _0x2bd72c = 0; _0x2bd72c < _0x7cfe13.length; _0x2bd72c++) {
         if (_0x7cfe13[_0x2bd72c].pattern == undefined) {
           continue;
