@@ -8,6 +8,123 @@ const {
   send,
   Config
 } = require("../lib/");
+const axios = require('axios');
+
+smd(
+  {
+    pattern: "guessage",
+    alias: ["age"],
+    desc: "Guesses the age of a person based on their name.",
+    category: "fun",
+    use: "guessage [name]",
+    examples: ["guessage John", "guessage Emily"]
+  },
+  async (message, input) => {
+    const name = input;
+
+    if (!name) {
+      return message.reply("Please provide a name to guess the age.");
+    }
+
+    try {
+      const response = await axios.get(`https://api.agify.io/?name=${name}`);
+      const { count, age } = response.data;
+
+      const output = `
+*Name:* ${name}
+*Estimated Age:* ${age}
+*Count:* ${count}
+      `;
+
+      await message.send(output);
+    } catch (error) {
+      await message.error(
+        error + "\n\nCommand: guessage",
+        error,
+        "Failed to guess age."
+      );
+    }
+  }
+);
+smd(
+  {
+    pattern: "guesscountry",
+    alias: ["country"],
+    desc: "Guesses the likely countries associated with a name.",
+    category: "fun",
+    use: "guesscountry [name]",
+    examples: ["guesscountry Michael", "guesscountry Fatima"]
+  },
+  async (message, input) => {
+    const name = input;
+
+    if (!name) {
+      return message.reply("Please provide a name to guess the country.");
+    }
+
+    try {
+      const response = await axios.get(`https://api.nationalize.io/?name=${name}`);
+      const { count, country } = response.data;
+
+      let output = `
+*Name:* ${name}
+*Count:* ${count}
+*Likely Countries:*
+`;
+
+      country.forEach((c, index) => {
+        output += `\n${index + 1}. ${c.country_id} (${(c.probability * 100).toFixed(2)}%)`;
+      });
+
+      await message.send(output);
+    } catch (error) {
+      await message.error(
+        error + "\n\nCommand: guesscountry",
+        error,
+        "Failed to guess country."
+      );
+    }
+  }
+);
+
+smd(
+  {
+    pattern: "guessgender",
+    alias: ["gender"],
+    desc: "Guesses the gender of a person based on their name.",
+    category: "fun",
+    use: "guessgender [name]",
+    examples: ["guessgender David", "guessgender Sarah"]
+  },
+  async (message, input) => {
+    const name = input;
+
+    if (!name) {
+      return message.reply("Please provide a name to guess the gender.");
+    }
+
+    try {
+      const response = await axios.get(`https://api.genderize.io/?name=${name}`);
+      const { count, gender, probability } = response.data;
+
+      const output = `
+*Name:* ${name}
+*Estimated Gender:* ${gender}
+*Probability:* ${(probability * 100).toFixed(2)}%
+*Count:* ${count}
+      `;
+
+      await message.send(output);
+    } catch (error) {
+      await message.error(
+        error + "\n\nCommand: guessgender",
+        error,
+        "Failed to guess gender."
+      );
+    }
+  }
+);
+
 const astro_patch_numGuess = {};
 class GuessingGame {
   constructor() {

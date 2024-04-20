@@ -5,6 +5,48 @@ const cheerio = require("cheerio");
 const Config = require("../config");
 const { react } = require("../lib/Asta");
 let s_ser = true;
+const axios = require('axios');
+
+(
+  {
+    pattern: "zip",
+    alias: ["zipcode"],
+    desc: "Provides information about a US zip code.",
+    category: "tools",
+    use: "zip [zip_code]",
+    examples: ["zip 90001", "zip 33162"]
+  },
+  async (message, input) => {
+    const zipCode = input;
+
+    if (!zipCode) {
+      return message.reply("Please provide a zip code.");
+    }
+
+    try {
+      const response = await axios.get(`https://api.zippopotam.us/us/${zipCode}`);
+      const { postCode, country, countryAbbreviation, places } = response.data;
+
+      let output = `
+*Zip Code:* ${postCode}
+*Country:* ${country} (${countryAbbreviation})
+*Places:*
+`;
+
+      places.forEach((place, index) => {
+        output += `\n${index + 1}. ${place["place name"]}, ${place.state} (${place.latitude}, ${place.longitude})`;
+      });
+
+      await message.send(output);
+    } catch (error) {
+      await message.error(
+        error + "\n\nCommand: zip",
+        error,
+        "Failed to retrieve zip code information."
+      );
+    }
+  }
+);
 smd(
   {
     pattern: "channel",
