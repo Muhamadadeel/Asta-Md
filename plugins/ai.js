@@ -1,9 +1,7 @@
 const fs = require("fs-extra");
 const {
-  TelegraPh,
   aitts,
   smd,
-  send,
   prefix,
   Config,
   parsedJid,
@@ -189,6 +187,122 @@ async function aiResponce(_0x109acf, _0xf00650, _0x2728a0 = "") {
     return _0x242f00(273);
   }
 }
+smd(
+  {
+    pattern: "rmbg",
+    alias: ["removebg"],
+    desc: "Removes the background from an image.",
+    category: "ai",
+    filename: __filename,
+    use: "<image URL>",
+  },
+  async (message, input) => {
+    try {
+      const url = input.trim();
+      if (!url || !isValidUrl(url)) {
+        return await message.send("*_Please provide a valid image URL._*");
+      }
+
+      const apiUrl = `https://aemt.me/removebg?url=${encodeURIComponent(url)}`;
+      const response = await axios.get(apiUrl, {
+        headers: {
+          "accept": "application/json",
+        },
+      });
+      const data = response.data;
+
+      if (!data || !data.url || !data.url.status === "true") {
+        return await message.reply("*Failed to remove background from the image.*");
+      }
+
+      const resultUrl = data.url.result;
+      const imageBuffer = await axios.get(resultUrl, { responseType: "arraybuffer" });
+      const buffer = Buffer.from(imageBuffer.data, "binary");
+      await message.bot.sendMessage(message.chat, { image: buffer }, { quoted: message });
+    } catch (error) {
+      await message.error(error + "\n\nCommand: rmbg", error, "*Failed to remove background from the image.*");
+    }
+  }
+);
+
+function isValidUrl(url) {
+  try {
+    new URL(url);
+    return true;
+  } catch (_) {
+    return false;
+  }
+}
+smd(
+  {
+    pattern: "stablediffusion",
+    alias: ["sd"],
+    desc: "Generates an image using Stable Diffusion AI.",
+    category: "ai",
+    filename: __filename,
+    use: "<text>",
+  },
+  async (message, input) => {
+    try {
+      const text = input.trim();
+      if (!text) {
+        return await message.send("*_Please provide some text to generate an image._*");
+      }
+
+      const apiUrl = `https://aemt.me/stablediffusion?text=${encodeURIComponent(text)}`;
+      const response = await axios.get(apiUrl, {
+        headers: {
+          "accept": "application/json",
+        },
+        responseType: "arraybuffer",
+      });
+
+      if (!response.data) {
+        return await message.reply("*Failed to generate an image using Stable Diffusion AI.*");
+      }
+
+      const buffer = Buffer.from(response.data, "binary");
+      await message.bot.sendMessage(message.chat, { image: buffer }, { quoted: message });
+    } catch (error) {
+      await message.error(error + "\n\nCommand: stablediffusion", error, "*Failed to use Stable Diffusion AI.*");
+    }
+  }
+);
+smd(
+  {
+    pattern: "bard",
+    alias: ["b"],
+    desc: "Generates a response from Bard AI.",
+    category: "ai",
+    filename: __filename,
+    use: "<text>",
+  },
+  async (message, input) => {
+    try {
+      const text = input.trim();
+      if (!text) {
+        return await message.send("*_Please provide some text to generate a response._*");
+      }
+
+      const apiUrl = `https://aemt.me/bard?text=${encodeURIComponent(text)}`;
+      const response = await axios.get(apiUrl, {
+        headers: {
+          "accept": "application/json",
+        },
+      });
+      const data = response.data;
+
+      if (!data || !data.status) {
+        return await message.reply("*Failed to generate a response from Bard AI.*");
+      }
+
+      const result = data.result;
+      return await message.send(`*Bard AI:* ${result}`, { quoted: message });
+    } catch (error) {
+      await message.error(error + "\n\nCommand: bard", error, "*Failed to use Bard AI.*");
+    }
+  }
+);
 smd({
   pattern: "gpt4",
   category: "ai",
@@ -594,57 +708,6 @@ async function Draw(_0x3ab488) {
   const _0x1c59a6 = await _0x54c8a4.arrayBuffer();
   return Buffer.from(_0x1c59a6);
 }
-smd(
-  {
-    pattern: "rmbg",
-    alias: ["removebg"],
-    category: "ai",
-    filename: __filename,
-    desc: "Remove image Background.",
-  },
-  async (_0x28a796) => {
-    try {
-      if (!Config.REMOVE_BG_KEY) {
-        return _0x28a796.reply(
-          "```You Dont Have REMOVE_BG_KEY \nPlease Create RemoveBG KEY from Given Link \nhttps://www.remove.bg/\nAnd Set Key in REMOVE_BG_KEY Var```"
-        );
-      }
-      let _0x536d9f = ["imageMessage"];
-      let _0x4f2076 = _0x536d9f.includes(_0x28a796.mtype)
-        ? _0x28a796
-        : _0x28a796.reply_message;
-      if (!_0x4f2076 || !_0x536d9f.includes(_0x4f2076?.mtype || "null")) {
-        return await _0x28a796.send("*_Uhh Dear, Reply to an image_*");
-      }
-      let _0x437dc5 = await _0x28a796.bot.downloadAndSaveMediaMessage(
-        _0x4f2076
-      );
-      let _0x4dcaa0 = await TelegraPh(_0x437dc5);
-      try {
-        fs.unlinkSync(_0x437dc5);
-      } catch {}
-      let _0x9b86dd = await aiResponce(_0x28a796, "rmbg", _0x4dcaa0);
-      if (_0x9b86dd) {
-        await _0x28a796.send(
-          _0x9b86dd,
-          {
-            caption: Config.caption,
-          },
-          "image",
-          _0x28a796
-        );
-      } else {
-        await _0x28a796.send("*_Request not be preceed!!_*");
-      }
-    } catch (_0x166d80) {
-      await _0x28a796.error(
-        _0x166d80 + "\n\ncommand: rmbg",
-        _0x166d80,
-        "*_No responce from remove.bg, Sorry!!_*"
-      );
-    }
-  }
-);
 smd(
   {
     pattern: "aitts",
