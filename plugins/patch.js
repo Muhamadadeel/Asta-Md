@@ -592,23 +592,46 @@ smd(
 );
 astro_patch.cmd(
   {
-    pattern: "uptime",
-    alias: ["runtime"],
-    desc: "Tells runtime/uptime of bot.",
-    category: "misc",
+    pattern: "runtime",
+    desc: "Show the uptime, RAM usage, and CPU name of the process.",
+    category: "general",
     filename: __filename,
   },
-  async (_0x50127f) => {
+  async (m) => {
     try {
-      _0x50127f.reply(
-        "*_Uptime of " + tlang().title + ": " + runtime(process.uptime()) + "_*"
-      );
-    } catch (_0x5ed240) {
-      await _0x50127f.error(
-        _0x5ed240 + "\n\ncommand : uptime",
-        _0x5ed240,
-        false
-      );
+      const uptime = process.uptime();
+      const uptimeHours = Math.floor(uptime / 3600);
+      const uptimeMinutes = Math.floor((uptime % 3600) / 60);
+      const uptimeSeconds = Math.floor(uptime % 60);
+
+      const ramUsage = process.memoryUsage().heapTotal / 1024 / 1024;
+
+      const cpuName = process.cpuData ? process.cpuData.modelName : "Unknown";
+
+      const message = `*Asta MD Running Since:*\n\n*Uptime:* ${uptimeHours}h ${uptimeMinutes}m ${uptimeSeconds}s\n*RAM Usage:* ${ramUsage.toFixed(2)} MB\n*CPU Name:* ${cpuName}`;
+
+      const button = [
+        {
+          buttonId: "ok",
+          buttonText: { displayText: "OK" },
+          type: 1,
+        },
+      ];
+
+      const contextInfo = {
+        isForwarded: true,
+        forwardingScore: 999,
+        title: "Asta MD Running Since",
+        body: message,
+        footerText: "Asta MD 2024",
+        isSendNotificationMsg: true,
+        mentionedJid: [],
+        buttons: button,
+      };
+
+      await m.bot.sendMessage(m.chat, { text: message, contextInfo }, { quoted: null });
+    } catch (e) {
+      await m.error(`${e}\n\ncommand: runtime`, e);
     }
   }
 );
