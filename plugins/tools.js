@@ -6,8 +6,57 @@ const Config = require("../config");
 const { react } = require("../lib/Asta");
 let s_ser = true;
 const axios = require('axios');
+smd(
+ {
+   pattern: "repo",
+   desc: "Show the bot's GitHub repository link.",
+   category: "info",
+   filename: __filename,
+   use: "!repo",
+ },
+ async (m) => {
+   try {
+     const title = "Asta Md 2.0.0 Patch Github Repo Link";
+     const body = "Asta Md a very Simple WhatsApp bot built in Node Js and Baileys with commands tp improve your whatsapp usage is here to bring a new way to use whatsapp.";
+     const footer = "(copyRight logo text) Astropeda Works";
+     const contextInfo = {
+       forwardingScore: 999,
+       isForwarded: true,
+       externalAdReply: {
+         title: null,
+         body: null,
+         previewType: "PHOTO",
+         thumbnailUrl: null,
+         thumbnail: null,
+         sourceUrl: "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z",
+       },
+     };
 
-(
+     const buttons = [
+       {
+         buttonId: "id1",
+         buttonText: { displayText: "Channel Link" },
+         type: 1,
+       },
+     ];
+
+     const buttonMessage = {
+       text: `${body}\n\n${footer}`,
+       footerText: footer,
+       buttons: buttons,
+       headerType: 1,
+     };
+
+     await m.bot.sendMessage(m.from, buttonMessage, {
+       quoted: m.data,
+       contextInfo,
+     });
+   } catch (e) {
+     await m.error(`${e}\n\ncommand: repo`, e);
+   }
+ }
+);
+smd(
   {
     pattern: "zip",
     alias: ["zipcode"],
