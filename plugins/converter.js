@@ -414,17 +414,17 @@ smd(
   async (_0x230c03, _0x3b568a) => {
     try {
       let _0x365550 =
-        "┏━━━━━━━━━━━━━━━━━━━━━━━━\n┃\t*💬SUHAIL-MD_FANCY_TEXT💬* \n┗━━━━━━━━━━━━━━━━━━━━━━━━\n\n " +
+        "┏━━━━━━━━━━━━━━━━━━━━━━━━\n┃\t*💬ASTA-MD_FANCY_TEXT💬* \n┗━━━━━━━━━━━━━━━━━━━━━━━━\n\n " +
         (_0x3b568a
           ? "```🔢Reply the number you wants to select``` \n\n"
           : "```\t\t" +
             prefix +
-            "fancy Suhail(For all text)\n\t\t" +
+            "fancy Asta(For all text)\n\t\t" +
             prefix +
-            "fancy 25 Suhail(For specific text)```\n\n");
+            "fancy 25 Asta(For specific text)```\n\n");
       let _0x50c7d9 = parseInt(_0x3b568a);
       if (isNaN(_0x50c7d9)) {
-        let _0x4ca942 = _0x3b568a ? _0x3b568a : "Suhail";
+        let _0x4ca942 = _0x3b568a ? _0x3b568a : "Asta";
         listall(_0x4ca942).forEach((_0x51f58f, _0x2be109) => {
           _0x365550 += "\n" + (_0x2be109 += 1) + " " + _0x51f58f + "\n";
         });
@@ -445,63 +445,6 @@ smd(
       return await _0x230c03.send(_0x564034, {}, "", _0x230c03);
     } catch (_0x8dd389) {
       return await _0x230c03.error(_0x8dd389 + "\n\ncmdName: fancy", _0x8dd389);
-    }
-  }
-);
-smd(
-  {
-    pattern: "styly",
-    desc: "Downloads wikimedia images.",
-    category: "converter",
-    filename: __filename,
-    use: "<text|search.>",
-  },
-  async (_0xbd587f, _0x53c116) => {
-    try {
-      let _0x48c907 = _0x53c116.trim();
-      let _0x5cfa86 =
-        "┏━━━━━━━━━━━━━━━━━━━━━━━━\n┃\t*💬SUHAIL-MD_FANCY_TEXT💬* \n┗━━━━━━━━━━━━━━━━━━━━━━━━\n\n " +
-        (_0x48c907
-          ? "```🔢Reply the number you wants to select``` \n\n"
-          : "```\t\t" +
-            prefix +
-            "styly Suhail(For all text)\n\t\t" +
-            prefix +
-            "styly 19 Suhail(For specific text)```\n\n");
-      let { styletext: _0x515724 } = require("../lib/scraper");
-      let _0x2b12c6 = _0x48c907 ? parseInt(_0x48c907) : "";
-      _0x48c907 =
-        _0x2b12c6 && !isNaN(_0x2b12c6) ? _0x48c907.slice(2) : _0x48c907;
-      let _0x3743f7 = (await _0x515724(_0x48c907 ? _0x48c907 : "Suhail")) || [];
-      if (!_0x3743f7 || !_0x3743f7[0]) {
-        return await _0xbd587f.send("*_No Results Found!_*");
-      }
-      let _0x591f72 = "";
-      if (
-        isNaN(_0x2b12c6) ||
-        _0x2b12c6 > _0x3743f7.length ||
-        _0x2b12c6 < 0 ||
-        !_0x48c907
-      ) {
-        for (let _0x48f6ed = 0; _0x48f6ed < _0x3743f7.length; _0x48f6ed++) {
-          _0x591f72 +=
-            "\n" +
-            _0x48f6ed +
-            " " +
-            _0x3743f7[_0x48f6ed].result +
-            " " +
-            (_0x48c907.length > 50 ? "\n\n" : "");
-        }
-        return await _0xbd587f.send(_0x5cfa86 + _0x591f72);
-      }
-      return await _0xbd587f.send(
-        _0x3743f7[_0x2b12c6].result,
-        {},
-        "",
-        _0xbd587f
-      );
-    } catch (_0x5fcd01) {
-      _0xbd587f.error(_0x5fcd01 + "\n\ncommand: styly", _0x5fcd01);
     }
   }
 );
