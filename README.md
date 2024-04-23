@@ -9,7 +9,7 @@
 ### SETUP
 #### Star Asta Md & Fork
 <center>
-<a href="https://github.com/Astropeda/Asta-Md/fork"><img title="ASTA-MD" src="https://img.shields.io/badge/FORK ASTA-MD-h?color=black&style=for-the-badge&logo=stackshare"></a>  <a href="https://asta-code-app-9b7d929f3f62.herokuapp.com/qr"><img title="SCAN QR " src="https://img.shields.io/badge/SCAN QR -h?color=black&style=for-the-badge&logo=msi"></a> <a href="https://asta-code-app-9b7d929f3f62.herokuapp.com/pair"><img title="PARING CODE" src="https://img.shields.io/badge/PARING CODE -h?color=black&style=for-the-badge&logo=msi"></a>
+<a href="https://github.com/Astropeda/Asta-Md/fork"><img title="ASTA-MD" src="https://img.shields.io/badge/FORK ASTA-MD-h?color=black&style=for-the-badge&logo=stackshare"></a>  <a href="https://asta-app-52c5fcbed3fa.herokuapp.com/qr"><img title="SCAN QR " src="https://img.shields.io/badge/SCAN QR -h?color=black&style=for-the-badge&logo=msi"></a> <a href="https://asta-app-52c5fcbed3fa.herokuapp.com/pair"><img title="PARING CODE" src="https://img.shields.io/badge/PARING CODE -h?color=black&style=for-the-badge&logo=msi"></a>
 
 ### ASTA Deploy Methods
 
