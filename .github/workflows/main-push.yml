@@ -31,5 +31,6 @@ jobs:
       run: |
           git config --global user.email "astromedia0010@gmail.com"
           git config --global user.name "Astropeda" 
+          git remote set-url origin https://github.com/Astropeda/Asta-Md.git
     - name: Run Node
       run: node git.js
