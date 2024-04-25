@@ -1,4 +1,4 @@
-FROM node:20
+FROM quay.io/sampandey001/secktor
 
 RUN git clone https://github.com/Astropeda/Asta-Md /root/Astropeda
 
