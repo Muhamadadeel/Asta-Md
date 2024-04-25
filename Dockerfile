@@ -8,8 +8,7 @@ RUN rm -rf /root/Astropeda/node_modules
 
 # Install dependencies
 WORKDIR /root/Astropeda
-RUN npm install
-RUN npm yarn i
+RUN npm Install
 
 # Add additional Steps To Run...
 EXPOSE 3000
