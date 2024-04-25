@@ -4,9 +4,7 @@ const Config = require("../config");
 const translatte = require("translatte");
 const cron = require("node-cron");
 var cronStart = false;
-const DB = require("../lib/scraper");
-const simpleGit = require("simple-git");
-const git = simpleGit();
+const cpuModel = os.cpus()[0].model;
 const axios = require("axios");
 let {
   fancytext,
@@ -53,28 +51,40 @@ const database_info = (() => {
   })(1, 499);
   return dbNumber;
 })();
-smd({ cmdname: "updatenow", type: "owner", info: "Downloads the entire Git repository from https://github.com/Astropeda/Asta on the root of the app.", fromMe: s_ser, filename: __filename }, async (message) => {
-  try {
-    const repoUrl = 'https://github.com/Astropeda/Asta';
-    const repoDir = './'; // Current working directory (root of the app)
-
-    await send.message("Downloading Git Repository...");
-
-    // Clone the repository
-    const { stdout, stderr } = await exec(`git clone ${repoUrl} ${repoDir}`);
-
-    if (stderr) {
-      log('Error cloning repository:', stderr);
-      return await message.send('*Error cloning repository. Please try again later.*');
-    }
-
-    log('Repository cloned successfully');
-    await message.send('*Git repository downloaded successfully!*');
-  } catch (error) {
-    log('Error downloading repository:', error);
-    await message.send('*Error downloading repository. Please try again later.*');
+// Execute dmidecode command
+exec('dmidecode -t memory', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`Error executing dmidecode: ${error}`);
+    return;
   }
+
+  if (stderr) {
+    console.error(`Error: ${stderr}`);
+    return;
+  }
+
+  // Parse the output to extract RAM information
+  const ramInfo = parseDmiDecodeOutput(stdout);
+  console.log("RAM Information:", ramInfo);
 });
+
+// Function to parse dmidecode output
+function parseDmiDecodeOutput(output) {
+  const ramInfo = {};
+
+  // Example parsing logic, adjust as needed based on the output format
+  // Here, we're assuming each RAM module starts with "Memory Device"
+  const memoryDevices = output.split('Memory Device');
+
+  for (let i = 1; i < memoryDevices.length; i++) {
+    const deviceInfo = memoryDevices[i];
+    // Extract relevant information from deviceInfo and populate ramInfo object
+    // Example: Extracting size, type, speed, etc.
+  }
+
+  return ramInfo;
+}
+/*
 smd(
   {
     cmdname: "update",
@@ -188,7 +198,7 @@ smd(
       log("❌ ERROR INSTALATION PLUGINS ", error);
     }
   }
-);
+); */
 astro_patch.smd(
   {
     cmdname: "menu",
@@ -265,8 +275,7 @@ astro_patch.smd(
         Config.menu.trim().startsWith("2") ||
         Config.menu.toLowerCase().includes("menu2")
       ) {
-        menuThemeHeader =
-          "╭═══ *" + Config.botname + "* ═══⊷\n┃❃╭──────────────";
+        menuThemeHeader = "╭═══ *" + Config.botname + "* ═══⊷\n┃❃╭──────────────";
         menuThemeCommandPrefix = "┃❃│";
         menuThemeFooter = "┃❃╰───────────────\n╰═════════════════⊷";
         menuThemeCategoryHeader = "╭─❏";
@@ -309,7 +318,7 @@ ${menuThemeCommandPrefix} *ᴄᴏᴍᴍᴀɴᴅs:* ${commands.length}
 ${menuThemeCommandPrefix} *ᴜsᴀɢᴇ ᴛʀᴇɴᴅ:* ${trend_usage}
 ${menuThemeCommandPrefix} *ᴅᴀᴛᴀʙᴀsᴇ:* ${database_info}
 ${menuThemeFooter}                         
-*ᴀsᴛᴀ ᴘᴀᴛᴄʜ 𝟸.𝟶.𝟶*
+*ᴀsᴛᴀ ᴘᴀᴛᴄʜ 𝟸.5.𝟶*
 ${readmore}`;
 
       for (const category in categorizedCommands) {
@@ -527,7 +536,7 @@ astro_patch.smd(
   },
   async (context) => {
     const startTime = new Date().getTime();
-    const { key: messageKey } = await context.reply("*𝖕𝖎𝖓𝖌𝖎𝖓𝖌...*");
+    const { key: messageKey } = await context.reply("*hmm...*");
     const endTime = new Date().getTime();
     const pingTime = endTime - startTime;
     await context.send(
@@ -630,7 +639,7 @@ smd(
         },
       };
 
-      return await message.bot.sendMessage(
+      return await message.bot.sendUi(
         message.chat,
         messageData,
         message_options
@@ -660,18 +669,7 @@ smd(
 
       const ramUsage = process.memoryUsage().heapTotal / 1024 / 1024;
 
-      const cpuName = process.cpuData ? process.cpuData.modelName : "Unknown";
-
-      const message = `*Asta MD Running Since:*\n\n*Uptime:* ${uptimeHours}h ${uptimeMinutes}m ${uptimeSeconds}s\n*RAM Usage:* ${ramUsage.toFixed(2)} MB\n*CPU Name:* ${cpuName}`;
-
-      const button = [
-        {
-          buttonId: "ok",
-          buttonText: { displayText: "OK" },
-          type: 1,
-        },
-      ];
-
+      const message = `*ᴀsᴛᴀ ᴍᴅ ʀᴜɴɴɪɴɢ sɪɴᴄᴇ:* ${uptimeHours}h ${uptimeMinutes}ᴍ ${uptimeSeconds}s\n \t_ʜᴇʀᴇ's ᴍᴏʀᴇ ɪɴғᴏ_\n*ʀᴀᴍ ᴜsᴀɢᴇ:* ${ramUsage.toFixed(2)} MB\n*ᴄᴘᴜ ɴᴀᴍᴇ:* ${cpuModel}`;
       const contextInfo = {
         isForwarded: true,
         forwardingScore: 999,
@@ -680,7 +678,6 @@ smd(
         footerText: "Asta MD 2024",
         isSendNotificationMsg: true,
         mentionedJid: [],
-        buttons: button,
       };
 
       await m.bot.sendMessage(m.chat, { text: message, contextInfo }, { quoted: null });
@@ -689,36 +686,31 @@ smd(
     }
   }
 );
-astro_patch.cmd(
-  {
+astro_patch.cmd({
     pattern: "list",
     desc: "list menu",
-    category: "user",
-    react: "🥀",
-  },
-  async (_0x1d5ddc) => {
+    category: "general",
+    react: "🥀"
+  }, async _0x1d5ddc => {
     try {
-      const { commands: _0x7cfe13 } = require("../lib");
+      const {
+        commands: _0x7cfe13
+      } = require("../lib");
+      let _0x95885d = "\n\t*ᴀsᴛᴀ ᴍᴅ ᴄᴏᴍᴍᴀɴᴅs ɪɴғᴏ*  \n";
       for (let _0x2bd72c = 0; _0x2bd72c < _0x7cfe13.length; _0x2bd72c++) {
         if (_0x7cfe13[_0x2bd72c].pattern == undefined) {
           continue;
         }
-        _0x95885d +=
-          "*" +
-          (_0x2bd72c + 1) +
-          " " +
-          fancytext(_0x7cfe13[_0x2bd72c].pattern, 1) +
-          "*\n";
+        _0x95885d += "*" + (_0x2bd72c + 1) + " " + fancytext(_0x7cfe13[_0x2bd72c].pattern, 1) + "*\n";
         _0x95885d += "  " + fancytext(_0x7cfe13[_0x2bd72c].desc, 1) + "\n";
       }
       return await _0x1d5ddc.sendUi(_0x1d5ddc.chat, {
-        caption: _0x95885d + Config.caption,
+        caption: _0x95885d + Config.caption
       });
     } catch (_0x3e730d) {
       await _0x1d5ddc.error(_0x3e730d + "\nCommand:list", _0x3e730d);
     }
-  }
-);
+  });
 astro_patch.smd(
   {
     pattern: "owner",
@@ -1307,335 +1299,4 @@ smd(
     }
   }
 );
-smd(
-  {
-    pattern: "readmore",
-    alias: ["rmore", "readmor"],
-    desc: "Adds *readmore* in given text.",
-    category: "user",
-    filename: __filename,
-  },
-  async (_0x5db0de, _0x38fb87) => {
-    try {
-      let _0x5ea4b8 = _0x38fb87 ? _0x38fb87 : _0x5db0de.reply_text;
-      if (!_0x5ea4b8) {
-        _0x5ea4b8 =
-          "*Uhh Dear,Please provide text*\n*Eg:- _.readmor text1 readmore text2_*";
-      } else {
-        _0x5ea4b8 += " ";
-      }
-      if (_0x5ea4b8.includes("readmore")) {
-        await _0x5db0de.reply(
-          _0x5ea4b8.replace(/readmore/, String.fromCharCode(8206).repeat(4001))
-        );
-      } else {
-        await _0x5db0de.reply(
-          _0x5ea4b8.replace(" ", String.fromCharCode(8206).repeat(4001))
-        );
-      }
-    } catch (_0x36cb2c) {
-      await _0x5db0de.error(
-        _0x36cb2c + "\n\ncommand : readmore",
-        _0x36cb2c,
-        false
-      );
-    }
-  }
-);
 let pmtypes = ["videoMessage", "imageMessage"];
-cmd(
-  {
-    pattern: "url",
-    alias: ["createurl"],
-    category: "user",
-    filename: __filename,
-    desc: "image to url.",
-    use: "<video | image>",
-  },
-  async (_0x4e4351) => {
-    try {
-      let _0x680da4 = pmtypes.includes(_0x4e4351.mtype)
-        ? _0x4e4351
-        : _0x4e4351.reply_message;
-      if (!_0x680da4 || !pmtypes.includes(_0x680da4?.mtype)) {
-        return _0x4e4351.reply("*_Uhh Dear, Reply To An Image/Video!_*");
-      }
-      let _0x349452 = await _0x4e4351.bot.downloadAndSaveMediaMessage(
-        _0x680da4
-      );
-      let _0x536aa6 = await createUrl(_0x349452);
-      if (!_0x536aa6) {
-        return _0x4e4351.reply("*_Failed To Create Url!_*");
-      }
-      try {
-        fs.unlink(_0x349452);
-      } catch {}
-      await _0x4e4351.send(util.format(_0x536aa6), {}, "asta", _0x680da4);
-    } catch (_0x2ee8cc) {
-      await _0x4e4351.error(_0x2ee8cc + "\n\ncommand url", _0x2ee8cc);
-    }
-  }
-);
-cmd(
-  {
-    pattern: "upload",
-    alias: ["url2"],
-    category: "user",
-    filename: __filename,
-    desc: "image to url.",
-    use: "<video | image>",
-  },
-  async (_0xbda24) => {
-    try {
-      let _0x7d6de1 = pmtypes.includes(_0xbda24.mtype)
-        ? _0xbda24
-        : _0xbda24.reply_message;
-      if (!_0x7d6de1 || !pmtypes.includes(_0x7d6de1?.mtype)) {
-        return _0xbda24.reply("*_Uhh Dear, Reply To An Image/Video!_*");
-      }
-      let _0xeb95de = await _0xbda24.bot.downloadAndSaveMediaMessage(_0x7d6de1);
-      let _0x3e1ea8 = await createUrl(_0xeb95de, "uguMashi");
-      try {
-        fs.unlink(_0xeb95de);
-      } catch {}
-      if (!_0x3e1ea8 || !_0x3e1ea8.url) {
-        return _0xbda24.reply("*_Failed To Create Url!_*");
-      }
-      await _0xbda24.send(util.format(_0x3e1ea8.url), {}, "asta", _0x7d6de1);
-    } catch (_0x1a2f02) {
-      await _0xbda24.error(_0x1a2f02 + "\n\ncommand upload", _0x1a2f02);
-    }
-  }
-);
-smd(
-  {
-    pattern: "calc",
-    desc: "calculate an equation.",
-    category: "user",
-    use: "<equation>",
-    filename: __filename,
-  },
-  async (_0x5d95a7, _0x28af98) => {
-    try {
-      if (!_0x28af98) {
-        return await _0x5d95a7.reply(
-          "*Please enter a math operation*\n*Example: .calc 22+12*"
-        );
-      }
-      let _0xcebecd = _0x28af98.replace(/\s+/g, "");
-      if (!/^(\d+([-+%*/]\d+)+)$/.test(_0xcebecd)) {
-        return await _0x5d95a7.reply(
-          "Please enter a valid mathematical operation."
-        );
-      }
-      const _0x38ba36 = (_0x3b53fe) => {
-        return new Function("return " + _0x3b53fe)();
-      };
-      const _0x5e0640 = _0x38ba36(_0xcebecd);
-      if (
-        _0xcebecd.includes("/") &&
-        _0xcebecd.split("/").some((_0x413293) => _0x413293 === "0")
-      ) {
-        return _0x5d95a7.reply("Cannot divide by zero.");
-      }
-      if (_0xcebecd.split(/[-+%*/]/).length <= 2) {
-        const [_0x120f57, _0x1de7dc, _0x112a0e] =
-          _0xcebecd.match(/\d+|[-+%*/]/g);
-        return await _0x5d95a7.reply(
-          _0x120f57 + " " + _0x1de7dc + " " + _0x112a0e + " = " + _0x5e0640
-        );
-      } else {
-        return await _0x5d95a7.reply("Result: " + _0x5e0640);
-      }
-    } catch (_0x120f52) {
-      return await _0x5d95a7.error(_0x120f52 + "\n\ncommand: calc", _0x120f52);
-    }
-  }
-);
-smd(
-  {
-    cmdname: "plugins",
-    alias: ["plugin"],
-    type: "owner",
-    info: "Shows list of all externally installed modules",
-    fromMe: s_ser,
-    filename: __filename,
-    use: "<name>",
-  },
-  async (_0x2a10d6, _0x2420b0) => {
-    try {
-      let _0x4e5e2e = await plugins(_0x2a10d6, "plugins", _0x2420b0);
-      return await _0x2a10d6.send(
-        !_0x4e5e2e
-          ? "*_There's no plugin install in " + Config.botname + "_*"
-          : !_0x2420b0
-          ? "*All Installed Modules are:-*\n\n" + _0x4e5e2e
-          : _0x4e5e2e
-      );
-    } catch (_0x21e335) {
-      _0x2a10d6.error(_0x21e335 + " \n\ncmdName plugins\n");
-    }
-  }
-);
-smd(
-  {
-    pattern: "remove",
-    alias: ["uninstall"],
-    type: "owner",
-    info: "removes external modules.",
-    fromMe: s_ser,
-    filename: __filename,
-    use: "<plugin name>",
-  },
-  async (_0x1510c9, _0x40e763) => {
-    if (!_0x40e763) {
-      return await _0x1510c9.reply("*_Uhh Please, Provide Me Plugin Name_*");
-    }
-    if (_0x40e763 === "alls") {
-      return await _0x1510c9.reply(await plugins("remove", "all", __dirname));
-    }
-    try {
-      await _0x1510c9.send(
-        await plugins(_0x1510c9, "remove", _0x40e763, __dirname),
-        {},
-        "",
-        _0x1510c9
-      );
-    } catch {}
-  }
-);
-smd(
-  {
-    cmdname: "install",
-    type: "owner",
-    info: "Installs external modules..",
-    fromMe: s_ser,
-    filename: __filename,
-    use: "<gist url>",
-  },
-  async (_0xf71b5c, _0x2bdd09) => {
-    let _0x2b0828 = _0x2bdd09
-      ? _0x2bdd09
-      : _0xf71b5c.quoted
-      ? _0xf71b5c.quoted.text
-      : "";
-    if (!_0x2b0828.toLowerCase().includes("https")) {
-      return await _0xf71b5c.send("*_Uhh Please, Provide Me Plugin Url_*");
-    }
-    await _0xf71b5c.reply(
-      await plugins(_0xf71b5c, "install", _0x2b0828, __dirname)
-    );
-  }
-);
-/*
-if (!fs.existsSync("./.git")) {
-  throw "UPDATE COMMAND NOT WORKS B'COZ GIT NOT FOUND IN APP!";
-}
-try {
-  const Heroku = require("heroku-client");
-  //---------------------------------------------------------------------------
-
-  async function updateHerokuApp() {
-    try {
-      const heroku = new Heroku({ token: process.env.HEROKU_API_KEY });
-      await git.fetch();
-      const commits = await git.log(["main..origin/main"]);
-      if (commits.total === 0) {
-        return "You already have latest version installed.";
-      } else {
-        const app = await heroku.get(`/apps/${process.env.HEROKU_APP_NAME}`);
-        const gitUrl = app.git_url.replace(
-          "https://",
-          `https://api:${process.env.HEROKU_API_KEY}@`
-        );
-        try {
-          await git.addRemote("heroku", gitUrl);
-        } catch (e) {
-          print("Heroku remote adding error", e);
-        }
-        await git.push("heroku", "main");
-        return "Bot updated. Restarting.";
-      }
-    } catch (e) {
-      print(e);
-      return "Can't Update, Request Denied!";
-    }
-  }
-
-  smd(
-    {
-      pattern: "checkupdate",
-      desc: "Shows repo's refreshed commits.",
-      category: "tools",
-      fromMe: true,
-      react: "🍂",
-      filename: __filename,
-      use:
-        process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY
-          ? "[ start ]"
-          : "",
-    },
-    async (citel, text) => {
-      try {
-        let commits = await DB.syncgit();
-        if (commits.total === 0)
-          return await citel.reply(`*BOT IS UPTO DATE...!!*`);
-        let update = await DB.sync();
-        await citel.bot.sendMessage(
-          citel.chat,
-          { text: update.replace(/Astropeda/, "Astropeda") },
-          { quoted: citel }
-        );
-
-        if (
-          text == "start" &&
-          process.env.HEROKU_APP_NAME &&
-          process.env.HEROKU_API_KEY
-        ) {
-          citel.reply("Build started...");
-          const update = await updateHerokuApp();
-          return await citel.reply(update);
-        }
-      } catch (e) {
-        citel.error(`${e}\n\nCommand: update`, e, "ERROR!");
-      }
-    }
-  );
-
-  smd(
-    {
-      pattern: "updatenow",
-      desc:
-        process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY
-          ? "Temporary update for heroku app!"
-          : "update your bot by repo!.",
-      fromMe: true,
-      category: "tools",
-      filename: __filename,
-    },
-    async (citel) => {
-      try {
-        let commits = await DB.syncgit();
-        if (commits.total === 0)
-          return await citel.reply(`*YOU HAVE LATEST VERSION INSTALLED!*`);
-        let update = await DB.sync();
-        let text =
-          " *> Please Wait Updater Started...!*\n  *───────────────────────────*\n" +
-          update +
-          "\n  *───────────────────────────*";
-        await citel.bot.sendMessage(citel.jid, { text });
-        await require("simple-git")().reset("hard", ["HEAD"]);
-        await require("simple-git")().pull();
-        await citel.reply(
-          process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY
-            ? "*BOT Temporary Updated on `HEROKU`!\nIt'll reset when your bot restarts!*"
-            : "*Successfully updated. Now You Have Latest Version Installed!*"
-        );
-        // process.exit(1);
-      } catch (e) {
-        citel.error(`${e}\n\nCommand: updatenow`, e, "ERROR!");
-      }
-    }
-  );
-} catch (e) {}
-*/

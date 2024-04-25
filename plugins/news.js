@@ -1,35 +1,49 @@
 let { smd } = require("../lib");
 const axios = require("axios");
-smd({ pattern: "wabeta", desc: "Fetches the latest WhatsApp beta information.", category: "news", filename: __filename, use: "wabeta", }, async (message, input) => {
-  try {
-    const apiUrl = "https://api.maher-zubair.tech/details/wabetainfo";
-    const response = await fetch(apiUrl);
-    const data = await response.json();
-    if (!data || data.status !== 200 || !data.result) {
-      return message.send("*Failed to fetch WhatsApp beta information.*");
+smd(
+  {
+    pattern: "wabeta",
+    desc: "Fetches the latest WhatsApp beta information.",
+    category: "news",
+    filename: __filename,
+    use: "wabeta",
+  },
+  async (message, input) => {
+    try {
+      const apiUrl = "https://api.maher-zubair.tech/details/wabetainfo";
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      if (!data || data.status !== 200 || !data.result) {
+        return message.send("*Failed to fetch WhatsApp beta information.*");
+      }
+
+      const { title, updateFor, date, /**image,*/ subtitle, link, desc, QandA } =
+        data.result;
+
+      let output = `*${title}*\n\n`;
+      output += `*Update For:* ${updateFor.join(", ")}\n`;
+      output += `*Date:* ${date}\n\n`;
+      output += `*${subtitle}*\n\n`;
+      output += `${desc}\n\n`;
+      output += `*Link:* ${link}\n\n`;
+
+      output += "*Q&A:*\n";
+      QandA.forEach((qa) => {
+        output += `\n*Q:* ${qa.question}\n*A:* ${qa.answer}\n`;
+      });
+
+      return message.send(output, { quoted: message });
+    } catch (error) {
+      console.error(error);
+      return message.error(
+        error + "\n\nCommand: wabeta",
+        error,
+        "*Failed to fetch WhatsApp beta information.*"
+      );
     }
-    const { title, updateFor, date, image, subtitle, link, desc, QandA } = data.result;
-    let output = `*${title}*\n\n`;
-    output += `*Update For:* ${updateFor.join(", ")}\n`;
-    output += `*Date:* ${date}\n\n`;
-    output += `*${subtitle}*\n\n`;
-    output += `${desc}\n\n`;
-    output += `*Image:* ${image}\n`;
-    output += `*Link:* ${link}\n\n`;
-    output += "*Q&A:*\n";
-    QandA.forEach((qa) => {
-      output += `\n*Q:* ${qa.question}\n*A:* ${qa.answer}\n`;
-    });
-    return message.send(output, { quoted: message, thumbnail: image });
-  } catch (error) {
-    console.error(error);
-    return message.error(
-      error + "\n\nCommand: wabeta",
-      error,
-      "*Failed to fetch WhatsApp beta information.*"
-    );
   }
-});
+);
 
 smd(
   {
@@ -64,7 +78,7 @@ smd(
         output += "\n";
       }
 
-      return message.send(output, { quoted: message, thumbnail: image });
+      return message.send(output, { quoted: message });
     } catch (error) {
       console.error(error);
       return message.error(
@@ -104,7 +118,7 @@ smd(
           output += `*Image:* ${image}\n\n`;
           output += `*Full Description:*\n${full_desc}`;
 
-          return message.send(output, { quoted: message, thumbnail: image });
+          return message.send(output, { quoted: message });
         })
         .catch((error) => {
           console.log(error);
@@ -145,14 +159,14 @@ smd(
       let output = `*Title:* ${title}\n\n`;
       output += `*Summary:* ${summary}\n\n`;
       output += `*Published At:* ${published_at}\n\n`;
-      output += `*LINK:* ${url}`;
+      output += `*URL:* ${url}`;
 
       // If image_url is available, add it to the output
-   /*   if (image_url) {
+      if (image_url) {
         output += `\n\n*Image:* ${image_url}`;
-      } */
+      }
 
-      await m.send(output, {quoted: m, thumbnail: image_url});
+      await m.send(output);
     } catch (e) {
       await m.error(`${e}\n\ncommand: spacenews`, e);
     }
@@ -185,7 +199,7 @@ smd(
       output += `*Link:* ${link}\n\n`;
       output += `*Image:* ${img}`;
 
-      return await message.send(output, { quoted: message, thumbnail: img });
+      return await message.send(output, { quoted: message });
     } catch (error) {
       await message.error(
         error + "\n\nCommand: technews",
@@ -231,3 +245,74 @@ smd(
     }
   }
 );
+smd(
+  {
+    pattern: "animesearch",
+    category: "news",
+    desc: "Searches for an anime",
+    use: '<query>',
+    filename: __filename
+  },
+  async (m, client) => {
+    try {
+      const query = m.text.split(' ').slice(1).join(' ');
+      if (!query) return client.sendMessage(m.from, { text: 'Please provide an anime title to search.' }, { quoted: m });
+
+      const response = await fetch(`https://api.maher-zubair.tech/anime/search?q=${encodeURIComponent(query)}`);
+      const data = await response.json();
+
+      if (data.status !== 200) return client.sendMessage(m.from, { text: `Error: ${data.result}` }, { quoted: m });
+
+      const anime = data.result;
+      const animeInfo = `
+*Title:* ${anime.title.romaji}
+*English Title:* ${anime.title.english}
+*Native Title:* ${anime.title.native}
+*Format:* ${anime.format}
+*Episodes:* ${anime.episodes}
+*Duration:* ${anime.duration} mins
+*Status:* ${anime.status}
+*Season:* ${anime.season} ${anime.seasonYear}
+*Source:* ${anime.source}
+*Genres:* ${anime.genres.join(', ')}
+*Start Date:* ${anime.startDate.day}/${anime.startDate.month}/${anime.startDate.year}
+*End Date:* ${anime.endDate.day}/${anime.endDate.month}/${anime.endDate.year}
+*Average Score:* ${anime.averageScore}
+*Synonyms:* ${anime.synonyms.join(', ')}
+
+*Description:*
+${anime.description}
+      `;
+
+      client.sendMessage(m.from, { text: animeInfo }, { quoted: m });
+    } catch (error) {
+      console.error(error);
+      client.sendMessage(m.from, { text: 'An error occurred while searching for the anime.' }, { quoted: m });
+    }
+  }
+);
+smd({
+  pattern: 'nasanews',
+  fromMe: false,
+  desc: 'Get the latest NASA news',
+  type: 'news'
+}, async (message, match) => {
+  try {
+      const response = await axios.get('https://api.maher-zubair.tech/details/nasa');
+      const data = response.data.result;
+      
+      const news = `
+🚀 *Title:* ${data.title}
+📅 *Date:* ${data.date}
+📝 *Explanation:* ${data.explanation}
+🔗 *More Info:* [Read More](${data.url})
+📷 *Image:* [View Image](${data.hdurl})
+📢 *Copyright:* ${data.copyright}
+      `;
+      
+      await message.send(news, { quoted: message.data });
+  } catch (error) {
+      console.error('Error fetching NASA news:', error);
+      await message.send('_Failed to fetch NASA news._', { quoted: message.data });
+  }
+});

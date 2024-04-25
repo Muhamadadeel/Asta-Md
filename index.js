@@ -1,13 +1,11 @@
-// ASTA MD WHATSAPP BOT 2024 
-
-const bot = require(__dirname + '/lib/runner')
+const bot = require(__dirname + '/lib/asta_patch')
 const { VERSION } = require(__dirname + '/config')
 
 const start = async () => {
-    Debug.info(`Asta ${VERSION}`)
+    Debug.info(`Starting Asta ${VERSION}`)
   try {
     await bot.init()
-    bot.logger.info('⏳ Starting App!')
+    //bot.logger.info('⏳ Database syncing!')
     await bot.DATABASE.sync()
     await bot.connect()
   } catch (error) {
@@ -16,4 +14,3 @@ const start = async () => {
   }
 }
 start();
-// START

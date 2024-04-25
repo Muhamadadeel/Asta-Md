@@ -1,6 +1,5 @@
-const {
-  cmd
-} = require("../lib/plugins");
+const axios = require('axios')
+const {cmd} = require("../lib/plugins");
 const eco = require("discord-mongoose-economy");
 const {
   smd,
@@ -8,123 +7,95 @@ const {
   send,
   Config
 } = require("../lib/");
-const axios = require('axios');
-
-smd(
-  {
-    pattern: "guessage",
-    alias: ["age"],
-    desc: "Guesses the age of a person based on their name.",
-    category: "fun",
-    use: "guessage [name]",
-    examples: ["guessage John", "guessage Emily"]
-  },
-  async (message, input) => {
-    const name = input;
-
-    if (!name) {
-      return message.reply("Please provide a name to guess the age.");
-    }
-
-    try {
-      const response = await axios.get(`https://api.agify.io/?name=${name}`);
-      const { count, age } = response.data;
-
-      const output = `
+smd({
+  pattern: "guessage",
+  alias: ["age"],
+  desc: "Guesses the age of a person based on their name.",
+  category: "fun",
+  use: "guessage [name]",
+  examples: ["guessage John", "guessage Emily"]
+}, async (message, input) => {
+  const name = input;
+  if (!name) {
+    return message.reply("Please provide a name to guess the age.");
+  }
+  try {
+    const response = await axios.get(`https://api.agify.io/?name=${name}`);
+    const {
+      count,
+      age
+    } = response.data;
+    const output = `
 *Name:* ${name}
 *Estimated Age:* ${age}
 *Count:* ${count}
       `;
-
-      await message.send(output);
-    } catch (error) {
-      await message.error(
-        error + "\n\nCommand: guessage",
-        error,
-        "Failed to guess age."
-      );
-    }
+    await message.send(output);
+  } catch (error) {
+    await message.error(error + "\n\nCommand: guessage", error, "Failed to guess age.");
   }
-);
-smd(
-  {
-    pattern: "guesscountry",
-    alias: ["country"],
-    desc: "Guesses the likely countries associated with a name.",
-    category: "fun",
-    use: "guesscountry [name]",
-    examples: ["guesscountry Michael", "guesscountry Fatima"]
-  },
-  async (message, input) => {
-    const name = input;
-
-    if (!name) {
-      return message.reply("Please provide a name to guess the country.");
-    }
-
-    try {
-      const response = await axios.get(`https://api.nationalize.io/?name=${name}`);
-      const { count, country } = response.data;
-
-      let output = `
+});
+smd({
+  pattern: "guesscountry",
+  alias: ["country"],
+  desc: "Guesses the likely countries associated with a name.",
+  category: "fun",
+  use: "guesscountry [name]",
+  examples: ["guesscountry Michael", "guesscountry Fatima"]
+}, async (message, input) => {
+  const name = input;
+  if (!name) {
+    return message.reply("Please provide a name to guess the country.");
+  }
+  try {
+    const response = await axios.get(`https://api.nationalize.io/?name=${name}`);
+    const {
+      count,
+      country
+    } = response.data;
+    let output = `
 *Name:* ${name}
 *Count:* ${count}
 *Likely Countries:*
 `;
-
-      country.forEach((c, index) => {
-        output += `\n${index + 1}. ${c.country_id} (${(c.probability * 100).toFixed(2)}%)`;
-      });
-
-      await message.send(output);
-    } catch (error) {
-      await message.error(
-        error + "\n\nCommand: guesscountry",
-        error,
-        "Failed to guess country."
-      );
-    }
+    country.forEach((c, index) => {
+      output += `\n${index + 1}. ${c.country_id} (${(c.probability * 100).toFixed(2)}%)`;
+    });
+    await message.send(output);
+  } catch (error) {
+    await message.error(error + "\n\nCommand: guesscountry", error, "Failed to guess country.");
   }
-);
-
-smd(
-  {
-    pattern: "guessgender",
-    alias: ["gender"],
-    desc: "Guesses the gender of a person based on their name.",
-    category: "fun",
-    use: "guessgender [name]",
-    examples: ["guessgender David", "guessgender Sarah"]
-  },
-  async (message, input) => {
-    const name = input;
-
-    if (!name) {
-      return message.reply("Please provide a name to guess the gender.");
-    }
-
-    try {
-      const response = await axios.get(`https://api.genderize.io/?name=${name}`);
-      const { count, gender, probability } = response.data;
-
-      const output = `
+});
+smd({
+  pattern: "guessgender",
+  alias: ["gender"],
+  desc: "Guesses the gender of a person based on their name.",
+  category: "fun",
+  use: "guessgender [name]",
+  examples: ["guessgender David", "guessgender Sarah"]
+}, async (message, input) => {
+  const name = input;
+  if (!name) {
+    return message.reply("Please provide a name to guess the gender.");
+  }
+  try {
+    const response = await axios.get(`https://api.genderize.io/?name=${name}`);
+    const {
+      count,
+      gender,
+      probability
+    } = response.data;
+    const output = `
 *Name:* ${name}
 *Estimated Gender:* ${gender}
 *Probability:* ${(probability * 100).toFixed(2)}%
 *Count:* ${count}
       `;
-
-      await message.send(output);
-    } catch (error) {
-      await message.error(
-        error + "\n\nCommand: guessgender",
-        error,
-        "Failed to guess gender."
-      );
-    }
+    await message.send(output);
+  } catch (error) {
+    await message.error(error + "\n\nCommand: guessgender", error, "Failed to guess gender.");
   }
-);
-
+});
 const astro_patch_numGuess = {};
 class GuessingGame {
   constructor() {
@@ -849,9 +820,9 @@ cmd({
         delete astro_patch_Capital[_0x16aecb.sender];
         try {
           if (global.isMongodb) {
-            await eco.give(_0x2e9c6b.player, "Asta", _0x15c4a0);
+            await eco.give(_0x2e9c6b.player, "Suhail", _0x15c4a0);
           }
-        } catch {}
+        } catch { }
       } else if (_0x2e9c6b.attempts <= 3) {
         await _0x16aecb.bot.sendMessage(_0x5d0144, {
           text: captions.onWrongAns.replace("$player", _0x2e9c6b.player.split("@")[0]).replace("$attempt", "" + (3 - _0x2e9c6b.attempts)).replace("$waitTime", _0x2e9c6b.waitTime),
@@ -938,7 +909,7 @@ class WordChainGame {
           let _0x3ed90a = "*Reminder : Game Terminates After " + this.currentRemTime + "s*\n\n*_Waiting For @" + this.currentPlayer.split("@")[0] + "'s Responce_*    \n_Take Your Turn, Otherwise Game Terminates_\n_Make Sure Your Word Must Start With *" + this.previousWord.slice(-1) + "* , and Must Have Atleast *" + this.wordLength + "* letters_\n\nYou Still Have *" + this.currentRemTime + "Secs* to Answer\nGive Your Best To Make Difficult For Opponent";
           _0x346961.send(_0x3ed90a, {
             mentions: [this.currentPlayer]
-          }, "asta");
+          }, "suhail");
         } else if (!this.player2 || !this.player1) {
           _0x346961.bot.sendMessage(_0x346961.jid, {
             text: "_Still Waiting For Player to Start Word Chain Game..._\n _Type *" + prefix + "wcg* to Join The Game_  \nOtherwise : _Wcg Session Expires After " + this.currentRemTime + "s_"
@@ -1125,7 +1096,7 @@ smd({
           url: stickers[_0x4cde9e]
         },
         packname: "ᴅɪᴄᴇ",
-        author: "ᴀsᴛᴀ-ᴍᴅ"
+        author: "sᴜʜᴀɪʟ-ᴍᴅ"
       });
     } catch (_0xd37c6a) {
       const _0x312d64 = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
@@ -1363,7 +1334,7 @@ smd({
       _0x5aaad7[_0x5aaad7.game._currentTurn ^ _0x560530 ? "x" : "o"] = _0x303e73.chat;
     }
     if (_0x3fbb59 && isMongodb) {
-      await eco.give(_0x303e73.sender, "Asta", 2000);
+      await eco.give(_0x303e73.sender, "Suhail", 2000);
     }
     if (_0x3fbb59 || _0x1e00eb) {
       await _0x303e73.bot.sendMessage(_0x303e73.chat, {
