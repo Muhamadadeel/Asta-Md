@@ -8,7 +8,7 @@ RUN rm -rf /root/Astropeda/node_modules
 
 # Install dependencies
 WORKDIR /root/Astropeda
-RUN npm Install
+RUN npm install
 
 # Add additional Steps To Run...
 EXPOSE 3000
