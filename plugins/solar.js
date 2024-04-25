@@ -320,29 +320,6 @@ const {
    }
  });
  smd({
-   pattern: "callhq",
-   type: "fun",
-   info: "Shows calling logs with whatsapp head quaters",
-   filename: __filename
- }, async (_0x28198a, _0xbd1cc1) => {
-   let _0x44d1f1 = ["`Connecting To Whatsapp Headquarters...`", "`Call Connected.`", "`Whatsapp: Hello This is Whatsapp HQ. Who is this?`", "`Me: Yo this is` @" + _0x28198a.senderName + ",`Please Connect me to my lil bro, Suhail Tech`", "`User Authorised.`", "`Calling Suhail Tech`  `At +2348039607375`", "`Private  Call Connected...`", "`Me: Hello Sir, Please Ban This Whatsapp Account.`", "`Suhail: May I Know Who Is This?`", "`Me: Yo Brah, I Am` @" + _0x28198a.senderName, "`Suhail: OMG!!! Long time no see, Wassup Brother...\nI'll Make Sure That Guy Account Will Get Blocked Within 24Hrs.`", "`Me: Thanks, See You Later Brah.`", "`Suhail: Please Don't Thank Brah, Whatsapp Is Our's. Just Gimme A Call When You Become Free.`", "`Me: Is There Any Issue/Emergency???`", "`Suhail: Yes Sur, There Is A Bug In Whatsapp v69.6.9.\nI Am Not Able To Fix It. If Possible, Please Help Fix The Bug.`", "`Me: Send Me The App On My Whatsapp Account, I Will Fix The Bug & Send You.`", "`Suhail: Sure Sur \nTC Bye Bye :)`", "`Private Call Disconnected.`"];
-   let _0x20a053 = _0x44d1f1[0];
-   let {
-     key: _0x1d37cc
-   } = await _0x28198a.send(_0x20a053);
-   for (let _0x429cf8 = 0; _0x429cf8 < _0x44d1f1.length; _0x429cf8++) {
-     await sleep(2000);
-     _0x20a053 += "\n" + _0x44d1f1[_0x429cf8];
-     await _0x28198a.send(_0x44d1f1[_0x429cf8], {
-       edit: _0x1d37cc
-     });
-   }
-   await sleep(3000);
-   await _0x28198a.send(_0x20a053, {
-     edit: _0x1d37cc
-   });
- });
- smd({
    pattern: "nikal",
    type: "fun",
    info: "show loduu edits",
