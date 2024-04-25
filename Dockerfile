@@ -1,4 +1,4 @@
-FROM node:20
+FROM quay.io/sampandey001/secktor
 
 RUN git clone https://github.com/Astropeda/Asta-Md /root/Astropeda
 
@@ -8,7 +8,7 @@ RUN rm -rf /root/Astropeda/node_modules
 
 # Install dependencies
 WORKDIR /root/Astropeda
-RUN npm Install
+RUN npm install
 
 # Add additional Steps To Run...
 EXPOSE 3000
