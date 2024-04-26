@@ -251,7 +251,7 @@ smd({
         async(message, text) => {
           try{
 
-            if (!text) return message.reply(`*_Give me city name, ${message.isCreator ? "Buddy" : "Idiot"}!!_*`);
+            if (!text) return message.reply(`*_Give me city name, ${message.isCreator ? "Master" : "Idiot"}!!_*`);
             let {data} = await axios.get( `https://api.openweathermap.org/data/2.5/weather?q=${text}&units=metric&appid=060a6bcfa19809c2cd4d97a212b19273&language=en`);
             if(!data || data.cod === '404') return await message.reply(`*_Please provide valid city name!_*`)
             let textw = `*🌟Weather of  ${text}*\n\n`;

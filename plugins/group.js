@@ -81,7 +81,7 @@ const {
      const _0x417018 = await Suhail.bot.groupCreate(_0x37b490, [..._0x5a5c26]);
      if (_0x417018) {
        let _0x2c6495 = await _0x1d2f1f.bot.sendMessage(_0x417018.id, {
-         text: "*_Hey Buddy, Welcome to new Group_*\n" + Config.caption
+         text: "*_Hey Master, Welcome to new Group_*\n" + Config.caption
        });
        try {
          var _0x3a49e9 = await Suhail.bot.groupInviteCode(_0x417018.id);
@@ -877,7 +877,7 @@ const {
        return _0xadbad4.reply(tlang().group);
      }
      if (_0xadbad4.metadata?.announce) {
-       return await _0xadbad4.reply("*Uhh " + (_0xadbad4.isSuhail ? "Buddy" : "Sir") + ", Group already muted*");
+       return await _0xadbad4.reply("*Uhh " + (_0xadbad4.isAstro ? "Master" : "Sir") + ", Group already muted*");
      }
      if (!_0xadbad4.isBotAdmin) {
        return _0xadbad4.reply(tlang().botAdmin);
@@ -902,7 +902,7 @@ const {
        return _0x5d1afd.reply(tlang().group);
      }
      if (!_0x5d1afd.metadata?.announce) {
-       return await _0x5d1afd.reply("*Hey " + (_0x5d1afd.isSuhail ? "Buddy" : "Sir") + ", Group already unmute*");
+       return await _0x5d1afd.reply("*Hey " + (_0x5d1afd.isAstro ? "Master" : "Sir") + ", Group already unmute*");
      }
      if (!_0x5d1afd.isBotAdmin) {
        return _0x5d1afd.reply(tlang().botAdmin);
@@ -926,7 +926,7 @@ const {
        return _0x1dca9f.reply(tlang().group);
      }
      if (_0x1dca9f.metadata.restrict) {
-       return await _0x1dca9f.reply("*Hey " + (_0x1dca9f.isSuhail ? "Buddy" : "Sir") + ", Group setting already locked*");
+       return await _0x1dca9f.reply("*Hey " + (_0x1dca9f.isAstro ? "Master" : "Sir") + ", Group setting already locked*");
      }
      if (!_0x1dca9f.isBotAdmin) {
        return await _0x1dca9f.reply("*_I'm not admin!_*");
@@ -951,7 +951,7 @@ const {
        return _0xe880ee.reply(tlang().group);
      }
      if (!_0xe880ee.metadata.restrict) {
-       return await _0xe880ee.reply("*Hey " + (_0xe880ee.isSuhail ? "Buddy" : "Sir") + ", Group setting already unlocked*");
+       return await _0xe880ee.reply("*Hey " + (_0xe880ee.isAstro ? "Master" : "Sir") + ", Group setting already unlocked*");
      }
      if (!_0xe880ee.isBotAdmin) {
        return await _0xe880ee.reply("*_I'm not admin!_*");
@@ -1046,7 +1046,7 @@ const {
        return _0x3d5ec9.reply(tlang().group);
      }
      if (!_0x3d5ec9.isBotAdmin) {
-       return await _0x3d5ec9.reply("*_I'm Not Admin In This Group, " + (_0x3d5ec9.isSuhail ? "Buddy" : "Sir") + "_*");
+       return await _0x3d5ec9.reply("*_I'm Not Admin In This Group, " + (_0x3d5ec9.isAstro ? "Master" : "Sir") + "_*");
      }
      if (!_0x3d5ec9.isAdmin) {
        return _0x3d5ec9.reply(tlang().admin);

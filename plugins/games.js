@@ -129,7 +129,7 @@ smd({
         return await _0x435f9e.reply("*_You're not player of running game!!_*");
       }
     } else if (_0x2bfba9 === "end" && !_0x44b37a) {
-      return await _0x435f9e.reply("*_Hey " + (_0x435f9e.senderName || "buddy") + ", There's no game running yet!!_*");
+      return await _0x435f9e.reply("*_Hey " + (_0x435f9e.senderName || "master") + ", There's no game running yet!!_*");
     }
     if (_0x44b37a && _0x44b37a.status) {
       return await _0x435f9e.reply("*_A game is already in progress in this chat._*\n To End the Game:  .Guess end");
@@ -635,7 +635,7 @@ class HiddenCardGame {
       return "";
     }
     if (_0xa4cc81 !== this.currentPlayer) {
-      return "*_Hey Buddy, It's not your turn._*";
+      return "*_Hey Master, It's not your turn._*";
     }
     this.attempts[this.currentPlayer]++;
     const _0x52c4bf = _0xb34f99 - 1;

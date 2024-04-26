@@ -1,7 +1,56 @@
-let { smd,send } = require("../lib");
+let { smd } = require("../lib");
 const axios = require("axios");
 const fetch = require("node-fetch");
 
+smd(
+  {
+    pattern: "wanews",
+    alias: ["wa"],
+    desc: "Fetches the latest WhatsApp beta news for Android.",
+    category: "news",
+    filename: __filename,
+    use: "wanews",
+  },
+  async (message, input) => {
+    try {
+      const apiUrl = "https://api.maher-zubair.tech/details/wabetainfo";
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      if (!data || data.status !== 200 || !data.result) {
+        return message.send("*Failed to fetch WhatsApp beta news.*");
+      }
+
+      const { title, subtitle, date, image, link, desc, QandA } = data.result;
+
+      let output = `*${title}*\n\n`;
+      output += `${subtitle}\n`;
+      output += `${date}\n\n`;
+      output += `${desc}\n\n`;
+      output += `*Link:* ${link}\n\n`;
+
+      if (image) {
+        output += `![Image](${image})\n\n`;
+      }
+
+      if (QandA && QandA.length > 0) {
+        output += "*Q&A:*\n";
+        QandA.forEach((qa) => {
+          output += `*${qa.question}*\n${qa.answer}\n\n`;
+        });
+      }
+
+      return message.send(output, { quoted: message });
+    } catch (error) {
+      console.error(error);
+      return message.error(
+        error + "\n\nCommand: wanews",
+        error,
+        "*Failed to fetch WhatsApp beta news.*"
+      );
+    }
+  }
+);
 
 
 smd(

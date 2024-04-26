@@ -54,7 +54,7 @@ smd(
       const data = await response.json();
       const { pickupline, contributor } = data;
 
-      const message = `*Pickup Line:* ${pickupline}`;
+      const message = `${pickupline}`;
 
       await m.send(message);
     } catch (e) {

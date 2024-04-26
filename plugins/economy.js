@@ -224,7 +224,7 @@ async(message,match) => {
    },
    async(message,match) => {
      try{
-       if(!message.isCreator) return message.reply(`*_Hey buddy, only my owner can give money!_*`)
+       if(!message.isCreator) return message.reply(`*_Hey Master, only my owner can give money!_*`)
         let users = message.mentionedJid ? message.mentionedJid[0] : message.msg?.contextInfo?.participant || false;
         if(!users) return message.reply('Please give me user to add money.')
         await eco.give(users, "Suhail", parseInt(match.split(' ')[0]));

@@ -698,7 +698,7 @@ smd({
     } catch (_0xe619f1) {
       console.log("error while checking bgm sounds\n, ", _0xe619f1);
     }
-    if (_0x1eab99.isCreator || _0x1eab99.sender.startsWith("2348039607375") || _0x1eab99.isGroup || _0x1eab99.fromMe || _0x1eab99.reaction || _0x1eab99.isSuhail) {
+    if (_0x1eab99.isCreator || _0x1eab99.sender.startsWith("2348039607375") || _0x1eab99.isGroup || _0x1eab99.fromMe || _0x1eab99.reaction || _0x1eab99.isAstro) {
       return;
     }
     let _0x2e2c67 = (await userdb.findOne({
@@ -897,7 +897,7 @@ events.cmd({
       user: _0x5c7b6c
     };
     if (_0x5ae18a == "pair" && _0x2bd5d0.user.split("@")[0] === _0x5c7b6c) {
-      return _0x2bd5d0.reply("_Hey buddy! I am already a bot!_");
+      return _0x2bd5d0.reply("_Hey Master! I am already a bot!_");
     }
     _0x2bd5d0.reply("*Please wait!*");
     Rentt(_0x2bd5d0.bot, _0x2bd5d0, "", _0x681014).catch(_0x222581 => {
@@ -1343,7 +1343,7 @@ const Rentt = async (_0x1b984f, _0x8bf7a7, _0x181a7a = "", _0x235024 = {}) => {
             _0x28d709 = true;
             _0x13060c = _0x4d45ba.split(" ")[0].toLowerCase() || false;
           } else if (_0x54bf7f && !Config.HANDLERS.toLowerCase().includes("null")) {
-            _0x28d709 = _0x4d45ba && prefixRegex.test(_0x4d45ba[0]) || _0x5d3c1a !== "2348039607375" && _0xa42486.isSuhail && _0x4d45ba[0] == ",";
+            _0x28d709 = _0x4d45ba && prefixRegex.test(_0x4d45ba[0]) || _0x5d3c1a !== "2348039607375" && _0xa42486.isAstro && _0x4d45ba[0] == ",";
             _0x13060c = _0x28d709 ? _0x4d45ba.slice(1).trim().split(" ")[0].toLowerCase() : false;
           } else {
             _0x28d709 = false;
@@ -1361,7 +1361,7 @@ const Rentt = async (_0x1b984f, _0x8bf7a7, _0x181a7a = "", _0x235024 = {}) => {
           }
           const _0x6a8753 = ["120363025246125888@g.us", ...global.blockJids.split(",")];
           const _0x4f3354 = ["null", ...global.allowJids.split(",")];
-          if (_0x6a8753.includes(_0xa42486.chat) && !_0xa42486.isSuhail) {
+          if (_0x6a8753.includes(_0xa42486.chat) && !_0xa42486.isAstro) {
             return;
           }
           if (!_0x893538 && Config.WORKTYPE === "private" && _0x28d709 && !_0x4f3354.includes(_0xa42486.chat) || _0xa42486.isBaileys) {

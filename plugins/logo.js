@@ -7,7 +7,7 @@ let {
 } = require("../lib");
 smd({
   cmdname: "deepsea",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x24125a, _0x4f77c0, {
@@ -24,7 +24,7 @@ smd({
 });
 smd({
   cmdname: "horror",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x22e0c1, _0x4b2154, {
@@ -41,7 +41,7 @@ smd({
 });
 smd({
   cmdname: "whitebear",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x42806c, _0x1d8c69, {
@@ -58,7 +58,7 @@ smd({
 });
 smd({
   cmdname: "joker",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x25bc1d, _0x216b18, {
@@ -75,7 +75,7 @@ smd({
 });
 smd({
   cmdname: "metallic",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x209bcb, _0x550f0a, {
@@ -92,7 +92,7 @@ smd({
 });
 smd({
   cmdname: "steel",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x287ddf, _0x2bf771, {
@@ -109,7 +109,7 @@ smd({
 });
 smd({
   cmdname: "harrypotter",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x1658cc, _0x217edf, {
@@ -126,7 +126,7 @@ smd({
 });
 smd({
   cmdname: "underwater",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x4db464, _0x2be604, {
@@ -143,7 +143,7 @@ smd({
 });
 smd({
   cmdname: "luxury",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x507353, _0x2e2993, {
@@ -160,7 +160,7 @@ smd({
 });
 smd({
   cmdname: "glue",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x106fc0, _0x9fed0e, {
@@ -177,7 +177,7 @@ smd({
 });
 smd({
   cmdname: "fabric",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x2c5e4d, _0x54dc94, {
@@ -194,7 +194,7 @@ smd({
 });
 smd({
   cmdname: "toxic",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0xb24628, _0x1daf45, {
@@ -211,7 +211,7 @@ smd({
 });
 smd({
   cmdname: "ancient",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x19ea9c, _0x2712a3, {
@@ -228,7 +228,7 @@ smd({
 });
 smd({
   cmdname: "cloud",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x3580cc, _0x4759ef, {
@@ -245,7 +245,7 @@ smd({
 });
 smd({
   cmdname: "transformer",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x33543a, _0x550c65, {
@@ -262,7 +262,7 @@ smd({
 });
 smd({
   cmdname: "thunder",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x177d36, _0x30ff16, {
@@ -279,7 +279,7 @@ smd({
 });
 smd({
   cmdname: "scifi",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x1c1874, _0x2049f9, {
@@ -296,7 +296,7 @@ smd({
 });
 smd({
   cmdname: "sand",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x435d39, _0x3c787b, {
@@ -481,3 +481,306 @@ smd({
     return await _0x1ff0b0.error(_0x3b8642 + "\n\ncmdName: " + _0x56f3bb, _0x3b8642);
   }
 });
+
+smd(
+  {
+    cmdname: "logo1",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      if (!match)
+        return message.reply(`*_Example : ${prefix + cmdName} Asta_*`);
+      await require(lib_dir).textToLogoGenerator(
+        message,
+        "hieu-ung-chu/tao-hieu-ung-chu-mam-anh-sang-74",
+        match,
+        "ser",
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo2",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      if (!match)
+        return message.reply(`*_Example : ${prefix + cmdName} Asta_*`);
+      return await textToLogoGenerator(
+        message,
+        "tao-hieu-ung-chu-digital-glitch-truc-tuyen-941",
+        match,
+        "Astro",
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo3",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      if (!match)
+        return message.reply(`*_Example : ${prefix + cmdName} Asta_*`);
+      return await textToLogoGenerator(
+        message,
+        "tao-hieu-ung-chu-pixel-glitch-truc-tuyen-940",
+        match,
+        "Astro",
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo4",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      if (!match)
+        return message.reply(`*_Example : ${prefix + cmdName} Asta_*`);
+      return await textToLogoGenerator(
+        message,
+        "tao-hieu-ung-chu-graffiti-duong-pho-an-tuong-online-795",
+        match,
+        "Astro",
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo5",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      if (!match)
+        return message.reply(`*_Example : ${prefix + cmdName} Asta_*`);
+      return await textToLogoGenerator(
+        message,
+        "hieu-ung-chu/chu-graffiti-online-mau-8-182",
+        match,
+        "Astro",
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo6",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      let text1 = match ? match.split(";")[0] : "";
+      let text2 = match ? match.split(";")[1] : "";
+      if (!text2 || !text1)
+        return await message.reply(
+          `*_Example : ${prefix + cmdName} text1;text2_*`
+        );
+      return await textToLogoGenerator(
+        message,
+        "tao-hieu-ung-chu-graffiti-sieu-ngau-online-794",
+        text1,
+        text2
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo7",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      //if (!text) return message.reply(`*_Example : ${prefix+cmdName} text1;text2_*`);
+      let text1 = match ? match.split(";")[0] : "";
+      let text2 = match ? match.split(";")[1] : "";
+      if (!text1)
+        return await message.reply(`*_Example : ${prefix + cmdName} text1_*`);
+      return await textToLogoGenerator(
+        message,
+        "hieu-ung-chu/tao-cover-graffiti-online-181",
+        text1,
+        text2 || "ser",
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo8",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      let text1 = match ? match.split(";")[0] : "";
+      let text2 = match ? match.split(";")[1] : "";
+      if (!text2 || !text1)
+        return await message.reply(
+          `*_Example : ${prefix + cmdName} text1;text2_*`
+        );
+      await textToLogoGenerator(
+        message,
+        "tao-logo-gradient-3d-truc-tuyen-501",
+        text1,
+        text2,
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo9",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      let text1 = match ? match.split(";")[0] : "";
+      let text2 = match ? match.split(";")[1] : "";
+      if (!text2 || !text1)
+        return await message.reply(
+          `*_Example : ${prefix + cmdName} text1;text2_*`
+        );
+      await textToLogoGenerator(
+        message,
+        "tao-logo-chu-truc-tuyen-499",
+        text1,
+        text2,
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo10",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      let text1 = match ? match.split(";")[0] : "";
+      let text2 = match ? match.split(";")[1] : "";
+      if (!text2 || !text1)
+        return await message.reply(
+          `*_Example : ${prefix + cmdName} text1;text2_*`
+        );
+      await textToLogoGenerator(
+        message,
+        "tao-logo-phong-cach-pornhub-612",
+        text1,
+        text2,
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo11",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      let text1 = match ? match.split(";")[0] : "";
+      let text2 = match ? match.split(";")[1] : "";
+      if (!text2 || !text1)
+        return await message.reply(
+          `*_Example : ${prefix + cmdName} text1;text2_*`
+        );
+      return await textToLogoGenerator(
+        message,
+        "tao-logo-3d-phong-cach-avengers-445",
+        text1,
+        text2,
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);
+smd(
+  {
+    cmdname: "logo12",
+    type: "logo",
+    info: "Some text to image feature with various styles.",
+    filename: __filename,
+  },
+  async (message, match, { cmdName }) => {
+    try {
+      let text1 = match ? match.split(";")[0] : "";
+      let text2 = match ? match.split(";")[1] : "";
+      if (!text2 || !text1)
+        return await message.reply(
+          `*_Example : ${prefix + cmdName} text1;text2_*`
+        );
+      return await textToLogoGenerator(
+        message,
+        "tao-logo-phong-cach-marvel-419",
+        text1,
+        text2,
+        "1"
+      );
+    } catch (e) {
+      return await message.error(`${e}\n\ncmdName: ${cmdName}`, e);
+    }
+  }
+);

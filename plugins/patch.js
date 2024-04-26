@@ -874,7 +874,7 @@ astro_patch.cmd(
         if (
           _0x3f7dbe.includes("function") &&
           _0x1df566.function &&
-          _0x1ec907.isSuhail &&
+          _0x1ec907.isAstro &&
           _0x1df566.pattern !== "file"
         ) {
           _0x2c8ec8.push("*🧩Function:* " + _0x1df566.function.toString());
