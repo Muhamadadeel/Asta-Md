@@ -1,5 +1,6 @@
 const {smd, send} = require("../lib")
 const fetch = require('node-fetch')
+const axios = require('axios');
 smd({
     pattern: "forex1",
     category: "forex",
@@ -87,3 +88,33 @@ smd({
       return message.error(error, "*Failed to fetch forex market status.*");
     }
   });
+ 
+
+  smd({
+      pattern: "fxexchange",
+      category: "forexnews",
+      desc: "All Currencies Info",
+      filename: __filename
+  }, async (message, match) => {
+      try {
+          // Fetch currency exchange data from an API
+          const response = await axios.get('https://api.exchangerate-api.com/v4/latest/USD');
+          
+          // Extract currency exchange rates from the response
+          const exchangeRates = response.data.rates;
+          
+          // Format the exchange rates for display
+          let formattedMessage = 'Current exchange rates:\n';
+          for (const currency in exchangeRates) {
+              formattedMessage += `${currency}: ${exchangeRates[currency]}\n`;
+          }
+          
+          // Send the formatted message as a response
+          await message.sendMessage(formattedMessage);
+      } catch (error) {
+          console.error('Error fetching currency exchange rates:', error);
+          // Send an error message as a response
+          await message.sendMessage('Sorry, there was an error fetching the currency exchange rates. Please try again later.');
+      }
+  });
+  
