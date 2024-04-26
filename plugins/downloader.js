@@ -7,7 +7,7 @@ const {
    getBuffer,
    smdBuffer,
    prefix,
-   send,
+   sendMessage,
    Config,
  } = require("../lib");
  const {
@@ -37,7 +37,7 @@ smd(
       const response = await fetch(apiUrl);
 
       if (!response.ok) {
-        return await m.send(
+        return await m.sendMessage(
           `*_Error: ${response.status} ${response.statusText}_*`
         );
       }
@@ -53,7 +53,7 @@ smd(
 *Link:* ${link}
 `;
 
-      await send(m.from, null, message);
+      await sendMessage(m.from, null, message);
     } catch (e) {
       await m.error(`${e}\n\ncommand: wabeta`, e);
     }
