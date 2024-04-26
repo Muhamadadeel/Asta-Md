@@ -311,18 +311,21 @@ smd({
   if (!text) return message.reply(`*_Please provide a query_*\n*_Example ${prefix + cmdName} What is the meaning of life?_*`);
 
   try {
-    const res = await (await fetch(`https://api.maher-zubair.tech/ai/chatgptv4?q=${text}`)).json();
+    const apiUrl = `https://ultimetron.guruapi.tech/gpt4?prompt=${encodeURIComponent(text)}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
 
-    if (!res.status === 200) return message.send("*There's a problem, try again later!*");
+    if (!data.result.success) return message.send("*There's a problem, try again later!*");
 
-    const { result } = res;
-    const astro = "𝘼𝙎𝙏𝘼 𝙂𝙋𝙏4\n "
+    const { reply } = data.result;
+    const astro = "ᴀsᴛᴀ ɢᴘᴛ𝟺\n";
     const tbl = "```";
-    await send(message, `${astro}${tbl}${result}${tbl}`);
-  } catch (e) {
-    return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
+    await send(message, `${astro}${tbl}${reply}${tbl}`);
+  } catch (error) {
+    return await message.error(`${error}\n\n command: ${cmdName}`, error, `*_An error occurred while processing your request_*`);
   }
 });
+
 smd({
   pattern: "gemini",
   category: "ai",
