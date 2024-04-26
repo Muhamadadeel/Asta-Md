@@ -1,4 +1,3 @@
-const fs = require("fs-extra");
 const {
   aitts,
   smd,
@@ -6,7 +5,7 @@ const {
   Config,
   parsedJid,
   sleep,
-} = require("../lib");
+} = require(__dirname, "../lib");
 const axios = require("axios");
 const { send } = require("../lib");
 const fetch = require("node-fetch");
