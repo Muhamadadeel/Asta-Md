@@ -1,6 +1,5 @@
 let { smd } = require("../lib");
 const axios = require("axios");
-let { fetch} = require('node-fetch')
 const fetch = require('node:http').get;
 const { sendFromUrl } = require('../lib');
 smd(
