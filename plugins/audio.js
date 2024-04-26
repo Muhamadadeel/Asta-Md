@@ -1,6 +1,7 @@
 const {
     smd
   } = require("../lib");
+const { exec } = require('child_process');
   const fs = require("fs");
   async function audioEditor(_0x1ef339, _0x567a0f = "bass", _0x730356 = "") {
     if (!_0x1ef339.quoted) {
