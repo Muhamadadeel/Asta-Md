@@ -1,4 +1,4 @@
-let { smd } = require(__dirname, "../lib");
+let { smd } = require("../lib");
 const axios = require("axios");
 const fetch = require("node-fetch");
 
