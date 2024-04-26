@@ -3,6 +3,54 @@ const {fetchJson,smd, tlang,send, getBuffer, prefix, Config ,groupdb } = require
 let gis = require("async-g-i-s");
 const axios = require('axios')
 const fetch = require('node-fetch')
+smd(
+  {
+    pattern: 'lyrics',
+    alias: ['lyric'],
+    category: 'search',
+    desc: 'Search for lyrics of a given song',
+    use: '<song name>',
+    filename: __filename,
+  },
+  async (message, songName) => {
+    if (!songName) {
+      return message.reply(
+        `*_Please provide a song name_*\n*_Example: ${prefix}lyrics blue eyes punjabi_*`
+      );
+    }
+
+    try {
+      const response = await fetch(
+        `https://api.maher-zubair.tech/search/lyrics?q=${encodeURIComponent(songName)}`
+      );
+      const data = await response.json();
+
+      if (data.status !== 200) {
+        return message.send('*Please provide a valid song name!*');
+      }
+
+      if (!data.result) {
+        return message.send('*There was a problem, please try again later!*');
+      }
+
+      const { artist, lyrics, title } = data.result;
+      const contextInfo = await message.bot.contextInfo('*ASTA*-𝗠𝗗', `Lyrics-${songName}`);
+
+      await sendMessage(
+        message,
+        `*Title:* ${title}\n*Artist:* ${artist}\n\`\`\`${lyrics}\`\`\``,
+        { contextInfo }
+      );
+    } catch (error) {
+      console.error(`Error fetching lyrics for "${songName}":`, error);
+      return message.send('*_Sorry, I couldn't find the lyrics for that song._*');
+    }
+  }
+);
+
+async function sendMessage(message, content, options) {
+  // Implementation for sending the message
+}
 smd({
     pattern: "bing",
     alias: ["bingsearch"],
@@ -35,54 +83,7 @@ smd({
       await msg.error(err + "\n\ncommand: bing", err, "*An error occurred while searching on Bing.*");
     }
   });
-  smd(
-    {
-      pattern: "lyrics",
-      alias: ["lyric"],
-      category: "search",
-      desc: "Searche lyrics of given song name",
-      use: "<text | song>",
-      filename: __filename,
-    },
   
-    async (message, text, { cmdName }) => {
-      if (!text)
-        return message.reply(
-          `*_Uhh please, give me song name_*\n*_Example ${
-            prefix + cmdName
-          } blue eyes punjabi_*`
-        );
-      try {
-        const res = await (
-          await fetch(`https://api.maher-zubair.tech/search/lyrics?q=${text}`)
-        ).json();
-        if (!res.status) return message.send("*Please Provide valid name!!!*");
-        if (!res.result)
-          return message.send("*There's a problem, try again later!*");
-        const { thumb, lyrics, title, artist } = res.result,
-          tbl = "```",
-          tcl = "*",
-          tdl = "_*",
-          contextInfo = {
-            externalAdReply: {
-              ...(await message.bot.contextInfo("*ASTA*-𝗠𝗗", `Lyrics-${text}`)),
-            },
-          };
-        await send(
-          message,
-          `*Title:* ${title}\n*Artist:* ${artist} \n${tbl}${lyrics}${tbl} `,
-          { contextInfo: contextInfo },
-          ""
-        );
-      } catch (e) {
-        return await message.error(
-          `${e}\n\n command: ${cmdName}`,
-          e,
-          `*_Didn't get any lyrics, Sorry!_*`
-        );
-      }
-    }
-  );
   smd(
     {
       pattern: "zip",
