@@ -1,9 +1,8 @@
 let {
   smd,
-  prefix, 
-textToLogoGenerator
+  prefix
 } = require("../lib");
-
+let textToLogoGenerator = require(__dirname, "../lib")
 smd({
   cmdname: "deepsea",
   type: "deepsea",
