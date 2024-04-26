@@ -2,7 +2,7 @@ const {smd, send} = require("../lib")
 const fetch = require('node-fetch')
 smd({
     pattern: "forex1",
-    category: "forex news",
+    category: "forex",
     desc: "Fetches the latest forex news",
     filename: __filename,
     use: "forexnews",
@@ -35,4 +35,55 @@ smd({
       return message.error(error, "*Failed to fetch forex news.*");
     }
   });
+  smd({
+    pattern: "fxstatus",
+    category: "forex",
+    desc: "Fetches the current status of the forex market",
+    filename: __filename,
+    use: "fxstatus",
+  }, async (message) => {
+    try {
+      const apiUrl = "https://api.polygon.io/v1/marketstatus/now?apiKey=Y4iTYoJANwppB8I3Bm4QVWdV5oXlvc45";
+      const response = await fetch(apiUrl);
+      const data = await response.json();
   
+      if (!data) {
+        return message.send("*Failed to fetch forex market status.*");
+      }
+  
+      let output = "*Forex Market Status:*\n";
+      output += `After Hours: ${data.afterHours ? "Closed" : "Open"}\n`;
+      output += `Market: ${data.market ? "Open" : "Closed"}\n`;
+  
+      const currencies = data.currencies;
+      output += "\n*Currencies:*\n";
+      output += `Crypto: ${currencies.crypto}\n`;
+      output += `FX: ${currencies.fx}\n`;
+  
+      const exchanges = data.exchanges;
+      output += "\n*Exchanges:*\n";
+      output += `NASDAQ: ${exchanges.nasdaq}\n`;
+      output += `NYSE: ${exchanges.nyse}\n`;
+      output += `OTC: ${exchanges.otc}\n`;
+  
+      const indicesGroups = data.indicesGroups;
+      output += "\n*Indices Groups:*\n";
+      output += `S&P: ${indicesGroups.s_and_p}\n`;
+      output += `Societe Generale: ${indicesGroups.societe_generale}\n`;
+      output += `MSCI: ${indicesGroups.msci}\n`;
+      output += `FTSE Russell: ${indicesGroups.ftse_russell}\n`;
+      output += `MStar: ${indicesGroups.mstar}\n`;
+      output += `MStarC: ${indicesGroups.mstarc}\n`;
+      output += `CCCY: ${indicesGroups.cccy}\n`;
+      output += `CGI: ${indicesGroups.cgi}\n`;
+      output += `NASDAQ: ${indicesGroups.nasdaq}\n`;
+      output += `Dow Jones: ${indicesGroups.dow_jones}\n`;
+  
+      output += `\n*Server Time:* ${data.serverTime}\n`;
+  
+      return message.send(output, { quoted: message });
+    } catch (error) {
+      console.error(error);
+      return message.error(error, "*Failed to fetch forex market status.*");
+    }
+  });
