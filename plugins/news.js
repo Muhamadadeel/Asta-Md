@@ -1,59 +1,8 @@
 let { smd,send } = require("../lib");
 const axios = require("axios");
-const fetch = require('node-fetch');
-smd(
-  {
-    pattern: "wabeta",
-    desc: "Get the latest WhatsApp beta update information.",
-    category: "news",
-    filename: __filename,
-  },
-  async (m) => {
-    try {
-      const apiUrl = "https://api.maher-zubair.tech/details/wabetainfo";
-      const response = await fetch(apiUrl);
+const fetch = require("node-fetch");
 
-      if (!response.ok) {
-        return await m.send(
-          `*_Error: ${response.status} ${response.statusText}_*`
-        );
-      }
 
-      const data = await response.json();
-      const {
-        title,
-        updateFor,
-        date,
-        image,
-        subtitle,
-        link,
-        desc,
-        QandA,
-      } = data.result;
-
-      const message = `
-*${title}*
-
-*Update For:* ${updateFor.join(", ")}
-*Date:* ${date}
-*Subtitle:* ${subtitle}
-*Link:* ${link}
-
-*Description:*
-${desc}
-
-*Q&A:*
-${QandA.map(({ question, answer }) => `\n*Q:* ${question}\n*A:* ${answer}`).join("\n\n")}
-
-*Image:*
-`;
-
-      await send(m.from, image, message, m, {}, "image");
-    } catch (e) {
-      await m.error(`${e}\n\ncommand: wabeta`, e);
-    }
-  }
-);
 
 smd(
   {
