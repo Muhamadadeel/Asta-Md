@@ -23,55 +23,6 @@ const {
  const {
    cmd
  } = require("../lib/plugins");
- async function send(_0x38fbe8, _0x3e1faf, _0x38564b = {
-  packname: "",
-  author: "Asta-Md"
-}, _0x1ab511 = "", _0x207bd9 = "", _0x4627ba = "") {
-  if (!_0x3e1faf || !_0x38fbe8) {
-    return;
-  }
-  try {
-    let _0x269470 = _0x4627ba ? _0x4627ba : _0x38fbe8.chat;
-    return await _0x38fbe8.send(_0x3e1faf, _0x38564b, _0x1ab511, _0x207bd9, _0x269470);
-  } catch (_0x164757) {
-    console.log("./lib/asta.js/send()\n", _0x164757);
-  }
-}
-smd(
-  {
-    pattern: "wabeta",
-    desc: "Get the latest WhatsApp beta update information.",
-    category: "news",
-    filename: __filename,
-  },
-  async (m) => {
-    try {
-      const apiUrl = "https://api.maher-zubair.tech/details/wabetainfo";
-      const response = await fetch(apiUrl);
-
-      if (!response.ok) {
-        return await m.send(
-          `*_Error: ${response.status} ${response.statusText}_*`
-        );
-      }
-
-      const data = await response.json();
-      const {
-        title,
-        link
-      } = data.result;
-
-      const message = `
-*${title}*
-*Link:* ${link}
-`;
-
-      await send(m.from, null, message);
-    } catch (e) {
-      await m.error(`${e}\n\ncommand: wabeta`, e);
-    }
-  }
-);
  smd(
   {
     pattern: "igstalk",
