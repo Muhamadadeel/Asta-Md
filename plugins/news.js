@@ -1,47 +1,58 @@
 let { smd } = require("../lib");
 const axios = require("axios");
 let { fetch} = require('node-fetch')
+const fetch = require('node:http').get;
+const { sendFromUrl } = require('../lib');
 smd(
   {
     pattern: "wabeta",
-    desc: "Fetches the latest WhatsApp beta information.",
+    desc: "Get the latest WhatsApp beta update information.",
     category: "news",
     filename: __filename,
-    use: "wabeta",
   },
-  async (message, input) => {
+  async (m) => {
     try {
       const apiUrl = "https://api.maher-zubair.tech/details/wabetainfo";
       const response = await fetch(apiUrl);
-      const data = await response.json();
 
-      if (!data || data.status !== 200 || !data.result) {
-        return message.send("*Failed to fetch WhatsApp beta information.*");
+      if (!response.ok) {
+        return await m.send(
+          `*_Error: ${response.status} ${response.statusText}_*`
+        );
       }
 
-      const { title, updateFor, date, /**image,*/ subtitle, link, desc, QandA } =
-        data.result;
+      const data = await response.json();
+      const {
+        title,
+        updateFor,
+        date,
+        image,
+        subtitle,
+        link,
+        desc,
+        QandA,
+      } = data.result;
 
-      let output = `*${title}*\n\n`;
-      output += `*Update For:* ${updateFor.join(", ")}\n`;
-      output += `*Date:* ${date}\n\n`;
-      output += `*${subtitle}*\n\n`;
-      output += `${desc}\n\n`;
-      output += `*Link:* ${link}\n\n`;
+      const message = `
+*${title}*
 
-      output += "*Q&A:*\n";
-      QandA.forEach((qa) => {
-        output += `\n*Q:* ${qa.question}\n*A:* ${qa.answer}\n`;
-      });
+*Update For:* ${updateFor.join(", ")}
+*Date:* ${date}
+*Subtitle:* ${subtitle}
+*Link:* ${link}
 
-      return message.send(output, { quoted: message });
-    } catch (error) {
-      console.error(error);
-      return message.error(
-        error + "\n\nCommand: wabeta",
-        error,
-        "*Failed to fetch WhatsApp beta information.*"
-      );
+*Description:*
+${desc}
+
+*Q&A:*
+${QandA.map(({ question, answer }) => `\n*Q:* ${question}\n*A:* ${answer}`).join("\n\n")}
+
+*Image:*
+`;
+
+      await m.bot.sendFromUrl(m.from, image, message, m, {}, "image");
+    } catch (e) {
+      await m.error(`${e}\n\ncommand: wabeta`, e);
     }
   }
 );
