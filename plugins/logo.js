@@ -2,7 +2,7 @@ let {
   smd,
   prefix
 } = require("../lib");
-async function textToLogoGenerator(_0x371218, _0x4f590d = "", _0x13a1c2 = "", _0x11339e = "ser", _0x2091c1 = "textpro", _0x1bd248 = true) {
+function textToLogoGenerator(_0x371218, _0x4f590d = "", _0x13a1c2 = "", _0x11339e = "ser", _0x2091c1 = "textpro", _0x1bd248 = true) {
   let _0x19543f = {};
   let _0x1d4467 = {};
   let _0x44b219 = /1|ephoto|ephoto360/gi.test(_0x2091c1) ? "https://ephoto360.com/" + _0x4f590d + ".html" : /2|potoxy|photooxy/gi.test(_0x2091c1) ? "https://photooxy.com/" + _0x4f590d + ".html" : /3|enphoto|en360/gi.test(_0x2091c1) ? "https://en.ephoto360.com/" + _0x4f590d + ".html" : "https://textpro.me/" + _0x4f590d + ".html";
