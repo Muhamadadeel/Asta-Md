@@ -1,10 +1,52 @@
-const Config = require("../config");
 let {
   smd,
-  lang,
-  textToLogoGenerator,
   prefix
 } = require("../lib");
+async function textToLogoGenerator(_0x371218, _0x4f590d = "", _0x13a1c2 = "", _0x11339e = "ser", _0x2091c1 = "textpro", _0x1bd248 = true) {
+  let _0x19543f = {};
+  let _0x1d4467 = {};
+  let _0x44b219 = /1|ephoto|ephoto360/gi.test(_0x2091c1) ? "https://ephoto360.com/" + _0x4f590d + ".html" : /2|potoxy|photooxy/gi.test(_0x2091c1) ? "https://photooxy.com/" + _0x4f590d + ".html" : /3|enphoto|en360/gi.test(_0x2091c1) ? "https://en.ephoto360.com/" + _0x4f590d + ".html" : "https://textpro.me/" + _0x4f590d + ".html";
+  try {
+    const {
+      textpro: _0x4cf419
+    } = require("mumaker");
+    if (_0x13a1c2) {
+      _0x19543f = await _0x4cf419(_0x44b219, [_0x13a1c2, _0x11339e]);
+    }
+    let _0x339d4a = {} || {
+      ...(await _0x371218.bot.contextInfo("ᴛᴇxᴛ ᴛᴏ ʟᴏɢᴏ", "Hello " + _0x371218.senderName))
+    };
+    return await _0x371218.bot.sendMessage(_0x371218.jid, {
+      image: {
+        url: _0x19543f.image
+      },
+      caption: caption,
+      contextInfo: _0x339d4a
+    }, {
+      messageId: _0x371218.bot.messageId()
+    });
+  } catch (_0x4845d6) {
+    try {
+      let _0x4a65d4 = global.api_smd + ("/api/maker?text1=" + _0x13a1c2 + "&text2=" + _0x11339e + "&url=" + _0x44b219);
+      _0x1d4467 = await fetchJson(_0x4a65d4);
+      if ((!_0x1d4467 || !_0x1d4467.status || !_0x1d4467.img) && _0x1bd248) {
+        return _0x371218.error(_0x4845d6 + "\nWebinfo:" + (_0x1d4467.img || _0x1d4467) + "\n\nfileName: textToLogoGenerator->s.js", _0x4845d6);
+      }
+      await _0x371218.bot.sendMessage(_0x371218.jid, {
+        image: {
+          url: _0x1d4467.img
+        }
+      }, {
+        messageId: _0x371218.bot.messageId()
+      });
+    } catch (_0x549deb) {
+      let _0xa9ebc6 = _0x19543f && _0x19543f.image ? _0x19543f.image : _0x1d4467 && _0x1d4467.img ? _0x1d4467.img : false;
+      if (_0x1bd248) {
+        _0x371218.error(_0x4845d6 + "\n\nAPI Error : " + _0x549deb + "\n\nfileName: textToLogoGenerator->s.js", _0x4845d6, (_0xa9ebc6 ? "Here we go\n\n" + _0xa9ebc6 : "Error, Request Denied!").trim());
+      }
+    }
+  }
+}
 smd({
   cmdname: "deepsea",
   type: "deepsea",

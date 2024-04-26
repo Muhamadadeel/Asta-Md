@@ -127,60 +127,67 @@ smd(
     }
   }
 );
-smd({
+smd(
+  {
     pattern: "fxexchange",
     category: "forex",
     desc: "Fetches the latest foreign exchange rates against the US Dollar",
     filename: __filename,
     use: "fxexchange [currency_code]",
-  }, async (message, match) => {
+  },
+  async (message, match) => {
     try {
       const currencyCode = match || "USD";
       const apiUrl = `https://api.exchangerate-api.com/v4/latest/${currencyCode}`;
       const response = await fetch(apiUrl);
       const data = await response.json();
-  
+
       if (!data || !data.rates) {
-        return message.send(`*Failed to fetch exchange rates for ${currencyCode}.*`);
+        return message.send(
+          `*Failed to fetch exchange rates for ${currencyCode}.*`
+        );
       }
-  
+
       let output = `*Foreign Exchange Rates (${data.base})*\n\n`;
       for (const [currency, rate] of Object.entries(data.rates)) {
         output += `${currency}: ${rate.toFixed(4)}\n`;
       }
-  
+
       return message.send(output, { quoted: message });
     } catch (error) {
       console.error(error);
       return message.error(error, "*Failed to fetch exchange rates.*");
     }
-  });
-  smd({
+  }
+);
+smd(
+  {
     pattern: "stocktickers",
     category: "forex",
     desc: "Fetches a list of active stock tickers",
     filename: __filename,
     use: "stocktickers [limit]",
-  }, async (message, match) => {
+  },
+  async (message, match) => {
     try {
       const limit = match || 100;
       const apiUrl = `https://api.polygon.io/v3/reference/tickers?active=true&limit=${limit}&apiKey=Y4iTYoJANwppB8I3Bm4QVWdV5oXlvc45`;
       const response = await fetch(apiUrl);
       const data = await response.json();
-  
+
       if (!data || !data.results || data.results.length === 0) {
         return message.send("*No active stock tickers found.*");
       }
-  
+
       let output = `*Active Stock Tickers (Limit: ${limit}):*\n\n`;
       data.results.forEach((ticker) => {
         output += `${ticker.ticker}: ${ticker.name}\n`;
       });
-  
+
       return message.send(output, { quoted: message });
     } catch (error) {
       console.error(error);
       return message.error(error, "*Failed to fetch stock tickers.*");
     }
-  });
-  
+  }
+);

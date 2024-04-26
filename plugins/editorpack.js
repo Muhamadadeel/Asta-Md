@@ -1,4 +1,4 @@
-const { smd ,prefix,Config,createUrl,photoEditor,smdBuffer} = require("../lib")
+const { smd ,prefix,Config,smdBuffer} = require("../lib")
 let photo = ["imageMessage" ]
 
 let gfxold = ["ad","uncover","clown","mnm","pet","drip","gun","colorify"] 
@@ -9,7 +9,48 @@ let gfxx = [
     'sepia',  'rip',  'trash',  'hitler',
     "jail", "shit", "affect",...gfxold 
 ];
-
+async function createUrl(_0x128c16, _0x4f4112 = "1") {
+  try {
+    if (!_0x128c16) {
+      return;
+    }
+    if (!_0x4f4112 || _0x4f4112 === "1" || _0x4f4112.toLowerCase() === "telegraph") {
+      return await TelegraPh(_0x128c16);
+    }
+    if (_0x4f4112 === "2" || _0x4f4112.toLowerCase().includes("ugu")) {
+      return await UploadFileUgu(_0x128c16);
+    }
+  } catch (_0x21a973) {
+    console.log("ERROR IN SCRAPPING FOR CREATE URL()\n", _0x21a973);
+  }
+}
+async function photoEditor(_0x17796b, _0x343213 = "ad", _0xf62b7f = "", _0xe1eb47 = true) {
+  let _0xc6e0fc = ["imageMessage"];
+  try {
+    let _0x430f77 = _0xc6e0fc.includes(_0x17796b.mtype) ? _0x17796b : _0x17796b.reply_message;
+    if (!_0x430f77 || !_0xc6e0fc.includes(_0x430f77?.mtype || "null")) {
+      return await _0x17796b.send("*_Uhh Dear, Reply to an image_*");
+    }
+    let _0x2de3c4 = await _0x17796b.bot.downloadAndSaveMediaMessage(_0x430f77);
+    let _0x9a4084 = await TelegraPh(_0x2de3c4);
+    try {
+      fs.unlinkSync(_0x2de3c4);
+    } catch (_0x408f7d) {}
+    return await _0x17796b.bot.sendMessage(_0x17796b.chat, {
+      image: {
+        url: "https://api.popcat.xyz/" + _0x343213 + "?image=" + _0x9a4084
+      },
+      caption: _0xf62b7f
+    }, {
+      quoted: _0x17796b,
+      messageId: _0x17796b.bot.messageId()
+    });
+  } catch (_0x23ac28) {
+    if (_0xe1eb47) {
+      await _0x17796b.error(_0x23ac28 + "\n\ncommand: " + _0x343213 + "\nfileName: photoEditor->s.js", _0x23ac28);
+    }
+  }
+}
 
 const sendEditor = async (m,cmd, error = true,cap = Config.caption?.split("\n")[0] ||"") => {
     if(!gfxx.includes(cmd)) return 
