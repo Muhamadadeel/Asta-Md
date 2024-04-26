@@ -1,5 +1,6 @@
 let { smd } = require("../lib");
 const axios = require("axios");
+let { fetch} = require('node-fetch')
 smd(
   {
     pattern: "wabeta",
