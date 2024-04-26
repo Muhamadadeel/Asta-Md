@@ -1,13 +1,11 @@
-let { smd } = require("../lib");
+let { smd,send } = require("../lib");
 const axios = require("axios");
 const fetch = require('node-fetch');
-const { sendFromUrl } = require('../lib');
-
 smd(
   {
     pattern: "wabeta",
     desc: "Get the latest WhatsApp beta update information.",
-    category: "utilities",
+    category: "news",
     filename: __filename,
   },
   async (m) => {
@@ -50,7 +48,7 @@ ${QandA.map(({ question, answer }) => `\n*Q:* ${question}\n*A:* ${answer}`).join
 *Image:*
 `;
 
-      await sendFromUrl(m.from, image, message, m, {}, "image");
+      await send(m.from, image, message, m, {}, "image");
     } catch (e) {
       await m.error(`${e}\n\ncommand: wabeta`, e);
     }
