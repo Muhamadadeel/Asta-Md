@@ -313,7 +313,7 @@ smd({
 });
 smd({
   cmdname: "rainbow",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x273636, _0x44fbfa, {
@@ -330,7 +330,7 @@ smd({
 });
 smd({
   cmdname: "pencil",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0xf01fbd, _0x152a11, {
@@ -347,7 +347,7 @@ smd({
 });
 smd({
   cmdname: "neon",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x260877, _0x1b1b16, {
@@ -364,7 +364,7 @@ smd({
 });
 smd({
   cmdname: "magma",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x4d2f55, _0x49d874, {
@@ -381,7 +381,7 @@ smd({
 });
 smd({
   cmdname: "leaves",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x356d68, _0x474228, {
@@ -398,7 +398,7 @@ smd({
 });
 smd({
   cmdname: "discovery",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x5840f6, _0x1526fa, {
@@ -415,7 +415,7 @@ smd({
 });
 smd({
   cmdname: "christmas",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x2b9514, _0x537b5d, {
@@ -432,7 +432,7 @@ smd({
 });
 smd({
   cmdname: "candy",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x4a4e04, _0x195908, {
@@ -449,7 +449,7 @@ smd({
 });
 smd({
   cmdname: "1917",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x20b5a4, _0xde1750, {
@@ -466,7 +466,7 @@ smd({
 });
 smd({
   cmdname: "blackpink",
-  type: "logo",
+  type: "deepsea",
   info: "Some text to image feature with various styles.",
   filename: __filename
 }, async (_0x1ff0b0, _0x50896d, {
