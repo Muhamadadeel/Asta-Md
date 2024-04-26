@@ -816,7 +816,7 @@ smd({
       }, {
         autobio: _0x1f0ea7
       });
-      var _0x347b23 = await getContent(_0x50364b, _0x1f0ea7 == "true" || _0x1f0ea7 == "on" ? "Auto Bio By Suhail-MD, ⏰Time: @time 🚀@bot" : _0x1f0ea7);
+      var _0x347b23 = await getContent(_0x50364b, _0x1f0ea7 == "true" || _0x1f0ea7 == "on" ? "Auto Bio By Asta-MD, ⏰Time: @time 🚀@bot" : _0x1f0ea7);
       await _0x50364b.bot.updateProfileStatus(_0x347b23);
       return await _0x50364b.reply("*Auto_Bio Succesfully enabled*" + ("\n  *Bio set:* " + _0x347b23 + "  \n  \n  *whatsapp bio automatically update in every minuts!*\n  "));
     }
