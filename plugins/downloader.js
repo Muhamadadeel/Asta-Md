@@ -7,7 +7,6 @@ const {
    getBuffer,
    smdBuffer,
    prefix,
-   sendMessage,
    Config,
  } = require("../lib");
  const {
