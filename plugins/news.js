@@ -306,7 +306,6 @@ smd({
 📅 *Date:* ${data.date}
 📝 *Explanation:* ${data.explanation}
 🔗 *More Info:* [Read More](${data.url})
-📷 *Image:* [View Image](${data.hdurl})
 📢 *Copyright:* ${data.copyright}
       `;
       
