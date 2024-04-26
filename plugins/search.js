@@ -1,9 +1,8 @@
 const moment = require('moment-timezone')
-const {fetchJson,smd, tlang,send, getBuffer, prefix, Config ,groupdb } = require("../lib")
+const {fetchJson,smd, tlang,send, shazam, getBuffer, prefix, Config ,groupdb } = require("../lib")
 let gis = require("async-g-i-s");
 const axios = require('axios')
 const fetch = require('node-fetch')
-
 smd(
   {
     pattern: "lyrics",
@@ -123,9 +122,48 @@ smd({
       }
     }
   );
+ async function shazam(_0x859a32) {
+    let _0x49c991 = new acrcloud({
+      host: "identify-eu-west-1.acrcloud.com",
+      endpoint: "/v1/identify",
+      signature_version: "1",
+      data_type: "audio",
+      secure: true,
+      access_key: "c816ad50a2bd6282e07b90447d93c38c",
+      access_secret: "ZpYSwmCFpRovcSQBCFCe1KArX7xt8DTkYx2XKiIP"
+    });
+    let _0xf13a35 = await _0x49c991.identify(_0x859a32);
+    let {
+      code: _0x415c0c,
+      msg: _0x256320
+    } = _0xf13a35.status;
+    if (_0x415c0c !== 0) {
+      return _0x256320;
+    }
+    let {
+      title: _0x341b8a,
+      artists: _0x4ac72a,
+      album: _0x4a0f93,
+      genres: _0x27dc36,
+      release_date: _0x190efe,
+      external_metadata: _0x43a980
+    } = _0xf13a35.metadata.music[0];
+    let {
+      youtube: _0x5a3838,
+      spotify: _0x493522
+    } = _0x43a980;
+    return {
+      status: 200,
+      title: _0x341b8a,
+      artists: _0x4ac72a !== undefined ? _0x4ac72a.map(_0x428f09 => _0x428f09.name).join(", ") : "",
+      genres: _0x27dc36 !== undefined ? _0x27dc36.map(_0x20c5cf => _0x20c5cf.name).join(", ") : "",
+      release_date: _0x190efe,
+      album: _0x4a0f93.name || "",
+      data: _0xf13a35
+    };
+  }
    smd({
-           pattern: "find",
-           alias :["shazam"],
+           pattern: "shazam",
            category: "search",
            desc: "Finds info about song",
            filename: __filename,
