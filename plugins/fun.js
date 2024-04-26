@@ -1,9 +1,38 @@
 const axios = require("axios");
 const {
-  randomeFunfacts,
   smd
 } = require("../lib");
 const fetch = require("node-fetch");
+async function randomeFunfacts(_0x1be35e) {
+  try {
+    if (_0x1be35e === "question") {
+      return await random_question();
+    } else if (_0x1be35e === "truth") {
+      return await truth();
+    } else if (_0x1be35e === "dare") {
+      return await dare();
+    } else if (_0x1be35e === "joke") {
+      const _0x4fe671 = await (await fetch("https://official-joke-api.appspot.com/random_joke")).json();
+      return "*Joke :* " + _0x4fe671.setup + "\n*Punchline:*  " + _0x4fe671.punchline;
+    } else if (_0x1be35e === "joke2") {
+      const _0x1cc76d = await (await fetch("https://v2.jokeapi.dev/joke/Any?type=single")).json();
+      return "*joke :* " + _0x1cc76d.joke;
+    } else if (_0x1be35e === "fact") {
+      const {
+        data: _0x202058
+      } = await axios.get("https://nekos.life/api/v2/fact");
+      return "*Fact:* " + _0x202058.fact;
+    } else if (_0x1be35e === "quotes") {
+      const {
+        data: _0x6d4253
+      } = await axios.get("https://favqs.com/api/qotd");
+      return "╔════◇\n║ *🎗️Content:* " + _0x6d4253.quote.body + "\n║ *👤Author:* " + _0x6d4253.quote.author + "\n║\n╚════════════╝";
+    }
+  } catch (_0x1147af) {
+    msg.error(_0x1147af);
+    console.log("./lib/asta.js/randomeFunfacts()\n", _0x1147af);
+  }
+}
 smd(
   {
     pattern: "rizz",

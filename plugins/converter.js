@@ -12,10 +12,34 @@ const {
   listall,
   prefix,
   smd,
-  generateSticker,
   TelegraPh,
   Config
 } = require("../lib");
+async function generateSticker(_0x43a996, _0x5c979b, _0x116cae = {
+  pack: Config.packname,
+  author: Config.author
+}, _0x5b1252 = true) {
+  try {
+    const {
+      Sticker: _0x92981e,
+      createSticker: _0x1a1a97,
+      StickerTypes: _0x5f17c1
+    } = require("wa-sticker-formatter");
+    let _0x54c67c = new _0x92981e(_0x5c979b, {
+      ..._0x116cae
+    });
+    return await _0x43a996.bot.sendMessage(_0x43a996.chat, {
+      sticker: await _0x54c67c.toBuffer()
+    }, {
+      quoted: _0x43a996,
+      messageId: _0x43a996.bot.messageId()
+    });
+  } catch (_0x32ee71) {
+    if (_0x5b1252) {
+      await _0x43a996.error(_0x32ee71 + "\n\nfileName: generateSticker->s.js\n");
+    }
+  }
+}
 let mtypes = ["imageMessage", "videoMessage", "stickerMessage"];
 smd({
   cmdname: "sticker",
