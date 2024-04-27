@@ -1,4 +1,4 @@
-const { smd, prefix } = require('../lib');
+const { smd, prefix, Config } = require('../lib');
 const fetch = require('node-fetch');
 
 async function textToLogoGenerator(message, textProUrl, text1, text2 = "ser", serviceType = "textpro", retryOnFail = true) {
@@ -18,7 +18,7 @@ async function textToLogoGenerator(message, textProUrl, text1, text2 = "ser", se
     let captionContext = {} || { ...(await message.bot.contextInfo('Text to Logo', `Hello ${message.senderName}`)) };
     return await message.bot.sendMessage(message.jid, {
       image: { url: mumakerResponse.image },
-      caption: caption,
+      caption: Config.caption,
       contextInfo: captionContext
     }, { messageId: message.bot.messageId() });
   } catch (error) {
