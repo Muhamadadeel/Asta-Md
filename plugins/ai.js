@@ -1,6 +1,9 @@
+const fs = require("fs-extra");
 const {
+  TelegraPh,
   aitts,
   smd,
+  send,
   prefix,
   Config,
   parsedJid,
@@ -186,141 +189,28 @@ async function aiResponce(_0x109acf, _0xf00650, _0x2728a0 = "") {
     return _0x242f00(273);
   }
 }
-smd(
-  {
-    pattern: "rmbg",
-    alias: ["removebg"],
-    desc: "Removes the background from an image.",
-    category: "ai",
-    filename: __filename,
-    use: "<image URL>",
-  },
-  async (message, input) => {
-    try {
-      const url = input.trim();
-      if (!url || !isValidUrl(url)) {
-        return await message.send("*_Please provide a valid image URL._*");
-      }
-
-      const apiUrl = `https://aemt.me/removebg?url=${encodeURIComponent(url)}`;
-      const response = await axios.get(apiUrl, {
-        headers: {
-          "accept": "application/json",
-        },
-      });
-      const data = response.data;
-
-      if (!data || !data.url || !data.url.status === "true") {
-        return await message.reply("*Failed to remove background from the image.*");
-      }
-
-      const resultUrl = data.url.result;
-      const imageBuffer = await axios.get(resultUrl, { responseType: "arraybuffer" });
-      const buffer = Buffer.from(imageBuffer.data, "binary");
-      await message.bot.sendMessage(message.chat, { image: buffer }, { quoted: message });
-    } catch (error) {
-      await message.error(error + "\n\nCommand: rmbg", error, "*Failed to remove background from the image.*");
-    }
-  }
-);
-
-function isValidUrl(url) {
-  try {
-    new URL(url);
-    return true;
-  } catch (_) {
-    return false;
-  }
-}
-smd(
-  {
-    pattern: "sd",
-    desc: "Generates an image using Stable Diffusion AI.",
-    category: "ai",
-    filename: __filename,
-    use: "<text>",
-  },
-  async (message, input) => {
-    try {
-      const text = input.trim();
-      if (!text) {
-        return await message.send("*_Please provide some text to generate an image._*");
-      }
-
-      const apiUrl = `https://aemt.me/stablediffusion?text=${encodeURIComponent(text)}`;
-      const response = await axios.get(apiUrl, {
-        headers: {
-          "accept": "application/json",
-        },
-        responseType: "arraybuffer",
-      });
-
-      if (!response.data) {
-        return await message.reply("*Failed to generate an image using Stable Diffusion AI.*");
-      }
-
-      const buffer = Buffer.from(response.data, "binary");
-      await message.bot.sendMessage(message.chat, { image: buffer }, { quoted: message });
-    } catch (error) {
-      await message.error(error + "\n\nCommand: stablediffusion", error, "*Failed to use Stable Diffusion AI.*");
-    }
-  }
-);
-smd(
-  {
-    pattern: "bard",
-    desc: "Generates a response from Bard AI.",
-    category: "ai",
-    filename: __filename,
-    use: "<text>",
-  },
-  async (message, input) => {
-    try {
-      const text = input.trim();
-      if (!text) {
-        return await message.send("*_Please provide some text to generate a response._*");
-      }
-
-      const apiUrl = `https://aemt.me/bard?text=${encodeURIComponent(text)}`;
-      const response = await axios.get(apiUrl, {
-        headers: {
-          "accept": "application/json",
-        },
-      });
-      const data = response.data;
-
-      if (!data || !data.status) {
-        return await message.reply("*Failed to generate a response from Bard AI.*");
-      }
-
-      const result = data.result;
-      return await message.send(`*Bard AI:* ${result}`, { quoted: message });
-    } catch (error) {
-      await message.error(error + "\n\nCommand: bard", error, "*Failed to use Bard AI.*");
-    }
-  }
-);
-smd({ pattern: "gpt4", category: "ai", desc: "Chat with GPT-4 AI model", use: "<text>", filename: __filename, }, async (message, text, { cmdName }) => {
+smd({
+  pattern: "gpt4",
+  category: "ai",
+  desc: "Chat with GPT-4 AI model",
+  use: "<text>",
+  filename: __filename,
+}, async (message, text, { cmdName }) => {
   if (!text) return message.reply(`*_Please provide a query_*\n*_Example ${prefix + cmdName} What is the meaning of life?_*`);
 
   try {
-    const apiUrl = `https://api.maher-zubair.tech/ai/chatgptv4?q=${encodeURIComponent(text)}`;
-    const response = await fetch(apiUrl);
-    const data = await response.json();
+    const res = await (await fetch(`https://api.maher-zubair.tech/ai/chatgptv4?q=${text}`)).json();
 
-    if (data.status !== 200) {
-      return message.send("*There's a problem, try again later!*");
-    }
+    if (!res.status === 200) return message.send("*There's a problem, try again later!*");
 
-    const { result } = data;
-    const astro = "ᴀsᴛᴀ ɢᴘᴛ𝟺\n";
+    const { result } = res;
+    const astro = "𝘼𝙎𝙏𝘼 𝙂𝙋𝙏4\n "
     const tbl = "```";
     await send(message, `${astro}${tbl}${result}${tbl}`);
-  } catch (error) {
-    return await message.error(`${error}\n\n command: ${cmdName}`, error, `*_An error occurred while processing your request_*`);
+  } catch (e) {
+    return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
   }
 });
-
 smd({
   pattern: "gemini",
   category: "ai",
@@ -345,7 +235,7 @@ smd({
 });
 smd(
   {
-    cmdname: "alexa2",
+    cmdname: "alexa",
     category: "ai",
     use: "[text]",
     filename: __filename,
@@ -400,6 +290,85 @@ smd(
         _0x4adf95 + "\n\ncommand: chat",
         _0x4adf95,
         "*_no responce from chatbot, sorry!!_*"
+      );
+    }
+  }
+);
+smd(
+  {
+    pattern: "gpt",
+    desc: "chat with an AI",
+    category: "ai",
+    use: "<Hii, Astro>",
+    filename: __filename,
+  },
+  async (_0x5cb388, _0x302ad5) => {
+    try {
+      try {
+        let _0x557719 = _0x302ad5 ? _0x302ad5 : bot.reply_text;
+        if (!_0x557719) {
+          return man.reply("Provide me a query ex Who is Astro");
+        }
+        const _0x50c8d3 = await fetch(
+          "https://aemt.me/openai?text=" + _0x557719
+        );
+        const _0x14c9d6 = await _0x50c8d3.json();
+        if (_0x14c9d6 && _0x14c9d6.status && _0x14c9d6.result) {
+          return await _0x5cb388.reply(_0x14c9d6.result);
+        }
+      } catch {}
+      if (
+        Config.OPENAI_API_KEY == "" ||
+        !Config.OPENAI_API_KEY ||
+        !("" + Config.OPENAI_API_KEY).startsWith("sk")
+      ) {
+        return _0x5cb388.reply(
+          "```You Dont Have OPENAI API KEY \nPlease Create OPEN API KEY from Given Link \nhttps://platform.openai.com/account/api-keys\nAnd Set Key in Heroku OPENAI_API_KEY Var```"
+        );
+      }
+      if (!_0x302ad5) {
+        return _0x5cb388.reply(
+          "Hey there! " +
+            _0x5cb388.senderName +
+            ". How are you doing these days?"
+        );
+      }
+      return _0x5cb388.send(await aiResponce(_0x5cb388, "gpt", _0x302ad5));
+    } catch (_0x2ef914) {
+      await _0x5cb388.error(
+        _0x2ef914 + "\n\ncommand: gpt",
+        _0x2ef914,
+        "*_no responce from chatgpt, sorry!!_*"
+      );
+    }
+  }
+);
+smd(
+  {
+    pattern: "fgpt",
+    desc: "chat with an AI",
+    category: "ai",
+    use: "<query>",
+    filename: __filename,
+  },
+  async (_0x42b3b8, _0x3f3887) => {
+    try {
+      let _0x1b0897 = _0x3f3887 ? _0x3f3887 : _0x42b3b8.reply_text;
+      if (!_0x1b0897) {
+        return _0x42b3b8.reply("Provide me a query ex Who is Astro");
+      }
+      const _0x4c275e = await fetch("https://aemt.me/openai?text=" + _0x1b0897);
+      const _0x4743c3 = await _0x4c275e.json();
+      if (_0x4743c3 && _0x4743c3.status && _0x4743c3.result) {
+        return await _0x42b3b8.send(_0x4743c3.result);
+      } else {
+        await _0x42b3b8.send("*_Error while getting gpt responce!!_*");
+      }
+    } catch (_0x70fc81) {
+      await _0x42b3b8.error(
+        _0x70fc81 + "\n\ncommand: fgpt",
+        _0x70fc81,
+        "*_no responce from chatgpt, sorry!!_*"
       );
     }
   }
@@ -625,6 +594,57 @@ async function Draw(_0x3ab488) {
   const _0x1c59a6 = await _0x54c8a4.arrayBuffer();
   return Buffer.from(_0x1c59a6);
 }
+smd(
+  {
+    pattern: "rmbg",
+    alias: ["removebg"],
+    category: "ai",
+    filename: __filename,
+    desc: "Remove image Background.",
+  },
+  async (_0x28a796) => {
+    try {
+      if (!Config.REMOVE_BG_KEY) {
+        return _0x28a796.reply(
+          "```You Dont Have REMOVE_BG_KEY \nPlease Create RemoveBG KEY from Given Link \nhttps://www.remove.bg/\nAnd Set Key in REMOVE_BG_KEY Var```"
+        );
+      }
+      let _0x536d9f = ["imageMessage"];
+      let _0x4f2076 = _0x536d9f.includes(_0x28a796.mtype)
+        ? _0x28a796
+        : _0x28a796.reply_message;
+      if (!_0x4f2076 || !_0x536d9f.includes(_0x4f2076?.mtype || "null")) {
+        return await _0x28a796.send("*_Uhh Dear, Reply to an image_*");
+      }
+      let _0x437dc5 = await _0x28a796.bot.downloadAndSaveMediaMessage(
+        _0x4f2076
+      );
+      let _0x4dcaa0 = await TelegraPh(_0x437dc5);
+      try {
+        fs.unlinkSync(_0x437dc5);
+      } catch {}
+      let _0x9b86dd = await aiResponce(_0x28a796, "rmbg", _0x4dcaa0);
+      if (_0x9b86dd) {
+        await _0x28a796.send(
+          _0x9b86dd,
+          {
+            caption: Config.caption,
+          },
+          "image",
+          _0x28a796
+        );
+      } else {
+        await _0x28a796.send("*_Request not be preceed!!_*");
+      }
+    } catch (_0x166d80) {
+      await _0x28a796.error(
+        _0x166d80 + "\n\ncommand: rmbg",
+        _0x166d80,
+        "*_No responce from remove.bg, Sorry!!_*"
+      );
+    }
+  }
+);
 smd(
   {
     pattern: "aitts",
