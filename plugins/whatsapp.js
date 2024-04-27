@@ -367,7 +367,7 @@ smd(
             .tz(timezone)
             .format("DD/MM/YYYY HH:mm:ss");
       }
-      _0x281fb2.send(_0x21f6f4, {}, "suhail", _0x281fb2);
+      _0x281fb2.send(_0x21f6f4, {}, "asta", _0x281fb2);
     } catch (_0x5633d6) {
       return await _0x281fb2.error(
         _0x5633d6 + "\n\n command: listpc",

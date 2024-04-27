@@ -137,7 +137,7 @@ smd(
          ...(await _0x297641.bot.contextInfo("HISTORY"))
        },
        mentions: [..._0x38bc51]
-     }, "suhail", _0x297641);
+     }, "asta", _0x297641);
    } catch (_0x48863b) {
      await _0x297641.error(_0x48863b + "\n\ncommand : cmdused", _0x48863b, "*ERROR!*");
    }
@@ -198,7 +198,7 @@ smd(
        return await _0x7587f6.reply("_Reply to an image/video message!_");
      }
      if (!_0x11eeb1) {
-       return await _0x7587f6.reply("_Need fileName, Example: document suhail | caption_");
+       return await _0x7587f6.reply("_Need fileName, Example: document asta | caption_");
      }
      let _0x1bfcf5 = await _0x7587f6.bot.downloadAndSaveMediaMessage(_0x49db20);
      let _0x3f6d77 = _0x11eeb1.includes(":") ? ":" : _0x11eeb1.includes(";") ? ";" : "|";
@@ -320,7 +320,7 @@ smd(
    let _0x3b31ed = "Character of @" + _0x32c078.split("@")[0] + "  is *" + _0x2f5d93 + "* 🔥⚡";
    _0x2a677e.send(_0x3b31ed, {
      mentions: [_0x32c078]
-   }, "suhail", _0x2a677e);
+   }, "asta", _0x2a677e);
  });
  smd({
    cmdname: "poetry",
@@ -481,7 +481,7 @@ smd(
      if (_0x358290 && _0x358290.status == "200") {
        return await _0x4cdec8.send(_0x358290.result, {
          caption: Config.caption
-       }, "smdimg", _0x4cdec8);
+       }, "amdimg", _0x4cdec8);
      } else {
        _0x4cdec8.send("_No responce from server!_");
      }

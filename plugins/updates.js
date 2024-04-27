@@ -75,7 +75,7 @@ let {
      });
      await _0x3b2ef2.reply(_0x2dca1f + _0x23711a + _0x3c1a2b, {
        mentions: [_0x3b2ef2.sender]
-     }, "suhail", _0x3b2ef2);
+     }, "asta", _0x3b2ef2);
    } catch (_0x29b74b) {
      _0x3b2ef2.error(_0x29b74b + "\n\nCommand: request", _0x29b74b, false);
    }

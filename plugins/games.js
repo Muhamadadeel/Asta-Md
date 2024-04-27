@@ -909,7 +909,7 @@ class WordChainGame {
           let _0x3ed90a = "*Reminder : Game Terminates After " + this.currentRemTime + "s*\n\n*_Waiting For @" + this.currentPlayer.split("@")[0] + "'s Responce_*    \n_Take Your Turn, Otherwise Game Terminates_\n_Make Sure Your Word Must Start With *" + this.previousWord.slice(-1) + "* , and Must Have Atleast *" + this.wordLength + "* letters_\n\nYou Still Have *" + this.currentRemTime + "Secs* to Answer\nGive Your Best To Make Difficult For Opponent";
           _0x346961.send(_0x3ed90a, {
             mentions: [this.currentPlayer]
-          }, "suhail");
+          }, "asta");
         } else if (!this.player2 || !this.player1) {
           _0x346961.bot.sendMessage(_0x346961.jid, {
             text: "_Still Waiting For Player to Start Word Chain Game..._\n _Type *" + prefix + "wcg* to Join The Game_  \nOtherwise : _Wcg Session Expires After " + this.currentRemTime + "s_"

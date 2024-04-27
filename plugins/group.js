@@ -863,7 +863,7 @@ const {
    await _0x8c602e.reply("\t❣️ *Matchmaking...* ❣️\n\t*✯────────────────────✯*\n@" + _0x8c602e.sender.split("@")[0] + "  x  @" + _0x7fa6d0.split("@")[0] + "\n\t*✯────────────────────✯*\n\n" + (await _0x30a2ec()) + "\n\n" + Config.caption, {
      contextInfo: _0x1a1a8e,
      mentions: [_0x7fa6d0]
-   }, "suhail");
+   }, "asta");
  });
  smd({
    pattern: "mute",

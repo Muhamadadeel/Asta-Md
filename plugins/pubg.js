@@ -20,7 +20,7 @@ let singleText = async (message, match, { cmdName }) => {
       message,
       logo[cmdName],
       match,
-      "suhail",
+      "asta",
       "1"
     );
   } catch (e) {

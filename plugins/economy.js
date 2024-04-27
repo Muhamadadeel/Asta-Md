@@ -24,7 +24,7 @@ smd({
         if (zerogroup?.economy == "false") return reply("*🚦Economy* is not active in current group.");
         if (!isGroup) return reply(tlang().group);
         const daily  = await eco.daily(sender, "Asta", 500); //give 500 for daily, can be changed
-        if (daily.cd) { //cdL is already formatted cooldown Left
+        if (daily.cd) {
           return await reply(`🧧 You already claimed daily for today, come back in ${daily.cdL}🫡`);
         } else { reply(`you claimed daily ${daily.amount} 🪙 for today🎉.`);  }
       }catch(e){ error(`${e}\n\ncommand: daily`,e)}

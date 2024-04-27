@@ -693,7 +693,7 @@ smd({
         return _0x3dac0f = false;
       });
     } else {
-      return _0x54e3dc.reply("*_Uhh Dear, provide text, ex .ttp 4 hii im suhail!!_*");
+      return _0x54e3dc.reply("*_Uhh Dear, provide text, ex .ttp 4 hii im asta!!_*");
     }
   } catch (_0x72e5d) {
     return await _0x54e3dc.error(_0x72e5d + "\n\ncmdName: ttp\n");

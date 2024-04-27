@@ -4,7 +4,7 @@ const {
     prefix,
     Config,
     sleep,
-    smdJson,
+    astroJson,
     smdBuffer
   } = require("../lib");
   const axios = require("axios");

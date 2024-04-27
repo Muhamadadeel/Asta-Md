@@ -1,7 +1,7 @@
 const {
    smd,
    fetchJson,
-   smdJson,
+   astroJson,
    fancytext,
    yt,
    getBuffer,
@@ -548,7 +548,7 @@ smd(
          );
        }
  
-       let video = await smdJson(
+       let video = await astroJson(
          "https://api.maher-zubair.tech/download/twitter?url=" + query
        );
  
@@ -661,7 +661,7 @@ smd(
            '*_Please provide a valid Facebook Video URL._'
          );
        }
-       let video = await smdJson(
+       let video = await astroJson(
          "https://api-smd.onrender.com/api/fbdown?url=" + query
        );
        if (!video || !video.status) {
@@ -671,7 +671,7 @@ smd(
          message.chat,
          {
            video: {
-             url: video.result.audio, // Assuming you want the audio quality video
+             url: video.result.audio, // Assuming you want the audio quality
            },
            caption: Config.caption,
          },
@@ -731,7 +731,7 @@ smd(
  });
  smd(
    {
-     pattern: "tgs",
+     pattern: "tgs2",
      desc: "Downloads telegram stickers.",
      category: "downloader",
      filename: __filename,
@@ -916,7 +916,7 @@ smd(
              "fb https://www.facebook.com/watch/?v=2018727118289093_*"
          );
        }
-       let video = await smdJson(
+       let video = await astroJson(
          "https://api-smd.onrender.com/api/fbdown?url=" + query
        );
        if (!video || !video.status) {
@@ -962,7 +962,7 @@ smd(
              "fb https://www.facebook.com/watch/?v=2018727118289093_*"
          );
        }
-       let video = await smdJson(
+       let video = await astroJson(
          "https://api-smd.onrender.com/api/fbdown?url=" + query
        );
        if (!video || !video.status) {

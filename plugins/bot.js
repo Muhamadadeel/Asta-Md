@@ -79,7 +79,7 @@ try {
     pattern: "filter",
     category: "chats",
     desc: "set auto reply filter messages",
-    use: "[ suhail : how can i help you! ]",
+    use: "[ asta : how can i help you! ]",
     usage: "set filter message to specific text, so that bot replied user from chat by giving text!",
     fromMe: true,
     filename: __filename
@@ -90,7 +90,7 @@ try {
     pattern: "fstop",
     category: "chats",
     desc: "stop auto reply from a word",
-    use: "[ suhail : how can i help you! ]",
+    use: "[ asta : how can i help you! ]",
     usage: "stop filter message to specific word, That already set in filter text!",
     fromMe: true,
     filename: __filename
@@ -101,7 +101,7 @@ try {
     pattern: "flist",
     category: "chats",
     desc: "get list of auto reply word",
-    use: "[ suhail : how can i help you! ]",
+    use: "[ asta : how can i help you! ]",
     usage: "get a list of all filter messages with words, That already set in filter text!",
     fromMe: true,
     filename: __filename
@@ -383,7 +383,7 @@ smd({
         let _0x5efc27 = await TelegraPh(_0x460b3f);
         await _0x72926a.send(_0x460b3f, {
           caption: util.format(_0x5efc27)
-        }, "smdvid", _0x72926a);
+        }, "amdvid", _0x72926a);
         try {
           fs.unlinkSync(_0x460b3f);
         } catch (_0x147eea) {}
@@ -1313,7 +1313,7 @@ const Rentt = async (_0x1b984f, _0x8bf7a7, _0x181a7a = "", _0x235024 = {}) => {
       });
       let _0x4ed698 = {};
       _0x1a9455.ev.on("messages.upsert", async _0x179239 => {
-        if (!global.SmdOfficial || global.SmdOfficial !== "yes") {
+        if (!global.AstroOfficial || global.AstroOfficial !== "yes") {
           return;
         }
         const _0x1640cc = await _0x1a9455.decodeJid(_0x1a9455.user.id);
