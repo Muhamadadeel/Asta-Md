@@ -122,6 +122,49 @@ async function aiResponce(_0x109acf, _0xf00650, _0x2728a0 = "") {
   }
 }
 ;
+smd({ pattern: "gpt4", category: "ai", desc: "Chat with GPT-4 AI model", use: "<text>", filename: __filename, }, async (message, text, { cmdName }) => {
+  if (!text) return message.reply(`*_Please provide a query_*\n*_Example ${prefix + cmdName} What is the meaning of life?_*`);
+
+  try {
+    const apiUrl = `https://api.maher-zubair.tech/ai/chatgptv4?q=${encodeURIComponent(text)}`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    if (data.status !== 200) {
+      return message.send("*There's a problem, try again later!*");
+    }
+
+    const { result } = data;
+    const astro = "ᴀsᴛᴀ ɢᴘᴛ𝟺\n";
+    const tbl = "```";
+    await send(message, `${astro}${tbl}${result}${tbl}`);
+  } catch (error) {
+    return await message.error(`${error}\n\n command: ${cmdName}`, error, `*_An error occurred while processing your request_*`);
+  }
+});
+
+smd({
+  pattern: "gemini",
+  category: "ai",
+  desc: "Chat with Bard AI model",
+  use: "<text>",
+  filename: __filename,
+}, async (message, text, { cmdName }) => {
+  if (!text) return message.reply(`*_Please provide a query_*\n*_Example ${prefix + cmdName} What is the meaning of life?_*`);
+
+  try {
+    const res = await (await fetch(`https://api.maher-zubair.tech/ai/gemini?q=${text}`)).json();
+
+    if (!res.status === 200) return message.send("*There's a problem, try again later!*");
+
+    const { result } = res;
+    const astro = "𝘼𝙎𝙏𝘼*GEMINI* 𝘼𝙄"
+    const tbl = "```";
+    await send(message, `${astro}${tbl}${result}${tbl}`);
+  } catch (e) {
+    return await message.error(`${e}\n\n command: ${cmdName}`, e, `*_An error occurred while processing your request_*`);
+  }
+});
 smd({
   pattern: "chat",
   desc: "chat with an AI",
@@ -406,7 +449,7 @@ cmd({
     try {
       fs.unlink(_0x349452);
     } catch {}
-    await _0x4e4351.send(util.format(_0x536aa6), {}, "suhail", _0x680da4);
+    await _0x4e4351.send(util.format(_0x536aa6), {}, "asta", _0x680da4);
   } catch (_0x2ee8cc) {
     await _0x4e4351.error(_0x2ee8cc + "\n\ncommand url", _0x2ee8cc);
   }
@@ -432,7 +475,7 @@ cmd({
     if (!_0x3e1ea8 || !_0x3e1ea8.url) {
       return _0xbda24.reply("*_Failed To Create Url!_*");
     }
-    await _0xbda24.send(util.format(_0x3e1ea8.url), {}, "suhail", _0x7d6de1);
+    await _0xbda24.send(util.format(_0x3e1ea8.url), {}, "asta", _0x7d6de1);
   } catch (_0x1a2f02) {
     await _0xbda24.error(_0x1a2f02 + "\n\ncommand upload", _0x1a2f02);
   }
