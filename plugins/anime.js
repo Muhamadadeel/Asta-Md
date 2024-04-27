@@ -1,13 +1,12 @@
 const Config = require("../config");
 let {
   sendGImages,
-  smd
+  amd
 } = require("../lib");
 const axios = require("axios");
 const fetch = require("node-fetch");
 const {
-  fetchJson,
-  getBuffer
+  fetchJson
 } = require("../lib/");
 async function sendAnime(_0x55a475, _0x509539, _0x4e419e, _0x835b9a = "") {
   function _0xf3e051() {
@@ -102,7 +101,7 @@ async function sendAnime(_0x55a475, _0x509539, _0x4e419e, _0x835b9a = "") {
     await _0x509539[_0x2d1f22(341)](_0x29e730);
   }
 }
-smd({
+amd({
   pattern: "waifu",
   desc: "To get Waifu Random Pics",
   category: "anime",
@@ -114,7 +113,7 @@ smd({
     return await sendAnime(_0x3f90ca, _0x3f90ca, "waifu", _0x18c6e6);
   } catch {}
 });
-smd({
+amd({
   pattern: "neko",
   category: "anime",
   desc: "Sends a Neko Image in chat",
@@ -126,7 +125,7 @@ smd({
     return await sendAnime(_0x1cd273, _0x1cd273, "neko", _0xb77fec);
   } catch {}
 });
-smd({
+amd({
   pattern: "megumin",
   desc: "To get Waifu Random Pics",
   category: "anime",
@@ -138,7 +137,7 @@ smd({
     return await sendAnime(_0x5a7e62, _0x5a7e62, "megumin", _0x8aed59);
   } catch {}
 });
-smd({
+amd({
   pattern: "loli",
   category: "anime",
   filename: __filename,
@@ -148,7 +147,7 @@ smd({
     return await sendAnime(_0x11eae1, _0x11eae1, "loli");
   } catch {}
 });
-smd({
+amd({
   pattern: "foxgirl",
   category: "anime",
   desc: "Sends image of Fox Girl Anime.",
@@ -158,7 +157,7 @@ smd({
     return await sendAnime(_0x545d0f, _0x545d0f, "foxgirl");
   } catch {}
 });
-smd({
+amd({
   pattern: "demon",
   alias: ["ds"],
   desc: "To get Naruto Random Videos",
@@ -169,7 +168,7 @@ smd({
     return await sendAnime(_0x88a702, _0x88a702, "demon");
   } catch {}
 });
-smd({
+amd({
   pattern: "naruto",
   desc: "To get Naruto Random Videos",
   category: "anime",
@@ -179,7 +178,7 @@ smd({
     return await sendAnime(_0x5ded99, _0x5ded99, "naruto");
   } catch {}
 });
-smd({
+amd({
   pattern: "pokepic",
   category: "anime",
   filename: __filename,
@@ -189,7 +188,7 @@ smd({
     return await sendGImages(_0x583a8f, _0x26e084 + "Pokemon Pics only HD ", "*---「 Poke Pic 」---*", _0x26e084);
   } catch {}
 });
-smd({
+amd({
   pattern: "animewall",
   category: "anime",
   desc: "Anime Wallpaper Random",
@@ -199,7 +198,7 @@ smd({
     return await sendGImages(_0x1be31e, _0x45a934 + "anime wallpaper for desktop full hd", "*---「 Anime Wallpaper 」---*", _0x45a934);
   } catch {}
 });
-smd({
+amd({
   pattern: "pokemon",
   category: "anime",
   filename: __filename,
@@ -230,7 +229,7 @@ smd({
     }
   } catch {}
 });
-smd({
+amd({
   pattern: "kaneki",
   desc: "Sends a random image of Kaneki from Tokyo Ghoul.",
   category: "anime",
@@ -262,7 +261,7 @@ smd({
   }
 });
 // Command for Akira
-smd({
+amd({
   pattern: "akira",
   desc: "Sends a random image of Akira.",
   category: "anime",
@@ -294,7 +293,7 @@ smd({
   }
 });
 // Command for Anna
-smd({
+amd({
   pattern: "anna",
   desc: "Sends a random image of Anna.",
   category: "anime",
@@ -327,7 +326,7 @@ smd({
 });
 
 // Command for Asuna
-smd({
+amd({
   pattern: "asuna",
   desc: "Sends a random image of Asuna.",
   category: "anime",
@@ -359,7 +358,7 @@ smd({
   }
 });
 // Command for Anna
-smd({
+amd({
   pattern: "anna",
   desc: "Sends a random image of Anna.",
   category: "anime",
@@ -392,7 +391,7 @@ smd({
 });
 
 // Command for Asuna
-smd({
+amd({
   pattern: "asuna",
   desc: "Sends a random image of Asuna.",
   category: "anime",
@@ -424,7 +423,7 @@ smd({
   }
 });
 // Command for Boruto
-smd({
+amd({
   pattern: "boruto",
   desc: "Sends a random image of Boruto.",
   category: "anime",
@@ -457,7 +456,7 @@ smd({
 });
 
 // Command for Chiho
-smd({
+amd({
   pattern: "chiho",
   desc: "Sends a random image of Chiho.",
   category: "anime",
@@ -490,7 +489,7 @@ smd({
 });
 
 // Command for Eba
-smd({
+amd({
   pattern: "eba",
   desc: "Sends a random image of Eba.",
   category: "anime",
@@ -523,7 +522,7 @@ smd({
 });
 
 // Command for Elaina
-smd({
+amd({
   pattern: "elaina",
   desc: "Sends a random image of Elaina.",
   category: "anime",
@@ -556,7 +555,7 @@ smd({
 });
 
 // Command for Ezra
-smd({
+amd({
   pattern: "ezra",
   desc: "Sends a random image of Ezra.",
   category: "anime",
@@ -589,7 +588,7 @@ smd({
 });
 
 // Command for Inori
-smd({
+amd({
   pattern: "inori",
   desc: "Sends a random image of Inori.",
   category: "anime",
@@ -622,7 +621,7 @@ smd({
 });
 
 // Command for Itachi
-smd({
+amd({
   pattern: "itachi",
   desc: "Sends a random image of Itachi.",
   category: "anime",
@@ -655,7 +654,7 @@ smd({
 });
 
 // Command for Itori
-smd({
+amd({
   pattern: "itori",
   desc: "Sends a random image of Itori.",
   category: "anime",
@@ -688,7 +687,7 @@ smd({
 });
 
 // Command for Kaga
-smd({
+amd({
   pattern: "kaga",
   desc: "Sends a random image of Kaga.",
   category: "anime",
@@ -721,7 +720,7 @@ smd({
 });
 
 // Command for Kaori
-smd({
+amd({
   pattern: "kaori",
   desc: "Sends a random image of Kaori.",
   category: "anime",
@@ -754,7 +753,7 @@ smd({
 });
 
 // Command for Kotori
-smd({
+amd({
   pattern: "kotori",
   desc: "Sends a random image of Kotori.",
   category: "anime",
@@ -787,7 +786,7 @@ smd({
 });
 
 // Command for Kurumi
-smd({
+amd({
   pattern: "kurumi",
   desc: "Sends a random image of Kurumi.",
   category: "anime",
@@ -820,7 +819,7 @@ smd({
 });
 
 // Command for Miku
-smd({
+amd({
   pattern: "miku",
   desc: "Sends a random image of Miku.",
   category: "anime",
@@ -853,7 +852,7 @@ smd({
 });
 
 // Command for Naruto
-smd({
+amd({
   pattern: "naruto",
   desc: "Sends a random image of Naruto.",
   category: "anime",
@@ -886,7 +885,7 @@ smd({
 });
 
 // Command for Nezuko
-smd({
+amd({
   pattern: "nezuko",
   desc: "Sends a random image of Nezuko.",
   category: "anime",
@@ -919,7 +918,7 @@ smd({
 });
 
 // Command for Sakura
-smd({
+amd({
   pattern: "sakura",
   desc: "Sends a random image of Sakura.",
   category: "anime",
@@ -952,7 +951,7 @@ smd({
 });
 
 // Command for Sasuke
-smd({
+amd({
   pattern: "sasuke",
   desc: "Sends a random image of Sasuke.",
   category: "anime",
@@ -985,7 +984,7 @@ smd({
 });
 
 // Command for Husbu
-smd({
+amd({
   pattern: "husbu",
   desc: "Sends a random image of Husbu.",
   category: "anime",
@@ -1018,7 +1017,7 @@ smd({
 });
 
 // Command for Shota
-smd({
+amd({
   pattern: "shota",
   desc: "Sends a random image of Shota.",
   category: "anime",
@@ -1049,7 +1048,7 @@ smd({
     await m.error(`${error}\n\ncommand: shota`, error, "*_Uhh dear, an error occurred!_*");
   }
 });
-smd({
+amd({
   pattern: 'animesearch',
   fromMe: false,
   desc: 'Search for anime details',
