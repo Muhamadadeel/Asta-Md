@@ -378,7 +378,7 @@ smd(
   }
 );
 smd({
-     cmdname: "deepsea",
+     cmdname: "sea",
      type: "deepsea",
      info: "Some text to image feature with various styles.",
      filename: __filename
