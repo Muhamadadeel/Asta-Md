@@ -1,7 +1,7 @@
+const amd = require("../lib/plugins")
 const Config = require("../config");
 let {
-  sendGImages,
-  amd
+  sendGImages
 } = require("../lib");
 const axios = require("axios");
 const fetch = require("node-fetch");
