@@ -36,7 +36,7 @@
     },
     "THUMB_IMAGE": {
       "description": "Thumbnail",
-      "value": "",
+      "value": "https://i.imgur.com/P37NWrz.jpeg",
     },
     "BOT_NAME": {
       "description": " NAME FOR BOT",
