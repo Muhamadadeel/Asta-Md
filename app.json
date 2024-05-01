@@ -34,6 +34,15 @@
       "required": false,
       "value": "ᴀsᴛᴀ-ᴍᴅ"
     },
+    "THUMB_IMAGE": {
+      "description": "Thumbnail",
+      "value": "",
+    },
+    "BOT_NAME": {
+      "description": " NAME FOR BOT",
+      "required": false,
+      "value": "ᴀsᴛᴀ-ᴍᴅ"
+    },
     "TZ": {
       "description": "Put TIME_ZONE according to your location",
       "required": false,
