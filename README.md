@@ -45,7 +45,7 @@ ASTA-MD- Simple Multi Device whatsapp bot.
 
 2. If you Have Heroku Deploy Now
     <br>
-<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/Astropeda/Asta-Md"> <img src="https://img.shields.io/badge/heroku%20Deploy-blue?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
+<p align="center"><a href="https://astropeda.github.io/delpoy-button/"> <img src="https://img.shields.io/badge/heroku%20Deploy-blue?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
 
 ```
 Make Sure Run this on a Heroku Teams Not Personal Heroku, I recommed using it Eco Dynos too.
