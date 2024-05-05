@@ -1,7 +1,7 @@
 <p align="center">  
   <a href="https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z">
     <img alt="Asta" height="300" src="https://i.imgur.com/lIo3cM2.jpeg">
-    <h1 align="center">ASTA-MD 2.5.O</h1>
+    <h1 align="center">ASTA-MD 2.5.O *Replit Support Ended*</h1>
   </a>
 </p>
 <p align="center">
@@ -15,7 +15,7 @@
 </p>
 
 ####  
-ASTA-MD- Simple Multi Device whatsapp bot.
+ASTA-MD- Simple Multi Device whatsapp bot. * REPLIT SUPPORT ENDED *
 
 ***
 
@@ -92,16 +92,6 @@ Make Sure Run this on a Heroku Teams Not Personal Heroku, I recommed using it Ec
 - Then Click Lunch and wait for deplyment to complete.
 - and you're good to go.
 
-2. TUTORIAL (Never)
-#### DEPLOY TO Replit (This shit also Going paid)
-
-1. If You don't have an account in Replit. Create an account.
-    <br>
-<p align="center"><a href="https://replit.com/signup"> <img src="https://img.shields.io/badge/replit%20Account-blue?style=for-the-badge&logo=replit" width="220" height="38.45"/></a></p>
-
-2. Now Deploy
-    <br>
-<p align="center"><a href="https://repl.it/github/Astropeda/Asta-Md"> <img src="https://img.shields.io/badge/replit%20Deploy-blue?style=for-the-badge&logo=replit" width="220" height="38.45"/></a></p>
 
 - Star ⭐ the repo if you like ASTA-MD.
 
