@@ -1,5 +1,5 @@
 {
-   "name": "asta-md",
+   "name": "asta-md-botto",
    "version": "2.5.0",
    "description": "Multi device whatsapp bot by Astropeda.",
    "main": "index.js",
