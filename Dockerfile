@@ -1,15 +1,8 @@
-FROM quay.io/sampandey001/secktor
-
+FROM node:lts-buster
 RUN git clone https://github.com/Astropeda/Asta-Md /root/Astropeda
-
-# Clear npm cache and remove node_modules directories
 RUN npm cache clean --force
 RUN rm -rf /root/Astropeda/node_modules
-
-# Install dependencies
 WORKDIR /root/Astropeda
 RUN npm install
-
-# Add additional Steps To Run...
-EXPOSE 3000
+EXPOSE 8000
 CMD ["npm","start" ]
