@@ -1,16 +1,18 @@
 const DB = require("../lib/scraper");
-const { Config, smd } = require("../lib");
+const { smd } = require("../lib");
 const simpleGit = require("simple-git");
 const git = simpleGit();
+
 try {
   const Heroku = require("heroku-client");
+
   async function updateHerokuApp() {
     try {
       const heroku = new Heroku({ token: process.env.HEROKU_API_KEY });
       await git.fetch();
       const commits = await git.log(["main..origin/main"]);
       if (commits.total === 0) {
-        return `${Config.botname} IS ON IT'S LATEST VERSION`;
+        return "You already have latest version installed.";
       } else {
         console.log("Update Detected, trying to update your bot!");
         const app = await heroku.get(`/apps/${process.env.HEROKU_APP_NAME}`);
@@ -34,6 +36,7 @@ try {
   smd(
     {
       pattern: "checkupdate",
+      alias: "update",
       desc: "Shows repo's refreshed commits.",
       category: "tools",
       fromMe: true,
@@ -45,15 +48,14 @@ try {
       try {
         let commits = await DB.syncgit();
         if (commits.total === 0)
-          return await citel.reply(
-            `*ASTA-MD MD IS RUNNING ON LATEST\nPATCHES\nFIXES\UPGRADES*`
-          );
+          return await citel.reply("*`Your Bot is On the Latest Version*`");
         let update = await DB.sync();
         await citel.bot.sendMessage(
           citel.chat,
-          { text: update.replace(/SuhailTechIMd/, "Astropeda") },
+          { text: update.replace(/Astropeda/, "Astropeda") },
           { quoted: citel }
         );
+
         if (
           text == "start" &&
           process.env.HEROKU_APP_NAME &&
@@ -70,10 +72,10 @@ try {
   );
   smd(
     {
-      pattern: "update",
+      pattern: "updatenow",
       desc: process.env.HEROKU_API_KEY
-        ? "*UPDATE SUCCESS*"
-        : "UPDATED YOUR DEPLOYEMENT",
+        ? "Temporary update for heroku app!"
+        : "update your bot by repo!.",
       fromMe: true,
       category: "tools",
       filename: __filename,
@@ -82,26 +84,20 @@ try {
       try {
         let commits = await DB.syncgit();
         if (commits.total === 0)
-          return await citel.reply(`*${Config.VERSION} IS Updating*`);
+          return await citel.reply("*`Your Bot is On the Latest Version*`");
         let update = await DB.sync();
-        let text = ` 
-*UPDATE RUNNING*
-\t${update}*`;
+        let text = "*`> Your Bot is Updating`* " + update + "";
         await citel.bot.sendMessage(citel.jid, { text });
         await require("simple-git")().reset("hard", ["HEAD"]);
         await require("simple-git")().pull();
         await citel.reply(
           process.env.HEROKU_APP_NAME && process.env.HEROKU_API_KEY
-            ? "*`BOT UPDATED`*\n*RESTART YOUR BOT FOR UPDATE TO TAKE EFFECT*"
-            : "```*Successfully updated. Now You Have Latest Version Installed!*"
+            ? "*`Bot Updated`*\n *Restart Now!*"
+            : "*Successfully updated. Now You Have Latest Version Installed!*"
         );
       } catch (e) {
         citel.error(`${e}\n\nCommand: updatenow`, e, "ERROR!");
       }
     }
   );
-  if (process.env.HEROKU_API_KEY) {
-    print("HEROKU : checking for auto update!");
-    updateHerokuApp();
-  }
 } catch (e) {}
