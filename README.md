@@ -18,7 +18,7 @@ Here's Source Code [Asta-Md-main.zip](https://github.com/Astropeda/Asta-Md/files
 
 --------------------------------------------------
 <p>𝗗𝗘𝗣𝗟𝗢𝗬 𝗡𝗢𝗪!</p>
-<a href="https://github.com/Astropeda/Asta-Md/edit/main/README.md#%F0%9D%97%97%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%9F%F0%9D%97%A2%F0%9D%97%AC%F0%9D%97%A0%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%A7%F0%9D%97%A6"><img title="SCAN QR" src="https://img.shields.io/badge/𝗗𝗘𝗣𝗟𝗢𝗬 𝗡𝗢𝗪!-h?color=black&style=for-the-badge&logo=github"></a>
+<a href="https://github.com/Astropeda/Asta-Md?tab=readme-ov-file#%F0%9D%97%97%F0%9D%97%98%F0%9D%97%A3%F0%9D%97%9F%F0%9D%97%A2%F0%9D%97%AC%F0%9D%97%A0%F0%9D%97%98%F0%9D%97%A1%F0%9D%97%A7%F0%9D%97%A6"><img title="SCAN QR" src="https://img.shields.io/badge/𝗗𝗘𝗣𝗟𝗢𝗬 𝗡𝗢𝗪!-h?color=black&style=for-the-badge&logo=github"></a>
 
 
 -------------------------------------------------
