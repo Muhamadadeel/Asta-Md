@@ -234,6 +234,7 @@ smd({
     console.log("ERROR IN AFK MAIN\n", _0x4f282f);
   }
 });
+/*
 cmd({
   pattern: "alive",
   category: "user",
@@ -360,7 +361,7 @@ async function convertAudioToBlackScreenVideo(_0x528238, _0x32b9b6) {
       result: false
     };
   }
-}
+} */
 smd({
   pattern: "audiourl",
   alias: ["black"],

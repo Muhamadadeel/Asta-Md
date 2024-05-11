@@ -444,7 +444,7 @@ astro_patch.cmd({
 let channel_lin = "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z"
 smd(
   {
-    pattern: "alive2",
+    pattern: "alive",
     desc: "Shows system status with different designs.",
     category: "user",
     filename: __filename,
