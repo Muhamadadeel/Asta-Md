@@ -5,7 +5,7 @@
   "keywords": "Asta",
   "success_url": "/astro/",
   "app_url": "/qr/",
-  "stack": "contanier",
+  "stack": "container",
 
   "env": {
     "OWNER_NAME": {
