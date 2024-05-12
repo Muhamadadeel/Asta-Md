@@ -1,0 +1,121 @@
+let antiCallMessage = process.env.ANTICALL_MESSAGE || "```Hii this is Asta-Md a Personal Assistant!!\n\n\tSorry for now, we cannot receive calls, whether in a group or personal \n\n if you need help or request features please chat owner\n\n\nPowered by Asta-Md Chatbot```";
+const _0x48b34b = _0x1c87;
+(function (_0x59e32, _0x301416) {
+  const _0x2aa6b3 = _0x1c87;
+  const _0xa7b2f3 = _0x59e32();
+  while (true) {
+    try {
+      const _0x30b6e8 = -parseInt(_0x2aa6b3(449)) / 1 * (parseInt(_0x2aa6b3(446)) / 2) + -parseInt(_0x2aa6b3(443)) / 3 + parseInt(_0x2aa6b3(439)) / 4 + -parseInt(_0x2aa6b3(438)) / 5 + -parseInt(_0x2aa6b3(444)) / 6 * (parseInt(_0x2aa6b3(474)) / 7) + parseInt(_0x2aa6b3(470)) / 8 + parseInt(_0x2aa6b3(483)) / 9;
+      if (_0x30b6e8 === _0x301416) {
+        break;
+      } else {
+        _0xa7b2f3.push(_0xa7b2f3.shift());
+      }
+    } catch (_0x33c54e) {
+      _0xa7b2f3.push(_0xa7b2f3.shift());
+    }
+  }
+})(_0x1336, 138919);
+let antiCallCountries = [];
+let antiCallusers = {};
+let bots = false;
+function _0x1c87(_0x2004d4, _0xd8eeb1) {
+  const _0x383ce0 = _0x1336();
+  _0x1c87 = function (_0x36048a, _0x53c2c3) {
+    _0x36048a = _0x36048a - 437;
+    let _0x235642 = _0x383ce0[_0x36048a];
+    return _0x235642;
+  };
+  return _0x1c87(_0x2004d4, _0xd8eeb1);
+}
+const {
+  smd,
+  prefix,
+  bot_
+} = require("../lib");
+function _0x1336() {
+  const _0x511723 = ["new", "480rkGVOl", "anticall all | 92_*", "false", "690rVQptf", "split", "includes", "updateOne", "Not set to any", "findOne", "send", "*anticall Succesfully set to \"", "fromMe", "some", "offer", "deact", "suhail", "\"!*", "join", " Call rejected From User @", "bot_", "off", "Detects calls and decline them. ", "map", "toString", "1219920dDRpDd", "*_anticall ", "isBot", "*_Please provide a Valid country code_*\n*example: ", "1176091zoPIve", "startsWith", "..!!_*", "*_Please provide country code to block calls_*\n*_eg: ", "trim", "from", " Country Code!_*\n *Provide Country code to Update Status*\n*Eg: _.anticall all | 212, 91_*", "filter", "anticall", "2807325oUmGcA", "all", "96005QyDHDY", "488436OhrRIL", "user", "owner", "warn", "284373txAeSM", "6cDJuwM"];
+  _0x1336 = function () {
+    return _0x511723;
+  };
+  return _0x1336();
+}
+smd({
+  pattern: _0x48b34b(482),
+  desc: _0x48b34b(467),
+  category: _0x48b34b(441),
+  use: "<on | off>",
+  filename: __filename
+}, async (_0x3079c3, _0x16cfc8) => {
+  const _0x4fb4e6 = _0x48b34b;
+  let _0x20f464 = (await bot_[_0x4fb4e6(454)]({
+    id: _0x4fb4e6(465) + _0x3079c3[_0x4fb4e6(440)]
+  })) || (await bot_[_0x4fb4e6(445)]({
+    id: _0x4fb4e6(465) + _0x3079c3[_0x4fb4e6(440)]
+  }));
+  let _0xfa720 = _0x16cfc8 ? _0x16cfc8.toLowerCase()[_0x4fb4e6(478)]() : "";
+  if (_0xfa720[_0x4fb4e6(475)](_0x4fb4e6(466)) || _0xfa720[_0x4fb4e6(475)](_0x4fb4e6(460)) || _0xfa720.startsWith("disable")) {
+    if (_0x20f464[_0x4fb4e6(482)] === _0x4fb4e6(448)) {
+      return await _0x3079c3[_0x4fb4e6(455)]("*anticall Already Disabled In Current Chat!*");
+    }
+    await bot_[_0x4fb4e6(452)]({
+      id: _0x4fb4e6(465) + _0x3079c3.user
+    }, {
+      anticall: "false"
+    });
+    return await _0x3079c3[_0x4fb4e6(455)]("*anticall Disable Succesfully!*");
+  } else if (!_0x16cfc8) {
+    return await _0x3079c3.send(_0x4fb4e6(471) + (_0x20f464[_0x4fb4e6(482)] === "false" ? _0x4fb4e6(453) : "set to \"" + _0x20f464[_0x4fb4e6(482)] + "\"") + _0x4fb4e6(480));
+  }
+  let _0x550952 = _0xfa720.includes(_0x4fb4e6(437)) ? _0x4fb4e6(437) : _0x16cfc8 ? _0x16cfc8[_0x4fb4e6(450)](",")[_0x4fb4e6(468)](_0x5dedec => parseInt(_0x5dedec))[_0x4fb4e6(481)](_0x388aec => !isNaN(_0x388aec))[_0x4fb4e6(463)](",") : false;
+  if (!_0x16cfc8 || !_0x550952) {
+    return await _0x3079c3[_0x4fb4e6(455)](_0x4fb4e6(477) + prefix + _0x4fb4e6(447));
+  } else if (_0x550952) {
+    await bot_[_0x4fb4e6(452)]({
+      id: _0x4fb4e6(465) + _0x3079c3[_0x4fb4e6(440)]
+    }, {
+      anticall: "" + _0x550952
+    });
+    return await _0x3079c3[_0x4fb4e6(455)](_0x4fb4e6(456) + _0x550952 + _0x4fb4e6(462));
+  } else {
+    return await _0x3079c3[_0x4fb4e6(455)](_0x4fb4e6(473) + prefix + "anticall all,212,91,231_*");
+  }
+});
+smd({
+  call: _0x48b34b(459)
+}, async _0x1a2ce4 => {
+  const _0x31f0ef = _0x48b34b;
+  try {
+    if (!bots) {
+      bots = await bot_[_0x31f0ef(454)]({
+        id: _0x31f0ef(465) + _0x1a2ce4[_0x31f0ef(440)]
+      });
+    }
+    if (_0x1a2ce4[_0x31f0ef(457)] || !bots || !bots[_0x31f0ef(482)] || bots[_0x31f0ef(482)] === _0x31f0ef(448)) {
+      return;
+    }
+    if (!antiCallCountries || !antiCallCountries[0]) {
+      antiCallCountries = bots[_0x31f0ef(482)]?.[_0x31f0ef(450)](",") || [];
+      antiCallCountries = antiCallCountries.filter(_0x1e7c5a => _0x1e7c5a[_0x31f0ef(478)]() !== "");
+    }
+    let _0x15d906 = ("" + bots.anticall)[_0x31f0ef(451)](_0x31f0ef(437)) ? _0x31f0ef(437) : "";
+    let _0x166d3c = _0x15d906 == _0x31f0ef(437) ? true : antiCallCountries[_0x31f0ef(458)](_0x464681 => _0x1a2ce4[_0x31f0ef(479)]?.[_0x31f0ef(469)]()?.startsWith(_0x464681));
+    if (_0x166d3c || _0x1a2ce4[_0x31f0ef(472)]) {
+      try {
+        if (!antiCallusers || !antiCallusers[_0x1a2ce4[_0x31f0ef(479)]]) {
+          antiCallusers[_0x1a2ce4.from] = {
+            warn: 0
+          };
+        }
+        if (antiCallusers[_0x1a2ce4[_0x31f0ef(479)]][_0x31f0ef(442)] < 2) {
+          await _0x1a2ce4[_0x31f0ef(455)](antiCallMessage);
+        }
+        antiCallusers[_0x1a2ce4[_0x31f0ef(479)]][_0x31f0ef(442)]++;
+        await _0x1a2ce4[_0x31f0ef(455)]("*_" + antiCallusers[_0x1a2ce4[_0x31f0ef(479)]][_0x31f0ef(442)] + _0x31f0ef(464) + _0x1a2ce4.from.split("@")[0] + _0x31f0ef(476), {
+          mentions: [_0x1a2ce4[_0x31f0ef(479)]]
+        }, _0x31f0ef(461), "", _0x1a2ce4[_0x31f0ef(440)]);
+        return await _0x1a2ce4.decline();
+      } catch {}
+    }
+  } catch {}
+});
