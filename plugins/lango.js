@@ -55,46 +55,46 @@ astro_patch.cmd({
   category: "user",
   fromMe: true,
   filename: __filename
-}, async (_0x19c6c2, _0x390366, {
+}, async (message, match, {
   Void: _0x5744a6
 }) => {
   try {
-    if (!_0x390366) {
-      return await _0x19c6c2.send("*_Please provide cmd name by replying a Sticker_*");
+    if (!match) {
+      return await message.send("*_Please provide cmd name by replying a Sticker_*");
     }
-    let _0x589082 = _0x390366.split(",");
+    let _0x589082 = match.split(",");
     var _0xcfa05c;
     var _0x1d482d;
     let _0x3b5abd = false;
-    if (_0x19c6c2.quoted) {
-      let _0x2cb146 = _0x19c6c2.quoted.mtype;
-      if (_0x2cb146 == "stickerMessage" && _0x390366) {
+    if (message.quoted) {
+      let _0x2cb146 = message.quoted.mtype;
+      if (_0x2cb146 == "stickerMessage" && match) {
         _0x3b5abd = true;
-        _0xcfa05c = _0x390366.split(" ")[0];
-        _0x1d482d = "sticker-" + _0x19c6c2.quoted.msg.fileSha256;
+        _0xcfa05c = match.split(" ")[0];
+        _0x1d482d = "sticker-" + message.quoted.msg.fileSha256;
       }
     }
     if (!_0x3b5abd && _0x589082.length > 1) {
       _0x1d482d = _0x589082[0].trim().toLowerCase();
       _0xcfa05c = _0x589082[1].trim().toLowerCase();
     } else if (!_0x3b5abd) {
-      return await _0x19c6c2.send("*_Uhh Dear, Give Cmd With New Name_*\n*Eg: _.setcmd New_Name, Cmd_Name_*");
+      return await message.send("*_Uhh Dear, Give Cmd With New Name_*\n*Eg: _.setcmd New_Name, Cmd_Name_*");
     }
     if (_0x1d482d.length < 1) {
-      return await _0x19c6c2.reply("*_Uhh Please, Provide New_Cmd Name First_*");
+      return await message.reply("*_Uhh Please, Provide New_Cmd Name First_*");
     }
     if (global.setCmdAlias[_0x1d482d]) {
-      return await _0x19c6c2.send("*_\"" + (_0x3b5abd ? "Given Sticker" : _0x1d482d) + "\" Already set for \"" + global.setCmdAlias[_0x1d482d] + "\" Cmd, Please try another " + (_0x3b5abd ? "Sticker" : "Name") + "_*");
+      return await message.send("*_\"" + (_0x3b5abd ? "Given Sticker" : _0x1d482d) + "\" Already set for \"" + global.setCmdAlias[_0x1d482d] + "\" Cmd, Please try another " + (_0x3b5abd ? "Sticker" : "Name") + "_*");
     }
     const _0x1af1e0 = astro_patch.commands.find(_0x8905bd => _0x8905bd.pattern === _0xcfa05c) || astro_patch.commands.find(_0x2cb164 => _0x2cb164.alias && _0x2cb164.alias.includes(_0xcfa05c));
     if (_0x1af1e0) {
       global.setCmdAlias[_0x1d482d] = _0x1af1e0.pattern;
-      return await _0x19c6c2.send("*_Cmd \"" + global.setCmdAlias[_0x1d482d] + "\" Succesfully set to \"" + (_0x3b5abd ? "Sticker" : _0x1d482d) + "\"._*\n*_These all names are reset, If bot restart_*");
+      return await message.send("*_Cmd \"" + global.setCmdAlias[_0x1d482d] + "\" Succesfully set to \"" + (_0x3b5abd ? "Sticker" : _0x1d482d) + "\"._*\n*_These all names are reset, If bot restart_*");
     } else {
-      return await _0x19c6c2.send("*_Provided Cmd( " + _0xcfa05c + ") not found in bot cmds. Please Provide Valid cmd Name_*");
+      return await message.send("*_Provided Cmd( " + _0xcfa05c + ") not found in bot cmds. Please Provide Valid cmd Name_*");
     }
   } catch (_0x56a63d) {
-    await _0x19c6c2.error(_0x56a63d + "\nCommand:setcmd", _0x56a63d);
+    await message.error(_0x56a63d + "\nCommand:setcmd", _0x56a63d);
   }
 });
 astro_patch.cmd({
