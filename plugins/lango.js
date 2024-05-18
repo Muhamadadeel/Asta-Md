@@ -62,39 +62,39 @@ astro_patch.cmd({
     if (!match) {
       return await message.send("*_Please provide cmd name by replying a Sticker_*");
     }
-    let _0x589082 = match.split(",");
-    var _0xcfa05c;
-    var _0x1d482d;
-    let _0x3b5abd = false;
+    let input = match.split(",");
+    var check;
+    var init;
+    let column = false;
     if (message.quoted) {
       let _0x2cb146 = message.quoted.mtype;
       if (_0x2cb146 == "stickerMessage" && match) {
-        _0x3b5abd = true;
-        _0xcfa05c = match.split(" ")[0];
-        _0x1d482d = "sticker-" + message.quoted.msg.fileSha256;
+        column = true;
+        check = match.split(" ")[0];
+        init = "sticker-" + message.quoted.msg.fileSha256;
       }
     }
-    if (!_0x3b5abd && _0x589082.length > 1) {
-      _0x1d482d = _0x589082[0].trim().toLowerCase();
-      _0xcfa05c = _0x589082[1].trim().toLowerCase();
-    } else if (!_0x3b5abd) {
+    if (!column && input.length > 1) {
+      init = input[0].trim().toLowerCase();
+      check = input[1].trim().toLowerCase();
+    } else if (!column) {
       return await message.send("*_Uhh Dear, Give Cmd With New Name_*\n*Eg: _.setcmd New_Name, Cmd_Name_*");
     }
-    if (_0x1d482d.length < 1) {
+    if (init.length < 1) {
       return await message.reply("*_Uhh Please, Provide New_Cmd Name First_*");
     }
-    if (global.setCmdAlias[_0x1d482d]) {
-      return await message.send("*_\"" + (_0x3b5abd ? "Given Sticker" : _0x1d482d) + "\" Already set for \"" + global.setCmdAlias[_0x1d482d] + "\" Cmd, Please try another " + (_0x3b5abd ? "Sticker" : "Name") + "_*");
+    if (global.setCmdAlias[init]) {
+      return await message.send("*_\"" + (column ? "Given Sticker" : init) + "\" Already set for \"" + global.setCmdAlias[init] + "\" Cmd, Please try another " + (column ? "Sticker" : "Name") + "_*");
     }
-    const _0x1af1e0 = astro_patch.commands.find(_0x8905bd => _0x8905bd.pattern === _0xcfa05c) || astro_patch.commands.find(_0x2cb164 => _0x2cb164.alias && _0x2cb164.alias.includes(_0xcfa05c));
-    if (_0x1af1e0) {
-      global.setCmdAlias[_0x1d482d] = _0x1af1e0.pattern;
-      return await message.send("*_Cmd \"" + global.setCmdAlias[_0x1d482d] + "\" Succesfully set to \"" + (_0x3b5abd ? "Sticker" : _0x1d482d) + "\"._*\n*_These all names are reset, If bot restart_*");
+    const check_cmd = astro_patch.commands.find(cmd => cmd.pattern === check) || astro_patch.commands.find(cmds => cmds.alias && cmds.alias.includes(check));
+    if (check_cmd) {
+      global.setCmdAlias[init] = check_cmd.pattern;
+      return await message.send("*_Cmd \"" + global.setCmdAlias[init] + "\" Succesfully set to \"" + (column ? "Sticker" : init) + "\"._*\n*_These all names are reset, If bot restart_*");
     } else {
-      return await message.send("*_Provided Cmd( " + _0xcfa05c + ") not found in bot cmds. Please Provide Valid cmd Name_*");
+      return await message.send("*_Provided Cmd( " + check + ") not found in bot cmds. Please Provide Valid cmd Name_*");
     }
-  } catch (_0x56a63d) {
-    await message.error(_0x56a63d + "\nCommand:setcmd", _0x56a63d);
+  } catch (error) {
+    await message.error(error + "\nCommand:setcmd", error);
   }
 });
 astro_patch.cmd({
