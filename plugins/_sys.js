@@ -65,7 +65,7 @@ AdminFunction({
   use: "<plugins>",
 }, async (message) => {
   try {
-    return await message.sendUi(
+    return await message.send(
       `*Here Are The External Plugins* ${external_cmds}\n \t${footer}`
     );
   } catch (error) {
