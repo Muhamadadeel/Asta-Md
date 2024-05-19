@@ -403,7 +403,7 @@ AdminFunction.cmd({
     let text = parseInt(menu_fancy || "") || MenuFancys[Math.floor(Math.random() * MenuFancys.length)];
     const currentTime = message.time;
     const currentDate = message.date;
-    let BotInfoOnMenu = MenuTopHeader + "\n" + MenuSideHeader + " ＵＳＥＲ:- " + ownername + "\n" + MenuSideHeader + " ＭＯＤＥ:- " + Config.WORKTYPE + "\n" + MenuSideHeader + " ＣＭＤＳ:- " + commands.length + "\n" + MenuSideHeader + " ＡＬＩＶＥ:- " + runtime(process.uptime()) + "\n" + MenuSideHeader + " ＲＡＭ:- " + formatp(os.totalmem() - os.freemem()) + "\n" + MenuSideHeader + " ＴＩＭＥ:- " + currentTime + "\n"+MenuTopFooter+"\n\t❑ ᴘᴀᴛᴄʜ 𝟹.𝟻.𝟶 ❑\n " +readmore+"\n";
+    let BotInfoOnMenu = MenuTopHeader + "\n" + MenuSideHeader + " ＵＳＥＲ:- " + ownername + "\n" + MenuSideHeader + " ＭＯＤＥ:- " + Config.WORKTYPE + "\n" + MenuSideHeader + " ＣＭＤＳ:- " + commands.length + "\n" + MenuSideHeader + " ＡＬＩＶＥ:- " + runtime(process.uptime()) + "\n" + MenuSideHeader + " ＲＡＭ:- " + formatp(os.totalmem() - os.freemem()) + "\n" + MenuSideHeader + " ＴＩＭＥ:- " + currentTime + "\n"+MenuTopFooter+"\n\t```❑ ᴘᴀᴛᴄʜ 𝟹.𝟻.𝟶 ❑```\n " +readmore+"\n";
     for (const Texts in cmdlets) {
       BotInfoOnMenu += CategoryStartHeader + " *" + fancytext(Texts, text) + "* " + CategoryEndHeader + "\n";
       if (match.toLowerCase() == Texts.toLowerCase()) {
