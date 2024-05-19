@@ -42,7 +42,9 @@ bot(
       let Installer = await plugins(message, "plugins", InstalledPlugins);
       return await message.send(
         !Installer
-          ? "*`Sir "+Config.ownername+" I have Scanned and did not See Any Externally Installed Plugins`*"
+          ? "*`Sir " +
+              Config.ownername +
+              " I have Scanned and did not See Any Externally Installed Plugins`*"
           : !InstalledPlugins
           ? "*All Installed Modules are:-*\n\n" + Installer
           : Installer
@@ -55,23 +57,26 @@ bot(
 let external_cmds = "AntiDelete: [ ]\nAntiSpam: [ ]";
 let footer = "" + Config.botname + "";
 
-bot({
-  pattern: "extraplugins",
-  alias: ["listplugins"],
-  type: "sys",
-  info: "shows the External Plugins you can Install",
-  fromMe: true,
-  filename: __filename,
-  use: "<plugins>",
-}, async (message) => {
-  try {
-    return await message.send(
-      `*Here Are The External Plugins*\n ${external_cmds}\n \t${footer}`
-    );
-  } catch (error) {
-    message.error(error + " \n\ncmdName extraplugins\n");
+bot(
+  {
+    pattern: "extraplugins",
+    alias: ["listplugins"],
+    type: "sys",
+    info: "shows the External Plugins you can Install",
+    fromMe: true,
+    filename: __filename,
+    use: "<plugins>",
+  },
+  async (message) => {
+    try {
+      return await message.send(
+        `*Here Are The External Plugins*\n ${external_cmds}\n \t${footer}`
+      );
+    } catch (error) {
+      message.error(error + " \n\ncmdName extraplugins\n");
+    }
   }
-});
+);
 bot(
   {
     pattern: "remove",
