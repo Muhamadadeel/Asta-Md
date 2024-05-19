@@ -8,7 +8,7 @@ let {
   runtime,
   formatp,
   prefix,
-  smd,
+  amd,
 } = require("../lib");
 const long = String.fromCharCode(8206);
 const readmore = long.repeat(4001);
@@ -125,7 +125,7 @@ astro_patch.cmd({
     await message.error(error + "\nCommand:delcmd", error);
   }
 });
-astro_patch.smd({
+astro_patch.amd({
   pattern: "ping",
   desc: "To check ping",
   category: "user",
@@ -437,7 +437,7 @@ astro_patch.cmd({
   }
 });
 let ChannelLink = "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z"
-smd(
+amd(
   {
     pattern: "alive",
     desc: "Shows system status with different designs.",
@@ -567,7 +567,7 @@ astro_patch.cmd({
     await message.error(error + "\nCommand:list", error);
   }
 });
-astro_patch.smd({
+astro_patch.amd({
   pattern: "owner",
   desc: "To check ping",
   category: "user",
@@ -760,7 +760,7 @@ astro_patch.cmd({
     await _0x42c675.error(_0x17a5af + "\n\ncommand shell", _0x17a5af);
   }
 });
-smd(
+amd(
   {
     pattern: "channel",
     desc: "To check ping",
@@ -779,7 +779,7 @@ smd(
     await message.send(channelMessage, { contextInfo });
   }
 );
-smd(
+amd(
   {
     pattern: "support",
     desc: "To check ping",

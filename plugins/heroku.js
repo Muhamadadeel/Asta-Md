@@ -9,7 +9,7 @@ try {
       botpic,
       prefix,
       sck1,
-      smd,
+      amd,
       format
     } = require(lib_dir);
     const axios = require("axios");
@@ -246,7 +246,7 @@ try {
         };
       }
     };
-    smd({
+    amd({
       cmdname: "getsudo",
       alias: ["mods", "gsudo"],
       info: "get sudo users list.",
@@ -266,7 +266,7 @@ try {
         mentions: _0x23332c
       }, "img", _0x5abb61);
     });
-    smd({
+    amd({
       pattern: "setsudo",
       alias: ["ssudo", "setmod"],
       fromMe: true,
@@ -299,7 +299,7 @@ try {
         await _0x1cdf13.error(_0x52a055 + "\n\ncommand: setsudo", _0x52a055);
       }
     });
-    smd({
+    amd({
       pattern: "delsudo",
       alias: ["dsudo", "delmod"],
       fromMe: true,
@@ -334,7 +334,7 @@ try {
         await _0x46e8a8.error(_0x290b92 + "\n\ncommand: delsudo", _0x290b92);
       }
     });
-    smd({
+    amd({
       pattern: "allvar",
       alias: ["getallvar", "allvars"],
       desc: "To get All  Heroku Vars",
@@ -364,7 +364,7 @@ try {
         await _0x25d85b.error(_0x19ac3e + "\n\ncommand: allvar", _0x19ac3e);
       }
     });
-    smd({
+    amd({
       pattern: "newvar",
       alias: ["addvar", "avar"],
       desc: "To Set Heroku Vars",
@@ -396,7 +396,7 @@ try {
         await _0x4f4031.error(_0x5badd2 + "\n\ncommand: " + _0x23e35e, _0x5badd2);
       }
     });
-    smd({
+    amd({
       pattern: "delvar",
       fromMe: true,
       desc: "Delete heroku config var",
@@ -423,7 +423,7 @@ try {
         _0x558033.error(_0x223430 + "\n\ncommand: delvar", _0x223430, false);
       }
     });
-    smd({
+    amd({
       pattern: "getvar",
       desc: "To Get A Heroku Var",
       category: "tools",
@@ -448,7 +448,7 @@ try {
         await _0x30c9b1.error(_0x4aa2ff + "\n\ncommand: " + _0x30054, _0x4aa2ff);
       }
     });
-    smd({
+    amd({
       pattern: "setvar",
       alias: ["updatevar"],
       desc: "To Set Heroku Vars",
@@ -456,7 +456,7 @@ try {
       fromMe: true,
       filename: __filename
     }, async (_0x30bb0e, _0x55d839, {
-      smd: _0xbfe12a
+      amd: _0xbfe12a
     }) => {
       try {
         if (!_0x55d839) {
@@ -480,7 +480,7 @@ try {
       }
     });
     if (process.env.HEROKU_API_KEY || process.env.HEROKU_APP_NAME) {
-      smd({
+      amd({
         pattern: "reboot",
         fromMe: true,
         desc: "reboot heroku bot.",
@@ -499,7 +499,7 @@ try {
           _0xb6ea23.error(_0x161056 + "\n\ncommand: reboot", _0x161056, false);
         }
       });
-      smd({
+      amd({
         pattern: "shutdown",
         alias: ["turnoff"],
         fromMe: true,
@@ -536,7 +536,7 @@ try {
           _0xee0308.error(_0x304a1b + "\n\ncommand: shutdown", _0x304a1b, false);
         }
       });
-      smd({
+      amd({
         pattern: "turnon",
         fromMe: true,
         type: "tools",
@@ -585,7 +585,7 @@ try {
           _0x2a6748.error(_0x2a8ec6 + "\n\ncommand: turnon", _0x2a8ec6, false);
         }
       });
-      smd({
+      amd({
         pattern: "dyno",
         fromMe: true,
         desc: "Heroku DYNOS Infomation!",
@@ -619,7 +619,7 @@ try {
           }
         });
       });
-      smd({
+      amd({
         pattern: "heroku",
         fromMe: true,
         desc: "Heroku ACCOUNT Infomation!",
@@ -641,7 +641,7 @@ try {
                 _0x2f8ad6 += typeof _0x542aa1 == "object" ? "" : "- *" + _0x1eb472 + ":* ```" + _0x542aa1 + "```\n";
               }
               _0x2f8ad6 = _0x2f8ad6 ? "*HEROKU APP(`" + HEROKU_APP_NAME + "`) INFORMATION*\n" + _0x2f8ad6 : "";
-              if (/app|bot|suhail|smd/gi.test(_0x58756b) && _0x2f8ad6) {
+              if (/app|bot|suhail|amd/gi.test(_0x58756b) && _0x2f8ad6) {
                 return await _0x2eadf9.send(_0x2f8ad6);
               }
             }

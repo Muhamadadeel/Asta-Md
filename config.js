@@ -53,7 +53,7 @@ global.save_status = process.env.AUTO_SAVE_STATUS || "false"
 global.save_status_from =  process.env.SAVE_STATUS_FROM  || "2348039607375";
 global.read_status_from =  process.env.READ_STATUS_FROM  ||  "2348039607375";
 
-global.api_smd = "https://api-smd.onrender.com"
+global.api_smd = "https://api-amd.onrender.com"
 global.scan = "https://suhail-md-vtsf.onrender.com";
 
 
