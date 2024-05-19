@@ -12,9 +12,9 @@ let {
 } = require("../lib");
 const long = String.fromCharCode(8206);
 const readmore = long.repeat(4001);
-const astro_patch = require("../lib/plugins");
+const AdminFunction = require("../lib/plugins");
 const axios = require("axios");
-const events = astro_patch;
+const events = AdminFunction;
 const {
   exec
 } = require("child_process");
@@ -48,7 +48,7 @@ if (!cronStart) {
   });
 }
 ;
-astro_patch.cmd({
+AdminFunction.cmd({
   pattern: "newcmd",
   desc: "To check ping",
   category: "user",
@@ -83,7 +83,7 @@ astro_patch.cmd({
     if (global.setCmdAlias[init]) {
       return await message.send("*_\"" + (column ? "Given Sticker" : init) + "\" Already set for \"" + global.setCmdAlias[init] + "\" Cmd, Please try another " + (column ? "Sticker" : "Name") + "_*");
     }
-    const check_cmd = astro_patch.commands.find(cmd => cmd.pattern === check) || astro_patch.commands.find(cmds => cmds.alias && cmds.alias.includes(check));
+    const check_cmd = AdminFunction.commands.find(cmd => cmd.pattern === check) || AdminFunction.commands.find(cmds => cmds.alias && cmds.alias.includes(check));
     if (check_cmd) {
       global.setCmdAlias[init] = check_cmd.pattern;
       return await message.send("*_Cmd \"" + global.setCmdAlias[init] + "\" Succesfully set to \"" + (column ? "Sticker" : init) + "\"._*\n*_These all names are reset, If bot restart_*");
@@ -94,7 +94,7 @@ astro_patch.cmd({
     await message.error(error + "\nCommand:setcmd", error);
   }
 });
-astro_patch.cmd({
+AdminFunction.cmd({
   pattern: "delcmd",
   desc: "To check ping",
   category: "user",
@@ -125,7 +125,7 @@ astro_patch.cmd({
     await message.error(error + "\nCommand:delcmd", error);
   }
 });
-astro_patch.amd({
+AdminFunction.amd({
   pattern: "ping",
   desc: "To check ping",
   category: "user",
@@ -140,7 +140,7 @@ astro_patch.amd({
     edit: latency
   }, "", request);
 });
-astro_patch.cmd({
+AdminFunction.cmd({
   pattern: "runtime",
   alias: ["uptime"],
   desc: "Tells runtime/uptime of bot.",
@@ -320,7 +320,7 @@ global.sendButtons = async (message, context = {}, MessageBody = [], OnBodyBtn =
   });
   return _0x5f08d6;
 };
-astro_patch.cmd({
+AdminFunction.cmd({
   cmdname: "menu",
   desc: "Help list",
   react: "📃",
@@ -543,7 +543,7 @@ amd(
     }
   }
 );
-astro_patch.cmd({
+AdminFunction.cmd({
   pattern: "list",
   desc: "list menu",
   category: "user",
@@ -567,7 +567,7 @@ astro_patch.cmd({
     await message.error(error + "\nCommand:list", error);
   }
 });
-astro_patch.amd({
+AdminFunction.amd({
   pattern: "owner",
   desc: "To check ping",
   category: "user",
@@ -602,7 +602,7 @@ astro_patch.amd({
     await citel.error(error + "\nCommand:owner", error);
   }
 });
-astro_patch.cmd({
+AdminFunction.cmd({
   pattern: "trt",
   alias: ["translate"],
   category: "user",
@@ -642,7 +642,7 @@ const readDirectory = path => {
     });
   });
 };
-astro_patch.cmd({
+AdminFunction.cmd({
   pattern: "file",
   desc: "to get extact name where that command is in repo.\nSo user can edit that.",
   category: "user",
@@ -704,7 +704,7 @@ astro_patch.cmd({
     await _0x3dfe64.error(_0x5d7a6d + "\nCommand:file", _0x5d7a6d);
   }
 });
-astro_patch.cmd({
+AdminFunction.cmd({
   pattern: "eval",
   alias: ["$"],
   category: "owner",
@@ -732,7 +732,7 @@ astro_patch.cmd({
     return await _0x4da0b8.reply(_0x5d5ce4.toString());
   }
 });
-astro_patch.cmd({
+AdminFunction.cmd({
   pattern: "shell",
   category: "owner",
   filename: __filename,
