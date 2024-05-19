@@ -1,4 +1,4 @@
-import { amd } from "../lib";
+let { amd } = require ("../lib");
 
 amd(
   {

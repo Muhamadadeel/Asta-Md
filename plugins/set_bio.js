@@ -1,5 +1,5 @@
-import { amd } from "../lib";
-import { prefix } from "../lib";
+let { amd } = require ("../lib");
+let { prefix } = require ("../lib");
 amd(
   {
     pattern: "bio",

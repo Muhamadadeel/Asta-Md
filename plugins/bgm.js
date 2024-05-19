@@ -1,6 +1,6 @@
-import { TelegraPh } from "../lib";
-import { smd } from "../lib";
-import { bot_ } from "../lib";
+let { TelegraPh } from "../lib";
+let { smd } from "../lib";
+let { bot_ } from "../lib";
 smd(
   {
     pattern: "bgm",

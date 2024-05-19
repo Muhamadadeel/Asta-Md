@@ -1,6 +1,6 @@
 let mtypes = ["imageMessage"];
-import { amd } from "../lib";
-import { updateProfilePicture } from "../lib";
+let { amd } = require ("../lib");
+let { updateProfilePicture } = require ("../lib");
 amd(
   {
     pattern: "setpp",
