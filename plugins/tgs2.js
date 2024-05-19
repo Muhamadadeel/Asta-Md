@@ -1,7 +1,7 @@
 const { amd, fetchJson, getBuffer, Config, prefix } = require("../lib");
 amd(
   {
-    pattern: "tgs `link`",
+    pattern: "tgs <url>",
     alias: "tgs",
     desc: "Downloads telegram stickers.",
     category: "downloader",
