@@ -22,7 +22,6 @@ const {
   smd,
   fetchJson,
   sendWelcome,
-  runtime,
   bot_,
   getTime
 } = require(lib_dir);
@@ -30,9 +29,6 @@ const util = require("util");
 const fs = require("fs-extra");
 const axios = require("axios");
 const fetch = require("node-fetch");
-const {
-  cmd
-} = require(lib_dir + "/plugins.js");
 
 let afk = false;
 smd({
