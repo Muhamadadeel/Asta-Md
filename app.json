@@ -3,9 +3,8 @@
   "description": "Simple WhatsApp Botto.",
   "logo": "https://i.imgur.com/JMsAFRD.jpeg",
   "keywords": "Asta",
-  "success_url": "/astro/",
-  "app_url": "/qr/",
-  "stack": "contanier",
+  "success_url": "/",
+  "stack": "container",
 
   "env": {
     "OWNER_NAME": {
