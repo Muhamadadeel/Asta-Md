@@ -52,8 +52,9 @@ AdminFunction(
     }
   }
 );
-let external_cmds = "AntiDelete: [ ]\nAntiSpam: [ ]"
-let footer = ""+Config.botname+""
+let external_cmds = "AntiDelete: [ ]\nAntiSpam: [ ]";
+let footer = "" + Config.botname + "";
+
 AdminFunction({
   pattern: "extraplugins",
   alias: ["listplugins"],
@@ -62,17 +63,15 @@ AdminFunction({
   fromMe: true,
   filename: __filename,
   use: "<plugins>",
-},
-async (message) => {
+}, async (message) => {
   try {
-    return await message.sendUi(`
-*Here Are The External Plugins*
-${external_cmds}\n
-\t${footer}
-    `);
-  } catch {}
-}
-)
+    return await message.sendUi(
+      `*Here Are The External Plugins* ${external_cmds}\n \t${footer}`
+    );
+  } catch (error) {
+    message.error(error + " \n\ncmdName extraplugins\n");
+  }
+});
 AdminFunction(
   {
     pattern: "remove",
