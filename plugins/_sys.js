@@ -66,7 +66,7 @@ AdminFunction({
 }, async (message) => {
   try {
     return await message.send(
-      `*Here Are The External Plugins* ${external_cmds}\n \t${footer}`
+      `*Here Are The External Plugins*\n ${external_cmds}\n \t${footer}`
     );
   } catch (error) {
     message.error(error + " \n\ncmdName extraplugins\n");
