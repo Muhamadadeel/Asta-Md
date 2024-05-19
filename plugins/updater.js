@@ -1,9 +1,8 @@
 const DB = require("../lib/scraper");
-const { amd } = require("../lib");
-const Config = require("../config")
+const { AdminFunction } = require("../lib");
+const Config = require("../config");
 const simpleGit = require("simple-git");
 const git = simpleGit();
-const fs = require("fs");
 
 try {
   const Heroku = require("heroku-client");
@@ -36,21 +35,23 @@ try {
   }
 
   //---------------------------------------------------------------------------
-  amd(
+  AdminFunction(
     {
-      pattern: "checkupdate",
+      pattern: "updates",
       desc: "Shows repo's refreshed commits.",
       category: "tools",
       fromMe: true,
       react: "⬇️",
       filename: __filename,
-      use: process.env.HEROKU_API_KEY ? "[ start ]" : "",
+      use: process.env.HEROKU_API_KEY ? "[ redeploy ]" : "",
     },
     async (citel, text) => {
       try {
         let commits = await DB.syncgit();
         if (commits.total === 0)
-          return await citel.reply("*`Hello "+Config.ownername+" You are on the Latest Version`*");
+          return await citel.reply(
+            "*`Hello " + Config.ownername + " You are on the Latest Version`*"
+          );
         let update = await DB.sync();
         await citel.bot.sendMessage(
           citel.chat,
@@ -63,7 +64,7 @@ try {
           process.env.HEROKU_APP_NAME &&
           process.env.HEROKU_API_KEY
         ) {
-          citel.reply("Build started...");
+          citel.reply("*`Redeploying Bot`*");
           const update = await updateHerokuApp();
           return await citel.reply(update);
         }
@@ -72,9 +73,9 @@ try {
       }
     }
   );
-  amd(
+  AdminFunction(
     {
-      pattern: "updatenow",
+      pattern: "update",
       desc: process.env.HEROKU_API_KEY
         ? "Temporary update for heroku app!"
         : "update your bot by repo!.",
@@ -86,10 +87,15 @@ try {
       try {
         let commits = await DB.syncgit();
         if (commits.total === 0)
-          return await citel.reply("*`Hello "+Config.ownername+" "+Config.botname+" is on the latest version.`*");
+          return await citel.reply(
+            "*`Hello " +
+              Config.ownername +
+              " " +
+              Config.botname +
+              " is on the latest version.`*"
+          );
         let update = await DB.sync();
-        let text =
-          " *`> Update Started`*\n"+update+"";
+        let text = " *`> Update Started`*\n" + update + "";
         await citel.bot.sendMessage(citel.jid, { text });
         await require("simple-git")().reset("hard", ["HEAD"]);
         await require("simple-git")().pull();
