@@ -1,66 +1,8 @@
 const moment = require("moment-timezone");
 const Config = require("../config");
-let { amd, prefix, updateProfilePicture, parsedJid } = require("../lib");
+let { amd, prefix, parsedJid } = require("../lib");
 const { cmd } = require("../lib/plugins");
-let mtypes = ["imageMessage"];
-amd(
-  {
-    pattern: "pp",
-    desc: "Set profile picture",
-    category: "whatsapp",
-    use: "<reply to image>",
-    fromMe: true,
-    filename: __filename,
-  },
-  async (_0x4f9f9f) => {
-    try {
-      let _0x3d8b6f = mtypes.includes(_0x4f9f9f.mtype)
-        ? _0x4f9f9f
-        : _0x4f9f9f.reply_message;
-      if (!_0x3d8b6f || !mtypes.includes(_0x3d8b6f?.mtype || "need_Media")) {
-        return await _0x4f9f9f.reply("*Reply to an image, dear*");
-      }
-      return await updateProfilePicture(
-        _0x4f9f9f,
-        _0x4f9f9f.user,
-        _0x3d8b6f,
-        "pp"
-      );
-    } catch (_0x18308f) {
-      await _0x4f9f9f.error(_0x18308f + "\n\ncommand : pp", _0x18308f);
-    }
-  }
-);
-amd(
-  {
-    pattern: "fullpp",
-    desc: "Set full screen profile picture",
-    category: "whatsapp",
-    use: "<reply to image>",
-    fromMe: true,
-    filename: __filename,
-  },
-  async (_0x36432c) => {
-    try {
-      let _0x312b1b = mtypes.includes(_0x36432c.mtype)
-        ? _0x36432c
-        : _0x36432c.reply_message;
-      if (!_0x312b1b || !mtypes.includes(_0x312b1b?.mtype || "need_Media")) {
-        return await _0x36432c.reply("*Reply to an image, dear*");
-      }
-      return await updateProfilePicture(
-        _0x36432c,
-        _0x36432c.user,
-        _0x312b1b,
-        "fullpp"
-      );
-    } catch (_0x8343ed) {
-      await _0x36432c.error(_0x8343ed + "\n\ncommand : fullpp", _0x8343ed);
-    }
-    {
-    }
-  }
-);
+
 amd(
   {
     pattern: "rpp",
