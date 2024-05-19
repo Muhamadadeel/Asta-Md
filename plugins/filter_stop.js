@@ -1,6 +1,6 @@
-let smd = require ("../lib");
+const amd = require("../lib")
 const { filter } = require(lib_dir + "/astropeda.js");
-smd(
+amd(
   {
     pattern: "fstop",
     category: "chats",

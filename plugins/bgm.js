@@ -1,6 +1,6 @@
-let { TelegraPh } from "../lib";
-let { smd } from "../lib";
-let { bot_ } from "../lib";
+let { TelegraPh } = require ("../lib");
+let { smd } = require ("../lib");
+let { bot_ } = require ("../lib");
 smd(
   {
     pattern: "bgm",
