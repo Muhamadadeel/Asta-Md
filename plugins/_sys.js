@@ -52,8 +52,7 @@ AdminFunction(
     }
   }
 );
-let external_cmds = "AntiDelete: [ ]\nAntiSpam: [ ]";
-
+let external_cmds = "AntiDelete: [ ]\nAntiSpam: [ ]"
 AdminFunction({
   pattern: "extraplugins",
   alias: ["listplugins"],
@@ -62,28 +61,19 @@ AdminFunction({
   fromMe: true,
   filename: __filename,
   use: "<plugins>",
-}, async (message, match) => {
+},
+async (message) => {
   try {
-    // Set the context info code for an external ad reply
-    message.context_info = {
-      stanzaId: message.key.id,
-      participant: message.conn.user.jid,
-      quotedMessage: {
-        conversation: "Plugins",
-      },
-      remoteJid: "status@broadcast",
-    };
-
-    return await message.send(
-      `*Here Are The External Plugins* ${external_cmds}\n \t${footer}`,
-      {
-        contextInfo: message.context_info,
-      }
-    );
+    return await message.send(`
+*Here Are The External Plugins*
+${external_cmds}\n
+\t${footer}
+    `);
   } catch (error) {
-    message.error(error + " \n\ncmdName extraplugins\n");
+    message.error(error + " \n\ncmdName hi\n");
   }
-});
+}
+)
 AdminFunction(
   {
     pattern: "remove",
