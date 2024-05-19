@@ -1,7 +1,8 @@
 const { amd, fetchJson, getBuffer, Config, prefix } = require("../lib");
 amd(
   {
-    pattern: "tgs2",
+    pattern: "tgs `link`",
+    alias: "tgs",
     desc: "Downloads telegram stickers.",
     category: "downloader",
     filename: __filename,
@@ -22,17 +23,10 @@ amd(
       let input = match.split("|")[0];
       let query = input.split("/addstickers/")[1];
       let { result: output } = await fetchJson(
-        "https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=" +
-          encodeURIComponent(query) +
-          " "
+        "https://api.telegram.org/bot891038791:AAHWB1dQd-vi0IbH2NjKYUk-hqQ8rQuzPD4/getStickerSet?name=" +encodeURIComponent(query) + " "
       );
       let search = match.split("|")[1] || "";
-      let result =
-        "Total stickers: " +
-        output.stickers.length +
-        "\n*Estimated complete in:* " +
-        output.stickers.length * 1.5 +
-        " seconds\nKeep in mind that there is a chance of a ban if used frequently";
+      let result = "Total stickers: "+output.stickers.length +"";
       if (output.is_animated) {
         return await message.reply("Animated stickers are not supported");
       } else if (search.startsWith("info")) {
@@ -53,21 +47,13 @@ amd(
         sent = output.stickers.length - 5;
       }
       if (sent > data) {
-        let _0xe6592a = data;
+        let recived = data;
         data = sent;
-        sent = _0xe6592a;
+        sent = recived;
       }
       await message.reply(
         result +
-          "\n\n_Downloading as " +
-          results +
-          " From index *" +
-          sent +
-          "* to *" +
-          data +
-          "*._\nIf you wants more to download then use Like \n\n .tgs " +
-          input +
-          " |  10 ,  20 ; photo"
+          "\n\n_Downloading as "+results +" From index *" +sent +"* to *" +data +"*._\nIf you wants more to download then use Like \n\n .tgs "+ input +" |  10 ,  20 ; photo"
       );
       for (sent; sent < data; sent++) {
         let _0x4de16f = await fetchJson(
