@@ -1,6 +1,5 @@
 try {
   let { Config, prefix, SysFunction } = require(lib_dir);
-  const axios = require("axios");
   const fetch = require("node-fetch");
   const fs = require("fs");
   global.HEROKU_APP_NAME = (process.env.HEROKU_APP_NAME || "").toLowerCase();
@@ -280,12 +279,9 @@ try {
         .split(",")
         .filter((YetSudo) => YetSudo && YetSudo !== "null")
         .map((FoundSudo) => FoundSudo.trim());
-      let AllSudoData = SudoData
-        .map(
-          (Sudoed, SudoPP) =>
-            "  " + (SudoPP + 1) + " 〄 @" + Sudoed + "\n\n"
-        )
-        .join("");
+      let AllSudoData = SudoData.map(
+        (Sudoed, SudoPP) => "  " + (SudoPP + 1) + " 〄 @" + Sudoed + "\n\n"
+      ).join("");
       let Tags = [
         message.sender,
         ...SudoData.map((SudoResult) => SudoResult + "@s.whatsapp.net"),
@@ -436,16 +432,13 @@ try {
         try {
           global.allvar = loadvar();
           let variables = global.allvar || {};
-          result =
-            "   『 *ALL VARIABLES OF YOUR BOT* 』 \n";
+          result = "   『 *ALL VARIABLES OF YOUR BOT* 』 \n";
           Object.keys(variables).forEach((results) => {
             result +=
               "*" +
               results +
               " :*  " +
-              (variables[results]
-                ? "```" + variables[results] + "```"
-                : "") +
+              (variables[results] ? "```" + variables[results] + "```" : "") +
               " \n";
           });
         } catch (error) {
@@ -509,10 +502,7 @@ try {
           );
         }
       } catch (error) {
-        await message.error(
-          error + "\n\ncommand: " + HerokuNewVar,
-          error
-        );
+        await message.error(error + "\n\ncommand: " + HerokuNewVar, error);
       }
     }
   );
@@ -531,18 +521,13 @@ try {
           );
         }
         const input = match.toUpperCase();
-        let get =
-          process.env[input] || process.env[match] || false;
+        let get = process.env[input] || process.env[match] || false;
         if (!get) {
-          return message.reply(
-            "*" + input + "* variable not exist in BOT!"
-          );
+          return message.reply("*" + input + "* variable not exist in BOT!");
         }
         let expected = (await heroku.addvar(input, false)) || {};
         if (expected.status) {
-          message.reply(
-            "```{} successfully deleted```".replace("{}", input)
-          );
+          message.reply("```{} successfully deleted```".replace("{}", input));
           restart_bot();
         } else if (!expected || !expected.status) {
           console.log(expected.data);
@@ -552,8 +537,8 @@ try {
               " due to error!_*\n\n  _please check that you put valid_\n  _*HEROKU_APP_NAME* and *HEROKU_API_KEY*_"
           );
         }
-      } catch (_0x223430) {
-        message.error(_0x223430 + "\n\ncommand: delvar", _0x223430, false);
+      } catch (error) {
+        message.error(error + "\n\ncommand: delvar", error, false);
       }
     }
   );
@@ -565,35 +550,31 @@ try {
       fromMe: true,
       filename: __filename,
     },
-    async (_0x30c9b1, _0x1a330a, { cmdName: _0x30054 }) => {
+    async (message, match, { cmdName: getvar }) => {
       try {
         require(config_dir);
-        if (!_0x1a330a) {
-          return _0x30c9b1.reply(
+        if (!match) {
+          return message.reply(
             "*Please give me Variable Name*\n*Example : " +
-              (prefix + _0x30054) +
+              (prefix + getvar) +
               " CAPTION*"
           );
         }
-        const _0x357a91 = _0x1a330a.toUpperCase();
-        let _0x3ce2dd =
-          process.env[_0x357a91] || process.env[_0x1a330a] || false;
-        if (_0x3ce2dd) {
-          return _0x30c9b1.reply(_0x357a91 + ":" + _0x3ce2dd);
+        const Data = match.toUpperCase();
+        let proccesor = process.env[Data] || process.env[match] || false;
+        if (proccesor) {
+          return message.reply(Data + ":" + proccesor);
         } else {
-          return _0x30c9b1.reply(
+          return message.reply(
             "*" +
-              _0x357a91 +
+              Data +
               "* variable not exist in BOT!\nUse *" +
               prefix +
               "newvar* to add variables!"
           );
         }
-      } catch (_0x4aa2ff) {
-        await _0x30c9b1.error(
-          _0x4aa2ff + "\n\ncommand: " + _0x30054,
-          _0x4aa2ff
-        );
+      } catch (error) {
+        await message.error(error + "\n\ncommand: " + getvar, error);
       }
     }
   );
@@ -606,45 +587,38 @@ try {
       fromMe: true,
       filename: __filename,
     },
-    async (_0x30bb0e, _0x55d839, { amd: _0xbfe12a }) => {
+    async (message, match, { amd: setvar }) => {
       try {
-        if (!_0x55d839) {
-          return _0x30bb0e.reply(
+        if (!match) {
+          return message.reply(
             "*Uhh dear, Give me variable name*\n*Example : " +
               prefix +
               "setvar PREFIX:null*"
           );
         }
-        const _0x5ccf72 = _0x55d839.includes(":")
-          ? _0x55d839.indexOf(":")
-          : _0x55d839.indexOf("=");
-        const _0x572bfd = _0x55d839.slice(0, _0x5ccf72).toUpperCase().trim();
-        const _0x3f57a8 = _0x55d839.slice(_0x5ccf72 + 1).trim();
-        if (!_0x3f57a8) {
+        const Data = match.includes(":")
+          ? match.indexOf(":")
+          : match.indexOf("=");
+        const input = match.slice(0, Data).toUpperCase().trim();
+        const excpected = match.slice(Data + 1).trim();
+        if (!excpected) {
           return msg.reply(
             "*Uhh Please, Provide value after ':' !*\n*Example : " +
-              (prefix + _0xbfe12a) +
+              (prefix + setvar) +
               " AUTO_READ_STATUS:true*"
           );
         }
-        let _0x114a64 = await heroku.setvar(_0x572bfd, _0x3f57a8);
-        if (_0x114a64.status) {
-          await _0x30bb0e.reply(
-            "*" +
-              _0x572bfd +
-              ":* [ " +
-              _0x3f57a8 +
-              " ]  *updated successfully.*"
+        let VarSetor = await heroku.setvar(input, excpected);
+        if (VarSetor.status) {
+          await message.reply(
+            "*" + input + ":* [ " + excpected + " ]  *updated successfully.*"
           );
           restart_bot();
-        } else if (!_0x114a64 || !_0x114a64.status) {
-          await _0x30bb0e.reply(_0x114a64.data);
+        } else if (!VarSetor || !VarSetor.status) {
+          await message.reply(VarSetor.data);
         }
-      } catch (_0x1d631d) {
-        await _0x30bb0e.error(
-          _0x1d631d + "\n\ncommand: " + _0xbfe12a,
-          _0x1d631d
-        );
+      } catch (error) {
+        await message.error(error + "\n\ncommand: " + setvar, error);
       }
     }
   );
@@ -656,23 +630,22 @@ try {
         desc: "reboot heroku bot.",
         type: "tools",
       },
-      async (_0xb6ea23) => {
+      async (action) => {
         try {
-          await _0xb6ea23.reply("_Rebooting Heroku App..._");
+          await action.reply("_Rebooting Heroku App..._");
           const _0x535e75 = require("heroku-client");
           const _0x5eab3b = new _0x535e75({
             token: HEROKU_API_KEY,
           });
           await _0x5eab3b
             .delete("/apps/" + HEROKU_APP_NAME + "/dynos")
-            .catch(async (_0x5aeb05) => {
-              return await _0xb6ea23.send(
-                "ERROR HEROKU : " +
-                  (_0x5aeb05.message || _0x5aeb05.body.message)
+            .catch(async (error) => {
+              return await action.send(
+                "ERROR HEROKU : " + (error.message || error.body.message)
               );
             });
-        } catch (_0x161056) {
-          _0xb6ea23.error(_0x161056 + "\n\ncommand: reboot", _0x161056, false);
+        } catch (err) {
+          action.error(err + "\n\ncommand: reboot", err, false);
         }
       }
     );
@@ -683,45 +656,40 @@ try {
         fromMe: true,
         type: "tools",
       },
-      async (_0xee0308, _0x33b4c6) => {
+      async (message, formation) => {
         try {
-          const _0x578d90 = require("heroku-client");
-          const _0x10117f = new _0x578d90({
+          const ControlRemote = require("heroku-client");
+          const AccessApi = new ControlRemote({
             token: HEROKU_API_KEY,
           });
-          let _0x543466 = "/apps/" + HEROKU_APP_NAME;
-          await _0x10117f
-            .get(_0x543466 + "/formation")
-            .then(async (_0x945740) => {
+          let result = "/apps/" + HEROKU_APP_NAME;
+          await AccessApi.get(result + "/formation")
+            .then(async (ondyno) => {
               log({
-                formation: _0x945740,
+                formation: ondyno,
               });
-              forID = _0x945740[0].id;
-              let _0x6e1cc1 = Math.floor(Math.random() * 15) + 5;
-              let { key: _0xf74b3f } = await _0xee0308.send(
-                "_Shutting down in next " + _0x6e1cc1 + "s.._"
+              forID = ondyno[0].id;
+              let OnTime = Math.floor(Math.random() * 15) + 5;
+              let { key: OffMsg } = await message.send(
+                "_Shutting down in next " + OnTime + "s.._"
               );
-              await require(lib_dir).sleep(_0x6e1cc1 * 1000);
-              await _0x10117f.patch(_0x543466 + "/formation/" + forID, {
+              await require(lib_dir).sleep(OnTime * 1000);
+              await AccessApi.patch(result + "/formation/" + forID, {
                 body: {
-                  quantity: _0x33b4c6 === "on" ? 1 : 0,
+                  quantity: formation === "on" ? 1 : 0,
                 },
               });
-              await _0xee0308.edit("bye bye!", {
-                edit: _0xf74b3f,
+              await message.edit("bye bye!", {
+                edit: OffMsg,
               });
             })
             .catch(async (_0x4ca293) => {
-              await _0xee0308.send(
+              await message.send(
                 "HEROKU ERROR : " + (_0x4ca293.message || _0x4ca293)
               );
             });
-        } catch (_0x304a1b) {
-          _0xee0308.error(
-            _0x304a1b + "\n\ncommand: shutdown",
-            _0x304a1b,
-            false
-          );
+        } catch (error) {
+          message.error(error + "\n\ncommand: shutdown", error, false);
         }
       }
     );
@@ -732,9 +700,9 @@ try {
         type: "tools",
         dontAddCommandList: true,
       },
-      async (_0x2a6748, _0x2701b3) => {
+      async (message, match) => {
         try {
-          if (!_0x2701b3) {
+          if (!match) {
             return message.reply(
               "*Provide stopped heroku app name to restart it*\n*Example : " +
                 prefix +
@@ -743,116 +711,61 @@ try {
                 "*"
             );
           }
-          const _0x1313df = _0x2701b3.includes(":")
-            ? _0x2701b3.indexOf(":")
-            : _0x2701b3.indexOf("=");
-          const _0x4adc58 = _0x2701b3.slice(0, _0x1313df).toUpperCase().trim();
-          const _0x19fcfe = _0x2701b3
-            .slice(_0x1313df + 1)
+          const data = match.includes(":")
+            ? match.indexOf(":")
+            : match.indexOf("=");
+          const query = match.slice(0, data).toUpperCase().trim();
+          const input = match
+            .slice(data + 1)
             .trim()
             .split(" ")[0];
-          if (!/HEROKU|APP|NAME/gi.test(_0x4adc58)) {
+          if (!/HEROKU|APP|NAME/gi.test(query)) {
             return message.reply(
               "```Either Key or value Missing```\n ```Example : " +
                 prefix +
                 "turnon NAME:heroku_app```"
             );
           }
-          if (!_0x19fcfe) {
+          if (!input) {
             return msg.reply(
               "*Uhh Please, Provide value after ':' !*\n*Example : " +
                 prefix +
                 "turnon HEROKU:app_name*"
             );
           }
-          const _0x1e29c9 = require("heroku-client");
-          const _0x41815e = new _0x1e29c9({
+          const APiAccess = require("heroku-client");
+          const ConRemote = new APiAccess({
             token: HEROKU_API_KEY,
           });
-          let _0x391c8d = "/apps/" + _0x19fcfe;
-          await _0x41815e
-            .get(_0x391c8d + "/formation")
-            .then(async (_0x55d207) => {
+          let HerokuApi = "/apps/" + input;
+          await ConRemote.get(HerokuApi + "/formation")
+            .then(async (Result) => {
               log({
-                formation: _0x55d207,
+                formation: Result,
               });
-              forID = _0x55d207[0].id;
-              let _0x50c707 = Math.floor(Math.random() * 5) + 5;
-              let { key: _0x5ba0c0 } = await _0x2a6748.send(
-                "_Turning On in next " + _0x50c707 + "s.._"
+              forID = Result[0].id;
+              let Regulator = Math.floor(Math.random() * 5) + 5;
+              let { key: SentResultMsg } = await message.send(
+                "_Turning On in next " + Regulator + "s.._"
               );
-              await require(lib_dir).sleep(_0x50c707 * 1000);
-              await _0x41815e.patch(_0x391c8d + "/formation/" + forID, {
+              await require(lib_dir).sleep(Regulator * 1000);
+              await ConRemote.patch(HerokuApi + "/formation/" + forID, {
                 body: {
                   quantity: 1,
                 },
               });
-              await _0x2a6748.edit("HURRAY TURNED ON!", {
-                edit: _0x5ba0c0,
+              await message.edit("HURRAY TURNED ON!", {
+                edit: SentResultMsg,
               });
             })
-            .catch(async (_0x17c538) => {
-              await _0x2a6748.send(
-                "HEROKU ERROR : " + (_0x17c538.message || _0x17c538)
+            .catch(async (HeroErr) => {
+              await message.send(
+                "HEROKU ERROR : " + (HeroErr.message || HeroErr)
               );
             });
-        } catch (_0x2a8ec6) {
-          _0x2a6748.error(_0x2a8ec6 + "\n\ncommand: turnon", _0x2a8ec6, false);
+        } catch (error) {
+          message.error(error + "\n\ncommand: turnon", error, false);
         }
-      }
-    );
-    SysFunction(
-      {
-        pattern: "dyno",
-        fromMe: true,
-        desc: "Heroku DYNOS Infomation!",
-        type: "tools",
-      },
-      async (_0x554e38, _0x59535f) => {
-        const _0x551cca = require("heroku-client");
-        const _0x30dc40 = new _0x551cca({
-          token: HEROKU_API_KEY,
-        });
-        let _0x3affb2 = "/apps/" + HEROKU_APP_NAME;
-        _0x30dc40.get("/account").then(async (_0x5d0320) => {
-          const _0x4243f0 =
-            "https://api.heroku.com/accounts/" +
-            _0x5d0320.id +
-            "/actions/get-quota";
-          const _0x4a40fa = {
-            "User-Agent": "Chrome/80.0.3987.149 Mobile Safari/537.36",
-            Authorization: "Bearer " + HEROKU_API_KEY,
-            Accept: "application/vnd.heroku+json; version=3",
-          };
-          try {
-            const _0x24019a = await axios.post(_0x4243f0, null, {
-              headers: _0x4a40fa,
-            });
-            const _0x5815f9 = _0x24019a.data;
-            const _0x1d36e5 = Math.floor(_0x5815f9.account_quota);
-            const _0x95f186 = Math.floor(_0x5815f9.quota_used);
-            const _0x1ec20a = Math.round((_0x95f186 / _0x1d36e5) * 100);
-            const _0x2329b0 = _0x1d36e5 - _0x95f186;
-            await _0x554e38.send(
-              "*HEROKU DYNOS INFORMATION FOR " +
-                HEROKU_APP_NAME.toUpperCase() +
-                "_APP*\n      Total Dynos : " +
-                _0x1d36e5 +
-                "\n      Dyno Used : " +
-                _0x95f186 +
-                "\n      Percentage : " +
-                _0x1ec20a +
-                "\n      Dyno Left : " +
-                _0x2329b0
-            );
-          } catch (_0x57325a) {
-            console.error(_0x57325a);
-            await _0x554e38.send(
-              _0x57325a.message ||
-                "An error occurred while fetching Heroku dynos information."
-            );
-          }
-        });
       }
     );
     SysFunction(
@@ -862,67 +775,54 @@ try {
         desc: "Heroku ACCOUNT Infomation!",
         type: "tools",
       },
-      async (_0x2eadf9, _0x58756b) => {
+      async (message, query) => {
         try {
-          const _0x4360b5 = require("heroku-client");
-          const _0xbb5b96 = new _0x4360b5({
+          const APiAccess = require("heroku-client");
+          const Remote = new APiAccess({
             token: HEROKU_API_KEY,
           });
-          let _0x451470 = "";
-          let _0x2f8ad6 = "";
-          let _0x5498bc = "/apps/" + HEROKU_APP_NAME;
-          await _0xbb5b96
-            .get(_0x5498bc + "/formation")
-            .then(async (_0xc980a2) => {
-              let _0x4708cb = _0xc980a2[0] || {};
-              if (_0x4708cb && _0x4708cb.id) {
-                _0x4708cb.name = HEROKU_APP_NAME;
-                for (const [_0x1eb472, _0x542aa1] of Object.entries(
-                  _0x4708cb
-                )) {
-                  _0x2f8ad6 +=
-                    typeof _0x542aa1 == "object"
+          let Ab = "";
+          let Cd = "";
+          let Ef = "/apps/" + HEROKU_APP_NAME;
+          await Remote.get(Ef + "/formation")
+            .then(async (inicase) => {
+              let Jointdata = inicase[0] || {};
+              if (Jointdata && Jointdata.id) {
+                Jointdata.name = HEROKU_APP_NAME;
+                for (const [obj, subj] of Object.entries(Jointdata)) {
+                  Cd +=
+                    typeof subj == "object"
                       ? ""
-                      : "- *" + _0x1eb472 + ":* ```" + _0x542aa1 + "```\n";
+                      : "- *" + obj + ":* ```" + subj + "```\n";
                 }
-                _0x2f8ad6 = _0x2f8ad6
-                  ? "*HEROKU APP(`" +
-                    HEROKU_APP_NAME +
-                    "`) INFORMATION*\n" +
-                    _0x2f8ad6
+                Cd = Cd
+                  ? "*HEROKU APP(`" + HEROKU_APP_NAME + "`) INFORMATION*\n" + Cd
                   : "";
-                if (/app|bot|suhail|amd/gi.test(_0x58756b) && _0x2f8ad6) {
-                  return await _0x2eadf9.send(_0x2f8ad6);
+                if (/app|bot|suhail|amd/gi.test(query) && Cd) {
+                  return await message.send(Cd);
                 }
               }
             })
             .catch(async (_0x3608e6) => {});
-          _0xbb5b96
-            .get("/account")
-            .then(async (_0x57a495) => {
-              if (_0x57a495 && _0x57a495.id) {
-                for (const [_0xbf171, _0x19c2d6] of Object.entries(_0x57a495)) {
-                  _0x451470 +=
-                    "- *" + _0xbf171 + ":* ```" + _0x19c2d6 + "```\n";
+          Remote.get("/account")
+            .then(async (resulted) => {
+              if (resulted && resulted.id) {
+                for (const [AccData, InfoAcc] of Object.entries(resulted)) {
+                  Ab += "- *" + AccData + ":* ```" + InfoAcc + "```\n";
                 }
-                await _0x2eadf9.send(
-                  (
-                    "*HEROKU ACCOUNT INFORMATION*\n\n" +
-                    _0x451470 +
-                    "\n\n" +
-                    _0x2f8ad6
-                  ).trim()
+                await message.send(
+                  ("*HEROKU ACCOUNT INFORMATION*\n\n" + Ab + "\n\n" + Cd).trim()
                 );
               } else {
                 throw "_Acc Not found, please check valid `HEROKU_API_KEY`_";
               }
             })
-            .catch(async (_0x1e40ff) => {
-              console.log(_0x1e40ff.message || _0x1e40ff.data || data);
-              await _0x2eadf9.send(_0x1e40ff.message);
+            .catch(async (logData) => {
+              console.log(logData.message || logData.data || data);
+              await message.send(logData.message);
             });
-        } catch (_0x10dff5) {
-          _0x2eadf9.error(_0x10dff5 + "\n\ncommand: heroku", _0x10dff5, false);
+        } catch (error) {
+          message.error(error + "\n\ncommand: heroku", error, false);
         }
       }
     );
@@ -933,6 +833,6 @@ try {
     save_env: save_env,
     updateCache: updateCache,
   };
-} catch (_0x56e126) {
-  log("HEROKU UPDATE ERROR : ", _0x56e126);
+} catch (error) {
+  log("HEROKU UPDATE ERROR : ", error);
 }
