@@ -33,98 +33,7 @@ const fetch = require("node-fetch");
 const {
   cmd
 } = require(lib_dir + "/plugins.js");
-const exec = util.promisify(require("child_process").exec);
-let db = {};
-db.get = async () => {
-  const _0x39ecdb = "./astro.json";
-  try {
-    return JSON.parse(fs.readFileSync(_0x39ecdb, "utf-8"));
-  } catch (_0x12c187) {
-    return {};
-  }
-};
-db.update = async _0x19934a => {
-  try {
-    const _0x370f4c = "./astro.json";
-    const _0x50546d = db.get();
-    const _0x456e8c = {
-      ..._0x50546d,
-      ..._0x19934a
-    };
-    fs.writeFileSync(_0x370f4c, JSON.stringify(_0x456e8c, null, 2), "utf-8");
-    return _0x456e8c;
-  } catch (_0x4e2ecd) {
-    console.error("Error updating data:", _0x4e2ecd);
-  }
-};
-try {
-  const {
-    mention,
-    filter
-  } = require(lib_dir + "/astropeda.js");
-  smd({
-    cmdname: "mention",
-    fromMe: true,
-    category: "chats",
-    desc: "set auto reply for mention",
-    use: "[ url type/audio ]",
-    usage: "read  'mention wiki' to get all inforamtion of mention!",
-    filename: __filename
-  }, async (_0x184ecd, _0x431080) => {
-    mention.cmd(_0x184ecd, _0x431080);
-  });
-  smd({
-    on: "main",
-    fromMe: false
-  }, async (_0x138199, _0x359c14 = "") => {
-    mention.check(_0x138199, _0x359c14);
-  });
-  smd({
-    pattern: "filter",
-    category: "chats",
-    desc: "set auto reply filter messages",
-    use: "[ asta : how can i help you! ]",
-    usage: "set filter message to specific text, so that bot replied user from chat by giving text!",
-    fromMe: true,
-    filename: __filename
-  }, async (_0x126a17, _0x3ebefa) => {
-    filter.set(_0x126a17, _0x3ebefa);
-  });
-  smd({
-    pattern: "fstop",
-    category: "chats",
-    desc: "stop auto reply from a word",
-    use: "[ asta : how can i help you! ]",
-    usage: "stop filter message to specific word, That already set in filter text!",
-    fromMe: true,
-    filename: __filename
-  }, async (_0x2fd083, _0xa71664) => {
-    filter.stop(_0x2fd083, _0xa71664);
-  });
-  smd({
-    pattern: "flist",
-    category: "chats",
-    desc: "get list of auto reply word",
-    use: "[ asta : how can i help you! ]",
-    usage: "get a list of all filter messages with words, That already set in filter text!",
-    fromMe: true,
-    filename: __filename
-  }, async _0x55f8e8 => {
-    filter.list(_0x55f8e8);
-  });
-  smd({
-    on: "text"
-  }, async (_0x593a64, _0x40e88c) => {
-    try {
-      filter.check(_0x593a64, _0x40e88c);
-    } catch (_0x4839f8) {}
-  });
-} catch (_0x2568c0) {
-  if (!global.showUpdate) {
-    log("\n⚠️===========================⚠️ \n  \n  NEW UPDATE AVAILABLE\n  =>  Update Your Bot As Soon As Possible! 🚫\n \n Regards: ASTROPEDA\n⚠️============================⚠️");
-    global.showUpdate = true;
-  }
-}
+
 let afk = false;
 smd({
   pattern: "afk",
@@ -850,6 +759,29 @@ smd({
     }
   }
 });
+let db = {};
+db.get = async () => {
+  const _0x39ecdb = "./astro.json";
+  try {
+    return JSON.parse(fs.readFileSync(_0x39ecdb, "utf-8"));
+  } catch (_0x12c187) {
+    return {};
+  }
+};
+db.update = async _0x19934a => {
+  try {
+    const _0x370f4c = "./astro.json";
+    const _0x50546d = db.get();
+    const _0x456e8c = {
+      ..._0x50546d,
+      ..._0x19934a
+    };
+    fs.writeFileSync(_0x370f4c, JSON.stringify(_0x456e8c, null, 2), "utf-8");
+    return _0x456e8c;
+  } catch (_0x4e2ecd) {
+    console.error("Error updating data:", _0x4e2ecd);
+  }
+};
 events.cmd({
   cmdname: "logout",
   desc: "logout running bot with device !",
