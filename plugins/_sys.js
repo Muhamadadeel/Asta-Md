@@ -1,5 +1,5 @@
-const { AdminFunction, plugins, Config } = require("../lib");
-AdminFunction(
+const { bot, plugins, Config } = require("../lib");
+bot(
   {
     cmdname: "restart",
     info: "To restart bot",
@@ -13,7 +13,7 @@ AdminFunction(
     restarter("pm2 restart all");
   }
 );
-AdminFunction(
+bot(
   {
     cmdname: "shutdown",
     info: "To Shutdown bot",
@@ -27,7 +27,7 @@ AdminFunction(
     killer("pm2 stop all");
   }
 );
-AdminFunction(
+bot(
   {
     cmdname: "plugins",
     alias: ["plugin"],
@@ -55,7 +55,7 @@ AdminFunction(
 let external_cmds = "AntiDelete: [ ]\nAntiSpam: [ ]";
 let footer = "" + Config.botname + "";
 
-AdminFunction({
+bot({
   pattern: "extraplugins",
   alias: ["listplugins"],
   type: "sys",
@@ -72,7 +72,7 @@ AdminFunction({
     message.error(error + " \n\ncmdName extraplugins\n");
   }
 });
-AdminFunction(
+bot(
   {
     pattern: "remove",
     alias: ["uninstall"],
@@ -101,7 +101,7 @@ AdminFunction(
     } catch {}
   }
 );
-AdminFunction(
+bot(
   {
     cmdname: "install",
     type: "owner",
