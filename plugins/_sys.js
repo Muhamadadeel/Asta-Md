@@ -53,6 +53,7 @@ AdminFunction(
   }
 );
 let external_cmds = "AntiDelete: [ ]\nAntiSpam: [ ]"
+let footer = ""+Config.botname+""
 AdminFunction({
   pattern: "extraplugins",
   alias: ["listplugins"],
@@ -64,7 +65,7 @@ AdminFunction({
 },
 async (message) => {
   try {
-    return await message.send(`
+    return await message.sendUi(`
 *Here Are The External Plugins*
 ${external_cmds}\n
 \t${footer}
