@@ -3,7 +3,7 @@ AdminFunction(
   {
     cmdname: "restart",
     info: "To restart bot",
-    type: "tools",
+    type: "sys",
     fromMe: true,
     filename: __filename,
   },
@@ -17,7 +17,7 @@ AdminFunction(
   {
     cmdname: "shutdown",
     info: "To Shutdown bot",
-    type: "tools",
+    type: "sys",
     fromMe: true,
     filename: __filename,
   },
@@ -31,7 +31,7 @@ AdminFunction(
   {
     cmdname: "plugins",
     alias: ["plugin"],
-    type: "owner",
+    type: "sys",
     info: "Shows list of all externally installed modules",
     fromMe: true,
     filename: __filename,
@@ -42,7 +42,7 @@ AdminFunction(
       let Installer = await plugins(message, "plugins", InstalledPlugins);
       return await message.send(
         !Installer
-          ? "8`Sir "+Config.ownername+" I have Scanned and did not See Any Externally Installed Plugins*`"
+          ? "*`Sir "+Config.ownername+" I have Scanned and did not See Any Externally Installed Plugins`*"
           : !InstalledPlugins
           ? "*All Installed Modules are:-*\n\n" + Installer
           : Installer
@@ -52,6 +52,38 @@ AdminFunction(
     }
   }
 );
+let external_cmds = "AntiDelete: [ ]\nAntiSpam: [ ]";
+
+AdminFunction({
+  pattern: "extraplugins",
+  alias: ["listplugins"],
+  type: "sys",
+  info: "shows the External Plugins you can Install",
+  fromMe: true,
+  filename: __filename,
+  use: "<plugins>",
+}, async (message, match) => {
+  try {
+    // Set the context info code for an external ad reply
+    message.context_info = {
+      stanzaId: message.key.id,
+      participant: message.conn.user.jid,
+      quotedMessage: {
+        conversation: "Plugins",
+      },
+      remoteJid: "status@broadcast",
+    };
+
+    return await message.send(
+      `*Here Are The External Plugins* ${external_cmds}\n \t${footer}`,
+      {
+        contextInfo: message.context_info,
+      }
+    );
+  } catch (error) {
+    message.error(error + " \n\ncmdName extraplugins\n");
+  }
+});
 AdminFunction(
   {
     pattern: "remove",
