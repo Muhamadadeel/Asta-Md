@@ -42,13 +42,13 @@ AdminFunction(
       let Installer = await plugins(message, "plugins", InstalledPlugins);
       return await message.send(
         !Installer
-          ? "*_There's no plugin install in " + Config.botname + "_*"
+          ? "8`Sir "+Config.ownername+" I have Scanned and did not See Any Externally Installed Plugins*`"
           : !InstalledPlugins
           ? "*All Installed Modules are:-*\n\n" + Installer
           : Installer
       );
-    } catch (_0x21e335) {
-      message.error(_0x21e335 + " \n\ncmdName plugins\n");
+    } catch (error) {
+      message.error(error + " \n\ncmdName plugins\n");
     }
   }
 );
