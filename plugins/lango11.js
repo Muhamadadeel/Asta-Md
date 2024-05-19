@@ -26,7 +26,7 @@ cmd(
       try {
         await message.react("✨", message);
         return await message.bot.copyNForward(
-          message.chat,
+         // message.chat,
           text.quoted,
           false
         );
