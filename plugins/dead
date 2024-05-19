@@ -1,0 +1,128 @@
+/*
+cmd({
+  pattern: "alive",
+  category: "user",
+  desc: "is bot alive??"
+}, async (_0x2e497f, _0x22c113, {
+  isCreator: _0x51170
+}) => {
+  let _0x580abc = _0x22c113;
+  let _0xd8f193 = "*`Hey &user "+Config.botname+" is online`*";
+  let _0x458353 = "";
+  let _0x2de605 = false;
+  let _0x591e21 = false;
+  if (_0x51170 && _0x22c113 != "") {
+    let _0x8204d4 = (await bot_.findOne({
+      id: "bot_" + _0x2e497f.user
+    })) || (await bot_.new({
+      id: "bot_" + _0x2e497f.user
+    }));
+    if (_0x22c113.startsWith("get")) {
+      return _0x2e497f.reply(_0x8204d4.alive_get);
+    }
+    if (_0x22c113.toLowerCase().startsWith("info") || _0x22c113.toLowerCase().startsWith("settings")) {
+      let _0x5a500d = "*ᴀsᴛᴀ-ᴍᴅ • ᴀʟɪᴠᴇ ᴍᴇssᴀɢᴇ sᴇᴛᴛɪɴɢs*\n\n*KeyWords for Alive Message:*\n &user : ```To add user name,```\n &uptime: ```To add Uptime of bot,```\n &line : ```To add random pickup Line,```\n &quote: ```To add random quote with auther,```\n\n*Update Alive by adding text with Alive*\n```.alive Your_Alive_Message_here```\n\n*Also Add photo and video url in Alive*\n```.alive Your_Alive_Message_here``` https://i.imgur.com/JMsAFRD.jpeg\n\n*Alive Message With Url And All Keywords*\n```.alive``` url_here \n```Hey &user``` 🍂\n```I Am Asta-Md, A Multidevice Whatsapp User Bot.```\nBot alive since ```&uptime```\n*Quote:* ```&quote```\n*Pickup Line:* ```&line```\n\n";
+      return await _0x2e497f.bot.sendMessage(_0x2e497f.chat, {
+        image: {
+          url: await botpic()
+        },
+        caption: _0x5a500d + Config.caption
+      }, {
+        quoted: _0x2e497f
+      });
+    }
+    const _0x429cce = /(https?:\/\/\S+)/gi;
+    const _0x428b4a = [".jpg", ".jpeg", ".png"];
+    const _0x406c81 = [".mp4", ".avi", ".mov", ".mkv", ".gif"];
+    let _0x249042 = _0x22c113.match(_0x429cce) || false;
+    if (_0x249042) {
+      let _0x7da32b = 0;
+      while (_0x7da32b < _0x249042.length && !_0x2de605 && !_0x591e21) {
+        _0x458353 = _0x249042[_0x7da32b];
+        const _0x110464 = _0x458353.substring(_0x458353.lastIndexOf(".")).toLowerCase();
+        if (_0x428b4a.includes(_0x110464)) {
+          _0x2de605 = true;
+          _0x591e21 = false;
+        } else if (_0x406c81.includes(_0x110464)) {
+          _0x591e21 = true;
+          _0x2de605 = false;
+        } else {
+          console.log("Unknown link: " + _0x458353);
+        }
+        _0x7da32b++;
+      }
+    }
+    if (_0x591e21 || _0x2de605) {
+      _0x22c113 = _0x22c113.replace(_0x458353, "");
+    }
+    await bot_.updateOne({
+      id: "bot_" + _0x2e497f.user
+    }, {
+      alive_text: _0x22c113,
+      alive_get: _0x580abc,
+      alive_url: _0x458353,
+      alive_image: _0x2de605,
+      alive_video: _0x591e21
+    });
+  }
+  var _0x998ef0 = (await bot_.findOne({
+    id: "bot_" + _0x2e497f.user
+  })) || (await bot_.new({
+    id: "bot_" + _0x2e497f.user
+  }));
+  _0xd8f193 = _0x998ef0.alive_text ? _0x998ef0.alive_text : _0xd8f193;
+  if (_0xd8f193.includes("&quote")) {
+    var _0x131abb = await axios.get("https://favqs.com/api/qotd");
+    let _0x44fd94 = _0x131abb.data.quote.body + " By " + _0x131abb.data.quote.author;
+    _0xd8f193 = _0xd8f193.replace("&quote", _0x44fd94);
+  }
+  _0xd8f193 = _0xd8f193.replace("&uptime", runtime(process.uptime())).replace("&user", _0x2e497f.senderName).replace("&line", (await fetchJson("https://api.popcat.xyz/pickuplines")).pickupline).replace("&time", _0x2e497f.time).replace("&time", _0x2e497f.date);
+  _0x2de605 = _0x998ef0.alive_image || false;
+  _0x591e21 = _0x998ef0.alive_video || false;
+  _0x458353 = _0x998ef0.alive_url || (await botpic());
+  const _0x45a7ec = _0x2de605 ? {
+    image: {
+      url: _0x458353
+    },
+    caption: _0xd8f193
+  } : _0x591e21 ? {
+    video: {
+      url: _0x458353
+    },
+    gifPlayback: true,
+    caption: _0xd8f193
+  } : {
+    text: _0xd8f193
+  };
+  return _0x2e497f.bot.sendMessage(_0x2e497f.chat, _0x45a7ec, {
+    quoted: _0x2e497f
+  });
+});
+async function convertAudioToBlackScreenVideo(_0x528238, _0x32b9b6) {
+  try {
+    try {
+      fs.unlinkSync(_0x32b9b6);
+    } catch (_0xdbc67d) {}
+    const _0x77f5a8 = "ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 " + _0x528238;
+    const {
+      stdout: _0x35baeb
+    } = await exec(_0x77f5a8);
+    const _0xa4c00a = parseFloat(_0x35baeb);
+    try {
+      fs.unlinkSync("./blackScreen.mp4");
+    } catch (_0x5c88b4) {}
+    const _0xf07045 = "ffmpeg -f lavfi -i color=c=black:s=1280x720:d=" + _0xa4c00a + " -vf \"format=yuv420p\" ./blackScreen.mp4";
+    await exec(_0xf07045);
+    const _0x39ba37 = "ffmpeg -i ./blackScreen.mp4 -i " + _0x528238 + " -c:v copy -c:a aac -map 0:v:0 -map 1:a:0 " + _0x32b9b6;
+    await exec(_0x39ba37);
+    console.log("Audio converted to black screen video successfully!");
+    return {
+      result: true
+    };
+  } catch (_0x2a64be) {
+    console.log("An error occurred:", _0x2a64be);
+    return {
+      result: false
+    };
+  }
+} */
