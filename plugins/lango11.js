@@ -10,37 +10,37 @@ cmd(
     category: "user",
     filename: __filename,
   },
-  async (_0x65da56) => {
+  async (message) => {
     try {
-      if (!_0x65da56.quoted) {
-        return await _0x65da56.send("*_Uhh Dear, Reply to a Message_*");
+      if (!message.quoted) {
+        return await message.send("*_Uhh Dear, Reply to a Message_*");
       }
-      var _0xaab596 = await _0x65da56.bot.serializeM(
-        await _0x65da56.getQuotedObj()
+      var text = await message.bot.serializeM(
+        await message.getQuotedObj()
       );
-      if (!_0xaab596 || !_0xaab596.quoted) {
-        return await _0x65da56.replay(
+      if (!text || !text.quoted) {
+        return await message.replay(
           "*Message you replied does not contain a reply Message*"
         );
       }
       try {
-        await _0x65da56.react("✨", _0x65da56);
-        return await _0x65da56.bot.copyNForward(
-          _0x65da56.chat,
-          _0xaab596.quoted,
+        await message.react("✨", message);
+        return await message.bot.copyNForward(
+          message.chat,
+          text.quoted,
           false
         );
-      } catch (_0x669d0c) {
-        await _0x65da56.bot.forward(
-          _0x65da56.chat,
-          _0xaab596.quoted,
+      } catch (error) {
+        await message.bot.forward(
+          message.chat,
+          text.quoted,
           {},
-          _0x65da56
+          message
         );
-        console.log(_0x669d0c);
+        console.log(error);
       }
-    } catch (_0x358ded) {
-      await _0x65da56.error(_0x358ded + "\n\ncommand : quoted", _0x358ded);
+    } catch (error) {
+      await message.error(error + "\n\ncommand : quoted", error);
     }
   }
 );
