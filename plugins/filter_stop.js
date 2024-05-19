@@ -1,4 +1,4 @@
-let smd from "../lib";
+let smd = require ("../lib");
 const { filter } = require(lib_dir + "/astropeda.js");
 smd(
   {
