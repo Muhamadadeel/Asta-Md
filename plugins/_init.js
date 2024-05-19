@@ -9,7 +9,6 @@ let {
   formatp,
   prefix,
   smd,
-  react
 } = require("../lib");
 const long = String.fromCharCode(8206);
 const readmore = long.repeat(4001);
@@ -50,14 +49,12 @@ if (!cronStart) {
 }
 ;
 astro_patch.cmd({
-  pattern: "setcmd",
+  pattern: "newcmd",
   desc: "To check ping",
   category: "user",
   fromMe: true,
   filename: __filename
-}, async (message, match, {
-  Void: _0x5744a6
-}) => {
+}, async (message, match) => {
   try {
     if (!match) {
       return await message.send("*_Please provide cmd name by replying a Sticker_*");
@@ -103,31 +100,29 @@ astro_patch.cmd({
   category: "user",
   fromMe: true,
   filename: __filename
-}, async (_0x24256f, _0x5413b8, {
-  Void: _0x5d796d
-}) => {
+}, async (message, input) => {
   try {
-    let _0x51d508 = _0x5413b8 ? _0x5413b8.split(" ")[0].trim().toLowerCase() : "";
-    let _0x3fe92f = false;
-    if (_0x24256f.quoted) {
-      if (_0x24256f.quoted.mtype == "stickerMessage") {
-        _0x3fe92f = true;
-        _0x51d508 = "sticker-" + _0x24256f.quoted.msg.fileSha256;
-      } else if (!_0x5413b8) {
-        return await _0x24256f.send("*_Please reply to a Sticker that set for a Cmd_*");
+    let search = input ? input.split(" ")[0].trim().toLowerCase() : "";
+    let extra = false;
+    if (message.quoted) {
+      if (message.quoted.mtype == "stickerMessage") {
+        extra = true;
+        search = "sticker-" + message.quoted.msg.fileSha256;
+      } else if (!input) {
+        return await message.send("*_Please reply to a Sticker that set for a Cmd_*");
       }
-    } else if (!_0x5413b8) {
-      return await _0x24256f.send("*_Uhh Dear, provide Name that set to a cmd_*\n*Eg: _.delcmd Cmd_Name_*");
+    } else if (!input) {
+      return await message.send("*_Uhh Dear, provide Name that set to a cmd_*\n*Eg: _.delcmd Cmd_Name_*");
     }
-    if (global.setCmdAlias[_0x51d508]) {
-      await _0x24256f.send("*_\"" + (_0x3fe92f ? "Given Sticker" : _0x51d508) + "\" deleted Succesfully at \"" + global.setCmdAlias[_0x51d508] + "\" cmd_*");
-      delete global.setCmdAlias[_0x51d508];
+    if (global.setCmdAlias[search]) {
+      await message.send("*_\"" + (extra ? "Given Sticker" : search) + "\" deleted Succesfully at \"" + global.setCmdAlias[search] + "\" cmd_*");
+      delete global.setCmdAlias[search];
       return;
     } else {
-      return await _0x24256f.send("*_\"" + (_0x3fe92f ? "Given Sticker" : _0x51d508) + "\" not Set for any cmd._*\n *_Please Provide Valid " + (_0x3fe92f ? "Sticker" : "cmd Name") + " to delete_*");
+      return await message.send("*_\"" + (extra ? "Given Sticker" : search) + "\" not Set for any cmd._*\n *_Please Provide Valid " + (extra ? "Sticker" : "cmd Name") + " to delete_*");
     }
-  } catch (_0x1c3c2e) {
-    await _0x24256f.error(_0x1c3c2e + "\nCommand:delcmd", _0x1c3c2e);
+  } catch (error) {
+    await message.error(error + "\nCommand:delcmd", error);
   }
 });
 astro_patch.smd({
@@ -135,15 +130,15 @@ astro_patch.smd({
   desc: "To check ping",
   category: "user",
   filename: __filename
-}, async _0x1d39cb => {
-  var _0x3ee9e5 = new Date().getTime();
+}, async request => {
+  var init = new Date().getTime();
   const {
-    key: _0x46bcf7
-  } = await _0x1d39cb.reply("*Testing Ping!!!*");
-  var _0x578b74 = new Date().getTime();
-  return await _0x1d39cb.send("*ʟᴀᴛᴇɴᴄʏ " + (_0x578b74 - _0x3ee9e5) + " ms*", {
-    edit: _0x46bcf7
-  }, "", _0x1d39cb);
+    key: latency
+  } = await request.reply("*`Server Check`*");
+  var deinit = new Date().getTime();
+  return await request.send("`*ʟᴀᴛᴇɴᴄʏ " + (deinit - init) + " ms*`", {
+    edit: latency
+  }, "", request);
 });
 astro_patch.cmd({
   pattern: "runtime",
@@ -151,166 +146,166 @@ astro_patch.cmd({
   desc: "Tells runtime/uptime of bot.",
   category: "misc",
   filename: __filename
-}, async _0x5c9c07 => {
+}, async token => {
   try {
-    _0x5c9c07.reply("*_Uptime of " + tlang().title + ": " + runtime(process.uptime()) + "_*");
-  } catch (_0x3b0363) {
-    await _0x5c9c07.error(_0x3b0363 + "\n\ncommand : uptime", _0x3b0363, false);
+    token.reply("*`Bot Alive Since " + tlang().title + ": " + runtime(process.uptime()) + "`*");
+  } catch (error) {
+    await token.error(error + "\n\ncommand : uptime", error, false);
   }
 });
 global.create_UI = () => {
   if (!global.userImages || /text|txt|nothing|suhail/.test(global.userImages)) {
     return {};
   }
-  const _0x6d542a = [".jpg", ".jpeg", ".png", ".webp"];
-  const _0x520773 = [".mp4", ".avi", ".mov", ".mkv", ".gif", ".m4v"];
-  let _0x5cbf34 = video = false;
+  const initFormat = [".jpg", ".jpeg", ".png", ".webp"];
+  const rcnFormat = [".mp4", ".avi", ".mov", ".mkv", ".gif", ".m4v"];
+  let vidFile = video = false;
   if (!ui_urls || !ui_urls[0]) {
     ui_urls = global.userImages ? global.userImages.split(",") : [""];
     ui_urls = ui_urls.filter(_0x2e34e7 => _0x2e34e7.trim() !== "");
   }
-  let _0x38000b = (ui_urls[Math.floor(Math.random() * ui_urls.length)] || "").trim();
-  if (/http/gi.test(_0x38000b) && !ui_infoCache[_0x38000b]) {
-    const _0x41988b = _0x38000b.substring(_0x38000b.lastIndexOf(".")).toLowerCase();
-    if (_0x6d542a.includes(_0x41988b)) {
-      ui_Cache[_0x38000b] = "image";
-    } else if (_0x520773.includes(_0x41988b)) {
-      ui_Cache[_0x38000b] = "video";
+  let RandomSwitch = (ui_urls[Math.floor(Math.random() * ui_urls.length)] || "").trim();
+  if (/http/gi.test(RandomSwitch) && !ui_infoCache[RandomSwitch]) {
+    const IndexedSwitched = RandomSwitch.substring(RandomSwitch.lastIndexOf(".")).toLowerCase();
+    if (initFormat.includes(IndexedSwitched)) {
+      ui_Cache[RandomSwitch] = "image";
+    } else if (rcnFormat.includes(IndexedSwitched)) {
+      ui_Cache[RandomSwitch] = "video";
     }
   }
   return {
-    [ui_Cache[_0x38000b] || "Inavlid_Type_URL"]: {
-      url: _0x38000b
+    [ui_Cache[RandomSwitch] || "Inavlid_Type_URL"]: {
+      url: RandomSwitch
     }
   };
 };
-global.createButtons = _0x322a2c => {
-  if (!_0x322a2c || Array.isArray(_0x322a2c)) {
-    return _0x322a2c || [];
+global.createButtons = OnMessage => {
+  if (!OnMessage || Array.isArray(OnMessage)) {
+    return OnMessage || [];
   }
-  const _0x1203a5 = /#button\s*:\s*([^|]+)\s*\|\s*display_text\s*:\s*([^|]+)(?:\s*\|\s*(id)\s*:\s*([^|]+))?(?:\s*\|\s*(copy_code)\s*:\s*([^|]+))?\/#/ig;
-  const _0x2f0fe3 = [];
-  let _0x311da9;
-  while ((_0x311da9 = _0x1203a5.exec(_0x322a2c)) !== null) {
+  const BtnValue = /#button\s*:\s*([^|]+)\s*\|\s*display_text\s*:\s*([^|]+)(?:\s*\|\s*(id)\s*:\s*([^|]+))?(?:\s*\|\s*(copy_code)\s*:\s*([^|]+))?\/#/ig;
+  const JsonBtn = [];
+  let BtnContext;
+  while ((BtnContext = BtnValue.exec(OnMessage)) !== null) {
     try {
-      const _0x4366c6 = _0x311da9[1].trim();
-      const _0x2a65b0 = _0x311da9[2].trim();
-      const _0x18594a = _0x311da9[4] ? _0x311da9[4].trim() : "";
-      let _0x52b830 = _0x311da9[6] ? _0x311da9[6].trim() : "";
-      let _0x4dccad = {
-        display_text: _0x2a65b0
+      const OnBtnValue = BtnContext[1].trim();
+      const InBtnValue = BtnContext[2].trim();
+      const OffBtnValue = BtnContext[4] ? BtnContext[4].trim() : "";
+      let ActionBtn = BtnContext[6] ? BtnContext[6].trim() : "";
+      let TouchValue = {
+        display_text: InBtnValue
       };
-      if (_0x4366c6 === "cta_copy") {
-        _0x4dccad = {
-          display_text: _0x2a65b0,
-          id: _0x18594a,
-          copy_code: _0x52b830
+      if (OnBtnValue === "cta_copy") {
+        TouchValue = {
+          display_text: InBtnValue,
+          id: OffBtnValue,
+          copy_code: ActionBtn
         };
-      } else if (_0x4366c6 === "cta_url") {
-        _0x4dccad = {
-          display_text: _0x2a65b0,
-          url: ("" + (_0x18594a || "")).replace(" /#", "").trim(),
-          merchant_url: _0x52b830 || "https://www.google.com"
+      } else if (OnBtnValue === "cta_url") {
+        TouchValue = {
+          display_text: InBtnValue,
+          url: ("" + (OffBtnValue || "")).replace(" /#", "").trim(),
+          merchant_url: ActionBtn || "https://www.google.com"
         };
       } else {
-        _0x4dccad = {
-          display_text: _0x2a65b0,
-          id: _0x18594a
+        TouchValue = {
+          display_text: InBtnValue,
+          id: OffBtnValue
         };
       }
-      if (_0x4366c6) {
-        _0x2f0fe3.push({
-          name: _0x4366c6,
-          buttonParamsJson: JSON.stringify(_0x4dccad)
+      if (OnBtnValue) {
+        JsonBtn.push({
+          name: OnBtnValue,
+          buttonParamsJson: JSON.stringify(TouchValue)
         });
       } else {
-        log("button_name missing in", _0x311da9[0]);
+        log("button_name missing in", BtnContext[0]);
       }
-    } catch (_0x5d592e) {
-      console.log(_0x5d592e);
+    } catch (error) {
+      console.log(error);
     }
   }
-  return _0x2f0fe3 || [];
+  return JsonBtn || [];
 };
-global.sendButtons = async (_0x3c0a61, _0x1cb8f5 = {}, _0x4294b8 = [], _0x539235 = false) => {
-  if (!_0x3c0a61) {
+global.sendButtons = async (message, context = {}, MessageBody = [], OnBodyBtn = false) => {
+  if (!message) {
     throw "need m instance";
   }
-  let _0x560306 = _0x539235 || _0x3c0a61.jid;
-  if (typeof _0x1cb8f5 != "object") {
-    _0x1cb8f5 = {};
+  let BtnJid = OnBodyBtn || message.jid;
+  if (typeof context != "object") {
+    context = {};
   }
-  _0x1cb8f5.messageId = _0x1cb8f5.messageId || _0x3c0a61.bot.messageId();
-  if (typeof _0x4294b8 === "string") {
-    _0x4294b8 = createButtons(_0x4294b8);
+  context.messageId = context.messageId || message.bot.messageId();
+  if (typeof MessageBody === "string") {
+    MessageBody = createButtons(MessageBody);
   }
-  if (typeof _0x1cb8f5.buttons === "string" || Array.isArray(_0x1cb8f5.buttons)) {
-    _0x4294b8 = [..._0x4294b8, ...(createButtons(_0x1cb8f5.buttons) || [])];
+  if (typeof context.buttons === "string" || Array.isArray(context.buttons)) {
+    MessageBody = [...MessageBody, ...(createButtons(context.buttons) || [])];
   }
   let {
-    generateWAMessageFromContent: _0x1cbb8a,
-    proto: _0x229e9d,
-    prepareWAMessageMedia: _0x205cd2
+    generateWAMessageFromContent: MsgGen,
+    proto: ProtCol,
+    prepareWAMessageMedia: MediaMsg
   } = require("@whiskeysockets/baileys");
-  let _0x4530cd = {};
+  let OfDataMsg = {};
   try {
-    if (typeof _0x1cb8f5.imageMessage === "object") {
-      _0x4530cd = {
-        imageMessage: _0x1cb8f5.imageMessage
+    if (typeof context.imageMessage === "object") {
+      OfDataMsg = {
+        imageMessage: context.imageMessage
       };
-    } else if (typeof _0x1cb8f5.videoMessage === "object") {
-      _0x4530cd = {
-        videoMessage: _0x1cb8f5.videoMessage
+    } else if (typeof context.videoMessage === "object") {
+      OfDataMsg = {
+        videoMessage: context.videoMessage
       };
     } else {
-      let _0x32171 = false;
-      let _0x43e277 = _0x1cb8f5.image || _0x1cb8f5.video ? _0x1cb8f5 : create_UI();
-      if (_0x43e277.image) {
-        _0x32171 = (await _0x205cd2({
-          image: _0x43e277.image || log0
+      let OnDataMsg = false;
+      let ImgVidValue = context.image || context.video ? context : create_UI();
+      if (ImgVidValue.image) {
+        OnDataMsg = (await MediaMsg({
+          image: ImgVidValue.image || log0
         }, {
-          upload: _0x3c0a61.bot.waUploadToServer
+          upload: message.bot.waUploadToServer
         })) || false;
-      } else if (_0x43e277.video) {
-        _0x32171 = (await _0x205cd2({
-          image: _0x43e277.video || log0
+      } else if (ImgVidValue.video) {
+        OnDataMsg = (await MediaMsg({
+          image: ImgVidValue.video || log0
         }, {
-          upload: _0x3c0a61.bot.waUploadToServer
+          upload: message.bot.waUploadToServer
         })) || false;
       }
-      if (_0x32171) {
-        _0x4530cd = _0x32171.imageMessage ? {
-          imageMessage: _0x32171.imageMessage
-        } : _0x32171.videoMessage ? {
-          videoMessage: _0x32171.videoMessage
+      if (OnDataMsg) {
+        OfDataMsg = OnDataMsg.imageMessage ? {
+          imageMessage: OnDataMsg.imageMessage
+        } : OnDataMsg.videoMessage ? {
+          videoMessage: OnDataMsg.videoMessage
         } : {};
       }
     }
-  } catch (_0x346a07) {
-    _0x4530cd = {};
+  } catch (error) {
+    OfDataMsg = {};
   }
-  let _0x20bced = {
-    ...(await _0x3c0a61.bot.contextInfo(botname, _0x3c0a61.senderName || ownername)),
-    ...(_0x1cb8f5.contextInfo || {})
+  let FadedContext = {
+    ...(await message.bot.contextInfo(botname, message.senderName || ownername)),
+    ...(context.contextInfo || {})
   };
-  let _0x5f08d6 = _0x1cbb8a(_0x560306, {
+  let _0x5f08d6 = MsgGen(BtnJid, {
     viewOnceMessage: {
       message: {
-        interactiveMessage: _0x229e9d.Message.InteractiveMessage.create({
+        interactiveMessage: ProtCol.Message.InteractiveMessage.create({
           body: {
-            text: _0x1cb8f5.text || _0x1cb8f5.body || _0x1cb8f5.caption || "Astro"
+            text: context.text || context.body || context.caption || "Astro"
           },
           footer: {
-            text: _0x1cb8f5.footer || "¢σρуяιgнт αѕтяσρє∂α"
+            text: context.footer || "¢σρуяιgнт αѕтяσρє∂α"
           },
           header: {
-            ...(_0x4530cd || {}),
-            hasMediaAttachment: _0x4530cd.imageMessage || _0x4530cd.videoMessage ? true : false,
-            ...(_0x1cb8f5.header || {})
+            ...(OfDataMsg || {}),
+            hasMediaAttachment: OfDataMsg.imageMessage || OfDataMsg.videoMessage ? true : false,
+            ...(context.header || {})
           },
-          contextInfo: _0x20bced,
-          nativeFlowMessage: _0x229e9d.Message.InteractiveMessage.NativeFlowMessage.create({
-            buttons: _0x4294b8
+          contextInfo: FadedContext,
+          nativeFlowMessage: ProtCol.Message.InteractiveMessage.NativeFlowMessage.create({
+            buttons: MessageBody
           })
         }),
         messageContextInfo: {
@@ -319,9 +314,9 @@ global.sendButtons = async (_0x3c0a61, _0x1cb8f5 = {}, _0x4294b8 = [], _0x539235
         }
       }
     }
-  }, _0x1cb8f5);
-  await _0x3c0a61.bot.relayMessage(_0x560306, _0x5f08d6.message, {
-    messageId: _0x1cb8f5.messageId
+  }, context);
+  await message.bot.relayMessage(BtnJid, _0x5f08d6.message, {
+    messageId: context.messageId
   });
   return _0x5f08d6;
 };
@@ -331,117 +326,117 @@ astro_patch.cmd({
   react: "📃",
   type: "user",
   filename: __filename
-}, async (_0x34854f, _0xc0fd3a) => {
+}, async (message, match) => {
   try {
     const {
-      commands: _0x35e374
+      commands: commands
     } = require("../lib");
-    if (_0xc0fd3a.split(" ")[0]) {
-      let _0x1d9578 = [];
-      const _0x2db5a5 = _0x35e374.find(_0x2f3338 => _0x2f3338.pattern === _0xc0fd3a.split(" ")[0].toLowerCase());
-      if (_0x2db5a5) {
-        _0x1d9578.push("*🍁Command:* " + _0x2db5a5.pattern);
-        if (_0x2db5a5.category) {
-          _0x1d9578.push("*🧩Category:* " + _0x2db5a5.category);
+    if (match.split(" ")[0]) {
+      let PreData = [];
+      const identifer = commands.find(cmds => cmds.pattern === match.split(" ")[0].toLowerCase());
+      if (identifer) {
+        PreData.push("*🍁Command:* " + identifer.pattern);
+        if (identifer.category) {
+          PreData.push("*🧩Category:* " + identifer.category);
         }
-        if (_0x2db5a5.alias && _0x2db5a5.alias[0]) {
-          _0x1d9578.push("*🧩Alias:* " + _0x2db5a5.alias.join(", "));
+        if (identifer.alias && identifer.alias[0]) {
+          PreData.push("*🧩Alias:* " + identifer.alias.join(", "));
         }
-        if (_0x2db5a5.desc) {
-          _0x1d9578.push("*🧩Description:* " + _0x2db5a5.desc);
+        if (identifer.desc) {
+          PreData.push("*🧩Description:* " + identifer.desc);
         }
-        if (_0x2db5a5.use) {
-          _0x1d9578.push("*〽️Usa:*\n ```" + prefix + _0x2db5a5.pattern + " " + _0x2db5a5.use + "```");
+        if (identifer.use) {
+          PreData.push("*〽️Usa:*\n ```" + prefix + identifer.pattern + " " + identifer.use + "```");
         }
-        if (_0x2db5a5.usage) {
-          _0x1d9578.push("*〽️Usage:*\n ```" + _0x2db5a5.usage + "```");
+        if (identifer.usage) {
+          PreData.push("*〽️Usage:*\n ```" + identifer.usage + "```");
         }
-        await _0x34854f.reply(_0x1d9578.join("\n"));
+        await message.reply(PreData.join("\n"));
       }
     }
-    var _0x3772d4;
-    var _0x498fcc;
-    var _0x10c74b;
-    var _0x18960b;
-    var _0x3e0d2f;
-    var _0x3fbd57;
-    var _0x259d38;
-    let _0x23de54 = 0;
+    var MenuTopHeader;
+    var MenuSideHeader;
+    var MenuTopFooter;
+    var CategoryStartHeader
+    var CategoryEndHeader;
+    var CmdNameLine;
+    var CategoryFullEnd;
+    let MenuType = 0;
     if (menu === "") {
-      _0x23de54 = Math.floor(Math.random() * 4) + 1;
+      MenuType = Math.floor(Math.random() * 4) + 1;
     }
-    if (_0x23de54 == 1 || menu.trim().startsWith("1") || menu.toLowerCase().includes("v1")) {
-      _0x3772d4 = "╭━━━〔 *" + botname + "* 〕━━━┈⊷";
-      _0x498fcc = "┃✵│";
-      _0x10c74b = "┃✵╰──────────────\n╰━━━━━━━━━━━━━━━┈⊷";
-      _0x18960b = "╭─────────────┈⊷\n│「";
-      _0x3e0d2f = "」\n╰┬────────────┈⊷";
-      _0x3fbd57 = "││◦➛";
-      _0x259d38 = "│╰────────────┈⊷\n╰─────────────┈⊷";
-    } else if (_0x23de54 == 2 || menu.trim().startsWith("2") || menu.toLowerCase().includes("v2")) {
-      _0x3772d4 = "╭═══ *" + botname + "*  ═══⊷\n┃❃╭──────────────";
-      _0x498fcc = "┃❃│";
-      _0x10c74b = "┃❃╰───────────────\n╰═════════════════⊷";
-      _0x18960b = "╭─❏";
-      _0x3e0d2f = "❏";
-      _0x3fbd57 = "┃❃│";
-      _0x259d38 = "┃❃╰───────────────\n╰═════════════════⊷";
+    if (MenuType == 1 || menu.trim().startsWith("1") || menu.toLowerCase().includes("v1")) {
+      MenuTopHeader = "╭━━━〔 *" + botname + "* 〕━━━┈⊷";
+      MenuSideHeader = "┃✵│";
+      MenuTopFooter = "┃✵╰──────────────\n╰━━━━━━━━━━━━━━━┈⊷";
+      CategoryStartHeader = "╭─────────────┈⊷\n│「";
+      CategoryEndHeader = "」\n╰┬────────────┈⊷";
+      CmdNameLine = "││◦➛";
+      CategoryFullEnd = "│╰────────────┈⊷\n╰─────────────┈⊷";
+    } else if (MenuType == 2 || menu.trim().startsWith("2") || menu.toLowerCase().includes("v2")) {
+      MenuTopHeader = "╭═══ *" + botname + "*  ═══⊷\n┃❃╭──────────────";
+      MenuSideHeader = "┃❃│";
+      MenuTopFooter = "┃❃╰───────────────\n╰═════════════════⊷";
+      CategoryStartHeader = "╭─❏";
+      CategoryEndHeader = "❏";
+      CmdNameLine = "┃❃│";
+      CategoryFullEnd = "┃❃╰───────────────\n╰═════════════════⊷";
     } else {
-      _0x3772d4 = "╭═══〘  " + botname + "  〙═══⊷❍\n┃✰╭──────────────";
-      _0x498fcc = "┃✰│";
-      _0x10c74b = "┃✰╰───────────────\n╰═════════════════⊷";
-      _0x18960b = "╭════〘";
-      _0x3e0d2f = "〙════⊷❍";
-      _0x3fbd57 = "┃✰│";
-      _0x259d38 = "┃✰╰─────────────────❍\n╰══════════════════⊷❍";
+      MenuTopHeader = "╭═══〘  " + botname + "  〙═══⊷❍\n┃✰╭──────────────";
+      MenuSideHeader = "┃✰│";
+      MenuTopFooter = "┃✰╰───────────────\n╰═════════════════⊷";
+      CategoryStartHeader = "╭════〘";
+      CategoryEndHeader = "〙════⊷❍";
+      CmdNameLine = "┃✰│";
+      CategoryFullEnd = "┃✰╰─────────────────❍\n╰══════════════════⊷❍";
     }
-    const _0x2b167b = {};
-    _0x35e374.map(async (_0x1ed88e, _0x8039f3) => {
-      if (_0x1ed88e.dontAddCommandList === false && _0x1ed88e.pattern !== undefined) {
-        if (!_0x2b167b[_0x1ed88e.category]) {
-          _0x2b167b[_0x1ed88e.category] = [];
+    const cmdlets = {};
+    commands.map(async (query, data) => {
+      if (query.dontAddCommandList === false && query.pattern !== undefined) {
+        if (!cmdlets[query.category]) {
+          cmdlets[query.category] = [];
         }
-        _0x2b167b[_0x1ed88e.category].push(_0x1ed88e.pattern);
+        cmdlets[query.category].push(query.pattern);
       }
     });
-    let _0x41772e = [1, 22, 23, 1, 36, 35, 48, 1, 42, 55, 56];
-    let _0x288376 = parseInt(menu_fancy || "") || _0x41772e[Math.floor(Math.random() * _0x41772e.length)];
-    const _0x21ab06 = _0x34854f.time;
-    const _0x322bdd = _0x34854f.date;
-    let _0xb3a26 = _0x3772d4 + "\n" + _0x498fcc + " υѕєя:- " + ownername + "\n" + _0x498fcc + " мσ∂є:- " + Config.WORKTYPE + "\n" + _0x498fcc + " ᴘʟᴀᴛғᴏʀᴍ:- ʟɪɴᴜx\n" + _0x498fcc + " ¢σммαи∂ѕ:- " + _0x35e374.length + "\n" + _0x498fcc + " яυитιмє:- " + runtime(process.uptime()) + "\n" + _0x498fcc + " яαм υѕαgє:- " + formatp(os.totalmem() - os.freemem()) + "\n" + _0x498fcc + " тιмє:- " + _0x21ab06 + "\n" + _0x498fcc + " ∂αтє:- " + _0x322bdd + "\n" + _0x498fcc + " νєяѕισи:- " + Config.VERSION + "\n" + _0x10c74b + "\nαѕтα м∂ ραт¢н 3.0.0\n " +readmore+"\n";
-    for (const _0x5c07fb in _0x2b167b) {
-      _0xb3a26 += _0x18960b + " *" + fancytext(_0x5c07fb, _0x288376) + "* " + _0x3e0d2f + "\n";
-      if (_0xc0fd3a.toLowerCase() == _0x5c07fb.toLowerCase()) {
-        _0xb3a26 = _0x18960b + " *" + fancytext(_0x5c07fb, _0x288376) + "* " + _0x3e0d2f + "\n";
-        for (const _0x27958d of _0x2b167b[_0x5c07fb]) {
-          _0xb3a26 += _0x3fbd57 + " " + fancytext(_0x27958d, _0x288376) + "\n";
+    let MenuFancys = [1, 22, 23, 1, 36, 35, 48, 1, 42, 55, 56];
+    let text = parseInt(menu_fancy || "") || MenuFancys[Math.floor(Math.random() * MenuFancys.length)];
+    const currentTime = message.time;
+    const currentDate = message.date;
+    let BotInfoOnMenu = MenuTopHeader + "\n" + MenuSideHeader + " υѕєя:- " + ownername + "\n" + MenuSideHeader + " мσ∂є:- " + Config.WORKTYPE + "\n" + MenuSideHeader + " ᴘʟᴀᴛғᴏʀᴍ:- ʟɪɴᴜx\n" + MenuSideHeader + " ¢σммαи∂ѕ:- " + commands.length + "\n" + MenuSideHeader + " яυитιмє:- " + runtime(process.uptime()) + "\n" + MenuSideHeader + " яαм υѕαgє:- " + formatp(os.totalmem() - os.freemem()) + "\n" + MenuSideHeader + " тιмє:- " + currentTime + "\n" + MenuSideHeader + " ∂αтє:- " + currentDate + "\n" + MenuSideHeader + " νєяѕισи:- " + Config.VERSION + "\n" + MenuTopFooter + "\nαѕтα м∂ ραт¢н 3.0.0\n " +readmore+"\n";
+    for (const Texts in cmdlets) {
+      BotInfoOnMenu += CategoryStartHeader + " *" + fancytext(Texts, text) + "* " + CategoryEndHeader + "\n";
+      if (match.toLowerCase() == Texts.toLowerCase()) {
+        BotInfoOnMenu = CategoryStartHeader + " *" + fancytext(Texts, text) + "* " + CategoryEndHeader + "\n";
+        for (const randomlate of cmdlets[Texts]) {
+          BotInfoOnMenu += CmdNameLine + " " + fancytext(randomlate, text) + "\n";
         }
-        _0xb3a26 += _0x259d38 + "\n";
+        BotInfoOnMenu += CategoryFullEnd + "\n";
         break;
       } else {
-        for (const _0x34d05f of _0x2b167b[_0x5c07fb]) {
-          _0xb3a26 += _0x3fbd57 + " " + fancytext(_0x34d05f, _0x288376) + "\n";
+        for (const _0x34d05f of cmdlets[Texts]) {
+          BotInfoOnMenu += CmdNameLine + " " + fancytext(_0x34d05f, text) + "\n";
         }
-        _0xb3a26 += _0x259d38 + "\n";
+        BotInfoOnMenu += CategoryFullEnd + "\n";
       }
     }
-    _0xb3a26 += caption;
-    let _0x434de1 = {
-      caption: _0xb3a26
+    BotInfoOnMenu += caption;
+    let Important = {
+      caption: BotInfoOnMenu
     };
-    if (/1|buttons|btn/gi.test(BUTTONS) && _0x34854f.device !== "web") {
-      await sendButtons(_0x34854f, {
-        caption: _0xb3a26,
-        buttons: "\n            #button:cta_url | display_text : Fork & Star Asta Md| id:" + github + " /# \n            #button:cta_url | display_text : Channel | id:" + channel_lin + " /#            \n            "
+    if (/1|buttons|btn/gi.test(BUTTONS) && message.device !== "web") {
+      await sendButtons(message, {
+        caption: BotInfoOnMenu,
+        buttons: "\n            #button:cta_url | display_text : Fork & Star Asta Md| id:" + github + " /# \n            #button:cta_url | display_text : Channel | id:" + ChannelLink + " /#            \n            "
       });
     } else {
-      await _0x34854f.sendUi(_0x34854f.chat, _0x434de1, _0x34854f);
+      await message.sendUi(message.chat, Important, message);
     }
-  } catch (_0x433626) {
-    await _0x34854f.error(_0x433626 + "\nCommand:menu", _0x433626);
+  } catch (error) {
+    await message.error(error + "\nCommand:menu", error);
   }
 });
-let channel_lin = "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z"
+let ChannelLink = "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z"
 smd(
   {
     pattern: "alive",
@@ -473,7 +468,7 @@ smd(
           const quoteText = `\n\n*"${quote.result.body}"*\n_- ${quote.result.author}_`;
           const end = new Date().getTime();
           const pingSeconds = (end - start) / 1000;
-          const captionText = `ᴀsᴛᴀ ᴍᴅ �.𝟶.𝟶 ᴘᴀᴛᴄʜ\n\n*Ping:* ${pingSeconds} seconds${quoteText}\n\nᴀsᴛᴀ ᴍᴅ`;
+          const captionText = `ᴀsᴛᴀ ᴍᴅ 3.5.𝟶 ᴘᴀᴛᴄʜ\n\n*Ping:* ${pingSeconds} seconds${quoteText}\n\nᴀsᴛᴀ ᴍᴅ`;
 
           return { image: imageBuffer.data, caption: captionText };
         },
@@ -495,7 +490,7 @@ smd(
 
           const end = new Date().getTime();
           const pingSeconds = (end - start) / 1000;
-          const captionText = `ᴀsᴛᴀ ᴍᴅ �.𝟶.𝟶 ᴘᴀᴛᴄʜ\n\n*Ping:* ${pingSeconds} seconds\n\n*Fact:*\n${fact.result.fact}\n\nᴀsᴛᴀ ᴍᴅ`;
+          const captionText = `ᴀsᴛᴀ ᴍᴅ 3.5.𝟶 ᴘᴀᴛᴄʜ\n\n*Ping:* ${pingSeconds} seconds\n\n\n${fact.result.fact}\n\nᴀsᴛᴀ ᴍᴅ`;
 
           return { image: imageBuffer.data, caption: captionText };
         },
@@ -517,7 +512,7 @@ smd(
 
           const end = new Date().getTime();
           const pingSeconds = (end - start) / 1000;
-          const captionText = `ᴀsᴛᴀ ᴍᴅ �.𝟶.𝟶 ᴘᴀᴛᴄʜ\n\n*Ping:* ${pingSeconds} seconds\n\n*Line:*\n${line.result}\n\nᴀsᴛᴀ ᴍᴅ`;
+          const captionText = `ᴀsᴛᴀ ᴍᴅ 3.5.𝟶 ᴘᴀᴛᴄʜ\n\n*Ping:* ${pingSeconds} seconds\n\n\n${line.result}\n\nᴀsᴛᴀ ᴍᴅ`;
 
           return { image: imageBuffer.data, caption: captionText };
         },
@@ -552,25 +547,24 @@ astro_patch.cmd({
   pattern: "list",
   desc: "list menu",
   category: "user",
-  react: "🥀"
-}, async _0x1d5ddc => {
+}, async message => {
   try {
     const {
-      commands: _0x7cfe13
+      commands: RanDon
     } = require("../lib");
-    let _0x95885d = "\n\t*ᴀsᴛᴀ ᴍᴅ ᴄᴏᴍᴍᴀɴᴅs ɪɴғᴏ*  \n";
-    for (let _0x2bd72c = 0; _0x2bd72c < _0x7cfe13.length; _0x2bd72c++) {
-      if (_0x7cfe13[_0x2bd72c].pattern == undefined) {
+    let mVoid = "\n\t*ᴀsᴛᴀ ᴍᴅ ᴄᴏᴍᴍᴀɴᴅs ɪɴғᴏ*  \n";
+    for (let RamDom = 0; RamDom < RanDon.length; RamDom++) {
+      if (RanDon[RamDom].pattern == undefined) {
         continue;
       }
-      _0x95885d += "*" + (_0x2bd72c + 1) + " " + fancytext(_0x7cfe13[_0x2bd72c].pattern, 1) + "*\n";
-      _0x95885d += "  " + fancytext(_0x7cfe13[_0x2bd72c].desc, 1) + "\n";
+      mVoid += "*" + (RamDom + 1) + " " + fancytext(RanDon[RamDom].pattern, 1) + "*\n";
+      mVoid += "  " + fancytext(RanDon[RamDom].desc, 1) + "\n";
     }
-    return await _0x1d5ddc.sendUi(_0x1d5ddc.chat, {
-      caption: _0x95885d + Config.caption
+    return await message.sendUi(message.chat, {
+      caption: mVoid + Config.caption
     });
-  } catch (_0x3e730d) {
-    await _0x1d5ddc.error(_0x3e730d + "\nCommand:list", _0x3e730d);
+  } catch (error) {
+    await message.error(error + "\nCommand:list", error);
   }
 });
 astro_patch.smd({
@@ -578,14 +572,14 @@ astro_patch.smd({
   desc: "To check ping",
   category: "user",
   filename: __filename
-}, async _0x365574 => {
+}, async citel => {
   try {
-    const _0x1574f7 = "BEGIN:VCARD\nVERSION:3.0\nFN:" + ownername + "\nORG:;\nTEL;type=CELL;type=VOICE;waid=" + global.owner?.split(",")[0] + ":+" + global.owner?.split(",")[0] + "\nEND:VCARD";
-    let _0x495739 = {
+    const data = "BEGIN:VCARD\nVERSION:3.0\nFN:" + ownername + "\nORG:;\nTEL;type=CELL;type=VOICE;waid=" + global.owner?.split(",")[0] + ":+" + global.owner?.split(",")[0] + "\nEND:VCARD";
+    let Contact = {
       contacts: {
         displayName: ownername,
         contacts: [{
-          vcard: _0x1574f7
+          vcard: data
         }]
       },
       contextInfo: {
@@ -601,11 +595,11 @@ astro_patch.smd({
         }
       }
     };
-    return await _0x365574.sendMessage(_0x365574.jid, _0x495739, {
-      quoted: _0x365574
+    return await citel.sendMessage(citel.jid, Contact, {
+      quoted: citel
     });
-  } catch (_0x14d9fd) {
-    await _0x365574.error(_0x14d9fd + "\nCommand:owner", _0x14d9fd);
+  } catch (error) {
+    await citel.error(error + "\nCommand:owner", error);
   }
 });
 astro_patch.cmd({
@@ -615,35 +609,35 @@ astro_patch.cmd({
   filename: __filename,
   use: "< text >",
   desc: "Translate's given text in desird language."
-}, async (_0x54a537, _0x60aaa1) => {
+}, async (Aoid, Aitel) => {
   try {
-    let _0x2ea596 = _0x60aaa1 ? _0x60aaa1.split(" ")[0].toLowerCase() : "en";
-    if (!_0x54a537.reply_text) {
-      var _0xe7c6dc = _0x60aaa1.replace(_0x2ea596, "")?.trim() || false;
+    let formal = Aitel ? Aitel.split(" ")[0].toLowerCase() : "en";
+    if (!Aoid.reply_text) {
+      var result = Aitel.replace(formal, "")?.trim() || false;
     } else {
-      var _0xe7c6dc = _0x54a537.reply_text;
+      var result = Aoid.reply_text;
     }
-    if (!_0xe7c6dc) {
-      return await _0x54a537.reply("*Please Give Me Text. Example: _" + prefix + "trt en Who are you_*");
+    if (!result) {
+      return await Aoid.reply("*Please Give Me Text. Example: _" + prefix + "trt en Who are you_*");
     }
-    var _0x18ef5d = await translatte(_0xe7c6dc, {
+    var output = await translatte(result, {
       from: "auto",
-      to: _0x2ea596
+      to: formal
     });
-    if ("text" in _0x18ef5d) {
-      return await _0x54a537.reply(_0x18ef5d.text);
+    if ("text" in output) {
+      return await Aoid.reply(output.text);
     }
-  } catch (_0x4e56f8) {
-    await _0x54a537.error(_0x4e56f8 + "\n\ncommand trt", _0x4e56f8);
+  } catch (error) {
+    await Aoid.error(error + "\n\ncommand trt", error);
   }
 });
-const readDirectory = _0x51dfc1 => {
-  return new Promise((_0x33db7c, _0x5e5125) => {
-    fs.readdir(_0x51dfc1, (_0x574886, _0x7ed14a) => {
-      if (_0x574886) {
-        _0x5e5125("Error reading directory");
+const readDirectory = path => {
+  return new Promise((location, dir) => {
+    fs.readdir(path, (place, classss) => {
+      if (place) {
+        dir("Error reading directory");
       } else {
-        _0x33db7c(_0x7ed14a);
+        location(classss);
       }
     });
   });
