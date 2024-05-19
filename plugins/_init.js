@@ -403,7 +403,7 @@ AdminFunction.cmd({
     let text = parseInt(menu_fancy || "") || MenuFancys[Math.floor(Math.random() * MenuFancys.length)];
     const currentTime = message.time;
     const currentDate = message.date;
-    let BotInfoOnMenu = MenuTopHeader + "\n" + MenuSideHeader + " υѕєя:- " + ownername + "\n" + MenuSideHeader + " мσ∂є:- " + Config.WORKTYPE + "\n" + MenuSideHeader + " ᴘʟᴀᴛғᴏʀᴍ:- ʟɪɴᴜx\n" + MenuSideHeader + " ¢σммαи∂ѕ:- " + commands.length + "\n" + MenuSideHeader + " яυитιмє:- " + runtime(process.uptime()) + "\n" + MenuSideHeader + " яαм υѕαgє:- " + formatp(os.totalmem() - os.freemem()) + "\n" + MenuSideHeader + " тιмє:- " + currentTime + "\n" + MenuSideHeader + " ∂αтє:- " + currentDate + "\n" + MenuSideHeader + " νєяѕισи:- " + Config.VERSION + "\n" + MenuTopFooter + "\nαѕтα м∂ ραт¢н 3.0.0\n " +readmore+"\n";
+    let BotInfoOnMenu = MenuTopHeader + "\n" + MenuSideHeader + " ＵＳＥＲ:- " + ownername + "\n" + MenuSideHeader + " ＭＯＤＥ:- " + Config.WORKTYPE + "\n" + MenuSideHeader + " ＣＭＤＳ:- " + commands.length + "\n" + MenuSideHeader + " ＡＬＩＶＥ:- " + runtime(process.uptime()) + "\n" + MenuSideHeader + " ＲＡＭ:- " + formatp(os.totalmem() - os.freemem()) + "\n" + MenuSideHeader + " ＴＩＭＥ:- " + currentTime + "\n\t❑▁ᴘᴀᴛᴄʜ 𝟹.𝟻.𝟶▁❑\n " +readmore+"\n";
     for (const Texts in cmdlets) {
       BotInfoOnMenu += CategoryStartHeader + " *" + fancytext(Texts, text) + "* " + CategoryEndHeader + "\n";
       if (match.toLowerCase() == Texts.toLowerCase()) {
@@ -427,7 +427,7 @@ AdminFunction.cmd({
     if (/1|buttons|btn/gi.test(BUTTONS) && message.device !== "web") {
       await sendButtons(message, {
         caption: BotInfoOnMenu,
-        buttons: "\n            #button:cta_url | display_text : Fork & Star Asta Md| id:" + github + " /# \n            #button:cta_url | display_text : Channel | id:" + ChannelLink + " /#            \n            "
+        buttons: "\n            #button:cta_url | display_text : Get Your Own| id:" + github + " /# \n            #button:cta_url | display_text : Support| id:" + SupportGc + " /# \n            #button:cta_url | display_text : Channel | id:" + ChannelLink + " /#            \n            #button:cta_url | display_text : Full Support | id:" + tglink + " /#            \n            "
       });
     } else {
       await message.sendUi(message.chat, Important, message);
@@ -436,7 +436,9 @@ AdminFunction.cmd({
     await message.error(error + "\nCommand:menu", error);
   }
 });
+let tglink = "https://t.me/+tBdXzBsRBAMzNmFk"
 let ChannelLink = "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z"
+let SupportGc = "https://chat.whatsapp.com/Fb0ejJQeiPA08T0FB5H20g"
 amd(
   {
     pattern: "alive",
