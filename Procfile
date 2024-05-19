@@ -1,14 +1,1 @@
-web: npm start 
-
-
-
-
-
-
-
-
-
-
-
-
-# Creator: SUHAIL TECH
+worker: npm start 
