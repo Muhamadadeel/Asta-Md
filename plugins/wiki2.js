@@ -3,6 +3,7 @@ const { amd } = require("../lib");
 amd(
   {
     pattern: "wiki2 <query>",
+    alias: "wiki2",
     desc: "Downloads wikimedia images.",
     category: "downloader",
     filename: __filename,
