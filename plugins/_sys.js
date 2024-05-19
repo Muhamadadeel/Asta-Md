@@ -70,9 +70,7 @@ async (message) => {
 ${external_cmds}\n
 \t${footer}
     `);
-  } catch (error) {
-    message.error(error + " \n\ncmdName hi\n");
-  }
+  } catch {}
 }
 )
 AdminFunction(
