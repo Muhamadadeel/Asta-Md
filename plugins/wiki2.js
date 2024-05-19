@@ -13,8 +13,8 @@ amd(
       if (!query) {
         return await message.send("*_Please Give me search query!_*");
       }
-      let { wikimedia: _0x168a95 } = require("../lib");
-      let result = (await _0x168a95(query)) || [];
+      let { wikimedia: search } = require("../lib");
+      let result = (await search(query)) || [];
       if (!result || !result[0]) {
         return await message.send("*_No Results Found!_*");
       }
@@ -44,3 +44,6 @@ amd(
     }
   }
 );
+
+
+
