@@ -24,41 +24,9 @@ const {
   bot_,
   getTime
 } = require(lib_dir);
-const util = require("util");
 const fs = require("fs-extra");
 const axios = require("axios");
 const fetch = require("node-fetch");
-smd({
-  pattern: "audiourl",
-  alias: ["black"],
-  desc: "get url for audio and converted into black video",
-  category: "converter"
-}, async (_0x72926a, _0x4e5da) => {
-  try {
-    if (!_0x72926a.quoted) {
-      return await _0x72926a.reply("_Reply to Audio MEssage!_");
-    }
-    let _0x460b3f = "";
-    if (_0x72926a.quoted.mtype == "audioMessage") {
-      let _0x1f1386 = await _0x72926a.bot.downloadAndSaveMediaMessage(_0x72926a.quoted);
-      let _0x555071 = await convertAudioToBlackScreenVideo(_0x1f1386, "./temp/convertedVideo.mp4");
-      if (_0x555071.result) {
-        _0x460b3f = "./temp/convertedVideo.mp4";
-        let _0x5efc27 = await TelegraPh(_0x460b3f);
-        await _0x72926a.send(_0x460b3f, {
-          caption: util.format(_0x5efc27)
-        }, "smdvid", _0x72926a);
-        try {
-          fs.unlinkSync(_0x460b3f);
-        } catch (_0x147eea) {}
-      } else {
-        throw "Invalid Media Path";
-      }
-    }
-  } catch (_0x10a3dc) {
-    await _0x72926a.error(_0x10a3dc + "\n\nCommand: audiourl", _0x10a3dc, "_ERRORR!_");
-  }
-});
 smd({
   pattern: "bgm",
   desc: "Toggle On/Off to enable/disable bgm",
