@@ -136,7 +136,7 @@ AdminFunction.amd({
     key: latency
   } = await request.reply("*`Server Check`*");
   var deinit = new Date().getTime();
-  return await request.send("`*ʟᴀᴛᴇɴᴄʏ " + (deinit - init) + " ms*`", {
+  return await request.send("*`ʟᴀᴛᴇɴᴄʏ " + (deinit - init) + " ms`*", {
     edit: latency
   }, "", request);
 });
@@ -296,7 +296,7 @@ global.sendButtons = async (message, context = {}, MessageBody = [], OnBodyBtn =
             text: context.text || context.body || context.caption || "Astro"
           },
           footer: {
-            text: context.footer || "¢σρуяιgнт αѕтяσρє∂α"
+            text: context.footer || "αѕтα тє¢н тєαм"
           },
           header: {
             ...(OfDataMsg || {}),
