@@ -1,5 +1,4 @@
-const { plugins, Config } = require("../lib");
-const {AdminFunction} = require("../lib")
+const { AdminFunction, plugins, Config } = require("../lib");
 AdminFunction(
   {
     cmdname: "restart",
@@ -65,7 +64,9 @@ AdminFunction(
   },
   async (message, IsName) => {
     if (!IsName) {
-      return await message.reply("*`Sir I Need A Plugin Name, To Remove A Plugin`*");
+      return await message.reply(
+        "*`Sir I Need A Plugin Name, To Remove A Plugin`*"
+      );
     }
     if (IsName === "alls") {
       return await message.reply(await plugins("remove", "all", __dirname));
@@ -90,13 +91,11 @@ AdminFunction(
     use: "<gist url>",
   },
   async (message, IsUrl) => {
-    let Installer = IsUrl
-      ? IsUrl
-      : message.quoted
-      ? message.quoted.text
-      : "";
+    let Installer = IsUrl ? IsUrl : message.quoted ? message.quoted.text : "";
     if (!Installer.toLowerCase().includes("https")) {
-      return await message.send("*`Sir Please Give A Vaild Plugin Url To Install From`*");
+      return await message.send(
+        "*`Sir Please Give A Vaild Plugin Url To Install From`*"
+      );
     }
     await message.reply(
       await plugins(message, "install", Installer, __dirname)
