@@ -1384,7 +1384,6 @@ UserFunction(
               url: DocMsgMeta,
             },
             fileName: DocFileData,
-            caption: Config.caption,
             mimetype: "video/mp4",
             contextInfo: EndRsultMsg,
           });
