@@ -1,5 +1,5 @@
 while true
 do
-echo "Starting Suhail-Md!"
+echo "Running Application!"
 node .
 done
