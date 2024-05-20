@@ -53,7 +53,6 @@ try {
       OPENAI_API_KEY: modules.OPENAI_API_KEY,
       ANTILINK_VALUES: modules.antilink_values,
       MODE: modules.WORKTYPE,
-      THEME: modules.LANG,
       SESSION_ID: global.SESSION_ID,
       ...(global.newvar || {}),
     };
@@ -62,11 +61,11 @@ try {
   let restart_bot = () => {
     try {
       require("pm2").restart("index.js");
-    } catch (_0x3abf25) {
-      console.log(_0x3abf25);
+    } catch (err) {
+      console.log(err);
     }
-    const { exec: _0x31294b } = require("child_process");
-    _0x31294b("pm2 restart all");
+    const { exec: Restarter } = require("child_process");
+    Restarter("pm2 restart all");
   };
   let updateCache = (dir = "../config") => {
     try {
