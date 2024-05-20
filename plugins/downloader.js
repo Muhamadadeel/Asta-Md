@@ -31,7 +31,7 @@ UserFunction(
   async (messsage, isUrl) => {
     try {
       if (!isUrl) {
-        return await messsage.send("*`Hello Sir Give Me A Social Media Link to Download From`*");
+        return await messsage.send("*`Hello Sir Give Me A Social Media Link To Download From`*\n\n"+prefix+"allsocial *`your link`*");
       }
       const apiUrl = `https://api.maher-zubair.tech/download/alldownload2?url=${encodeURIComponent(
         isUrl
@@ -227,19 +227,19 @@ UserFunction(
     filename: __filename,
     use: "<url>",
   },
-  async (m, url) => {
+  async (message, isUrl) => {
     try {
-      if (!url) {
-        return await m.send("*_Please provide a Google Drive URL!_*");
+      if (!isUrl) {
+        return await message.send("*_Please provide a Google Drive URL!_*");
       }
 
       const apiUrl = `https://api.maher-zubair.tech/download/gdrive?url=${encodeURIComponent(
-        url
+        isUrl
       )}`;
       const response = await fetch(apiUrl);
 
       if (!response.ok) {
-        return await m.send(
+        return await message.send(
           `*_Error: ${response.status} ${response.statusText}_*`
         );
       }
@@ -247,7 +247,7 @@ UserFunction(
       const data = await response.json();
 
       if (data.status !== 200) {
-        return await m.send(
+        return await message.send(
           `*_Error: ${data.status} - ${data.result || "Unknown error"}_*`
         );
       }
@@ -255,16 +255,15 @@ UserFunction(
       const { downloadUrl, fileName, fileSize, mimetype } = data.result;
       const caption = `*File:* ${fileName}\n*Size:* ${fileSize}\n*Type:* ${mimetype}`;
 
-      await m.bot.sendFromUrl(m.from, downloadUrl, caption, m, {}, "file");
+      await message.bot.sendFromUrl(message.from, downloadUrl, caption, message, {}, "file");
     } catch (e) {
-      await m.error(`${e}\n\ncommand: gdrive`, e);
+      await message.error(`${e}\n\ncommand: gdrive`, e);
     }
   }
 );
 UserFunction(
   {
-    pattern: "spotify2",
-    alias: ["sp2"],
+    pattern: "spotify",
     desc: "Downloads a Spotify song.",
     category: "downloader",
     filename: __filename,
@@ -335,8 +334,8 @@ function isValidUrl(url) {
 }
 UserFunction(
   {
-    pattern: "spotify",
-    alias: ["sp"],
+    pattern: "findspotify",
+    alias: "findsp",
     desc: "Searches for Spotify tracks.",
     category: "search",
     filename: __filename,
@@ -346,7 +345,7 @@ UserFunction(
     try {
       const query = input.trim();
       if (!query) {
-        return await message.send("*_Please provide a search query._*");
+        return await message.send("*`Hey Sir Give Me Spotify Tracks To Find Informatiion About`*\n\n"+prefix+"findsp *`your link`*");
       }
 
       const apiUrl = `https://api.maher-zubair.tech/search/spotify?q=${encodeURIComponent(
@@ -414,7 +413,7 @@ UserFunction(
         );
       }
 
-      let video = await astroJson(
+      let video = await fetchJson(
         "https://api.maher-zubair.tech/download/twitter?url=" + query
       );
 
