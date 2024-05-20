@@ -1361,12 +1361,12 @@ UserFunction(
         if (InfoVidMeta.duration >= videotime) {
           isDoc = "document";
         }
-        let _0x3d6d42 = {
+        let FTYPE = {
           type: "video",
           quality: InfoVidMeta.pref_Quality || "best",
           format: "mp4",
         };
-        let DocMsgMeta = await yt.download(DResult[1], _0x3d6d42);
+        let DocMsgMeta = await yt.download(DResult[1], FTYPE);
         var EndRsultMsg = {
           ...(await meesage.bot.contextInfo(
             Config.botname,
@@ -1384,6 +1384,7 @@ UserFunction(
               url: DocMsgMeta,
             },
             fileName: DocFileData,
+            caption: Config.caption,
             mimetype: "video/mp4",
             contextInfo: EndRsultMsg,
           });
@@ -1542,42 +1543,42 @@ UserFunction(
     filename: __filename,
     use: "<Dowanload Tiktok Sounds>",
   },
-  async (_0x2ee3dd, _0x20a520) => {
+  async (message, match) => {
     try {
-      if (!_0x20a520) {
-        return _0x2ee3dd.reply(
+      if (!match) {
+        return message.reply(
           "*Give A Number Example: " + prefix + "sound 5*"
         );
       }
-      const _0x19c223 = parseInt(_0x20a520);
-      if (_0x19c223.toString() == "NaN" || _0x19c223 < 1 || _0x19c223 > 160) {
-        return _0x2ee3dd.reply("*_❌ Give a number between 1 to 160_*");
+      const data = parseInt(match);
+      if (data.toString() == "NaN" || data < 1 || data > 160) {
+        return message.reply("*_❌ Give a number between 1 to 160_*");
       }
-      let _0xf0331a =
+      let F =
         "https://github.com/DGXeon/Tiktokmusic-API/raw/master/tiktokmusic/sound" +
-        _0x19c223.toString() +
+        data.toString() +
         ".mp3";
-      let _0x2ba501 = await getBuffer(_0xf0331a);
-      var _0x29fdd9 = {
-        ...(await _0x2ee3dd.bot.contextInfo(
+      let AFILE = await getBuffer(F);
+      var MTYPE = {
+        ...(await message.bot.contextInfo(
           Config.botname,
-          "ᴛɪᴋᴛᴏᴋ ꜱᴏᴜɴᴅ " + _0x19c223
+          "ᴛɪᴋᴛᴏᴋ ꜱᴏᴜɴᴅ " + data
         )),
       };
-      let _0x4737bb = {
-        audio: _0x2ba501,
-        fileName: "Asta-Md tiktok Sound" + _0x19c223 + ".m4a",
+      let FTYPE = {
+        audio: AFILE,
+        fileName: "Asta-Md tiktok Sound" + data + ".m4a",
         mimetype: "audio/mpeg",
         ptt: true,
-        contextInfo: _0x29fdd9,
+        contextInfo: MTYPE,
       };
-      return _0x2ee3dd.bot.sendMessage(_0x2ee3dd.chat, _0x4737bb, {
-        quoted: _0x2ee3dd,
+      return message.bot.sendMessage(message.chat, FTYPE, {
+        quoted: message,
       });
-    } catch (_0x223ebb) {
-      return _0x2ee3dd.error(
-        _0x223ebb + "\n\ncommand: sound",
-        _0x223ebb,
+    } catch (error) {
+      return message.error(
+        error + "\n\ncommand: sound",
+        error,
         false
       );
     }
@@ -1634,35 +1635,35 @@ UserFunction(
     filename: __filename,
     use: "<ringtone name>",
   },
-  async (_0x1da3da, _0x2f0451) => {
+  async (message, match) => {
     try {
-      if (!_0x2f0451) {
-        return _0x1da3da.reply("Example: " + prefix + "ringtone back in black");
+      if (!match) {
+        return message.reply("Example: " + prefix + "ringtone back in black");
       }
-      const { ringtone: _0x2ec04e } = require("../lib/scraper");
-      let _0x5f35d4 = await _0x2ec04e(_0x2f0451);
-      var _0x2e165b = {
-        ...(await _0x1da3da.bot.contextInfo(
+      const { ringtone: query } = require("../lib/scraper");
+      let data = await query(match);
+      var MTYPE = {
+        ...(await message.bot.contextInfo(
           Config.botname,
           "ʀɪɴɢᴛᴏɴᴇ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ"
         )),
       };
-      let _0x5c9751 = {
+      let ATYPE = {
         audio: {
-          url: _0x5f35d4[0].audio,
+          url: data[0].audio,
         },
-        caption: "*" + _0x5f35d4[0].title + "*",
-        fileName: _0x5f35d4[0].title + ".mp3",
+        caption: "*" + data[0].title + "*",
+        fileName: data[0].title + ".mp3",
         mimetype: "audio/mpeg",
-        contextInfo: _0x2e165b,
+        contextInfo: MTYPE,
       };
-      return _0x1da3da.bot.sendMessage(_0x1da3da.jid, _0x5c9751, {
-        quoted: _0x1da3da,
+      return message.bot.sendMessage(message.jid, ATYPE, {
+        quoted: message,
       });
-    } catch (_0x430a86) {
-      return _0x1da3da.error(
-        _0x430a86 + "\n\ncommand: ringtone",
-        _0x430a86,
+    } catch (error) {
+      return message.error(
+        error + "\n\ncommand: ringtone",
+        error,
         "*_Ringtone not found with given name!!_*"
       );
     }
@@ -1676,32 +1677,32 @@ UserFunction(
     filename: __filename,
     use: "<text|image name>",
   },
-  async (_0xf8b0b, _0x589f9c) => {
+  async (msg, query) => {
     try {
-      if (!_0x589f9c) {
-        return _0xf8b0b.reply("What picture are you looking for?");
+      if (!query) {
+        return msg.reply("What picture are you looking for?");
       }
-      let _0x383852 = (await pinterest(_0x589f9c)) || [];
-      if (!_0x383852 || !_0x383852[0]) {
-        return await _0xf8b0b.send("*_No Result found!_*");
+      let request = (await pinterest(query)) || [];
+      if (!request || !request[0]) {
+        return await msg.send("*_No Result found!_*");
       }
-      var _0x132d25 = {
-        ...(await _0xf8b0b.bot.contextInfo(
+      var MTYPE = {
+        ...(await msg.bot.contextInfo(
           Config.botname,
           "ᴘɪɴᴛᴇʀᴇꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ"
         )),
       };
-      let _0x21ce53 = _0x383852.length < 5 ? _0x383852.length : 5;
-      for (let _0x1af9e9 = 0; _0x1af9e9 < _0x21ce53; _0x1af9e9++) {
-        await _0xf8b0b.bot.sendMessage(_0xf8b0b.chat, {
+      let data = request.length < 5 ? request.length : 5;
+      for (let result = 0; result < data; result++) {
+        await msg.bot.sendMessage(msg.chat, {
           image: {
-            url: _0x383852[_0x1af9e9],
+            url: request[result],
           },
-          contextInfo: _0x132d25,
+          contextInfo: MTYPE,
         });
       }
-    } catch (_0x5c4711) {
-      return _0xf8b0b.reply("Uhh Plese, Give me a Name. Ex .pint apple");
+    } catch (err) {
+      return msg.reply("*`Sir Use "+prefix+"pinterest cars`*");
     }
   }
 );
@@ -1714,50 +1715,50 @@ UserFunction(
     filename: __filename,
     use: "<url of mediafire>",
   },
-  async (_0x1ccf8b, _0x33d036) => {
+  async (message, query) => {
     try {
-      let _0x4ae56d = _0x33d036.includes("mediafire.com")
-        ? _0x33d036
-        : _0x1ccf8b.reply_text || "";
-      if (!_0x4ae56d.includes("mediafire.com")) {
-        return _0x1ccf8b.reply(
+      let request = query.includes("mediafire.com")
+        ? query
+        : message.reply_text || "";
+      if (!request.includes("mediafire.com")) {
+        return message.reply(
           "*_Provide mediafire url, Use: " +
             prefix +
             "mf https://www.mediafire.com/file/i33wo2xvgvid05m/muezzaverse_2221749531_musicaldown.com.mp4/file!_*"
         );
       }
-      let _0x4190c2 = _0x4ae56d.split(" ")[0];
-      const _0x15a389 = await mediafire(_0x4190c2);
-      if (!_0x15a389 || !_0x15a389[0]) {
-        return _0x1ccf8b.reply("could not found anything");
+      let asked = request.split(" ")[0];
+      const result = await mediafire(asked);
+      if (!result || !result[0]) {
+        return message.reply("could not found anything");
       }
       let _0x504ec3 =
         "『 *Mᴇᴅɪᴀғɪʀᴇ Dᴏᴡɴʟᴏᴀᴅᴇʀ* 』\n\n *Name* : " +
-        _0x15a389[0].nama +
+        result[0].nama +
         "\n *Size* :" +
-        _0x15a389[0].size +
+        result[0].size +
         "\n *Mime* : " +
-        _0x15a389[0].mime +
+        result[0].mime +
         "\n \n\n" +
         Config.caption;
       _0x504ec3 = await fancytext(_0x504ec3, 25);
-      var _0x227c35 = {
-        ...(await _0x1ccf8b.bot.contextInfo(Config.botname, "MEDIAFIRE")),
+      var MTYPE = {
+        ...(await message.bot.contextInfo(Config.botname, "MEDIAFIRE")),
       };
-      let _0x33773c = {
+      let DTYPE = {
         document: {
-          url: _0x15a389[0].link,
+          url: result[0].link,
         },
         caption: _0x504ec3,
-        fileName: _0x15a389[0].nama,
-        mimetype: _0x15a389[0].mime,
-        contextInfo: _0x227c35,
+        fileName: result[0].nama,
+        mimetype: result[0].mime,
+        contextInfo: MTYPE,
       };
-      return await _0x1ccf8b.bot.sendMessage(_0x1ccf8b.chat, _0x33773c);
-    } catch (_0x50b778) {
-      return _0x1ccf8b.error(
-        _0x50b778 + "\n\ncommand: mediafire",
-        _0x50b778,
+      return await message.bot.sendMessage(message.chat, DTYPE);
+    } catch (err) {
+      return message.error(
+        err + "\n\ncommand: mediafire",
+        err,
         "*_File not found!!_*"
       );
     }
@@ -1772,50 +1773,50 @@ UserFunction(
     filename: __filename,
     use: "<give text>",
   },
-  async (_0x2c2023, _0x4ec99f) => {
+  async (mesage, match) => {
     try {
-      if (!_0x4ec99f) {
-        return await _0x2c2023.reply("*_Give Me Search Query_*");
+      if (!match) {
+        return await mesage.reply("*_Give Me Search Query_*");
       }
-      let _0x3b2ca6 = await yts(_0x4ec99f);
-      let _0x4123ae = _0x3b2ca6.all[0];
-      let _0x5883a9 =
+      let q = await yts(match);
+      let resukt = q.all[0];
+      let RTYPE =
         "\t *ᴀsᴛᴀ-ᴍᴅ • sᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ*   \n\n*Title :* " +
-        _0x4123ae.title +
+        resukt.title +
         "\nUrl : " +
-        _0x4123ae.url +
+        resukt.url +
         "\n*Description :* " +
-        _0x4123ae.timestamp +
+        resukt.timestamp +
         "\n*Views :* " +
-        _0x4123ae.views +
+        resukt.views +
         "\n*Uploaded :* " +
-        _0x4123ae.ago +
+        resukt.ago +
         "\n*Author :* " +
-        _0x4123ae.author.name +
+        resukt.author.name +
         "\n\n\n_Reply 1 To Video_ Or _1 document_\n_Reply 2 To Audio_ Or _2 document_";
-      let _0x3885cc = await smdBuffer(_0x4123ae.thumbnail);
-      var _0x44a363 = {
-        ...(await _0x2c2023.bot.contextInfo(
+      let IMGTYPE = await smdBuffer(resukt.thumbnail);
+      var CTYPE = {
+        ...(await mesage.bot.contextInfo(
           Config.botname,
           "ʏᴏᴜᴛᴜʙᴇ ꜱᴏɴɢ",
-          _0x3885cc
+          IMGTYPE
         )),
       };
-      await _0x2c2023.bot.sendMessage(_0x2c2023.jid, {
-        image: _0x3885cc,
-        caption: _0x5883a9,
-        contextInfo: _0x44a363,
+      await mesage.bot.sendMessage(mesage.jid, {
+        image: IMGTYPE,
+        caption: RTYPE,
+        contextInfo: CTYPE,
       });
-    } catch (_0x86b411) {
-      return _0x2c2023.error(
-        _0x86b411 + "\n\ncommand: mediafire",
-        _0x86b411,
+    } catch (errr) {
+      return mesage.error(
+        errr + "\n\ncommand: mediafire",
+        errr,
         "*_File not found!!_*"
       );
     }
   }
 );
-cmd(
+UserFunction(
   {
     pattern: "yts",
     alias: ["yt", "ytsearch"],
@@ -1824,41 +1825,41 @@ cmd(
     filename: __filename,
     use: "<Yt Search Query>",
   },
-  async (_0x1c8285, _0xca939c) => {
+  async (m, query) => {
     try {
-      if (!_0xca939c) {
-        return await _0x1c8285.reply("*_Give Me Search Query!_*");
+      if (!query) {
+        return await m.reply("*_Give Me Search Query!_*");
       }
-      let _0x2878ec = await yts(_0xca939c);
-      let _0x4186e4 =
-        "*ᴀsᴛᴀ-ᴍᴅ • ʏᴏᴜᴛᴜʙᴇ ᴅᴏᴡɴʟᴏᴀᴅ* \n*_______________________________* \n\n_Reply Any Number To Download._\n  _For Audio: 1 mp3._\n  _For Video: 1 video._\n  _For document: 1 document._\n\n_Results For : " +
-        _0xca939c +
+      let resulr = await yts(query);
+      let MTYPE =
+        "*ᴀsᴛᴀ-ᴍᴅ • ʏᴏᴜᴛᴜʙᴇ ᴅᴏᴡɴʟᴏᴀᴅ* \n\n\n_Reply Any Number To Download._\n  _For Audio: 1 mp3._\n  _For Video: 1 video._\n  _For document: 1 document._\n\n_Results For : " +
+        query +
         "_ \n\n";
-      let _0x463366 = 1;
-      for (let _0x308e22 of _0x2878ec.all) {
-        _0x4186e4 +=
+      let DAT = 1;
+      for (let resulted of resulr.all) {
+        MTYPE +=
           " \n*" +
-          _0x463366++ +
+          DAT++ +
           " : " +
-          _0x308e22.title +
-          (_0x308e22.timestamp ? "(" + _0x308e22.timestamp + ")" : "") +
+          resulted.title +
+          (resulted.timestamp ? "(" + resulted.timestamp + ")" : "") +
           "*\n*Url : " +
-          _0x308e22.url +
+          resulted.url +
           "*";
       }
-      return await _0x1c8285.sendMessage(
-        _0x1c8285.chat,
+      return await m.sendMessage(
+        m.chat,
         {
           image: {
-            url: _0x2878ec.all[0].thumbnail,
+            url: resulr.all[0].thumbnail,
           },
-          caption: _0x4186e4,
+          caption: MTYPE,
         },
         {
-          quoted: _0x1c8285,
+          quoted: m,
         }
       );
-    } catch (_0x5089b0) {}
+    } catch (err) {}
   }
 );
 UserFunction(
