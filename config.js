@@ -18,6 +18,7 @@ global.gurl  =process.env.GURL  || "https://whatsapp.com/channel/0029VaPGt3QEwEj
 global.website=process.env.GURL || "https://whatsapp.com/channel/0029VaPGt3QEwEjpBXT4Rv0z" ; 
 global.THUMB_IMAGE = process.env.THUMB_IMAGE || process.env.IMAGE || "https://i.imgur.com/JMsAFRD.jpeg" ;
 global.caption = process.env.CAPTION || global.caption || "αѕтα-м∂ 2024" 
+global.BUTTONS = process.env.BUTTONS || process.env.MENU_BTN || "1";
 
 
 global.devs = "2348039607375"

@@ -34,6 +34,11 @@
       "required": false,
       "value": "Africa/Lagos"
     },
+    "MENU_BTN":{
+      "description": "Show Buttons On Menu",
+      "required": false,
+      "value": "0"
+    },
     "FLUSH": {
       "description": " Make it 'true' if bot connected but not responed (After deployement!)",
       "required": false,
