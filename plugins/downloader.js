@@ -1,7 +1,7 @@
 const {
   UserFunction,
   fetchJson,
-  smdJson,
+  amdJson,
   fancytext,
   yt,
   getBuffer,
@@ -461,7 +461,7 @@ UserFunction(
             "fb https://www.facebook.com/watch/?v=2018727118289093_*"
         );
       }
-      let _0x3f4693 = await smdJson(api_smd + "/api/fb?url=" + _0xef90cc);
+      let _0x3f4693 = await amdJson(api_smd + "/api/fb?url=" + _0xef90cc);
       if (!_0x3f4693 || !_0x3f4693.status) {
         return await _0x3a3af2.reply("*Invalid Video Url!*");
       }
@@ -1633,10 +1633,10 @@ UserFunction(
       }
       var _0x3200a7 = false;
       try {
-        let _0x410534 = await smdJson(api_smd + "/api/ttdl2?url=" + _0x149d79);
+        let _0x410534 = await amdJson(api_smd + "/api/ttdl2?url=" + _0x149d79);
         _0x3200a7 = (_0x410534 && _0x410534?.video?.noWatermark) || false;
       } catch (_0x4f63b7) {
-        let _0x44d97e = await smdJson(
+        let _0x44d97e = await amdJson(
           api_smd + "/api/musically?url=" + _0x149d79
         );
         _0x3200a7 = (_0x44d97e && _0x44d97e?.result?.video) || false;
