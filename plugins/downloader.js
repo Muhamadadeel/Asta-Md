@@ -442,6 +442,7 @@ UserFunction(
     }
   }
 );
+let fb_api = "https://api-smd.onrender.com"
 UserFunction(
   {
     pattern: "facebook",
@@ -451,36 +452,33 @@ UserFunction(
     filename: __filename,
     use: "<add fb url.>",
   },
-  async (_0x3a3af2, _0x5f4e7a) => {
+  async (message, isUrl) => {
     try {
-      let _0xef90cc = _0x5f4e7a.split(" ")[0].trim();
-      if (!_0xef90cc || !_0xef90cc.startsWith("https://")) {
-        return await _0x3a3af2.send(
-          "*_Please Give me Facebook Video Url_*\n*Example _" +
-            prefix +
-            "fb https://www.facebook.com/watch/?v=2018727118289093_*"
+      let match = isUrl.split(" ")[0].trim();
+      if (!match || !match.startsWith("https://")) {
+        return await message.send(
+          "`*Hello Give Me A Vaild FaceBook Link`*\n\n"+prefix+"facebook *`your link`*"
         );
       }
-      let _0x3f4693 = await amdJson(api_smd + "/api/fb?url=" + _0xef90cc);
-      if (!_0x3f4693 || !_0x3f4693.status) {
-        return await _0x3a3af2.reply("*Invalid Video Url!*");
+      let result = await amdJson(fb_api + "/api/fb?url=" + match);
+      if (!result || !result.status) {
+        return await message.reply("*Invalid Video Url!*");
       }
-      return await _0x3a3af2.bot.sendMessage(
-        _0x3a3af2.chat,
+      return await message.bot.sendMessage(
+        message.chat,
         {
           video: {
-            url: _0x3f4693.result.urls[0].url,
-          },
-          caption: Config.caption,
+            url: result.result.urls[0].url,
+          }
         },
         {
-          quoted: _0x3a3af2,
+          quoted: message,
         }
       );
-    } catch (_0x2c7814) {
-      await _0x3a3af2.error(
-        _0x2c7814 + "\n\ncommand: facebook",
-        _0x2c7814,
+    } catch (error) {
+      await message.error(
+        error + "\n\ncommand: facebook",
+        error,
         "*_video not Found!!!_*"
       );
     }
@@ -495,81 +493,75 @@ UserFunction(
     filename: __filename,
     use: "<add sticker url.>",
   },
-  async (_0x7b09ff, _0x4af114) => {
+  async (message, query) => {
     try {
-      if (!_0x4af114) {
-        return _0x7b09ff.reply("*_Uhh dear, Give me App Name!_*");
+      if (!query) {
+        return message.reply("*`Give me App Name`*");
       }
-      let _0x468cc8 = await search(_0x4af114);
-      let _0x538b40 = {};
-      if (_0x468cc8.length) {
-        _0x538b40 = await download(_0x468cc8[0].id);
+      let data = await search(query);
+      let result = {};
+      if (data.length) {
+        result = await download(data[0].id);
       } else {
-        return _0x7b09ff.reply("*_Apk not found, Try another name!!_*");
+        return message.reply("*_Apk not found, Try another name!!_*");
       }
-      const _0x48bc12 = parseInt(_0x538b40.size);
-      if (_0x48bc12 > 200) {
-        return _0x7b09ff.reply("❌ File size bigger than 200mb.");
+      const init = parseInt(result.size);
+      if (init > 200) {
+        return message.reply("❌ File size bigger than 200mb.");
       }
-      const _0x31321c = _0x538b40.dllink;
+      const info = result.dllink;
       let _0x24f726 = await fancytext(
-        "『 *ᗩᑭᏦ  ᗞᝪᗯᑎしᝪᗩᗞᗴᖇ* 』\n\n*APP Name :* " +
-          _0x538b40.name +
-          "\n*App Id :* " +
-          _0x538b40.package +
-          "\n*Last Up :* " +
-          _0x538b40.lastup +
-          "\n*App Size :* " +
-          _0x538b40.size +
-          "\n\n\n " +
-          Config.caption,
-        25
-      );
-      const _0x3e266b = (_0x538b40?.name || "Downloader") + ".apk";
-      const _0x585f79 = "temp/" + _0x3e266b;
-      let _0x533c85 = await _0x7b09ff.reply(
-        _0x538b40.icon,
+`『 *ᗩᑭᏦ  ᗞᝪᗯᑎしᝪᗩᗞᗴᖇ* 』
+*APP Name :*  ${result.name}
+*App Id :* ${result.package}
+*Last Up :* ${result.lastup}
+*App Size :* " ${result.size}`
+);
+      const ResultFile = (result?.name || "Downloader") + ".apk";
+      const STORE = "temp/" + ResultFile;
+      let asked = await message.reply(
+        result.icon,
         {
           caption: _0x24f726,
         },
         "img",
-        _0x7b09ff
+        message
       );
       axios
-        .get(_0x31321c, {
+        .get(info, {
           responseType: "stream",
         })
-        .then((_0x3cdb1d) => {
-          const _0x406256 = fs.createWriteStream(_0x585f79);
-          _0x3cdb1d.data.pipe(_0x406256);
+        .then((streamLike) => {
+          const DL = fs.createWriteStream(STORE);
+          streamLike.data.pipe(DL);
           return new Promise((_0xd7f976, _0x27915) => {
-            _0x406256.on("finish", _0xd7f976);
-            _0x406256.on("error", _0x27915);
+            DL.on("finish", _0xd7f976);
+            DL.on("error", _0x27915);
           });
         })
         .then(() => {
           let _0x389371 = {
-            document: fs.readFileSync(_0x585f79),
+            document: fs.readFileSync(STORE),
             mimetype: "application/vnd.android.package-archive",
-            fileName: _0x3e266b,
+            fileName: ResultFile,
           };
-          _0x7b09ff.bot.sendMessage(_0x7b09ff.jid, _0x389371, {
-            quoted: _0x533c85,
+          message.bot.sendMessage(message.jid, _0x389371, {
+            quoted: asked,
           });
           try {
-            fs.unlink(_0x585f79);
+            fs.unlink(STORE);
           } catch {}
         })
         .catch((_0x2490b5) => {
           try {
-            fs.unlink(_0x585f79);
+            fs.unlink(STORE);
           } catch {}
-          _0x7b09ff.reply("*_Apk not Found, Sorry_*");
+          message.reply("*_Apk not Found, Sorry_*");
         });
-    } catch (_0x4540ef) {
-      await _0x7b09ff.error(
-        _0x4540ef + "\n\ncommand: apk",
-        _0x4540ef,
+    } catch (error) {
+      await message.error(
+        error + "\n\ncommand: apk",
+        error,
         "*_Apk not Found!_*"
       );
     }
