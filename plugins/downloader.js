@@ -31,7 +31,11 @@ UserFunction(
   async (messsage, isUrl) => {
     try {
       if (!isUrl) {
-        return await messsage.send("*`Hello Sir Give Me A Social Media Link To Download From`*\n\n"+prefix+"allsocial *`your link`*");
+        return await messsage.send(
+          "*`Hello Sir Give Me A Social Media Link To Download From`*\n\n" +
+            prefix +
+            "allsocial *`your link`*"
+        );
       }
       const apiUrl = `https://api.maher-zubair.tech/download/alldownload2?url=${encodeURIComponent(
         isUrl
@@ -52,12 +56,26 @@ UserFunction(
       const { title, thumbnail, medias } = result;
       const caption = `*Title:* ${title}\n\n*Source:* ${medias[0].source}`;
 
-      await messsage.bot.sendFromUrl(messsage.from, thumbnail, caption, messsage, {}, "image");
+      await messsage.bot.sendFromUrl(
+        messsage.from,
+        thumbnail,
+        caption,
+        messsage,
+        {},
+        "image"
+      );
 
       for (const media of medias) {
         const { url, formattedSize, quality, extension } = media;
         const mediaCaption = `*Quality:* ${quality}\n*Size:* ${formattedSize}\n*Extension:* ${extension}`;
-        await messsage.bot.sendFromUrl(messsage.from, url, mediaCaption, messsage, {}, "video");
+        await messsage.bot.sendFromUrl(
+          messsage.from,
+          url,
+          mediaCaption,
+          messsage,
+          {},
+          "video"
+        );
       }
     } catch (e) {
       await messsage.error(`${e}\n\ncommand: allsocial`, e);
@@ -76,12 +94,16 @@ UserFunction(
     try {
       if (!isUrl) {
         return await message.reply(
-          "*`Hello Sir Please Give Me A Vaild Telegram Sticker link`*\n\n"+prefix+"tg2 *`your link`*"
+          "*`Hello Sir Please Give Me A Vaild Telegram Sticker link`*\n\n" +
+            prefix +
+            "tg2 *`your link`*"
         );
       }
       if (!isUrl.includes("addstickers")) {
         return await message.reply(
-          "*`Hello Sir Please Give Me A Vaild Telegram Sticker link`*\n\n"+prefix+"tg2 *`your link`*"
+          "*`Hello Sir Please Give Me A Vaild Telegram Sticker link`*\n\n" +
+            prefix +
+            "tg2 *`your link`*"
         );
       }
       let GivenUrl = isUrl.split("|")[0];
@@ -184,7 +206,11 @@ UserFunction(
   async (message, query) => {
     try {
       if (!query) {
-        return await message.send("*`Sir you didn't give me anything to search for!`*\n\n"+prefix+"wiki2 elon musk");
+        return await message.send(
+          "*`Sir you didn't give me anything to search for!`*\n\n" +
+            prefix +
+            "wiki2 elon musk"
+        );
       }
       let { wikimedia: requested } = require("../lib");
       let match = (await requested(query)) || [];
@@ -202,10 +228,7 @@ UserFunction(
           message.bot.sendFromUrl(
             message.from,
             match[data].image,
-            "Title: " +
-              match[data].title +
-              "\n*Source:* " +
-              match[data].source,
+            "Title: " + match[data].title + "\n*Source:* " + match[data].source,
             message,
             {},
             "image"
@@ -217,7 +240,6 @@ UserFunction(
     }
   }
 );
-
 
 UserFunction(
   {
@@ -255,7 +277,14 @@ UserFunction(
       const { downloadUrl, fileName, fileSize, mimetype } = data.result;
       const caption = `*File:* ${fileName}\n*Size:* ${fileSize}\n*Type:* ${mimetype}`;
 
-      await message.bot.sendFromUrl(message.from, downloadUrl, caption, message, {}, "file");
+      await message.bot.sendFromUrl(
+        message.from,
+        downloadUrl,
+        caption,
+        message,
+        {},
+        "file"
+      );
     } catch (e) {
       await message.error(`${e}\n\ncommand: gdrive`, e);
     }
@@ -345,7 +374,11 @@ UserFunction(
     try {
       const query = input.trim();
       if (!query) {
-        return await message.send("*`Hey Sir Give Me Spotify Tracks To Find Informatiion About`*\n\n"+prefix+"findsp *`your link`*");
+        return await message.send(
+          "*`Hey Sir Give Me Spotify Tracks To Find Informatiion About`*\n\n" +
+            prefix +
+            "findsp *`your link`*"
+        );
       }
 
       const apiUrl = `https://api.maher-zubair.tech/search/spotify?q=${encodeURIComponent(
@@ -442,7 +475,7 @@ UserFunction(
     }
   }
 );
-let fb_api = "https://api-smd.onrender.com"
+let fb_api = "https://api-smd.onrender.com";
 UserFunction(
   {
     pattern: "facebook",
@@ -457,7 +490,9 @@ UserFunction(
       let match = isUrl.split(" ")[0].trim();
       if (!match || !match.startsWith("https://")) {
         return await message.send(
-          "`*Hello Give Me A Vaild FaceBook Link`*\n\n"+prefix+"facebook *`your link`*"
+          "`*Hello Give Me A Vaild FaceBook Link`*\n\n" +
+            prefix +
+            "facebook *`your link`*"
         );
       }
       let result = await amdJson(fb_api + "/api/fb?url=" + match);
@@ -469,7 +504,7 @@ UserFunction(
         {
           video: {
             url: result.result.urls[0].url,
-          }
+          },
         },
         {
           quoted: message,
@@ -511,12 +546,12 @@ UserFunction(
       }
       const info = result.dllink;
       let _0x24f726 = await fancytext(
-`『 *ᗩᑭᏦ  ᗞᝪᗯᑎしᝪᗩᗞᗴᖇ* 』
+        `『 *ᗩᑭᏦ  ᗞᝪᗯᑎしᝪᗩᗞᗴᖇ* 』
 *APP Name :*  ${result.name}
 *App Id :* ${result.package}
 *Last Up :* ${result.lastup}
 *App Size :* " ${result.size}`
-);
+      );
       const ResultFile = (result?.name || "Downloader") + ".apk";
       const STORE = "temp/" + ResultFile;
       let asked = await message.reply(
@@ -634,22 +669,19 @@ UserFunction(
         : "";
       if (!match) {
         return await message.reply(
-          "*`Give Me Git Repo`*\n\n"+prefix+"gitclone https://github.com/Astropeda/Asta-Md"
+          "*`Give Me Git Repo`*\n\n" +
+            prefix +
+            "gitclone https://github.com/Astropeda/Asta-Md"
         );
       }
-      const URl =
-        /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i;
+      const URl = /(?:https|git)(?::\/\/|@)github\.com[\/:]([^\/:]+)\/(.+)/i;
       if (!URl.test(match)) {
         return await message.reply("*Provide Valid Repositry Url*");
       }
       let [URl_L, URL_M, URL_B] = match.match(URl) || [];
       URL_B = URL_B.replace(/.git$/, "");
       let resultFile =
-        "https://api.github.com/repos/" +
-        URL_M +
-        "/" +
-        URL_B +
-        "/zipball";
+        "https://api.github.com/repos/" + URL_M + "/" + URL_B + "/zipball";
       let FetchedData = (
         await fetch(resultFile, {
           method: "HEAD",
@@ -780,13 +812,11 @@ UserFunction(
       let isVoice = message.reply_text ? message.reply_text : query;
       if (!isVoice) {
         return message.reply(
-          "*`Example : "+prefix+"tts Hi,I am Asta-Md whatsapp bot.`*"
+          "*`Example : " + prefix + "tts Hi,I am Asta-Md whatsapp bot.`*"
         );
       }
       try {
-        let data = query
-          ? query.split(" ")[0].toLowerCase()
-          : "en";
+        let data = query ? query.split(" ")[0].toLowerCase() : "en";
         const _0x18d003 = googleTTS.getAudioUrl(isVoice, {
           lang: data,
           slow: true,
@@ -922,7 +952,9 @@ UserFunction(
       let query = input.split(" ")[0].trim();
       if (!query || !query.startsWith("https://")) {
         return await message.send(
-          "`*Hello Give Me A Vaild FaceBook Link`*\n\n"+prefix+"facebook *`your link`*"
+          "`*Hello Give Me A Vaild FaceBook Link`*\n\n" +
+            prefix +
+            "facebook *`your link`*"
         );
       }
       let video = await fetch(
@@ -965,7 +997,9 @@ UserFunction(
       let query = input.split(" ")[0].trim();
       if (!query || !query.startsWith("https://")) {
         return await message.send(
-          "`*Hello Give Me A Vaild FaceBook Link`*\n\n"+prefix+"facebook *`your link`*"
+          "`*Hello Give Me A Vaild FaceBook Link`*\n\n" +
+            prefix +
+            "facebook *`your link`*"
         );
       }
       let video = await fetch(
@@ -1011,12 +1045,12 @@ UserFunction(
         .trim();
       if (!match || !match.toLowerCase().startsWith("http")) {
         return msg.reply(
-          "`*Hello Give Me A Video Link`*\n\n"+prefix+"downmp4 *`your link`*"
+          "`*Hello Give Me A Video Link`*\n\n" +
+            prefix +
+            "downmp4 *`your link`*"
         );
       }
-      var _0x1e4a34 = qury.toLowerCase().includes("doc")
-        ? "document"
-        : "video";
+      var _0x1e4a34 = qury.toLowerCase().includes("doc") ? "document" : "video";
       await msg.bot.sendMessage(
         msg.chat,
         {
@@ -1025,10 +1059,7 @@ UserFunction(
           },
           caption: "*HERE WE GO*",
           contextInfo: {
-            ...(await msg.bot.contextInfo(
-              Config.botname,
-              msg.senderName
-            )),
+            ...(await msg.bot.contextInfo(Config.botname, msg.senderName)),
           },
         },
         {
@@ -1095,54 +1126,56 @@ UserFunction(
   }
 );
 UserFunction(
-    {
-      pattern: "tiktok",
-      desc: "Downloads Tiktok Videos Via Url.",
-      category: "downloader",
-      filename: __filename,
-      use: "<add tiktok url.>",
-    },
-    async (message, url) => {
-      try {
-        if (!url) {
-          return await message.reply(
-            "`*Hello Give Me A Vaild Tiktok Link`*\n\n"+prefix+"tiktok *`your link`*"
-          );
-        }
-  
-        const tiktokUrl = url.split(" ")[0];
-        if (!/tiktok/.test(tiktokUrl)) {
-          return await message.reply(
-            "*Uhh Please, Give me Valid Tiktok Video Url!*"
-          );
-        }
-  
-        const apiUrl = `https://api.maher-zubair.tech/download/tiktok?url=${encodeURIComponent(
-          tiktokUrl
-        )}`;
-        const response = await fetchJson(apiUrl);
-  
-        if (response.status !== 200) {
-          return await message.reply(`*Error: ${response.result}*`);
-        }
-  
-        const videoUrl = response.result;
-        const fileType = videoUrl.toLowerCase().includes("mp4")
-          ? "video"
-          : "document";
-  
-        await message.send(
-          videoUrl,
-          { caption: Config.caption },
-          fileType,
-          message
+  {
+    pattern: "tiktok",
+    desc: "Downloads Tiktok Videos Via Url.",
+    category: "downloader",
+    filename: __filename,
+    use: "<add tiktok url.>",
+  },
+  async (message, url) => {
+    try {
+      if (!url) {
+        return await message.reply(
+          "`*Hello Give Me A Vaild Tiktok Link`*\n\n" +
+            prefix +
+            "tiktok *`your link`*"
         );
-      } catch (error) {
-        console.error(error);
-        return message.error(`${error}\n\ncommand: tiktok`, error);
       }
+
+      const tiktokUrl = url.split(" ")[0];
+      if (!/tiktok/.test(tiktokUrl)) {
+        return await message.reply(
+          "*Uhh Please, Give me Valid Tiktok Video Url!*"
+        );
+      }
+
+      const apiUrl = `https://api.maher-zubair.tech/download/tiktok?url=${encodeURIComponent(
+        tiktokUrl
+      )}`;
+      const response = await fetchJson(apiUrl);
+
+      if (response.status !== 200) {
+        return await message.reply(`*Error: ${response.result}*`);
+      }
+
+      const videoUrl = response.result;
+      const fileType = videoUrl.toLowerCase().includes("mp4")
+        ? "video"
+        : "document";
+
+      await message.send(
+        videoUrl,
+        { caption: Config.caption },
+        fileType,
+        message
+      );
+    } catch (error) {
+      console.error(error);
+      return message.error(`${error}\n\ncommand: tiktok`, error);
     }
-  );
+  }
+);
 UserFunction(
   {
     pattern: "tiktok2",
@@ -1162,7 +1195,9 @@ UserFunction(
 
       if (!url) {
         return await message.reply(
-          "`*Hello Give Me A Vaild Tiktok Link`*\n\n"+prefix+"tiktok *`your link`*"
+          "`*Hello Give Me A Vaild Tiktok Link`*\n\n" +
+            prefix +
+            "tiktok *`your link`*"
         );
       }
 
@@ -1304,9 +1339,7 @@ UserFunction(
   },
   async (meesage, query) => {
     let match = query ? query : meesage.reply_text;
-    var isDoc = query.toLowerCase().includes("doc")
-      ? "document"
-      : "video";
+    var isDoc = query.toLowerCase().includes("doc") ? "document" : "video";
     if (!match) {
       return meesage.reply("*Use : " + prefix + "video Moon Men*");
     }
@@ -1336,10 +1369,7 @@ UserFunction(
         EndResult.on("finish", Success);
       });
       var EndRsultMsg = {
-        ...(await meesage.bot.contextInfo(
-          Config.botname,
-          "ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ"
-        )),
+        ...(await meesage.bot.contextInfo(Config.botname, "ᴠɪᴅᴇᴏ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ")),
       };
       let MetaData = {
         [isDoc]: fs.readFileSync(SaveDir),
@@ -1417,9 +1447,7 @@ UserFunction(
     if (!match) {
       return message.reply("Example : " + prefix + "video2 hello world");
     }
-    var TypeData = match.toLowerCase().includes("doc")
-      ? "document"
-      : "video";
+    var TypeData = match.toLowerCase().includes("doc") ? "document" : "video";
     let ElseCheckedReee = ytIdRegex.exec(results) || [];
     let Matched = ElseCheckedReee[0] || false;
     try {
@@ -1482,9 +1510,7 @@ UserFunction(
   async (message, query) => {
     try {
       let match = query ? query : message.reply_text;
-      var TYPE = match.toLowerCase().includes("doc")
-        ? "document"
-        : "audio";
+      var TYPE = match.toLowerCase().includes("doc") ? "document" : "audio";
       if (!match) {
         return message.reply("*" + prefix + "play back in black*");
       }
@@ -1546,9 +1572,7 @@ UserFunction(
   async (message, match) => {
     try {
       if (!match) {
-        return message.reply(
-          "*Give A Number Example: " + prefix + "sound 5*"
-        );
+        return message.reply("*Give A Number Example: " + prefix + "sound 5*");
       }
       const data = parseInt(match);
       if (data.toString() == "NaN" || data < 1 || data > 160) {
@@ -1576,11 +1600,7 @@ UserFunction(
         quoted: message,
       });
     } catch (error) {
-      return message.error(
-        error + "\n\ncommand: sound",
-        error,
-        false
-      );
+      return message.error(error + "\n\ncommand: sound", error, false);
     }
   }
 );
@@ -1687,10 +1707,7 @@ UserFunction(
         return await msg.send("*_No Result found!_*");
       }
       var MTYPE = {
-        ...(await msg.bot.contextInfo(
-          Config.botname,
-          "ᴘɪɴᴛᴇʀᴇꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ"
-        )),
+        ...(await msg.bot.contextInfo(Config.botname, "ᴘɪɴᴛᴇʀᴇꜱᴛ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ")),
       };
       let data = request.length < 5 ? request.length : 5;
       for (let result = 0; result < data; result++) {
@@ -1702,7 +1719,7 @@ UserFunction(
         });
       }
     } catch (err) {
-      return msg.reply("*`Sir Use "+prefix+"pinterest cars`*");
+      return msg.reply("*`Sir Use " + prefix + "pinterest cars`*");
     }
   }
 );
@@ -1871,84 +1888,84 @@ UserFunction(
     filename: __filename,
     use: "<yt video url>",
   },
-  async (_0x1d4717, _0x3716fd) => {
-    let _0x2d4f04 = _0x3716fd ? _0x3716fd : _0x1d4717.reply_text;
-    var _0x58ceb6 = _0x2d4f04.toLowerCase().includes("doc")
+  async (mesg, query) => {
+    let match = query ? query : mesg.reply_text;
+    var documtn = match.toLowerCase().includes("doc")
       ? "document"
-      : _0x2d4f04.toLowerCase().includes("mp3")
+      : match.toLowerCase().includes("mp3")
       ? "audio"
       : "video";
-    const _0x4a3f32 = ytIdRegex.exec(_0x2d4f04) || [];
-    if (!_0x2d4f04 || !_0x4a3f32[0]) {
-      return await _0x1d4717.reply("*_provide youtube video url!_*");
+    const resultFile = ytIdRegex.exec(match) || [];
+    if (!match || !resultFile[0]) {
+      return await mesg.reply("*_provide youtube video url!_*");
     }
     try {
-      let _0x5c93a9 = await ytdl.getInfo(_0x4a3f32[0]);
-      if (_0x5c93a9.videoDetails.lengthSeconds >= videotime) {
-        _0x58ceb6 = "document";
+      let FileDetail = await ytdl.getInfo(resultFile[0]);
+      if (FileDetail.videoDetails.lengthSeconds >= videotime) {
+        documtn = "document";
       }
-      let _0x1a3a4c = _0x5c93a9.videoDetails.title;
-      let _0x1c86b6 = "./temp/" + _0x4a3f32[1] + ".mp4";
-      const _0x1f15ef = ytdl(_0x4a3f32[0], {
+      let filename = FileDetail.videoDetails.title;
+      let dir = "./temp/" + resultFile[1] + ".mp4";
+      const loginfo = ytdl(resultFile[0], {
         filter: (_0x4c0ea7) => _0x4c0ea7.itag == 22 || _0x4c0ea7.itag == 18,
-      }).pipe(fs.createWriteStream(_0x1c86b6));
-      await new Promise((_0x517788, _0x429bfa) => {
-        _0x1f15ef.on("error", _0x429bfa);
-        _0x1f15ef.on("finish", _0x517788);
+      }).pipe(fs.createWriteStream(dir));
+      await new Promise((succes, failur) => {
+        loginfo.on("error", failur);
+        loginfo.on("finish", succes);
       });
-      var _0x3b1bff = {
-        ...(await _0x1d4717.bot.contextInfo(Config.botname, "ʏᴛᴅʟ ᴠɪᴅᴇᴏ")),
+      var contextInfoMsg = {
+        ...(await mesg.bot.contextInfo(Config.botname, "ʏᴛᴅʟ ᴠɪᴅᴇᴏ")),
       };
-      let _0x4d676e = {
-        [_0x58ceb6]: fs.readFileSync(_0x1c86b6),
+      let MTYPE = {
+        [documtn]: fs.readFileSync(dir),
         mimetype: "video/mp4",
-        fileName: _0x1a3a4c,
+        fileName: filename,
         caption: "  *Here's Your Video*\n" + Config.caption,
-        contextInfo: _0x3b1bff,
+        contextInfo: contextInfoMsg,
       };
-      await _0x1d4717.bot.sendMessage(_0x1d4717.jid, _0x4d676e, {
-        quoted: _0x1d4717,
+      await mesg.bot.sendMessage(mesg.jid, MTYPE, {
+        quoted: mesg,
       });
       try {
-        return await fs.unlinkSync(_0x1c86b6);
+        return await fs.unlinkSync(dir);
       } catch {}
-    } catch (_0x15d510) {
-      console.log("here now,ytdl-core error: ", _0x15d510);
+    } catch (error) {
+      console.log("here now,ytdl-core error: ", error);
       try {
-        let _0x5a46ec = await yt.getInfo(_0x4a3f32[1]);
-        let _0x257939 = {
+        let fileDat = await yt.getInfo(resultFile[1]);
+        let VIDTYPE = {
           type: "video",
-          quality: _0x5a46ec.pref_Quality || "best",
+          quality: fileDat.pref_Quality || "best",
           format: "mp4",
         };
-        if (_0x5a46ec.duration >= videotime) {
-          _0x58ceb6 = "document";
+        if (fileDat.duration >= videotime) {
+          documtn = "document";
         }
-        let _0x588c42 = await yt.download(_0x4a3f32[1], _0x257939);
-        var _0x3b1bff = {
-          ...(await _0x1d4717.bot.contextInfo(Config.botname, "ʏᴏᴜᴛᴜʙᴇ ᴠɪᴅᴇᴏ")),
+        let RESULT = await yt.download(resultFile[1], VIDTYPE);
+        var contextInfoMsg = {
+          ...(await mesg.bot.contextInfo(Config.botname, "ʏᴏᴜᴛᴜʙᴇ ᴠɪᴅᴇᴏ")),
         };
-        let _0x13be6f = _0x5a46ec.title || _0x588c42 || _0x4a3f32[1];
-        if (_0x588c42) {
-          await _0x1d4717.bot.sendMessage(_0x1d4717.chat, {
-            [_0x58ceb6]: {
-              url: _0x588c42,
+        let filename = fileDat.title || RESULT || resultFile[1];
+        if (RESULT) {
+          await mesg.bot.sendMessage(mesg.chat, {
+            [documtn]: {
+              url: RESULT,
             },
-            fileName: _0x13be6f,
+            fileName: filename,
             mimetype: "video/mp4",
-            contextInfo: _0x3b1bff,
+            contextInfo: contextInfoMsg,
           });
         } else {
-          await _0x1d4717.send("*_Video not Found_*");
+          await mesg.send("*_Video not Found_*");
         }
         try {
-          fs.unlinkSync("" + _0x588c42);
+          fs.unlinkSync("" + RESULT);
         } catch {}
         return;
-      } catch (_0x363775) {
-        return _0x1d4717.error(
-          _0x363775 + "\n\ncommand: ytmp4",
-          _0x363775,
+      } catch (error) {
+        return mesg.error(
+          error + "\n\ncommand: ytmp4",
+          error,
           "*_Uhh dear, Video not Found!!_*"
         );
       }
@@ -1963,76 +1980,72 @@ UserFunction(
     category: "downloader",
     use: "<yt video url>",
   },
-  async (_0x3f8930, _0x5834bb) => {
-    let _0x4fe91c = _0x5834bb ? _0x5834bb : _0x3f8930.reply_text;
-    var _0x540f68 = _0x4fe91c.toLowerCase().includes("doc")
-      ? "document"
-      : "audio";
-    const _0x2758ec = ytIdRegex.exec(_0x4fe91c) || [];
-    if (!_0x4fe91c || !_0x2758ec[0]) {
-      return await _0x3f8930.reply(
-        "*_Uhh please, Provide youtube video url!_*"
-      );
+  async (message, query) => {
+    let match = query ? query : message.reply_text;
+    var documtent = match.toLowerCase().includes("doc") ? "document" : "audio";
+    const fileInfo = ytIdRegex.exec(match) || [];
+    if (!match || !fileInfo[0]) {
+      return await message.reply("*_Uhh please, Provide youtube video url!_*");
     }
     try {
-      let _0x4b5067 = await ytdl.getInfo(_0x2758ec[0]);
-      if (_0x4b5067.videoDetails.lengthSeconds >= videotime) {
-        _0x540f68 = "document";
+      let VIDMETA = await ytdl.getInfo(fileInfo[0]);
+      if (VIDMETA.videoDetails.lengthSeconds >= videotime) {
+        documtent = "document";
       }
-      let _0xaca4bd = _0x4b5067.videoDetails.title;
-      let _0x24816a = "./temp/" + _0x2758ec[1] + ".mp3";
-      const _0x2591f0 = ytdl(_0x2758ec[0], {
-        filter: (_0x4e89f2) =>
-          _0x4e89f2.audioBitrate == 160 || _0x4e89f2.audioBitrate == 128,
-      }).pipe(fs.createWriteStream(_0x24816a));
-      await new Promise((_0x401b5b, _0x3d90fd) => {
-        _0x2591f0.on("error", _0x3d90fd);
-        _0x2591f0.on("finish", _0x401b5b);
+      let filename = VIDMETA.videoDetails.title;
+      let dir = "./temp/" + fileInfo[1] + ".mp3";
+      const indo = ytdl(fileInfo[0], {
+        filter: (contentTYPE) =>
+          contentTYPE.audioBitrate == 160 || contentTYPE.audioBitrate == 128,
+      }).pipe(fs.createWriteStream(dir));
+      await new Promise((success, failure) => {
+        indo.on("error", failure);
+        indo.on("finish", success);
       });
-      var _0x29af08 = {
-        ...(await _0x3f8930.bot.contextInfo(Config.botname, "ʏᴏᴜᴛᴜʙᴇ ᴠɪᴅᴇᴏ")),
+      var ContextInfo = {
+        ...(await message.bot.contextInfo(Config.botname, "ʏᴏᴜᴛᴜʙᴇ ᴠɪᴅᴇᴏ")),
       };
-      let _0x4c646c = {
-        [_0x540f68]: fs.readFileSync(_0x24816a),
+      let MTYPE = {
+        [documtent]: fs.readFileSync(dir),
         mimetype: "audio/mpeg",
-        fileName: _0xaca4bd,
-        contextInfo: _0x29af08,
+        fileName: filename,
+        contextInfo: ContextInfo,
       };
-      await _0x3f8930.bot.sendMessage(_0x3f8930.jid, _0x4c646c, {
-        quoted: _0x3f8930,
+      await message.bot.sendMessage(message.jid, MTYPE, {
+        quoted: message,
       });
       try {
-        return await fs.unlinkSync(_0x24816a);
+        return await fs.unlinkSync(dir);
       } catch {}
-    } catch (_0x345ce7) {
-      console.log("here now,ytdl-core : ", _0x345ce7);
+    } catch (error) {
+      console.log("here now,ytdl-core : ", error);
       try {
-        let _0x5b9011 = await yt.download(_0x2758ec[1], {
+        let FileDir = await yt.download(fileInfo[1], {
           type: "audio",
           quality: "best",
         });
-        var _0x29af08 = {
-          ...(await _0x3f8930.bot.contextInfo(Config.botname, "ʏᴏᴜᴛᴜʙᴇ ᴠɪᴅᴇᴏ")),
+        var ContextInfo = {
+          ...(await message.bot.contextInfo(Config.botname, "ʏᴏᴜᴛᴜʙᴇ ᴠɪᴅᴇᴏ")),
         };
-        if (_0x5b9011) {
-          await _0x3f8930.bot.sendMessage(_0x3f8930.jid, {
-            [_0x540f68]: {
-              url: _0x5b9011,
+        if (FileDir) {
+          await message.bot.sendMessage(message.jid, {
+            [documtent]: {
+              url: FileDir,
             },
             mimetype: "audio/mpeg",
             fileName: Config.caption,
-            contextInfo: _0x29af08,
+            contextInfo: ContextInfo,
           });
         } else {
-          await _0x3f8930.send("*_audio not Found!_*");
+          await message.send("*_audio not Found!_*");
         }
         try {
-          fs.unlinkSync(_0x5b9011);
+          fs.unlinkSync(FileDir);
         } catch {}
-      } catch (_0x2cd979) {
-        await _0x3f8930.error(
-          _0x2cd979 + "\n\ncommand: ytmp3",
-          _0x2cd979,
+      } catch (error) {
+        await message.error(
+          error + "\n\ncommand: ytmp3",
+          error,
           "*_Uhh dear, audio file not Found!!_*"
         );
       }
@@ -2047,71 +2060,68 @@ UserFunction(
     category: "downloader",
     use: "<ytdoc video url>",
   },
-  async (_0x17c662, _0x429696) => {
+  async (message, query) => {
     try {
-      let _0x5696a7 = _0x429696 ? _0x429696 : _0x17c662.reply_text;
-      const _0x1d542b = ytIdRegex.exec(_0x5696a7) || [];
-      if (!_0x5696a7 || !_0x1d542b[0]) {
-        return await _0x17c662.reply("❌Please provide me a url");
+      let match = query ? query : message.reply_text;
+      const results = ytIdRegex.exec(match) || [];
+      if (!match || !results[0]) {
+        return await message.reply("❌Please provide me a url");
       }
-      var _0x43c5ac = _0x1d542b[1];
-      var _0x59bbaa = false;
+      var VInfo = results[1];
+      var Data = false;
       try {
-        let _0x32b31a = await ytdl.getInfo(_0x1d542b[0]);
-        _0x43c5ac = _0x32b31a.videoDetails.title;
-        let _0x4b47c3 = "./temp/Asta-Md " + _0x1d542b[1] + ".mp3";
-        const _0x212389 = ytdl(_0x1d542b[0], {
-          filter: (_0xd2371a) =>
-            _0xd2371a.audioBitrate == 160 || _0xd2371a.audioBitrate == 128,
-        }).pipe(fs.createWriteStream(_0x4b47c3));
-        _0x59bbaa = _0x4b47c3;
-        await new Promise((_0x1506ab, _0x26e243) => {
-          _0x212389.on("error", _0x26e243);
-          _0x212389.on("finish", _0x1506ab);
+        let _0x32b31a = await ytdl.getInfo(results[0]);
+        VInfo = _0x32b31a.videoDetails.title;
+        let dir = "./temp/Asta-Md " + results[1] + ".mp3";
+        const logInfo = ytdl(results[0], {
+          filter: (AudioType) =>
+            AudioType.audioBitrate == 160 || AudioType.audioBitrate == 128,
+        }).pipe(fs.createWriteStream(dir));
+        Data = dir;
+        await new Promise((succes, failur) => {
+          logInfo.on("error", failur);
+          logInfo.on("finish", succes);
         });
-      } catch (_0x18c033) {
-        console.log("here now,ytdl-core : ", _0x18c033);
+      } catch (error) {
+        console.log("here now,ytdl-core : ", error);
         try {
-          _0x59bbaa = await yt.download(_0x1d542b[1], {
+          Data = await yt.download(results[1], {
             type: "audio",
             quality: "best",
           });
-        } catch (_0x4122cc) {
-          return await _0x17c662.error(
-            _0x4122cc + "\n\ncommand: ytdoc",
-            _0x4122cc,
+        } catch (error) {
+          return await message.error(
+            error + "\n\ncommand: ytdoc",
+            error,
             "*_file not Found!!_*"
           );
         }
       }
-      if (!_0x59bbaa) {
-        return await _0x17c662.send("*_Uhh dear, video not found_*");
+      if (!Data) {
+        return await message.send("*_Uhh dear, video not found_*");
       }
-      var _0x10e2fa = {
-        ...(await _0x17c662.bot.contextInfo(
-          Config.botname,
-          "ʏᴛᴅᴏᴄ ᴍᴘ3 ʏᴏᴜᴛᴜʙᴇ"
-        )),
+      var ContextInfo = {
+        ...(await message.bot.contextInfo(Config.botname, "ʏᴛᴅᴏᴄ ᴍᴘ3 ʏᴏᴜᴛᴜʙᴇ")),
       };
-      let _0x300d1a = {
+      let MTYPE = {
         document: {
-          url: _0x59bbaa,
+          url: Data,
         },
         mimetype: "audio/mpeg",
-        fileName: "Asta-Md--" + _0x1d542b[1] + ".mp3",
+        fileName: "Asta-Md--" + results[1] + ".mp3",
         caption: Config.caption,
-        contextInfo: _0x10e2fa,
+        contextInfo: ContextInfo,
       };
-      await _0x17c662.bot.sendMessage(_0x17c662.jid, _0x300d1a, {
-        quoted: _0x17c662,
+      await message.bot.sendMessage(message.jid, MTYPE, {
+        quoted: message,
       });
       try {
-        return await fs.unlinkSync(_0x59bbaa);
+        return await fs.unlinkSync(Data);
       } catch {}
-    } catch (_0xbed50) {
-      await _0x17c662.error(
-        _0xbed50 + "\n\ncommand: ytdoc",
-        _0xbed50,
+    } catch (error) {
+      await message.error(
+        error + "\n\ncommand: ytdoc",
+        error,
         "*_audio file not Found!!_*"
       );
     }
@@ -2121,402 +2131,174 @@ cmd(
   {
     on: "text",
   },
-  async (_0xb75e78, _0x221e78, { isCreator: _0xfbeec5 }) => {
-    if (_0xb75e78.quoted && _0xb75e78.text) {
-      const _0x5b8ee5 = _0xb75e78.quoted.text.split("\n");
-      if (_0x5b8ee5[0].includes("ᴀsᴛᴀ-ᴍᴅ • sᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ")) {
-        const _0x1724ba = _0x5b8ee5.find((_0x525632) =>
-          _0x525632.startsWith("Url :")
-        );
-        let _0x43a95e = _0x1724ba.replace("Url :", "").trim();
+  async (message, query, { isCreator: onText }) => {
+    if (message.quoted && message.text) {
+      const MenuOptions = message.quoted.text.split("\n");
+      if (MenuOptions[0].includes("ᴀsᴛᴀ-ᴍᴅ • sᴏɴɢ ᴅᴏᴡɴʟᴏᴀᴅᴇʀ")) {
+        const Chosen = MenuOptions.find((input) => input.startsWith("Url :"));
+        let Inputeddata = Chosen.replace("Url :", "").trim();
         try {
-          await _0xb75e78.sendMessage(_0xb75e78.chat, {
+          await message.sendMessage(message.chat, {
             react: {
               text: "✨",
-              key: _0xb75e78.key,
+              key: message.key,
             },
           });
-          let _0x4cd3b2;
-          if (_0xb75e78.text.startsWith("1")) {
-            let _0x3edf2a = _0x221e78.toLowerCase().includes("doc")
+          let dirPath;
+          if (message.text.startsWith("1")) {
+            let opt = query.toLowerCase().includes("doc")
               ? "document"
-              : _0x221e78.toLowerCase().includes("mp3")
+              : query.toLowerCase().includes("mp3")
               ? "audio"
               : "video";
-            _0x4cd3b2 = "./temp/ytsong.mp4";
-            const _0x5e7871 = ytdl(_0x43a95e, {
-              filter: (_0x145c7e) =>
-                _0x145c7e.itag == 22 || _0x145c7e.itag == 18,
-            }).pipe(fs.createWriteStream(_0x4cd3b2));
-            await new Promise((_0x540130, _0xf6b8ae) => {
-              _0x5e7871.on("error", _0xf6b8ae);
-              _0x5e7871.on("finish", _0x540130);
+            dirPath = "./temp/ytsong.mp4";
+            const logInfo = ytdl(Inputeddata, {
+              filter: (fileBuff) => fileBuff.itag == 22 || fileBuff.itag == 18,
+            }).pipe(fs.createWriteStream(dirPath));
+            await new Promise((succ, fail) => {
+              logInfo.on("error", fail);
+              logInfo.on("finish", succ);
             });
-            await _0xb75e78.sendMessage(
-              _0xb75e78.chat,
+            await message.sendMessage(
+              message.chat,
               {
-                [_0x3edf2a]: fs.readFileSync(_0x4cd3b2),
-                mimetype: _0x3edf2a == "audio" ? "audio/mpeg" : "video/mp4",
+                [opt]: fs.readFileSync(dirPath),
+                mimetype: opt == "audio" ? "audio/mpeg" : "video/mp4",
                 fileName: Config.caption,
                 caption: Config.caption,
               },
               {
-                quoted: _0xb75e78,
+                quoted: message,
               }
             );
-          } else if (_0xb75e78.text.startsWith("2")) {
-            let _0x5d9956 = _0x221e78.toLowerCase().includes("doc")
+          } else if (message.text.startsWith("2")) {
+            let IfDoc = query.toLowerCase().includes("doc")
               ? "document"
               : "audio";
-            _0x4cd3b2 = "./temp/ytsong.mp3";
-            const _0x39ddb9 = ytdl(_0x43a95e, {
-              filter: (_0xa5f832) =>
-                _0xa5f832.audioBitrate == 160 || _0xa5f832.audioBitrate == 128,
-            }).pipe(fs.createWriteStream(_0x4cd3b2));
-            await new Promise((_0x4790a8, _0x9a005b) => {
-              _0x39ddb9.on("error", _0x9a005b);
-              _0x39ddb9.on("finish", _0x4790a8);
+            dirPath = "./temp/ytsong.mp3";
+            const logInfo = ytdl(Inputeddata, {
+              filter: (FileType) =>
+                FileType.audioBitrate == 160 || FileType.audioBitrate == 128,
+            }).pipe(fs.createWriteStream(dirPath));
+            await new Promise((succs, fails) => {
+              logInfo.on("error", fails);
+              logInfo.on("finish", succs);
             });
-            await _0xb75e78.sendMessage(
-              _0xb75e78.chat,
+            await message.sendMessage(
+              message.chat,
               {
-                [_0x5d9956]: fs.readFileSync(_0x4cd3b2),
+                [IfDoc]: fs.readFileSync(dirPath),
                 mimetype: "audio/mpeg",
                 fileName: Config.caption,
               },
               {
-                quoted: _0xb75e78,
+                quoted: message,
               }
             );
           }
           try {
-            return fs.unlinkSync(_0x4cd3b2);
-          } catch (_0x51cca7) {}
-        } catch (_0x189dd8) {
-          return await _0xb75e78.reply(
-            "Error While Downloading Video : " + _0x189dd8
-          );
+            return fs.unlinkSync(dirPath);
+          } catch (err) {}
+        } catch (err) {
+          return await message.reply("Error While Downloading Video : " + err);
         }
-      } else if (_0x5b8ee5[0].includes("ᴀsᴛᴀ-ᴍᴅ • ʏᴏᴜᴛᴜʙᴇ ᴅᴏᴡɴʟᴏᴀᴅ")) {
-        let _0x307bb6 = "*" + _0xb75e78.text.split(" ")[0] + " : ";
-        const _0x56275d = _0x5b8ee5.find((_0x3b5e74) =>
-          _0x3b5e74.startsWith(_0x307bb6)
-        );
-        if (_0x56275d) {
+      } else if (MenuOptions[0].includes("ᴀsᴛᴀ-ᴍᴅ • ʏᴏᴜᴛᴜʙᴇ ᴅᴏᴡɴʟᴏᴀᴅ")) {
+        let data = "*" + message.text.split(" ")[0] + " : ";
+        const OPT2 = MenuOptions.find((options) => options.startsWith(data));
+        if (OPT2) {
           try {
-            let _0x3e1826 = _0x56275d
-              .replace(_0x307bb6, "")
-              .split("*")[0]
-              .trim();
-            const _0x4d9213 = _0x5b8ee5[_0x5b8ee5.indexOf(_0x56275d) + 1];
-            const _0x37a579 = _0x4d9213
+            let data_Result = OPT2.replace(data, "").split("*")[0].trim();
+            const _0x4d9213 = MenuOptions[MenuOptions.indexOf(OPT2) + 1];
+            const InputedQuery = _0x4d9213
               .split("*")[1]
               .replace("Url : ", "")
               .trim();
-            if (_0x37a579.startsWith("http")) {
-              await _0xb75e78.sendMessage(_0xb75e78.chat, {
+            if (InputedQuery.startsWith("http")) {
+              await message.sendMessage(message.chat, {
                 react: {
                   text: "✨",
-                  key: _0xb75e78.key,
+                  key: message.key,
                 },
               });
-              let _0x1d3325 = _0x221e78.toLowerCase().includes("doc")
+              let dirFilePath = query.toLowerCase().includes("doc")
                 ? "document"
-                : _0x221e78.toLowerCase().includes("mp3")
+                : query.toLowerCase().includes("mp3")
                 ? "audio"
                 : "video";
-              let _0x26cc84 =
+              let datas =
                 "./temp/Yts Download " +
                 Math.floor(Math.random() * 10000) +
                 ".mp4";
-              const _0x104b4c = ytdl(_0x37a579, {
-                filter: (_0x31a431) =>
-                  _0x31a431.itag == 22 || _0x31a431.itag == 18,
-              }).pipe(fs.createWriteStream(_0x26cc84));
-              await new Promise((_0x45b31c, _0x5b6595) => {
-                _0x104b4c.on("error", _0x5b6595);
-                _0x104b4c.on("finish", _0x45b31c);
+              const Res = ytdl(InputedQuery, {
+                filter: (FFilePath) =>
+                  FFilePath.itag == 22 || FFilePath.itag == 18,
+              }).pipe(fs.createWriteStream(datas));
+              await new Promise((scc, err) => {
+                Res.on("error", err);
+                Res.on("finish", scc);
               });
-              await _0xb75e78.sendMessage(
-                _0xb75e78.chat,
+              await message.sendMessage(
+                message.chat,
                 {
-                  [_0x1d3325]: fs.readFileSync(_0x26cc84),
-                  mimetype: _0x1d3325 == "audio" ? "audio/mpeg" : "video/mp4",
-                  fileName: "" + _0x3e1826,
-                  caption: _0x3e1826 + " \n " + Config.caption,
+                  [dirFilePath]: fs.readFileSync(datas),
+                  mimetype: dirFilePath == "audio" ? "audio/mpeg" : "video/mp4",
+                  fileName: "" + data_Result,
+                  caption: data_Result + " \n " + Config.caption,
                 },
                 {
-                  quoted: _0xb75e78,
+                  quoted: message,
                 }
               );
               try {
-                fs.unlink(_0x26cc84);
-              } catch (_0x338800) {}
+                fs.unlink(datas);
+              } catch (errr) {}
             }
-          } catch (_0x3de0e2) {
-            _0xb75e78.error(
-              _0x3de0e2 + "\n\nCommand yts Listener",
-              _0x3de0e2,
+          } catch (err) {
+            message.error(
+              err + "\n\nCommand yts Listener",
+              err,
               "*Video Not Found!*"
             );
           }
         }
-      } else if (_0x5b8ee5[0].includes("ᴀsᴛᴀ-ᴍᴅ • ᴀᴘᴋ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪsᴛ")) {
-        let _0x35d668 = "*" + _0xb75e78.text.split(" ")[0] + " : ";
-        const _0x205a5f = _0x5b8ee5.find((_0x304058) =>
-          _0x304058.startsWith(_0x35d668)
+      } else if (MenuOptions[0].includes("ᴀsᴛᴀ-ᴍᴅ • ᴀᴘᴋ ᴅᴏᴡɴʟᴏᴀᴅ ʟɪsᴛ")) {
+        let request = "*" + message.text.split(" ")[0] + " : ";
+        const Options = MenuOptions.find((selected) =>
+          selected.startsWith(request)
         );
-        if (_0x205a5f) {
+        if (Options) {
           try {
-            let _0x17567d = _0x205a5f
-              .replace(_0x35d668, "")
-              .split("*")[0]
-              .trim();
-            const _0x14618c = _0x5b8ee5[_0x5b8ee5.indexOf(_0x205a5f) + 1];
-            const _0x2407a8 = _0x14618c
-              .split("*")[1]
-              .replace("Id : ", "")
-              .trim();
-            await _0xb75e78.sendMessage(_0xb75e78.chat, {
+            let _0x17567d = Options.replace(request, "").split("*")[0].trim();
+            const DAT = MenuOptions[MenuOptions.indexOf(Options) + 1];
+            const Reqeusts = DAT.split("*")[1].replace("Id : ", "").trim();
+            await message.sendMessage(message.chat, {
               react: {
                 text: "✨",
-                key: _0xb75e78.key,
+                key: message.key,
               },
             });
-            let _0x37b3a4 = await download(_0x2407a8);
-            let _0x478b37 = "*App Name :* " + _0x37b3a4.name;
-            _0x478b37 += "\n*App id        :* " + _0x37b3a4.package;
-            _0x478b37 += "\n*Last Up       :* " + _0x37b3a4.lastup;
-            _0x478b37 += "\n*App Size     :* " + _0x37b3a4.size;
-            _0x478b37 += "\n               \n" + Config.caption;
-            let _0x5032aa = {
+            let results = await download(Reqeusts);
+            let CapData = "*App Name :* " + results.name;
+            CapData += "\n*App id        :* " + results.package;
+            CapData += "\n*Last Up       :* " + results.lastup;
+            CapData += "\n*App Size     :* " + results.size;
+            CapData += "\n               \n" + Config.caption;
+            let DOCTYPE = {
               document: {
-                url: _0x37b3a4.dllink,
+                url: results.dllink,
               },
               mimetype: "application/vnd.android.package-archive",
-              fileName: _0x37b3a4.name + ".apk",
-              caption: _0x478b37,
+              fileName: results.name + ".apk",
+              caption: CapData,
             };
-            return await _0xb75e78.sendMessage(_0xb75e78.chat, _0x5032aa, {
-              quoted: _0xb75e78,
+            return await message.sendMessage(message.chat, DOCTYPE, {
+              quoted: message,
             });
-          } catch (_0x12fd88) {
-            _0xb75e78.reply("*_Can't Download, App Limit Exceed_*");
+          } catch (err) {
+            message.reply("*_Can't Download, App Limit Exceed_*");
           }
         }
       }
-    }
-  }
-);
-/** PLAYLIST */
-const _0xf3b3b9 = _0xc1f2;
-function _0xe8a3() {
-  const _0x1872b6 = [
-    "audio",
-    "random",
-    "length",
-    ".mp4",
-    "6710240SkWnCZ",
-    "readFileSync",
-    "Downloads video from playlist.",
-    "<yt playlist url>",
-    "title",
-    "videos",
-    "sendMessage",
-    "2179701ijsDnM",
-    "botname",
-    "4565025fjxWjZ",
-    "pushName",
-    "168uBIxwJ",
-    "document",
-    "includes",
-    "216vVeWdZ",
-    "itag",
-    "\n ⿻ File Size : ",
-    "reply",
-    "chat",
-    "11410952QXDvWH",
-    "mp3",
-    " MB",
-    "614495gBYQxj",
-    "split",
-    "toLowerCase",
-    "floor",
-    "downloader",
-    "videoDetails",
-    "audio/mpeg",
-    "videoId",
-    "This Process will take a bit time.",
-    "2487090FcjOyi",
-    "❌ File size bigger than ",
-    "pipe",
-    "statSync",
-    "mb.",
-    "test",
-    "log",
-    "lengthSeconds",
-    "getInfo",
-    "61665AJJjOP",
-    "./temp/",
-    "unlinkSync",
-  ];
-  _0xe8a3 = function () {
-    return _0x1872b6;
-  };
-  return _0xe8a3();
-}
-function _0xc1f2(_0x44febb, _0x412500) {
-  const _0xe8a308 = _0xe8a3();
-  _0xc1f2 = function (_0xc1f20d, _0x460a50) {
-    _0xc1f20d = _0xc1f20d - 214;
-    let _0x14f3b6 = _0xe8a308[_0xc1f20d];
-    return _0x14f3b6;
-  };
-  return _0xc1f2(_0x44febb, _0x412500);
-}
-(function (_0x131f7c, _0x3f6081) {
-  const _0x3b3c98 = _0xc1f2;
-  const _0x165db2 = _0x131f7c();
-  while (true) {
-    try {
-      const _0x538451 =
-        -parseInt(_0x3b3c98(249)) / 1 +
-        -parseInt(_0x3b3c98(258)) / 2 +
-        parseInt(_0x3b3c98(236)) / 3 +
-        -parseInt(_0x3b3c98(227)) / 4 +
-        (-parseInt(_0x3b3c98(220)) / 5) * (parseInt(_0x3b3c98(241)) / 6) +
-        -parseInt(_0x3b3c98(246)) / 7 +
-        (-parseInt(_0x3b3c98(238)) / 8) * (-parseInt(_0x3b3c98(234)) / 9);
-      if (_0x538451 === _0x3f6081) {
-        break;
-      } else {
-        _0x165db2.push(_0x165db2.shift());
-      }
-    } catch (_0x1c3a5e) {
-      _0x165db2.push(_0x165db2.shift());
-    }
-  }
-})(_0xe8a3, 997920);
-UserFunction(
-  {
-    pattern: "playlist",
-    desc: _0xf3b3b9(229),
-    category: _0xf3b3b9(253),
-    filename: __filename,
-    use: _0xf3b3b9(230),
-  },
-  async (_0x1283e0, _0x45d2ef, { Void: _0xc34be3 }) => {
-    const _0x38a391 = _0xf3b3b9;
-    try {
-      var _0x5d6154 = 2000;
-      var _0x1a03f5 = 400;
-      var _0x3ef119 = _0x45d2ef[_0x38a391(251)]().includes("doc")
-        ? "document"
-        : _0x45d2ef[_0x38a391(251)]()[_0x38a391(240)](_0x38a391(247)) ||
-          _0x45d2ef[_0x38a391(251)]().includes(_0x38a391(223))
-        ? _0x38a391(223)
-        : "video";
-      const _0x5c2288 = (_0x5202bc) => {
-        const _0x2d6457 = _0x38a391;
-        return (
-          "" + Math[_0x2d6457(252)](Math[_0x2d6457(224)]() * 10000) + _0x5202bc
-        );
-      };
-      if (
-        !_0x45d2ef ||
-        !_0x45d2ef.includes("=") ||
-        !/http/gi[_0x38a391(216)](_0x45d2ef)
-      ) {
-        return await _0x1283e0[_0x38a391(244)](
-          "*Use Playlist URL, Like: " +
-            prefix +
-            "playlist https://www.youtube.com/playlist?list=PLZeei0S6_unh-jTeWsJI1mOI6snxeHn5c*"
-        );
-      }
-      let _0x1c2a7e = _0x45d2ef[_0x38a391(250)]("=")[1][_0x38a391(250)](" ")[0];
-      console[_0x38a391(217)](_0x1c2a7e);
-      var _0x20ebc9 = {
-        listId: _0x1c2a7e,
-      };
-      yts(_0x20ebc9, async function (_0x594f1f, _0x2548a3) {
-        const _0x5c8996 = _0x38a391;
-        if (_0x594f1f) {
-          throw _0x594f1f;
-        }
-        _0x1283e0.reply(_0x5c8996(257));
-        for (
-          let _0x1492ac = 0;
-          _0x1492ac < _0x2548a3[_0x5c8996(232)][_0x5c8996(225)];
-          _0x1492ac++
-        ) {
-          if (_0x2548a3.videos[_0x1492ac][_0x5c8996(256)] === undefined) {
-            continue;
-          }
-          let _0xdaf4e3 = _0x2548a3[_0x5c8996(232)][_0x1492ac][_0x5c8996(256)];
-          try {
-            let _0x48a6df = await ytdl[_0x5c8996(219)](_0xdaf4e3);
-            if (_0x48a6df[_0x5c8996(254)][_0x5c8996(218)] >= _0x5d6154) {
-              _0x3ef119 = "document";
-            }
-            let _0x5ec28d = _0x48a6df[_0x5c8996(254)][_0x5c8996(231)];
-            let _0x1a85a9 = _0x5c2288(_0x5c8996(226));
-            const _0x55ba81 = ytdl(_0xdaf4e3, {
-              filter: (_0x1df4a7) =>
-                _0x1df4a7.itag == 22 || _0x1df4a7[_0x5c8996(242)] == 18,
-            })[_0x5c8996(260)](
-              fs.createWriteStream(_0x5c8996(221) + _0x1a85a9)
-            );
-            await new Promise((_0x1e87e2, _0x352753) => {
-              _0x55ba81.on("error", _0x352753);
-              _0x55ba81.on("finish", _0x1e87e2);
-            });
-            let _0x5e17d6 = fs[_0x5c8996(214)](_0x5c8996(221) + _0x1a85a9);
-            let _0x1e47e6 = _0x5e17d6.size;
-            let _0x4a0671 = _0x1e47e6 / 1048576;
-            if (_0x4a0671 <= _0x1a03f5) {
-              let _0x3eab5e = {
-                [_0x3ef119]: fs[_0x5c8996(228)](_0x5c8996(221) + _0x1a85a9),
-                mimetype: _0x3ef119 == "audio" ? _0x5c8996(255) : "video/mp4",
-                fileName: "" + _0x5ec28d,
-                caption:
-                  _0x3ef119 == _0x5c8996(239)
-                    ? ""
-                    : " ⿻ Title : " +
-                      _0x5ec28d +
-                      _0x5c8996(243) +
-                      _0x4a0671 +
-                      _0x5c8996(248),
-                headerType: 4,
-                contextInfo: {
-                  externalAdReply: {
-                    title: Config[_0x5c8996(235)],
-                    body: _0x1283e0[_0x5c8996(237)],
-                    thumbnail: log0,
-                    renderLargerThumbnail: true,
-                    mediaType: 2,
-                    mediaUrl: gurl,
-                    sourceUrl: gurl,
-                  },
-                },
-              };
-              _0xc34be3[_0x5c8996(233)](_0x1283e0[_0x5c8996(245)], _0x3eab5e, {
-                quoted: _0x1283e0,
-              });
-            } else {
-              _0x1283e0[_0x5c8996(244)](
-                _0x5c8996(259) + _0x1a03f5 + _0x5c8996(215)
-              );
-            }
-            try {
-              fs[_0x5c8996(222)](_0x5c8996(221) + _0x1a85a9);
-            } catch (_0x492195) {}
-          } catch (_0x312da2) {
-            console[_0x5c8996(217)](_0x312da2);
-          }
-        }
-      });
-    } catch (_0x4bcd8f) {
-      console[_0x38a391(217)](_0x4bcd8f);
     }
   }
 );
