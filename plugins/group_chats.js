@@ -279,7 +279,7 @@ UserFunction(
     }
   }
 );
-smd(
+UserFunction(
   {
     cmdname: "accept",
     info: "accept all request to join!",
@@ -327,7 +327,7 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     cmdname: "requests",
     info: "Shows All The Request From User That Whats To Join Your Group.",
@@ -371,6 +371,47 @@ smd(
       });
     } catch (error) {
       await match.error(error + "\n\ncommand: listrequest", error);
+    }
+  }
+);
+UserFunction(
+  {
+    cmdname: "editdesc",
+    info: "Edit Description of Group",
+    type: "group",
+    filename: __filename,
+    use: "<enter Description Text>",
+  },
+  async (match, input) => {
+    try {
+      if (!match.isGroup) {
+        return match.reply(tlang().group);
+      }
+      if (!input) {
+        return await match.reply(
+          "*Hey Sir Use\n\n" + prefix + "editdesc `Is this My Group`*"
+        );
+      }
+      if (!match.isBotAdmin || !match.isAdmin) {
+        return await match.reply(
+          !match.isBotAdmin
+            ? "*I am Not A Group Admin" +
+                (!match.isCreator ? ", Sir" : "") +
+                "_*"
+            : tlang().admin
+        );
+      }
+      try {
+        await match.bot.groupUpdateDescription(
+          match.chat,
+          input + "\n\n\t" + Config.caption
+        );
+        match.reply("*_✅Group description Updated Successfuly!_*");
+      } catch (err) {
+        await match.reply("*_Can't update description, Group Id not found!!_*");
+      }
+    } catch (err) {
+      await match.error(err + "\n\ncommand: setdesc", err);
     }
   }
 );
