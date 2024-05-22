@@ -279,3 +279,51 @@ UserFunction(
     }
   }
 );
+smd(
+  {
+    cmdname: "accept",
+    info: "accept all request to join!",
+    type: "group",
+    filename: __filename,
+  },
+  async (message, data) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isBotAdmin || !message.isAdmin) {
+        return await message.reply(
+          !message.isBotAdmin
+            ? "Make Me An Admin To Perform This Action." +
+                (!message.isCreator ? ", Sir" : "") +
+                "_*"
+            : tlang().admin
+        );
+      }
+      const Requests = await message.bot.groupRequestParticipantsList(
+        message.chat
+      );
+      if (!Requests || !Requests[0]) {
+        return await message.reply("*`No Join Request Yet`*");
+      }
+      let accepted_requests = [];
+      let accepted = "*List of accepted users*\n\n";
+      for (let users = 0; users < Requests.length; users++) {
+        try {
+          await message.bot.groupRequestParticipantsUpdate(
+            message.from,
+            [Requests[users].jid],
+            "approve"
+          );
+          accepted += "@" + Requests[users].jid.split("@")[0] + "\n";
+          accepted_requests = [...accepted_requests, Requests[users].jid];
+        } catch {}
+      }
+      await message.send(accepted, {
+        mentions: [accepted_requests],
+      });
+    } catch (error) {
+      await message.error(error + "\n\ncommand: acceptall", error);
+    }
+  }
+);
