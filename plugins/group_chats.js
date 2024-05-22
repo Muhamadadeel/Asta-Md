@@ -327,3 +327,50 @@ smd(
     }
   }
 );
+smd(
+  {
+    cmdname: "requests",
+    info: "Shows All The Request From User That Whats To Join Your Group.",
+    type: "group",
+    filename: __filename,
+    use: "<enter Description Text>",
+  },
+  async (match, data) => {
+    try {
+      if (!match.isGroup) {
+        return match.reply(tlang().group);
+      }
+      if (!match.isBotAdmin || !match.isAdmin) {
+        return await match.reply(
+          !match.isBotAdmin
+            ? "*Make Me Admin To See All Join Requests" +
+                (!match.isCreator ? ", Sir" : "") +
+                "*"
+            : tlang().admin
+        );
+      }
+      const Request_Data = await match.bot.groupRequestParticipantsList(
+        match.chat
+      );
+      if (!Request_Data || !Request_Data[0]) {
+        return await match.reply("*_No Request Join Yet_*");
+      }
+      let requests = [];
+      let user_request = "*List of User Request to join*\n\n";
+      for (
+        let view_requests = 0;
+        view_requests < Request_Data.length;
+        view_requests++
+      ) {
+        user_request +=
+          "@" + Request_Data[view_requests].jid.split("@")[0] + "\n";
+        requests = [...requests, Request_Data[view_requests].jid];
+      }
+      return await match.send(user_request, {
+        mentions: [requests],
+      });
+    } catch (error) {
+      await match.error(error + "\n\ncommand: listrequest", error);
+    }
+  }
+);
