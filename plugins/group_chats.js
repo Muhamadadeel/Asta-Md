@@ -59,3 +59,95 @@ UserFunction(
     }
   }
 );
+UserFunction(
+  {
+    cmdname: "newgc",
+    info: "Create New Group",
+    type: "whatsapp",
+    filename: __filename,
+    use: "<group link.>",
+  },
+  async (input, match, { UserFunction: newgc, cmdName: newgc }) => {
+    try {
+      if (!input.isCreator) {
+        return input.reply(tlang().owner);
+      }
+      if (!match) {
+        return await input.reply(
+          "Hello Sir To Create A New Group\n\n" +
+            prefix +
+            "" +
+            newgc +
+            " *`Your Group Name`*"
+        );
+      }
+      let tagged = match;
+      if (tagged.toLowerCase() === "info") {
+        return await input.send(
+          (
+            "\n  *Its a command to create new Gc*\n  \t```Ex: " +
+            (prefix + cmd) +
+            " My new Group```\n  \n*You Can Add People To The Group*\n  \t```just reply or mention Users```\n  "
+          ).trim()
+        );
+      }
+      let request = [input.sender];
+      if (input.quoted) {
+        request.push(input.quoted.sender);
+      }
+      if (input.mentionedJid && input.mentionedJid[0]) {
+        request.push(...input.mentionedJid);
+        try {
+          mentionJids.forEach((Users) => {
+            var other_users = Users.split("@")[0].trim();
+            tagged = tagged.replace(new RegExp("@" + other_users, "g"), "");
+          });
+        } catch {}
+      }
+      const SuccessMsg = tagged.substring(0, 60);
+      const RemoteAsker = await input.bot.groupCreate(SuccessMsg, [...request]);
+      if (RemoteAsker) {
+        let MSG = await input.bot.sendMessage(RemoteAsker.id, {
+          text: "*New Group Created!*\n" + Config.caption,
+        });
+        try {
+          var NewGCLINK = await input.bot.groupInviteCode(RemoteAsker.id);
+        } catch {
+          var NewGCLINK = false;
+        }
+        var newlink = "https://chat.whatsapp.com/";
+        var newGroupLink = "" + newlink + NewGCLINK;
+        var ContextMSG = {
+          externalAdReply: {
+            title: "𝗔𝗦𝗧𝗔-𝗠𝗗",
+            body: "" + SuccessMsg,
+            renderLargerThumbnail: true,
+            thumbnail: log0,
+            mediaType: 1,
+            mediaUrl: newGroupLink,
+            sourceUrl: newGroupLink,
+          },
+        };
+        return await send(
+          input,
+          (
+            "*Group Created*\n" + (NewGCLINK ? "*_" + newGroupLink + "_*" : "")
+          ).trim(),
+          {
+            contextInfo: ContextMSG,
+          },
+          "",
+          MSG
+        );
+      } else {
+        await input.send("*_Can't create new group, Sorry!!_*");
+      }
+    } catch (error) {
+      await input.error(
+        error + "\n\ncommand: " + newgc,
+        error,
+        "*_Can't create new group, Sorry!!_*"
+      );
+    }
+  }
+);
