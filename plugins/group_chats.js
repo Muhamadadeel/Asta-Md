@@ -151,7 +151,7 @@ UserFunction(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "groupdata",
     desc: "get group info by link",
@@ -228,6 +228,54 @@ smd(
         error,
         "*_Group Id not found, Sorry!!_*"
       );
+    }
+  }
+);
+UserFunction(
+  {
+    cmdname: "reject",
+    info: "Reject All Join Requests",
+    type: "group",
+    filename: __filename,
+  },
+  async (message, data) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isBotAdmin || !message.isAdmin) {
+        return await message.reply(
+          !message.isBotAdmin
+            ? "*Make me an Admin to Perform this Action." +
+                (!message.isCreator ? ", Sir" : "") +
+                "*"
+            : tlang().admin
+        );
+      }
+      const Requests = await message.bot.groupRequestParticipantsList(
+        message.chat
+      );
+      if (!Requests || !Requests[0]) {
+        return await message.reply("*_No Request Join Yet_*");
+      }
+      let Rdata = [];
+      let rejected_users = "*Rejected Requests*\n\n";
+      for (let _0x164385 = 0; _0x164385 < Requests.length; _0x164385++) {
+        try {
+          await message.bot.groupRequestParticipantsUpdate(
+            message.from,
+            [Requests[_0x164385].jid],
+            "reject"
+          );
+          rejected_users += "@" + Requests[_0x164385].jid.split("@")[0] + "\n";
+          Rdata = [...Rdata, Requests[_0x164385].jid];
+        } catch {}
+      }
+      await message.send(rejected_users, {
+        mentions: [Rdata],
+      });
+    } catch (error) {
+      await message.error(error + "\n\ncommand: rejectall", error);
     }
   }
 );
