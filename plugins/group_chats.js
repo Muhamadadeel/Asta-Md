@@ -151,3 +151,83 @@ UserFunction(
     }
   }
 );
+smd(
+  {
+    pattern: "groupdata",
+    desc: "get group info by link",
+    type: "group",
+    filename: __filename,
+    use: "<group link.>",
+  },
+  async (message, request) => {
+    try {
+      let match = request ? request : message.reply_text;
+      const query = match.match(grouppattern) || false;
+      if (!query) {
+        return await message.reply("*Give me Group Link to Analyse Sir*");
+      }
+      let glink = query[0].split("https://chat.whatsapp.com/")[1].trim();
+      const gInfoData = await message.bot.groupGetInviteInfo(glink);
+      if (gInfoData) {
+        const calendar = new Date(gInfoData.creation * 1000);
+        var year_data = calendar.getFullYear();
+        var month_data = calendar.getMonth() + 1;
+        var current_data = calendar.getDate();
+        var calendar_data =
+          year_data +
+          "-" +
+          month_data.toString().padStart(2, "0") +
+          "-" +
+          current_data.toString().padStart(2, "0");
+        var _0x56eaaf = {
+          externalAdReply: {
+            title: "𝗔𝗦𝗧𝗔-𝗠𝗗",
+            body: gInfoData.subject,
+            renderLargerThumbnail: true,
+            thumbnail: log0,
+            mediaType: 1,
+            mediaUrl: query[0],
+            sourceUrl: query[0],
+          },
+        };
+        return await send(
+          message,
+          (
+            gInfoData.subject +
+            "\n  \n  Creator: wa.me/" +
+            gInfoData.owner.split("@")[0] +
+            " \n  GJid; ```" +
+            gInfoData.id +
+            "  ```\n  *Muted:* " +
+            (gInfoData.announce ? " yes" : " no") +
+            "\n  *Locked:* " +
+            (gInfoData.restrict ? " yes" : " no") +
+            "\n  *createdAt:* " +
+            calendar_data +
+            "\n  *participents:* " +
+            (gInfoData.size > 3 ? gInfoData.size + "th" : gInfoData.size) +
+            "\n  " +
+            (gInfoData.desc ? "*description:* " + gInfoData.desc + "\n" : "") +
+            "\n  " +
+            Config.caption +
+            "\n  "
+          ).trim(),
+          {
+            mentions: [gInfoData.owner],
+            contextInfo: _0x56eaaf,
+          },
+          "",
+          message
+        );
+      } else {
+        await message.send("*_Group Id not found, Sorry!!_*");
+      }
+    } catch (error) {
+      await message.error(
+        error + "\n\ncommand: ginfo",
+        error,
+        "*_Group Id not found, Sorry!!_*"
+      );
+    }
+  }
+);
