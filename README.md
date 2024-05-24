@@ -52,34 +52,19 @@ To add a new command:
 1. Create a new file in the `commands` directory, for example `hello.js`.
 2. Define the command logic:
     ```javascript
-    module.exports = {
-        name: 'hello',
-        description: 'Responds with a greeting',
-        execute: async (message, args) => {
-            await message.reply('Hello! How can I assist you today?');
-        },
-    };
+    import amd from './lib'
+    amd(
+  {
+    pattern: "hi",
+    fromMe: true, // is the the message if from owner
+    desc: "Send Hi Message", // Comomands Description
+    type: "Test", // Command Categoery
+  },
+  async (mes) => {
+    await message.send("Hello There")
+  }
+);
     ```
 
-3. Register the command in the main bot file if necessary.
+3. Register the command in the main bot file to use it.
 
-## Contributing
-
-We welcome contributions from the community! To contribute:
-
-1. Fork the repository.
-2. Create a new branch with your feature or bugfix.
-3. Make your changes and commit them with clear messages.
-4. Push your branch and open a Pull Request.
-
-## License
-
-Asta Md is released under the [MIT License](LICENSE).
-
-## Contact
-
-For any questions or feedback, feel free to open an issue or contact us via email at [astro@example.com](mailto:astro@example.com).
-
----
-
-We hope you find Asta Md useful and look forward to your contributions! Happy coding!
