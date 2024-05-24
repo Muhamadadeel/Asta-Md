@@ -549,3 +549,101 @@ UserFunction(
     }
   }
 );
+cmd(
+  {
+    pattern: "invite",
+    desc: "Get Your Group Link.",
+    category: "group",
+    filename: __filename,
+  },
+  async (message) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isBotAdmin) {
+        return message.reply("*Unable To Perform Action, I'm not An Admin*");
+      }
+      var gcLinkID = await message.bot.groupInviteCode(message.chat);
+      var link_init = "https://chat.whatsapp.com/";
+      var result = "" + link_init + gcLinkID;
+      return message.reply("*Group Link* \n*" + result + "*");
+    } catch (error) {
+      await message.error(
+        error + "\n\ncommand: invite",
+        error,
+        "*_Can't fetch data due to error*"
+      );
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "revoke",
+    desc: "get group link.",
+    category: "group",
+    filename: __filename,
+  },
+  async (message) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isBotAdmin) {
+        return message.reply("*I an not an Admin Sir*");
+      }
+      await message.bot.groupRevokeInvite(message.chat);
+      return message.reply("*_Group Link Revoked SuccesFully_*");
+    } catch (err) {
+      await message.error(
+        err + "\n\ncommand: revoke",
+        err,
+        "*Can't revoke data due to error, Sorry!!*"
+      );
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "tagall",
+    desc: "Tags every person of group.",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      const gcUsers = message.metadata.participants || {};
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let tagMsg =
+        "\n➲ *Message :* " +
+        (match ? match : "blank Message") +
+        " \n " +
+        Config.caption +
+        " \n\n\n➲ *Author:* " +
+        message.pushName +
+        " 🔖\n";
+      for (let tagged of gcUsers) {
+        if (!tagged.id.startsWith("2348039607375")) {
+          tagMsg += "@" + tagged.id.split("@")[0] + "\n";
+        }
+      }
+      await message.bot.sendMessage(
+        message.chat,
+        {
+          text: tagMsg,
+          mentions: gcUsers.map((jids) => jids.id),
+        },
+        {
+          quoted: message,
+        }
+      );
+    } catch (err) {
+      await message.error(err + "\n\ncommand: tagall", err, false);
+    }
+  }
+);
