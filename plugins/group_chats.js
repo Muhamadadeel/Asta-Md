@@ -1344,7 +1344,7 @@ UserFunction(
     }
   }
 );
-cmd(
+UserFunction(
   {
     pattern: "broadcast",
     desc: "Bot makes a broadcast in all groups",
