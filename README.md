@@ -12,10 +12,19 @@ Welcome to **Asta Md**, an open-source WhatsApp bot developed by Astro. This bot
 - **API Integration**: Seamlessly integrate with other APIs to expand functionality.
 
 ## Getting Started
+### Get Your Session
+
+This is Important To Run Your Bot
+
+<a href="https://web-session.vercel.app/"><img title="SCAN QR" src="https://img.shields.io/badge/GET SESSION-h?color=black&style=for-the-badge&logo=msi"></a>
+
+<a href="https://github.com/Astropeda/Asta-Md/fork"><img title="Fork Repo" src="https://img.shields.io/badge/Fork Repo-h?color=black&style=for-the-badge&logo=stackshare"></a>
+
+
 
 ### Prerequisites
 
-Before you begin, ensure you have the following:
+For Advanced Users, make sure you have the following:
 
 - Node.js (version 16 or higher)
 - npm (Node Package Manager)
@@ -173,7 +182,7 @@ We welcome contributions from the community! To contribute, please follow the gu
 
 ## License
 
-Asta Md is released under the [Unlicense](https://github.com/Astropeda/Asta-Md/blob/main/LICENSE).
+Asta Md is released under the [GNU General Public License v2.0](https://github.com/Astropeda/Asta-Md/blob/main/LICENSE).
 
 ## Contact
 
