@@ -471,14 +471,14 @@ try {
       try {
         if (!input) {
           return message.reply(
-            "*Use " + (prefix + HerokuNewVar) + " CAPTION:Suhail Md*"
+            "*Use " + (prefix + HerokuNewVar) + " CAPTION:Asta Md*"
           );
         }
-        const _0x4ddca6 = input.includes(":")
+        const match = input.includes(":")
           ? input.indexOf(":")
           : input.indexOf("=");
-        const InputedData = input.slice(0, _0x4ddca6).toUpperCase().trim();
-        const excepted = input.slice(_0x4ddca6 + 1).trim();
+        const InputedData = input.slice(0, match).toUpperCase().trim();
+        const excepted = input.slice(match + 1).trim();
         if (!excepted) {
           return msg.reply(
             "*Uhh Please, Provide Value After ':' !*\n*Example : " +
