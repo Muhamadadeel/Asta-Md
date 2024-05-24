@@ -1,4 +1,4 @@
-# Asta Md - A Simple Open Sourced WhatsApp Bot Built By Astro
+## ᴀꜱᴛᴀ ᴍᴅ
 
 ## Introduction
 
@@ -17,7 +17,7 @@ Welcome to **Asta Md**, an open-source WhatsApp bot developed by Astro. This bot
 
 Before you begin, ensure you have the following:
 
-- Node.js (version 14 or higher)
+- Node.js (version 16 or higher)
 - npm (Node Package Manager)
 
 ### Installation
@@ -48,8 +48,9 @@ Once the bot is running, it will automatically connect to WhatsApp and start han
 ## Adding Commands
 
 To add a new command:
+##### Learn how to Create commands? Click Me
 
-1. Create a new file in the `commands` directory, for example `hi.js`.
+1. Create a new file in the `plugins` directory, for example `hi.js`.
 2. Define the command logic using the following template:
     ```javascript
     import amd from './lib';
@@ -68,7 +69,7 @@ To add a new command:
     );
     ```
 
-3. Ensure that your new command file is correctly imported and utilized within your main bot setup.
+3. Ensure that your new command file is correctly imported and utilized within your main bot setup. **Apply at your own end**
 
 ## Deploy to Node.js Platforms
 
@@ -98,22 +99,22 @@ To add a new command:
 
 5. Set up environment variables on Heroku:
     ```sh
-    heroku config:set KEY=VALUE
+    heroku config:set SESSION_ID=Astro;;n
     ```
 
-#### Deploy Button
+#### Heroku Docker Delpoy
 
-Add the following code to your README.md:
-
-```markdown
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-```
+<a href="https://astropeda.github.io/delpoy-button/">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a>
 
 ### VS Code Spaces
 
-1. Open your repository in VS Code.
+<a href="https://github.com/codespaces/new?skip_quickstart=true&machine=standardLinux32gb&repo=763349202&ref=main&geo=UsWest"><img title="Codespaces" src="https://img.shields.io/badge/Delpoy To Codespaces-h?color=black&style=for-the-badge&logo=GitHub"></a>
+
+
 2. Press `F1` and select `Remote-Containers: Open Folder in Container`.
-3. Follow the prompts to set up your development environment.
+3. In the `config.js` file put your Session Id in `SESSION_ID` variable.
 4. Start the bot using the terminal in VS Code:
     ```sh
     npm start
@@ -123,12 +124,61 @@ Add the following code to your README.md:
 
 1. Sign in to [Koyeb](https://www.koyeb.com/).
 2. Create a new App and link your GitHub repository.
-3. Set up environment variables as needed.
+3. In the your forked repository make sure you out your session Id in `config.js` file
+   
+<a href="https://app.koyeb.com/apps/new/import-project"><img title="Deploy Koyeb" src="https://img.shields.io/badge/DEPLOY KOYEB-h?color=black&style=for-the-badge&logo=koyeb"></a>
+
 4. Deploy your app directly from the Koyeb dashboard.
 
 ### Railway
 
 1. Sign in to [Railway](https://railway.app/).
 2. Create a new project and link your GitHub repository.
-3. Configure the environment variables.
+
+<a href="https://railway.app/"><img title="INRL-MD Deploy Koyeb" src="https://img.shields.io/badge/DEPLOY RAILWAY-h?color=black&style=for-the-badge&logo=railway"></a>
+
+   
+3. Configure the environment variables from your github forked repository.
 4. Deploy the project from the Railway dashboard.
+
+
+ ### Termux Setup
+
+ ```bash
+termux-setup-storage
+apt update
+apt upgrade
+pkg update && pkg upgrade
+pkg install bash
+pkg install libwebp
+pkg install git -y
+pkg install nodejs -y 
+pkg install ffmpeg -y 
+pkg install wget
+pkg install imagemagick -y
+git clone Your Forked Github Url
+cd Asta-Md
+npm i
+npm start
+```
+
+## Contributing
+
+We welcome contributions from the community! 
+
+To contribute:
+1. Fork the repository.
+2. Create a new branch with your feature or bug fix.
+3. Make your changes and commit them with clear messages.
+4. Push your branch and open a Pull Request.
+
+## License
+
+Asta Md is released under the [Unlicense](https://github.com/Astropeda/Asta-Md/blob/main/LICENSE).
+
+## Contact
+
+For any questions or feedback, feel free to contact us via Telegram:
+
+- [Astropeda](http://t.me/Astropeda) (Direct contact)
+- [Asta Support](https://t.me/astasupportgc) (Support channel)
