@@ -3408,14 +3408,14 @@ UserFunction(
             if (message.isBotAdmin) {
               var fel = "*_Bot user not allowed, please make it private!_*";
               if (data.antibot === "warn") {
-                let _0x50d0d8 = {
+                let msf_re = {
                   reason: "Bots not allowed!",
                   chat: message.metadata?.subject || "GROUP",
                   date: message.date,
                 };
                 taggs = taggs
                   ? taggs
-                  : await warn.addwarn(message.sender, message.chat, _0x50d0d8);
+                  : await warn.addwarn(message.sender, message.chat, msf_re);
                 if (taggs.status) {
                   fel =
                     "*Hey @" + message.senderNum + " warning, Due To Antibot!*";
