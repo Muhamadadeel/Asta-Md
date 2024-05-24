@@ -7,13 +7,13 @@
 # Order is important; the last matching pattern takes precedence.
 
 # Doc files
-/docs/  @CODE_OF_CONDUCT @LICENSE
+/docs/  @LICENSE
 
 # Source files
-/src/   @lib @plugins
+/src/   @lib
 
 # Tests
-/tests/ @Astro @Astropeda
+/tests/ @AstroFXDEV @Astropeda
 
 # Frontend
 /front/ @AstroFXDEV @Astropeda
