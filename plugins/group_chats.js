@@ -924,3 +924,488 @@ smd(
     }
   }
 );
+UserFunction(
+  {
+    pattern: "mute",
+    desc: "Only Admin Can Send A Message",
+    category: "group",
+    filename: __filename,
+    use: "<quote|reply|number>",
+  },
+  async (message) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (message.metadata?.announce) {
+        return await message.reply(
+          "*" + (message.isSuhail ? "Master" : "Sir") + ", Group already muted*"
+        );
+      }
+      if (!message.isBotAdmin) {
+        return message.reply(tlang().botAdmin);
+      }
+      if (!message.isCreator && !message.isAdmin) {
+        return message.reply(tlang().admin);
+      }
+      await message.bot
+        .groupSettingUpdate(message.chat, "announcement")
+        .then((_0x150a20) => message.reply("*Group Chat Muted*"))
+        .catch((_0x5d5c82) => message.reply("*Can't change Group Setting*"));
+    } catch (err) {
+      await message.error(err + "\n\ncommand: gmute", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "unmute",
+    desc: "Provides admin role to replied/quoted user",
+    category: "group",
+    filename: __filename,
+    use: "<quote|reply|number>",
+  },
+  async (message) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.metadata?.announce) {
+        return await message.reply(
+          "*" + (message.isSuhail ? "Master" : "Sir") + ", Group Isn't Muted*"
+        );
+      }
+      if (!message.isBotAdmin) {
+        return message.reply(tlang().botAdmin);
+      }
+      if (!message.isCreator && !message.isAdmin) {
+        return message.reply(tlang().admin);
+      }
+      await message.bot
+        .groupSettingUpdate(message.chat, "not_announcement")
+        .then((_0x5993c4) =>
+          message.reply("*_Group Chat UnMute successfully!!_*")
+        )
+        .catch((_0x293794) =>
+          message.reply("*_Can't change Group Setting, Sorry!_*")
+        );
+    } catch (err) {
+      await message.error(err + "\n\ncommand: gunmute", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "lock",
+    fromMe: true,
+    desc: "only allow admins to modify the group's settings.",
+    type: "group",
+  },
+  async (message, classes) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (message.metadata.restrict) {
+        return await message.reply(
+          "*" +
+            (message.isSuhail ? "Master" : "Sir") +
+            ", Group setting already locked*"
+        );
+      }
+      if (!message.isBotAdmin) {
+        return await message.reply("*_I'm not admin!_*");
+      }
+      if (!message.isCreator && !message.isAdmin) {
+        return message.reply(tlang().admin);
+      }
+      await message.bot
+        .groupSettingUpdate(message.chat, "locked")
+        .then((_0x49c387) =>
+          message.reply("*Group locked, Only Admin can change Group Settings*")
+        )
+        .catch((_0x100d44) => message.reply("*_Can't change Group Setting*"));
+    } catch (error) {
+      await message.error(error + "\n\ncommand: lock", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "unlock",
+    fromMe: true,
+    desc: "allow everyone to modify the group's settings.",
+    type: "group",
+  },
+  async (msg, match) => {
+    try {
+      if (!msg.isGroup) {
+        return msg.reply(tlang().group);
+      }
+      if (!msg.metadata.restrict) {
+        return await msg.reply(
+          "*" +
+            (msg.isSuhail ? "Master" : "Sir") +
+            ", Group setting already unlocked*"
+        );
+      }
+      if (!msg.isBotAdmin) {
+        return await msg.reply("*_I'm not admin!_*");
+      }
+      if (!msg.isCreator && !msg.isAdmin) {
+        return msg.reply(tlang().admin);
+      }
+      await msg.bot
+        .groupSettingUpdate(msg.chat, "unlocked")
+        .then((_0x282118) =>
+          msg.reply("*Group unlocked, everyone change Group Settings*")
+        )
+        .catch((_0x320353) =>
+          msg.reply("*_Can't change Group Setting, Sorry!_*")
+        );
+    } catch (error) {
+      await msg.error(error + "\n\ncommand: unlock", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "tag",
+    desc: "Tags everyperson of group without mentioning their numbers",
+    category: "group",
+    filename: __filename,
+    use: "<text>",
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!match && !message.reply_message) {
+        return message.reply("*Example : " + prefix + "tag Good Morning*");
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let msg = message.reply_message ? message.reply_message : message;
+      let cp = message.reply_message ? message.reply_message.text : match;
+      let blob = "";
+      let input;
+      let mssg = msg.mtype;
+      if (mssg == "imageMessage") {
+        blob = "image";
+        input = await msg.download();
+      } else if (mssg == "videoMessage") {
+        blob = "video";
+        input = await msg.download();
+      } else if (!match && message.quoted) {
+        input = message.quoted.text;
+      } else {
+        input = match;
+      }
+      if (!input) {
+        return await message.send("*_Uhh dear, reply to message!!!_*");
+      }
+      return await message.send(
+        input,
+        {
+          caption: cp,
+          mentions: message.metadata.participants.map(
+            (_0x3c9928) => _0x3c9928.id
+          ),
+        },
+        blob,
+        msg
+      );
+    } catch (error) {
+      await message.error(error + "\n\ncommand: tag", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "tagadmin",
+    desc: "Tags only Admin numbers",
+    category: "group",
+    filename: __filename,
+    use: "<text>",
+  },
+  async (message, dat) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      const _0x13a9c9 = message.admins
+        .map((admins, users) => " *|  @" + admins.id.split("@")[0] + "*")
+        .join("\n");
+      let _0x20f7aa = (
+        "\n▢ From : @" +
+        message.sender.split("@")[0] +
+        "\n" +
+        (dat ? "≡ Message :" + dat : "") +
+        "\n\n*┌─⊷ GROUP ADMINS*\n" +
+        _0x13a9c9 +
+        "\n*└───────────⊷*\n\n" +
+        Config.caption
+      ).trim();
+      return await message.bot.sendMessage(message.chat, {
+        text: _0x20f7aa,
+        mentions: [message.sender, ...message.admins.map((jidss) => jidss.id)],
+      });
+    } catch (error) {
+      await message.error(error + "\n\ncommand: tagadmin", error);
+    }
+  }
+);
+cmd(
+  {
+    pattern: "add",
+    desc: "Add that person in group",
+    category: "group",
+    filename: __filename,
+    use: "<number|reply|mention>",
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isBotAdmin) {
+        return await message.reply(
+          "*_I'm Not Admin In This Group, " +
+            (message.isSuhail ? "Master" : "Sir") +
+            "_*"
+        );
+      }
+      if (!message.isAdmin) {
+        return message.reply(tlang().admin);
+      }
+      let info = message.quoted
+        ? message.quoted.sender
+        : message.mentionedJid[0]
+        ? message.mentionedJid[0]
+        : match
+        ? match.replace(/[^0-9]/g, "").replace(/[\s+]/g, "") + "@s.whatsapp.net"
+        : false;
+      if (!info) {
+        return await message.reply("*Provide An User.*");
+      }
+      try {
+        await message.bot.groupParticipantsUpdate(message.chat, [info], "add");
+        await message.reply("*User Added to Group*");
+        message.react("✨");
+      } catch (err) {
+        await message.react("❌");
+        await message.bot.sendMessage(
+          info,
+          {
+            text:
+              "*Here's The Group Invite Link*\n\n @" +
+              message.sender.split("@")[0] +
+              " Wants to add you in below group\n\n*_https://chat.whatsapp.com/" +
+              (await message.bot.groupInviteCode(message.chat)) +
+              "_*\n ---------------------------------  \n*_Join If YOu Feel Free?_*",
+            mentions: [message.sender],
+          },
+          {
+            quoted: message,
+          }
+        );
+        await message.reply(
+          "*Can't Add User Due To WhatsApp Ban\nI Have Sent Them An Invite Link*"
+        );
+      }
+    } catch (error) {
+      await message.error(error + "\n\ncommand: add", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "alljids",
+    desc: "Sends chat id of every groups.",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match, { cmdName: getJid }) => {
+    try {
+      if (!message.isCreator) {
+        return message.reply(tlang().owner);
+      }
+      n = await message.bot.groupFetchAllParticipating();
+      const entry = Object.entries(n)
+        .slice(0)
+        .map((_0x9d4955) => _0x9d4955[1]);
+      let results = "";
+      let jids_info = false;
+      let data = false;
+      if (match.includes("jid")) {
+        jids_info = true;
+      } else if (match.includes("name")) {
+        data = true;
+      }
+      await message.reply(
+        "Fetching " +
+          (jids_info ? "Only jids" : data ? "Only Names" : "Names and Jids") +
+          " from " +
+          entry.length +
+          " Groups"
+      );
+      await sleep(2000);
+      for (var requested of entry.map((_0x19e435) => _0x19e435.id)) {
+        results += jids_info ? "" : "\n*Group:* " + n[requested].subject + " ";
+        results += data ? "" : "\n*JID:* " + requested + "\n";
+      }
+      return await message.send(results);
+    } catch (error) {
+      await message.error(error + "\n\ncommand: " + getJid, error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "demote",
+    desc: "Demotes replied/quoted user from group",
+    category: "group",
+    filename: __filename,
+    use: "<quote|reply|number>",
+  },
+  async (message) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isBotAdmin) {
+        return await message.reply("*I'm Not Admin In This Group, Sir*");
+      }
+      if (!message.isAdmin) {
+        return message.reply(tlang().admin);
+      }
+      let match = message.mentionedJid[0]
+        ? message.mentionedJid[0]
+        : message.reply_message
+        ? message.reply_message.sender
+        : false;
+      if (!match) {
+        return await message.reply("*Reply/mention an User*");
+      }
+      if (message.checkBot(match)) {
+        return await message.reply("*Can't Demote My Creator*");
+      }
+      try {
+        await message.bot.groupParticipantsUpdate(
+          message.chat,
+          [match],
+          "demote"
+        );
+        await message.reply("*Demoted*");
+      } catch (_0x5e7b02) {
+        await message.reply("*_Can,t demote user, try it manually_*");
+      }
+    } catch (err) {
+      await message.error(err + "\n\ncommand: demote", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "del",
+    desc: "Deletes message of any user",
+    category: "group",
+    filename: __filename,
+    use: "<quote/reply message.>",
+  },
+  async (message) => {
+    try {
+      if (!message.reply_message) {
+        return message.reply("*_Please reply to a message!!!_*");
+      }
+      let match = message.reply_message;
+      if (match && match.fromMe && message.isCreator) {
+        return match.delete();
+      } else if (match && message.isGroup) {
+        if (!message.isBotAdmin) {
+          return message.reply(
+            "*I can't delete messages without getting Admin Role.*"
+          );
+        }
+        if (!message.isAdmin) {
+          return message.reply(tlang().admin);
+        }
+        await match.delete();
+      } else {
+        return await message.reply(tlang().owner);
+      }
+    } catch (error) {
+      await message.error(error + "\n\ncommand: del", error);
+    }
+  }
+);
+cmd(
+  {
+    pattern: "broadcast",
+    desc: "Bot makes a broadcast in all groups",
+    fromMe: true,
+    category: "group",
+    filename: __filename,
+    use: "<text for broadcast.>",
+  },
+  async (message, request) => {
+    try {
+      if (!request) {
+        return await message.reply("*Give Me Text To BroadCast*");
+      }
+      let query = await message.bot.groupFetchAllParticipating();
+      let init = Object.entries(query)
+        .slice(0)
+        .map((msg) => msg[1]);
+      let data = init.map((_0x5ea155) => _0x5ea155.id);
+      await message.send(
+        "*Sending Broadcast Message" +
+          data.length +
+          " Group Chat, Finish Time " +
+          data.length * 1.5 +
+          " second_*"
+      );
+      let broadcast_m_type =
+        "*--❗" + tlang().title + " Broadcasted--*\n\n *🍀Message:* " + request;
+      let MSGTYPE = {
+        forwardingScore: 999,
+        isForwarded: true,
+        externalAdReply: {
+          title: "Via Ad",
+          body: message.senderName,
+          renderLargerThumbnail: true,
+          thumbnail: log0,
+          mediaType: 1,
+          mediaUrl: "",
+          sourceUrl: gurl,
+          showAdAttribution: true,
+        },
+      };
+      for (let ava of data) {
+        try {
+          await sleep(1500);
+          await send(
+            message,
+            broadcast_m_type,
+            {
+              contextInfo: MSGTYPE,
+            },
+            "",
+            "",
+            ava
+          );
+        } catch {}
+      }
+      return await message.reply(
+        "*Successful Sending Broadcast To " + data.length + " Group*"
+      );
+    } catch (error) {
+      await message.error(error + "\n\ncommand: broadcast", error);
+    }
+  }
+);
