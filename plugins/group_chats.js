@@ -2973,3 +2973,978 @@ smd(
     }
   }
 );
+UserFunction(
+  {
+    pattern: "amute",
+    desc: "sets auto mute time in group.",
+    category: "group",
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let dat =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      if (!match) {
+        return await message.reply(
+          "*Auto_Mute *" +
+            (dat.mute === "false" ? "disable" : "enabled") +
+            " for current group*" +
+            (dat.mute !== "false"
+              ? "\n *Auto mute status set at : " + dat.mute + "* "
+              : "")
+        );
+      }
+      let [data, opt] = match.split(":").map(Number);
+      if (
+        isNaN(data) ||
+        isNaN(opt) ||
+        data < 0 ||
+        data >= 24 ||
+        opt < 0 ||
+        opt >= 60
+      ) {
+        return message.reply(
+          "Please provide correct form.\nEg: " + prefix + "amute 22:00"
+        );
+      }
+      let foo =
+        data.toString().padStart(2, "0") +
+        ":" +
+        opt.toString().padStart(2, "0");
+      await groupdb.updateOne(
+        {
+          id: message.chat,
+        },
+        {
+          mute: foo,
+        }
+      );
+      return message.reply(
+        "*_Successfully done, Group auto mute at " + foo + "_*"
+      );
+    } catch (err) {
+      message.error(err + "\n\ncommand: amute", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "aunmute",
+    desc: "sets unmute time in group.",
+    category: "group",
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let dat =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      if (!match) {
+        return await message.reply(
+          "*Auto_Unmute *" +
+            (dat.unmute === "false" ? "disable" : "enabled") +
+            " for current group*" +
+            (dat.unmute !== "false"
+              ? "\n *Auto unmute status set at : " + dat.unmute + "* "
+              : "")
+        );
+      }
+      let [foo, blob] = match.split(":").map(Number);
+      if (
+        isNaN(foo) ||
+        isNaN(blob) ||
+        foo < 0 ||
+        foo >= 24 ||
+        blob < 0 ||
+        blob >= 60
+      ) {
+        return message.reply(
+          "Please provide correct form.\nEg: " + prefix + "aunmute 22:00"
+        );
+      }
+      let con =
+        foo.toString().padStart(2, "0") +
+        ":" +
+        blob.toString().padStart(2, "0");
+      await groupdb.updateOne(
+        {
+          id: message.chat,
+        },
+        {
+          unmute: con,
+        }
+      );
+      return message.reply(
+        "*Successfully done, Group auto unmute at " + con + "*"
+      );
+    } catch (err) {
+      message.error(err + "\n\ncommand: aunmute", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "dunmute",
+    desc: "Delete unmute from group.",
+    category: "group",
+  },
+  async (mesg) => {
+    try {
+      if (!mesg.isGroup) {
+        return mesg.reply(tlang().group);
+      }
+      if (!mesg.isAdmin && !mesg.isCreator) {
+        return mesg.reply(tlang().admin);
+      }
+      let match = await groupdb.findOne({
+        id: mesg.chat,
+      });
+      if (!match || !match.unmute || match.unmute == "false") {
+        return await mesg.reply("*There's no auto unmute set in group.*");
+      }
+      await groupdb.updateOne(
+        {
+          id: mesg.chat,
+        },
+        {
+          unmute: "false",
+        }
+      );
+      return await mesg.reply("*Auto unmute deleted successfully.*");
+    } catch (error) {
+      mesg.error(error + "\n\ncommand: dunmute", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "dmute",
+    desc: "Delete mute from group.",
+    category: "moderation",
+  },
+  async (msg) => {
+    try {
+      if (!msg.isGroup) {
+        return msg.reply(tlang().group);
+      }
+      if (!msg.isAdmin && !msg.isCreator) {
+        return msg.reply(tlang().admin);
+      }
+      let match = await groupdb.findOne({
+        id: msg.chat,
+      });
+      if (!match || !match.mute || match.mute == "false") {
+        return await msg.reply("*There's no auto mute set in group.*");
+      }
+      await groupdb.updateOne(
+        {
+          id: msg.chat,
+        },
+        {
+          mute: "false",
+        }
+      );
+      return await msg.reply("*Auto mute deleted successfully.*");
+    } catch (err) {
+      msg.error(err + "\n\ncommand: dmute", err);
+    }
+  }
+);
+async function haveEqualMembers(msg, jids) {
+  if (msg.length === 0 || jids.length === 0) {
+    return false;
+  }
+  const dat = msg.filter((_0x44f6e4) => jids.includes(_0x44f6e4));
+  const res = (dat.length / msg.length) * 100;
+  return res >= 76;
+}
+UserFunction(
+  {
+    pattern: "antiword",
+    desc: "Detects words from chat,and delete/warn senders.",
+    category: "group",
+    filename: __filename,
+    use: "< action | words >",
+  },
+  async (mesg, query, { cmdName: antiword }) => {
+    try {
+      if (!mesg.isGroup) {
+        return mesg.reply(tlang().group);
+      }
+      if (!mesg.isAdmin && !mesg.isCreator) {
+        return mesg.reply(tlang().admin);
+      }
+      let dat =
+        (await groupdb.findOne({
+          id: mesg.chat,
+        })) ||
+        (await groupdb.new({
+          id: mesg.chat,
+          antiword: {
+            status: "false",
+            words: "",
+          },
+        }));
+      let match = query ? query.toLowerCase().trim() : false;
+      let conn = dat.antiword;
+      let sock =
+        "*Antiword Currently *" +
+        (conn.status !== "false" ? "enabled" : "disabled") +
+        "!!!* ```\n  STATUS: " +
+        (conn.status ? conn.status : "--Empty Yet--") +
+        " \n  WORDS: " +
+        (conn.words ? conn.words.replace(/,/gi, " -- ") : "--Empty Yet--") +
+        "```\n\n*Available Cmds:* ```\n  " +
+        (prefix + antiword) +
+        " off \n  " +
+        (prefix + antiword) +
+        " reset\n  " +
+        (prefix + antiword) +
+        " warn | bad,words\n  " +
+        (prefix + antiword) +
+        " delete | hot,badas,etc\n``` \n\n\n " +
+        Config.caption;
+      if (!match || !query) {
+        return await mesg.send(sock);
+      }
+      let info = match.split("|")[1] || "";
+      let blob =
+        match.startsWith("on") ||
+        match.startsWith("act") ||
+        match.startsWith("enable") ||
+        match.startsWith("del")
+          ? "delete"
+          : match.startsWith("warn")
+          ? "warn"
+          : match.startsWith("off") ||
+            match.startsWith("deact") ||
+            match.startsWith("disable")
+          ? "false"
+          : match.startsWith("reset")
+          ? "reset"
+          : "";
+      blob = !blob && info && conn.status !== "false" ? conn.status : blob;
+      if (blob === "reset") {
+        await groupdb.updateOne(
+          {
+            id: mesg.chat,
+          },
+          {
+            antiword: {},
+          }
+        );
+        return await mesg.send("*_Anti_Word status cleard!_*");
+      } else if (blob === "delete" || blob === "warn") {
+        if (conn.status == blob && !info) {
+          return await mesg.send(
+            "*Please provide badWords, like " +
+              (prefix + antiword) +
+              " " +
+              blob +
+              " | bad,words"
+          );
+        }
+        info = info ? info : conn.words;
+        await groupdb.updateOne(
+          {
+            id: mesg.chat,
+          },
+          {
+            antiword: {
+              status: blob,
+              words: info,
+            },
+          }
+        );
+        return await mesg.send(
+          "*_Anti_Word succesfully set to '" +
+            blob +
+            "' badward!_*\n*Antiwords are:```" +
+            (info ? info.replace(/,/gi, " | ") : "--Empty Yet--") +
+            "``` *"
+        );
+      } else if (blob === "false") {
+        if (conn.status === blob) {
+          return await mesg.send(
+            "*AntiWord Already Disabled In Current Chat!*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: mesg.chat,
+          },
+          {
+            antiword: {
+              status: "false",
+              words: conn.words,
+            },
+          }
+        );
+        return await mesg.send("*Anti_Word Disable Succesfully!*");
+      } else {
+        return await mesg.reply("*Follow instructions\n\n" + sock);
+      }
+    } catch (err) {
+      mesg.error(err + "\n\ncommand: antiword", err);
+    }
+  }
+);
+let bott = false;
+let chatbotCount = 0;
+UserFunction(
+  {
+    on: "main",
+  },
+  async (
+    message,
+    body,
+    {
+      botNumber: botm,
+      isCreator: crwat,
+      budy: messagend,
+      body: m_fino,
+      icmd: incastity,
+    }
+  ) => {
+    try {
+      if (global.MsgsInLog === "true") {
+        console.log(
+          "" +
+            (message.isGroup
+              ? "[MESSAGE IN GROUP] From => " +
+                message.metadata.subject +
+                "\n[USER]:"
+              : "[MESSAGE IN PRIVATE] From =>") +
+            (" " +
+              message.senderName +
+              " " +
+              message.senderNum +
+              "\n[" +
+              message.mtype.toUpperCase() +
+              "]: " +
+              message.body +
+              "")
+        );
+      }
+      let data =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) || false;
+      let taggs = false;
+      try {
+        if (!global.SmdOfficial && global.SmdOfficial !== "yes") {
+          return;
+        }
+        if (
+          data &&
+          data.antitag == "true" &&
+          !message.checkBot() &&
+          message.mtype !== "reactionMessage" &&
+          data.botenable == "true"
+        ) {
+          const foo = await haveEqualMembers(
+            message.metadata.participants.map((hmm) => hmm.id),
+            message.mentionedJid
+          );
+          if (foo && message.isBotAdmin) {
+            let resu = {
+              reason: "tagging all members!",
+              chat: message.metadata?.subject || "GROUP",
+              warnedby: tlang().title,
+              date: message.date,
+            };
+            taggs = await warn.addwarn(message.sender, message.chat, resu);
+            await message.reply(
+              "*[TAG DETECTED] Hey @" +
+                message.senderNum +
+                " warning!!_*\n*Tagging Users Isn't Allowd Here*",
+              {
+                mentions: [message.sender],
+              }
+            );
+            await message.delete();
+          } else if (foo && !message.isBotAdmin) {
+            await message.reply(
+              "*[TAGALL DETECTED] Can't do anything, Until I'm Admin*",
+              {
+                mentions: [message.sender],
+              }
+            );
+          }
+        }
+        if (
+          data &&
+          message.isGroup &&
+          !message.isAdmin &&
+          !crwat &&
+          message.mtype !== "reactionMessage" &&
+          data.botenable == "true"
+        ) {
+          if (
+            data.antibot &&
+            data.antibot !== "false" &&
+            message.isBot &&
+            !message.checkBot(message.sender)
+          ) {
+            if (message.isBotAdmin) {
+              var fel = "*_Bot user not allowed, please make it private!_*";
+              if (data.antibot === "warn") {
+                let _0x50d0d8 = {
+                  reason: "Bots not allowed!",
+                  chat: message.metadata?.subject || "GROUP",
+                  date: message.date,
+                };
+                taggs = taggs
+                  ? taggs
+                  : await warn.addwarn(message.sender, message.chat, _0x50d0d8);
+                if (taggs.status) {
+                  fel =
+                    "*Hey @" + message.senderNum + " warning, Due To Antibot!*";
+                }
+              } else if (data.antibot === "kick") {
+                try {
+                  sleep(1000);
+                  await message.bot.groupParticipantsUpdate(
+                    message.chat,
+                    [message.sender],
+                    "remove"
+                  );
+                  fel =
+                    "*_User @" + message.senderNum + " kick Due To Antibot!_*";
+                } catch {}
+              }
+              await message.delete();
+              await message.send(fel, {
+                mentions: [message.sender],
+              });
+            } else if (!message.isBotAdmin && message.isBot) {
+              await message.reply(
+                "*_Uhh Please, Provide Admin Role To Kick Other Bot_*\n*_Or Disable Antibot (On/Off) In Current Group_*"
+              );
+            }
+          }
+          if (
+            data.onlyadmin &&
+            data.onlyadmin === "true" &&
+            SmdOfficial == "yes"
+          ) {
+            var fel = "";
+            if (message.isBotAdmin) {
+              let dmt = {
+                reason: "Only Admin can Chat!",
+                chat: message.metadata?.subject || "PRIVATE",
+                warnedby: tlang().title,
+                date: message.date,
+              };
+              taggs = taggs
+                ? taggs
+                : await warn.addwarn(message.sender, message.chat, dmt);
+              if (taggs.status) {
+                fel = "*Warns you for chat here!*\n";
+              }
+              await message.delete();
+              sleep(1500);
+              await message.send(
+                "*Hey @" +
+                  message.senderNum +
+                  "* " +
+                  fel +
+                  "*Deleteing message,while onlyadmin activated!!* ",
+                {
+                  mentions: [message.sender],
+                }
+              );
+            } else {
+              await message.send(
+                "*_Provide admin role to kick Message Senders_*\n*Or _Disable onlyadmin(on/off) in currentchat_*"
+              );
+            }
+          }
+          if (
+            data.antilink &&
+            data.antilink !== "false" &&
+            SmdOfficial === "yes"
+          ) {
+            const bmt =
+              Config.antilink_values && Config.antilink_values !== "all"
+                ? Config.antilink_values
+                    .split(",")
+                    .filter((input) => input.trim() !== "")
+                : ["https://", "chat.whatsapp.com", "fb.com"];
+            let searched = m_fino.toLowerCase();
+            if (bmt.some((datb) => searched.includes(datb))) {
+              if (!message.isBotAdmin) {
+                let nsg =
+                  " *[LINK DETECTED]*\nUser @" +
+                  message.sender.split("@")[0] +
+                  " detected sending a link.\nPromote " +
+                  Config.botname +
+                  " as admin to " +
+                  (data.antilink === "kick"
+                    ? "kick \nlink senders."
+                    : "delete \nlinks from this Chat") +
+                  " \n";
+                await message.send(nsg, {
+                  mentions: [message.sender],
+                });
+              } else if (data.antilink === "delete") {
+                await message.send("*_Link Detected.. Deletion Done!_*");
+                await message.delete();
+              } else if (data.antilink === "warn" || data.antilink === "true") {
+                let send_msg = {
+                  reason: "links not allowed!",
+                  chat: message.metadata?.subject || "PRIVATE",
+                  warnedby: tlang().title,
+                  date: message.date,
+                };
+                taggs = taggs
+                  ? taggs
+                  : await warn.addwarn(message.sender, message.chat, send_msg);
+                var fel = taggs.status
+                  ? "*_[LINK DETECTED] Hey @" +
+                    message.senderNum +
+                    " warning!!_*\n*_links not allowed in current group!_*"
+                  : "*[LINK DETECTED]!*";
+                await message.reply(fel, {
+                  mentions: [message.sender],
+                });
+                await message.delete();
+              } else if (data.antilink === "kick") {
+                await message.send("*_Link Detected!!_*");
+                try {
+                  await message.delete();
+                  sleep(1500);
+                  await message.bot.groupParticipantsUpdate(
+                    message.chat,
+                    [message.sender],
+                    "remove"
+                  );
+                } catch {
+                  await message.send("*Link Detected*\n" + tlang().botAdmin);
+                }
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.log("Error From Antilinks : ", err);
+      }
+      var wrods_on_db = data?.antiword || {
+        status: "false",
+      };
+      if (
+        body.length > 1 &&
+        !message.isBot &&
+        wrods_on_db &&
+        wrods_on_db.status !== "false" &&
+        wrods_on_db.words
+      ) {
+        var chek = wrods_on_db.words.split(",") || [];
+        let quer = false;
+        chek.map(async (msg) => {
+          if (
+            message.isAdmin ||
+            !global.SmdOfficial ||
+            global.SmdOfficial != "yes"
+          ) {
+            return;
+          }
+          let match = new RegExp("\\b" + msg?.trim() + "\\b", "ig");
+          let resu = messagend.toLowerCase();
+          if (!quer && msg && match.test(resu)) {
+            quer = true;
+            await sleep(500);
+            try {
+              var db_find = "";
+              if (wrods_on_db.status === "warn") {
+                let send_msd_fb = {
+                  reason: "For using Bad Word",
+                  chat: message.metadata?.subject || "PRIVATE",
+                  warnedby: tlang().title,
+                  date: message.date,
+                };
+                taggs = taggs
+                  ? taggs
+                  : await warn.addwarn(
+                      message.sender,
+                      message.chat,
+                      send_msd_fb
+                    );
+                if (taggs.status) {
+                  db_find = "\n*Warns you for using badWord!!*\n";
+                }
+              }
+              if (message.isBotAdmin) {
+                await message.send(
+                  "*[BAD WORD DETECTED] Hey @" +
+                    message.senderNum +
+                    "* " +
+                    db_find +
+                    " *Deleting your message from chat!*\n",
+                  {
+                    mentions: [message.sender],
+                  },
+                  message
+                );
+                await message.delete();
+              } else {
+                await message.reply(
+                  "*_[BAD WORD DETECTED] provide admin to take action!_*",
+                  {
+                    mentions: [message.sender],
+                  }
+                );
+              }
+            } catch (err) {
+              console.log("Error From Bad Words : ", err);
+            }
+          }
+        });
+      }
+      if (taggs) {
+        let db = parseInt(global.warncount) || 2;
+        if (taggs.warning >= db) {
+          if (message.isGroup) {
+            if (message.isBotAdmin) {
+              await message.send(
+                "*Hey @" +
+                  message.senderNum +
+                  " Kicking you from group!_*\n*_Because Your warn limit exceeded*",
+                {
+                  mentions: [message.sender],
+                }
+              );
+              await message.bot.groupParticipantsUpdate(
+                message.chat,
+                [message.sender],
+                "remove"
+              );
+            }
+          } else {
+            await message.send(
+              "*Hey @" +
+                message.senderNum +
+                " Blocking you!_*\n*_Because Your warn limit exceeded*",
+              {
+                mentions: [message.sender],
+              }
+            );
+            await message.bot.updateBlockStatus(message.sender, "block");
+          }
+        }
+      }
+      try {
+        if (!global.SmdOfficial || message.mtype === "reactionMessage") {
+          return;
+        }
+        let db = (await groupdb.findOne({
+          id: message.chat,
+        })) || {
+          chatbot: "false",
+        };
+        if (!bott || chatbotCount >= 10) {
+          bott = (await bot_.findOne({
+            id: "bot_" + message.user,
+          })) || {
+            chatbot: "false",
+          };
+        } else {
+          chatbotCount++;
+        }
+        let foo =
+          bott && bott.chatbot && bott.chatbot == "true"
+            ? "true"
+            : db.chatbot || "false";
+        if (foo === "true" && !incastity && !message.isBot && message.text) {
+          let _0x4c0917 = !message.isGroup
+            ? message.user
+            : message.quoted
+            ? message.quoted.sender
+            : message.mentionedJid[0] || false;
+          if (message.isGroup && _0x4c0917 && !message.checkBot(_0x4c0917)) {
+            return;
+          }
+          let { data: ccpt } = await axios.get(
+            "http://api.brainshop.ai/get?bid=175685&key=Pg8Wu8mrDQjfr0uv&uid=[" +
+              message.senderNum +
+              "]&msg=[" +
+              messagend +
+              "]"
+          );
+          if (ccpt && ccpt.cnt) {
+            message.send(ccpt.cnt, {}, "suhail", message);
+          } else {
+            ("");
+          }
+        }
+      } catch (err) {
+        console.log("Error From ChatBot : ", err);
+      }
+    } catch (err) {
+      console.log("Group Settings error in command.main() \n", err);
+    }
+  }
+);
+let users = {};
+let user_warns = {};
+UserFunction(
+  {
+    group: "add",
+  },
+  async (msg, { Void: _0x4dedb6 }) => {
+    try {
+      let match = await groupdb.findOne({
+        id: msg.chat,
+      });
+      if (
+        !match ||
+        !msg.isGroup ||
+        match.botenable !== "true" ||
+        msg.blockJid ||
+        msg.fromMe
+      ) {
+        return;
+      }
+      let dat = match && match.welcome ? match.welcome : "false";
+      let query =
+        match && match.antifake ? match.antifake.toLowerCase() : "false";
+      let input = query.split(",");
+      const data_ba = input.some((msnc) => msg.user.startsWith(msnc));
+      if (query !== "false" && !data_ba && !msg.isCreator) {
+        if (msg.isBotAdmin) {
+          try {
+            await msg.kick();
+            return await sendWelcome(
+              msg,
+              "*[ANTIFAKE START] @User kicked automaticaly!* @pp"
+            );
+          } catch (err) {
+            await msg.error(
+              " Can't kick user in antifake\n❲❒❳ GROUP: " +
+                msg.metadata.subject +
+                "\n❲❒❳ ERROR: " +
+                err +
+                "\n",
+              err,
+              false
+            );
+          }
+        } else {
+          await msg.send(
+            "*[ANTI_FAKE ERROR] Need admin role to kick fake users!!*"
+          );
+        }
+      } else if (dat === "true") {
+        await sendWelcome(msg, match.welcometext);
+      }
+    } catch (err) {
+      console.log("Error From Welcome : ", err);
+    }
+  }
+);
+UserFunction(
+  {
+    group: "remove",
+  },
+  async (message, { Void: remove }) => {
+    try {
+      let citel =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) || false;
+      if (
+        !message ||
+        !citel ||
+        !message.isGroup ||
+        citel.botenable !== "true" ||
+        message.blockJid ||
+        message.fromMe
+      ) {
+        return;
+      }
+      let aitel = citel && citel.goodbye ? citel.goodbye : "false";
+      if (aitel === "true") {
+        await sendWelcome(message, citel.goodbyetext);
+      }
+    } catch (_0x442765) {
+      console.log("Error From Goodbye : ", _0x442765);
+    }
+  }
+);
+smd(
+  {
+    group: "promote",
+  },
+  async (message, { Void: mm }) => {
+    try {
+      let citel =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) || false;
+      if (
+        !citel ||
+        !message.isGroup ||
+        citel.botenable !== "true" ||
+        message.blockJid
+      ) {
+        return;
+      }
+      if (!user_warns[message.sender]) {
+        user_warns[message.sender] = {
+          [message.action]: 1,
+        };
+      } else {
+        user_warns[message.sender][message.action]++;
+      }
+      let aitel;
+      if (citel.antipromote == "true" && !message.isCreator) {
+        aitel = message.isBotAdmin ? false : true;
+        if (
+          users[message.sender] &&
+          users[message.sender].previous_Action === "antidemote"
+        ) {
+          delete users[message.sender];
+          return;
+        }
+        if (message.isBotAdmin) {
+          try {
+            await message.demote();
+            users[message.sender] = {
+              previous_Action: "antipromote",
+            };
+            if (user_warns[message.sender][message.action] > 2) {
+              return;
+            }
+            return await sendWelcome(
+              message,
+              "*[ANTIPROMOTE START] @User Demoted Automatically!* @pp "
+            );
+          } catch (err) {
+            await message.error(
+              " Can't demote user in antipromote\n❲❒❳ GROUP: " +
+                message.metadata.subject +
+                "\n❲❒❳ ERROR: " +
+                err +
+                "\n",
+              err,
+              false
+            );
+          }
+        }
+      }
+      if (citel.pdm == "true" || aitel) {
+        if (user_warns[message.sender][message.action] > 2) {
+          return;
+        }
+        var citel =
+          " *[SOMEONE PROMOTE HERE]*\n" +
+          (aitel
+            ? "*Note : _I'm Not Admin Here, So I Can't Demote Someone while Anti_Promote Activated_*"
+            : "") +
+          "\n           \n  ❲❒❳ *User:* _@user_\n❲❒❳ *Position:* _Member -> Admin_ @pp\n  ❲❒❳ *Total Members:* _@count_Members_\n❲❒❳ *Group Name:* @gname\n\n\n" +
+          Config.caption;
+        return await sendWelcome(message, citel);
+      }
+    } catch (err) {
+      console.log("Error From Promote : ", err);
+    }
+  }
+);
+UserFunction(
+  {
+    group: "demote",
+  },
+  async (mesg, { Void: _0x4676d7 }) => {
+    try {
+      let citel =
+        (await groupdb.findOne({
+          id: mesg.chat,
+        })) || false;
+      if (
+        !citel ||
+        !mesg.isGroup ||
+        citel.botenable !== "true" ||
+        mesg.blockJid
+      ) {
+        return;
+      }
+      if (!user_warns[mesg.sender]) {
+        user_warns[mesg.sender] = {
+          [mesg.action]: 1,
+        };
+      } else {
+        user_warns[mesg.sender][mesg.action]++;
+      }
+      let matches;
+      if (citel.antidemote == "true" && !mesg.isCreator) {
+        matches = mesg.isBotAdmin ? false : true;
+        if (
+          users[mesg.sender] &&
+          users[mesg.sender].previous_Action === "antipromote"
+        ) {
+          delete users[mesg.sender];
+          return;
+        }
+        if (mesg.isBotAdmin) {
+          try {
+            await mesg.promote();
+            users[mesg.sender] = {
+              previous_Action: "antidemote",
+            };
+            if (user_warns[mesg.sender][mesg.action] > 2) {
+              return;
+            }
+            return await sendWelcome(
+              mesg,
+              "*[ANTIPROMOTE START] User promote automatically!* @pp "
+            );
+          } catch (err) {
+            await mesg.error(
+              " Can't promote user in antidemote\n❲❒❳ GROUP: " +
+                mesg.metadata.subject +
+                "\n❲❒❳ ERROR: " +
+                err +
+                "\n",
+              err,
+              false
+            );
+          }
+        }
+      }
+      if (citel.pdm == "true" || matches) {
+        if (user_warns[mesg.sender][mesg.action] > 2) {
+          return;
+        }
+        var dm_msg =
+          " *[SOMEONE DEMOTE HERE]*\n  " +
+          (matches
+            ? "*Note : _I'm Not Admin Here, So I Can't promote Someone while Anti_Demote Activated_*"
+            : "") +
+          "\n\n  ❲❒❳ *User:* _@user_\n❲❒❳ *Position:* _Admin -> Member_ @pp\n  ❲❒❳ *Total Members:* _@count_Members_\n❲❒❳ *Group Name:* @gname\n  \n\n" +
+          Config.caption;
+        return await sendWelcome(mesg, dm_msg);
+      }
+    } catch (err) {
+      console.log("Error From Demote : ", err);
+    }
+  }
+);
