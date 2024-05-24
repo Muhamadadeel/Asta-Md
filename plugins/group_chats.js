@@ -415,30 +415,65 @@ UserFunction(
     }
   }
 );
-UserFunction({
-  cmdname: "editname",
-  info: "Set Description of Group",
-  type: "group",
-  filename: __filename,
-  use: "<enter Description Text>"
-}, async (message, match) => {
-  try {
-    if (!message.isGroup) {
-      return message.reply(tlang().group);
-    }
-    if (!match) {
-      return await message.reply("*Uhh Dear, Give text to Update This Group Name*");
-    }
-    if (!message.isBotAdmin || !message.isAdmin) {
-      return await message.reply(!message.isBotAdmin ? "*I'm Not Admin In This Group" + (!message.isCreator ? ", Sir" : "") + "*" : tlang().admin);
-    }
+UserFunction(
+  {
+    cmdname: "editname",
+    info: "Set Description of Group",
+    type: "group",
+    filename: __filename,
+    use: "<enter Description Text>",
+  },
+  async (message, match) => {
     try {
-      await message.bot.groupUpdateSubject(message.chat, match);
-      message.reply("*_✅Group Name Updated Successfuly.!_*");
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!match) {
+        return await message.reply(
+          "*Uhh Dear, Give text to Update This Group Name*"
+        );
+      }
+      if (!message.isBotAdmin || !message.isAdmin) {
+        return await message.reply(
+          !message.isBotAdmin
+            ? "*I'm Not Admin In This Group" +
+                (!message.isCreator ? ", Sir" : "") +
+                "*"
+            : tlang().admin
+        );
+      }
+      try {
+        await message.bot.groupUpdateSubject(message.chat, match);
+        message.reply("*_✅Group Name Updated Successfuly.!_*");
+      } catch (err) {
+        await message.reply("*_Can't update name, Group Id not found!!_*");
+      }
     } catch (err) {
-      await message.reply("*_Can't update name, Group Id not found!!_*");
+      await message.error(err + "\n\ncommand: setdesc", err);
     }
-  } catch (err) {
-    await message.error(err + "\n\ncommand: setdesc", err);
   }
-});
+);
+UserFunction(
+  {
+    cmdname: "leave",
+    info: "Exit a Group.",
+    fromMe: true,
+    type: "group",
+    filename: __filename,
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return await message.send(tlang().group, {}, "", message);
+      }
+      await message.bot.groupParticipantsUpdate(
+        message.chat,
+        [message.user],
+        "remove"
+      );
+      message.send("*Bye Bye Everyone*", {}, "", message, message.user);
+    } catch (err) {
+      await message.error(err + "\n\ncommand: left", err, false);
+    }
+  }
+);
