@@ -719,3 +719,208 @@ cmd(
     }
   }
 );
+smd(
+  {
+    pattern: "poll",
+    desc: "Makes poll in group.",
+    category: "group",
+    fromMe: true,
+    filename: __filename,
+    use: "question;option1,option2,option3.....",
+  },
+  async (message, query) => {
+    try {
+      let [poll_name, request] = query.split(";");
+      if (query.split(";") < 2) {
+        return await message.reply(
+          prefix + "poll question;option1,option2,option3....."
+        );
+      }
+      let poll_questions = [];
+      for (let data of request.split(",")) {
+        if (data && data != "") {
+          poll_questions.push(data);
+        }
+      }
+      await message.bot.sendMessage(message.chat, {
+        poll: {
+          name: poll_name,
+          values: poll_questions,
+        },
+      });
+    } catch (err) {
+      await message.error(err + "\n\ncommand: poll", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "promote",
+    desc: "Provides admin role to replied/quoted user",
+    category: "group",
+    filename: __filename,
+    use: "<quote|reply|number>",
+  },
+  async (message) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isBotAdmin) {
+        return message.reply("*I'm Not Admin, So I Can't Promote Anyone*");
+      }
+      if (!message.isAdmin) {
+        return message.reply(tlang().admin);
+      }
+      let match = message.mentionedJid[0]
+        ? message.mentionedJid[0]
+        : message.quoted
+        ? message.quoted.sender
+        : false;
+      if (!match) {
+        return await message.reply("*Reply/mention an User*");
+      }
+      await message.bot.groupParticipantsUpdate(
+        message.chat,
+        [match],
+        "promote"
+      );
+      await message.send(
+        "*@" + match.split("@")[0] + " promoted Succesfully!*",
+        {
+          mentions: [match],
+        }
+      );
+    } catch (err) {
+      await message.error(err + "\n\ncommand: promote", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "kick",
+    desc: "Kicks replied/quoted user from group.",
+    category: "group",
+    filename: __filename,
+    use: "<quote|reply|number>",
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isBotAdmin) {
+        return await message.reply("*I'm Not Admin In This Group*");
+      }
+      if (!message.isAdmin) {
+        return message.reply(tlang().admin);
+      }
+      let match = message.quoted
+        ? message.quoted.sender
+        : message.mentionedJid[0]
+        ? message.mentionedJid[0]
+        : false;
+      if (!match) {
+        return await message.reply("*Reply/mention an User*");
+      }
+      if (message.checkBot(match)) {
+        return await message.reply("*I can't kick my Creator!!*");
+      }
+      await message.bot.groupParticipantsUpdate(
+        message.chat,
+        [match],
+        "remove"
+      );
+      await message.send("*@" + match.split("@")[0] + " Kicked!*", {
+        mentions: [match],
+      });
+    } catch (error) {
+      await message.error(error + "\n\ncommand: kick", error);
+    }
+  }
+);
+smd(
+  {
+    pattern: "group",
+    desc: "mute and unmute group.",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match) => {
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
+    }
+    if (!message.isAdmin && !message.isCreator) {
+      return message.reply(tlang().admin);
+    }
+    let ottb = match.toLowerCase();
+    try {
+      const pp =
+        (await message.bot
+          .profilePictureUrl(message.chat, "image")
+          .catch((_0x1a1b89) => THUMB_IMAGE)) || THUMB_IMAGE;
+      const jids = message.metadata;
+      const mjids = message.admins;
+      const dta = mjids
+        .map(
+          (users, length) =>
+            "  " + (length + 1) + ". wa.me/" + users.id.split("@")[0]
+        )
+        .join("\n");
+      console.log("listAdmin , ", dta);
+      const info =
+        jids.owner ||
+        mjids.find((admin_data) => admin_data.admin === "superadmin")?.id ||
+        false;
+      let dat_msg = `
+*「 INFO GROUP 」*
+*▢ ID :* • ${jids.id}
+*▢ NAME :* • ${jids.subject}
+*▢ Members :* • ${jids.participants.length}
+*▢ Group Owner :* • ${info ? "wa.me/" + info.split("@")[0] : "notFound"}
+*▢ Admins :* • ${dta}
+*▢ Description :* • ${jids.desc?.toString() || "unknown"}
+`;
+      let dat = isMongodb
+        ? await sck.findOne({
+            id: message.chat,
+          })
+        : false;
+      if (dat) {
+        dat_msg += (
+          "*▢ 🪢 Extra Group Configuration :*\n  • Group Nsfw :    " +
+          (dat.nsfw == "true" ? "✅" : "❎") +
+          " \n  • Antilink :    " +
+          (dat.antilink == "true" ? "✅" : "❎") +
+          "\n  • Economy :    " +
+          (dat.economy == "true" ? "✅" : "❎") +
+          "\n"
+        ).trim();
+        if (dat.welcome == "true") {
+          dat_msg += "\n*▢ Wellcome Message :* \n  • " + dat.welcometext;
+          dat_msg += "\n\n*▢ Goodbye Message :* \n  • " + dat.goodbyetext;
+        }
+      }
+      try {
+        await message.bot.sendMessage(
+          message.chat,
+          {
+            image: {
+              url: pp,
+            },
+            caption: dat_msg,
+          },
+          {
+            quoted: message,
+          }
+        );
+      } catch (err) {
+        await message.send(dat_msg, {}, "", message);
+        return console.log("error in group info,\n", err);
+      }
+    } catch (err) {
+      await message.error(err + "\ncmdName: Group info");
+      return console.log("error in group info,\n", err);
+    }
+  }
+);
