@@ -477,3 +477,75 @@ UserFunction(
     }
   }
 );
+let mtypes = ["imageMessage"];
+UserFunction(
+  {
+    pattern: "editgcpp",
+    desc: "Set Group profile picture",
+    category: "group",
+    use: "<reply to image>",
+    filename: __filename,
+  },
+  async (message) => {
+    try {
+      if (!message.isGroup) {
+        return await message.send(tlang().group, {}, "", message);
+      }
+      if (!message.isBotAdmin || !message.isAdmin) {
+        return await message.reply(
+          !message.isBotAdmin
+            ? "*I am not an Admin" + (!message.isCreator ? ", Sir" : "") + "*"
+            : tlang().admin
+        );
+      }
+      let match = mtypes.includes(message.mtype)
+        ? message
+        : message.reply_message;
+      if (!match || !mtypes.includes(match?.mtype || "need_Media")) {
+        return await message.reply("*Reply to an image, dear*");
+      }
+      return await updateProfilePicture(message, message.chat, match, "gpp");
+    } catch (error) {
+      await message.error(error + "\n\ncommand : gpp", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "fullgpp",
+    desc: "Set full screen group profile picture",
+    category: "group",
+    use: "<reply to image>",
+    filename: __filename,
+  },
+  async (message) => {
+    try {
+      if (!message.isGroup) {
+        return await message.send(tlang().group, {}, "", message);
+      }
+      if (!message.isBotAdmin || !message.isAdmin) {
+        return await message.reply(
+          !message.isBotAdmin
+            ? "*I'm Not An Admin" + (!message.isCreator ? ", Sir" : "") + "*"
+            : tlang().admin
+        );
+      }
+      let match = mtypes.includes(message.mtype)
+        ? message
+        : message.reply_message;
+      if (!match || !mtypes.includes(match?.mtype || "need_Media")) {
+        return await message.reply("*Reply to an image*");
+      }
+      return await updateProfilePicture(
+        message,
+        message.chat,
+        match,
+        "fullgpp"
+      );
+    } catch (err) {
+      await message.error(err + "\n\ncommand : fullgpp", err);
+    }
+    {
+    }
+  }
+);
