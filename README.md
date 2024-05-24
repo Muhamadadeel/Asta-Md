@@ -182,7 +182,7 @@ We welcome contributions from the community! To contribute, please follow the gu
 
 ## License
 
-Asta Md is released under the [Unlicense](https://github.com/Astropeda/Asta-Md/blob/main/LICENSE).
+Asta Md is released under the [GNU General Public License v2.0](https://github.com/Astropeda/Asta-Md/blob/main/LICENSE).
 
 ## Contact
 
