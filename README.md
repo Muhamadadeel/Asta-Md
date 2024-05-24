@@ -1,4 +1,4 @@
-## ᴀꜱᴛᴀ ᴍᴅ
+### ᴀꜱᴛᴀ ᴍᴅ ʙᴇᴛᴀ 3.5.0
 
 ## Introduction
 
@@ -164,11 +164,10 @@ npm start
 
 ## Contributing
 
-We welcome contributions from the community! 
+We welcome contributions from the community! To contribute, please follow the guidelines provided [here](https://github.com/Astropeda/Asta-Md/blob/main/CONTRIBUTING.md):
 
-To contribute:
 1. Fork the repository.
-2. Create a new branch with your feature or bug fix.
+2. Create a new branch with your feature or bugfix.
 3. Make your changes and commit them with clear messages.
 4. Push your branch and open a Pull Request.
 
