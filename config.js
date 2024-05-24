@@ -24,11 +24,6 @@ global.BUTTONS = process.env.BUTTONS || process.env.MENU_BTN || "1";
 global.devs = "2348039607375"
 global.sudo = process.env.SUDO ? process.env.SUDO.replace(/[\s+]/g, '') : "2348039607375";
 global.owner= process.env.OWNER_NUMBER ? process.env.OWNER_NUMBER.replace(/[\s+]/g, '') : "2348039607375";
-
-
-
-
-//========================= [ BOT SETTINGS ] =========================\\
 global.style = process.env.STYLE   || '2'
 global.flush = process.env.FLUSH   || "false"; 
 global.gdbye = process.env.GOODBYE || "false"; 

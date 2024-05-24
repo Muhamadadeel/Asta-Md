@@ -1,4 +1,3 @@
-global.BUTTONS = process.env.BUTTONS || "1";
 const os = require("os");
 const fs = require("fs");
 const Config = require("../config");
