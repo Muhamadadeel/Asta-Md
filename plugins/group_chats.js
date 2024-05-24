@@ -669,7 +669,7 @@ UserFunction(
 
       if (!message.isBotAdmin) {
         return message.reply(
-          "\*I am Not An Admin, I can't perform such action.\*"
+          "*I am Not An Admin, I can't perform such action.*"
         );
       }
 
@@ -677,7 +677,7 @@ UserFunction(
         return message.reply(tlang().admin);
       }
 
-      let saved = "\*These Users Not Kicked\* \n\t";
+      let saved = "*These Users Not Kicked* \n\t";
       let history = message.metadata.participants;
       let data = 0;
       let query = false;
@@ -687,7 +687,7 @@ UserFunction(
         if (!chosen_data && jids.id !== message.user) {
           if (!query) {
             query = true;
-            await message.reply("\*Removing All Participants\*");
+            await message.reply("*Removing All Participants*");
           }
           try {
             await message.bot.groupParticipantsUpdate(
@@ -701,15 +701,15 @@ UserFunction(
       }
 
       if (data == 0) {
-        return await message.reply("\*No Participants Kicked\*");
+        return await message.reply("*No Participants Kicked*");
       } else {
-        return await message.reply("\*Done, " + data + " Participants Kicked\*");
+        return await message.reply("*Done, " + data + " Participants Kicked*");
       }
     } catch (err) {
       await message.error(
         err + "\n\ncommand: kickall",
         err,
-        "\*Can't kick participants due to error\*"
+        "*Can't kick participants due to error*"
       );
     }
   }
@@ -1644,10 +1644,7 @@ UserFunction(
         }
       );
       let get = parseInt(global.warncount) || 3;
-      if (
-        opt_blob[message.chat].length > get &&
-        !message.checkBot(query)
-      ) {
+      if (opt_blob[message.chat].length > get && !message.checkBot(query)) {
         if (message.isGroup) {
           if (message.isBotAdmin) {
             await message.send(
@@ -1724,11 +1721,7 @@ UserFunction(
         })) ||
         {};
       let quey = m_dat.warn || {};
-      if (
-        msg.isCreator &&
-        data.toLowerCase() === "all" &&
-        quey
-      ) {
+      if (msg.isCreator && data.toLowerCase() === "all" && quey) {
         quey = {};
       } else {
         if (!m_dat || !quey || !quey[msg.chat]) {
@@ -1749,6 +1742,1234 @@ UserFunction(
       );
     } catch (err) {
       await msg.error(err + "\n\nCommand: resetwarn", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "activate",
+    desc: "Switches for varios works.",
+    category: "settings",
+    filename: __filename,
+  },
+  async (message, request) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      const botNumber = message.botNumber;
+      const isAdmin = message.isAdmin;
+      let menu = request?.split(" ")[0].toLowerCase()?.trim() || false;
+      if (!isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let quetions =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        })) ||
+        false;
+      if (!quetions) {
+        return await message.reply("*Group Not In Db*");
+      }
+      switch (menu) {
+        case "antilink":
+          {
+            if (quetions.antilink !== "false") {
+              return await message.reply(
+                "*_Antilink was alredy enabled here!_*"
+              );
+            }
+            await groupdb.updateOne(
+              {
+                id: message.chat,
+              },
+              {
+                antilink: "warn",
+              }
+            );
+            await message.reply("*_Enabled antilink in current chat.!_*");
+          }
+          break;
+        case "economy":
+          {
+            if (quetions.economy == "true") {
+              return await message.reply("*_Economy was alredy enabled.!_*");
+            }
+            await groupdb.updateOne(
+              {
+                id: message.chat,
+              },
+              {
+                economy: "true",
+              }
+            );
+            await message.reply("*_Economy enabled in current chat.!_*");
+          }
+          break;
+        case "events":
+          {
+            await groupdb.updateOne(
+              {
+                id: message.chat,
+              },
+              {
+                welcome: "true",
+                goodbye: "true",
+              }
+            );
+            return await message.reply("*Successfully Enabled Events!*");
+          }
+          break;
+        case "bot":
+          {
+            if (quetions.botenable == "true") {
+              return await message.reply("*_bot is already enabled!_*");
+            }
+            await groupdb.updateOne(
+              {
+                id: message.chat,
+              },
+              {
+                botenable: "true",
+              }
+            );
+            await message.reply("*_Successfully Enabled bot_*");
+          }
+          break;
+        default: {
+          message.reply(
+            "Please provide me term like.\n1-events\n2-antilink\n3-economy\n4-bot"
+          );
+        }
+      }
+    } catch (error) {
+      await message.error(error + "\n\ncommand: act", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "deactivate",
+    desc: "Switches for varios works.",
+    category: "settings",
+    filename: __filename,
+  },
+  async (message, request) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      const botNumber = message.botNumber;
+      const isAdmin = message.isAdmin;
+      let menu = request?.split(" ")[0].toLowerCase()?.trim() || false;
+      if (!menu) {
+        return message.reply(
+          "❌ Please provide me term like like\n1-events\n2-antilink\n3-bot\n4-economy"
+        );
+      }
+      if (!isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let _0x39a7fb =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        })) ||
+        false;
+      if (!_0x39a7fb) {
+        return await message.reply(
+          "*_Uhh dear, request not be proceed due to error!_*"
+        );
+      }
+      switch (menu) {
+        case "antilink":
+          {
+            if (_0x39a7fb.antilink == "false") {
+              return message.reply("*_Antilink was alredy disabled_*");
+            }
+            await groupdb.updateOne(
+              {
+                id: message.chat,
+              },
+              {
+                antilink: "false",
+              }
+            );
+            message.reply("*_disabled antilink in current chat!_*");
+          }
+          break;
+        case "economy":
+          {
+            if (_0x39a7fb.economy == "false") {
+              return message.reply("*_Economy was alredy disabled!_*");
+            }
+            await groupdb.updateOne(
+              {
+                id: message.chat,
+              },
+              {
+                economy: "false",
+              }
+            );
+            message.reply("*disabled Economy in current chat.*");
+          }
+          break;
+        case "events":
+        case "event":
+          {
+            if (_0x39a7fb.events == "false") {
+              return message.reply("*_Events are already disabled!_*");
+            }
+            await groupdb.updateOne(
+              {
+                id: message.chat,
+              },
+              {
+                welcome: "false",
+                goodbye: "false",
+              }
+            );
+            return message.reply("*Successfully disabled Events!*");
+          }
+          break;
+        case "bot":
+          {
+            if (_0x39a7fb.botenable == "false") {
+              return await message.reply("*_bot is already disabled!_*");
+            }
+            await groupdb.updateOne(
+              {
+                id: message.chat,
+              },
+              {
+                botenable: "true",
+              }
+            );
+            await message.reply("*_Successfully disabled bot_*");
+          }
+          break;
+        default: {
+          message.reply(
+            "Please provide me term like.\n1-events\n2-antilink\n3-bot\n4-economy"
+          );
+        }
+      }
+    } catch (_0x27fa6e) {
+      await message.error(_0x27fa6e + "\n\ncommand: deact", _0x27fa6e);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "bot",
+    desc: "activates and deactivates bot.\nuse buttons to toggle.",
+    fromMe: true,
+    category: "misc",
+    filename: __filename,
+  },
+  async (message, match) => {
+    try {
+      let input = match ? match.toLowerCase().trim() : false;
+      let query = input ? input.split(" ")[0] : false;
+      let data_Info =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      if (!query) {
+        await message.send(
+          "*_Bot *" +
+            (data_Info.botenable === "false" ? "Disabled" : "Enabled") +
+            " in this Chat!_*"
+        );
+      } else if (
+        query.startsWith("off") ||
+        query.startsWith("deact") ||
+        query.startsWith("disable")
+      ) {
+        if (data_Info.botenable === "false") {
+          await message.send("*_Bot already disabled in current Chat!!_*");
+        } else {
+          await groupdb.updateOne(
+            {
+              id: message.chat,
+            },
+            {
+              botenable: "false",
+            }
+          );
+          await message.send("*_Bot Disabled Succesfully!_*");
+        }
+      } else if (
+        query.startsWith("on") ||
+        query.startsWith("act") ||
+        query.startsWith("enable")
+      ) {
+        if (data_Info.botenable === "true") {
+          await message.send("*_Bot already enabled in current Chat!!_*");
+        } else {
+          await groupdb.updateOne(
+            {
+              id: message.chat,
+            },
+            {
+              botenable: "true",
+            }
+          );
+          await message.send("*_Bot Succesfully Enabled!_*");
+        }
+      } else {
+        await message.send(
+          "*_Provide Valid Instruction_*\n*Ex: _" + prefix + "bot on/off_*"
+        );
+      }
+    } catch (err) {
+      message.error(err + "\n\ncommand: bot", err);
+    }
+  }
+);
+smd(
+  {
+    pattern: "antitag",
+    desc: "detect tagall in group chat, then kick them",
+    fromMe: true,
+    category: "misc",
+    filename: __filename,
+  },
+  async (messsage, match) => {
+    try {
+      let input = match ? match.toLowerCase().trim() : false;
+      let data = input ? input.split(" ")[0] : false;
+      let options =
+        (await groupdb.findOne({
+          id: messsage.chat,
+        })) ||
+        (await groupdb.new({
+          id: messsage.chat,
+        }));
+      if (!data) {
+        await messsage.send(
+          "*_Anti_tag *" +
+            (options.antitag === "false" ? "Disabled" : "Enabled") +
+            " in this Chat!_*"
+        );
+      } else if (
+        data.startsWith("off") ||
+        data.startsWith("deact") ||
+        data.startsWith("disable")
+      ) {
+        if (options.antitag === "false") {
+          await messsage.send(
+            "*_Anti_tag already disabled in current Chat!!_*"
+          );
+        } else {
+          await groupdb.updateOne(
+            {
+              id: messsage.chat,
+            },
+            {
+              antitag: "false",
+            }
+          );
+          await messsage.send("*_Anti_tag Disabled Succesfully!_*");
+        }
+      } else if (
+        data.startsWith("on") ||
+        data.startsWith("act") ||
+        data.startsWith("enable")
+      ) {
+        if (options.antitag === "true") {
+          await messsage.send("*_Anti_tag already enabled in current Chat!!_*");
+        } else {
+          await groupdb.updateOne(
+            {
+              id: messsage.chat,
+            },
+            {
+              antitag: "true",
+            }
+          );
+          await messsage.send(
+            "*_Anti_tag succesfully enabled in chat!_*\n*_Now bot kick user who tag all members!_*"
+          );
+        }
+      } else {
+        await messsage.send(
+          "*_Provide Valid Instruction_*\n*Ex: _" + prefix + "antitag on/off_*"
+        );
+      }
+    } catch (err) {
+      messsage.error(err + "\n\ncommand: antitag", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "antilink",
+    desc: "activates and deactivates antilink.\nuse buttons to toggle.",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match, { cmdName: antilink }) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let input = match ? match.toLowerCase().trim() : false;
+      let sent = input ? input.split(" ")[0] : false;
+      let data =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      if (!sent) {
+        return await message.send(
+          "*_Antilink " +
+            (data.antilink === "false" ? "Disabled" : "Enabled") +
+            " in this Group!_* \n" +
+            (data.antilink === "false"
+              ? ""
+              : "*Current Mode:* _" + data.antilink + "_") +
+            "\n\n*Antilink Modes:* ```\n" +
+            (prefix + antilink) +
+            " kick (Delete Links & Kick Senders)\n" +
+            (prefix + antilink) +
+            " delete (Delete Links Only)\n" +
+            (prefix + antilink) +
+            " warn (warn & delete links)\n" +
+            (prefix + antilink) +
+            " off (Disable Antilink in chat) ```\n\n\n" +
+            Config.caption
+        );
+      } else if (
+        sent.startsWith("off") ||
+        sent.startsWith("deact") ||
+        sent.startsWith("disable")
+      ) {
+        if (data.antilink === "false") {
+          return await message.send(
+            "*_Anti_Link already disabled in current Chat!!_*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            antilink: "false",
+          }
+        );
+        return await message.send("*_Anti_Link Disabled Succesfully!_*");
+      } else if (sent.startsWith("kick")) {
+        if (data.antilink === "kick") {
+          return await message.send(
+            "*_Anti_Link already set to kick link senders!!_*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            antilink: "kick",
+          }
+        );
+        return await message.send(
+          "*_Anti_Link Succesfully set to kick link senders!_*"
+        );
+      } else if (sent.startsWith("delete")) {
+        if (data.antilink === "delete") {
+          return await message.send(
+            "*_Anti_Link already set to delete links!!_*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            antilink: "delete",
+          }
+        );
+        return await message.send(
+          "*_Anti_Link Succesfully set to delete links from chat!_*"
+        );
+      } else if (sent.startsWith("warn")) {
+        if (data.antilink === "warn") {
+          return await message.send(
+            "*_Anti_Link already set to warn link senders!!_*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            antilink: "warn",
+          }
+        );
+        return await message.send(
+          "*_Anti_Link set to warn and delete links!_*"
+        );
+      } else {
+        return await message.send(
+          "*_Uhh Please, Provide Valid Instruction_*\n*Eg: _" +
+            prefix +
+            "antilink kick/delete/warn/off_*"
+        );
+      }
+    } catch (error) {
+      message.error(error + "\n\ncommand: antilink", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "welcome",
+    alias: ["setwelcome"],
+    desc: "sets welcome message in specific group.",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, data) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let input = data.toLowerCase().trim();
+      let data =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      if (input === "on" || input === "act" || input === "enable") {
+        if (data.welcome === "true") {
+          return await message.send(
+            "*_Welcome already enabled in current group!!_*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            welcome: "true",
+          }
+        );
+        return await message.send("*Welcome successfully enabled!!*");
+      }
+      if (data.welcome !== "true") {
+        return await message.send(
+          "*Welcome *Disabled in this Group* \n*_Use on/off to enable/disable welcome_*"
+        );
+      }
+      if (!data || input === "get") {
+        return await message.reply("*Welcome :* " + data.welcometext);
+      }
+      if (input === "off" || input === "deact" || input === "disable") {
+        if (data.welcome === "false") {
+          return await message.send(
+            "*Welcome already disabled in current group*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            welcome: "false",
+          }
+        );
+        return await message.send("*Disabled Welcome Message*");
+      }
+      await groupdb.updateOne(
+        {
+          id: message.chat,
+        },
+        {
+          welcometext: data,
+          welcome: "true",
+        }
+      );
+      await sendWelcome(message, data);
+    } catch (error) {
+      message.error(error + "\n\ncommand: setwelcome", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "goodbye",
+    desc: "sets goodbye message in specific group.",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let input = match.toLowerCase().trim();
+      let output =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      if (input === "on" || input === "act" || input === "enable") {
+        if (output.goodbye === "true") {
+          return await message.send(
+            "*Goodbye already enabled in current Group*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            goodbye: "true",
+          }
+        );
+        return await message.send("*Goodbye successfully enabled!!*");
+      }
+      if (output.goodbye !== "true") {
+        return await message.send(
+          "*_Goodbye *Disabled in this Group!_* \n*_Use on/off to enable/disable goodbye_*"
+        );
+      }
+      if (!match || input === "get") {
+        return await message.reply("*Goodbye Message :* " + output.goodbyetext);
+      }
+      if (input === "off" || input === "deact" || input === "disable") {
+        if (output.goodbye === "false") {
+          return await message.send(
+            "*Goodbye already disabled in current Group*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            goodbye: "false",
+          }
+        );
+        return await message.send("*Disbale GoodBye Message*");
+      }
+      await groupdb.updateOne(
+        {
+          id: message.chat,
+        },
+        {
+          goodbyetext: match,
+          goodbye: "true",
+        }
+      );
+      await sendWelcome(message, match);
+    } catch (error) {
+      message.error(error + "\n\ncommand: setgoodbye", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "antimsg",
+    desc: "activates and deactivates onlyadmin.",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match, { cmdName: msg_send }) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let menu =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      let input = match ? match.toLowerCase().trim() : false;
+      let chosen = input ? input.split(" ")[0] : false;
+      if (!chosen) {
+        return await message.send(
+          "*_" +
+            msg_send +
+            " *" +
+            (menu.onlyadmin === "false" ? "Disabled" : "Enabled") +
+            " in this Group!_*\n *_Use on/off to enable/disable_*"
+        );
+      } else if (
+        chosen.startsWith("off") ||
+        chosen.startsWith("deact") ||
+        chosen.startsWith("disable")
+      ) {
+        if (menu.onlyadmin === "false") {
+          return await message.reply(
+            "*_Onlyadmin Already Disabled in Current Chat_*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            onlyadmin: "false",
+          }
+        );
+        await message.bot.groupSettingUpdate(message.chat, "not_announcement");
+        return await message.send(
+          "*" +
+            msg_send +
+            " succesfully disable in group!_*\n*_Now everyone send message in group_*"
+        );
+      } else if (
+        chosen.startsWith("on") ||
+        chosen.startsWith("act") ||
+        chosen.startsWith("enable")
+      ) {
+        if (menu.onlyadmin === "true") {
+          return await message.reply(
+            "*_Onlyadmin Already Enabled in Current Chat_*"
+          );
+        }
+        if (message.isBotAdmin) {
+          await groupdb.updateOne(
+            {
+              id: message.chat,
+            },
+            {
+              onlyadmin: "true",
+            }
+          );
+          await message.bot.groupSettingUpdate(message.chat, "announcement");
+          return await message.send(
+            "*" +
+              msg_send +
+              " succesfully set to kick msg senders!_*\n*_Now only admins allow to send msg in group_*"
+          );
+        } else {
+          return await message.reply("*Provide Admin Role First*");
+        }
+      } else {
+        return await message.reply(
+          "*_Please Provide Valid Instruction_*\n*_Use on/off to enable/disable_*"
+        );
+      }
+    } catch (err) {
+      message.error(err + "\n\ncommand: onlyadmin", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "antibot",
+    desc: "kick Bot Users from Group.!",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match, { cmdName: antibotto }) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let msg =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      let request = match ? match.toLowerCase().trim() : "";
+      let matched =
+        request.startsWith("on") ||
+        request.startsWith("act") ||
+        request.startsWith("enable") ||
+        request.startsWith("del") ||
+        request.startsWith("warn")
+          ? "warn"
+          : request.startsWith("kic")
+          ? "kick"
+          : request.startsWith("off") ||
+            request.startsWith("reset") ||
+            request.startsWith("deact") ||
+            request.startsWith("disable")
+          ? "false"
+          : "";
+      if (!matched) {
+        return await message.send(
+          "*_Antibot Currently *" +
+            (msg.antibot === "false" ? "Disabled" : "Enabled") +
+            " in this Group!_*\n*_Use warn/kick/off to enable/disable Antibot_*"
+        );
+      } else if (matched === "false") {
+        if (msg.antibot === "false") {
+          return await message.reply(
+            "*_Antibot Already Disabled in Current Chat_*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            antibot: "false",
+          }
+        );
+        return await message.send("*Antibot Succesfully Disable in Group*");
+      } else if (matched === "warn" || matched === "kick") {
+        if (msg.antibot === matched) {
+          return await message.reply(
+            "*Antibot Already set to " + matched + " bots!*"
+          );
+        }
+        if (!message.isBotAdmin) {
+          return await message.reply("*Provide Admin Role First*");
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            antibot: matched,
+          }
+        );
+        return await message.send(
+          "*_Antibot Succesfully set to " + matched + " Bot Users!_*"
+        );
+      } else {
+        return await message.reply(
+          "*_Please provide valid instructions!_*\n*_Use warn/kick/off to enable/disable Antibot!_*"
+        );
+      }
+    } catch (err) {
+      message.error(err + "\n\ncommand: antibot", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "disable",
+    desc: "disable cmds in Group.!",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let _0x2cad27 =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      let input = match ? match.toLowerCase().trim() : false;
+      let data = input ? input.split(" ")[0] : "";
+      if (!data) {
+        return await message.send(
+          "*Provide cmd name to disable in group*\n*Ex " +
+            prefix +
+            "disable tag(to disabled 'tag' cmd)/info*"
+        );
+      } else if (
+        data.startsWith("info") ||
+        data.startsWith("list") ||
+        data.startsWith("cmds")
+      ) {
+        return await message.send(
+          _0x2cad27.disablecmds === "false"
+            ? "*_Uhh Dear, Theres no cmd disabled in current group_*"
+            : "*_Disable cmds :_* ```" +
+                _0x2cad27.disablecmds.replace("false,", "") +
+                "```"
+        );
+      } else if (
+        data.startsWith("enable") ||
+        data.startsWith("disable") ||
+        data.startsWith("bot")
+      ) {
+        return await message.reply("*_Uhh Dear, I can't disable that cmd_*");
+      } else if (data) {
+        const cmd_data_fui =
+          ᴀsᴛᴀ_ᴍᴅ.commands.find((cmdlets) => cmdlets.pattern === data) ||
+          ᴀsᴛᴀ_ᴍᴅ.commands.find((db) => db.alias && db.alias.includes(data));
+        if (cmd_data_fui) {
+          let _0xac463 = cmd_data_fui.pattern.replace(
+            /[.*+?^${}()|[\]\\]/g,
+            "\\$&"
+          );
+          let foo = new RegExp("\\b" + _0xac463 + "\\b");
+          if (foo.test(_0x2cad27.disablecmds)) {
+            return await message.send("*Provided cmd already in disable cmds*");
+          }
+          var set_data = _0x2cad27.disablecmds + "," + cmd_data_fui.pattern;
+          await groupdb.updateOne(
+            {
+              id: message.chat,
+            },
+            {
+              disablecmds: set_data,
+            }
+          );
+          let hero = set_data.replace("false,", "");
+          return await message.send(
+            '*_"' +
+              data +
+              '" Succesfully added in disable cmds_*' +
+              (hero === "" ? "" : "\n*_Disable cmds :_* ```" + hero + "```")
+          );
+        } else {
+          return await message.reply(
+            "*_'" + data + "' is not a bot command, Provide valid command_*"
+          );
+        }
+      }
+    } catch (err) {
+      message.error(err + "\n\ncommand: enable", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "enable",
+    desc: "enable a cmd in Group.!",
+    category: "group",
+    filename: __filename,
+  },
+  async (mesage, match) => {
+    try {
+      if (!mesage.isGroup) {
+        return mesage.reply(tlang().group);
+      }
+      if (!mesage.isAdmin && !mesage.isCreator) {
+        return mesage.reply(tlang().admin);
+      }
+      let recg =
+        (await groupdb.findOne({
+          id: mesage.chat,
+        })) ||
+        (await groupdb.new({
+          id: mesage.chat,
+        }));
+      let input = match ? match.toLowerCase().trim() : false;
+      let data = input ? input.split(" ")[0] : "";
+      let foo = data.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      let reqt = new RegExp("\\b" + foo + "\\b");
+      if (!data || data === "") {
+        return await mesage.send(
+          "*Please provide disabled cmd name to enable it*\n*Ex " +
+            prefix +
+            "enable tag(if 'tag' cmd disabled)/all(reset disables)*"
+        );
+      } else if (input.startsWith("all")) {
+        await groupdb.updateOne(
+          {
+            id: mesage.chat,
+          },
+          {
+            disablecmds: "false",
+          }
+        );
+        return await mesage.send("*_All disable cmds succesfully enabled_*");
+      } else if (
+        reqt.test(recg.disablecmds) &&
+        recg.disablecmds.includes(data)
+      ) {
+        let data_dis = recg.disablecmds.replace(reqt, "");
+        await groupdb.updateOne(
+          {
+            id: mesage.chat,
+          },
+          {
+            disablecmds: data_dis,
+          }
+        );
+        return await mesage.send(
+          '*_"' +
+            data.replace(",", "") +
+            '" Succesfully removed from disable cmds_*'
+        );
+      } else {
+        return await mesage.send(
+          "_There's no cmd disabled with *" + data.replace(",", "") + "* name"
+        );
+      }
+    } catch (error) {
+      mesage.error(error + "\n\ncommand: disable", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "antinum",
+    desc: "𝗗𝗲𝘁𝗲𝗰𝘁𝘀 𝗽𝗿𝗼𝗺𝗼𝘁𝗲/𝗱𝗲𝗺𝗼𝘁𝗲 𝗮𝗻𝗱 𝘀𝗲𝗻𝗱𝘀 𝗮𝗹𝗲𝗿𝘁. ",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let msg =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      let options = match ? match.toLowerCase().trim() : "";
+      if (
+        options.startsWith("off") ||
+        options.startsWith("deact") ||
+        options.startsWith("disable")
+      ) {
+        if (msg.antifake == "false") {
+          return await message.send(
+            "*Anti_Fake Already Disabled In Current Chat!*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            antifake: "false",
+          }
+        );
+        return await message.send("*Anti_Fake Disable Succesfully!*");
+      } else if (!match) {
+        return await message.send(
+          "*_Antifake " +
+            (msg.antifake === "false"
+              ? "Not set to any"
+              : 'set to "' + msg.antifake + '"') +
+            " Country Code!*\n *Provide Country code to Update Antifake Status*\n*Eg: " +
+            prefix +
+            "antifake 234*"
+        );
+      }
+      let dataaa = match
+        ? match
+            .split(",")
+            .map((blob) => parseInt(blob))
+            .filter((fo) => !isNaN(fo))
+            .join(",")
+        : false;
+      if (!match || !dataaa) {
+        return await message.send(
+          "*_Please provide a country code First_*\n *_Only numbers to join this group._*\n*_eg: " +
+            prefix +
+            "antifake 234_*"
+        );
+      } else if (dataaa) {
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            antifake: "" + dataaa,
+          }
+        );
+        return await message.send(
+          '*Anti_Fake Succesfully set to "' +
+            dataaa +
+            "\"!*\n*_Now People Joined Group Who's Number Start With " +
+            dataaa +
+            "_*"
+        );
+      } else {
+        return await message.send(
+          "*_Please provide a Valid country code First_*\n *_Only numbers to join this group._*\n*_eg: " +
+            prefix +
+            "antifake 234_*"
+        );
+      }
+    } catch (err) {
+      message.error(err + "\n\ncommand: antifake", err);
+    }
+  }
+);
+smd(
+  {
+    pattern: "antidemote",
+    desc: "Detects Promote and Automaticaly demote promoted person.",
+    category: "group",
+    filename: __filename,
+  },
+  async (mesage, match) => {
+    try {
+      if (!mesage.isGroup) {
+        return mesage.reply(tlang().group);
+      }
+      if (!mesage.isAdmin && !mesage.isCreator) {
+        return mesage.reply(tlang().admin);
+      }
+      let menu =
+        (await groupdb.findOne({
+          id: mesage.chat,
+        })) ||
+        (await groupdb.new({
+          id: mesage.chat,
+        }));
+      let opt = match ? match.toLowerCase().trim() : "";
+      if (
+        opt.startsWith("on") ||
+        opt.startsWith("act") ||
+        opt.startsWith("enable")
+      ) {
+        if (menu.antidemote == "true") {
+          return await mesage.send(
+            "*Anti_Demote Already Enabled In Current Chat!*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: mesage.chat,
+          },
+          {
+            antidemote: "true",
+          }
+        );
+        return await mesage.send(
+          "*Anti_Demote Enable Succesfully! _No One Demote Here Now_.*"
+        );
+      } else if (
+        opt.startsWith("off") ||
+        opt.startsWith("deact") ||
+        opt.startsWith("disable")
+      ) {
+        if (menu.antidemote == "false") {
+          return await mesage.send(
+            "*Anti_Demote Already Disabled In Current Chat!*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: mesage.chat,
+          },
+          {
+            antidemote: "false",
+          }
+        );
+        return await mesage.send("*Anti_Demote Disable Succesfully!*");
+      } else {
+        return await mesage.reply(
+          '*Uhh Dear, Please Toggle between "On" And "Off".* \n*_To Enable & Disable Stop Demoting Peoples!_*'
+        );
+      }
+    } catch (err) {
+      mesage.error(err + "\n\ncommand: antidemote", err);
+    }
+  }
+);
+smd(
+  {
+    pattern: "antipromote",
+    desc: "Detects Promote and Automaticaly demote promoted person.",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+      let dt =
+        (await groupdb.findOne({
+          id: message.chat,
+        })) ||
+        (await groupdb.new({
+          id: message.chat,
+        }));
+      let options = match ? match.toLowerCase().trim() : "";
+      if (
+        options.startsWith("on") ||
+        options.startsWith("act") ||
+        options.startsWith("enable")
+      ) {
+        if (dt.antipromote == "true") {
+          return await message.send(
+            "*Anti_Promote Already Enabled In Current Chat!*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            antipromote: "true",
+          }
+        );
+        return await message.send(
+          "*Anti_Promote Enable Succesfully! _No One Promote Here Now_.*"
+        );
+      } else if (
+        options.startsWith("off") ||
+        options.startsWith("deact") ||
+        options.startsWith("disable")
+      ) {
+        if (dt.antipromote == "false") {
+          return await message.send(
+            "*Anti_Promote Already Disabled In Current Chat!*"
+          );
+        }
+        await groupdb.updateOne(
+          {
+            id: message.chat,
+          },
+          {
+            antipromote: "false",
+          }
+        );
+        return await message.send("*Anti_Promote Disable Succesfully!*");
+      } else {
+        return await message.reply(
+          '*Please Toggle between "On" And "Off".* \n*To Stop Promoting Users in Chat*'
+        );
+      }
+    } catch (err) {
+      message.error(err + "\n\ncommand: antipromote", err);
     }
   }
 );
