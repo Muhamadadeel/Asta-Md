@@ -6,12 +6,6 @@
 
 # Order is important; the last matching pattern takes precedence.
 
-# Doc files
-/docs/  @LICENSE
-
-# Source files
-/src/   @lib
-
 # Tests
 /tests/ @AstroFXDEV @Astropeda
 
