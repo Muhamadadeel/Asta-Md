@@ -69,3 +69,66 @@ To add a new command:
     ```
 
 3. Ensure that your new command file is correctly imported and utilized within your main bot setup.
+
+## Deploy to Node.js Platforms
+
+### Heroku
+
+#### Using Heroku CLI
+
+1. Install the Heroku CLI:
+    ```sh
+    npm install -g heroku
+    ```
+
+2. Log in to your Heroku account:
+    ```sh
+    heroku login
+    ```
+
+3. Create a new Heroku app:
+    ```sh
+    heroku create
+    ```
+
+4. Push your code to Heroku:
+    ```sh
+    git push heroku main
+    ```
+
+5. Set up environment variables on Heroku:
+    ```sh
+    heroku config:set KEY=VALUE
+    ```
+
+#### Deploy Button
+
+Add the following code to your README.md:
+
+```markdown
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+```
+
+### VS Code Spaces
+
+1. Open your repository in VS Code.
+2. Press `F1` and select `Remote-Containers: Open Folder in Container`.
+3. Follow the prompts to set up your development environment.
+4. Start the bot using the terminal in VS Code:
+    ```sh
+    npm start
+    ```
+
+### Koyeb
+
+1. Sign in to [Koyeb](https://www.koyeb.com/).
+2. Create a new App and link your GitHub repository.
+3. Set up environment variables as needed.
+4. Deploy your app directly from the Koyeb dashboard.
+
+### Railway
+
+1. Sign in to [Railway](https://railway.app/).
+2. Create a new project and link your GitHub repository.
+3. Configure the environment variables.
+4. Deploy the project from the Railway dashboard.
