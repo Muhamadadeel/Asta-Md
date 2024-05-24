@@ -5,7 +5,7 @@ const {
   fancytext,
   yt,
   getBuffer,
-  smdBuffer,
+  amdBuffer,
   pinterest,
   prefix,
   Config,
@@ -1811,7 +1811,7 @@ UserFunction(
         "\n*Author :* " +
         resukt.author.name +
         "\n\n\n_Reply 1 To Video_ Or _1 document_\n_Reply 2 To Audio_ Or _2 document_";
-      let IMGTYPE = await smdBuffer(resukt.thumbnail);
+      let IMGTYPE = await amdBuffer(resukt.thumbnail);
       var CTYPE = {
         ...(await mesage.bot.contextInfo(
           Config.botname,
