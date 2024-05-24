@@ -45,26 +45,26 @@ Before you begin, ensure you have the following:
 
 Once the bot is running, it will automatically connect to WhatsApp and start handling messages based on the predefined commands and handlers. You can customize and add new functionalities by editing the `commands` directory.
 
-### Adding Commands
+## Adding Commands
 
 To add a new command:
 
-1. Create a new file in the `commands` directory, for example `hello.js`.
-2. Define the command logic:
+1. Create a new file in the `commands` directory, for example `hi.js`.
+2. Define the command logic using the following template:
     ```javascript
-    import amd from './lib'
+    import amd from './lib';
+    
     amd(
-  {
-    pattern: "hi",
-    fromMe: true, // is the the message if from owner
-    desc: "Send Hi Message", // Comomands Description
-    type: "Test", // Command Categoery
-  },
-  async (mes) => {
-    await message.send("Hello There")
-  }
-);
+      {
+        pattern: "hi",
+        fromMe: true, // is the message from the owner
+        desc: "Send Hi Message", // Command Description
+        type: "Test", // Command Category
+      },
+      async (message) => {
+        await message.send("Hello There");
+      }
+    );
     ```
 
-3. Register the command in the main bot file to use it.
-
+3. Ensure that your new command file is correctly imported and utilized within your main bot setup.
