@@ -99,7 +99,7 @@ To add a new command:
 
 5. Set up environment variables on Heroku:
     ```sh
-    heroku config:set SESSION_ID=Astro;;n
+    heroku config:set SESSION_ID=Astro;;;
     ```
 
 #### Heroku Docker Delpoy
