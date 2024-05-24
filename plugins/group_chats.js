@@ -8,10 +8,17 @@ const {
   sleep,
   getAdmin,
   prefix,
+  groupdb,
+  userdb,
+  bot_,
+  sendWelcome,
 } = require("../lib");
+const axios = require("axios");
 const ᴀsᴛᴀ_ᴍᴅ = require("../lib/plugins");
 const { cmd } = ᴀsᴛᴀ_ᴍᴅ;
 const grouppattern = /https:\/\/chat\.whatsapp\.com\/[A-Za-z0-9]{22}/g;
+global.warncount = process.env.WARN_COUNT || global.warncount || "2";
+global.MsgsInLog = process.env.MSGS_IN_LOG || global.MsgsInLog || "true";
 UserFunction(
   {
     cmdname: "join",
@@ -1406,6 +1413,282 @@ UserFunction(
       );
     } catch (error) {
       await message.error(error + "\n\ncommand: broadcast", error);
+    }
+  }
+);
+let warn = {};
+warn.addwarn = async (message, match, label = {}) => {
+  try {
+    let search =
+      (await userdb.findOne({
+        id: message,
+      })) ||
+      (await userdb.new({
+        id: message,
+      }));
+    let dat = search.warn || {};
+    if (!dat[match]) {
+      dat[match] = [];
+    }
+    var MSG = {
+      chat: "PRIVATE",
+      reason: "Inapropriate Behaviour",
+      date: new Date(),
+      warnedby: tlang().title,
+      ...label,
+    };
+    dat[match].push(MSG);
+    search = await userdb.updateOne(
+      {
+        id: message,
+      },
+      {
+        warn: dat,
+      }
+    );
+    return {
+      status: true,
+      warning: dat[match].length,
+      user: search,
+    };
+  } catch (err) {
+    return {
+      status: false,
+      warning: 0,
+      user: {},
+      error: err,
+    };
+  }
+};
+UserFunction(
+  {
+    pattern: "checkwarn",
+    desc: "Check Warnings",
+    category: "user",
+    filename: __filename,
+  },
+  async (message, request) => {
+    try {
+      let inti = "";
+      let jids = message.sender;
+      if (message.isCreator) {
+        jids = message.reply_message
+          ? message.reply_message.sender
+          : message.mentionedJid[0]
+          ? message.mentionedJid[0]
+          : jids;
+      }
+      let mesg =
+        (await userdb.findOne({
+          id: jids,
+        })) ||
+        (await userdb.new({
+          id: jids,
+        }));
+      let db_vvc = mesg.warn || false;
+      let caseity = {};
+      if (db_vvc && request === "all") {
+        db_vvc = mesg.warn;
+      } else if (db_vvc && db_vvc[message.chat]) {
+        caseity[message.chat] = [...db_vvc[message.chat]];
+        db_vvc = caseity;
+      } else {
+        db_vvc = false;
+      }
+      let data = request === "all" ? true : !db_vvc[message.chat];
+      if (!mesg || !db_vvc || !data) {
+        return await message.send("*User doesn't have any warnings.*");
+      }
+      console.log("allwarn : ", db_vvc);
+      for (const msg_data_warned in db_vvc) {
+        let data_warn = db_vvc[msg_data_warned];
+        inti +=
+          "\n╭─────────────◆\n│ *[ID] : " +
+          (msg_data_warned.includes("@")
+            ? (await message.bot.getName(msg_data_warned)) || msg_data_warned
+            : msg_data_warned) +
+          "*\n│ *[TOTAL WARNING] : " +
+          db_vvc[msg_data_warned].length +
+          "*\n┝─────────────◆\n";
+        for (let blob = 0; blob < data_warn.length; blob++) {
+          inti +=
+            "┝── *WARNING " +
+            (blob + 1) +
+            "* ──\n│  *DATE:* " +
+            data_warn[blob].date +
+            " " +
+            (data_warn[blob].reason
+              ? "  \n│  *REASON:* " + data_warn[blob].reason
+              : "") +
+            "\n│  *WARNED BY:* " +
+            data_warn[blob].warnedby +
+            "\n│  *CHAT:* " +
+            data_warn[blob].chat +
+            "\n";
+        }
+        inti += "╰─────────────◆\n";
+      }
+      return await message.reply(
+        inti ? inti : "*User didn't have any warning yet*"
+      );
+    } catch (error) {
+      await message.error(error + "\n\nCommand: chatwarn", error);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "warn",
+    fromMe: true,
+    desc: "warn a user!",
+    category: "user",
+    filename: __filename,
+    use: " < USER >",
+  },
+  async (message, match) => {
+    try {
+      let query = message.reply_message
+        ? message.reply_message.sender
+        : message.mentionedJid[0]
+        ? message.mentionedJid[0]
+        : false;
+      if (!query) {
+        return await message.send("*Reply to a user*");
+      }
+      let ch_warn =
+        (await userdb.findOne({
+          id: query,
+        })) ||
+        (await userdb.new({
+          id: query,
+        }));
+      let opt_blob = ch_warn.warn || {};
+      if (!opt_blob[message.chat]) {
+        opt_blob[message.chat] = [];
+      }
+      var msg = {
+        chat: message.isGroup
+          ? message.metadata?.subject || "GROUP"
+          : "PRIVATE CHAT",
+        reason: match,
+        date: message.date,
+        warnedby: message.senderName,
+      };
+      opt_blob[message.chat].push(msg);
+      await userdb.updateOne(
+        {
+          id: query,
+        },
+        {
+          warn: opt_blob,
+        }
+      );
+      let get = parseInt(global.warncount) || 3;
+      if (
+        opt_blob[message.chat].length > get &&
+        !message.checkBot(query)
+      ) {
+        if (message.isGroup) {
+          if (message.isBotAdmin) {
+            await message.send(
+              "*Hey @" +
+                query.split("@")[0] +
+                ", Kicking you from group!*\n*_Because Your warn limit exceed!_*",
+              {
+                mentions: [query],
+              }
+            );
+            await message.bot.groupParticipantsUpdate(
+              message.chat,
+              [query],
+              "remove"
+            );
+          } else {
+            return await message.send(
+              "*Hey @" +
+                query.split("@")[0] +
+                " Dont Spam, Your warn limit exceed!*"
+            );
+          }
+        } else {
+          await message.send(
+            "*Hey @" +
+              query.split("@")[0] +
+              ", Blocking you!*\n*Because Your warning Limited Have been exceeded*",
+            {
+              mentions: [query],
+            }
+          );
+          await message.bot.updateBlockStatus(query, "block");
+        }
+      } else {
+        return await message.send(
+          "*Hey @" + query.split("@")[0] + " warning added, Don't spam!*",
+          {
+            mentions: [query],
+          }
+        );
+      }
+    } catch (error) {
+      await message.error(error + "\n\nCommand: warn ", error, false);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "resetwarn",
+    desc: "Reset Warning",
+    category: "user",
+    filename: __filename,
+    use: " user ",
+  },
+  async (msg, data) => {
+    try {
+      if (!msg.isCreator && !msg.isAdmin) {
+        return await msg.reply(tlang().admin);
+      }
+      let match = msg.reply_message
+        ? msg.reply_message.sender
+        : msg.mentionedJid[0]
+        ? msg.mentionedJid[0]
+        : false;
+      if (!match) {
+        return await msg.send("*Reply A User*");
+      }
+      let m_dat =
+        (await userdb.findOne({
+          id: match,
+        })) ||
+        (await userdb.new({
+          id: match,
+        })) ||
+        {};
+      let quey = m_dat.warn || {};
+      if (
+        msg.isCreator &&
+        data.toLowerCase() === "all" &&
+        quey
+      ) {
+        quey = {};
+      } else {
+        if (!m_dat || !quey || !quey[msg.chat]) {
+          return await msg.send("*_User didn't have any warning yet!!_*");
+        }
+        delete quey[msg.chat];
+      }
+      await userdb.updateOne(
+        {
+          id: match,
+        },
+        {
+          warn: quey,
+        }
+      );
+      await msg.reply(
+        "*User is free as a bird now!*\n*All warns has been deleted!*"
+      );
+    } catch (err) {
+      await msg.error(err + "\n\nCommand: resetwarn", err);
     }
   }
 );
