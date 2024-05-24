@@ -1,6 +1,97 @@
 const moment = require("moment-timezone");
 const Config = require("../config");
 let { amd, prefix, parsedJid, UserFunction } = require("../lib");
+UserFunction(
+  {
+    pattern: "jids",
+    desc: "get jid of all user in a group.",
+    category: "whatsapp",
+    filename: __filename,
+    use: "<@user>",
+  },
+  async ({ jid: users, reply: data, quoted: scraped }) => {
+    if (scraped) {
+      return data(scraped.sender);
+    } else {
+      return data(users);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "getpp",
+    desc: "Get Profile Pic For Given User",
+    category: "whatsapp",
+    filename: __filename,
+  },
+  async (message) => {
+    try {
+      let request = message.reply_message
+        ? message.reply_message.sender
+        : message.mentionedJid[0]
+        ? message.mentionedJid[0]
+        : message.from;
+      let output;
+      try {
+        output = await message.bot.profilePictureUrl(request, "image");
+      } catch (_0x42ab42) {
+        return message.reply("```Profile Pic Not Fetched```");
+      }
+      return await message.bot.sendMessage(
+        message.chat,
+        {
+          image: {
+            url: output,
+          },
+        },
+        {
+          quoted: message,
+        }
+      );
+    } catch (err) {
+      await message.error(err + "\n\ncommand : getpp", err);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "wa",
+    desc: "Makes wa me of quoted or mentioned user.",
+    category: "user",
+    filename: __filename,
+  },
+  async (message) => {
+    try {
+      let match = message.reply_message
+        ? message.reply_message.sender
+        : message.mentionedJid[0]
+        ? message.mentionedJid[0]
+        : false;
+      await message.reply(
+        !match
+          ? "*Please Reply Or Mention A User*"
+          : "https://wa.me/" + match.split("@")[0]
+      );
+    } catch (err) {
+      await message.error(err + "\n\ncommand : wa", err, false);
+    }
+  }
+);
+UserFunction(
+  {
+    pattern: "wame",
+    desc: "Makes wa me for user.",
+    category: "user",
+    filename: __filename,
+  },
+  async (message) => {
+    try {
+      return await message.reply(
+        "https://wa.me/" + message.sender.split("@")[0]
+      );
+    } catch {}
+  }
+);
 
 UserFunction(
   {
