@@ -656,6 +656,66 @@ UserFunction(
 );
 UserFunction(
   {
+    pattern: "kickall",
+    desc: "Kick all participants from the group",
+    category: "group",
+    filename: __filename,
+  },
+  async (message, match) => {
+    try {
+      if (!message.isGroup) {
+        return message.reply(tlang().group);
+      }
+
+      if (!message.isBotAdmin) {
+        return message.reply(
+          "\*I am Not An Admin, I can't perform such action.\*"
+        );
+      }
+
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang().admin);
+      }
+
+      let saved = "\*These Users Not Kicked\* \n\t";
+      let history = message.metadata.participants;
+      let data = 0;
+      let query = false;
+
+      for (let jids of history) {
+        let chosen_data = message.admins?.includes(jids.id) || false;
+        if (!chosen_data && jids.id !== message.user) {
+          if (!query) {
+            query = true;
+            await message.reply("\*Removing All Participants\*");
+          }
+          try {
+            await message.bot.groupParticipantsUpdate(
+              message.chat,
+              [jids.id],
+              "remove"
+            );
+            data++;
+          } catch {}
+        }
+      }
+
+      if (data == 0) {
+        return await message.reply("\*No Participants Kicked\*");
+      } else {
+        return await message.reply("\*Done, " + data + " Participants Kicked\*");
+      }
+    } catch (err) {
+      await message.error(
+        err + "\n\ncommand: kickall",
+        err,
+        "\*Can't kick participants due to error\*"
+      );
+    }
+  }
+);
+UserFunction(
+  {
     pattern: "ckick",
     desc: "Kick all numbers from a certain country",
     category: "group",
@@ -726,7 +786,7 @@ UserFunction(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "poll",
     desc: "Makes poll in group.",
