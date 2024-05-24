@@ -18,6 +18,9 @@ This is Important To Run Your Bot
 
 <a href="https://web-session.vercel.app/"><img title="SCAN QR" src="https://img.shields.io/badge/GET SESSION-h?color=black&style=for-the-badge&logo=msi"></a>
 
+<a href="https://github.com/Astropeda/Asta-Md/fork"><img title="Fork Repo" src="https://img.shields.io/badge/Fork Repo-h?color=black&style=for-the-badge&logo=stackshare"></a>
+
+
 
 ### Prerequisites
 
