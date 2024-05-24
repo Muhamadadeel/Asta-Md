@@ -447,7 +447,7 @@ try {
     ].join("|")})\\b`,
     "i"
   );
-  smd({ on: "quoted" }, async (message, text) => {
+  UserFunction({ on: "quoted" }, async (message, text) => {
     try {
       let mm = message.reply_message.status ? message.reply_message : false;
       if (mm && regexSend.test(text.toLowerCase())) {
@@ -465,7 +465,7 @@ try {
 
   let status = false,
     times = 0;
-  smd({ on: "main" }, async (message, text, { icmd }) => {
+  UserFunction({ on: "main" }, async (message, text, { icmd }) => {
     try {
       if (!status) {
         try {
@@ -485,7 +485,7 @@ try {
     }
   });
 
-  smd({ on: "text" }, async (message, text, { icmd }) => {
+  UserFunction({ on: "text" }, async (message, text, { icmd }) => {
     try {
       if (
         [
@@ -501,7 +501,7 @@ try {
       console.log(e);
     }
   });
-  smd({ on: "status" }, async (message, text) => {
+  UserFunction({ on: "status" }, async (message, text) => {
     try {
       if (
         `${global.read_status_from}`
