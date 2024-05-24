@@ -86,7 +86,7 @@ UserFunction(
         return await input.send(
           (
             "\n  *Its a command to create new Gc*\n  \t```Ex: " +
-            (prefix + cmd) +
+            (prefix + UserFunction) +
             " My new Group```\n  \n*You Can Add People To The Group*\n  \t```just reply or mention Users```\n  "
           ).trim()
         );
@@ -549,7 +549,7 @@ UserFunction(
     }
   }
 );
-cmd(
+UserFunction(
   {
     pattern: "invite",
     desc: "Get Your Group Link.",
@@ -647,7 +647,7 @@ UserFunction(
     }
   }
 );
-cmd(
+UserFunction(
   {
     pattern: "ckick",
     desc: "Kick all numbers from a certain country",
@@ -1160,7 +1160,7 @@ UserFunction(
     }
   }
 );
-cmd(
+UserFunction(
   {
     pattern: "add",
     desc: "Add that person in group",
