@@ -9,7 +9,6 @@ WORKDIR /root/Astropeda
 
 RUN npm install
 
-RUN npm install --legacy-peer-deps
 
 RUN npm update
 
