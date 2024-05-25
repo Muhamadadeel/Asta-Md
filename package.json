@@ -14,7 +14,7 @@
      "postinstall": "npx puppeteer@latest install --y"
    },
    "author": "Astropeda",
-   "license": "Apache-2.0",
+   "license": "GPL-2.0 license",
    "dependencies": {
      "@adiwajshing/keyed-db": "^0.2.4",
      "@hapi/boom": "^9.1.4",
