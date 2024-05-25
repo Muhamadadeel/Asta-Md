@@ -3855,7 +3855,7 @@ smd(
         if (user_warns[message.sender][message.action] > 2) {
           return;
         }
-        var citel =
+        var msg =
           " *[SOMEONE PROMOTE HERE]*\n" +
           (aitel
             ? "*Note : _I'm Not Admin Here, So I Can't Demote Someone while Anti_Promote Activated_*"
