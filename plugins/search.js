@@ -1,5 +1,12 @@
 const moment = require("moment-timezone");
-const { fetchJson, UserFunction, tlang, sleep, prefix, amdBuffer } = require("../lib");
+const {
+  fetchJson,
+  UserFunction,
+  tlang,
+  sleep,
+  prefix,
+  amdBuffer,
+} = require("../lib");
 const axios = require("axios");
 const fetch = require("node-fetch") || fetchJson;
 
@@ -699,38 +706,51 @@ UserFunction(
     }
   }
 );
-UserFunction({
+UserFunction(
+  {
     cmdname: "getsticker",
     category: "search",
     use: "[text]",
-    info: "Searches Stickers"
-  }, async (message, match) => {
+    info: "Searches Stickers",
+  },
+  async (message, match) => {
     try {
-      const {
-        generateSticker: gifFile
-      } = require("../lib");
+      const { generateSticker: gifFile } = require("../lib");
       if (!match) {
         return message.reply("Sorry you did not give any search term!");
       }
-      const query = await axios.get("https://g.tenor.com/v1/search?q=" + match + "&key=LIVDSRZULELA&limit=8").catch(() => {});
+      const query = await axios
+        .get(
+          "https://g.tenor.com/v1/search?q=" +
+            match +
+            "&key=LIVDSRZULELA&limit=8"
+        )
+        .catch(() => {});
       if (!query.data || !query.data.results || !query.data.results[0]) {
         return message.reply("*Could not find!*");
       }
-      let result = query.data.results.length > 5 ? 5 : query.data.results.length;
+      let result =
+        query.data.results.length > 5 ? 5 : query.data.results.length;
       for (let scraped = 0; scraped < result; scraped++) {
-        let file = await amdBuffer(query.data.results?.[scraped]?.media[0]?.mp4?.url);
+        let file = await amdBuffer(
+          query.data.results?.[scraped]?.media[0]?.mp4?.url
+        );
         let MTYPE = {
           pack: Config.packname,
           author: Config.author,
           type: "full",
-          quality: 1
+          quality: 1,
         };
         if (file) {
           gifFile(message, file, MTYPE);
         }
       }
     } catch (error) {
-      message.error(error + "\n\nCommand: stickersearch", error, "*Could not find*");
+      message.error(
+        error + "\n\nCommand: stickersearch",
+        error,
+        "*Could not find*"
+      );
     }
-  });
-  
+  }
+);
