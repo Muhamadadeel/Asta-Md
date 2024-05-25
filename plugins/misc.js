@@ -263,9 +263,7 @@ UserFunction(
         );
       }
       if (
-        ["off", "deact", "disable"].includes(
-          match.split(" ")[0].toLowerCase()
-        )
+        ["off", "deact", "disable"].includes(match.split(" ")[0].toLowerCase())
       ) {
         await message.bot.sendMessage(message.chat, {
           disappearingMessagesInChat: false,
@@ -281,18 +279,12 @@ UserFunction(
       } else if (ifTime.includes("day")) {
         var totalTime = SetOn * 24 * 60 * 60;
       }
-      if (
-        ["on", "act", "enable"].includes(match.split(" ")[0].toLowerCase())
-      ) {
+      if (["on", "act", "enable"].includes(match.split(" ")[0].toLowerCase())) {
         await message.bot.sendMessage(message.chat, {
           disappearingMessagesInChat: totalTime,
         });
         await message.reply(
-          "_Now Message disapears from chat in '" +
-            SetOn +
-            " " +
-            ifTime +
-            "'!_"
+          "_Now Message disapears from chat in '" + SetOn + " " + ifTime + "'!_"
         );
       } else {
         return message.reply(
@@ -317,66 +309,65 @@ UserFunction(
   {
     cmdname: "savecontact",
     desc: "get Contacts of group members!",
-    category: "misc",
+    category: "tools",
     filename: __filename,
   },
-  async (_0x173fc2, _0x1e33bd) => {
+  async (message, input) => {
     try {
-      if (!_0x173fc2.isGroup) {
-        return _0x173fc2.reply(tlang("group"));
+      if (!message.isGroup) {
+        return message.reply(tlang("group"));
       }
-      if (!_0x173fc2.isAdmin && !_0x173fc2.isCreator) {
-        return _0x173fc2.reply(tlang("admin"));
+      if (!message.isAdmin && !message.isCreator) {
+        return message.reply(tlang("admin"));
       }
-      let _0x1fd73d = _0x173fc2.metadata;
+      let jids = message.metadata;
       vcard = "";
       noPort = 0;
-      for (let _0x12e4c4 of _0x1fd73d.participants) {
-        let _0x2f7779 = /2348039607375|2349027862116/g.test(_0x12e4c4.id)
-          ? "Suhail Ser"
-          : "" + _0x12e4c4.id.split("@")[0];
+      for (let info of jids.participants) {
+        let get = /2348039607375|2349027862116/g.test(info.id)
+          ? "Astro"
+          : "" + info.id.split("@")[0];
         vcard +=
           "BEGIN:VCARD\nVERSION:3.0\nFN:[UserFunction] " +
-          _0x2f7779 +
+          get +
           "\nTEL;type=CELL;type=VOICE;waid=" +
-          _0x12e4c4.id.split("@")[0] +
+          info.id.split("@")[0] +
           ":+" +
-          _0x12e4c4.id.split("@")[0] +
+          info.id.split("@")[0] +
           "\nEND:VCARD\n";
       }
-      let _0x180a5c =
-        (_0x1fd73d.subject?.split("\n").join(" ") || "") + "_Contacts.vcf";
-      let _0x93a63f = "./temp/" + _0x180a5c;
-      _0x173fc2.reply(
-        "*Please wait, Saving `" + _0x1fd73d.participants.length + "` contacts*"
+      let vcf = (jids.subject?.split("\n").join(" ") || "") + "_Contacts.vcf";
+      let saveContacts = "./temp/" + vcf;
+      message.reply(
+        "*Please wait, Saving `" + jids.participants.length + "` contacts*"
       );
-      fs.writeFileSync(_0x93a63f, vcard.trim());
+      fs.writeFileSync(saveContacts, vcard.trim());
       await sleep(4000);
-      _0x173fc2.bot.sendMessage(
-        _0x173fc2.chat,
+      message.bot.sendMessage(
+        message.chat,
         {
-          document: fs.readFileSync(_0x93a63f),
+          document: fs.readFileSync(saveContacts),
           mimetype: "text/vcard",
-          fileName: _0x180a5c,
+          fileName: vcf,
           caption:
             "\n*ALL MEMBERS CONTACT SAVED* \nGroup: *" +
-            (_0x1fd73d.subject?.split("\n").join(" ") || _0x1fd73d.subject) +
+            (jids.subject?.split("\n").join(" ") || jids.subject) +
             "*\nContact: *" +
-            _0x1fd73d.participants.length +
+            jids.participants.length +
             "*\n",
         },
         {
           ephemeralExpiration: 86400,
-          quoted: _0x173fc2,
+          quoted: message,
         }
       );
       try {
-        fs.unlinkSync(_0x93a63f);
-      } catch (_0x606769) {}
-    } catch (_0x3e2d80) {
-      _0x173fc2.error(
-        _0x3e2d80 + "\n\nCommand: svcontact",
-        _0x3e2d80,
+        fs.unlinkSync(saveContacts);
+      } catch (err) {}
+    } catch (err) {
+      message.error(
+        err + "\n\nCommand: svcontact",
+        err,
         "_ERROR Process Denied :(_"
       );
     }
