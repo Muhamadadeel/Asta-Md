@@ -71,7 +71,8 @@
     "plugins": "plugins"
   },
   "devDependencies": {
-    "pino": "^8.11.0"
+    "pino": "^8.11.0",
+    "async-g-i-s": "^1.5.3"
   },
   "repository": {
     "type": "git",
