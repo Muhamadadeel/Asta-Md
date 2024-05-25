@@ -15,7 +15,7 @@
 
     "WELCOME": {
       "description": "put 'false' or 'true' to enable & disable WELCOME ",
-      "value": "true",
+      "value": "false",
       "required": false
     },
 
@@ -72,7 +72,7 @@
     "AUTO_READ_STATUS": {
       "description": "Fill the value true if you want bot view your Statuses.",
       "required": false,
-      "value": "true"
+      "value": "false"
     },
     "MSGS_IN_LOG": {
       "description": "Fill the value -true- if you want to see Messages in logs.",
@@ -107,7 +107,7 @@
       "required": false
     },
     "ELEVENLAB_API_KEY": {
-      "description": "Put your ElevenLab api key here for Aitts. Watch tutorial from https://youtu.be/HCDcdPtkwg4 ",
+      "description": "Put your ElevenLab api key here for Aitts.",
       "value": "",
       "required": false
     },
