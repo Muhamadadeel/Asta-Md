@@ -3794,7 +3794,7 @@ smd(
   {
     group: "promote",
   },
-  async (message, { Void: mm }) => {
+  async (message) => {
     try {
       let citel =
         (await groupdb.findOne({
