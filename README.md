@@ -90,33 +90,6 @@ Once the bot is running, it will automatically connect to WhatsApp and start han
 
 ### Heroku
 
-#### Using Heroku CLI
-
-1. Install the Heroku CLI:
-    ```sh
-    npm install -g heroku
-    ```
-
-2. Log in to your Heroku account:
-    ```sh
-    heroku login
-    ```
-
-3. Create a new Heroku app:
-    ```sh
-    heroku create
-    ```
-
-4. Push your code to Heroku:
-    ```sh
-    git push heroku main
-    ```
-
-5. Set up environment variables on Heroku:
-    ```sh
-    heroku config:set SESSION_ID=Astro;;;
-    ```
-
 #### Heroku Docker Delpoy
 
 <a href="https://astropeda.github.io/delpoy-button/">
