@@ -29,8 +29,14 @@ For Advanced Users, make sure you have the following:
 
 - Node.js (version 16 or higher)
 - npm (Node Package Manager)
+- Star & Fork Repo
+- Get Your Session ID
+- Put Your Session ID in `config.js` file
 
 ### Installation
+
+##### For Example
+
 
 1. Clone the repository:
     ```sh
@@ -44,7 +50,7 @@ For Advanced Users, make sure you have the following:
     ```
 
 3. Configure the bot:
-    - Rename `.env.example` to `.env` and fill in your WhatsApp credentials.
+    - Rename `.env.example` to `.env` and fill in your WhatsApp credentials (Only If you Didn't Config It Eariler).
 
 4. Start the bot:
     ```sh
