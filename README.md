@@ -13,6 +13,7 @@ Welcome to **Asta Md**, an open-source WhatsApp bot developed by Astro. This bot
 
 ## Getting Started
 ### Get Your Session
+#### Please Star Our Repo For Courage ❤️
 
 This is Important To Run Your Bot
 
@@ -57,7 +58,7 @@ Once the bot is running, it will automatically connect to WhatsApp and start han
 ## Adding Commands
 
 To add a new command:
-##### Learn how to Create commands? Click Me
+##### Learn how to Create commands
 
 1. Create a new file in the `plugins` directory, for example `hi.js`.
 2. Define the command logic using the following template:
