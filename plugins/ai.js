@@ -128,3 +128,40 @@ UserFunction(
     }
   }
 );
+UserFunction(
+  {
+    pattern: "gpt4",
+    desc: "Get a response from ChatGPT-4.",
+    category: "ai",
+    filename: __filename,
+    use: "<query>",
+  },
+  async (m, query) => {
+    try {
+      if (!query) {
+        return await m.send("*_Please provide a query for ChatGPT-4!_*");
+      }
+
+      const apiUrl = `https://api.maher-zubair.tech/ai/chatgptv4?q=${encodeURIComponent(query)}`;
+      const response = await fetch(apiUrl);
+
+      if (!response.ok) {
+        return await m.send(
+          `*_Error: ${response.status} ${response.statusText}_*`
+        );
+      }
+
+      const data = await response.json();
+
+      if (data.status !== 200) {
+        return await m.send("*_An error occurred while fetching the data._*");
+      }
+
+      const reply = data.result;
+
+      await m.send(reply);
+    } catch (e) {
+      await m.error(`${e}\n\ncommand: gpt4`, e);
+    }
+  }
+);
