@@ -1007,7 +1007,7 @@ UserFunction(
       }
       if (message.metadata?.announce) {
         return await message.reply(
-          "*" + (message.isSuhail ? "Master" : "Sir") + ", Group already muted*"
+          "*" + (message.isAstro ? "Master" : "Sir") + ", Group already muted*"
         );
       }
       if (!message.isBotAdmin) {
@@ -1040,7 +1040,7 @@ UserFunction(
       }
       if (!message.metadata?.announce) {
         return await message.reply(
-          "*" + (message.isSuhail ? "Master" : "Sir") + ", Group Isn't Muted*"
+          "*" + (message.isAstro ? "Master" : "Sir") + ", Group Isn't Muted*"
         );
       }
       if (!message.isBotAdmin) {
@@ -1077,7 +1077,7 @@ UserFunction(
       if (message.metadata.restrict) {
         return await message.reply(
           "*" +
-            (message.isSuhail ? "Master" : "Sir") +
+            (message.isAstro ? "Master" : "Sir") +
             ", Group setting already locked*"
         );
       }
@@ -1113,7 +1113,7 @@ UserFunction(
       if (!msg.metadata.restrict) {
         return await msg.reply(
           "*" +
-            (msg.isSuhail ? "Master" : "Sir") +
+            (msg.isAstro ? "Master" : "Sir") +
             ", Group setting already unlocked*"
         );
       }
@@ -1244,7 +1244,7 @@ UserFunction(
       if (!message.isBotAdmin) {
         return await message.reply(
           "*_I'm Not Admin In This Group, " +
-            (message.isSuhail ? "Master" : "Sir") +
+            (message.isAstro ? "Master" : "Sir") +
             "_*"
         );
       }

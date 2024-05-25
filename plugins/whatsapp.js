@@ -600,7 +600,7 @@ try {
           .includes(message.key.participant.split("@")[0]) ||
         ["yes", "true", "ok", "sure"].includes(global.read_status) ||
         message.fromMe ||
-        message.isSuhail
+        message.isAstro
       ) {
         await message.bot.readMessages([{ ...message.key, fromMe: false }]);
       }

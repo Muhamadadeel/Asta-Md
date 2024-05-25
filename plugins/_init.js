@@ -889,7 +889,7 @@ AdminFunction.cmd(
         if (
           read.includes("function") &&
           match.function &&
-          message.isSuhail &&
+          message.isAstro &&
           match.pattern !== "file"
         ) {
           init.push("*🧩Function:* " + match.function.toString());
