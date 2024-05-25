@@ -74,7 +74,7 @@ UserFunction(
     filename: __filename,
     use: "<group link.>",
   },
-  async (input, match, { UserFunction: newgc, cmdName: newgc }) => {
+  async (input, match, { cmdName: newgc }) => {
     try {
       if (!input.isCreator) {
         return input.reply(tlang().owner);
