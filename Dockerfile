@@ -8,6 +8,8 @@ RUN rm -rf /root/Astropeda/node_modules
 WORKDIR /root/Astropeda
 
 RUN npm install
+
+
 RUN npm update
 
 EXPOSE 9000
