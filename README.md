@@ -13,6 +13,7 @@ Welcome to **Asta Md**, an open-source WhatsApp bot developed by Astro. This bot
 
 ## Getting Started
 ### Get Your Session
+#### Please Star Our Repo For Courage ❤️
 
 This is Important To Run Your Bot
 
@@ -28,10 +29,16 @@ For Advanced Users, make sure you have the following:
 
 - Node.js (version 16 or higher)
 - npm (Node Package Manager)
+- Star & Fork Repo
+- Get Your Session ID
+- Put Your Session ID in `config.js` file
 
 ### Installation
 
-1. Clone the repository:
+##### For Example
+
+
+1. Clone Your Forked Repository:
     ```sh
     git clone https://github.com/astro/asta-md.git
     cd asta-md
@@ -43,7 +50,7 @@ For Advanced Users, make sure you have the following:
     ```
 
 3. Configure the bot:
-    - Rename `.env.example` to `.env` and fill in your WhatsApp credentials.
+    - Rename `.env.example` to `.env` and fill in your WhatsApp credentials (Only If you Didn't Config It Eariler).
 
 4. Start the bot:
     ```sh
@@ -56,8 +63,7 @@ Once the bot is running, it will automatically connect to WhatsApp and start han
 
 ## Adding Commands
 
-To add a new command:
-##### Learn how to Create commands? Click Me
+#### To creatr your custome a new command:
 
 1. Create a new file in the `plugins` directory, for example `hi.js`.
 2. Define the command logic using the following template:
@@ -83,33 +89,6 @@ To add a new command:
 ## Deploy to Node.js Platforms
 
 ### Heroku
-
-#### Using Heroku CLI
-
-1. Install the Heroku CLI:
-    ```sh
-    npm install -g heroku
-    ```
-
-2. Log in to your Heroku account:
-    ```sh
-    heroku login
-    ```
-
-3. Create a new Heroku app:
-    ```sh
-    heroku create
-    ```
-
-4. Push your code to Heroku:
-    ```sh
-    git push heroku main
-    ```
-
-5. Set up environment variables on Heroku:
-    ```sh
-    heroku config:set SESSION_ID=Astro;;;
-    ```
 
 #### Heroku Docker Delpoy
 
