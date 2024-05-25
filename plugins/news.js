@@ -1,8 +1,8 @@
-let { smd } = require("../lib");
+let { UserFunction } = require("../lib");
 const axios = require("axios");
 const fetch = require("node-fetch");
 
-smd(
+UserFunction(
   {
     pattern: "wanews",
     alias: ["wa"],
@@ -52,7 +52,7 @@ smd(
   }
 );
 
-smd(
+UserFunction(
   {
     pattern: "iosnews",
     alias: ["ios"],
@@ -97,7 +97,7 @@ smd(
   }
 );
 
-smd(
+UserFunction(
   {
     pattern: "googlenews",
     alias: ["gnews"],
@@ -140,7 +140,7 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "spacenews",
     desc: "Fetches articles from the Spaceflight News API.",
@@ -180,7 +180,7 @@ smd(
   }
 );
 
-smd(
+UserFunction(
   {
     pattern: "technews",
     alias: ["tn"],
@@ -216,7 +216,7 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "population",
     desc: "Fetches current population statistics.",
@@ -252,7 +252,7 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "animesearch",
     category: "news",
@@ -318,7 +318,7 @@ ${anime.description}
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "nasanews",
     fromMe: false,
@@ -349,7 +349,7 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "forex1",
     category: "forex",
@@ -388,7 +388,7 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "fxstatus",
     category: "forex",
@@ -445,7 +445,7 @@ smd(
   }
 );
 
-smd(
+UserFunction(
   {
     pattern: "fxpairs",
     category: "forex",
@@ -476,7 +476,7 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "fxexchange",
     category: "forex",
@@ -509,7 +509,7 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "stocktickers",
     category: "forex",
