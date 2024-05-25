@@ -1,7 +1,7 @@
 {
   "name": "asta-md",
-  "version": "3.0.0",
-  "description": "Simple Wa Bot",
+  "version": "3.5.0",
+  "description": "Simple WhatsApp Bot (Beta)",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
