@@ -63,7 +63,7 @@ Once the bot is running, it will automatically connect to WhatsApp and start han
 
 ## Adding Commands
 
-#### To creatr your custome a new command:
+#### To create your custom new command:
 
 1. Create a new file in the `plugins` directory, for example `hi.js`.
 2. Define the command logic using the following template:
