@@ -165,3 +165,40 @@ UserFunction(
     }
   }
 );
+UserFunction(
+  {
+    pattern: "leapai",
+    desc: "Generate an AI photo.",
+    category: "ai",
+    filename: __filename,
+    use: "<query>",
+  },
+  async (m, query) => {
+    try {
+      if (!query) {
+        return await m.send("*_Please provide a query for the AI photo generator!_*");
+      }
+
+      const apiUrl = `https://api.maher-zubair.tech/ai/photoleap?q=${encodeURIComponent(query)}`;
+      const response = await fetch(apiUrl);
+
+      if (!response.ok) {
+        return await m.send(
+          `*_Error: ${response.status} ${response.statusText}_*`
+        );
+      }
+
+      const data = await response.json();
+
+      if (data.status !== 200) {
+        return await m.send("*_An error occurred while fetching the data._*");
+      }
+
+      const photoUrl = data.result;
+
+      await m.bot.sendFromUrl(m.from, photoUrl, "Here is your generated photo:", m, {}, "image");
+    } catch (e) {
+      await m.error(`${e}\n\ncommand: leapai`, e);
+    }
+  }
+);
