@@ -1,4 +1,4 @@
-let { UserFunction, fetchJson, amdJson, tlang, sleep } = require("../lib");
+let { UserFunction, fetchJson, amdJson, tlang, sleep, prefix } = require("../lib");
 let fs = require("fs");
 let fetch = require("node-fetch") || fetchJson || amdJson;
 UserFunction(
@@ -13,7 +13,7 @@ UserFunction(
     try {
       if (!query) {
         return await m.send(
-          "*_Please provide a query for the card generator!_*"
+          "*Hello Give Me A Vaild Credit Card Bin To Generate From "+prefix+"gen 4343434*"
         );
       }
 
@@ -35,7 +35,7 @@ UserFunction(
       }
 
       const cards = data.result;
-      let message = "*Generated Card Information*\n\n";
+      let message = "*Generated Credit Crads*\n\n";
 
       cards.forEach((card) => {
         message += `
