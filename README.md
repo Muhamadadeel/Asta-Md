@@ -38,7 +38,7 @@ For Advanced Users, make sure you have the following:
 ##### For Example
 
 
-1. Clone the repository:
+1. Clone Your Forked Repository:
     ```sh
     git clone https://github.com/astro/asta-md.git
     cd asta-md
@@ -63,8 +63,7 @@ Once the bot is running, it will automatically connect to WhatsApp and start han
 
 ## Adding Commands
 
-To add a new command:
-##### Learn how to Create commands
+#### To creatr your custome a new command:
 
 1. Create a new file in the `plugins` directory, for example `hi.js`.
 2. Define the command logic using the following template:
