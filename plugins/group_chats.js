@@ -3352,7 +3352,7 @@ UserFunction(
         })) || false;
       let taggs = false;
       try {
-        if (!global.SmdOfficial && global.SmdOfficial !== "yes") {
+        if (!global.AmdOfficial && global.AmdOfficial !== "yes") {
           return;
         }
         if (
@@ -3446,7 +3446,7 @@ UserFunction(
           if (
             data.onlyadmin &&
             data.onlyadmin === "true" &&
-            SmdOfficial == "yes"
+            AmdOfficial == "yes"
           ) {
             var fel = "";
             if (message.isBotAdmin) {
@@ -3483,7 +3483,7 @@ UserFunction(
           if (
             data.antilink &&
             data.antilink !== "false" &&
-            SmdOfficial === "yes"
+            AmdOfficial === "yes"
           ) {
             const bmt =
               Config.antilink_values && Config.antilink_values !== "all"
@@ -3564,8 +3564,8 @@ UserFunction(
         chek.map(async (msg) => {
           if (
             message.isAdmin ||
-            !global.SmdOfficial ||
-            global.SmdOfficial != "yes"
+            !global.AmdOfficial ||
+            global.AmdOfficial != "yes"
           ) {
             return;
           }
@@ -3654,7 +3654,7 @@ UserFunction(
         }
       }
       try {
-        if (!global.SmdOfficial || message.mtype === "reactionMessage") {
+        if (!global.AmdOfficial || message.mtype === "reactionMessage") {
           return;
         }
         let db = (await groupdb.findOne({
