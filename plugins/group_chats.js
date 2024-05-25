@@ -6,6 +6,7 @@ const {
   Config,
   tlang,
   sleep,
+  smd,
   getAdmin,
   prefix,
   groupdb,
