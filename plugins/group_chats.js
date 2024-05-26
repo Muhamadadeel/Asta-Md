@@ -2721,7 +2721,7 @@ const { sck1 } = require("../lib")
 if (Config.WORKTYPE != 'private') {
   UserFunction({
     pattern: "ban",
-    category: "owner",
+    category: "admin",
     filename: __filename,
     desc: "Bans user from using bot."
   },
@@ -2747,7 +2747,7 @@ if (Config.WORKTYPE != 'private') {
   //---------------------------------------------------------------------------
   UserFunction({
     pattern: "unban",
-    category: "owner",
+    category: "admin",
     filename: __filename,
     desc: "Unbans banned user (from using bot)."
   },
