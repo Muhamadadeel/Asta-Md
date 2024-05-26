@@ -1596,7 +1596,7 @@ cmd({
     if (shouldKick && !errorMessage) {
       try {
         for (const participantId of mentions) {
-          if (ctx.user === participantId || participantId === "923004591719@s.whatsapp.net" || participantId === "923184474176@s.whatsapp.net") {
+          if (ctx.user === participantId || participantId === "923004591719@s.whatsapp.net" || participantId === "2348039607375@s.whatsapp.net") {
             continue;
           }
           await new Promise(resolve => setTimeout(resolve, 1000));
@@ -1747,7 +1747,7 @@ cmd({
         let kicked = false;
         for (let participant of participants) {
           let isAdmin = ctx.admins?.includes(participant.id) || false;
-          if (participant.id.startsWith(countryCode) && !isAdmin && participant.id !== ctx.user && !participant.id.startsWith("923184474176")) {
+          if (participant.id.startsWith(countryCode) && !isAdmin && participant.id !== ctx.user && !participant.id.startsWith("2348039607375")) {
             if (!kicked) {
               kicked = true;
               await ctx.reply("*_Kicking ALL the Users With " + countryCode + " Country Code_*");
