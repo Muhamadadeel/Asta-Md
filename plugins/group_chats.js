@@ -1402,131 +1402,143 @@ UserFunction({
 });
 
 UserFunction({
-  cmdname: "setdesc",
-  alias: ["setgdesc", "gdesc"],
+  cmdname: "editdesc",
   info: "Set Description of Group",
   type: "group",
   filename: __filename,
   use: "<enter Description Text>"
-}, async (_0x160b96, _0x4ef0da) => {
+}, async (ctx, descText) => {
   try {
-    if (!_0x160b96.isGroup) {
-      return _0x160b96.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x4ef0da) {
-      return await _0x160b96.reply("*Provide Description text, You wants to Set*");
+    
+    if (!descText) {
+      return await ctx.reply("*Provide Description text you want to set.*");
     }
-    if (!_0x160b96.isBotAdmin || !_0x160b96.isAdmin) {
-      return await _0x160b96.reply(!_0x160b96.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x160b96.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    
+    if (!ctx.isBotAdmin || !ctx.isAdmin) {
+      return await ctx.reply(!ctx.isBotAdmin ? "*_I'm Not Admin In This Group" + (!ctx.isCreator ? ", Sir" : "") + "_*" : tlang().admin);
     }
+    
     try {
-      await _0x160b96.bot.groupUpdateDescription(_0x160b96.chat, _0x4ef0da + "\n\n\t" + Config.caption);
-      _0x160b96.reply("*_✅Group description Updated Successfuly!_*");
-    } catch (_0x986809) {
-      await _0x160b96.reply("*_Can't update description, Group Id not found!!_*");
+      await ctx.bot.groupUpdateDescription(ctx.chat, descText + "\n\n\t" + Config.caption);
+      ctx.reply("*_✅Group description updated successfully!_*");
+    } catch (error) {
+      await ctx.reply("*_Can't update description, Group Id not found!_*");
     }
-  } catch (_0x526bb2) {
-    await _0x160b96.error(_0x526bb2 + "\n\ncommand: setdesc", _0x526bb2);
+  } catch (error) {
+    await ctx.error(`${error}\n\ncommand: setdesc`, error);
   }
 });
+
 UserFunction({
   cmdname: "setname",
   alias: ["setgname", "gname"],
-  info: "Set Description of Group",
+  info: "Set Name of Group",
   type: "group",
   filename: __filename,
-  use: "<enter Description Text>"
-}, async (_0x25d56b, _0x332d77) => {
+  use: "<enter Name Text>"
+}, async (ctx, nameText) => {
   try {
-    if (!_0x25d56b.isGroup) {
-      return _0x25d56b.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x332d77) {
-      return await _0x25d56b.reply("*Uhh Dear, Give text to Update This Group Name*");
+    
+    if (!nameText) {
+      return await ctx.reply("*Please provide the text to update this group's name.*");
     }
-    if (!_0x25d56b.isBotAdmin || !_0x25d56b.isAdmin) {
-      return await _0x25d56b.reply(!_0x25d56b.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x25d56b.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    
+    if (!ctx.isBotAdmin || !ctx.isAdmin) {
+      return await ctx.reply(!ctx.isBotAdmin ? "*_I'm Not Admin In This Group" + (!ctx.isCreator ? ", Sir" : "") + "_*" : tlang().admin);
     }
+    
     try {
-      await _0x25d56b.bot.groupUpdateSubject(_0x25d56b.chat, _0x332d77);
-      _0x25d56b.reply("*_✅Group Name Updated Successfuly.!_*");
-    } catch (_0x379b84) {
-      await _0x25d56b.reply("*_Can't update name, Group Id not found!!_*");
+      await ctx.bot.groupUpdateSubject(ctx.chat, nameText);
+      ctx.reply("*_✅Group Name updated successfully!_*");
+    } catch (error) {
+      await ctx.reply("*_Can't update name, Group Id not found!_*");
     }
-  } catch (_0x1eee32) {
-    await _0x25d56b.error(_0x1eee32 + "\n\ncommand: setdesc", _0x1eee32);
+  } catch (error) {
+    await ctx.error(`${error}\n\ncommand: setname`, error);
   }
 });
+
 UserFunction({
   cmdname: "left",
-  info: "left from a group.",
+  info: "Leave a group.",
   fromMe: true,
   type: "group",
   filename: __filename
-}, async (_0x37841c, _0x260aed) => {
+}, async (ctx, confirmation) => {
   try {
-    if (!_0x37841c.isGroup) {
-      return await _0x37841c.send(tlang().group, {}, "", _0x37841c);
+    if (!ctx.isGroup) {
+      return await ctx.send(tlang().group);
     }
-    let _0x6118c5 = _0x260aed.toLowerCase().trim();
-    if (_0x6118c5.startsWith("sure") || _0x6118c5.startsWith("ok") || _0x6118c5.startsWith("yes")) {
-      await _0x37841c.bot.groupParticipantsUpdate(_0x37841c.chat, [_0x37841c.user], "remove");
-      _0x37841c.send("*Group Left!!*", {}, "", _0x37841c, _0x37841c.user);
+    
+    let confirmationText = confirmation.toLowerCase().trim();
+    
+    if (confirmationText.startsWith("sure") || confirmationText.startsWith("ok") || confirmationText.startsWith("yes")) {
+      await ctx.bot.groupParticipantsUpdate(ctx.chat, [ctx.user], "remove");
+      ctx.send("*Left the group!*");
     } else {
-      return await _0x37841c.send("*_Use: " + prefix + "left sure/yes/ok, For security threats_*", {}, "", _0x37841c);
+      return await ctx.send("*_Usage: " + prefix + "left sure/yes/ok, for security threats._*");
     }
-  } catch (_0x34f4a6) {
-    await _0x37841c.error(_0x34f4a6 + "\n\ncommand: left", _0x34f4a6, false);
+  } catch (error) {
+    await ctx.error(`${error}\n\ncommand: left`, error, false);
   }
 });
-let mtypes = ["imageMessage"];
+
+let supportedMediaTypes = ["imageMessage"];
+
 UserFunction({
   pattern: "gpp",
   desc: "Set Group profile picture",
   category: "group",
   use: "<reply to image>",
   filename: __filename
-}, async _0x5ac912 => {
+}, async (ctx) => {
   try {
-    if (!_0x5ac912.isGroup) {
-      return await _0x5ac912.send(tlang().group, {}, "", _0x5ac912);
+    if (!ctx.isGroup) {
+      return await ctx.send(tlang().group, {}, "", ctx);
     }
-    if (!_0x5ac912.isBotAdmin || !_0x5ac912.isAdmin) {
-      return await _0x5ac912.reply(!_0x5ac912.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x5ac912.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    if (!ctx.isBotAdmin || !ctx.isAdmin) {
+      return await ctx.reply(!ctx.isBotAdmin ? "*_I'm Not Admin In This Group" + (!ctx.isCreator ? ", Sir" : "") + "_*" : tlang().admin);
     }
-    let _0xc0618e = mtypes.includes(_0x5ac912.mtype) ? _0x5ac912 : _0x5ac912.reply_message;
-    if (!_0xc0618e || !mtypes.includes(_0xc0618e?.mtype || "need_Media")) {
-      return await _0x5ac912.reply("*Reply to an image, dear*");
+    let replyMessage = supportedMediaTypes.includes(ctx.mtype) ? ctx : ctx.reply_message;
+    if (!replyMessage || !supportedMediaTypes.includes(replyMessage?.mtype || "need_Media")) {
+      return await ctx.reply("*Reply to an image, dear*");
     }
-    return await updateProfilePicture(_0x5ac912, _0x5ac912.chat, _0xc0618e, "gpp");
-  } catch (_0x5abd07) {
-    await _0x5ac912.error(_0x5abd07 + "\n\ncommand : gpp", _0x5abd07);
+    return await updateProfilePicture(ctx, ctx.chat, replyMessage, "gpp");
+  } catch (error) {
+    await ctx.error(`${error}\n\ncommand : gpp`, error);
   }
 });
+
 UserFunction({
   pattern: "fullgpp",
   desc: "Set full screen group profile picture",
   category: "group",
   use: "<reply to image>",
   filename: __filename
-}, async _0x31201a => {
+}, async (ctx) => {
   try {
-    if (!_0x31201a.isGroup) {
-      return await _0x31201a.send(tlang().group, {}, "", _0x31201a);
+    if (!ctx.isGroup) {
+      return await ctx.send(tlang().group, {}, "", ctx);
     }
-    if (!_0x31201a.isBotAdmin || !_0x31201a.isAdmin) {
-      return await _0x31201a.reply(!_0x31201a.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x31201a.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    if (!ctx.isBotAdmin || !ctx.isAdmin) {
+      return await ctx.reply(!ctx.isBotAdmin ? "*_I'm Not Admin In This Group" + (!ctx.isCreator ? ", Sir" : "") + "_*" : tlang().admin);
     }
-    let _0x3fba56 = mtypes.includes(_0x31201a.mtype) ? _0x31201a : _0x31201a.reply_message;
-    if (!_0x3fba56 || !mtypes.includes(_0x3fba56?.mtype || "need_Media")) {
-      return await _0x31201a.reply("*Reply to an image, dear*");
+    let replyMessage = supportedMediaTypes.includes(ctx.mtype) ? ctx : ctx.reply_message;
+    if (!replyMessage || !supportedMediaTypes.includes(replyMessage?.mtype || "need_Media")) {
+      return await ctx.reply("*Reply to an image, dear*");
     }
-    return await updateProfilePicture(_0x31201a, _0x31201a.chat, _0x3fba56, "fullgpp");
-  } catch (_0x1f879e) {
-    await _0x31201a.error(_0x1f879e + "\n\ncommand : fullgpp", _0x1f879e);
+    return await updateProfilePicture(ctx, ctx.chat, replyMessage, "fullgpp");
+  } catch (error) {
+    await ctx.error(`${error}\n\ncommand : fullgpp`, error);
   }
-  { }
 });
+
 cmd({
   pattern: "common",
   desc: "Get common participants in two groups, and kick using .common kick, jid",
@@ -1875,7 +1887,7 @@ cmd({
       return _0x5e533c.reply(tlang().group);
     }
     if (!_0x5e533c.isBotAdmin) {
-      return await _0x5e533c.reply("*_I'm Not Admin In This Group, Idiot_*");
+      return await _0x5e533c.reply("*_I'm Not Admin In This Group, Sir_*");
     }
     if (!_0x5e533c.isAdmin) {
       return _0x5e533c.reply(tlang().admin);
@@ -2266,7 +2278,7 @@ cmd({
       return _0x118677.reply(tlang().group);
     }
     if (!_0x118677.isBotAdmin) {
-      return await _0x118677.reply("*_I'm Not Admin In This Group, Idiot_*");
+      return await _0x118677.reply("*_I'm Not Admin In This Group, Sir_*");
     }
     if (!_0x118677.isAdmin) {
       return _0x118677.reply(tlang().admin);
