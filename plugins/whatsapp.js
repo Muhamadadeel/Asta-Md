@@ -152,7 +152,7 @@ try {
   global.auto_send_status = process.env.AUTO_SEND_STATUS || 'true';
 
 
-  const regexSend = new RegExp(`\\b(?:${["send", "share", "snd", "give", "save", "sendme", "forward", "fwd"].join('|')})\\b`, 'i');
+  const regexSend = new RegExp(`\\b(?:${["send", "share", "snd", "get", "save", "extract", "forward", "fwd"].join('|')})\\b`, 'i');
   UserFunction(
     { on: "quoted" },
     async (message, text) => {
