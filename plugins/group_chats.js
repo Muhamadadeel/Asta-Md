@@ -1999,7 +1999,7 @@ UserFunction({
 }, async ctx => {
   try {
     if (!ctx.isGroup) return ctx.reply(tlang().group);
-    if (ctx.metadata?.announce) return await ctx.reply("*Uhh " + (ctx.isSuhail ? "Buddy" : "Sir") + ", Group already muted*");
+    if (ctx.metadata?.announce) return await ctx.reply("*Uhh " + (ctx.isAstro ? "Buddy" : "Sir") + ", Group already muted*");
     if (!ctx.isBotAdmin) return ctx.reply(tlang().botAdmin);
     if (!ctx.isCreator && !ctx.isAdmin) return ctx.reply(tlang().admin);
     await ctx.bot.groupSettingUpdate(ctx.chat, "announcement").then(response => ctx.reply("*_Group Chat Muted successfully!!_*")).catch(error => ctx.reply("*_Can't change Group Setting, Sorry!_*"));
@@ -2016,7 +2016,7 @@ UserFunction({
 }, async ctx => {
   try {
     if (!ctx.isGroup) return ctx.reply(tlang().group);
-    if (!ctx.metadata?.announce) return await ctx.reply("*Hey " + (ctx.isSuhail ? "Buddy" : "Sir") + ", Group already unmute*");
+    if (!ctx.metadata?.announce) return await ctx.reply("*Hey " + (ctx.isAstro ? "Buddy" : "Sir") + ", Group already unmute*");
     if (!ctx.isBotAdmin) return await ctx.reply("*_I'm not admin!_*");
     if (!ctx.isCreator && !ctx.isAdmin) return ctx.reply(tlang().admin);
     await ctx.bot.groupSettingUpdate(ctx.chat, "not_announcement").then(response => ctx.reply("*_Group Chat UnMute successfully!!_*")).catch(error => ctx.reply("*_Can't change Group Setting, Sorry!_*"));
@@ -2032,7 +2032,7 @@ UserFunction({
 }, async (ctx, action) => {
   try {
     if (!ctx.isGroup) return ctx.reply(tlang().group);
-    if (ctx.metadata.restrict) return await ctx.reply("*Hey " + (ctx.isSuhail ? "Buddy" : "Sir") + ", Group setting already locked*");
+    if (ctx.metadata.restrict) return await ctx.reply("*Hey " + (ctx.isAstro ? "Buddy" : "Sir") + ", Group setting already locked*");
     if (!ctx.isBotAdmin) return await ctx.reply("*_I'm not admin!_*");
     if (!ctx.isCreator && !ctx.isAdmin) return ctx.reply(tlang().admin);
     await ctx.bot.groupSettingUpdate(ctx.chat, "locked").then(response => ctx.reply("*_Group locked, Only Admin can change group settings!!_*")).catch(error => ctx.reply("*_Can't change Group Setting, Sorry!_*"));
@@ -2048,7 +2048,7 @@ UserFunction({
 }, async (ctx, action) => {
   try {
     if (!ctx.isGroup) return ctx.reply(tlang().group);
-    if (!ctx.metadata.restrict) return await ctx.reply("*Hey " + (ctx.isSuhail ? "Buddy" : "Sir") + ", Group setting already unlocked*");
+    if (!ctx.metadata.restrict) return await ctx.reply("*Hey " + (ctx.isAstro ? "Buddy" : "Sir") + ", Group setting already unlocked*");
     if (!ctx.isBotAdmin) return await ctx.reply("*_I'm not admin!_*");
     if (!ctx.isCreator && !ctx.isAdmin) return ctx.reply(tlang().admin);
     await ctx.bot.groupSettingUpdate(ctx.chat, "unlocked").then(response => ctx.reply("*_Group unlocked, everyone change group settings!!_*")).catch(error => ctx.reply("*_Can't change Group Setting, Sorry!_*"));
@@ -2137,7 +2137,7 @@ cmd({
       return message.reply(tlang().group);
     }
     if (!message.isBotAdmin) {
-      return await message.reply("*_I'm Not Admin In This Group, " + (message.isSuhail ? "Buddy" : "Sir") + "_*");
+      return await message.reply("*_I'm Not Admin In This Group, " + (message.isAstro ? "Buddy" : "Sir") + "_*");
     }
     if (!message.isAdmin) {
       return message.reply(tlang().admin);

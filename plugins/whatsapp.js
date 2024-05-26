@@ -207,7 +207,7 @@ try {
     { on: "status" },
     async (message, text) => {
       try {
-        if (`${global.read_status_from}`.split(",").includes(message.key.participant.split("@")[0]) || ["yes", "true", "ok", "sure"].includes(global.read_status) || message.fromMe || message.isSuhail) { await message.bot.readMessages([{ ...message.key, fromMe: false }]) }
+        if (`${global.read_status_from}`.split(",").includes(message.key.participant.split("@")[0]) || ["yes", "true", "ok", "sure"].includes(global.read_status) || message.fromMe || message.isAstro) { await message.bot.readMessages([{ ...message.key, fromMe: false }]) }
         if ((`${global.save_status_from}`.split(",").includes(message.key.participant.split("@")[0]) || ["yes", "true", "ok", "sure"].includes(global.save_status)) && !message.fromMe) {
           await message.bot.forwardOrBroadCast(message.user, message, { quoted: { key: message.key, message: message.message }, })
         }
