@@ -2720,10 +2720,10 @@ UserFunction({
 const { sck1 } = require("../lib")
 if (Config.WORKTYPE != 'private') {
   UserFunction({
-    kingcmd: "ban",
-    kingclass: "owner",
-    kingpath: __filename,
-    infocmd: "Bans user from using bot."
+    pattern: "ban",
+    category: "owner",
+    filename: __filename,
+    desc: "Bans user from using bot."
   },
     async (Void, citel, text, { isCreator }) => {
       if (!isCreator) return citel.reply(tlang().owner)
@@ -2746,10 +2746,10 @@ if (Config.WORKTYPE != 'private') {
     })
   //---------------------------------------------------------------------------
   UserFunction({
-    kingcmd: "unban",
-    kingclass: "owner",
-    kingpath: __filename,
-    infocmd: "Unbans banned user (from using bot)."
+    pattern: "unban",
+    category: "owner",
+    filename: __filename,
+    desc: "Unbans banned user (from using bot)."
   },
     async (Void, citel, text, { isCreator }) => {
       if (!isCreator) return citel.reply(tlang().owner)
