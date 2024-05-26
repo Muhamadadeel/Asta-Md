@@ -5,7 +5,6 @@ const fetch = require("node-fetch");
 UserFunction(
   {
     pattern: "wanews",
-    alias: ["wa"],
     desc: "Fetches the latest WhatsApp beta news for Android.",
     category: "news",
     filename: __filename,
