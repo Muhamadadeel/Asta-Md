@@ -60,7 +60,7 @@ try {
         );
 
         if (
-          text == "start" &&
+          text == "redeploy" &&
           process.env.HEROKU_APP_NAME &&
           process.env.HEROKU_API_KEY
         ) {
