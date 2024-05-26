@@ -432,239 +432,189 @@ UserFunction({
 
 UserFunction({
   pattern: "antitag",
-  desc: "detect tagall in group chat, then kick them",
+  desc: "Detect tagall in group chat, then kick them",
   fromMe: true,
   category: "misc",
   filename: __filename
-}, async (_0x27399d, _0x182372) => {
+}, async (message, args) => {
   try {
-    let _0x206317 = _0x182372 ? _0x182372.toLowerCase().trim() : false;
-    let _0x4a3f1c = _0x206317 ? _0x206317.split(" ")[0] : false;
-    let _0x3dc11c = (await groupdb.findOne({
-      id: _0x27399d.chat
-    })) || (await groupdb.new({
-      id: _0x27399d.chat
-    }));
-    if (!_0x4a3f1c) {
-      await _0x27399d.send("*_Anti_tag *" + (_0x3dc11c.antitag === "false" ? "Disabled" : "Enabled") + " in this Chat!_*");
-    } else if (_0x4a3f1c.startsWith("off") || _0x4a3f1c.startsWith("deact") || _0x4a3f1c.startsWith("disable")) {
-      if (_0x3dc11c.antitag === "false") {
-        await _0x27399d.send("*_Anti_tag already disabled in current Chat!!_*");
+    const command = args ? args.toLowerCase().trim() : null;
+    const action = command ? command.split(" ")[0] : null;
+    const groupData = await groupdb.findOne({ id: message.chat }) || await groupdb.new({ id: message.chat });
+
+    if (!action) {
+      await message.send(`*_Anti_tag ${groupData.antitag === "false" ? "Disabled" : "Enabled"} in this Chat!_*`);
+    } else if (["off", "deact", "disable"].includes(action)) {
+      if (groupData.antitag === "false") {
+        await message.send("*_Anti_tag already disabled in current Chat!!_*");
       } else {
-        await groupdb.updateOne({
-          id: _0x27399d.chat
-        }, {
-          antitag: "false"
-        });
-        await _0x27399d.send("*_Anti_tag Disabled Succesfully!_*");
+        await groupdb.updateOne({ id: message.chat }, { antitag: "false" });
+        await message.send("*_Anti_tag Disabled Successfully!_*");
       }
-    } else if (_0x4a3f1c.startsWith("on") || _0x4a3f1c.startsWith("act") || _0x4a3f1c.startsWith("enable")) {
-      if (_0x3dc11c.antitag === "true") {
-        await _0x27399d.send("*_Anti_tag already enabled in current Chat!!_*");
+    } else if (["on", "act", "enable"].includes(action)) {
+      if (groupData.antitag === "true") {
+        await message.send("*_Anti_tag already enabled in current Chat!!_*");
       } else {
-        await groupdb.updateOne({
-          id: _0x27399d.chat
-        }, {
-          antitag: "true"
-        });
-        await _0x27399d.send("*_Anti_tag succesfully enabled in chat!_*\n*_Now bot kick user who tag all members!_*");
+        await groupdb.updateOne({ id: message.chat }, { antitag: "true" });
+        await message.send("*_Anti_tag successfully enabled in chat!_*\n*_Now bot will kick user who tags all members!_*");
       }
     } else {
-      await _0x27399d.send("*_Provide Valid Instruction_*\n*Ex: _" + prefix + "antitag on/off_*");
+      await message.send("*_Provide Valid Instruction_*\n*Ex: _" + prefix + "antitag on/off_*");
     }
-  } catch (_0x3141b6) {
-    _0x27399d.error(_0x3141b6 + "\n\ncommand: antitag", _0x3141b6);
+  } catch (error) {
+    message.error(error + "\n\ncommand: antitag", error);
   }
 });
+
 UserFunction({
   pattern: "antilink",
-  desc: "activates and deactivates antilink.\nuse buttons to toggle.",
+  desc: "Activates and deactivates antilink. Use buttons to toggle.",
   category: "group",
   filename: __filename
-}, async (_0x25c82f, _0x4ae2c7, {
-  smd: _0x23c42c
-}) => {
+}, async (message, args, { smd }) => {
   try {
-    if (!_0x25c82f.isGroup) {
-      return _0x25c82f.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x25c82f.isAdmin && !_0x25c82f.isCreator) {
-      return _0x25c82f.reply(tlang().admin);
+    if (!message.isAdmin && !message.isCreator) {
+      return message.reply(tlang().admin);
     }
-    let _0x495b9f = _0x4ae2c7 ? _0x4ae2c7.toLowerCase().trim() : false;
-    let _0x520158 = _0x495b9f ? _0x495b9f.split(" ")[0] : false;
-    let _0x7e1f39 = (await groupdb.findOne({
-      id: _0x25c82f.chat
-    })) || (await groupdb.new({
-      id: _0x25c82f.chat
-    }));
-    if (!_0x520158) {
-      return await _0x25c82f.send("*_Antilink " + (_0x7e1f39.antilink === "false" ? "Disabled" : "Enabled") + " in this Group!_* \n" + (_0x7e1f39.antilink === "false" ? "" : "*Current Mode:* _" + _0x7e1f39.antilink + "_") + "\n\n*Antilink Modes:* ```\n" + (prefix + _0x23c42c) + " kick (Delete Links & Kick Senders)\n" + (prefix + _0x23c42c) + " delete (Delete Links Only)\n" + (prefix + _0x23c42c) + " warn (warn & delete links)\n" + (prefix + _0x23c42c) + " off (Disable Antilink in chat) ```\n\n\n" + Config.caption);
-    } else if (_0x520158.startsWith("off") || _0x520158.startsWith("deact") || _0x520158.startsWith("disable")) {
-      if (_0x7e1f39.antilink === "false") {
-        return await _0x25c82f.send("*_Anti_Link already disabled in current Chat!!_*");
+
+    const command = args ? args.toLowerCase().trim() : null;
+    const action = command ? command.split(" ")[0] : null;
+    const groupData = await groupdb.findOne({ id: message.chat }) || await groupdb.new({ id: message.chat });
+
+    if (!action) {
+      return await message.send(`*_Antilink ${groupData.antilink === "false" ? "Disabled" : "Enabled"} in this Group!_* \n${groupData.antilink === "false" ? "" : "*Current Mode:* _" + groupData.antilink + "_"}\n\n*Antilink Modes:* \`\`\`\n${prefix + smd} kick (Delete Links & Kick Senders)\n${prefix + smd} delete (Delete Links Only)\n${prefix + smd} warn (Warn & Delete Links)\n${prefix + smd} off (Disable Antilink in chat) \`\`\`\n\n\n${Config.caption}`);
+    } else if (["off", "deact", "disable"].includes(action)) {
+      if (groupData.antilink === "false") {
+        return await message.send("*_Anti_Link already disabled in current Chat!!_*");
       }
-      await groupdb.updateOne({
-        id: _0x25c82f.chat
-      }, {
-        antilink: "false"
-      });
-      return await _0x25c82f.send("*_Anti_Link Disabled Succesfully!_*");
-    } else if (_0x520158.startsWith("kick")) {
-      if (_0x7e1f39.antilink === "kick") {
-        return await _0x25c82f.send("*_Anti_Link already set to kick link senders!!_*");
+      await groupdb.updateOne({ id: message.chat }, { antilink: "false" });
+      return await message.send("*_Anti_Link Disabled Successfully!_*");
+    } else if (["kick"].includes(action)) {
+      if (groupData.antilink === "kick") {
+        return await message.send("*_Anti_Link already set to kick link senders!!_*");
       }
-      await groupdb.updateOne({
-        id: _0x25c82f.chat
-      }, {
-        antilink: "kick"
-      });
-      return await _0x25c82f.send("*_Anti_Link Succesfully set to kick link senders!_*");
-    } else if (_0x520158.startsWith("delete")) {
-      if (_0x7e1f39.antilink === "delete") {
-        return await _0x25c82f.send("*_Anti_Link already set to delete links!!_*");
+      await groupdb.updateOne({ id: message.chat }, { antilink: "kick" });
+      return await message.send("*_Anti_Link Successfully set to kick link senders!_*");
+    } else if (["delete"].includes(action)) {
+      if (groupData.antilink === "delete") {
+        return await message.send("*_Anti_Link already set to delete links!!_*");
       }
-      await groupdb.updateOne({
-        id: _0x25c82f.chat
-      }, {
-        antilink: "delete"
-      });
-      return await _0x25c82f.send("*_Anti_Link Succesfully set to delete links from chat!_*");
-    } else if (_0x520158.startsWith("warn")) {
-      if (_0x7e1f39.antilink === "warn") {
-        return await _0x25c82f.send("*_Anti_Link already set to warn link senders!!_*");
+      await groupdb.updateOne({ id: message.chat }, { antilink: "delete" });
+      return await message.send("*_Anti_Link Successfully set to delete links from chat!_*");
+    } else if (["warn"].includes(action)) {
+      if (groupData.antilink === "warn") {
+        return await message.send("*_Anti_Link already set to warn link senders!!_*");
       }
-      await groupdb.updateOne({
-        id: _0x25c82f.chat
-      }, {
-        antilink: "warn"
-      });
-      return await _0x25c82f.send("*_Anti_Link set to warn and delete links!_*");
+      await groupdb.updateOne({ id: message.chat }, { antilink: "warn" });
+      return await message.send("*_Anti_Link set to warn and delete links!_*");
     } else {
-      return await _0x25c82f.send("*_Uhh Please, Provide Valid Instruction_*\n*Eg: _" + prefix + "antilink kick/delete/warn/off_*");
+      return await message.send("*_Please provide a valid instruction_*\n*Eg: _" + prefix + "antilink kick/delete/warn/off_*");
     }
-  } catch (_0x90fda9) {
-    _0x25c82f.error(_0x90fda9 + "\n\ncommand: antilink", _0x90fda9);
+  } catch (error) {
+    message.error(error + "\n\ncommand: antilink", error);
   }
 });
+
 UserFunction({
   pattern: "welcome",
   alias: ["setwelcome"],
-  desc: "sets welcome message in specific group.",
+  desc: "Sets welcome message in specific group.",
   category: "group",
   filename: __filename
-}, async (_0x1e1e67, _0x1036fe) => {
+}, async (message, args) => {
   try {
-    if (!_0x1e1e67.isGroup) {
-      return _0x1e1e67.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x1e1e67.isAdmin && !_0x1e1e67.isCreator) {
-      return _0x1e1e67.reply(tlang().admin);
+    if (!message.isAdmin && !message.isCreator) {
+      return message.reply(tlang().admin);
     }
-    let _0x2154d6 = _0x1036fe.toLowerCase().trim();
-    let _0x558208 = (await groupdb.findOne({
-      id: _0x1e1e67.chat
-    })) || (await groupdb.new({
-      id: _0x1e1e67.chat
-    }));
-    if (_0x2154d6 === "on" || _0x2154d6 === "act" || _0x2154d6 === "enable") {
-      if (_0x558208.welcome === "true") {
-        return await _0x1e1e67.send("*_Welcome already enabled in current group!!_*");
+
+    const command = args.toLowerCase().trim();
+    const groupData = await groupdb.findOne({ id: message.chat }) || await groupdb.new({ id: message.chat });
+
+    if (["on", "act", "enable"].includes(command)) {
+      if (groupData.welcome === "true") {
+        return await message.send("*_Welcome already enabled in current group!!_*");
       }
-      await groupdb.updateOne({
-        id: _0x1e1e67.chat
-      }, {
-        welcome: "true"
-      });
-      return await _0x1e1e67.send("*Welcome successfully enabled!!*");
+      await groupdb.updateOne({ id: message.chat }, { welcome: "true" });
+      return await message.send("*Welcome successfully enabled!!*");
     }
-    if (_0x558208.welcome !== "true") {
-      return await _0x1e1e67.send("*_Welcome *Disabled in this Group!_* \n*_Use on/off to enable/disable welcome_*");
+
+    if (groupData.welcome !== "true") {
+      return await message.send(`*_Welcome *Disabled in this Group!_* \n*_Use on/off to enable/disable welcome_*`);
     }
-    if (!_0x1036fe || _0x2154d6 === "get") {
-      return await _0x1e1e67.reply("*Welcome :* " + _0x558208.welcometext);
+
+    if (!args || command === "get") {
+      return await message.reply("*Welcome :* " + groupData.welcometext);
     }
-    if (_0x2154d6 === "off" || _0x2154d6 === "deact" || _0x2154d6 === "disable") {
-      if (_0x558208.welcome === "false") {
-        return await _0x1e1e67.send("*_Welcome already disabled in current group!!_*");
+
+    if (["off", "deact", "disable"].includes(command)) {
+      if (groupData.welcome === "false") {
+        return await message.send("*_Welcome already disabled in current group!!_*");
       }
-      await groupdb.updateOne({
-        id: _0x1e1e67.chat
-      }, {
-        welcome: "false"
-      });
-      return await _0x1e1e67.send("*Welcome message disabled!!*");
+      await groupdb.updateOne({ id: message.chat }, { welcome: "false" });
+      return await message.send("*Welcome message disabled!!*");
     }
-    await groupdb.updateOne({
-      id: _0x1e1e67.chat
-    }, {
-      welcometext: _0x1036fe,
-      welcome: "true"
-    });
-    await sendWelcome(_0x1e1e67, _0x1036fe);
-  } catch (_0x582cfc) {
-    _0x1e1e67.error(_0x582cfc + "\n\ncommand: setwelcome", _0x582cfc);
+
+    await groupdb.updateOne({ id: message.chat }, { welcometext: args, welcome: "true" });
+    await sendWelcome(message, args);
+  } catch (error) {
+    message.error(error + "\n\ncommand: setwelcome", error);
   }
 });
+
 UserFunction({
-  pattern: "goodbye",
-  alias: ["setgoodbye", "setbye"],
-  desc: "sets goodbye message in specific group.",
+  pattern: "setbye",
+  desc: "Sets goodbye message in specific group.",
   category: "group",
   filename: __filename
-}, async (_0x2c1a56, _0x5dedfc) => {
+}, async (message, args) => {
   try {
-    if (!_0x2c1a56.isGroup) {
-      return _0x2c1a56.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x2c1a56.isAdmin && !_0x2c1a56.isCreator) {
-      return _0x2c1a56.reply(tlang().admin);
+    if (!message.isAdmin && !message.isCreator) {
+      return message.reply(tlang().admin);
     }
-    let _0x604587 = _0x5dedfc.toLowerCase().trim();
-    let _0xbcf3ee = (await groupdb.findOne({
-      id: _0x2c1a56.chat
-    })) || (await groupdb.new({
-      id: _0x2c1a56.chat
-    }));
-    if (_0x604587 === "on" || _0x604587 === "act" || _0x604587 === "enable") {
-      if (_0xbcf3ee.goodbye === "true") {
-        return await _0x2c1a56.send("*_Goodbye already enabled in current group!!_*");
+
+    const command = args.toLowerCase().trim();
+    const groupData = await groupdb.findOne({ id: message.chat }) || await groupdb.new({ id: message.chat });
+
+    if (["on", "act", "enable"].includes(command)) {
+      if (groupData.goodbye === "true") {
+        return await message.send("*_Goodbye already enabled in current group!!_*");
       }
-      await groupdb.updateOne({
-        id: _0x2c1a56.chat
-      }, {
-        goodbye: "true"
-      });
-      return await _0x2c1a56.send("*Goodbye successfully enabled!!*");
+      await groupdb.updateOne({ id: message.chat }, { goodbye: "true" });
+      return await message.send("*Goodbye successfully enabled!!*");
     }
-    if (_0xbcf3ee.goodbye !== "true") {
-      return await _0x2c1a56.send("*_Goodbye *Disabled in this Group!_* \n*_Use on/off to enable/disable goodbye_*");
+
+    if (groupData.goodbye !== "true") {
+      return await message.send(`*_Goodbye *Disabled in this Group!_* \n*_Use on/off to enable/disable goodbye_*`);
     }
-    if (!_0x5dedfc || _0x604587 === "get") {
-      return await _0x2c1a56.reply("*Goodbye Message :* " + _0xbcf3ee.goodbyetext);
+
+    if (!args || command === "get") {
+      return await message.reply("*Goodbye Message :* " + groupData.goodbyetext);
     }
-    if (_0x604587 === "off" || _0x604587 === "deact" || _0x604587 === "disable") {
-      if (_0xbcf3ee.goodbye === "false") {
-        return await _0x2c1a56.send("*_Goodbye already disabled in current group!!_*");
+
+    if (["off", "deact", "disable"].includes(command)) {
+      if (groupData.goodbye === "false") {
+        return await message.send("*_Goodbye already disabled in current group!!_*");
       }
-      await groupdb.updateOne({
-        id: _0x2c1a56.chat
-      }, {
-        goodbye: "false"
-      });
-      return await _0x2c1a56.send("*Goodbye message disabled!!*");
+      await groupdb.updateOne({ id: message.chat }, { goodbye: "false" });
+      return await message.send("*Goodbye message disabled!!*");
     }
-    await groupdb.updateOne({
-      id: _0x2c1a56.chat
-    }, {
-      goodbyetext: _0x5dedfc,
-      goodbye: "true"
-    });
-    await sendWelcome(_0x2c1a56, _0x5dedfc);
-  } catch (_0x5dd573) {
-    _0x2c1a56.error(_0x5dd573 + "\n\ncommand: setgoodbye", _0x5dd573);
+
+    await groupdb.updateOne({ id: message.chat }, { goodbyetext: args, goodbye: "true" });
+    await sendWelcome(message, args);
+  } catch (error) {
+    message.error(error + "\n\ncommand: setgoodbye", error);
   }
 });
+
 UserFunction({
   pattern: "onlyadmin",
   alias: ["antimessge"],
