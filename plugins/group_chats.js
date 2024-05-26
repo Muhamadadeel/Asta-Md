@@ -803,193 +803,165 @@ UserFunction({
   }
 });
 
+
 UserFunction({
   pattern: "antifake",
-  desc: "𝗗𝗲𝘁𝗲𝗰𝘁𝘀 𝗽𝗿𝗼𝗺𝗼𝘁𝗲/𝗱𝗲𝗺𝗼𝘁𝗲 𝗮𝗻𝗱 𝘀𝗲𝗻𝗱𝘀 𝗮𝗹𝗲𝗿𝘁. ",
+  desc: "Detects promote/demote and sends alert.",
   category: "group",
   filename: __filename
-}, async (_0x5a1eb8, _0x463e76) => {
+}, async (ctx, args) => {
   try {
-    if (!_0x5a1eb8.isGroup) {
-      return _0x5a1eb8.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x5a1eb8.isAdmin && !_0x5a1eb8.isCreator) {
-      return _0x5a1eb8.reply(tlang().admin);
+    if (!ctx.isAdmin && !ctx.isCreator) {
+      return ctx.reply(tlang().admin);
     }
-    let _0x49ac75 = (await groupdb.findOne({
-      id: _0x5a1eb8.chat
-    })) || (await groupdb.new({
-      id: _0x5a1eb8.chat
-    }));
-    let _0x1c6236 = _0x463e76 ? _0x463e76.toLowerCase().trim() : "";
-    if (_0x1c6236.startsWith("off") || _0x1c6236.startsWith("deact") || _0x1c6236.startsWith("disable")) {
-      if (_0x49ac75.antifake == "false") {
-        return await _0x5a1eb8.send("*Anti_Fake Already Disabled In Current Chat!*");
+
+    let groupData = await groupdb.findOne({ id: ctx.chat }) || await groupdb.new({ id: ctx.chat });
+    let commandArg = args ? args.toLowerCase().trim() : "";
+
+    if (commandArg.startsWith("off") || commandArg.startsWith("deact") || commandArg.startsWith("disable")) {
+      if (groupData.antifake === "false") {
+        return ctx.send("*Anti_Fake Already Disabled In Current Chat!*");
       }
-      await groupdb.updateOne({
-        id: _0x5a1eb8.chat
-      }, {
-        antifake: "false"
-      });
-      return await _0x5a1eb8.send("*Anti_Fake Disable Succesfully!*");
-    } else if (!_0x463e76) {
-      return await _0x5a1eb8.send("*_Antifake " + (_0x49ac75.antifake === "false" ? "Not set to any" : "set to \"" + _0x49ac75.antifake + "\"") + " Country Code!_*\n *Provide Country code to Update Antifake Status*\n*Eg: _.antifake 92_*");
+      await groupdb.updateOne({ id: ctx.chat }, { antifake: "false" });
+      return ctx.send("*Anti_Fake Disabled Successfully!*");
+    } 
+
+    if (!args) {
+      return ctx.send(`*_Antifake ${groupData.antifake === "false" ? "Not set to any" : `set to "${groupData.antifake}"`} Country Code!_*\n*Provide Country code to Update Antifake Status*\n*Eg: _.antifake 92_*`);
     }
-    let _0x2f3d1b = _0x463e76 ? _0x463e76.split(",").map(_0x40173c => parseInt(_0x40173c)).filter(_0x44d61c => !isNaN(_0x44d61c)).join(",") : false;
-    if (!_0x463e76 || !_0x2f3d1b) {
-      return await _0x5a1eb8.send("*_Please provide a country code First_*\n *_Only numbers to join this group._*\n*_eg: " + prefix + "antifake 92_*");
-    } else if (_0x2f3d1b) {
-      await groupdb.updateOne({
-        id: _0x5a1eb8.chat
-      }, {
-        antifake: "" + _0x2f3d1b
-      });
-      return await _0x5a1eb8.send("*Anti_Fake Succesfully set to \"" + _0x2f3d1b + "\"!*\n*_Now People Joined Group Who's Number Start With " + _0x2f3d1b + "_*");
-    } else {
-      return await _0x5a1eb8.send("*_Please provide a Valid country code First_*\n *_Only numbers to join this group._*\n*_eg: " + prefix + "antifake 92_*");
-    }
-  } catch (_0x53288b) {
-    _0x5a1eb8.error(_0x53288b + "\n\ncommand: antifake", _0x53288b);
+
+    let countryCode = args ? args.split(",").map(code => parseInt(code)).filter(code => !isNaN(code)).join(",") : false;
+    if (!args || !countryCode) {
+      return ctx.send(`*_Please provide a country code First_*\n*_Only numbers to join this group._*\n*_eg: ${prefix}antifake 92_*`);
+    } 
+
+    await groupdb.updateOne({ id: ctx.chat }, { antifake: `${countryCode}` });
+    return ctx.send(`*Anti_Fake Successfully set to "${countryCode}"!*\n*_Now People Joined Group Who's Number Start With ${countryCode}_*`);
+  } catch (error) {
+    ctx.error(`${error}\n\ncommand: antifake`, error);
   }
 });
+
 UserFunction({
   pattern: "antidemote",
-  desc: "Detects Promote and Automaticaly demote promoted person.",
+  desc: "Detects Promote and Automatically demotes promoted person.",
   category: "group",
   filename: __filename
-}, async (_0x3d214e, _0x55496f) => {
+}, async (ctx, args) => {
   try {
-    if (!_0x3d214e.isGroup) {
-      return _0x3d214e.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x3d214e.isAdmin && !_0x3d214e.isCreator) {
-      return _0x3d214e.reply(tlang().admin);
+    if (!ctx.isAdmin && !ctx.isCreator) {
+      return ctx.reply(tlang().admin);
     }
-    let _0x30a721 = (await groupdb.findOne({
-      id: _0x3d214e.chat
-    })) || (await groupdb.new({
-      id: _0x3d214e.chat
-    }));
-    let _0x210ede = _0x55496f ? _0x55496f.toLowerCase().trim() : "";
-    if (_0x210ede.startsWith("on") || _0x210ede.startsWith("act") || _0x210ede.startsWith("enable")) {
-      if (_0x30a721.antidemote == "true") {
-        return await _0x3d214e.send("*Anti_Demote Already Enabled In Current Chat!*");
+
+    let groupData = await groupdb.findOne({ id: ctx.chat }) || await groupdb.new({ id: ctx.chat });
+    let commandArg = args ? args.toLowerCase().trim() : "";
+
+    if (commandArg.startsWith("on") || commandArg.startsWith("act") || commandArg.startsWith("enable")) {
+      if (groupData.antidemote === "true") {
+        return ctx.send("*Anti_Demote Already Enabled In Current Chat!*");
       }
-      await groupdb.updateOne({
-        id: _0x3d214e.chat
-      }, {
-        antidemote: "true"
-      });
-      return await _0x3d214e.send("*Anti_Demote Enable Succesfully! _No One Demote Here Now_.*");
-    } else if (_0x210ede.startsWith("off") || _0x210ede.startsWith("deact") || _0x210ede.startsWith("disable")) {
-      if (_0x30a721.antidemote == "false") {
-        return await _0x3d214e.send("*Anti_Demote Already Disabled In Current Chat!*");
+      await groupdb.updateOne({ id: ctx.chat }, { antidemote: "true" });
+      return ctx.send("*Anti_Demote Enabled Successfully! _No One Demote Here Now_.*");
+    } 
+
+    if (commandArg.startsWith("off") || commandArg.startsWith("deact") || commandArg.startsWith("disable")) {
+      if (groupData.antidemote === "false") {
+        return ctx.send("*Anti_Demote Already Disabled In Current Chat!*");
       }
-      await groupdb.updateOne({
-        id: _0x3d214e.chat
-      }, {
-        antidemote: "false"
-      });
-      return await _0x3d214e.send("*Anti_Demote Disable Succesfully!*");
-    } else {
-      return await _0x3d214e.reply("*Uhh Dear, Please Toggle between \"On\" And \"Off\".* \n*_To Enable & Disable Stop Demoting Peoples!_*");
-    }
-  } catch (_0x3863b4) {
-    _0x3d214e.error(_0x3863b4 + "\n\ncommand: antidemote", _0x3863b4);
+      await groupdb.updateOne({ id: ctx.chat }, { antidemote: "false" });
+      return ctx.send("*Anti_Demote Disabled Successfully!*");
+    } 
+
+    return ctx.reply(`*Uhh Dear, Please Toggle between "On" And "Off".* \n*_To Enable & Disable Stop Demoting Peoples!_*`);
+  } catch (error) {
+    ctx.error(`${error}\n\ncommand: antidemote`, error);
   }
 });
+
 UserFunction({
   pattern: "antipromote",
-  desc: "Detects Promote and Automaticaly demote promoted person.",
+  desc: "Detects Promote and Automatically demotes promoted person.",
   category: "group",
   filename: __filename
-}, async (_0x3d1898, _0x4bf866) => {
+}, async (ctx, args) => {
   try {
-    if (!_0x3d1898.isGroup) {
-      return _0x3d1898.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x3d1898.isAdmin && !_0x3d1898.isCreator) {
-      return _0x3d1898.reply(tlang().admin);
+    if (!ctx.isAdmin && !ctx.isCreator) {
+      return ctx.reply(tlang().admin);
     }
-    let _0x599352 = (await groupdb.findOne({
-      id: _0x3d1898.chat
-    })) || (await groupdb.new({
-      id: _0x3d1898.chat
-    }));
-    let _0x41626b = _0x4bf866 ? _0x4bf866.toLowerCase().trim() : "";
-    if (_0x41626b.startsWith("on") || _0x41626b.startsWith("act") || _0x41626b.startsWith("enable")) {
-      if (_0x599352.antipromote == "true") {
-        return await _0x3d1898.send("*Anti_Promote Already Enabled In Current Chat!*");
+
+    let groupData = await groupdb.findOne({ id: ctx.chat }) || await groupdb.new({ id: ctx.chat });
+    let commandArg = args ? args.toLowerCase().trim() : "";
+
+    if (commandArg.startsWith("on") || commandArg.startsWith("act") || commandArg.startsWith("enable")) {
+      if (groupData.antipromote === "true") {
+        return ctx.send("*Anti_Promote Already Enabled In Current Chat!*");
       }
-      await groupdb.updateOne({
-        id: _0x3d1898.chat
-      }, {
-        antipromote: "true"
-      });
-      return await _0x3d1898.send("*Anti_Promote Enable Succesfully! _No One Promote Here Now_.*");
-    } else if (_0x41626b.startsWith("off") || _0x41626b.startsWith("deact") || _0x41626b.startsWith("disable")) {
-      if (_0x599352.antipromote == "false") {
-        return await _0x3d1898.send("*Anti_Promote Already Disabled In Current Chat!*");
+      await groupdb.updateOne({ id: ctx.chat }, { antipromote: "true" });
+      return ctx.send("*Anti_Promote Enabled Successfully! _No One Promote Here Now_.*");
+    } 
+
+    if (commandArg.startsWith("off") || commandArg.startsWith("deact") || commandArg.startsWith("disable")) {
+      if (groupData.antipromote === "false") {
+        return ctx.send("*Anti_Promote Already Disabled In Current Chat!*");
       }
-      await groupdb.updateOne({
-        id: _0x3d1898.chat
-      }, {
-        antipromote: "false"
-      });
-      return await _0x3d1898.send("*Anti_Promote Disable Succesfully!*");
-    } else {
-      return await _0x3d1898.reply("*Uhh Dear, Please Toggle between \"On\" And \"Off\".* \n*_To Stop Promoting Peoples in Chat_*");
-    }
-  } catch (_0x424dfe) {
-    _0x3d1898.error(_0x424dfe + "\n\ncommand: antipromote", _0x424dfe);
+      await groupdb.updateOne({ id: ctx.chat }, { antipromote: "false" });
+      return ctx.send("*Anti_Promote Disabled Successfully!*");
+    } 
+
+    return ctx.reply(`*Uhh Dear, Please Toggle between "On" And "Off".* \n*_To Stop Promoting Peoples in Chat_*`);
+  } catch (error) {
+    ctx.error(`${error}\n\ncommand: antipromote`, error);
   }
 });
+
 UserFunction({
   pattern: "pdm",
-  desc: "Detect Promote/Demote Users And Send Alerts in Chat ",
+  desc: "Detect Promote/Demote Users And Send Alerts in Chat.",
   category: "group",
   filename: __filename
-}, async (_0x47f7e9, _0x4bf96c) => {
+}, async (ctx, args) => {
   try {
-    if (!_0x47f7e9.isGroup) {
-      return _0x47f7e9.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x47f7e9.isAdmin && !_0x47f7e9.isCreator) {
-      return _0x47f7e9.reply(tlang().admin);
+    if (!ctx.isAdmin && !ctx.isCreator) {
+      return ctx.reply(tlang().admin);
     }
-    let _0x9e3626 = (await groupdb.findOne({
-      id: _0x47f7e9.chat
-    })) || (await groupdb.new({
-      id: _0x47f7e9.chat
-    }));
-    let _0x19e598 = _0x4bf96c ? _0x4bf96c.toLowerCase().trim() : "";
-    if (_0x19e598.startsWith("on") || _0x19e598.startsWith("act") || _0x19e598.startsWith("enable")) {
-      if (_0x9e3626.pdm == "true") {
-        return await _0x47f7e9.send("*Promote/Demote Alerts Already Enabled In Current Chat!*");
+
+    let groupData = await groupdb.findOne({ id: ctx.chat }) || await groupdb.new({ id: ctx.chat });
+    let commandArg = args ? args.toLowerCase().trim() : "";
+
+    if (commandArg.startsWith("on") || commandArg.startsWith("act") || commandArg.startsWith("enable")) {
+      if (groupData.pdm === "true") {
+        return ctx.send("*Promote/Demote Alerts Already Enabled In Current Chat!*");
       }
-      await groupdb.updateOne({
-        id: _0x47f7e9.chat
-      }, {
-        pdm: "true"
-      });
-      return await _0x47f7e9.send("*Promote/Demote Alerts Enable Succesfully!*");
-    } else if (_0x19e598.startsWith("off") || _0x19e598.startsWith("deact") || _0x19e598.startsWith("disable")) {
-      if (_0x9e3626.pdm == "false") {
-        return await _0x47f7e9.send("*Promote/Demote Alerts Already Disabled In Current Chat!*");
+      await groupdb.updateOne({ id: ctx.chat }, { pdm: "true" });
+      return ctx.send("*Promote/Demote Alerts Enabled Successfully!*");
+    } 
+
+    if (commandArg.startsWith("off") || commandArg.startsWith("deact") || commandArg.startsWith("disable")) {
+      if (groupData.pdm === "false") {
+        return ctx.send("*Promote/Demote Alerts Already Disabled In Current Chat!*");
       }
-      await groupdb.updateOne({
-        id: _0x47f7e9.chat
-      }, {
-        pdm: "false"
-      });
-      return await _0x47f7e9.send("*Promote/Demote Alerts Disable Succesfully!*");
-    } else {
-      return await _0x47f7e9.reply("*Uhh Dear, Please use between \"On\" And \"Off\".* \n*_To get And Stop Promote/Demote Alerts_*");
-    }
-  } catch (_0x2f089d) {
-    _0x47f7e9.error(_0x2f089d + "\n\ncommand: pdm", _0x2f089d);
+      await groupdb.updateOne({ id: ctx.chat }, { pdm: "false" });
+      return ctx.send("*Promote/Demote Alerts Disabled Successfully!*");
+    } 
+
+    return ctx.reply(`*Uhh Dear, Please use between "On" And "Off".* \n*_To get And Stop Promote/Demote Alerts_*`);
+  } catch (error) {
+    ctx.error(`${error}\n\ncommand: pdm`, error);
   }
 });
+
 UserFunction({
   pattern: "amute",
   desc: "sets auto mute time in group.",
