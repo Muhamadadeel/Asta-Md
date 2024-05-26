@@ -1943,177 +1943,123 @@ cmd({
       }
     });
     
-cmd({
-  pattern: "pick",
-  desc: "Pics random user from Group",
-  category: "group",
-  filename: __filename
-}, async (_0xb552a2, _0x39ba38) => {
-  try {
-    if (!_0xb552a2.isGroup) {
-      return _0xb552a2.reply(tlang().group);
-    }
-    if (!_0x39ba38) {
-      return _0xb552a2.reply("*Which type of User you want?*");
-    }
-    let _0x4fd8bc = _0xb552a2.metadata.participants.map(_0x8b1e4d => _0x8b1e4d.id);
-    let _0x2dfc12 = _0x4fd8bc[Math.floor(Math.random() * _0x4fd8bc.length)];
-    _0xb552a2.bot.sendMessage(_0xb552a2.jid, {
-      text: "The most " + _0x39ba38 + " around us is *@" + _0x2dfc12.split("@")[0] + "*",
-      mentions: [_0x2dfc12]
-    }, {
-      quoted: _0xb552a2
+    cmd({
+      pattern: "pick",
+      desc: "Picks a random user from the group",
+      category: "group",
+      filename: __filename
+    }, async (ctx, userType) => {
+      try {
+        if (!ctx.isGroup) return ctx.reply(tlang().group);
+        if (!userType) return ctx.reply("*Which type of user do you want?*");
+        let participants = ctx.metadata.participants.map(user => user.id);
+        let randomUser = participants[Math.floor(Math.random() * participants.length)];
+        ctx.bot.sendMessage(ctx.jid, {
+          text: "The most " + userType + " around us is *@" + randomUser.split("@")[0] + "*",
+          mentions: [randomUser]
+        }, {
+          quoted: ctx
+        });
+      } catch (error) {
+        await ctx.error(error + "\n\ncommand : pick", error);
+      }
     });
-  } catch (_0x1a5f73) {
-    await _0xb552a2.error(_0x1a5f73 + "\n\ncommand : pick", _0x1a5f73);
-  }
-});
-UserFunction({
-  pattern: "ship",
-  category: "group",
-  filename: __filename
-}, async _0x8c602e => {
-  if (!_0x8c602e.isGroup) {
-    return _0x8c602e.reply(tlang().group);
-  }
-  let _0x456468 = _0x8c602e.metadata.participants.map(_0x119157 => _0x119157.id);
-  var _0x37f2d4 = _0x8c602e.reply_message ? _0x8c602e.reply_message.sender : _0x8c602e.mentionedJid[0] ? _0x8c602e.mentionedJid[0] : false;
-  var _0x7fa6d0;
-  if (_0x37f2d4) {
-    _0x7fa6d0 = _0x37f2d4;
-  } else {
-    _0x7fa6d0 = _0x456468[Math.floor(Math.random() * _0x456468.length)];
-  }
-  if (_0x8c602e.sender === _0x7fa6d0) {
-    return _0x8c602e.reply("*Wait... What!!!,You wanna do matchmaking with yourself!*");
-  }
-  async function _0x30a2ec() {
-    var _0x523d04;
-    const _0x4e5253 = Math.floor(Math.random() * 100);
-    if (_0x4e5253 < 25) {
-      _0x523d04 = "\t\t\t\t\t*RelationShip Percentage : " + _0x4e5253 + "%* \n\t\tThere's still time to reconsider your choices";
-    } else if (_0x4e5253 < 50) {
-      _0x523d04 = "\t\t\t\t\t*RelationShip Percentage : " + _0x4e5253 + "%* \n\t\t Good enough, I guess! 💫";
-    } else if (_0x4e5253 < 75) {
-      _0x523d04 = "\t\t\t\t\t*RelationShip Percentage : " + _0x4e5253 + "%* \n\t\t\tStay together and you'll find a way ⭐️";
-    } else if (_0x4e5253 < 90) {
-      _0x523d04 = "\t\t\t\t\t*RelationShip Percentage : " + _0x4e5253 + "%* \n\tAmazing! You two will be a good couple 💖 ";
-    } else {
-      _0x523d04 = "\t\t\t\t\t*RelationShip Percentage : " + _0x4e5253 + "%* \n\tYou both are fit to be together 💙";
-    }
-    return _0x523d04;
-  }
-  var _0x1a1a8e = {
-    ...(await _0x8c602e.bot.contextInfo("Matchmaking", "   ˚ʚ♡ɞ˚"))
-  };
-  await _0x8c602e.reply("\t❣️ *Matchmaking...* ❣️\n\t*✯────────────────────✯*\n@" + _0x8c602e.sender.split("@")[0] + "  x  @" + _0x7fa6d0.split("@")[0] + "\n\t*✯────────────────────✯*\n\n" + (await _0x30a2ec()) + "\n\n" + Config.caption, {
-    contextInfo: _0x1a1a8e,
-    mentions: [_0x7fa6d0]
-  }, "suhail");
-});
-UserFunction({
-  pattern: "mute",
-  desc: "Provides admin role to replied/quoted user",
-  category: "group",
-  filename: __filename,
-  use: "<quote|reply|number>"
-}, async _0xadbad4 => {
-  try {
-    if (!_0xadbad4.isGroup) {
-      return _0xadbad4.reply(tlang().group);
-    }
-    if (_0xadbad4.metadata?.announce) {
-      return await _0xadbad4.reply("*Uhh " + (_0xadbad4.isSuhail ? "Buddy" : "Sir") + ", Group already muted*");
-    }
-    if (!_0xadbad4.isBotAdmin) {
-      return _0xadbad4.reply(tlang().botAdmin);
-    }
-    if (!_0xadbad4.isCreator && !_0xadbad4.isAdmin) {
-      return _0xadbad4.reply(tlang().admin);
-    }
-    await _0xadbad4.bot.groupSettingUpdate(_0xadbad4.chat, "announcement").then(_0x150a20 => _0xadbad4.reply("*_Group Chat Muted successfully!!_*")).catch(_0x5d5c82 => _0xadbad4.reply("*_Can't change Group Setting, Sorry!_*"));
-  } catch (_0x2bea0d) {
-    await _0xadbad4.error(_0x2bea0d + "\n\ncommand: gmute", _0x2bea0d);
-  }
-});
-UserFunction({
-  pattern: "unmute",
-  desc: "Provides admin role to replied/quoted user",
-  category: "group",
-  filename: __filename,
-  use: "<quote|reply|number>"
-}, async _0x5d1afd => {
-  try {
-    if (!_0x5d1afd.isGroup) {
-      return _0x5d1afd.reply(tlang().group);
-    }
-    if (!_0x5d1afd.metadata?.announce) {
-      return await _0x5d1afd.reply("*Hey " + (_0x5d1afd.isSuhail ? "Buddy" : "Sir") + ", Group already unmute*");
-    }
-    if (!_0x5d1afd.isBotAdmin) {
-      return _0x5d1afd.reply(tlang().botAdmin);
-    }
-    if (!_0x5d1afd.isCreator && !_0x5d1afd.isAdmin) {
-      return _0x5d1afd.reply(tlang().admin);
-    }
-    await _0x5d1afd.bot.groupSettingUpdate(_0x5d1afd.chat, "not_announcement").then(_0x5993c4 => _0x5d1afd.reply("*_Group Chat UnMute successfully!!_*")).catch(_0x293794 => _0x5d1afd.reply("*_Can't change Group Setting, Sorry!_*"));
-  } catch (_0x3ea023) {
-    await _0x5d1afd.error(_0x3ea023 + "\n\ncommand: gunmute", _0x3ea023);
-  }
-});
-UserFunction({
-  pattern: "lock",
-  fromMe: true,
-  desc: "only allow admins to modify the group's settings.",
-  type: "group"
-}, async (_0x1dca9f, _0x44b327) => {
-  try {
-    if (!_0x1dca9f.isGroup) {
-      return _0x1dca9f.reply(tlang().group);
-    }
-    if (_0x1dca9f.metadata.restrict) {
-      return await _0x1dca9f.reply("*Hey " + (_0x1dca9f.isSuhail ? "Buddy" : "Sir") + ", Group setting already locked*");
-    }
-    if (!_0x1dca9f.isBotAdmin) {
-      return await _0x1dca9f.reply("*_I'm not admin!_*");
-    }
-    ;
-    if (!_0x1dca9f.isCreator && !_0x1dca9f.isAdmin) {
-      return _0x1dca9f.reply(tlang().admin);
-    }
-    await _0x1dca9f.bot.groupSettingUpdate(_0x1dca9f.chat, "locked").then(_0x49c387 => _0x1dca9f.reply("*_Group locked, Only Admin can change group settinggs!!_*")).catch(_0x100d44 => _0x1dca9f.reply("*_Can't change Group Setting, Sorry!_*"));
-  } catch (_0x9e6207) {
-    await _0x1dca9f.error(_0x9e6207 + "\n\ncommand: lock", _0x9e6207);
-  }
-});
-UserFunction({
-  pattern: "unlock",
-  fromMe: true,
-  desc: "allow everyone to modify the group's settings.",
-  type: "group"
-}, async (_0xe880ee, _0x2dce84) => {
-  try {
-    if (!_0xe880ee.isGroup) {
-      return _0xe880ee.reply(tlang().group);
-    }
-    if (!_0xe880ee.metadata.restrict) {
-      return await _0xe880ee.reply("*Hey " + (_0xe880ee.isSuhail ? "Buddy" : "Sir") + ", Group setting already unlocked*");
-    }
-    if (!_0xe880ee.isBotAdmin) {
-      return await _0xe880ee.reply("*_I'm not admin!_*");
-    }
-    ;
-    if (!_0xe880ee.isCreator && !_0xe880ee.isAdmin) {
-      return _0xe880ee.reply(tlang().admin);
-    }
-    await _0xe880ee.bot.groupSettingUpdate(_0xe880ee.chat, "unlocked").then(_0x282118 => _0xe880ee.reply("*_Group unlocked, everyone change group settings!!_*")).catch(_0x320353 => _0xe880ee.reply("*_Can't change Group Setting, Sorry!_*"));
-  } catch (_0x20d64c) {
-    await _0xe880ee.error(_0x20d64c + "\n\ncommand: unlock", _0x20d64c);
-  }
-});
+    UserFunction({
+      pattern: "ship",
+      category: "group",
+      filename: __filename
+    }, async ctx => {
+      if (!ctx.isGroup) return ctx.reply(tlang().group);
+      let participants = ctx.metadata.participants.map(user => user.id);
+      var targetUser = ctx.reply_message ? ctx.reply_message.sender : ctx.mentionedJid[0] ? ctx.mentionedJid[0] : false;
+      var userToShip = targetUser ? targetUser : participants[Math.floor(Math.random() * participants.length)];
+      if (ctx.sender === userToShip) return ctx.reply("*Wait... What!!!,You wanna do matchmaking with yourself!*");
+      async function getShipPercentage() {
+        var shipPercentage = Math.floor(Math.random() * 100);
+        if (shipPercentage < 25) return "\t\t\t\t\t*RelationShip Percentage : " + shipPercentage + "%* \n\t\tThere's still time to reconsider your choices";
+        else if (shipPercentage < 50) return "\t\t\t\t\t*RelationShip Percentage : " + shipPercentage + "%* \n\t\t Good enough, I guess! 💫";
+        else if (shipPercentage < 75) return "\t\t\t\t\t*RelationShip Percentage : " + shipPercentage + "%* \n\t\t\tStay together and you'll find a way ⭐️";
+        else if (shipPercentage < 90) return "\t\t\t\t\t*RelationShip Percentage : " + shipPercentage + "%* \n\tAmazing! You two will be a good couple 💖 ";
+        else return "\t\t\t\t\t*RelationShip Percentage : " + shipPercentage + "%* \n\tYou both are fit to be together 💙";
+      }
+      var contextInfo = {
+        ...(await ctx.bot.contextInfo("Matchmaking", "   ˚ʚ♡ɞ˚"))
+      };
+      await ctx.reply("\t❣️ *Matchmaking...* ❣️\n\t*✯────────────────────✯*\n@" + ctx.sender.split("@")[0] + "  x  @" + userToShip.split("@")[0] + "\n\t*✯────────────────────✯*\n\n" + (await getShipPercentage()) + "\n\n" + Config.caption, {
+        contextInfo: contextInfo,
+        mentions: [userToShip]
+      }, "suhail");
+    });
+    UserFunction({
+      pattern: "mute",
+      desc: "Mutes the group",
+      category: "group",
+      filename: __filename,
+      use: "<quote|reply|number>"
+    }, async ctx => {
+      try {
+        if (!ctx.isGroup) return ctx.reply(tlang().group);
+        if (ctx.metadata?.announce) return await ctx.reply("*Uhh " + (ctx.isSuhail ? "Buddy" : "Sir") + ", Group already muted*");
+        if (!ctx.isBotAdmin) return ctx.reply(tlang().botAdmin);
+        if (!ctx.isCreator && !ctx.isAdmin) return ctx.reply(tlang().admin);
+        await ctx.bot.groupSettingUpdate(ctx.chat, "announcement").then(response => ctx.reply("*_Group Chat Muted successfully!!_*")).catch(error => ctx.reply("*_Can't change Group Setting, Sorry!_*"));
+      } catch (error) {
+        await ctx.error(error + "\n\ncommand: gmute", error);
+      }
+    });
+    UserFunction({
+      pattern: "unmute",
+      desc: "Unmutes the group",
+      category: "group",
+      filename: __filename,
+      use: "<quote|reply|number>"
+    }, async ctx => {
+      try {
+        if (!ctx.isGroup) return ctx.reply(tlang().group);
+        if (!ctx.metadata?.announce) return await ctx.reply("*Hey " + (ctx.isSuhail ? "Buddy" : "Sir") + ", Group already unmute*");
+        if (!ctx.isBotAdmin) return await ctx.reply("*_I'm not admin!_*");
+        if (!ctx.isCreator && !ctx.isAdmin) return ctx.reply(tlang().admin);
+        await ctx.bot.groupSettingUpdate(ctx.chat, "not_announcement").then(response => ctx.reply("*_Group Chat UnMute successfully!!_*")).catch(error => ctx.reply("*_Can't change Group Setting, Sorry!_*"));
+      } catch (error) {
+        await ctx.error(error + "\n\ncommand: gunmute", error);
+      }
+    });
+    UserFunction({
+      pattern: "lock",
+      fromMe: true,
+      desc: "Locks the group settings",
+      type: "group"
+    }, async (ctx, action) => {
+      try {
+        if (!ctx.isGroup) return ctx.reply(tlang().group);
+        if (ctx.metadata.restrict) return await ctx.reply("*Hey " + (ctx.isSuhail ? "Buddy" : "Sir") + ", Group setting already locked*");
+        if (!ctx.isBotAdmin) return await ctx.reply("*_I'm not admin!_*");
+        if (!ctx.isCreator && !ctx.isAdmin) return ctx.reply(tlang().admin);
+        await ctx.bot.groupSettingUpdate(ctx.chat, "locked").then(response => ctx.reply("*_Group locked, Only Admin can change group settings!!_*")).catch(error => ctx.reply("*_Can't change Group Setting, Sorry!_*"));
+      } catch (error) {
+        await ctx.error(error + "\n\ncommand: lock", error);
+      }
+    });
+    UserFunction({
+      pattern: "unlock",
+      fromMe: true,
+      desc: "Unlocks the group settings",
+      type: "group"
+    }, async (ctx, action) => {
+      try {
+        if (!ctx.isGroup) return ctx.reply(tlang().group);
+        if (!ctx.metadata.restrict) return await ctx.reply("*Hey " + (ctx.isSuhail ? "Buddy" : "Sir") + ", Group setting already unlocked*");
+        if (!ctx.isBotAdmin) return await ctx.reply("*_I'm not admin!_*");
+        if (!ctx.isCreator && !ctx.isAdmin) return ctx.reply(tlang().admin);
+        await ctx.bot.groupSettingUpdate(ctx.chat, "unlocked").then(response => ctx.reply("*_Group unlocked, everyone change group settings!!_*")).catch(error => ctx.reply("*_Can't change Group Setting, Sorry!_*"));
+      } catch (error) {
+        await ctx
+        .error(error + "\n\ncommand: unlock", error);
+        }
+        });
+    
 UserFunction({
   pattern: "tag",
-  alias: ["hidetag"],
   desc: "Tags everyperson of group without mentioning their numbers",
   category: "group",
   filename: __filename,
