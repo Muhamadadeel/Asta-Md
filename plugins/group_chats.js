@@ -2631,10 +2631,10 @@ function saveBannedUsers(bannedUsers) {
 }
 
 // Function to ban a user
-async function banUser(userId) {
+async function banUser(userId, userJid, userName) {
   const bannedUsers = loadBannedUsers();
-  if (!bannedUsers.bannedUsers.includes(userId)) {
-    bannedUsers.bannedUsers.push(userId);
+  if (!bannedUsers.bannedUsers.some(user => user.userId === userId)) {
+    bannedUsers.bannedUsers.push({ userId, userJid, userName });
     saveBannedUsers(bannedUsers);
     return true;
   }
@@ -2644,7 +2644,7 @@ async function banUser(userId) {
 // Function to unban a user
 async function unbanUser(userId) {
   const bannedUsers = loadBannedUsers();
-  const index = bannedUsers.bannedUsers.indexOf(userId);
+  const index = bannedUsers.bannedUsers.findIndex(user => user.userId === userId);
   if (index !== -1) {
     bannedUsers.bannedUsers.splice(index, 1);
     saveBannedUsers(bannedUsers);
@@ -2660,11 +2660,13 @@ UserFunction({
   use: "<user-id>",
 }, async (message, match) => {
   const userId = match[1];
-  const success = await banUser(userId);
+  const userJid = message.sender;
+  const userName = message.senderName;
+  const success = await banUser(userId, userJid, userName);
   if (success) {
-    await message.reply(`User ${userId} has been banned.`);
+    await message.reply(`User ${userId} (${userName}) has been banned.`);
   } else {
-    await message.reply(`User ${userId} is already banned.`);
+    await message.reply(`User ${userId} (${userName}) is already banned.`);
   }
 });
 
@@ -2682,6 +2684,7 @@ UserFunction({
     await message.reply(`User ${userId} is not currently banned.`);
   }
 });
+
 UserFunction({
   pattern: "checkban",
   desc: "Shows all the banned users",
@@ -2694,12 +2697,13 @@ UserFunction({
     await message.reply("There are no banned users.");
   } else {
     let reply = "Banned Users:\n";
-    bannedUsers.bannedUsers.forEach(userId => {
-      reply += "- " + userId + "\n";
+    bannedUsers.bannedUsers.forEach(user => {
+      reply += `- ${user.userId} (${user.userName})\n`;
     });
     await message.reply(reply);
   }
 });
+
 UserFunction({
   pattern: "clearban",
   desc: "Unbans all the banned users",
