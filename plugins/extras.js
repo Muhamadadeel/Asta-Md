@@ -1,4 +1,7 @@
 const { UserFunction, tlang, prefix, amd } = require("../lib");
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+const fs = require('fs');
 async function audioEditor(_0x1ef339, _0x567a0f = "bass", _0x730356 = "") {
   if (!_0x1ef339.quoted) {
     return await _0x1ef339.send("*Reply To Audio*");
