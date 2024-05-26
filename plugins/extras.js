@@ -1,4 +1,85 @@
-const { UserFunction, tlang, prefix, audioEditor, amd } = require("../lib");
+const { UserFunction, tlang, prefix, amd } = require("../lib");
+async function audioEditor(_0x1ef339, _0x567a0f = "bass", _0x730356 = "") {
+  if (!_0x1ef339.quoted) {
+    return await _0x1ef339.send("*Reply To Audio*");
+  }
+  let _0x1e4c20 = _0x1ef339.quoted.mtype || _0x1ef339.mtype;
+  if (!/audio/.test(_0x1e4c20)) {
+    return await _0x1ef339.send("*_Reply to the audio you want to change with_*", {}, "", _0x730356);
+  }
+  try {
+    let _0x3497f6 = "-af equalizer=f=54:width_type=o:width=2:g=20";
+    if (/bass/.test(_0x567a0f)) {
+      _0x3497f6 = "-af equalizer=f=54:width_type=o:width=2:g=20";
+    }
+    if (/blown/.test(_0x567a0f)) {
+      _0x3497f6 = "-af acrusher=.1:1:64:0:log";
+    }
+    if (/deep/.test(_0x567a0f)) {
+      _0x3497f6 = "-af atempo=4/4,asetrate=44500*2/3";
+    }
+    if (/earrape/.test(_0x567a0f)) {
+      _0x3497f6 = "-af volume=12";
+    }
+    if (/fast/.test(_0x567a0f)) {
+      _0x3497f6 = "-filter:a \"atempo=1.63,asetrate=44100\"";
+    }
+    if (/fat/.test(_0x567a0f)) {
+      _0x3497f6 = "-filter:a \"atempo=1.6,asetrate=22100\"";
+    }
+    if (/nightcore/.test(_0x567a0f)) {
+      _0x3497f6 = "-filter:a atempo=1.06,asetrate=44100*1.25";
+    }
+    if (/reverse/.test(_0x567a0f)) {
+      _0x3497f6 = "-filter_complex \"areverse\"";
+    }
+    if (/robot/.test(_0x567a0f)) {
+      _0x3497f6 = "-filter_complex \"afftfilt=real='hypot(re,im)*sin(0)':imag='hypot(re,im)*cos(0)':win_size=512:overlap=0.75\"";
+    }
+    if (/slow/.test(_0x567a0f)) {
+      _0x3497f6 = "-filter:a \"atempo=0.7,asetrate=44100\"";
+    }
+    if (/smooth/.test(_0x567a0f)) {
+      _0x3497f6 = "-filter:v \"minterpolate='mi_mode=mci:mc_mode=aobmc:vsbmc=1:fps=120'\"";
+    }
+    if (/tupai/.test(_0x567a0f)) {
+      _0x3497f6 = "-filter:a \"atempo=0.5,asetrate=65100\"";
+    }
+    let _0x25e2bd = await _0x1ef339.bot.downloadAndSaveMediaMessage(_0x1ef339.quoted);
+    let _0x58830b = "temp/" + (_0x1ef339.sender.slice(6) + _0x567a0f) + ".mp3";
+    exec("ffmpeg -i " + _0x25e2bd + " " + _0x3497f6 + " " + _0x58830b, async (_0x43e1ec, _0x22acc9, _0x3cea68) => {
+      try {
+        fs.unlinkSync(_0x25e2bd);
+      } catch {}
+      ;
+      if (_0x43e1ec) {
+        return _0x1ef339.error(_0x43e1ec);
+      } else {
+        let _0x11bfca = fs.readFileSync(_0x58830b);
+        try {
+          fs.unlinkSync(_0x58830b);
+        } catch {}
+        ;
+        var _0xfba2a2 = {
+          ...(await _0x1ef339.bot.contextInfo("Hellow " + _0x1ef339.senderName + " 🤍", "⇆ㅤ ||◁ㅤ❚❚ㅤ▷||ㅤ ⇆"))
+        };
+        return _0x1ef339.bot.sendMessage(_0x1ef339.chat, {
+          audio: _0x11bfca,
+          mimetype: "audio/mpeg",
+          ptt: /ptt|voice/.test(_0x1ef339.test || "") ? true : false,
+          contextInfo: _0xfba2a2
+        }, {
+          quoted: _0x1ef339,
+          messageId: _0x1ef339.bot.messageId()
+        });
+      }
+    });
+  } catch (_0x48606a) {
+    await _0x1ef339.error(_0x48606a + "\n\ncmdName : " + _0x567a0f + "\n");
+    return console.log("error\n", _0x48606a);
+  }
+}
+
 async function loadMessages(msg, data, match = "") {
   try {
     match = (match ? match : data).split("@")[0];
