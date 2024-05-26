@@ -89,10 +89,10 @@ try {
         if (commits.total === 0)
           return await citel.reply(
             "*`Hello " +
-              Config.ownername +
-              " " +
-              Config.botname +
-              " is on the latest version.`*"
+            Config.ownername +
+            " " +
+            Config.botname +
+            " is on the latest version.`*"
           );
         let update = await DB.sync();
         let text = " *`> Update Started`*\n" + update + "";
@@ -109,4 +109,4 @@ try {
       }
     }
   );
-} catch (e) {}
+} catch (e) { }
