@@ -2609,6 +2609,7 @@ UserFunction({
     console.log("Error From Demote : ", error);
   }
 });
+/*
 const fs = require('fs');
 
 // Function to load banned users from ban.json
@@ -2715,3 +2716,53 @@ UserFunction({
   saveBannedUsers(bannedUsers);
   await message.reply("All banned users have been unbanned.");
 });
+*/
+const { sck1 } = require("../lib")
+if (Config.WORKTYPE != 'private') {
+  UserFunction({
+    kingcmd: "ban",
+    kingclass: "owner",
+    kingpath: __filename,
+    infocmd: "Bans user from using bot."
+  },
+    async (Void, citel, text, { isCreator }) => {
+      if (!isCreator) return citel.reply(tlang().owner)
+      try {
+        let users = citel.quoted ? citel.quoted.sender : citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
+        if (!users) return citel.reply(`*_Please Mention A User_*`)
+        let pushnamer = Void.getName(users);
+        sck1.findOne({ id: users }).then(async (usr) => {
+          if (!usr) {
+            await new sck1({ id: users, ban: "true" }).save()
+            return citel.reply(`*_Banned ${usr.name} from Using Commands._*`)
+          }
+          if (usr.ban == "true") return citel.reply(`${pushnamer} *_is already Banned from Using Commands_*`)
+          await sck1.updateOne({ id: users }, { ban: "true" })
+          return citel.reply(`*_Successfully Banned ${usr.name} from Using Commands._*`)
+        })
+      } catch (e) { return citel.reply("*_Please Reply/Mention Any User_*") }
+
+
+    })
+  //---------------------------------------------------------------------------
+  UserFunction({
+    kingcmd: "unban",
+    kingclass: "owner",
+    kingpath: __filename,
+    infocmd: "Unbans banned user (from using bot)."
+  },
+    async (Void, citel, text, { isCreator }) => {
+      if (!isCreator) return citel.reply(tlang().owner)
+      try {
+        let users = citel.quoted ? citel.quoted.sender : citel.mentionedJid ? citel.mentionedJid[0] : citel.msg.contextInfo.participant || false;
+        if (!users) return citel.reply("*_Please mention any user_*")
+        let pushnamer = Void.getName(users);
+        sck1.findOne({ id: users }).then(async (usr) => { // console.log(usr.ban);
+          if (!usr) { return citel.reply(`${pushnamer} *_Is Unbanned From Using Commands._*`); }
+          if (usr.ban !== "true") return await citel.reply(`${usr.name} *_Is Already Unbanned._*`);
+          await sck1.updateOne({ id: users }, { ban: "false" })
+          return await citel.reply(`*_User_* ${usr.name} *_Unbanned SuccessFully_*`);
+        })
+      } catch { return citel.reply("*_Unknown Error Occured_*"); }
+    })
+}

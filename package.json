@@ -1,5 +1,5 @@
 {
-   "name": "asta-md@3.5.0",
+   "name": "asta-md",
    "version": "3.5.0",
    "description": "Simple WhatsApp Bot",
    "main": "index.js",
@@ -11,7 +11,7 @@
      "stop": "pm2 stop Asta",
      "old-heroku-postbuild": "git clone https://github.com/Astropeda/Asta-Md.git temp && mv temp/.git .git && rm -rf temp && npx puppeteer@latest install  --y",
      "fis-heroku-postbuild": "git clone https://github.com/Astropeda/Asta-Md.git temp1 && rsync -av temp1/* ./ && rsync -av temp1/.* ./ && rm -rf temp1 && npm i && npx puppeteer@latest install",
-     "postinstall": "npx puppeteer@latest install --y"
+     "dbs--postinstall": "npx puppeteer@latest install --y"
    },
    "author": "Astropeda",
    "license": "GPL-2.0 license",
@@ -69,7 +69,7 @@
    },
    "directories": {
      "lib": "lib",
-     "plugins": "plugins"
+     "plugins": "lib/plugins"
    },
    "devDependencies": {
      "pino": "^7.0.5"
