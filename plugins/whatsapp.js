@@ -7,11 +7,29 @@ global.pinging = class _Ping {
   ping() { return this._after - this._before; }
 }
 const {
-  UserFunction, Config
+  UserFunction, Config, prefix
 } = require('../lib')
 let counter_name = { name: "asta-md" }
 try { global.Package_ = JSON.parse(require('fs').readFileSync('package.json', 'utf8')) || counter_name } catch { }
-
+UserFunction({
+	pattern: 'archive',
+	fromMe: true,
+	desc: 'archive whatsapp chat',
+	type: 'chats'
+}, async (message, match) => {
+    try{
+	const lstMsg = {
+		message: message.message,
+		key: message.key,
+		messageTimestamp: message.messageTimestamp
+	};
+	await message.bot.chatModify({
+		archive: true,
+		lastMessages: [lstMsg]
+	}, message.jid);
+	await message.send('_Archived_')
+}catch(e){ message.error(`${e}\n\nCommand : archive` , e, false) }
+})
 UserFunction({
   pattern: "jid",
   desc: "Get JID of a user in a group.",
