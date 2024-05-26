@@ -88,11 +88,19 @@ UserFunction({
       const userName = await message.bot.getName(targetJid);
       await message.bot.sendMessage(message.jid, {
         image: { url: userProfilePic },
-        caption: `\n╔════◇\n║ *『Person's Information』*\n║ \n║ *🍫Name :* ${userName}\n║ *👤Num :* ${userNumber}\n║ *🎐Bio    :*  ${userStatus}\n║ *🌟SetAt :* ${setStatusAt}\n║    *Keep Calm Dude🥳*    ◇\n╚════════════════╝\n`
+        caption:
+ `
+  *『User Information』*
+ ║
+ ║ *Name:* ${userName || "unknown"} 
+ ║ *Num:* ${userNumber || "unknown"}
+ ║ *Bio:*  ${userStatus || "unknown"}
+ ║ *LastUpdated:* ${setStatusAt || "unknown"}
+ ╚════════════════╝\n`
       }, { quoted: message });
     }
   } catch (error) {
-    await message.error(error + "\n\ncommand: whois", error);
+    await message.error(error + "\n\ncommand: ssp", error);
   }
 });
 
