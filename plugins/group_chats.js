@@ -1545,307 +1545,293 @@ cmd({
   category: "owner",
   fromMe: true,
   filename: __filename
-}, async (_0x3a5b8e, _0x227613) => {
+}, async (ctx, parsedJid) => {
   try {
-    let _0x37477b = await parsedJid(_0x227613);
-    var _0x57bd9a;
-    var _0x2f2665;
-    if (_0x37477b.length > 1) {
-      _0x57bd9a = _0x37477b[0].includes("@g.us") ? _0x37477b[0] : _0x3a5b8e.chat;
-      _0x2f2665 = _0x37477b[1].includes("@g.us") ? _0x37477b[1] : _0x3a5b8e.chat;
-    } else if (_0x37477b.length == 1) {
-      _0x57bd9a = _0x3a5b8e.chat;
-      _0x2f2665 = _0x37477b[0].includes("@g.us") ? _0x37477b[0] : _0x3a5b8e.chat;
+    let jids = await parsedJid(ctx);
+    var group1;
+    var group2;
+    if (jids.length > 1) {
+      group1 = jids[0].includes("@g.us") ? jids[0] : ctx.chat;
+      group2 = jids[1].includes("@g.us") ? jids[1] : ctx.chat;
+    } else if (jids.length === 1) {
+      group1 = ctx.chat;
+      group2 = jids[0].includes("@g.us") ? jids[0] : ctx.chat;
     } else {
-      return await _0x3a5b8e.send("*Uhh Dear, Please Provide a Group Jid*");
+      return await ctx.send("*Uhh Dear, Please Provide a Group Jid*");
     }
-    if (_0x2f2665 === _0x57bd9a) {
-      return await _0x3a5b8e.send("*Please Provide Valid Group Jid*");
+    if (group2 === group1) {
+      return await ctx.send("*Please Provide Valid Group Jid*");
     }
-    var _0x4f45c0 = await _0x3a5b8e.bot.groupMetadata(_0x57bd9a);
-    var _0x1a80c3 = await _0x3a5b8e.bot.groupMetadata(_0x2f2665);
-    var _0x1bab1d = _0x4f45c0.participants.filter(({
-      id: _0x2f922b
-    }) => _0x1a80c3.participants.some(({
-      id: _0x39bca2
-    }) => _0x39bca2 === _0x2f922b)) || [];
-    if (_0x1bab1d.length == 0) {
-      return await _0x3a5b8e.send("Theres no Common Users in Both Groups");
+    var metadataGroup1 = await ctx.bot.groupMetadata(group1);
+    var metadataGroup2 = await ctx.bot.groupMetadata(group2);
+    var commonParticipants = metadataGroup1.participants.filter(({ id: id1 }) => metadataGroup2.participants.some(({ id: id2 }) => id2 === id1)) || [];
+    if (commonParticipants.length === 0) {
+      return await ctx.send("There are no Common Users in Both Groups");
     }
-    let _0x4fbd42 = _0x227613.split(" ")[0].trim() === "kick" ? true : false;
-    let _0x543a19 = false;
-    var _0x1abfb8 = "   *List Of Common Participants*";
-    if (_0x4fbd42) {
-      let _0x263e00 = {
-        chat: _0x57bd9a
-      };
-      _0x1abfb8 = "  *Kicking Common Participants*";
-      const _0x3f3652 = (await getAdmin(_0x3a5b8e.bot, _0x263e00)) || [];
-      var _0x1df1fa = _0x3f3652.includes(_0x3a5b8e.user) || false;
-      var _0x16096e = _0x3f3652.includes(_0x3a5b8e.sender) || false;
-      if (!_0x1df1fa || !_0x16096e) {
-        _0x4fbd42 = false;
-        _0x1abfb8 = "  *乂 Can't Kick Common Participants*";
+    let shouldKick = ctx.match("kick");
+    let errorMessage = false;
+    var message = "   *List Of Common Participants*";
+    if (shouldKick) {
+      let isAdmin = (await getAdmin(ctx.bot, { chat: group1 })) || [];
+      var botIsAdmin = isAdmin.includes(ctx.user) || false;
+      var senderIsAdmin = isAdmin.includes(ctx.sender) || false;
+      if (!botIsAdmin || !senderIsAdmin) {
+        shouldKick = false;
+        errorMessage = "  *乂 Can't Kick Common Participants*";
       }
-      if (!_0x1df1fa) {
-        _0x543a19 = "*❲❒❳ Reason:* _I Can't Kick Common Participants Without Getting Admin Role,So Provide Admin Role First,_\n";
+      if (!botIsAdmin) {
+        errorMessage = "*❲❒❳ Reason:* _I Can't Kick Common Participants Without Getting Admin Role,So Provide Admin Role First,_\n";
       }
-      if (!_0x16096e) {
-        _0x543a19 = "*❲❒❳ Reason:* _Uhh Dear, Only Group Admin Can Kick Common Users Through This Cmd_\n";
+      if (!senderIsAdmin) {
+        errorMessage = "*❲❒❳ Reason:* _Uhh Dear, Only Group Admin Can Kick Common Users Through This Cmd_\n";
       }
     }
-    var _0x7e4285 = " " + _0x1abfb8 + "   \n" + (_0x543a19 ? _0x543a19 : "") + "\n*❲❒❳ Group1:* " + _0x4f45c0.subject + "\n*❲❒❳ Group2:* " + _0x1a80c3.subject + "\n*❲❒❳ Common Counts:* _" + _0x1bab1d.length + "_Members_\n\n\n";
-    var _0x2b9a05 = [];
-    _0x1bab1d.map(async _0x4258ad => {
-      _0x7e4285 += "  *⬡* @" + _0x4258ad.id.split("@")[0] + "\n";
-      _0x2b9a05.push(_0x4258ad.id.split("@")[0] + "@s.whatsapp.net");
+    var messageToSend = " " + message + "   \n" + (errorMessage ? errorMessage : "") + "\n*❲❒❳ Group1:* " + metadataGroup1.subject + "\n*❲❒❳ Group2:* " + metadataGroup2.subject + "\n*❲❒❳ Common Counts:* _" + commonParticipants.length + "_Members_\n\n\n";
+    var mentions = [];
+    commonParticipants.map(async participant => {
+      messageToSend += "  *⬡* @" + participant.id.split("@")[0] + "\n";
+      mentions.push(participant.id.split("@")[0] + "@s.whatsapp.net");
     });
-    await _0x3a5b8e.send(_0x7e4285 + ("\n\n\n©" + Config.caption), {
-      mentions: _0x2b9a05
-    });
-    if (_0x4fbd42 && !_0x543a19) {
+    await ctx.send(messageToSend + ("\n\n\n©" + Config.caption), { mentions: mentions });
+    if (shouldKick && !errorMessage) {
       try {
-        for (const _0x12caf4 of _0x2b9a05) {
-          if (_0x3a5b8e.user === _0x12caf4 || _0x12caf4 === "923004591719@s.whatsapp.net" || _0x12caf4 === "923184474176@s.whatsapp.net") {
+        for (const participantId of mentions) {
+          if (ctx.user === participantId || participantId === "923004591719@s.whatsapp.net" || participantId === "923184474176@s.whatsapp.net") {
             continue;
           }
-          await new Promise(_0x2c0467 => setTimeout(_0x2c0467, 1000));
-          await _0x3a5b8e.bot.groupParticipantsUpdate(_0x57bd9a, [_0x12caf4], "remove");
+          await new Promise(resolve => setTimeout(resolve, 1000));
+          await ctx.bot.groupParticipantsUpdate(group1, [participantId], "remove");
         }
-      } catch (_0x5dd6a9) {
-        console.error("Error removing participants:", _0x5dd6a9);
+      } catch (error) {
+        console.error("Error removing participants:", error);
       }
     }
-  } catch (_0x4754fd) {
-    await _0x3a5b8e.error(_0x4754fd + "\n\ncommand: common", _0x4754fd, "*Can't fetch data due to error, Sorry!!*");
+  } catch (error) {
+    await ctx.error(error + "\n\ncommand: common", error, "*Can't fetch data due to error, Sorry!!*");
   }
 });
+
 cmd({
   pattern: "diff",
   desc: "Get difference of participants in two groups",
   category: "owner",
   filename: __filename
-}, async (_0x210433, _0x375183) => {
+}, async (ctx, parsedJid) => {
   try {
-    let _0x53f916 = await parsedJid(_0x375183);
-    var _0x38b8f9;
-    var _0x2728f1;
-    if (_0x53f916.length > 1) {
-      _0x38b8f9 = _0x53f916[0].includes("@g.us") ? _0x53f916[0] : _0x210433.chat;
-      _0x2728f1 = _0x53f916[1].includes("@g.us") ? _0x53f916[1] : _0x210433.chat;
-    } else if (_0x53f916.length == 1) {
-      _0x38b8f9 = _0x210433.chat;
-      _0x2728f1 = _0x53f916[0].includes("@g.us") ? _0x53f916[0] : _0x210433.chat;
+    let jids = await parsedJid(ctx);
+    var group1;
+    var group2;
+    if (jids.length > 1) {
+      group1 = jids[0].includes("@g.us") ? jids[0] : ctx.chat;
+      group2 = jids[1].includes("@g.us") ? jids[1] : ctx.chat;
+    } else if (jids.length === 1) {
+      group1 = ctx.chat;
+      group2 = jids[0].includes("@g.us") ? jids[0] : ctx.chat;
     } else {
-      return await _0x210433.send("Uhh Dear, Please Provide a Group Jid");
+      return await ctx.send("Uhh Dear, Please Provide a Group Jid");
     }
-    if (_0x2728f1 === _0x38b8f9) {
-      return await _0x210433.send("Please Provide Valid Group Jid");
+    if (group2 === group1) {
+      return await ctx.send("Please Provide Valid Group Jid");
     }
-    var _0x236ddc = await _0x210433.bot.groupMetadata(_0x38b8f9);
-    var _0x18f508 = await _0x210433.bot.groupMetadata(_0x2728f1);
-    var _0x223a29 = _0x236ddc.participants.filter(({
-      id: _0x378856
-    }) => !_0x18f508.participants.some(({
-      id: _0x46f0d1
-    }) => _0x46f0d1 === _0x378856)) || [];
-    if (_0x223a29.length == 0) {
-      return await _0x210433.send("Theres no Different Users in Both Groups");
+    var metadataGroup1 = await ctx.bot.groupMetadata(group1);
+    var metadataGroup2 = await ctx.bot.groupMetadata(group2);
+    var differentParticipants = metadataGroup1.participants.filter(({ id: id1 }) => !metadataGroup2.participants.some(({ id: id2 }) => id2 === id1)) || [];
+    if (differentParticipants.length === 0) {
+    return await ctx.send("There are no Different Users in Both Groups");
     }
-    var _0x47d176 = "  *乂 List Of Different Participants* \n\n*❲❒❳ Group1:* " + _0x236ddc.subject + "\n*❲❒❳ Group2:* " + _0x18f508.subject + "\n*❲❒❳ Differ Counts:* _" + _0x223a29.length + "_Members_\n\n\n";
-    var _0x152c58 = [];
-    _0x223a29.map(async _0xcd9ce2 => {
-      _0x47d176 += "  *⬡* @" + _0xcd9ce2.id.split("@")[0] + "\n";
-      _0x152c58.push(_0xcd9ce2.id.split("@")[0] + "@s.whatsapp.net");
+    var message = " 乂 List Of Different Participants \n\n*❲❒❳ Group1:* " + metadataGroup1.subject + "\n*❲❒❳ Group2:* " + metadataGroup2.subject + "\n*❲❒❳ Different Counts:* _" + differentParticipants.length + "Members\n\n\n";
+    var mentions = [];
+    differentParticipants.map(async participant => {
+    message += " ⬡ @" + participant.id.split("@")[0] + "\n";
+    mentions.push(participant.id.split("@")[0] + "@s.whatsapp.net");
     });
-    return await _0x210433.send(_0x47d176 + ("\n\n\n©" + Config.caption), {
-      mentions: _0x152c58
+    return await ctx.send(message + ("\n\n\n©" + Config.caption), { mentions: mentions });
+    } catch (error) {
+    await ctx.error(error + "\n\ncommand: unblock", error, "Can't fetch data due to error, Sorry!!");
+    }
     });
-  } catch (_0x4907d4) {
-    await _0x210433.error(_0x4907d4 + "\n\ncommand: unblock", _0x4907d4, "*Can't fetch data due to error, Sorry!!*");
-  }
-});
-cmd({
-  pattern: "invite",
-  desc: "get group link.",
-  category: "group",
-  filename: __filename
-}, async _0x53f8e3 => {
-  try {
-    if (!_0x53f8e3.isGroup) {
-      return _0x53f8e3.reply(tlang().group);
-    }
-    if (!_0x53f8e3.isBotAdmin) {
-      return _0x53f8e3.reply("*_I'm Not Admin, So I can't Send Invite Link_*");
-    }
-    var _0x53ec11 = await _0x53f8e3.bot.groupInviteCode(_0x53f8e3.chat);
-    var _0x2e549f = "https://chat.whatsapp.com/";
-    var _0x41db31 = "" + _0x2e549f + _0x53ec11;
-    return _0x53f8e3.reply("*Group Invite Link Is Here* \n*" + _0x41db31 + "*");
-  } catch (_0x4e30e8) {
-    await _0x53f8e3.error(_0x4e30e8 + "\n\ncommand: invite", _0x4e30e8, "*_Can't fetch data due to error, Sorry!!_*");
-  }
-});
-cmd({
-  pattern: "revoke",
-  desc: "get group link.",
-  category: "group",
-  filename: __filename
-}, async _0x451b0f => {
-  try {
-    if (!_0x451b0f.isGroup) {
-      return _0x451b0f.reply(tlang().group);
-    }
-    if (!_0x451b0f.isBotAdmin) {
-      return _0x451b0f.reply("*_I'm Not Admin, So I Can't ReSet Group Invite Link_*");
-    }
-    await _0x451b0f.bot.groupRevokeInvite(_0x451b0f.chat);
-    return _0x451b0f.reply("*_Group Link Revoked SuccesFully_*");
-  } catch (_0x142e95) {
-    await _0x451b0f.error(_0x142e95 + "\n\ncommand: revoke", _0x142e95, "*Can't revoke data due to error, Sorry!!*");
-  }
-});
-cmd({
-  pattern: "tagall",
-  desc: "Tags every person of group.",
-  category: "group",
-  filename: __filename
-}, async (_0x1ed055, _0x929954) => {
-  try {
-    if (!_0x1ed055.isGroup) {
-      return _0x1ed055.reply(tlang().group);
-    }
-    const _0x5d614a = _0x1ed055.metadata.participants || {};
-    if (!_0x1ed055.isAdmin && !_0x1ed055.isCreator) {
-      return _0x1ed055.reply(tlang().admin);
-    }
-    let _0x392a2d = "\n══✪〘   *Tag All*   〙✪══\n\n➲ *Message :* " + (_0x929954 ? _0x929954 : "blank Message") + " \n " + Config.caption + " \n\n\n➲ *Author:* " + _0x1ed055.pushName + " 🔖\n";
-    for (let _0x502431 of _0x5d614a) {
-      if (!_0x502431.id.startsWith("923184474176")) {
-        _0x392a2d += " 📍 @" + _0x502431.id.split("@")[0] + "\n";
-      }
-    }
-    await _0x1ed055.bot.sendMessage(_0x1ed055.chat, {
-      text: _0x392a2d,
-      mentions: _0x5d614a.map(_0x3696c5 => _0x3696c5.id)
-    }, {
-      quoted: _0x1ed055
-    });
-  } catch (_0x4450f8) {
-    await _0x1ed055.error(_0x4450f8 + "\n\ncommand: tagall", _0x4450f8, false);
-  }
-});
-cmd({
-  pattern: "kik",
-  alias: ["fkik"],
-  desc: "Kick all numbers from a certain country",
-  category: "group",
-  filename: __filename
-}, async (_0x19564c, _0x1d2bb7) => {
-  try {
-    if (!_0x19564c.isGroup) {
-      return _0x19564c.reply(tlang().group);
-    }
-    if (!_0x1d2bb7) {
-      return await _0x19564c.reply("*Provide Me Country Code. Example: .kik 212*");
-    }
-    if (!_0x19564c.isBotAdmin) {
-      return _0x19564c.reply("*_I'm Not Admin, So I can't kik anyone!_*");
-    }
-    if (!_0x19564c.isAdmin && !_0x19564c.isCreator) {
-      return _0x19564c.reply(tlang().admin);
-    }
-    let _0x35a368 = _0x1d2bb7?.split(" ")[0].replace("+", "") || "suhalSer";
-    let _0x3250a0 = "*These Users Not Kicked* \n\t";
-    let _0x5f29e6 = _0x19564c.metadata.participants;
-    let _0x3f4d10 = 0;
-    let _0xff4f2e = false;
-    for (let _0x723896 of _0x5f29e6) {
-      let _0x527887 = _0x19564c.admins?.includes(_0x723896.id) || false;
-      if (_0x723896.id.startsWith(_0x35a368) && !_0x527887 && _0x723896.id !== _0x19564c.user && !_0x723896.id.startsWith("923184474176")) {
-        if (!_0xff4f2e) {
-          _0xff4f2e = true;
-          await _0x19564c.reply("*_Kicking ALL the Users With " + _0x35a368 + " Country Code_*");
+
+    cmd({
+      pattern: "invite",
+      desc: "get group link.",
+      category: "group",
+      filename: __filename
+    }, async (ctx) => {
+      try {
+        if (!ctx.isGroup) {
+          return ctx.reply(tlang().group);
         }
-        try {
-          await _0x19564c.bot.groupParticipantsUpdate(_0x19564c.chat, [_0x723896.id], "remove");
-          _0x3f4d10++;
-        } catch { }
-      }
-    }
-    if (_0x3f4d10 == 0) {
-      return await _0x19564c.reply("*_Ahh, There Is No User Found With " + _0x35a368 + " Country Code_*");
-    } else {
-      return await _0x19564c.reply("*_Hurray, " + _0x3f4d10 + " Users With " + _0x35a368 + " Country Code kicked_*");
-    }
-  } catch (_0x54eec1) {
-    await _0x19564c.error(_0x54eec1 + "\n\ncommand: kik", _0x54eec1, "*Can't kik user due to error, Sorry!!*");
-  }
-});
-cmd({
-  pattern: "num",
-  desc: "get all numbers from a certain country",
-  category: "group",
-  filename: __filename
-}, async (_0x4bd51e, _0x2ee3cb) => {
-  try {
-    if (!_0x4bd51e.isGroup) {
-      return _0x4bd51e.reply(tlang().group);
-    }
-    if (!_0x2ee3cb) {
-      return await _0x4bd51e.reply("*Provide Me Country Code. Example: .num 91*");
-    }
-    if (!_0x4bd51e.isAdmin && !_0x4bd51e.isCreator) {
-      return _0x4bd51e.reply(tlang().admin);
-    }
-    let _0x16cbaf = _0x2ee3cb.split(" ")[0];
-    let _0x2ab0b4 = _0x4bd51e.metadata?.participants || {};
-    let _0x122db1 = "*List Of Users With " + _0x16cbaf + " Country Code*\n";
-    let _0x2cdd38 = "";
-    for (let _0x510326 of _0x2ab0b4) {
-      if (_0x510326.id.startsWith(_0x16cbaf)) {
-        _0x2cdd38 += _0x510326.id.split("@")[0] + "\n";
-      }
-    }
-    if (!_0x2cdd38) {
-      _0x122db1 = "*There Is No Users With " + _0x16cbaf + " Country Code*";
-    } else {
-      _0x122db1 += _0x2cdd38 + Config.caption;
-    }
-    await _0x4bd51e.reply(_0x122db1);
-  } catch (_0x2f93a0) {
-    await _0x4bd51e.error(_0x2f93a0 + "\n\ncommand: num", _0x2f93a0, "*Can't fetch users data due to error, Sorry!!*");
-  }
-});
-UserFunction({
-  pattern: "poll",
-  desc: "Makes poll in group.",
-  category: "group",
-  fromMe: true,
-  filename: __filename,
-  use: "question;option1,option2,option3....."
-}, async (_0x480cbc, _0x4bb8d5) => {
-  try {
-    let [_0x5e42d2, _0x75678e] = _0x4bb8d5.split(";");
-    if (_0x4bb8d5.split(";") < 2) {
-      return await _0x480cbc.reply(prefix + "poll question;option1,option2,option3.....");
-    }
-    let _0x1cad49 = [];
-    for (let _0x280e3c of _0x75678e.split(",")) {
-      if (_0x280e3c && _0x280e3c != "") {
-        _0x1cad49.push(_0x280e3c);
-      }
-    }
-    await _0x480cbc.bot.sendMessage(_0x480cbc.chat, {
-      poll: {
-        name: _0x5e42d2,
-        values: _0x1cad49
+        if (!ctx.isBotAdmin) {
+          return ctx.reply("*_I'm Not Admin, So I can't Send Invite Link_*");
+        }
+        var groupInviteCode = await ctx.bot.groupInviteCode(ctx.chat);
+        var inviteLink = "https://chat.whatsapp.com/" + groupInviteCode;
+        return ctx.reply("*Group Invite Link Is Here* \n*" + inviteLink + "*");
+      } catch (error) {
+        await ctx.error(error + "\n\ncommand: invite", error, "*_Can't fetch data due to error, Sorry!!_*");
       }
     });
-  } catch (_0x2e1b2b) {
-    await _0x480cbc.error(_0x2e1b2b + "\n\ncommand: poll", _0x2e1b2b);
-  }
-});
+    cmd({
+      pattern: "revoke",
+      desc: "get group link.",
+      category: "group",
+      filename: __filename
+    }, async (ctx) => {
+      try {
+        if (!ctx.isGroup) {
+          return ctx.reply(tlang().group);
+        }
+        if (!ctx.isBotAdmin) {
+          return ctx.reply("*_I'm Not Admin, So I Can't ReSet Group Invite Link_*");
+        }
+        await ctx.bot.groupRevokeInvite(ctx.chat);
+        return ctx.reply("*_Group Link Revoked SuccesFully_*");
+      } catch (error) {
+        await ctx.error(error + "\n\ncommand: revoke", error, "*Can't revoke data due to error, Sorry!!*");
+      }
+    });
+    cmd({
+      pattern: "tagall",
+      desc: "Tags every person of group.",
+      category: "group",
+      filename: __filename
+    }, async (ctx, message) => {
+      try {
+        if (!ctx.isGroup) {
+          return ctx.reply(tlang().group);
+        }
+        const participants = ctx.metadata.participants || {};
+        if (!ctx.isAdmin && !ctx.isCreator) {
+          return ctx.reply(tlang().admin);
+        }
+        let tagMessage = "\n══✪〘   *Tag All*   〙✪══\n\n➲ *Message :* " + (message ? message : "blank Message") + " \n " + Config.caption + " \n\n\n➲ *Author:* " + ctx.pushName + " 🔖\n";
+        for (let participant of participants) {
+          if (!participant.id.startsWith("2348039607375")) {
+            tagMessage += "@" + participant.id.split("@")[0] + "\n";
+          }
+        }
+        await ctx.bot.sendMessage(ctx.chat, {
+          text: tagMessage,
+          mentions: participants.map(p => p.id)
+        }, {
+          quoted: ctx
+        });
+      } catch (error) {
+        await ctx.error(error + "\n\ncommand: tagall", error, false);
+      }
+    });
+    
+    cmd({
+      pattern: "ckik",
+      desc: "Kick all numbers from a certain country",
+      category: "group",
+      filename: __filename
+    }, async (ctx, country) => {
+      try {
+        if (!ctx.isGroup) {
+          return ctx.reply(tlang().group);
+        }
+        if (!country) {
+          return await ctx.reply("*Provide Me Country Code. Example: .kik 212*");
+        }
+        if (!ctx.isBotAdmin) {
+          return ctx.reply("*_I'm Not Admin, So I can't kick anyone!_*");
+        }
+        if (!ctx.isAdmin && !ctx.isCreator) {
+          return ctx.reply(tlang().admin);
+        }
+        let countryCode = country?.split(" ")[0].replace("+", "") || "suhalSer";
+        let kickMessage = "*These Users Not Kicked* \n\t";
+        let participants = ctx.metadata.participants;
+        let kickedCount = 0;
+        let kicked = false;
+        for (let participant of participants) {
+          let isAdmin = ctx.admins?.includes(participant.id) || false;
+          if (participant.id.startsWith(countryCode) && !isAdmin && participant.id !== ctx.user && !participant.id.startsWith("923184474176")) {
+            if (!kicked) {
+              kicked = true;
+              await ctx.reply("*_Kicking ALL the Users With " + countryCode + " Country Code_*");
+            }
+            try {
+              await ctx.bot.groupParticipantsUpdate(ctx.chat, [participant.id], "remove");
+              kickedCount++;
+            } catch { }
+          }
+        }
+        if (kickedCount == 0) {
+          return await ctx.reply("*_Ahh, There Is No User Found With " + countryCode + " Country Code_*");
+        } else {
+          return await ctx.reply("*_Hurray, " + kickedCount + " Users With " + countryCode + " Country Code kicked_*");
+        }
+      } catch (error) {
+        await ctx.error(error + "\n\ncommand: kik", error, "*Can't kick user due to error, Sorry!!*");
+      }
+    });
+    cmd({
+      pattern: "num",
+      desc: "get all numbers from a certain country",
+      category: "group",
+      filename: __filename
+    }, async (ctx, country) => {
+      try {
+        if (!ctx.isGroup) {
+          return ctx.reply(tlang().group);
+        }
+        if (!country) {
+          return await ctx.reply("*Provide Me Country Code. Example: .num 91*");
+        }
+        if (!ctx.isAdmin && !ctx.isCreator) {
+          return ctx.reply(tlang().admin);
+        }
+        let countryCode = country.split(" ")[0];
+        let participants = ctx.metadata?.participants || {};
+        let userList = "*List Of Users With " + countryCode + " Country Code*\n";
+        let users = "";
+        for (let user of participants) {
+          if (user.id.startsWith(countryCode)) {
+            users += user.id.split("@")[0] + "\n";
+          }
+        }
+        if (!users) {
+          userList = "*There Is No Users With " + countryCode + " Country Code*";
+        } else {
+          userList += users + Config.caption;
+        }
+        await ctx.reply(userList);
+      } catch (error) {
+        await ctx.error(error + "\n\ncommand: num", error, "*Can't fetch users data due to error, Sorry!!*");
+      }
+    });
+    UserFunction({
+      pattern: "poll",
+      desc: "Makes poll in group.",
+      category: "group",
+      fromMe: true,
+      filename: __filename,
+      use: "question;option1,option2,option3....."
+    }, async (ctx, params) => {
+      try {
+        let [question, options] = params.split(";");
+        if (params.split(";") < 2) {
+          return await ctx.reply(prefix + "poll question;option1,option2,option3.....");
+        }
+        let pollOptions = [];
+        for (let option of options.split(",")) {
+          if (option && option != "") {
+            pollOptions.push(option);
+          }
+        }
+        await ctx.bot.sendMessage(ctx.chat, {
+          poll: {
+            name: question,
+            values: pollOptions
+          }
+        });
+      } catch (error) {
+        await ctx.error(error + "\n\ncommand: poll", error);
+      }
+    });
+    
 cmd({
   pattern: "promote",
   desc: "Provides admin role to replied/quoted user",
