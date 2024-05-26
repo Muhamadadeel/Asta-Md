@@ -1759,12 +1759,12 @@ cmd({
           }
         }
         if (kickedCount == 0) {
-          return await ctx.reply("*_Ahh, There Is No User Found With " + countryCode + " Country Code_*");
+          return await ctx.reply("*_There Is No User Found With " + countryCode + " Country Code_*");
         } else {
           return await ctx.reply("*_Hurray, " + kickedCount + " Users With " + countryCode + " Country Code kicked_*");
         }
       } catch (error) {
-        await ctx.error(error + "\n\ncommand: kik", error, "*Can't kick user due to error, Sorry!!*");
+        await ctx.error(error + "\n\ncommand: ckik", error, "*Can't kick user due to error, Sorry!!*");
       }
     });
     cmd({
