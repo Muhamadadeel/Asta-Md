@@ -964,130 +964,120 @@ UserFunction({
 
 UserFunction({
   pattern: "amute",
-  desc: "sets auto mute time in group.",
+  desc: "Sets auto mute time in group.",
   category: "moderation"
-}, async (_0x23aaae, _0xc0fcc0) => {
+}, async (message, args) => {
   try {
-    if (!_0x23aaae.isGroup) {
-      return _0x23aaae.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x23aaae.isAdmin && !_0x23aaae.isCreator) {
-      return _0x23aaae.reply(tlang().admin);
+    if (!message.isAdmin && !message.isCreator) {
+      return message.reply(tlang().admin);
     }
-    let _0x4e4f77 = (await groupdb.findOne({
-      id: _0x23aaae.chat
-    })) || (await groupdb.new({
-      id: _0x23aaae.chat
-    }));
-    if (!_0xc0fcc0) {
-      return await _0x23aaae.reply("*Auto_Mute *" + (_0x4e4f77.mute === "false" ? "disable" : "enabled") + " for current group*" + (_0x4e4f77.mute !== "false" ? "\n *Auto mute status set at : " + _0x4e4f77.mute + "* " : ""));
+
+    const groupData = await groupdb.findOne({ id: message.chat }) || await groupdb.new({ id: message.chat });
+
+    if (!args) {
+      return message.reply(`*Auto_Mute ${groupData.mute === "false" ? "disabled" : "enabled"} for current group*${groupData.mute !== "false" ? `\n *Auto mute status set at: ${groupData.mute}* ` : ""}`);
     }
-    let [_0x579533, _0x1c48cc] = _0xc0fcc0.split(":").map(Number);
-    if (isNaN(_0x579533) || isNaN(_0x1c48cc) || _0x579533 < 0 || _0x579533 >= 24 || _0x1c48cc < 0 || _0x1c48cc >= 60) {
-      return _0x23aaae.reply("Please provide correct form.\nEg: " + prefix + "amute 22:00");
+
+    const [hour, minute] = args.split(":").map(Number);
+    if (isNaN(hour) || isNaN(minute) || hour < 0 || hour >= 24 || minute < 0 || minute >= 60) {
+      return message.reply(`Please provide correct form.\nEg: ${prefix}amute 22:00`);
     }
-    let _0x37c60f = _0x579533.toString().padStart(2, "0") + ":" + _0x1c48cc.toString().padStart(2, "0");
-    await groupdb.updateOne({
-      id: _0x23aaae.chat
-    }, {
-      mute: _0x37c60f
-    });
-    return _0x23aaae.reply("*_Successfully done, Group auto mute at " + _0x37c60f + "_*");
-  } catch (_0x47f0cd) {
-    _0x23aaae.error(_0x47f0cd + "\n\ncommand: amute", _0x47f0cd);
+
+    const muteTime = `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
+    await groupdb.updateOne({ id: message.chat }, { mute: muteTime });
+
+    return message.reply(`*_Successfully set auto mute at ${muteTime}_*`);
+  } catch (error) {
+    message.error(`${error}\n\ncommand: amute`, error);
   }
 });
+
 UserFunction({
   pattern: "aunmute",
-  desc: "sets unmute time in group.",
+  desc: "Sets auto unmute time in group.",
   category: "moderation"
-}, async (_0x93dfcd, _0x13088a) => {
+}, async (message, args) => {
   try {
-    if (!_0x93dfcd.isGroup) {
-      return _0x93dfcd.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x93dfcd.isAdmin && !_0x93dfcd.isCreator) {
-      return _0x93dfcd.reply(tlang().admin);
+    if (!message.isAdmin && !message.isCreator) {
+      return message.reply(tlang().admin);
     }
-    let _0x233212 = (await groupdb.findOne({
-      id: _0x93dfcd.chat
-    })) || (await groupdb.new({
-      id: _0x93dfcd.chat
-    }));
-    if (!_0x13088a) {
-      return await _0x93dfcd.reply("*Auto_Unmute *" + (_0x233212.unmute === "false" ? "disable" : "enabled") + " for current group*" + (_0x233212.unmute !== "false" ? "\n *Auto unmute status set at : " + _0x233212.unmute + "* " : ""));
+
+    const groupData = await groupdb.findOne({ id: message.chat }) || await groupdb.new({ id: message.chat });
+
+    if (!args) {
+      return message.reply(`*Auto_Unmute ${groupData.unmute === "false" ? "disabled" : "enabled"} for current group*${groupData.unmute !== "false" ? `\n *Auto unmute status set at: ${groupData.unmute}* ` : ""}`);
     }
-    let [_0x4566be, _0x302718] = _0x13088a.split(":").map(Number);
-    if (isNaN(_0x4566be) || isNaN(_0x302718) || _0x4566be < 0 || _0x4566be >= 24 || _0x302718 < 0 || _0x302718 >= 60) {
-      return _0x93dfcd.reply("Please provide correct form.\nEg: " + prefix + "aunmute 22:00");
+
+    const [hour, minute] = args.split(":").map(Number);
+    if (isNaN(hour) || isNaN(minute) || hour < 0 || hour >= 24 || minute < 0 || minute >= 60) {
+      return message.reply(`Please provide correct form.\nEg: ${prefix}aunmute 22:00`);
     }
-    let _0x47f5d3 = _0x4566be.toString().padStart(2, "0") + ":" + _0x302718.toString().padStart(2, "0");
-    await groupdb.updateOne({
-      id: _0x93dfcd.chat
-    }, {
-      unmute: _0x47f5d3
-    });
-    return _0x93dfcd.reply("*_Successfully done, Group auto unmute at " + _0x47f5d3 + "_*");
-  } catch (_0x30bf1c) {
-    _0x93dfcd.error(_0x30bf1c + "\n\ncommand: aunmute", _0x30bf1c);
+
+    const unmuteTime = `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
+    await groupdb.updateOne({ id: message.chat }, { unmute: unmuteTime });
+
+    return message.reply(`*_Successfully set auto unmute at ${unmuteTime}_*`);
+  } catch (error) {
+    message.error(`${error}\n\ncommand: aunmute`, error);
   }
 });
+
 UserFunction({
   pattern: "dunmute",
-  desc: "Delete unmute from group.",
+  desc: "Deletes auto unmute setting from group.",
   category: "moderation"
-}, async _0xe007b5 => {
+}, async (message) => {
   try {
-    if (!_0xe007b5.isGroup) {
-      return _0xe007b5.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0xe007b5.isAdmin && !_0xe007b5.isCreator) {
-      return _0xe007b5.reply(tlang().admin);
+    if (!message.isAdmin && !message.isCreator) {
+      return message.reply(tlang().admin);
     }
-    let _0xb4b312 = await groupdb.findOne({
-      id: _0xe007b5.chat
-    });
-    if (!_0xb4b312 || !_0xb4b312.unmute || _0xb4b312.unmute == "false") {
-      return await _0xe007b5.reply("*There's no auto unmute set in group.*");
+
+    const groupData = await groupdb.findOne({ id: message.chat });
+    if (!groupData || !groupData.unmute || groupData.unmute === "false") {
+      return message.reply("*There's no auto unmute set in group.*");
     }
-    await groupdb.updateOne({
-      id: _0xe007b5.chat
-    }, {
-      unmute: "false"
-    });
-    return await _0xe007b5.reply("*Auto unmute deleted successfully.*");
-  } catch (_0x243aed) {
-    _0xe007b5.error(_0x243aed + "\n\ncommand: dunmute", _0x243aed);
+
+    await groupdb.updateOne({ id: message.chat }, { unmute: "false" });
+    return message.reply("*Auto unmute deleted successfully.*");
+  } catch (error) {
+    message.error(`${error}\n\ncommand: dunmute`, error);
   }
 });
+
 UserFunction({
   pattern: "dmute",
-  desc: "Delete mute from group.",
+  desc: "Deletes auto mute setting from group.",
   category: "moderation"
-}, async (_0x10542a, _0x2cc451) => {
+}, async (message) => {
   try {
-    if (!_0x10542a.isGroup) {
-      return _0x10542a.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x10542a.isAdmin && !_0x10542a.isCreator) {
-      return _0x10542a.reply(tlang().admin);
+    if (!message.isAdmin && !message.isCreator) {
+      return message.reply(tlang().admin);
     }
-    let _0x529593 = await groupdb.findOne({
-      id: _0x10542a.chat
-    });
-    if (!_0x529593 || !_0x529593.mute || _0x529593.mute == "false") {
-      return await _0x10542a.reply("*There's no auto mute set in group.*");
+
+    const groupData = await groupdb.findOne({ id: message.chat });
+    if (!groupData || !groupData.mute || groupData.mute === "false") {
+      return message.reply("*There's no auto mute set in group.*");
     }
-    await groupdb.updateOne({
-      id: _0x10542a.chat
-    }, {
-      mute: "false"
-    });
-    return await _0x10542a.reply("*Auto mute deleted successfully.*");
-  } catch (_0x137fa6) {
-    _0x10542a.error(_0x137fa6 + "\n\ncommand: dmute", _0x137fa6);
+
+    await groupdb.updateOne({ id: message.chat }, { mute: "false" });
+    return message.reply("*Auto mute deleted successfully.*");
+  } catch (error) {
+    message.error(`${error}\n\ncommand: dmute`, error);
   }
 });
+
 async function haveEqualMembers(_0x31ae7e, _0x107896) {
   if (_0x31ae7e.length === 0 || _0x107896.length === 0) {
     return false;
