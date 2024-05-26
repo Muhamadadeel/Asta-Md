@@ -621,208 +621,188 @@ UserFunction({
   desc: "activates and deactivates onlyadmin.",
   category: "group",
   filename: __filename
-}, async (_0x18fcc8, _0x2d4a64, {
-  cmdName: _0x3e69a5
-}) => {
+}, async (ctx, args, { cmdName }) => {
   try {
-    if (!_0x18fcc8.isGroup) {
-      return _0x18fcc8.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x18fcc8.isAdmin && !_0x18fcc8.isCreator) {
-      return _0x18fcc8.reply(tlang().admin);
+    if (!ctx.isAdmin && !ctx.isCreator) {
+      return ctx.reply(tlang().admin);
     }
-    let _0x38fef2 = (await groupdb.findOne({
-      id: _0x18fcc8.chat
-    })) || (await groupdb.new({
-      id: _0x18fcc8.chat
-    }));
-    let _0x5b0eb3 = _0x2d4a64 ? _0x2d4a64.toLowerCase().trim() : false;
-    let _0x119122 = _0x5b0eb3 ? _0x5b0eb3.split(" ")[0] : false;
-    if (!_0x119122) {
-      return await _0x18fcc8.send("*_" + _0x3e69a5 + " *" + (_0x38fef2.onlyadmin === "false" ? "Disabled" : "Enabled") + " in this Group!_*\n *_Use on/off to enable/disable_*");
-    } else if (_0x119122.startsWith("off") || _0x119122.startsWith("deact") || _0x119122.startsWith("disable")) {
-      if (_0x38fef2.onlyadmin === "false") {
-        return await _0x18fcc8.reply("*_Onlyadmin Already Disabled in Current Chat_*");
+
+    let groupData = await groupdb.findOne({ id: ctx.chat }) || await groupdb.new({ id: ctx.chat });
+    let commandArg = args ? args.toLowerCase().trim() : false;
+    let action = commandArg ? commandArg.split(" ")[0] : false;
+
+    if (!action) {
+      return ctx.send(`*_${cmdName} ${groupData.onlyadmin === "false" ? "Disabled" : "Enabled"} in this Group!_*\n *_Use on/off to enable/disable_*`);
+    } 
+
+    if (["off", "deact", "disable"].includes(action)) {
+      if (groupData.onlyadmin === "false") {
+        return ctx.reply("*_Onlyadmin Already Disabled in Current Chat_*");
       }
-      await groupdb.updateOne({
-        id: _0x18fcc8.chat
-      }, {
-        onlyadmin: "false"
-      });
-      await _0x18fcc8.bot.groupSettingUpdate(_0x18fcc8.chat, "not_announcement");
-      return await _0x18fcc8.send("*" + _0x3e69a5 + " succesfully disable in group!_*\n*_Now everyone send message in group_*");
-    } else if (_0x119122.startsWith("on") || _0x119122.startsWith("act") || _0x119122.startsWith("enable")) {
-      if (_0x38fef2.onlyadmin === "true") {
-        return await _0x18fcc8.reply("*_Onlyadmin Already Enabled in Current Chat_*");
+      await groupdb.updateOne({ id: ctx.chat }, { onlyadmin: "false" });
+      await ctx.bot.groupSettingUpdate(ctx.chat, "not_announcement");
+      return ctx.send(`*_${cmdName} successfully disabled in group!_*\n*_Now everyone can send messages in group_*`);
+    } 
+
+    if (["on", "act", "enable"].includes(action)) {
+      if (groupData.onlyadmin === "true") {
+        return ctx.reply("*_Onlyadmin Already Enabled in Current Chat_*");
       }
-      if (_0x18fcc8.isBotAdmin) {
-        await groupdb.updateOne({
-          id: _0x18fcc8.chat
-        }, {
-          onlyadmin: "true"
-        });
-        await _0x18fcc8.bot.groupSettingUpdate(_0x18fcc8.chat, "announcement");
-        return await _0x18fcc8.send("*" + _0x3e69a5 + " succesfully set to kick msg senders!_*\n*_Now only admins allow to send msg in group_*");
+      if (ctx.isBotAdmin) {
+        await groupdb.updateOne({ id: ctx.chat }, { onlyadmin: "true" });
+        await ctx.bot.groupSettingUpdate(ctx.chat, "announcement");
+        return ctx.send(`*_${cmdName} successfully set to kick msg senders!_*\n*_Now only admins can send messages in group_*`);
       } else {
-        return await _0x18fcc8.reply("*_UHH Please, Provide Admin Role First_*");
+        return ctx.reply("*_Please provide Admin Role first_*");
       }
-    } else {
-      return await _0x18fcc8.reply("*_Please Provide Valid Instruction_*\n*_Use on/off to enable/disable_*");
-    }
-  } catch (_0x53ffd3) {
-    _0x18fcc8.error(_0x53ffd3 + "\n\ncommand: onlyadmin", _0x53ffd3);
+    } 
+
+    return ctx.reply("*_Please Provide Valid Instruction_*\n*_Use on/off to enable/disable_*");
+  } catch (error) {
+    ctx.error(`${error}\n\ncommand: onlyadmin`, error);
   }
 });
+
 UserFunction({
   pattern: "antibot",
   desc: "kick Bot Users from Group.!",
   category: "group",
   filename: __filename
-}, async (_0x3b3e26, _0x12cbbf, {
-  cmdName: _0x12486d
-}) => {
+}, async (ctx, args, { cmdName }) => {
   try {
-    if (!_0x3b3e26.isGroup) {
-      return _0x3b3e26.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x3b3e26.isAdmin && !_0x3b3e26.isCreator) {
-      return _0x3b3e26.reply(tlang().admin);
+    if (!ctx.isAdmin && !ctx.isCreator) {
+      return ctx.reply(tlang().admin);
     }
-    let _0x397293 = (await groupdb.findOne({
-      id: _0x3b3e26.chat
-    })) || (await groupdb.new({
-      id: _0x3b3e26.chat
-    }));
-    let _0x22e1dc = _0x12cbbf ? _0x12cbbf.toLowerCase().trim() : "";
-    let _0x11994b = _0x22e1dc.startsWith("on") || _0x22e1dc.startsWith("act") || _0x22e1dc.startsWith("enable") || _0x22e1dc.startsWith("del") || _0x22e1dc.startsWith("warn") ? "warn" : _0x22e1dc.startsWith("kic") ? "kick" : _0x22e1dc.startsWith("off") || _0x22e1dc.startsWith("reset") || _0x22e1dc.startsWith("deact") || _0x22e1dc.startsWith("disable") ? "false" : "";
-    if (!_0x11994b) {
-      return await _0x3b3e26.send("*_Antibot Currently *" + (_0x397293.antibot === "false" ? "Disabled" : "Enabled") + " in this Group!_*\n*_Use warn/kick/off to enable/disable Antibot_*");
-    } else if (_0x11994b === "false") {
-      if (_0x397293.antibot === "false") {
-        return await _0x3b3e26.reply("*_Antibot Already Disabled in Current Chat_*");
+
+    let groupData = await groupdb.findOne({ id: ctx.chat }) || await groupdb.new({ id: ctx.chat });
+    let commandArg = args ? args.toLowerCase().trim() : "";
+    let action = commandArg.startsWith("on") || commandArg.startsWith("act") || commandArg.startsWith("enable") || commandArg.startsWith("del") || commandArg.startsWith("warn") ? "warn" : commandArg.startsWith("kic") ? "kick" : commandArg.startsWith("off") || commandArg.startsWith("reset") || commandArg.startsWith("deact") || commandArg.startsWith("disable") ? "false" : "";
+
+    if (!action) {
+      return ctx.send(`*_Antibot Currently ${groupData.antibot === "false" ? "Disabled" : "Enabled"} in this Group!_*\n*_Use warn/kick/off to enable/disable Antibot_*`);
+    } 
+
+    if (action === "false") {
+      if (groupData.antibot === "false") {
+        return ctx.reply("*_Antibot Already Disabled in Current Chat_*");
       }
-      await groupdb.updateOne({
-        id: _0x3b3e26.chat
-      }, {
-        antibot: "false"
-      });
-      return await _0x3b3e26.send("*_Antibot Succesfully Disable in group!_*");
-    } else if (_0x11994b === "warn" || _0x11994b === "kick") {
-      if (_0x397293.antibot === _0x11994b) {
-        return await _0x3b3e26.reply("*_Antibot Already set to " + _0x11994b + " bots!_*");
+      await groupdb.updateOne({ id: ctx.chat }, { antibot: "false" });
+      return ctx.send("*_Antibot Successfully Disabled in group!_*");
+    } 
+
+    if (["warn", "kick"].includes(action)) {
+      if (groupData.antibot === action) {
+        return ctx.reply(`*_Antibot Already set to ${action} bots!_*`);
       }
-      if (!_0x3b3e26.isBotAdmin) {
-        return await _0x3b3e26.reply("*_Uhh Please, Provide Admin Role First_*");
+      if (!ctx.isBotAdmin) {
+        return ctx.reply("*_Please provide Admin Role first_*");
       }
-      await groupdb.updateOne({
-        id: _0x3b3e26.chat
-      }, {
-        antibot: _0x11994b
-      });
-      return await _0x3b3e26.send("*_Antibot Succesfully set to " + _0x11994b + " Bot Users!_*");
-    } else {
-      return await _0x3b3e26.reply("*_Please provide valid instructions!_*\n*_Use warn/kick/off to enable/disable Antibot!_*");
-    }
-  } catch (_0x304d4d) {
-    _0x3b3e26.error(_0x304d4d + "\n\ncommand: antibot", _0x304d4d);
+      await groupdb.updateOne({ id: ctx.chat }, { antibot: action });
+      return ctx.send(`*_Antibot Successfully set to ${action} Bot Users!_*`);
+    } 
+
+    return ctx.reply("*_Please provide valid instructions!_*\n*_Use warn/kick/off to enable/disable Antibot!_*");
+  } catch (error) {
+    ctx.error(`${error}\n\ncommand: antibot`, error);
   }
 });
+
 UserFunction({
   pattern: "disable",
   desc: "disable cmds in Group.!",
   category: "group",
   filename: __filename
-}, async (_0x204bdc, _0x1c3634) => {
+}, async (ctx, args) => {
   try {
-    if (!_0x204bdc.isGroup) {
-      return _0x204bdc.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x204bdc.isAdmin && !_0x204bdc.isCreator) {
-      return _0x204bdc.reply(tlang().admin);
+    if (!ctx.isAdmin && !ctx.isCreator) {
+      return ctx.reply(tlang().admin);
     }
-    let _0x2cad27 = (await groupdb.findOne({
-      id: _0x204bdc.chat
-    })) || (await groupdb.new({
-      id: _0x204bdc.chat
-    }));
-    let _0x161561 = _0x1c3634 ? _0x1c3634.toLowerCase().trim() : false;
-    let _0x3dd6b4 = _0x161561 ? _0x161561.split(" ")[0] : "";
-    if (!_0x3dd6b4) {
-      return await _0x204bdc.send("*Provide cmd name to disable in group*\n*Ex " + prefix + "disable tag(to disabled 'tag' cmd)/info*");
-    } else if (_0x3dd6b4.startsWith("info") || _0x3dd6b4.startsWith("list") || _0x3dd6b4.startsWith("cmds")) {
-      return await _0x204bdc.send(_0x2cad27.disablecmds === "false" ? "*_Uhh Dear, Theres no cmd disabled in current group_*" : "*_Disable cmds :_* ```" + _0x2cad27.disablecmds.replace("false,", "") + "```");
-    } else if (_0x3dd6b4.startsWith("enable") || _0x3dd6b4.startsWith("disable") || _0x3dd6b4.startsWith("bot")) {
-      return await _0x204bdc.reply("*_Uhh Dear, I can't disable that cmd_*");
-    } else if (_0x3dd6b4) {
-      const _0x965649 = astro_patch.commands.find(_0x1b0024 => _0x1b0024.pattern === _0x3dd6b4) || astro_patch.commands.find(_0x2fd6f8 => _0x2fd6f8.alias && _0x2fd6f8.alias.includes(_0x3dd6b4));
-      if (_0x965649) {
-        let _0xac463 = _0x965649.pattern.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-        let _0x27d7ad = new RegExp("\\b" + _0xac463 + "\\b");
-        if (_0x27d7ad.test(_0x2cad27.disablecmds)) {
-          return await _0x204bdc.send("*Uhh Dear, Provided cmd already in disable cmds*");
-        }
-        var _0x41da99 = _0x2cad27.disablecmds + "," + _0x965649.pattern;
-        await groupdb.updateOne({
-          id: _0x204bdc.chat
-        }, {
-          disablecmds: _0x41da99
-        });
-        let _0x23b4d5 = _0x41da99.replace("false,", "");
-        return await _0x204bdc.send("*_\"" + _0x3dd6b4 + "\" Succesfully added in disable cmds_*" + (_0x23b4d5 === "" ? "" : "\n*_Disable cmds :_* ```" + _0x23b4d5 + "```"));
-      } else {
-        return await _0x204bdc.reply("*_'" + _0x3dd6b4 + "' is not a bot command, Provide valid command_*");
+
+    let groupData = await groupdb.findOne({ id: ctx.chat }) || await groupdb.new({ id: ctx.chat });
+    let commandArg = args ? args.toLowerCase().trim() : "";
+    let action = commandArg ? commandArg.split(" ")[0] : "";
+
+    if (!action) {
+      return ctx.send(`*Provide cmd name to disable in group*\n*Ex ${prefix}disable tag (to disable 'tag' cmd)/info*`);
+    } 
+
+    if (["info", "list", "cmds"].includes(action)) {
+      return ctx.send(groupData.disablecmds === "false" ? "*_No cmds are disabled in current group_*" : `*_Disabled cmds :_* \`\`\`${groupData.disablecmds.replace("false,", "")}\`\`\``);
+    } 
+
+    if (["enable", "disable", "bot"].includes(action)) {
+      return ctx.reply("*_Cannot disable that cmd_*");
+    } 
+
+    const command = astro_patch.commands.find(cmd => cmd.pattern === action) || astro_patch.commands.find(cmd => cmd.alias && cmd.alias.includes(action));
+    if (command) {
+      let pattern = command.pattern.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      let regex = new RegExp(`\\b${pattern}\\b`);
+      if (regex.test(groupData.disablecmds)) {
+        return ctx.send("*Command is already disabled*");
       }
+      let updatedDisabledCmds = `${groupData.disablecmds},${command.pattern}`;
+      await groupdb.updateOne({ id: ctx.chat }, { disablecmds: updatedDisabledCmds });
+      let disabledCmds = updatedDisabledCmds.replace("false,", "");
+      return ctx.send(`*_\"${action}\" Successfully added to disabled cmds_*${disabledCmds === "" ? "" : `\n*_Disabled cmds :_* \`\`\`${disabledCmds}\`\`\``}`);
+    } else {
+      return ctx.reply(`*_'${action}' is not a bot command, provide a valid command_*`);
     }
-  } catch (_0x590dfb) {
-    _0x204bdc.error(_0x590dfb + "\n\ncommand: enable", _0x590dfb);
+  } catch (error) {
+    ctx.error(`${error}\n\ncommand: disable`, error);
   }
 });
+
 UserFunction({
   pattern: "enable",
   desc: "enable a cmd in Group.!",
   category: "group",
   filename: __filename
-}, async (_0x212b0e, _0x412234) => {
+}, async (ctx, args) => {
   try {
-    if (!_0x212b0e.isGroup) {
-      return _0x212b0e.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x212b0e.isAdmin && !_0x212b0e.isCreator) {
-      return _0x212b0e.reply(tlang().admin);
+    if (!ctx.isAdmin && !ctx.isCreator) {
+      return ctx.reply(tlang().admin);
     }
-    let _0x2c9cd0 = (await groupdb.findOne({
-      id: _0x212b0e.chat
-    })) || (await groupdb.new({
-      id: _0x212b0e.chat
-    }));
-    let _0xa3fc1d = _0x412234 ? _0x412234.toLowerCase().trim() : false;
-    let _0x439688 = _0xa3fc1d ? _0xa3fc1d.split(" ")[0] : "";
-    let _0x40bb35 = _0x439688.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    let _0x5c60c4 = new RegExp("\\b" + _0x40bb35 + "\\b");
-    if (!_0x439688 || _0x439688 === "") {
-      return await _0x212b0e.send("*Please provide disabled cmd name to enable it*\n*Ex " + prefix + "enable tag(if 'tag' cmd disabled)/all(reset disables)*");
-    } else if (_0xa3fc1d.startsWith("all")) {
-      await groupdb.updateOne({
-        id: _0x212b0e.chat
-      }, {
-        disablecmds: "false"
-      });
-      return await _0x212b0e.send("*_All disable cmds succesfully enabled_*");
-    } else if (_0x5c60c4.test(_0x2c9cd0.disablecmds) && _0x2c9cd0.disablecmds.includes(_0x439688)) {
-      let _0x51b1cd = _0x2c9cd0.disablecmds.replace(_0x5c60c4, "");
-      await groupdb.updateOne({
-        id: _0x212b0e.chat
-      }, {
-        disablecmds: _0x51b1cd
-      });
-      return await _0x212b0e.send("*_\"" + _0x439688.replace(",", "") + "\" Succesfully removed from disable cmds_*");
-    } else {
-      return await _0x212b0e.send("_There's no cmd disabled with *" + _0x439688.replace(",", "") + "* name");
-    }
-  } catch (_0x25ceaf) {
-    _0x212b0e.error(_0x25ceaf + "\n\ncommand: disable", _0x25ceaf);
+
+    let groupData = await groupdb.findOne({ id: ctx.chat }) || await groupdb.new({ id: ctx.chat });
+    let commandArg = args ? args.toLowerCase().trim() : "";
+    let action = commandArg ? commandArg.split(" ")[0] : "";
+    let pattern = action.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    let regex = new RegExp(`\\b${pattern}\\b`);
+
+    if (!action) {
+      return ctx.send(`*Provide disabled cmd name to enable it*\n*Ex ${prefix}enable tag (if 'tag' cmd disabled)/all (reset disables)*`);
+    } 
+
+    if (commandArg.startsWith("all")) {
+      await groupdb.updateOne({ id: ctx.chat }, { disablecmds: "false" });
+      return ctx.send("*_All disabled cmds successfully enabled_*");
+    } 
+
+    if (regex.test(groupData.disablecmds) && groupData.disablecmds.includes(action)) {
+      let updatedDisabledCmds = groupData.disablecmds.replace(regex, "");
+      await groupdb.updateOne({ id: ctx.chat }, { disablecmds: updatedDisabledCmds });
+      return ctx.send(`*_\"${action.replace(",", "")}\" Successfully removed from disabled cmds_*`);
+    } 
+
+    return ctx.send(`*No cmd disabled with the name "${action.replace(",", "")}"*`);
+  } catch (error) {
+    ctx.error(`${error}\n\ncommand: enable`, error);
   }
 });
+
 UserFunction({
   pattern: "antifake",
   desc: "𝗗𝗲𝘁𝗲𝗰𝘁𝘀 𝗽𝗿𝗼𝗺𝗼𝘁𝗲/𝗱𝗲𝗺𝗼𝘁𝗲 𝗮𝗻𝗱 𝘀𝗲𝗻𝗱𝘀 𝗮𝗹𝗲𝗿𝘁. ",
