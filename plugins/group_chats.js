@@ -2682,3 +2682,21 @@ UserFunction({
     await message.reply(`User ${userId} is not currently banned.`);
   }
 });
+UserFunction({
+  pattern: "checkban",
+  desc: "Shows all the banned users",
+  category: "admin",
+  filename: __filename,
+  isAdminCommand: true
+}, async (message) => {
+  const bannedUsers = loadBannedUsers();
+  if (bannedUsers.bannedUsers.length === 0) {
+    await message.reply("There are no banned users.");
+  } else {
+    let reply = "Banned Users:\n";
+    bannedUsers.bannedUsers.forEach(userId => {
+      reply += "- " + userId + "\n";
+    });
+    await message.reply(reply);
+  }
+});
