@@ -2609,3 +2609,76 @@ UserFunction({
     console.log("Error From Demote : ", error);
   }
 });
+const fs = require('fs');
+
+// Function to load banned users from ban.json
+function loadBannedUsers() {
+  try {
+    const data = fs.readFileSync('ban.json');
+    return JSON.parse(data);
+  } catch (error) {
+    return { bannedUsers: [] };
+  }
+}
+
+// Function to save banned users to ban.json
+function saveBannedUsers(bannedUsers) {
+  try {
+    fs.writeFileSync('ban.json', JSON.stringify(bannedUsers, null, 2));
+  } catch (error) {
+    console.error('Error saving banned users:', error);
+  }
+}
+
+// Function to ban a user
+async function banUser(userId) {
+  const bannedUsers = loadBannedUsers();
+  if (!bannedUsers.bannedUsers.includes(userId)) {
+    bannedUsers.bannedUsers.push(userId);
+    saveBannedUsers(bannedUsers);
+    return true;
+  }
+  return false; // User is already banned
+}
+
+// Function to unban a user
+async function unbanUser(userId) {
+  const bannedUsers = loadBannedUsers();
+  const index = bannedUsers.bannedUsers.indexOf(userId);
+  if (index !== -1) {
+    bannedUsers.bannedUsers.splice(index, 1);
+    saveBannedUsers(bannedUsers);
+    return true;
+  }
+  return false; // User is not currently banned
+}
+
+UserFunction({
+  pattern: "ban",
+  desc: "Bans a user from using any bot command",
+  category: "admin",
+  use: "<user-id>",
+}, async (message, match) => {
+  const userId = match[1];
+  const success = await banUser(userId);
+  if (success) {
+    await message.reply(`User ${userId} has been banned.`);
+  } else {
+    await message.reply(`User ${userId} is already banned.`);
+  }
+});
+
+UserFunction({
+  pattern: "unban",
+  desc: "Unbans a user from using any bot command",
+  category: "admin",
+  use: "<user-id>",
+}, async (message, match) => {
+  const userId = match[1];
+  const success = await unbanUser(userId);
+  if (success) {
+    await message.reply(`User ${userId} has been unbanned.`);
+  } else {
+    await message.reply(`User ${userId} is not currently banned.`);
+  }
+});
