@@ -1245,145 +1245,162 @@ UserFunction({
 });
 
 UserFunction({
-  pattern: "ginfo",
-  desc: "get group info by link",
+  pattern: "groupinfo",
+  desc: "Get group info by link",
   type: "group",
   filename: __filename,
   use: "<group link.>"
-}, async (_0x4f7c88, _0x1490e0) => {
+}, async (ctx, args) => {
   try {
-    let _0x3eb855 = _0x1490e0 ? _0x1490e0 : _0x4f7c88.reply_text;
-    const _0x3e5033 = _0x3eb855.match(grouppattern) || false;
-    if (!_0x3e5033) {
-      return await _0x4f7c88.reply("*_Uhh Please, provide group link_*");
+    let groupLink = args || ctx.reply_text;
+    const match = groupLink.match(grouppattern);
+    if (!match) {
+      return await ctx.reply("Please provide a valid group link.");
     }
-    let _0x5ced5d = _0x3e5033[0].split("https://chat.whatsapp.com/")[1].trim();
-    const _0x5f4890 = await _0x4f7c88.bot.groupGetInviteInfo(_0x5ced5d);
-    if (_0x5f4890) {
-      const _0x40ced5 = new Date(_0x5f4890.creation * 1000);
-      var _0x10288a = _0x40ced5.getFullYear();
-      var _0x436585 = _0x40ced5.getMonth() + 1;
-      var _0x511884 = _0x40ced5.getDate();
-      var _0x236a49 = _0x10288a + "-" + _0x436585.toString().padStart(2, "0") + "-" + _0x511884.toString().padStart(2, "0");
-      var _0x56eaaf = {
+    
+    let inviteCode = match[0].split("https://chat.whatsapp.com/")[1].trim();
+    const groupInfo = await ctx.bot.groupGetInviteInfo(inviteCode);
+    
+    if (groupInfo) {
+      const creationDate = new Date(groupInfo.creation * 1000);
+      const formattedDate = `${creationDate.getFullYear()}-${(creationDate.getMonth() + 1).toString().padStart(2, "0")}-${creationDate.getDate().toString().padStart(2, "0")}`;
+      const response = `
+        ${groupInfo.subject}
+        Creator: wa.me/${groupInfo.owner.split("@")[0]}
+        GJid: ${groupInfo.id}
+        Muted: ${groupInfo.announce ? "yes" : "no"}
+        Locked: ${groupInfo.restrict ? "yes" : "no"}
+        CreatedAt: ${formattedDate}
+        Participants: ${groupInfo.size}
+        ${groupInfo.desc ? `Description: ${groupInfo.desc}` : ""}
+        ${Config.caption}
+      `;
+      
+      const contextInfo = {
         externalAdReply: {
-          title: "𝗔𝗦𝗧𝗔-𝗠𝗗",
-          body: _0x5f4890.subject,
+          title: "ASTA-MD",
+          body: groupInfo.subject,
           renderLargerThumbnail: true,
           thumbnail: log0,
           mediaType: 1,
-          mediaUrl: _0x3e5033[0],
-          sourceUrl: _0x3e5033[0]
+          mediaUrl: match[0],
+          sourceUrl: match[0]
         }
       };
-      return await send(_0x4f7c88, (_0x5f4890.subject + "\n  \n  Creator: wa.me/" + _0x5f4890.owner.split("@")[0] + " \n  GJid; ```" + _0x5f4890.id + "  ```\n  *Muted:* " + (_0x5f4890.announce ? " yes" : " no") + "\n  *Locked:* " + (_0x5f4890.restrict ? " yes" : " no") + "\n  *createdAt:* " + _0x236a49 + "\n  *participents:* " + (_0x5f4890.size > 3 ? _0x5f4890.size + "th" : _0x5f4890.size) + "\n  " + (_0x5f4890.desc ? "*description:* " + _0x5f4890.desc + "\n" : "") + "\n  " + Config.caption + "\n  ").trim(), {
-        mentions: [_0x5f4890.owner],
-        contextInfo: _0x56eaaf
-      }, "", _0x4f7c88);
+      
+      return await ctx.send(response.trim(), { mentions: [groupInfo.owner], contextInfo });
     } else {
-      await _0x4f7c88.send("*_Group Id not found, Sorry!!_*");
+      await ctx.send("Group Id not found, Sorry!!");
     }
-  } catch (_0x36c345) {
-    await _0x4f7c88.error(_0x36c345 + "\n\ncommand: ginfo", _0x36c345, "*_Group Id not found, Sorry!!_*");
+  } catch (error) {
+    await ctx.error(`${error}\n\ncommand: groupinfo`, error, "Group Id not found, Sorry!!");
   }
 });
+
 UserFunction({
   cmdname: "reject",
-  info: "reject all request to join!",
+  info: "Reject all requests to join!",
   type: "group",
   filename: __filename
-}, async (_0xb81e45, _0x3dda5f) => {
+}, async (ctx, args) => {
   try {
-    if (!_0xb81e45.isGroup) {
-      return _0xb81e45.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0xb81e45.isBotAdmin || !_0xb81e45.isAdmin) {
-      return await _0xb81e45.reply(!_0xb81e45.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0xb81e45.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    
+    if (!ctx.isBotAdmin || !ctx.isAdmin) {
+      return await ctx.reply(!ctx.isBotAdmin ? "I'm Not Admin In This Group" : tlang().admin);
     }
-    const _0x4ea369 = await _0xb81e45.bot.groupRequestParticipantsList(_0xb81e45.chat);
-    if (!_0x4ea369 || !_0x4ea369[0]) {
-      return await _0xb81e45.reply("*_No Request Join Yet_*");
+    
+    const requests = await ctx.bot.groupRequestParticipantsList(ctx.chat);
+    if (!requests || requests.length === 0) {
+      return await ctx.reply("No Join Requests Yet.");
     }
-    let _0x3b870c = [];
-    let _0x32f437 = "*List of rejected users*\n\n";
-    for (let _0x164385 = 0; _0x164385 < _0x4ea369.length; _0x164385++) {
+    
+    let rejectedList = "List of rejected users\n\n";
+    for (const request of requests) {
       try {
-        await _0xb81e45.bot.groupRequestParticipantsUpdate(_0xb81e45.from, [_0x4ea369[_0x164385].jid], "reject");
-        _0x32f437 += "@" + _0x4ea369[_0x164385].jid.split("@")[0] + "\n";
-        _0x3b870c = [..._0x3b870c, _0x4ea369[_0x164385].jid];
-      } catch { }
+        await ctx.bot.groupRequestParticipantsUpdate(ctx.from, [request.jid], "reject");
+        rejectedList += `@${request.jid.split("@")[0]}\n`;
+      } catch (error) {
+        // handle individual rejection error silently
+      }
     }
-    await _0xb81e45.send(_0x32f437, {
-      mentions: [_0x3b870c]
-    });
-  } catch (_0x13cc87) {
-    await _0xb81e45.error(_0x13cc87 + "\n\ncommand: rejectall", _0x13cc87);
+    
+    await ctx.send(rejectedList, { mentions: requests.map(r => r.jid) });
+  } catch (error) {
+    await ctx.error(`${error}\n\ncommand: rejectall`, error);
   }
 });
+
 UserFunction({
   cmdname: "accept",
-  info: "accept all request to join!",
+  info: "Accept all requests to join!",
   type: "group",
   filename: __filename
-}, async (_0x90a6de, _0x5537ca) => {
+}, async (ctx, args) => {
   try {
-    if (!_0x90a6de.isGroup) {
-      return _0x90a6de.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x90a6de.isBotAdmin || !_0x90a6de.isAdmin) {
-      return await _0x90a6de.reply(!_0x90a6de.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x90a6de.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    
+    if (!ctx.isBotAdmin || !ctx.isAdmin) {
+      return await ctx.reply(!ctx.isBotAdmin ? "I'm Not Admin In This Group" : tlang().admin);
     }
-    const _0x3da7c6 = await _0x90a6de.bot.groupRequestParticipantsList(_0x90a6de.chat);
-    if (!_0x3da7c6 || !_0x3da7c6[0]) {
-      return await _0x90a6de.reply("*_No Join Request Yet_*");
+    
+    const requests = await ctx.bot.groupRequestParticipantsList(ctx.chat);
+    if (!requests || requests.length === 0) {
+      return await ctx.reply("No Join Requests Yet.");
     }
-    let _0x4f391e = [];
-    let _0x26ddf1 = "*List of accepted users*\n\n";
-    for (let _0x5ed6e8 = 0; _0x5ed6e8 < _0x3da7c6.length; _0x5ed6e8++) {
+    
+    let acceptedList = "List of accepted users\n\n";
+    for (const request of requests) {
       try {
-        await _0x90a6de.bot.groupRequestParticipantsUpdate(_0x90a6de.from, [_0x3da7c6[_0x5ed6e8].jid], "approve");
-        _0x26ddf1 += "@" + _0x3da7c6[_0x5ed6e8].jid.split("@")[0] + "\n";
-        _0x4f391e = [..._0x4f391e, _0x3da7c6[_0x5ed6e8].jid];
-      } catch { }
+        await ctx.bot.groupRequestParticipantsUpdate(ctx.from, [request.jid], "approve");
+        acceptedList += `@${request.jid.split("@")[0]}\n`;
+      } catch (error) {
+        // handle individual acceptance error silently
+      }
     }
-    await _0x90a6de.send(_0x26ddf1, {
-      mentions: [_0x4f391e]
-    });
-  } catch (_0x366bd4) {
-    await _0x90a6de.error(_0x366bd4 + "\n\ncommand: acceptall", _0x366bd4);
+    
+    await ctx.send(acceptedList, { mentions: requests.map(r => r.jid) });
+  } catch (error) {
+    await ctx.error(`${error}\n\ncommand: acceptall`, error);
   }
 });
+
 UserFunction({
   cmdname: "requests",
-  info: "Set Description of Group",
+  info: "List all join requests",
   type: "group",
   filename: __filename,
   use: "<enter Description Text>"
-}, async (_0x13cccd, _0x38cc41) => {
+}, async (ctx, args) => {
   try {
-    if (!_0x13cccd.isGroup) {
-      return _0x13cccd.reply(tlang().group);
+    if (!ctx.isGroup) {
+      return ctx.reply(tlang().group);
     }
-    if (!_0x13cccd.isBotAdmin || !_0x13cccd.isAdmin) {
-      return await _0x13cccd.reply(!_0x13cccd.isBotAdmin ? "*_I'm Not Admin In This Group" + (!_0x13cccd.isCreator ? ", Idiot" : "") + "_*" : tlang().admin);
+    
+    if (!ctx.isBotAdmin || !ctx.isAdmin) {
+      return await ctx.reply(!ctx.isBotAdmin ? "I'm Not Admin In This Group" : tlang().admin);
     }
-    const _0x3115b1 = await _0x13cccd.bot.groupRequestParticipantsList(_0x13cccd.chat);
-    if (!_0x3115b1 || !_0x3115b1[0]) {
-      return await _0x13cccd.reply("*_No Request Join Yet_*");
+    
+    const requests = await ctx.bot.groupRequestParticipantsList(ctx.chat);
+    if (!requests || requests.length === 0) {
+      return await ctx.reply("No Join Requests Yet.");
     }
-    let _0x4af6be = [];
-    let _0x59a317 = "*List of User Request to join*\n\n";
-    for (let _0x3230c3 = 0; _0x3230c3 < _0x3115b1.length; _0x3230c3++) {
-      _0x59a317 += "@" + _0x3115b1[_0x3230c3].jid.split("@")[0] + "\n";
-      _0x4af6be = [..._0x4af6be, _0x3115b1[_0x3230c3].jid];
+    
+    let requestList = "List of User Requests to join\n\n";
+    for (const request of requests) {
+      requestList += `@${request.jid.split("@")[0]}\n`;
     }
-    return await _0x13cccd.send(_0x59a317, {
-      mentions: [_0x4af6be]
-    });
-  } catch (_0x5c8e97) {
-    await _0x13cccd.error(_0x5c8e97 + "\n\ncommand: listrequest", _0x5c8e97);
+    
+    return await ctx.send(requestList, { mentions: requests.map(r => r.jid) });
+  } catch (error) {
+    await ctx.error(`${error}\n\ncommand: listrequest`, error);
   }
 });
+
 UserFunction({
   cmdname: "setdesc",
   alias: ["setgdesc", "gdesc"],
