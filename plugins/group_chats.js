@@ -1224,7 +1224,7 @@ UserFunction({
       var inviteLink = "https://chat.whatsapp.com/" + inviteCode;
       var contextInfo = {
         externalAdReply: {
-          title: "𝗦𝗨𝗛𝗔𝗜𝗟-𝗠𝗗",
+          title: "𝗔𝗦𝗧𝗔-𝗠𝗗",
           body: trimmedGroupName,
           renderLargerThumbnail: true,
           thumbnail: log0,
@@ -1267,7 +1267,7 @@ UserFunction({
       var _0x236a49 = _0x10288a + "-" + _0x436585.toString().padStart(2, "0") + "-" + _0x511884.toString().padStart(2, "0");
       var _0x56eaaf = {
         externalAdReply: {
-          title: "𝗦𝗨𝗛𝗔𝗜𝗟-𝗠𝗗",
+          title: "𝗔𝗦𝗧𝗔-𝗠𝗗",
           body: _0x5f4890.subject,
           renderLargerThumbnail: true,
           thumbnail: log0,
