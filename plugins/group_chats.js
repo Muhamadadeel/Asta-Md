@@ -1078,582 +1078,172 @@ UserFunction({
   }
 });
 
-async function haveEqualMembers(_0x31ae7e, _0x107896) {
-  if (_0x31ae7e.length === 0 || _0x107896.length === 0) {
-    return false;
-  }
-  const _0x5aee47 = _0x31ae7e.filter(_0x44f6e4 => _0x107896.includes(_0x44f6e4));
-  const _0x3a93d0 = _0x5aee47.length / _0x31ae7e.length * 100;
-  return _0x3a93d0 >= 76;
-}
+
 UserFunction({
   pattern: "antiword",
-  desc: "Detects words from chat,and delete/warn senders.",
+  desc: "Detects words from chat, and delete/warn senders.",
   category: "group",
   filename: __filename,
-  use: "< action | words >"
-}, async (_0x4626e9, _0x244587, {
-  cmdName: _0xc43bcd
-}) => {
+  use: "<action | words>"
+}, async (message, args, { cmdName = pattern }) => {
   try {
-    if (!_0x4626e9.isGroup) {
-      return _0x4626e9.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x4626e9.isAdmin && !_0x4626e9.isCreator) {
-      return _0x4626e9.reply(tlang().admin);
+    if (!message.isAdmin && !message.isCreator) {
+      return message.reply(tlang().admin);
     }
-    let _0x55ea26 = (await groupdb.findOne({
-      id: _0x4626e9.chat
-    })) || (await groupdb.new({
-      id: _0x4626e9.chat,
-      antiword: {
-        status: "false",
-        words: ""
-      }
-    }));
-    let _0x14e9b0 = _0x244587 ? _0x244587.toLowerCase().trim() : false;
-    let _0xe2e8cc = _0x55ea26.antiword;
-    let _0x28cfe1 = "*Antiword Currently *" + (_0xe2e8cc.status !== "false" ? "enabled" : "disabled") + "!!!* ```\n  STATUS: " + (_0xe2e8cc.status ? _0xe2e8cc.status : "--Empty Yet--") + " \n  WORDS: " + (_0xe2e8cc.words ? _0xe2e8cc.words.replace(/,/gi, " -- ") : "--Empty Yet--") + "```\n\n*Available Cmds:* ```\n  " + (prefix + _0xc43bcd) + " off \n  " + (prefix + _0xc43bcd) + " reset\n  " + (prefix + _0xc43bcd) + " warn | bad,words\n  " + (prefix + _0xc43bcd) + " delete | hot,badas,etc\n``` \n\n\n " + Config.caption;
-    if (!_0x14e9b0 || !_0x244587) {
-      return await _0x4626e9.send(_0x28cfe1);
-    }
-    let _0x48cd39 = _0x14e9b0.split("|")[1] || "";
-    let _0x431ae2 = _0x14e9b0.startsWith("on") || _0x14e9b0.startsWith("act") || _0x14e9b0.startsWith("enable") || _0x14e9b0.startsWith("del") ? "delete" : _0x14e9b0.startsWith("warn") ? "warn" : _0x14e9b0.startsWith("off") || _0x14e9b0.startsWith("deact") || _0x14e9b0.startsWith("disable") ? "false" : _0x14e9b0.startsWith("reset") ? "reset" : "";
-    _0x431ae2 = !_0x431ae2 && _0x48cd39 && _0xe2e8cc.status !== "false" ? _0xe2e8cc.status : _0x431ae2;
-    if (_0x431ae2 === "reset") {
-      await groupdb.updateOne({
-        id: _0x4626e9.chat
-      }, {
-        antiword: {}
-      });
-      return await _0x4626e9.send("*_Anti_Word status cleard!_*");
-    } else if (_0x431ae2 === "delete" || _0x431ae2 === "warn") {
-      if (_0xe2e8cc.status == _0x431ae2 && !_0x48cd39) {
-        return await _0x4626e9.send("*Please provide badWords, like " + (prefix + _0xc43bcd) + " " + _0x431ae2 + " | bad,words");
-      }
-      _0x48cd39 = _0x48cd39 ? _0x48cd39 : _0xe2e8cc.words;
-      await groupdb.updateOne({
-        id: _0x4626e9.chat
-      }, {
-        antiword: {
-          status: _0x431ae2,
-          words: _0x48cd39
-        }
-      });
-      return await _0x4626e9.send("*_Anti_Word succesfully set to '" + _0x431ae2 + "' badward!_*\n*Antiwords are:```" + (_0x48cd39 ? _0x48cd39.replace(/,/gi, " | ") : "--Empty Yet--") + "``` *");
-    } else if (_0x431ae2 === "false") {
-      if (_0xe2e8cc.status === _0x431ae2) {
-        return await _0x4626e9.send("*Anti_Word Already Disabled In Current Chat!*");
-      }
-      await groupdb.updateOne({
-        id: _0x4626e9.chat
-      }, {
-        antiword: {
-          status: "false",
-          words: _0xe2e8cc.words
-        }
-      });
-      return await _0x4626e9.send("*Anti_Word Disable Succesfully!*");
-    } else {
-      return await _0x4626e9.reply("*Uhh dear, Please follow instructions!!*\n\n" + _0x28cfe1);
-    }
-  } catch (_0x5738c4) {
-    _0x4626e9.error(_0x5738c4 + "\n\ncommand: antiword", _0x5738c4);
-  }
-});
-let bott = false;
-let chatbotCount = 0;
-UserFunction({
-  on: "main"
-}, async (_0x39f91d, _0x4baec9, {
-  botNumber: _0x4ac038,
-  isCreator: _0x184989,
-  budy: _0x47409a,
-  body: _0x66fc82,
-  icmd: _0x250d65
-}) => {
-  try {
-    if (global.MsgsInLog === "true") {
-      console.log("" + (_0x39f91d.isGroup ? "[MESSAGE IN GROUP] From => " + _0x39f91d.metadata.subject + "\n[USER]:" : "[MESSAGE IN PRIVATE] From =>") + (" " + _0x39f91d.senderName + " " + _0x39f91d.senderNum + "\n[" + _0x39f91d.mtype.toUpperCase() + "]: " + _0x39f91d.body + "\n============== [CHATS] ================="));
-    }
-    let _0x273393 = (await groupdb.findOne({
-      id: _0x39f91d.chat
-    })) || false;
-    let _0xea5278 = false;
-    try {
-      if (!global.SmdOfficial && global.SmdOfficial !== "yes") {
-        return;
-      }
-      if (_0x273393 && _0x273393.antitag == "true" && !_0x39f91d.checkBot() && _0x39f91d.mtype !== "reactionMessage" && _0x273393.botenable == "true") {
-        const _0x50265a = await haveEqualMembers(_0x39f91d.metadata.participants.map(_0x406321 => _0x406321.id), _0x39f91d.mentionedJid);
-        if (_0x50265a && _0x39f91d.isBotAdmin) {
-          let _0x40ef27 = {
-            reason: "tagging all members!",
-            chat: _0x39f91d.metadata?.subject || "GROUP",
-            warnedby: tlang().title,
-            date: _0x39f91d.date
-          };
-          _0xea5278 = await warn.addwarn(_0x39f91d.sender, _0x39f91d.chat, _0x40ef27);
-          await _0x39f91d.reply("*_[TAG DETECTED] Hey @" + _0x39f91d.senderNum + " warning!!_*\n*_Tagging all members is not allowed!_*", {
-            mentions: [_0x39f91d.sender]
-          });
-          await _0x39f91d.delete();
-        } else if (_0x50265a && !_0x39f91d.isBotAdmin) {
-          await _0x39f91d.reply("*_[TAGALL DETECTED] Can't do anything, without getting admin role!_*", {
-            mentions: [_0x39f91d.sender]
-          });
-        }
-      }
-      if (_0x273393 && _0x39f91d.isGroup && !_0x39f91d.isAdmin && !_0x184989 && _0x39f91d.mtype !== "reactionMessage" && _0x273393.botenable == "true") {
-        if (_0x273393.antibot && _0x273393.antibot !== "false" && _0x39f91d.isBot && !_0x39f91d.checkBot(_0x39f91d.sender)) {
-          if (_0x39f91d.isBotAdmin) {
-            var _0x3c86e4 = "*_Bot user not allowed, please make it private!_*";
-            if (_0x273393.antibot === "warn") {
-              let _0x50d0d8 = {
-                reason: "Bots not allowed!",
-                chat: _0x39f91d.metadata?.subject || "GROUP",
-                date: _0x39f91d.date
-              };
-              _0xea5278 = _0xea5278 ? _0xea5278 : await warn.addwarn(_0x39f91d.sender, _0x39f91d.chat, _0x50d0d8);
-              if (_0xea5278.status) {
-                _0x3c86e4 = "*_Hey @" + _0x39f91d.senderNum + " warning, Due To Antibot!_*";
-              }
-            } else if (_0x273393.antibot === "kick") {
-              try {
-                sleep(1000);
-                await _0x39f91d.bot.groupParticipantsUpdate(_0x39f91d.chat, [_0x39f91d.sender], "remove");
-                _0x3c86e4 = "*_User @" + _0x39f91d.senderNum + " kick Due To Antibot!_*";
-              } catch { }
-            }
-            await _0x39f91d.delete();
-            await _0x39f91d.send(_0x3c86e4, {
-              mentions: [_0x39f91d.sender]
-            });
-          } else if (!_0x39f91d.isBotAdmin && _0x39f91d.isBot) {
-            await _0x39f91d.reply("*_Uhh Please, Provide Admin Role To Kick Other Bot_*\n*_Or Disable Antibot (On/Off) In Current Group_*");
-          }
-        }
-        if (_0x273393.onlyadmin && _0x273393.onlyadmin === "true" && SmdOfficial == "yes") {
-          var _0x3c86e4 = "";
-          if (_0x39f91d.isBotAdmin) {
-            let _0x5c4aae = {
-              reason: "Only Admin can Chat!",
-              chat: _0x39f91d.metadata?.subject || "PRIVATE",
-              warnedby: tlang().title,
-              date: _0x39f91d.date
-            };
-            _0xea5278 = _0xea5278 ? _0xea5278 : await warn.addwarn(_0x39f91d.sender, _0x39f91d.chat, _0x5c4aae);
-            if (_0xea5278.status) {
-              _0x3c86e4 = "*Warns you for chat here!*\n";
-            }
-            await _0x39f91d.delete();
-            sleep(1500);
-            await _0x39f91d.send("*Hey @" + _0x39f91d.senderNum + "* " + _0x3c86e4 + "*Deleteing message,while onlyadmin activated!!* ", {
-              mentions: [_0x39f91d.sender]
-            });
-          } else {
-            await _0x39f91d.send("*_Provide admin role to kick Message Senders_*\n*Or _Disable onlyadmin(on/off) in currentchat_*");
-          }
-        }
-        if (_0x273393.antilink && _0x273393.antilink !== "false" && SmdOfficial === "yes") {
-          const _0x37bc15 = Config.antilink_values && Config.antilink_values !== "all" ? Config.antilink_values.split(",").filter(_0x3da281 => _0x3da281.trim() !== "") : ["https://", "chat.whatsapp.com", "fb.com"];
-          let _0x5cbc1d = _0x66fc82.toLowerCase();
-          if (_0x37bc15.some(_0x81b040 => _0x5cbc1d.includes(_0x81b040))) {
-            if (!_0x39f91d.isBotAdmin) {
-              let _0x26aa7f = " *[LINK DETECTED]*\nUser @" + _0x39f91d.sender.split("@")[0] + " detected sending a link.\nPromote " + Config.botname + " as admin to " + (_0x273393.antilink === "kick" ? "kick \nlink senders." : "delete \nlinks from this Chat") + " \n";
-              await _0x39f91d.send(_0x26aa7f, {
-                mentions: [_0x39f91d.sender]
-              });
-            } else if (_0x273393.antilink === "delete") {
-              await _0x39f91d.send("*_Link Detected.. Deletion Done!_*");
-              await _0x39f91d.delete();
-            } else if (_0x273393.antilink === "warn" || _0x273393.antilink === "true") {
-              let _0x75abf8 = {
-                reason: "links not allowed!",
-                chat: _0x39f91d.metadata?.subject || "PRIVATE",
-                warnedby: tlang().title,
-                date: _0x39f91d.date
-              };
-              _0xea5278 = _0xea5278 ? _0xea5278 : await warn.addwarn(_0x39f91d.sender, _0x39f91d.chat, _0x75abf8);
-              var _0x3c86e4 = _0xea5278.status ? "*_[LINK DETECTED] Hey @" + _0x39f91d.senderNum + " warning!!_*\n*_links not allowed in current group!_*" : "*_[LINK DETECTED]!_*";
-              await _0x39f91d.reply(_0x3c86e4, {
-                mentions: [_0x39f91d.sender]
-              });
-              await _0x39f91d.delete();
-            } else if (_0x273393.antilink === "kick") {
-              await _0x39f91d.send("*_Link Detected!!_*");
-              try {
-                await _0x39f91d.delete();
-                sleep(1500);
-                await _0x39f91d.bot.groupParticipantsUpdate(_0x39f91d.chat, [_0x39f91d.sender], "remove");
-              } catch {
-                await _0x39f91d.send("*Link Detected*\n" + tlang().botAdmin);
-              }
-            }
-          }
-        }
-      }
-    } catch (_0x1a7fb0) {
-      console.log("Error From Antilinks : ", _0x1a7fb0);
-    }
-    var _0x219875 = _0x273393?.antiword || {
-      status: "false"
-    };
-    if (_0x4baec9.length > 1 && !_0x39f91d.isBot && _0x219875 && _0x219875.status !== "false" && _0x219875.words) {
-      var _0x4e66ac = _0x219875.words.split(",") || [];
-      let _0x2298c9 = false;
-      _0x4e66ac.map(async _0x5e94de => {
-        if (_0x39f91d.isAdmin || !global.SmdOfficial || global.SmdOfficial != "yes") {
-          return;
-        }
-        let _0x520e96 = new RegExp("\\b" + _0x5e94de?.trim() + "\\b", "ig");
-        let _0x1ae0c5 = _0x47409a.toLowerCase();
-        if (!_0x2298c9 && _0x5e94de && _0x520e96.test(_0x1ae0c5)) {
-          _0x2298c9 = true;
-          await sleep(500);
-          try {
-            var _0x3dc4df = "";
-            if (_0x219875.status === "warn") {
-              let _0x5f3cee = {
-                reason: "For using Bad Word",
-                chat: _0x39f91d.metadata?.subject || "PRIVATE",
-                warnedby: tlang().title,
-                date: _0x39f91d.date
-              };
-              _0xea5278 = _0xea5278 ? _0xea5278 : await warn.addwarn(_0x39f91d.sender, _0x39f91d.chat, _0x5f3cee);
-              if (_0xea5278.status) {
-                _0x3dc4df = "\n*Warns you for using badWord!!*\n";
-              }
-            }
-            if (_0x39f91d.isBotAdmin) {
-              await _0x39f91d.send("*[BAD WORD DETECTED] Hey @" + _0x39f91d.senderNum + "* " + _0x3dc4df + " *Deleting your message from chat!*\n", {
-                mentions: [_0x39f91d.sender]
-              }, "suhail", _0x39f91d);
-              await _0x39f91d.delete();
-            } else {
-              await _0x39f91d.reply("*_[BAD WORD DETECTED] provide admin to take action!_*", {
-                mentions: [_0x39f91d.sender]
-              });
-            }
-          } catch (_0x44e136) {
-            console.log("Error From Bad Words : ", _0x44e136);
-          }
-        }
-      });
-    }
-    if (_0xea5278) {
-      let _0x4cb16b = parseInt(global.warncount) || 3;
-      if (_0xea5278.warning >= _0x4cb16b) {
-        if (_0x39f91d.isGroup) {
-          if (_0x39f91d.isBotAdmin) {
-            await _0x39f91d.send("*_Hey @" + _0x39f91d.senderNum + " Kicking you from group!_*\n*_Because Your warn limit exceed!_*", {
-              mentions: [_0x39f91d.sender]
-            });
-            await _0x39f91d.bot.groupParticipantsUpdate(_0x39f91d.chat, [_0x39f91d.sender], "remove");
-          }
-        } else {
-          await _0x39f91d.send("*_Hey @" + _0x39f91d.senderNum + " Blocking you!_*\n*_Because Your warn limit exceed!_*", {
-            mentions: [_0x39f91d.sender]
-          });
-          await _0x39f91d.bot.updateBlockStatus(_0x39f91d.sender, "block");
-        }
-      }
-    }
-    try {
-      if (!global.SmdOfficial || _0x39f91d.mtype === "reactionMessage") {
-        return;
-      }
-      let _0x294e10 = (await groupdb.findOne({
-        id: _0x39f91d.chat
-      })) || {
-        chatbot: "false"
-      };
-      if (!bott || chatbotCount >= 10) {
-        bott = (await bot_.findOne({
-          id: "bot_" + _0x39f91d.user
-        })) || {
-          chatbot: "false"
-        };
-      } else {
-        chatbotCount++;
-      }
-      let _0x3f3751 = bott && bott.chatbot && bott.chatbot == "true" ? "true" : _0x294e10.chatbot || "false";
-      if (_0x3f3751 === "true" && !_0x250d65 && !_0x39f91d.isBot && _0x39f91d.text) {
-        let _0x4c0917 = !_0x39f91d.isGroup ? _0x39f91d.user : _0x39f91d.quoted ? _0x39f91d.quoted.sender : _0x39f91d.mentionedJid[0] || false;
-        if (_0x39f91d.isGroup && _0x4c0917 && !_0x39f91d.checkBot(_0x4c0917)) {
-          return;
-        }
-        let {
-          data: _0x1a5d20
-        } = await axios.get("http://api.brainshop.ai/get?bid=175685&key=Pg8Wu8mrDQjfr0uv&uid=[" + _0x39f91d.senderNum + "]&msg=[" + _0x47409a + "]");
-        if (_0x1a5d20 && _0x1a5d20.cnt) {
-          _0x39f91d.send(_0x1a5d20.cnt, {}, "suhail", _0x39f91d);
-        } else {
-          "";
-        }
-      }
-    } catch (_0x418db7) {
-      console.log("Error From ChatBot : ", _0x418db7);
-    }
-  } catch (_0x4eac84) {
-    console.log("Group Settings error in command.main() \n", _0x4eac84);
-  }
-});
-let users = {};
-let user_warns = {};
-UserFunction({
-  group: "add"
-}, async (_0x28d76c, {
-  Void: _0x4dedb6
-}) => {
-  try {
-    let _0x3a7fc2 = await groupdb.findOne({
-      id: _0x28d76c.chat
+
+    let groupData = await groupdb.findOne({ id: message.chat }) || await groupdb.new({
+      id: message.chat,
+      antiword: { status: "false", words: "" }
     });
-    if (!_0x3a7fc2 || !_0x28d76c.isGroup || _0x3a7fc2.botenable !== "true" || _0x28d76c.blockJid || _0x28d76c.fromMe) {
-      return;
+
+    let command = args ? args.toLowerCase().trim() : false;
+    let antiwordSettings = groupData.antiword;
+    let currentSettings = `*Antiword Currently ${antiwordSettings.status !== "false" ? "enabled" : "disabled"}!!!* \`\`\`
+      STATUS: ${antiwordSettings.status ? antiwordSettings.status : "--Empty Yet--"}
+      WORDS: ${antiwordSettings.words ? antiwordSettings.words.replace(/,/gi, " -- ") : "--Empty Yet--"}\`\`\`
+
+      *Available Cmds:* \`\`\`
+      ${prefix + cmdName} off
+      ${prefix + cmdName} reset
+      ${prefix + cmdName} warn | bad,words
+      ${prefix + cmdName} delete | hot,badass,etc
+      \`\`\`
+      
+      ${Config.caption}`;
+
+    if (!command || !args) {
+      return await message.send(currentSettings);
     }
-    let _0x21c5eb = _0x3a7fc2 && _0x3a7fc2.welcome ? _0x3a7fc2.welcome : "false";
-    let _0x3fc86e = _0x3a7fc2 && _0x3a7fc2.antifake ? _0x3a7fc2.antifake.toLowerCase() : "false";
-    let _0x5dd590 = _0x3fc86e.split(",");
-    const _0xdb6223 = _0x5dd590.some(_0x25ffc0 => _0x28d76c.user.startsWith(_0x25ffc0));
-    if (_0x3fc86e !== "false" && !_0xdb6223 && !_0x28d76c.isCreator) {
-      if (_0x28d76c.isBotAdmin) {
-        try {
-          await _0x28d76c.kick();
-          return await sendWelcome(_0x28d76c, "*[ANTIFAKE START] @User kicked automaticaly!* @pp");
-        } catch (_0x52d6df) {
-          await _0x28d76c.error(" Can't kick user in antifake\n❲❒❳ GROUP: " + _0x28d76c.metadata.subject + "\n❲❒❳ ERROR: " + _0x52d6df + "\n", _0x52d6df, false);
-        }
-      } else {
-        await _0x28d76c.send("*[ANTI_FAKE ERROR] Need admin role to kick fake users!!*");
+
+    let [action, words] = command.split("|");
+    words = words ? words.trim() : "";
+    action = action.startsWith("on") || action.startsWith("act") || action.startsWith("enable") || action.startsWith("del") ? "delete" : action.startsWith("warn") ? "warn" : action.startsWith("off") || action.startsWith("deact") || action.startsWith("disable") ? "false" : action.startsWith("reset") ? "reset" : "";
+    action = !action && words && antiwordSettings.status !== "false" ? antiwordSettings.status : action;
+
+    if (action === "reset") {
+      await groupdb.updateOne({ id: message.chat }, { antiword: {} });
+      return await message.send("*_Anti_Word status cleared!_*");
+    } else if (["delete", "warn"].includes(action)) {
+      if (antiwordSettings.status === action && !words) {
+        return await message.send(`*Please provide badWords, like ${prefix + cmdName} ${action} | bad,words`);
       }
-    } else if (_0x21c5eb === "true") {
-      await sendWelcome(_0x28d76c, _0x3a7fc2.welcometext);
-    }
-  } catch (_0x476537) {
-    console.log("Error From Welcome : ", _0x476537);
-  }
-});
-UserFunction({
-  group: "remove"
-}, async (_0x1b9988, {
-  Void: _0xcb3386
-}) => {
-  try {
-    let _0xa3ec6 = (await groupdb.findOne({
-      id: _0x1b9988.chat
-    })) || false;
-    if (!_0x1b9988 || !_0xa3ec6 || !_0x1b9988.isGroup || _0xa3ec6.botenable !== "true" || _0x1b9988.blockJid || _0x1b9988.fromMe) {
-      return;
-    }
-    let _0x9f4c7b = _0xa3ec6 && _0xa3ec6.goodbye ? _0xa3ec6.goodbye : "false";
-    if (_0x9f4c7b === "true") {
-      await sendWelcome(_0x1b9988, _0xa3ec6.goodbyetext);
-    }
-  } catch (_0x442765) {
-    console.log("Error From Goodbye : ", _0x442765);
-  }
-});
-UserFunction({
-  group: "promote"
-}, async (_0x482975, {
-  Void: _0x3481d2
-}) => {
-  try {
-    let _0x390d91 = (await groupdb.findOne({
-      id: _0x482975.chat
-    })) || false;
-    if (!_0x390d91 || !_0x482975.isGroup || _0x390d91.botenable !== "true" || _0x482975.blockJid) {
-      return;
-    }
-    if (!user_warns[_0x482975.sender]) {
-      user_warns[_0x482975.sender] = {
-        [_0x482975.action]: 1
-      };
+      words = words ? words : antiwordSettings.words;
+      await groupdb.updateOne({ id: message.chat }, { antiword: { status: action, words: words } });
+      return await message.send(`*_Anti_Word successfully set to '${action}' badword!_*\n*Antiwords are: \`\`\`${words ? words.replace(/,/gi, " | ") : "--Empty Yet--"}\`\`\` *`);
+    } else if (action === "false") {
+      if (antiwordSettings.status === action) {
+        return await message.send("*Anti_Word Already Disabled In Current Chat!*");
+      }
+      await groupdb.updateOne({ id: message.chat }, { antiword: { status: "false", words: antiwordSettings.words } });
+      return await message.send("*Anti_Word Disabled Successfully!*");
     } else {
-      user_warns[_0x482975.sender][_0x482975.action]++;
+      return await message.reply("*Please follow instructions!!*\n\n" + currentSettings);
     }
-    let _0x4124fa;
-    if (_0x390d91.antipromote == "true" && !_0x482975.isCreator) {
-      _0x4124fa = _0x482975.isBotAdmin ? false : true;
-      if (users[_0x482975.sender] && users[_0x482975.sender].previous_Action === "antidemote") {
-        delete users[_0x482975.sender];
-        return;
-      }
-      if (_0x482975.isBotAdmin) {
-        try {
-          await _0x482975.demote();
-          users[_0x482975.sender] = {
-            previous_Action: "antipromote"
-          };
-          if (user_warns[_0x482975.sender][_0x482975.action] > 2) {
-            return;
-          }
-          return await sendWelcome(_0x482975, "*[ANTIPROMOTE START] @User Demoted Automatically!* @pp ");
-        } catch (_0x5ae38b) {
-          await _0x482975.error(" Can't demote user in antipromote\n❲❒❳ GROUP: " + _0x482975.metadata.subject + "\n❲❒❳ ERROR: " + _0x5ae38b + "\n", _0x5ae38b, false);
-        }
-      }
-    }
-    if (_0x390d91.pdm == "true" || _0x4124fa) {
-      if (user_warns[_0x482975.sender][_0x482975.action] > 2) {
-        return;
-      }
-      var _0x218901 = " *[SOMEONE PROMOTE HERE]*\n" + (_0x4124fa ? "*Note : _I'm Not Admin Here, So I Can't Demote Someone while Anti_Promote Activated_*" : "") + "\n           \n  ❲❒❳ *User:* _@user_\n❲❒❳ *Position:* _Member -> Admin_ @pp\n  ❲❒❳ *Total Members:* _@count_Members_\n❲❒❳ *Group Name:* @gname\n\n\n" + Config.caption;
-      return await sendWelcome(_0x482975, _0x218901);
-    }
-  } catch (_0x3a436e) {
-    console.log("Error From Promote : ", _0x3a436e);
-  }
-});
-UserFunction({
-  group: "demote"
-}, async (_0x2b38a5, {
-  Void: _0x4676d7
-}) => {
-  try {
-    let _0x1273fa = (await groupdb.findOne({
-      id: _0x2b38a5.chat
-    })) || false;
-    if (!_0x1273fa || !_0x2b38a5.isGroup || _0x1273fa.botenable !== "true" || _0x2b38a5.blockJid) {
-      return;
-    }
-    if (!user_warns[_0x2b38a5.sender]) {
-      user_warns[_0x2b38a5.sender] = {
-        [_0x2b38a5.action]: 1
-      };
-    } else {
-      user_warns[_0x2b38a5.sender][_0x2b38a5.action]++;
-    }
-    let _0x5878b4;
-    if (_0x1273fa.antidemote == "true" && !_0x2b38a5.isCreator) {
-      _0x5878b4 = _0x2b38a5.isBotAdmin ? false : true;
-      if (users[_0x2b38a5.sender] && users[_0x2b38a5.sender].previous_Action === "antipromote") {
-        delete users[_0x2b38a5.sender];
-        return;
-      }
-      if (_0x2b38a5.isBotAdmin) {
-        try {
-          await _0x2b38a5.promote();
-          users[_0x2b38a5.sender] = {
-            previous_Action: "antidemote"
-          };
-          if (user_warns[_0x2b38a5.sender][_0x2b38a5.action] > 2) {
-            return;
-          }
-          return await sendWelcome(_0x2b38a5, "*[ANTIPROMOTE START] User promote automatically!* @pp ");
-        } catch (_0x275310) {
-          await _0x2b38a5.error(" Can't promote user in antidemote\n❲❒❳ GROUP: " + _0x2b38a5.metadata.subject + "\n❲❒❳ ERROR: " + _0x275310 + "\n", _0x275310, false);
-        }
-      }
-    }
-    if (_0x1273fa.pdm == "true" || _0x5878b4) {
-      if (user_warns[_0x2b38a5.sender][_0x2b38a5.action] > 2) {
-        return;
-      }
-      var _0x168c92 = " *[SOMEONE DEMOTE HERE]*\n  " + (_0x5878b4 ? "*Note : _I'm Not Admin Here, So I Can't promote Someone while Anti_Demote Activated_*" : "") + "\n\n  ❲❒❳ *User:* _@user_\n❲❒❳ *Position:* _Admin -> Member_ @pp\n  ❲❒❳ *Total Members:* _@count_Members_\n❲❒❳ *Group Name:* @gname\n  \n\n" + Config.caption;
-      return await sendWelcome(_0x2b38a5, _0x168c92);
-    }
-  } catch (_0x3ef55d) {
-    console.log("Error From Demote : ", _0x3ef55d);
+  } catch (error) {
+    message.error(error + "\n\ncommand: antiword", error);
   }
 });
 
 UserFunction({
   cmdname: "join",
-  info: "joins group by link",
+  info: "Joins group by link",
   type: "whatsapp",
   fromMe: true,
   filename: __filename,
   use: "<group link.>"
-}, async (_0x466dd8, _0x5b1338) => {
+}, async (message, args) => {
   try {
-    if (_0x466dd8.reply_message && _0x466dd8.reply_message.groupInvite) {
-      var _0x29e5fc = await _0x466dd8.bot.groupAcceptInviteV4(_0x466dd8.chat, _0x466dd8.reply_message.msg);
-      if (_0x29e5fc && _0x29e5fc.includes("joined to:")) {
-        return await send(_0x466dd8, "*_Joined_*", {}, "", _0x466dd8);
+    if (message.reply_message && message.reply_message.groupInvite) {
+      let joinResponse = await message.bot.groupAcceptInviteV4(message.chat, message.reply_message.msg);
+      if (joinResponse && joinResponse.includes("joined to:")) {
+        return await send(message, "*Joined*", {}, "", message);
       }
     }
-    let _0x208739 = _0x5b1338 ? _0x5b1338 : _0x466dd8.reply_text;
-    const _0x47ed60 = _0x208739.match(grouppattern);
-    if (!_0x47ed60) {
-      return await _0x466dd8.reply("*_Uhh Please, provide group link_*");
+
+    let groupLink = args ? args : message.reply_text;
+    const match = groupLink.match(grouppattern);
+    if (!match) {
+      return await message.reply("*_Please, provide a valid group link_*");
     }
-    let _0x4263be = _0x47ed60[0].split("https://chat.whatsapp.com/")[1].trim();
-    await _0x466dd8.bot.groupAcceptInvite(_0x4263be).then(_0x7f3222 => send(_0x466dd8, "*_Joined_*", {}, "", _0x466dd8)).catch(_0x1d6aea => _0x466dd8.send("*_Can't Join, Group Id not found!!_*"));
-  } catch (_0x5d3484) {
-    await _0x466dd8.error(_0x5d3484 + "\n\ncommand: join", _0x5d3484, "*_Can't Join, Group Id not found, Sorry!!_*");
+
+    let groupId = match[0].split("https://chat.whatsapp.com/")[1].trim();
+    await message.bot.groupAcceptInvite(groupId).then(() => send(message, "*_Joined_*", {}, "", message)).catch(() => message.send("*_Can't Join, Group Id not found!!_*"));
+  } catch (error) {
+    await message.error(error + "\n\ncommand: join", error, "*_Can't Join, Group Id not found, Sorry!!_*");
   }
 });
+
 UserFunction({
   cmdname: "newgc",
   info: "Create New Group",
   type: "whatsapp",
   filename: __filename,
-  use: "<group link.>"
-}, async (_0x1d2f1f, _0x3c558e, {
-  smd: _0x2e7a79,
-  cmdName: _0x49994a
-}) => {
+  use: "<group name> <user mentions>"
+}, async (message, args, { smd, cmdName }) => {
   try {
-    if (!_0x1d2f1f.isCreator) {
-      return _0x1d2f1f.reply(tlang().owner);
+    if (!message.isCreator) {
+      return message.reply(tlang().owner);
     }
-    if (!_0x3c558e) {
-      return await _0x1d2f1f.reply("*_provide Name to Create new Group!!!_*\n*_Ex: " + (prefix + _0x2e7a79) + " My Name Group @user1,2,3.._*");
+    if (!args) {
+      return await message.reply(`*_Provide a name to create a new Group!!!_*\n*_Ex: ${prefix + smd} My New Group @user1,2,3.._*`);
     }
-    let _0x379d99 = _0x3c558e;
-    if (_0x379d99.toLowerCase() === "info") {
-      return await _0x1d2f1f.send(("\n  *Its a command to create new Gc*\n  \t```Ex: " + (prefix + cmd) + " My new Group```\n  \n*You also add peoples in newGc*\n  \t```just reply or mention Users```\n  ").trim());
+
+    let groupName = args;
+    if (groupName.toLowerCase() === "info") {
+      return await message.send(`\n  *It's a command to create a new group*\n  \t\`\`\`Ex: ${prefix + cmdName} My New Group\`\`\`\n  \n*You can also add people in new group*\n  \t\`\`\`Just reply or mention users\`\`\`\n`.trim());
     }
-    let _0x5a5c26 = [_0x1d2f1f.sender];
-    if (_0x1d2f1f.quoted) {
-      _0x5a5c26.push(_0x1d2f1f.quoted.sender);
+
+    let participants = [message.sender];
+    if (message.quoted) {
+      participants.push(message.quoted.sender);
     }
-    if (_0x1d2f1f.mentionedJid && _0x1d2f1f.mentionedJid[0]) {
-      _0x5a5c26.push(..._0x1d2f1f.mentionedJid);
+    if (message.mentionedJid && message.mentionedJid[0]) {
+      participants.push(...message.mentionedJid);
       try {
-        mentionJids.forEach(_0x3e3852 => {
-          var _0x30af68 = _0x3e3852.split("@")[0].trim();
-          _0x379d99 = _0x379d99.replace(new RegExp("@" + _0x30af68, "g"), "");
+        message.mentionedJid.forEach(mention => {
+          let mentionName = mention.split("@")[0].trim();
+          groupName = groupName.replace(new RegExp("@" + mentionName, "g"), "");
         });
       } catch { }
     }
-    const _0x37b490 = _0x379d99.substring(0, 60);
-    const _0x417018 = await Suhail.bot.groupCreate(_0x37b490, [..._0x5a5c26]);
-    if (_0x417018) {
-      let _0x2c6495 = await _0x1d2f1f.bot.sendMessage(_0x417018.id, {
-        text: "*_Hey Buddy, Welcome to new Group_*\n" + Config.caption
+
+    const trimmedGroupName = groupName.substring(0, 60);
+    const newGroup = await message.bot.groupCreate(trimmedGroupName, participants);
+    if (newGroup) {
+      let welcomeMessage = await message.bot.sendMessage(newGroup.id, {
+        text: "*_Hey Buddy, Welcome to the new Group_*\n" + Config.caption
       });
       try {
-        var _0x3a49e9 = await Suhail.bot.groupInviteCode(_0x417018.id);
+        var inviteCode = await message.bot.groupInviteCode(newGroup.id);
       } catch {
-        var _0x3a49e9 = false;
+        var inviteCode = false;
       }
-      var _0x2608ab = "https://chat.whatsapp.com/";
-      var _0x2fe2c7 = "" + _0x2608ab + _0x3a49e9;
-      var _0x539d8f = {
+      var inviteLink = "https://chat.whatsapp.com/" + inviteCode;
+      var contextInfo = {
         externalAdReply: {
           title: "𝗦𝗨𝗛𝗔𝗜𝗟-𝗠𝗗",
-          body: "" + _0x37b490,
+          body: trimmedGroupName,
           renderLargerThumbnail: true,
           thumbnail: log0,
           mediaType: 1,
-          mediaUrl: _0x2fe2c7,
-          sourceUrl: _0x2fe2c7
+          mediaUrl: inviteLink,
+          sourceUrl: inviteLink
         }
       };
-      return await send(_0x1d2f1f, ("*_Hurray, New group created!!!_*\n" + (_0x3a49e9 ? "*_" + _0x2fe2c7 + "_*" : "")).trim(), {
-        contextInfo: _0x539d8f
-      }, "", _0x2c6495);
+      return await send(message, `*_Hurray, New group created!!!_*\n${inviteCode ? "*_" + inviteLink + "_*" : ""}`.trim(), {
+        contextInfo
+      }, "", welcomeMessage);
     } else {
-      await _0x1d2f1f.send("*_Can't create new group, Sorry!!_*");
+      await message.send("*_Can't create new group, Sorry!!_*");
     }
-  } catch (_0x33d6f3) {
-    await _0x1d2f1f.error(_0x33d6f3 + "\n\ncommand: " + _0x49994a, _0x33d6f3, "*_Can't create new group, Sorry!!_*");
+  } catch (error) {
+    await message.error(error + "\n\ncommand: " + cmdName, error, "*_Can't create new group, Sorry!!_*");
   }
 });
+
 UserFunction({
   pattern: "ginfo",
   desc: "get group info by link",
@@ -2732,7 +2322,7 @@ cmd({
       forwardingScore: 999,
       isForwarded: true,
       externalAdReply: {
-        title: "Suhail-Md Broadcast",
+        title: "Asta-Md Broadcast",
         body: _0x553d05.senderName,
         renderLargerThumbnail: true,
         thumbnail: log0,
@@ -2753,5 +2343,423 @@ cmd({
     return await _0x553d05.reply("*Successful Sending Broadcast To " + _0x4ef191.length + " Group*");
   } catch (_0x2a8ad8) {
     await _0x553d05.error(_0x2a8ad8 + "\n\ncommand: broadcast", _0x2a8ad8);
+  }
+});
+
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+let bott = false;
+let chatbotCount = 0;
+async function haveEqualMembers(_0x31ae7e, _0x107896) {
+  if (_0x31ae7e.length === 0 || _0x107896.length === 0) {
+    return false;
+  }
+  const _0x5aee47 = _0x31ae7e.filter(_0x44f6e4 => _0x107896.includes(_0x44f6e4));
+  const _0x3a93d0 = _0x5aee47.length / _0x31ae7e.length * 100;
+  return _0x3a93d0 >= 76;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+UserFunction({
+  on: "main"
+}, async (_0x39f91d, _0x4baec9, {
+  botNumber: _0x4ac038,
+  isCreator: _0x184989,
+  budy: _0x47409a,
+  body: _0x66fc82,
+  icmd: _0x250d65
+}) => {
+  try {
+    if (global.MsgsInLog === "true") {
+      console.log("" + (_0x39f91d.isGroup ? "[MESSAGE IN GROUP] From => " + _0x39f91d.metadata.subject + "\n[USER]:" : "[MESSAGE IN PRIVATE] From =>") + (" " + _0x39f91d.senderName + " " + _0x39f91d.senderNum + "\n[" + _0x39f91d.mtype.toUpperCase() + "]: " + _0x39f91d.body + "\n============== [CHATS] ================="));
+    }
+    let _0x273393 = (await groupdb.findOne({
+      id: _0x39f91d.chat
+    })) || false;
+    let _0xea5278 = false;
+    try {
+      if (!global.SmdOfficial && global.SmdOfficial !== "yes") {
+        return;
+      }
+      if (_0x273393 && _0x273393.antitag == "true" && !_0x39f91d.checkBot() && _0x39f91d.mtype !== "reactionMessage" && _0x273393.botenable == "true") {
+        const _0x50265a = await haveEqualMembers(_0x39f91d.metadata.participants.map(_0x406321 => _0x406321.id), _0x39f91d.mentionedJid);
+        if (_0x50265a && _0x39f91d.isBotAdmin) {
+          let _0x40ef27 = {
+            reason: "tagging all members!",
+            chat: _0x39f91d.metadata?.subject || "GROUP",
+            warnedby: tlang().title,
+            date: _0x39f91d.date
+          };
+          _0xea5278 = await warn.addwarn(_0x39f91d.sender, _0x39f91d.chat, _0x40ef27);
+          await _0x39f91d.reply("*_[TAG DETECTED] Hey @" + _0x39f91d.senderNum + " warning!!_*\n*_Tagging all members is not allowed!_*", {
+            mentions: [_0x39f91d.sender]
+          });
+          await _0x39f91d.delete();
+        } else if (_0x50265a && !_0x39f91d.isBotAdmin) {
+          await _0x39f91d.reply("*_[TAGALL DETECTED] Can't do anything, without getting admin role!_*", {
+            mentions: [_0x39f91d.sender]
+          });
+        }
+      }
+      if (_0x273393 && _0x39f91d.isGroup && !_0x39f91d.isAdmin && !_0x184989 && _0x39f91d.mtype !== "reactionMessage" && _0x273393.botenable == "true") {
+        if (_0x273393.antibot && _0x273393.antibot !== "false" && _0x39f91d.isBot && !_0x39f91d.checkBot(_0x39f91d.sender)) {
+          if (_0x39f91d.isBotAdmin) {
+            var _0x3c86e4 = "*_Bot user not allowed, please make it private!_*";
+            if (_0x273393.antibot === "warn") {
+              let _0x50d0d8 = {
+                reason: "Bots not allowed!",
+                chat: _0x39f91d.metadata?.subject || "GROUP",
+                date: _0x39f91d.date
+              };
+              _0xea5278 = _0xea5278 ? _0xea5278 : await warn.addwarn(_0x39f91d.sender, _0x39f91d.chat, _0x50d0d8);
+              if (_0xea5278.status) {
+                _0x3c86e4 = "*_Hey @" + _0x39f91d.senderNum + " warning, Due To Antibot!_*";
+              }
+            } else if (_0x273393.antibot === "kick") {
+              try {
+                sleep(1000);
+                await _0x39f91d.bot.groupParticipantsUpdate(_0x39f91d.chat, [_0x39f91d.sender], "remove");
+                _0x3c86e4 = "*_User @" + _0x39f91d.senderNum + " kick Due To Antibot!_*";
+              } catch { }
+            }
+            await _0x39f91d.delete();
+            await _0x39f91d.send(_0x3c86e4, {
+              mentions: [_0x39f91d.sender]
+            });
+          } else if (!_0x39f91d.isBotAdmin && _0x39f91d.isBot) {
+            await _0x39f91d.reply("*_Uhh Please, Provide Admin Role To Kick Other Bot_*\n*_Or Disable Antibot (On/Off) In Current Group_*");
+          }
+        }
+        if (_0x273393.onlyadmin && _0x273393.onlyadmin === "true" && SmdOfficial == "yes") {
+          var _0x3c86e4 = "";
+          if (_0x39f91d.isBotAdmin) {
+            let _0x5c4aae = {
+              reason: "Only Admin can Chat!",
+              chat: _0x39f91d.metadata?.subject || "PRIVATE",
+              warnedby: tlang().title,
+              date: _0x39f91d.date
+            };
+            _0xea5278 = _0xea5278 ? _0xea5278 : await warn.addwarn(_0x39f91d.sender, _0x39f91d.chat, _0x5c4aae);
+            if (_0xea5278.status) {
+              _0x3c86e4 = "*Warns you for chat here!*\n";
+            }
+            await _0x39f91d.delete();
+            sleep(1500);
+            await _0x39f91d.send("*Hey @" + _0x39f91d.senderNum + "* " + _0x3c86e4 + "*Deleteing message,while onlyadmin activated!!* ", {
+              mentions: [_0x39f91d.sender]
+            });
+          } else {
+            await _0x39f91d.send("*_Provide admin role to kick Message Senders_*\n*Or _Disable onlyadmin(on/off) in currentchat_*");
+          }
+        }
+        if (_0x273393.antilink && _0x273393.antilink !== "false" && SmdOfficial === "yes") {
+          const _0x37bc15 = Config.antilink_values && Config.antilink_values !== "all" ? Config.antilink_values.split(",").filter(_0x3da281 => _0x3da281.trim() !== "") : ["https://", "chat.whatsapp.com", "fb.com"];
+          let _0x5cbc1d = _0x66fc82.toLowerCase();
+          if (_0x37bc15.some(_0x81b040 => _0x5cbc1d.includes(_0x81b040))) {
+            if (!_0x39f91d.isBotAdmin) {
+              let _0x26aa7f = " *[LINK DETECTED]*\nUser @" + _0x39f91d.sender.split("@")[0] + " detected sending a link.\nPromote " + Config.botname + " as admin to " + (_0x273393.antilink === "kick" ? "kick \nlink senders." : "delete \nlinks from this Chat") + " \n";
+              await _0x39f91d.send(_0x26aa7f, {
+                mentions: [_0x39f91d.sender]
+              });
+            } else if (_0x273393.antilink === "delete") {
+              await _0x39f91d.send("*_Link Detected.. Deletion Done!_*");
+              await _0x39f91d.delete();
+            } else if (_0x273393.antilink === "warn" || _0x273393.antilink === "true") {
+              let _0x75abf8 = {
+                reason: "links not allowed!",
+                chat: _0x39f91d.metadata?.subject || "PRIVATE",
+                warnedby: tlang().title,
+                date: _0x39f91d.date
+              };
+              _0xea5278 = _0xea5278 ? _0xea5278 : await warn.addwarn(_0x39f91d.sender, _0x39f91d.chat, _0x75abf8);
+              var _0x3c86e4 = _0xea5278.status ? "*_[LINK DETECTED] Hey @" + _0x39f91d.senderNum + " warning!!_*\n*_links not allowed in current group!_*" : "*_[LINK DETECTED]!_*";
+              await _0x39f91d.reply(_0x3c86e4, {
+                mentions: [_0x39f91d.sender]
+              });
+              await _0x39f91d.delete();
+            } else if (_0x273393.antilink === "kick") {
+              await _0x39f91d.send("*_Link Detected!!_*");
+              try {
+                await _0x39f91d.delete();
+                sleep(1500);
+                await _0x39f91d.bot.groupParticipantsUpdate(_0x39f91d.chat, [_0x39f91d.sender], "remove");
+              } catch {
+                await _0x39f91d.send("*Link Detected*\n" + tlang().botAdmin);
+              }
+            }
+          }
+        }
+      }
+    } catch (_0x1a7fb0) {
+      console.log("Error From Antilinks : ", _0x1a7fb0);
+    }
+    var _0x219875 = _0x273393?.antiword || {
+      status: "false"
+    };
+    if (_0x4baec9.length > 1 && !_0x39f91d.isBot && _0x219875 && _0x219875.status !== "false" && _0x219875.words) {
+      var _0x4e66ac = _0x219875.words.split(",") || [];
+      let _0x2298c9 = false;
+      _0x4e66ac.map(async _0x5e94de => {
+        if (_0x39f91d.isAdmin || !global.SmdOfficial || global.SmdOfficial != "yes") {
+          return;
+        }
+        let _0x520e96 = new RegExp("\\b" + _0x5e94de?.trim() + "\\b", "ig");
+        let _0x1ae0c5 = _0x47409a.toLowerCase();
+        if (!_0x2298c9 && _0x5e94de && _0x520e96.test(_0x1ae0c5)) {
+          _0x2298c9 = true;
+          await sleep(500);
+          try {
+            var _0x3dc4df = "";
+            if (_0x219875.status === "warn") {
+              let _0x5f3cee = {
+                reason: "For using Bad Word",
+                chat: _0x39f91d.metadata?.subject || "PRIVATE",
+                warnedby: tlang().title,
+                date: _0x39f91d.date
+              };
+              _0xea5278 = _0xea5278 ? _0xea5278 : await warn.addwarn(_0x39f91d.sender, _0x39f91d.chat, _0x5f3cee);
+              if (_0xea5278.status) {
+                _0x3dc4df = "\n*Warns you for using badWord!!*\n";
+              }
+            }
+            if (_0x39f91d.isBotAdmin) {
+              await _0x39f91d.send("*[BAD WORD DETECTED] Hey @" + _0x39f91d.senderNum + "* " + _0x3dc4df + " *Deleting your message from chat!*\n", {
+                mentions: [_0x39f91d.sender]
+              }, "suhail", _0x39f91d);
+              await _0x39f91d.delete();
+            } else {
+              await _0x39f91d.reply("*_[BAD WORD DETECTED] provide admin to take action!_*", {
+                mentions: [_0x39f91d.sender]
+              });
+            }
+          } catch (_0x44e136) {
+            console.log("Error From Bad Words : ", _0x44e136);
+          }
+        }
+      });
+    }
+    if (_0xea5278) {
+      let _0x4cb16b = parseInt(global.warncount) || 3;
+      if (_0xea5278.warning >= _0x4cb16b) {
+        if (_0x39f91d.isGroup) {
+          if (_0x39f91d.isBotAdmin) {
+            await _0x39f91d.send("*_Hey @" + _0x39f91d.senderNum + " Kicking you from group!_*\n*_Because Your warn limit exceed!_*", {
+              mentions: [_0x39f91d.sender]
+            });
+            await _0x39f91d.bot.groupParticipantsUpdate(_0x39f91d.chat, [_0x39f91d.sender], "remove");
+          }
+        } else {
+          await _0x39f91d.send("*_Hey @" + _0x39f91d.senderNum + " Blocking you!_*\n*_Because Your warn limit exceed!_*", {
+            mentions: [_0x39f91d.sender]
+          });
+          await _0x39f91d.bot.updateBlockStatus(_0x39f91d.sender, "block");
+        }
+      }
+    }
+    try {
+      if (!global.SmdOfficial || _0x39f91d.mtype === "reactionMessage") {
+        return;
+      }
+      let _0x294e10 = (await groupdb.findOne({
+        id: _0x39f91d.chat
+      })) || {
+        chatbot: "false"
+      };
+      if (!bott || chatbotCount >= 10) {
+        bott = (await bot_.findOne({
+          id: "bot_" + _0x39f91d.user
+        })) || {
+          chatbot: "false"
+        };
+      } else {
+        chatbotCount++;
+      }
+      let _0x3f3751 = bott && bott.chatbot && bott.chatbot == "true" ? "true" : _0x294e10.chatbot || "false";
+      if (_0x3f3751 === "true" && !_0x250d65 && !_0x39f91d.isBot && _0x39f91d.text) {
+        let _0x4c0917 = !_0x39f91d.isGroup ? _0x39f91d.user : _0x39f91d.quoted ? _0x39f91d.quoted.sender : _0x39f91d.mentionedJid[0] || false;
+        if (_0x39f91d.isGroup && _0x4c0917 && !_0x39f91d.checkBot(_0x4c0917)) {
+          return;
+        }
+        let {
+          data: _0x1a5d20
+        } = await axios.get("http://api.brainshop.ai/get?bid=175685&key=Pg8Wu8mrDQjfr0uv&uid=[" + _0x39f91d.senderNum + "]&msg=[" + _0x47409a + "]");
+        if (_0x1a5d20 && _0x1a5d20.cnt) {
+          _0x39f91d.send(_0x1a5d20.cnt, {}, "suhail", _0x39f91d);
+        } else {
+          "";
+        }
+      }
+    } catch (_0x418db7) {
+      console.log("Error From ChatBot : ", _0x418db7);
+    }
+  } catch (_0x4eac84) {
+    console.log("Group Settings error in command.main() \n", _0x4eac84);
+  }
+});
+let users = {};
+let user_warns = {};
+UserFunction({
+  group: "add"
+}, async (_0x28d76c, {
+  Void: _0x4dedb6
+}) => {
+  try {
+    let _0x3a7fc2 = await groupdb.findOne({
+      id: _0x28d76c.chat
+    });
+    if (!_0x3a7fc2 || !_0x28d76c.isGroup || _0x3a7fc2.botenable !== "true" || _0x28d76c.blockJid || _0x28d76c.fromMe) {
+      return;
+    }
+    let _0x21c5eb = _0x3a7fc2 && _0x3a7fc2.welcome ? _0x3a7fc2.welcome : "false";
+    let _0x3fc86e = _0x3a7fc2 && _0x3a7fc2.antifake ? _0x3a7fc2.antifake.toLowerCase() : "false";
+    let _0x5dd590 = _0x3fc86e.split(",");
+    const _0xdb6223 = _0x5dd590.some(_0x25ffc0 => _0x28d76c.user.startsWith(_0x25ffc0));
+    if (_0x3fc86e !== "false" && !_0xdb6223 && !_0x28d76c.isCreator) {
+      if (_0x28d76c.isBotAdmin) {
+        try {
+          await _0x28d76c.kick();
+          return await sendWelcome(_0x28d76c, "*[ANTIFAKE START] @User kicked automaticaly!* @pp");
+        } catch (_0x52d6df) {
+          await _0x28d76c.error(" Can't kick user in antifake\n❲❒❳ GROUP: " + _0x28d76c.metadata.subject + "\n❲❒❳ ERROR: " + _0x52d6df + "\n", _0x52d6df, false);
+        }
+      } else {
+        await _0x28d76c.send("*[ANTI_FAKE ERROR] Need admin role to kick fake users!!*");
+      }
+    } else if (_0x21c5eb === "true") {
+      await sendWelcome(_0x28d76c, _0x3a7fc2.welcometext);
+    }
+  } catch (_0x476537) {
+    console.log("Error From Welcome : ", _0x476537);
+  }
+});
+UserFunction({
+  group: "remove"
+}, async (_0x1b9988, {
+  Void: _0xcb3386
+}) => {
+  try {
+    let _0xa3ec6 = (await groupdb.findOne({
+      id: _0x1b9988.chat
+    })) || false;
+    if (!_0x1b9988 || !_0xa3ec6 || !_0x1b9988.isGroup || _0xa3ec6.botenable !== "true" || _0x1b9988.blockJid || _0x1b9988.fromMe) {
+      return;
+    }
+    let _0x9f4c7b = _0xa3ec6 && _0xa3ec6.goodbye ? _0xa3ec6.goodbye : "false";
+    if (_0x9f4c7b === "true") {
+      await sendWelcome(_0x1b9988, _0xa3ec6.goodbyetext);
+    }
+  } catch (_0x442765) {
+    console.log("Error From Goodbye : ", _0x442765);
+  }
+});
+UserFunction({
+  group: "promote"
+}, async (_0x482975, {
+  Void: _0x3481d2
+}) => {
+  try {
+    let _0x390d91 = (await groupdb.findOne({
+      id: _0x482975.chat
+    })) || false;
+    if (!_0x390d91 || !_0x482975.isGroup || _0x390d91.botenable !== "true" || _0x482975.blockJid) {
+      return;
+    }
+    if (!user_warns[_0x482975.sender]) {
+      user_warns[_0x482975.sender] = {
+        [_0x482975.action]: 1
+      };
+    } else {
+      user_warns[_0x482975.sender][_0x482975.action]++;
+    }
+    let _0x4124fa;
+    if (_0x390d91.antipromote == "true" && !_0x482975.isCreator) {
+      _0x4124fa = _0x482975.isBotAdmin ? false : true;
+      if (users[_0x482975.sender] && users[_0x482975.sender].previous_Action === "antidemote") {
+        delete users[_0x482975.sender];
+        return;
+      }
+      if (_0x482975.isBotAdmin) {
+        try {
+          await _0x482975.demote();
+          users[_0x482975.sender] = {
+            previous_Action: "antipromote"
+          };
+          if (user_warns[_0x482975.sender][_0x482975.action] > 2) {
+            return;
+          }
+          return await sendWelcome(_0x482975, "*[ANTIPROMOTE START] @User Demoted Automatically!* @pp ");
+        } catch (_0x5ae38b) {
+          await _0x482975.error(" Can't demote user in antipromote\n❲❒❳ GROUP: " + _0x482975.metadata.subject + "\n❲❒❳ ERROR: " + _0x5ae38b + "\n", _0x5ae38b, false);
+        }
+      }
+    }
+    if (_0x390d91.pdm == "true" || _0x4124fa) {
+      if (user_warns[_0x482975.sender][_0x482975.action] > 2) {
+        return;
+      }
+      var _0x218901 = " *[SOMEONE PROMOTE HERE]*\n" + (_0x4124fa ? "*Note : _I'm Not Admin Here, So I Can't Demote Someone while Anti_Promote Activated_*" : "") + "\n           \n  ❲❒❳ *User:* _@user_\n❲❒❳ *Position:* _Member -> Admin_ @pp\n  ❲❒❳ *Total Members:* _@count_Members_\n❲❒❳ *Group Name:* @gname\n\n\n" + Config.caption;
+      return await sendWelcome(_0x482975, _0x218901);
+    }
+  } catch (_0x3a436e) {
+    console.log("Error From Promote : ", _0x3a436e);
+  }
+});
+UserFunction({
+  group: "demote"
+}, async (_0x2b38a5, {
+  Void: _0x4676d7
+}) => {
+  try {
+    let _0x1273fa = (await groupdb.findOne({
+      id: _0x2b38a5.chat
+    })) || false;
+    if (!_0x1273fa || !_0x2b38a5.isGroup || _0x1273fa.botenable !== "true" || _0x2b38a5.blockJid) {
+      return;
+    }
+    if (!user_warns[_0x2b38a5.sender]) {
+      user_warns[_0x2b38a5.sender] = {
+        [_0x2b38a5.action]: 1
+      };
+    } else {
+      user_warns[_0x2b38a5.sender][_0x2b38a5.action]++;
+    }
+    let _0x5878b4;
+    if (_0x1273fa.antidemote == "true" && !_0x2b38a5.isCreator) {
+      _0x5878b4 = _0x2b38a5.isBotAdmin ? false : true;
+      if (users[_0x2b38a5.sender] && users[_0x2b38a5.sender].previous_Action === "antipromote") {
+        delete users[_0x2b38a5.sender];
+        return;
+      }
+      if (_0x2b38a5.isBotAdmin) {
+        try {
+          await _0x2b38a5.promote();
+          users[_0x2b38a5.sender] = {
+            previous_Action: "antidemote"
+          };
+          if (user_warns[_0x2b38a5.sender][_0x2b38a5.action] > 2) {
+            return;
+          }
+          return await sendWelcome(_0x2b38a5, "*[ANTIPROMOTE START] User promote automatically!* @pp ");
+        } catch (_0x275310) {
+          await _0x2b38a5.error(" Can't promote user in antidemote\n❲❒❳ GROUP: " + _0x2b38a5.metadata.subject + "\n❲❒❳ ERROR: " + _0x275310 + "\n", _0x275310, false);
+        }
+      }
+    }
+    if (_0x1273fa.pdm == "true" || _0x5878b4) {
+      if (user_warns[_0x2b38a5.sender][_0x2b38a5.action] > 2) {
+        return;
+      }
+      var _0x168c92 = " *[SOMEONE DEMOTE HERE]*\n  " + (_0x5878b4 ? "*Note : _I'm Not Admin Here, So I Can't promote Someone while Anti_Demote Activated_*" : "") + "\n\n  ❲❒❳ *User:* _@user_\n❲❒❳ *Position:* _Admin -> Member_ @pp\n  ❲❒❳ *Total Members:* _@count_Members_\n❲❒❳ *Group Name:* @gname\n  \n\n" + Config.caption;
+      return await sendWelcome(_0x2b38a5, _0x168c92);
+    }
+  } catch (_0x3ef55d) {
+    console.log("Error From Demote : ", _0x3ef55d);
   }
 });
