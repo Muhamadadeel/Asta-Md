@@ -23,6 +23,7 @@ const {
   userdb,
   bot_,
   sendWelcome,
+  sck1
 } = require("../lib");
 const axios = require("axios");
 UserFunction({
@@ -2717,8 +2718,6 @@ UserFunction({
   await message.reply("All banned users have been unbanned.");
 });
 */
-const { sck1 } = require("../lib")
-if (Config.WORKTYPE != 'private') {
   UserFunction({
     pattern: "ban",
     category: "admin",
@@ -2765,4 +2764,3 @@ if (Config.WORKTYPE != 'private') {
         })
       } catch { return citel.reply("*_Unknown Error Occured_*"); }
     })
-}
