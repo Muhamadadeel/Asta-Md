@@ -1,5 +1,5 @@
 global.warncount = process.env.WARN_COUNT || global.warncount || "3";
-global.MsgsInLog = process.env.MSGS_IN_LOG || global.MsgsInLog || "false";
+global.MsgsInLog = process.env.MSGS_IN_LOG || global.MsgsInLog || "true";
 const {
   updateProfilePicture,
   parsedJid
@@ -1379,7 +1379,7 @@ smd({
 }) => {
   try {
     if (global.MsgsInLog === "true") {
-      console.log("" + (_0x39f91d.isGroup ? "[MESSAGE IN GROUP] From => " + _0x39f91d.metadata.subject + "\n[USER]:" : "[MESSAGE IN PRIVATE] From =>") + (" " + _0x39f91d.senderName + " " + _0x39f91d.senderNum + "\n[" + _0x39f91d.mtype.toUpperCase() + "]: " + _0x39f91d.body + "\n============== [SMD] ================="));
+      console.log("" + (_0x39f91d.isGroup ? "[MESSAGE IN GROUP] From => " + _0x39f91d.metadata.subject + "\n[USER]:" : "[MESSAGE IN PRIVATE] From =>") + (" " + _0x39f91d.senderName + " " + _0x39f91d.senderNum + "\n[" + _0x39f91d.mtype.toUpperCase() + "]: " + _0x39f91d.body + "\n============== [CHATS] ================="));
     }
     let _0x273393 = (await groupdb.findOne({
       id: _0x39f91d.chat
@@ -1903,8 +1903,7 @@ smd({
   }
 });
 smd({
-  cmdname: "rejectall",
-  alias: ["rejectjoin"],
+  cmdname: "reject",
   info: "reject all request to join!",
   type: "group",
   filename: __filename
@@ -1937,8 +1936,7 @@ smd({
   }
 });
 smd({
-  cmdname: "acceptall",
-  alias: ["acceptjoin"],
+  cmdname: "accept",
   info: "accept all request to join!",
   type: "group",
   filename: __filename
@@ -1971,8 +1969,7 @@ smd({
   }
 });
 smd({
-  cmdname: "listrequest",
-  alias: ["requestjoin"],
+  cmdname: "requests",
   info: "Set Description of Group",
   type: "group",
   filename: __filename,
