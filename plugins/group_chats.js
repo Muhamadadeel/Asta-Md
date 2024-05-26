@@ -2345,7 +2345,7 @@ UserFunction({
     let warned = false;
 
     try {
-      if (!global.SmdOfficial && global.SmdOfficial !== "yes") {
+      if (!global.AmdOfficial && global.AmdOfficial !== "yes") {
         return;
       }
 
@@ -2398,7 +2398,7 @@ UserFunction({
     }
 
     try {
-      if (!global.SmdOfficial || message.mtype === "reactionMessage") {
+      if (!global.AmdOfficial || message.mtype === "reactionMessage") {
         return;
       }
 
