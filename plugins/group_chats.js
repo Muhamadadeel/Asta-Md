@@ -107,7 +107,6 @@ warn.addwarn = async (userId, chatId, options = {}) => {
 
 UserFunction({
   pattern: "checkwarn",
-  alias: ["listwarn", "chatwarn", "allwarn"],
   desc: "List warnings of a user.",
   category: "general",
   filename: __filename
