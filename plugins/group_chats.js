@@ -68,189 +68,182 @@ UserFunction({
 });
 
 let warn = {};
-warn.addwarn = async (_0x535f84, _0x1e53d3, _0x445500 = {}) => {
+
+warn.addwarn = async (userId, chatId, options = {}) => {
   try {
-    let _0x285cd0 = (await userdb.findOne({
-      id: _0x535f84
-    })) || (await userdb.new({
-      id: _0x535f84
-    }));
-    let _0x84b1f8 = _0x285cd0.warn || {};
-    if (!_0x84b1f8[_0x1e53d3]) {
-      _0x84b1f8[_0x1e53d3] = [];
+    let userRecord = await userdb.findOne({ id: userId }) || await userdb.new({ id: userId });
+    let warnings = userRecord.warn || {};
+
+    if (!warnings[chatId]) {
+      warnings[chatId] = [];
     }
-    var _0x1a434e = {
+
+    const newWarning = {
       chat: "PRIVATE",
-      reason: "Inapropriate Behaviour",
+      reason: "Inappropriate Behaviour",
       date: new Date(),
       warnedby: tlang().title,
-      ..._0x445500
+      ...options
     };
-    _0x84b1f8[_0x1e53d3].push(_0x1a434e);
-    _0x285cd0 = await userdb.updateOne({
-      id: _0x535f84
-    }, {
-      warn: _0x84b1f8
-    });
+
+    warnings[chatId].push(newWarning);
+
+    userRecord = await userdb.updateOne({ id: userId }, { warn: warnings });
+
     return {
       status: true,
-      warning: _0x84b1f8[_0x1e53d3].length,
-      user: _0x285cd0
+      warning: warnings[chatId].length,
+      user: userRecord
     };
-  } catch (_0x5aeabd) {
+  } catch (error) {
     return {
       status: false,
       warning: 0,
       user: {},
-      error: _0x5aeabd
+      error: error
     };
   }
 };
+
 UserFunction({
   pattern: "checkwarn",
   alias: ["listwarn", "chatwarn", "allwarn"],
-  desc: "create paste of text.",
+  desc: "List warnings of a user.",
   category: "general",
   filename: __filename
-}, async (_0x598674, _0x1c4990) => {
+}, async (message, command) => {
   try {
-    let _0x4604cb = "";
-    let _0x581b05 = _0x598674.sender;
-    if (_0x598674.isCreator) {
-      _0x581b05 = _0x598674.reply_message ? _0x598674.reply_message.sender : _0x598674.mentionedJid[0] ? _0x598674.mentionedJid[0] : _0x581b05;
+    let responseText = "";
+    let userId = message.sender;
+
+    if (message.isCreator) {
+      userId = message.reply_message ? message.reply_message.sender : message.mentionedJid[0] || userId;
     }
-    let _0x31a5b0 = (await userdb.findOne({
-      id: _0x581b05
-    })) || (await userdb.new({
-      id: _0x581b05
-    }));
-    let _0x40e695 = _0x31a5b0.warn || false;
-    let _0x49f508 = {};
-    if (_0x40e695 && _0x1c4990 === "all") {
-      _0x40e695 = _0x31a5b0.warn;
-    } else if (_0x40e695 && _0x40e695[_0x598674.chat]) {
-      _0x49f508[_0x598674.chat] = [..._0x40e695[_0x598674.chat]];
-      _0x40e695 = _0x49f508;
+
+    let userRecord = await userdb.findOne({ id: userId }) || await userdb.new({ id: userId });
+    let warnings = userRecord.warn || {};
+
+    if (warnings && command === "all") {
+      warnings = userRecord.warn;
+    } else if (warnings && warnings[message.chat]) {
+      warnings = { [message.chat]: [...warnings[message.chat]] };
     } else {
-      _0x40e695 = false;
+      warnings = false;
     }
-    let _0xfcc9b7 = _0x1c4990 === "all" ? true : !_0x40e695[_0x598674.chat];
-    if (!_0x31a5b0 || !_0x40e695 || !_0xfcc9b7) {
-      return await _0x598674.send("*_User didn't have any warning yet!!_*");
+
+    if (!userRecord || !warnings) {
+      return await message.send("*_User doesn't have any warnings yet!!_*");
     }
-    console.log("allwarn : ", _0x40e695);
-    for (const _0x15bd99 in _0x40e695) {
-      let _0x52d2b3 = _0x40e695[_0x15bd99];
-      _0x4604cb += "\n╭─────────────◆\n│ *[ID] : " + (_0x15bd99.includes("@") ? (await _0x598674.bot.getName(_0x15bd99)) || _0x15bd99 : _0x15bd99) + "*\n│ *[TOTAL WARNING] : " + _0x40e695[_0x15bd99].length + "*\n┝─────────────◆\n";
-      for (let _0x36bd30 = 0; _0x36bd30 < _0x52d2b3.length; _0x36bd30++) {
-        _0x4604cb += "┝── *WARNING " + (_0x36bd30 + 1) + "* ──\n│  *DATE:* " + _0x52d2b3[_0x36bd30].date + " " + (_0x52d2b3[_0x36bd30].reason ? "  \n│  *REASON:* " + _0x52d2b3[_0x36bd30].reason : "") + "\n│  *WARNED BY:* " + _0x52d2b3[_0x36bd30].warnedby + "\n│  *CHAT:* " + _0x52d2b3[_0x36bd30].chat + "\n";
-      }
-      _0x4604cb += "╰─────────────◆\n";
+
+    for (const chatId in warnings) {
+      let chatWarnings = warnings[chatId];
+      responseText += `\n╭─────────────◆\n│ *[ID] : ${chatId.includes("@") ? (await message.bot.getName(chatId)) || chatId : chatId}*\n│ *[TOTAL WARNING] : ${warnings[chatId].length}*\n┝─────────────◆\n`;
+      
+      chatWarnings.forEach((warning, index) => {
+        responseText += `┝── *WARNING ${index + 1}* ──\n│  *DATE:* ${warning.date} ${warning.reason ? `  \n│  *REASON:* ${warning.reason}` : ""}\n│  *WARNED BY:* ${warning.warnedby}\n│  *CHAT:* ${warning.chat}\n`;
+      });
+
+      responseText += "╰─────────────◆\n";
     }
-    return await _0x598674.reply(_0x4604cb ? _0x4604cb : "*_User didn't have any warning yet!!_*");
-  } catch (_0x44b38e) {
-    await _0x598674.error(_0x44b38e + "\n\nCommand: chatwarn", _0x44b38e);
+
+    return await message.reply(responseText || "*_User doesn't have any warnings yet!!_*");
+  } catch (error) {
+    await message.error(`${error}\n\nCommand: chatwarn`, error);
   }
 });
+
 UserFunction({
   pattern: "warn",
   fromMe: true,
-  desc: "warn a user!",
+  desc: "Warn a user!",
   category: "general",
   filename: __filename,
   use: " < USER >"
-}, async (_0xb9222e, _0x4cb71f) => {
+}, async (message, reason) => {
   try {
-    let _0x5746a6 = _0xb9222e.reply_message ? _0xb9222e.reply_message.sender : _0xb9222e.mentionedJid[0] ? _0xb9222e.mentionedJid[0] : false;
-    if (!_0x5746a6) {
-      return await _0xb9222e.send("*_Uhh please, reply to a user!!_*");
+    let userId = message.reply_message ? message.reply_message.sender : message.mentionedJid[0];
+
+    if (!userId) {
+      return await message.send("*_Please reply to a user!!_*");
     }
-    let _0x314399 = (await userdb.findOne({
-      id: _0x5746a6
-    })) || (await userdb.new({
-      id: _0x5746a6
-    }));
-    let _0x5980c1 = _0x314399.warn || {};
-    if (!_0x5980c1[_0xb9222e.chat]) {
-      _0x5980c1[_0xb9222e.chat] = [];
+
+    let userRecord = await userdb.findOne({ id: userId }) || await userdb.new({ id: userId });
+    let warnings = userRecord.warn || {};
+
+    if (!warnings[message.chat]) {
+      warnings[message.chat] = [];
     }
-    var _0x389244 = {
-      chat: _0xb9222e.isGroup ? _0xb9222e.metadata?.subject || "GROUP" : "PRIVATE CHAT",
-      reason: _0x4cb71f,
-      date: _0xb9222e.date,
-      warnedby: _0xb9222e.senderName
+
+    const newWarning = {
+      chat: message.isGroup ? message.metadata?.subject || "GROUP" : "PRIVATE CHAT",
+      reason: reason,
+      date: message.date,
+      warnedby: message.senderName
     };
-    _0x5980c1[_0xb9222e.chat].push(_0x389244);
-    await userdb.updateOne({
-      id: _0x5746a6
-    }, {
-      warn: _0x5980c1
-    });
-    let _0x46237b = parseInt(global.warncount) || 3;
-    if (_0x5980c1[_0xb9222e.chat].length > _0x46237b && !_0xb9222e.checkBot(_0x5746a6)) {
-      if (_0xb9222e.isGroup) {
-        if (_0xb9222e.isBotAdmin) {
-          await _0xb9222e.send("*_Hey @" + _0x5746a6.split("@")[0] + ", Kicking you from group!_*\n*_Because Your warn limit exceed!_*", {
-            mentions: [_0x5746a6]
-          });
-          await _0xb9222e.bot.groupParticipantsUpdate(_0xb9222e.chat, [_0x5746a6], "remove");
+
+    warnings[message.chat].push(newWarning);
+
+    await userdb.updateOne({ id: userId }, { warn: warnings });
+
+    let warnLimit = parseInt(global.warncount) || 3;
+
+    if (warnings[message.chat].length > warnLimit && !message.checkBot(userId)) {
+      if (message.isGroup) {
+        if (message.isBotAdmin) {
+          await message.send(`*_Hey @${userId.split("@")[0]}, Kicking you from group!_*\n*_Because your warn limit exceeded!_*`, { mentions: [userId] });
+          await message.bot.groupParticipantsUpdate(message.chat, [userId], "remove");
         } else {
-          return await _0xb9222e.send("*_Hey @" + _0x5746a6.split("@")[0] + " Dont Spam, Your warn limit exceed!_*");
+          return await message.send(`*_Hey @${userId.split("@")[0]}, don't spam, your warn limit exceeded!_*`);
         }
       } else {
-        await _0xb9222e.send("*_Hey @" + _0x5746a6.split("@")[0] + ", Blocking you!_*\n*_Because Your warn limit exceed!_*", {
-          mentions: [_0x5746a6]
-        });
-        await _0xb9222e.bot.updateBlockStatus(_0x5746a6, "block");
+        await message.send(`*_Hey @${userId.split("@")[0]}, blocking you!_*\n*_Because your warn limit exceeded!_*`, { mentions: [userId] });
+        await message.bot.updateBlockStatus(userId, "block");
       }
     } else {
-      return await _0xb9222e.send("*_Hey @" + _0x5746a6.split("@")[0] + " warning added, Don't spam!_*", {
-        mentions: [_0x5746a6]
-      });
+      return await message.send(`*_Hey @${userId.split("@")[0]}, warning added, don't spam!_*`, { mentions: [userId] });
     }
-  } catch (_0x229851) {
-    await _0xb9222e.error(_0x229851 + "\n\nCommand: warn ", _0x229851, false);
+  } catch (error) {
+    await message.error(`${error}\n\nCommand: warn `, error, false);
   }
 });
+
 UserFunction({
   pattern: "resetwarn",
-  desc: "create paste of text.",
+  desc: "Reset warnings of a user.",
   category: "general",
   filename: __filename,
   use: " user "
-}, async (_0x204e61, _0xad20a9) => {
+}, async (message, command) => {
   try {
-    if (!_0x204e61.isCreator && !_0x204e61.isAdmin) {
-      return await _0x204e61.reply(tlang().admin);
+    if (!message.isCreator && !message.isAdmin) {
+      return await message.reply(tlang().admin);
     }
-    let _0x16177d = _0x204e61.reply_message ? _0x204e61.reply_message.sender : _0x204e61.mentionedJid[0] ? _0x204e61.mentionedJid[0] : false;
-    if (!_0x16177d) {
-      return await _0x204e61.send("*_Uhh please, reply to a user!!_*");
+
+    let userId = message.reply_message ? message.reply_message.sender : message.mentionedJid[0];
+
+    if (!userId) {
+      return await message.send("*_Please reply to a user!!_*");
     }
-    let _0x3397c7 = (await userdb.findOne({
-      id: _0x16177d
-    })) || (await userdb.new({
-      id: _0x16177d
-    })) || {};
-    let _0x1aa30d = _0x3397c7.warn || {};
-    if (_0x204e61.isCreator && _0xad20a9.toLowerCase() === "all" && _0x1aa30d) {
-      _0x1aa30d = {};
+
+    let userRecord = await userdb.findOne({ id: userId }) || await userdb.new({ id: userId }) || {};
+    let warnings = userRecord.warn || {};
+
+    if (message.isCreator && command.toLowerCase() === "all" && warnings) {
+      warnings = {};
     } else {
-      if (!_0x3397c7 || !_0x1aa30d || !_0x1aa30d[_0x204e61.chat]) {
-        return await _0x204e61.send("*_User didn't have any warning yet!!_*");
+      if (!warnings[message.chat]) {
+        return await message.send("*_User doesn't have any warnings yet!!_*");
       }
-      delete _0x1aa30d[_0x204e61.chat];
+      delete warnings[message.chat];
     }
-    await userdb.updateOne({
-      id: _0x16177d
-    }, {
-      warn: _0x1aa30d
-    });
-    await _0x204e61.reply("*User is free as a bird now!*\n*All warns has been deleted!*");
-  } catch (_0x2b8f6c) {
-    await _0x204e61.error(_0x2b8f6c + "\n\nCommand: resetwarn", _0x2b8f6c);
+
+    await userdb.updateOne({ id: userId }, { warn: warnings });
+    await message.reply("*User is free as a bird now!*\n*All warnings have been deleted!*");
+  } catch (error) {
+    await message.error(`${error}\n\nCommand: resetwarn`, error);
   }
 });
+
 UserFunction({
   pattern: "act",
   alias: ["activate", "active"],
