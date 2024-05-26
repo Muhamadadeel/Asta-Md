@@ -1,4 +1,5 @@
 const { UserFunction, tlang, prefix, amd } = require("../lib");
+const path = require('path');
 const util = require('util');
 const { spawn } = require('child_process');
 const exec = util.promisify(require('child_process').exec);
