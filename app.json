@@ -5,20 +5,17 @@
   "keywords": "Asta",
   "success_url": "/",
   "stack": "container",
-
   "env": {
     "OWNER_NAME": {
       "description": "Name for Bot Owner",
       "value": "Astro",
       "required": true
     },
-
     "WELCOME": {
       "description": "put 'false' or 'true' to enable & disable WELCOME ",
       "value": "false",
       "required": false
     },
-
     "GOODBYE": {
       "description": "put 'false' or 'true' to enable & disable GOODBYE ",
       "value": "false",
@@ -162,7 +159,11 @@
     }
   },
   "buildpacks": [
-    { "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" },
-    { "url": "https://github.com/carlosdommor/heroku-buildpack-ffmpeg-latest" }
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest"
+    },
+    {
+      "url": "https://github.com/carlosdommor/heroku-buildpack-ffmpeg-latest"
+    }
   ]
 }
