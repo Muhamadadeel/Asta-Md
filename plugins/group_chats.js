@@ -2127,164 +2127,164 @@ cmd({
 
 cmd({
   pattern: "add",
-  desc: "Add that person in group",
+  desc: "Add that person to the group",
   category: "group",
   filename: __filename,
   use: "<number|reply|mention>"
-}, async (_0x3d5ec9, _0xa86e2f) => {
+}, async (message, param) => {
   try {
-    if (!_0x3d5ec9.isGroup) {
-      return _0x3d5ec9.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x3d5ec9.isBotAdmin) {
-      return await _0x3d5ec9.reply("*_I'm Not Admin In This Group, " + (_0x3d5ec9.isSuhail ? "Buddy" : "Sir") + "_*");
+    if (!message.isBotAdmin) {
+      return await message.reply("*_I'm Not Admin In This Group, " + (message.isSuhail ? "Buddy" : "Sir") + "_*");
     }
-    if (!_0x3d5ec9.isAdmin) {
-      return _0x3d5ec9.reply(tlang().admin);
+    if (!message.isAdmin) {
+      return message.reply(tlang().admin);
     }
-    let _0x23d1da = _0x3d5ec9.quoted ? _0x3d5ec9.quoted.sender : _0x3d5ec9.mentionedJid[0] ? _0x3d5ec9.mentionedJid[0] : _0xa86e2f ? _0xa86e2f.replace(/[^0-9]/g, "").replace(/[\s+]/g, "") + "@s.whatsapp.net" : false;
-    if (!_0x23d1da) {
-      return await _0x3d5ec9.reply("*_Uhh Dear, Please Provide An User._*");
+    let targetJid = message.quoted ? message.quoted.sender : message.mentionedJid[0] ? message.mentionedJid[0] : param ? param.replace(/[^0-9]/g, "").replace(/[\s+]/g, "") + "@s.whatsapp.net" : false;
+    if (!targetJid) {
+      return await message.reply("*_Uhh Dear, Please Provide A User._*");
     }
     try {
-      await _0x3d5ec9.bot.groupParticipantsUpdate(_0x3d5ec9.chat, [_0x23d1da], "add");
-      await _0x3d5ec9.reply("*_User Added in Group!!_*");
-      _0x3d5ec9.react("✨");
-    } catch (_0x381769) {
-      await _0x3d5ec9.react("❌");
-      await _0x3d5ec9.bot.sendMessage(_0x23d1da, {
-        text: "*_Here's The Group Invite Link!!_*\n\n @" + _0x3d5ec9.sender.split("@")[0] + " Wants to add you in below group\n\n*_https://chat.whatsapp.com/" + (await _0x3d5ec9.bot.groupInviteCode(_0x3d5ec9.chat)) + "_*\n ---------------------------------  \n*_Join If YOu Feel Free?_*",
-        mentions: [_0x3d5ec9.sender]
+      await message.bot.groupParticipantsUpdate(message.chat, [targetJid], "add");
+      await message.reply("*_User Added to Group!_*");
+      message.react("✨");
+    } catch (error) {
+      await message.react("❌");
+      await message.bot.sendMessage(targetJid, {
+        text: "*_Here's The Group Invite Link!_*\n\n @" + message.sender.split("@")[0] + " Wants to add you to the following group\n\n*_https://chat.whatsapp.com/" + (await message.bot.groupInviteCode(message.chat)) + "_*\n ---------------------------------  \n*_Join If You Feel Free?_*",
+        mentions: [message.sender]
       }, {
-        quoted: _0x3d5ec9
+        quoted: message
       });
-      await _0x3d5ec9.reply("*_Can't add user, Invite sent in pm_*");
+      await message.reply("*_Couldn't add user, Invite sent in pm._*");
     }
-  } catch (_0x247325) {
-    await _0x3d5ec9.error(_0x247325 + "\n\ncommand: add", _0x247325);
+  } catch (err) {
+    await message.error(err + "\n\ncommand: add", err);
   }
 });
+
 cmd({
-  pattern: "getjids",
-  alias: ["gjid", "gjids", "allgc", "gclist"],
-  desc: "Sends chat id of every groups.",
+  pattern: "alljids",
+  desc: "Sends chat id of every group.",
   category: "group",
   filename: __filename
-}, async (_0x124deb, _0x4744d0, {
-  cmdName: _0x374ed3
-}) => {
+}, async (message, query, { cmdName }) => {
   try {
-    if (!_0x124deb.isCreator) {
-      return _0x124deb.reply(tlang().owner);
+    if (!message.isCreator) {
+      return message.reply(tlang().owner);
     }
-    n = await _0x124deb.bot.groupFetchAllParticipating();
-    const _0x32bb60 = Object.entries(n).slice(0).map(_0x9d4955 => _0x9d4955[1]);
-    let _0x1494d8 = "";
-    let _0x30a9fa = false;
-    let _0x4fb9fb = false;
-    if (_0x4744d0.includes("jid")) {
-      _0x30a9fa = true;
-    } else if (_0x4744d0.includes("name")) {
-      _0x4fb9fb = true;
+    let groups = await message.bot.groupFetchAllParticipating();
+    const groupArray = Object.entries(groups).slice(0).map(entry => entry[1]);
+    let result = "";
+    let includeJids = false;
+    let includeNames = false;
+    if (query.includes("jid")) {
+      includeJids = true;
+    } else if (query.includes("name")) {
+      includeNames = true;
     }
-    await _0x124deb.reply("Fetching " + (_0x30a9fa ? "Only jids" : _0x4fb9fb ? "Only Names" : "Names and Jids") + " from " + _0x32bb60.length + " Groups");
+    await message.reply("Fetching " + (includeJids ? "Only Jids" : includeNames ? "Only Names" : "Names and Jids") + " from " + groupArray.length + " Groups");
     await sleep(2000);
-    for (var _0x4d64ac of _0x32bb60.map(_0x19e435 => _0x19e435.id)) {
-      _0x1494d8 += _0x30a9fa ? "" : "\n*Group:* " + n[_0x4d64ac].subject + " ";
-      _0x1494d8 += _0x4fb9fb ? "" : "\n*JID:* " + _0x4d64ac + "\n";
+    for (let group of groupArray) {
+      result += includeNames ? "" : "\n*Group:* " + group.subject + " ";
+      result += includeJids ? "" : "\n*JID:* " + group.id + "\n";
     }
-    return await _0x124deb.send(_0x1494d8);
-  } catch (_0x1bb5e0) {
-    await _0x124deb.error(_0x1bb5e0 + "\n\ncommand: " + _0x374ed3, _0x1bb5e0);
+    return await message.send(result);
+  } catch (err) {
+    await message.error(err + "\n\ncommand: " + cmdName, err);
   }
 });
+
 cmd({
   pattern: "demote",
   desc: "Demotes replied/quoted user from group",
   category: "group",
   filename: __filename,
   use: "<quote|reply|number>"
-}, async _0x118677 => {
+}, async (message) => {
   try {
-    if (!_0x118677.isGroup) {
-      return _0x118677.reply(tlang().group);
+    if (!message.isGroup) {
+      return message.reply(tlang().group);
     }
-    if (!_0x118677.isBotAdmin) {
-      return await _0x118677.reply("*_I'm Not Admin In This Group, Sir_*");
+    if (!message.isBotAdmin) {
+      return await message.reply("*_I'm Not Admin In This Group, Sir_*");
     }
-    if (!_0x118677.isAdmin) {
-      return _0x118677.reply(tlang().admin);
+    if (!message.isAdmin) {
+      return message.reply(tlang().admin);
     }
-    let _0x3ce3f1 = _0x118677.mentionedJid[0] ? _0x118677.mentionedJid[0] : _0x118677.reply_message ? _0x118677.reply_message.sender : false;
-    if (!_0x3ce3f1) {
-      return await _0x118677.reply("*Uhh dear, reply/mention an User*");
+    let targetJid = message.mentionedJid[0] ? message.mentionedJid[0] : message.reply_message ? message.reply_message.sender : false;
+    if (!targetJid) {
+      return await message.reply("*Uhh dear, reply/mention a user*");
     }
-    if (_0x118677.checkBot(_0x3ce3f1)) {
-      return await _0x118677.reply("*_Huh, I can't demote my creator!!_*");
+    if (message.checkBot(targetJid)) {
+      return await message.reply("*_I can't demote my creator!!_*");
     }
     try {
-      await _0x118677.bot.groupParticipantsUpdate(_0x118677.chat, [_0x3ce3f1], "demote");
-      await _0x118677.reply("*_User demote sucessfully!!_*");
-    } catch (_0x5e7b02) {
-      await _0x118677.reply("*_Can,t demote user, try it manually, Sorry!!_*");
+      await message.bot.groupParticipantsUpdate(message.chat, [targetJid], "demote");
+      await message.reply("*_User demoted successfully!!_*");
+    } catch (error) {
+      await message.reply("*_Can't demote user, try it manually. Sorry!!_*");
     }
-  } catch (_0x307b66) {
-    await _0x118677.error(_0x307b66 + "\n\ncommand: demote", _0x307b66);
+  } catch (err) {
+    await message.error(err + "\n\ncommand: demote", err);
   }
 });
+
 UserFunction({
   pattern: "del",
-  alias: ["delete", "dlt"],
   desc: "Deletes message of any user",
   category: "group",
   filename: __filename,
-  use: "<quote/reply message.>"
-}, async _0x320d81 => {
+  use: "<quote/reply message>"
+}, async (message) => {
   try {
-    if (!_0x320d81.reply_message) {
-      return _0x320d81.reply("*_Please reply to a message!!!_*");
+    if (!message.reply_message) {
+      return message.reply("*_Please reply to a message!!!_*");
     }
-    let _0x3776d3 = _0x320d81.reply_message;
-    if (_0x3776d3 && _0x3776d3.fromMe && _0x320d81.isCreator) {
-      return _0x3776d3.delete();
-    } else if (_0x3776d3 && _0x320d81.isGroup) {
-      if (!_0x320d81.isBotAdmin) {
-        return _0x320d81.reply("*I can't delete messages without getting Admin Role.*");
+    let targetMessage = message.reply_message;
+    if (targetMessage && targetMessage.fromMe && message.isCreator) {
+      return targetMessage.delete();
+    } else if (targetMessage && message.isGroup) {
+      if (!message.isBotAdmin) {
+        return message.reply("*I can't delete messages without Admin Role.*");
       }
-      if (!_0x320d81.isAdmin) {
-        return _0x320d81.reply(tlang().admin);
+      if (!message.isAdmin) {
+        return message.reply(tlang().admin);
       }
-      await _0x3776d3.delete();
+      await targetMessage.delete();
     } else {
-      return await _0x320d81.reply(tlang().owner);
+      return await message.reply(tlang().owner);
     }
-  } catch (_0x4ac639) {
-    await _0x320d81.error(_0x4ac639 + "\n\ncommand: del", _0x4ac639);
+  } catch (err) {
+    await message.error(err + "\n\ncommand: del", err);
   }
 });
+
 cmd({
   pattern: "broadcast",
   desc: "Bot makes a broadcast in all groups",
   fromMe: true,
   category: "group",
   filename: __filename,
-  use: "<text for broadcast.>"
-}, async (_0x553d05, _0x5d14a3) => {
+  use: "<text for broadcast>"
+}, async (message, text) => {
   try {
-    if (!_0x5d14a3) {
-      return await _0x553d05.reply("*_Uhh Dear, Provide text to broadcast in all groups_*");
+    if (!text) {
+      return await message.reply("*Provide text to broadcast in all groups*");
     }
-    let _0x387241 = await _0x553d05.bot.groupFetchAllParticipating();
-    let _0x32f9c9 = Object.entries(_0x387241).slice(0).map(_0x3ccabe => _0x3ccabe[1]);
-    let _0x4ef191 = _0x32f9c9.map(_0x5ea155 => _0x5ea155.id);
-    await _0x553d05.send("*_Sending Broadcast To " + _0x4ef191.length + " Group Chat, Finish Time " + _0x4ef191.length * 1.5 + " second_*");
-    let _0x552932 = "*--❗" + tlang().title + " Broadcast❗--*\n\n *🍀Message:* " + _0x5d14a3;
-    let _0x305de9 = {
+    let groups = await message.bot.groupFetchAllParticipating();
+    let groupArray = Object.entries(groups).slice(0).map(entry => entry[1]);
+    let groupIds = groupArray.map(group => group.id);
+    await message.send("*_Sending Broadcast To " + groupIds.length + " Group Chats, Expected Completion Time: " + groupIds.length * 1.5 + " seconds_*");
+    let broadcastText = "*--❗" + tlang().title + " Broadcast❗--*\n\n *🍀Message:* " + text;
+    let contextInfo = {
       forwardingScore: 999,
       isForwarded: true,
       externalAdReply: {
         title: "Asta-Md Broadcast",
-        body: _0x553d05.senderName,
+        body: message.senderName,
         renderLargerThumbnail: true,
         thumbnail: log0,
         mediaType: 1,
@@ -2293,17 +2293,15 @@ cmd({
         showAdAttribution: true
       }
     };
-    for (let _0x4c9688 of _0x4ef191) {
+    for (let groupId of groupIds) {
       try {
         await sleep(1500);
-        await send(_0x553d05, _0x552932, {
-          contextInfo: _0x305de9
-        }, "", "", _0x4c9688);
+        await send(message, broadcastText, { contextInfo }, "", "", groupId);
       } catch { }
     }
-    return await _0x553d05.reply("*Successful Sending Broadcast To " + _0x4ef191.length + " Group*");
-  } catch (_0x2a8ad8) {
-    await _0x553d05.error(_0x2a8ad8 + "\n\ncommand: broadcast", _0x2a8ad8);
+    return await message.reply("Successful Sending Broadcast To " + groupIds.length + " Groups");
+  } catch (err) {
+    await message.error(err + "\n\ncommand: broadcast", err);
   }
 });
 
