@@ -1,7 +1,31 @@
 const { UserFunction, tlang, prefix, amd } = require("../lib");
 const util = require('util');
+const { spawn } = require('child_process');
 const exec = util.promisify(require('child_process').exec);
 const fs = require('fs');
+function ffmpeg(_0x3f259d, _0x31af2c = [], _0x5729b0 = "", _0x357d10 = "") {
+  return new Promise(async (_0xba570a, _0x502055) => {
+    try {
+      let _0x5a9045 = path.join(__dirname, "./", +new Date() + "." + _0x5729b0);
+      let _0x2352fa = _0x5a9045 + "." + _0x357d10;
+      await fs.promises.writeFile(_0x5a9045, _0x3f259d);
+      spawn("ffmpeg", ["-y", "-i", _0x5a9045, ..._0x31af2c, _0x2352fa]).on("error", _0x502055).on("close", async _0xf77d97 => {
+        try {
+          await fs.promises.unlink(_0x5a9045);
+          if (_0xf77d97 !== 0) {
+            return _0x502055(_0xf77d97);
+          }
+          _0xba570a(await fs.promises.readFile(_0x2352fa));
+          await fs.promises.unlink(_0x2352fa);
+        } catch (_0x3e53b9) {
+          _0x502055(_0x3e53b9);
+        }
+      });
+    } catch (_0x485d65) {
+      _0x502055(_0x485d65);
+    }
+  });
+}
 async function audioEditor(_0x1ef339, _0x567a0f = "bass", _0x730356 = "") {
   if (!_0x1ef339.quoted) {
     return await _0x1ef339.send("*Reply To Audio*");
