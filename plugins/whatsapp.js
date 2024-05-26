@@ -7,10 +7,8 @@ global.pinging = class _Ping {
   ping() { return this._after - this._before; }
 }
 const {
-   UserFunction, Config
+  UserFunction, Config
 } = require('../lib')
-const axios = require('axios')
-const UserFunction = smd;
 let counter_name = { name: "asta-md" }
 try { global.Package_ = JSON.parse(require('fs').readFileSync('package.json', 'utf8')) || counter_name } catch { }
 
@@ -187,5 +185,5 @@ UserFunction({
 }, async message => {
   try {
     return await message.reply("https://wa.me/" + message.sender.split("@")[0]);
-  } catch {}
+  } catch { }
 });
