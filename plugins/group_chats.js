@@ -1,8 +1,7 @@
 global.warncount = process.env.WARN_COUNT || global.warncount || "3";
 global.MsgsInLog = process.env.MSGS_IN_LOG || global.MsgsInLog || "true";
 const {
-  updateProfilePicture,
-  parsedJid
+  updateProfilePicture
 } = require("../lib");
 const {
   sck,
