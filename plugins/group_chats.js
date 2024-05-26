@@ -2559,161 +2559,170 @@ UserFunction({
 });
 let users = {};
 let user_warns = {};
+
 UserFunction({
   group: "add"
-}, async (_0x28d76c, {
-  Void: _0x4dedb6
+}, async (message, {
+  Void
 }) => {
   try {
-    let _0x3a7fc2 = await groupdb.findOne({
-      id: _0x28d76c.chat
+    let groupSettings = await groupdb.findOne({
+      id: message.chat
     });
-    if (!_0x3a7fc2 || !_0x28d76c.isGroup || _0x3a7fc2.botenable !== "true" || _0x28d76c.blockJid || _0x28d76c.fromMe) {
+    if (!groupSettings || !message.isGroup || groupSettings.botenable !== "true" || message.blockJid || message.fromMe) {
       return;
     }
-    let _0x21c5eb = _0x3a7fc2 && _0x3a7fc2.welcome ? _0x3a7fc2.welcome : "false";
-    let _0x3fc86e = _0x3a7fc2 && _0x3a7fc2.antifake ? _0x3a7fc2.antifake.toLowerCase() : "false";
-    let _0x5dd590 = _0x3fc86e.split(",");
-    const _0xdb6223 = _0x5dd590.some(_0x25ffc0 => _0x28d76c.user.startsWith(_0x25ffc0));
-    if (_0x3fc86e !== "false" && !_0xdb6223 && !_0x28d76c.isCreator) {
-      if (_0x28d76c.isBotAdmin) {
+
+    let welcomeEnabled = groupSettings.welcome === "true";
+    let antiFakeEnabled = (groupSettings.antifake || "false").toLowerCase();
+    let antiFakeWords = antiFakeEnabled.split(",");
+
+    const isFakeUser = antiFakeWords.some(word => message.user.startsWith(word));
+    if (antiFakeEnabled !== "false" && !isFakeUser && !message.isCreator) {
+      if (message.isBotAdmin) {
         try {
-          await _0x28d76c.kick();
-          return await sendWelcome(_0x28d76c, "*[ANTIFAKE START] @User kicked automaticaly!* @pp");
-        } catch (_0x52d6df) {
-          await _0x28d76c.error(" Can't kick user in antifake\n❲❒❳ GROUP: " + _0x28d76c.metadata.subject + "\n❲❒❳ ERROR: " + _0x52d6df + "\n", _0x52d6df, false);
+          await message.kick();
+          return await sendWelcome(message, "*[ANTIFAKE START] @User kicked automatically!* @pp");
+        } catch (error) {
+          await message.error(" Can't kick user in antifake\n❲❒❳ GROUP: " + message.metadata.subject + "\n❲❒❳ ERROR: " + error + "\n", error, false);
         }
       } else {
-        await _0x28d76c.send("*[ANTI_FAKE ERROR] Need admin role to kick fake users!!*");
+        await message.send("*[ANTI_FAKE ERROR] Need admin role to kick fake users!!*");
       }
-    } else if (_0x21c5eb === "true") {
-      await sendWelcome(_0x28d76c, _0x3a7fc2.welcometext);
+    } else if (welcomeEnabled) {
+      await sendWelcome(message, groupSettings.welcometext);
     }
-  } catch (_0x476537) {
-    console.log("Error From Welcome : ", _0x476537);
+  } catch (error) {
+    console.log("Error From Welcome : ", error);
   }
 });
+
+
 UserFunction({
   group: "remove"
-}, async (_0x1b9988, {
-  Void: _0xcb3386
+}, async (message, {
+  Void
 }) => {
   try {
-    let _0xa3ec6 = (await groupdb.findOne({
-      id: _0x1b9988.chat
+    let groupSettings = (await groupdb.findOne({
+      id: message.chat
     })) || false;
-    if (!_0x1b9988 || !_0xa3ec6 || !_0x1b9988.isGroup || _0xa3ec6.botenable !== "true" || _0x1b9988.blockJid || _0x1b9988.fromMe) {
+    if (!message || !groupSettings || !message.isGroup || groupSettings.botenable !== "true" || message.blockJid || message.fromMe) {
       return;
     }
-    let _0x9f4c7b = _0xa3ec6 && _0xa3ec6.goodbye ? _0xa3ec6.goodbye : "false";
-    if (_0x9f4c7b === "true") {
-      await sendWelcome(_0x1b9988, _0xa3ec6.goodbyetext);
+
+    let goodbyeEnabled = groupSettings.goodbye === "true";
+    if (goodbyeEnabled) {
+      await sendWelcome(message, groupSettings.goodbyetext);
     }
-  } catch (_0x442765) {
-    console.log("Error From Goodbye : ", _0x442765);
+  } catch (error) {
+    console.log("Error From Goodbye : ", error);
   }
 });
+
 UserFunction({
   group: "promote"
-}, async (_0x482975, {
-  Void: _0x3481d2
+}, async (message, {
+  Void
 }) => {
   try {
-    let _0x390d91 = (await groupdb.findOne({
-      id: _0x482975.chat
+    let groupSettings = (await groupdb.findOne({
+      id: message.chat
     })) || false;
-    if (!_0x390d91 || !_0x482975.isGroup || _0x390d91.botenable !== "true" || _0x482975.blockJid) {
+    if (!groupSettings || !message.isGroup || groupSettings.botenable !== "true" || message.blockJid) {
       return;
     }
-    if (!user_warns[_0x482975.sender]) {
-      user_warns[_0x482975.sender] = {
-        [_0x482975.action]: 1
+
+    if (!user_warns[message.sender]) {
+      user_warns[message.sender] = {
+        [message.action]: 1
       };
     } else {
-      user_warns[_0x482975.sender][_0x482975.action]++;
+      user_warns[message.sender][message.action]++;
     }
-    let _0x4124fa;
-    if (_0x390d91.antipromote == "true" && !_0x482975.isCreator) {
-      _0x4124fa = _0x482975.isBotAdmin ? false : true;
-      if (users[_0x482975.sender] && users[_0x482975.sender].previous_Action === "antidemote") {
-        delete users[_0x482975.sender];
+
+    let antidemoteEnabled = groupSettings.antipromote === "true" && !message.isCreator;
+    if (antidemoteEnabled) {
+      let shouldDemote = message.isBotAdmin ? false : true;
+      if (users[message.sender] && users[message.sender].previous_Action === "antidemote") {
+        delete users[message.sender];
         return;
       }
-      if (_0x482975.isBotAdmin) {
+      if (message.isBotAdmin) {
         try {
-          await _0x482975.demote();
-          users[_0x482975.sender] = {
+          await message.demote();
+          users[message.sender] = {
             previous_Action: "antipromote"
           };
-          if (user_warns[_0x482975.sender][_0x482975.action] > 2) {
+          if (user_warns[message.sender][message.action] > 2) {
             return;
           }
-          return await sendWelcome(_0x482975, "*[ANTIPROMOTE START] @User Demoted Automatically!* @pp ");
-        } catch (_0x5ae38b) {
-          await _0x482975.error(" Can't demote user in antipromote\n❲❒❳ GROUP: " + _0x482975.metadata.subject + "\n❲❒❳ ERROR: " + _0x5ae38b + "\n", _0x5ae38b, false);
+          return await sendWelcome(message, "*[ANTIPROMOTE START] @User Demoted Automatically!* @pp ");
+        } catch (error) {
+          await message.error(" Can't demote user in antipromote\n❲❒❳ GROUP: " + message.metadata.subject + "\n❲❒❳ ERROR: " + error + "\n", error, false);
         }
       }
     }
-    if (_0x390d91.pdm == "true" || _0x4124fa) {
-      if (user_warns[_0x482975.sender][_0x482975.action] > 2) {
-        return;
-      }
-      var _0x218901 = " *[SOMEONE PROMOTE HERE]*\n" + (_0x4124fa ? "*Note : _I'm Not Admin Here, So I Can't Demote Someone while Anti_Promote Activated_*" : "") + "\n           \n  ❲❒❳ *User:* _@user_\n❲❒❳ *Position:* _Member -> Admin_ @pp\n  ❲❒❳ *Total Members:* _@count_Members_\n❲❒❳ *Group Name:* @gname\n\n\n" + Config.caption;
-      return await sendWelcome(_0x482975, _0x218901);
+
+    let pdmEnabled = groupSettings.pdm === "true" || shouldDemote;
+    if (pdmEnabled && user_warns[message.sender][message.action] <= 2) {
+      var captionText = " *[SOMEONE PROMOTE HERE]*\n" + (shouldDemote ? "*Note : _I'm Not Admin Here, So I Can't Demote Someone while Anti_Promote Activated_*" : "") + "\n           \n  ❲❒❳ *User:* _@user_\n❲❒❳ *Position:* _Member -> Admin_ @pp\n  ❲❒❳ *Total Members:* _@count_Members_\n❲❒❳ *Group Name:* @gname\n\n\n" + Config.caption;
+      return await sendWelcome(message, captionText);
     }
-  } catch (_0x3a436e) {
-    console.log("Error From Promote : ", _0x3a436e);
+  } catch (error) {
+    console.log("Error From Promote : ", error);
   }
 });
 UserFunction({
   group: "demote"
-}, async (_0x2b38a5, {
-  Void: _0x4676d7
+}, async (message, {
+  Void
 }) => {
   try {
-    let _0x1273fa = (await groupdb.findOne({
-      id: _0x2b38a5.chat
+    let groupSettings = (await groupdb.findOne({
+      id: message.chat
     })) || false;
-    if (!_0x1273fa || !_0x2b38a5.isGroup || _0x1273fa.botenable !== "true" || _0x2b38a5.blockJid) {
+    if (!groupSettings || !message.isGroup || groupSettings.botenable !== "true" || message.blockJid) {
       return;
     }
-    if (!user_warns[_0x2b38a5.sender]) {
-      user_warns[_0x2b38a5.sender] = {
-        [_0x2b38a5.action]: 1
+
+    if (!user_warns[message.sender]) {
+      user_warns[message.sender] = {
+        [message.action]: 1
       };
     } else {
-      user_warns[_0x2b38a5.sender][_0x2b38a5.action]++;
+      user_warns[message.sender][message.action]++;
     }
-    let _0x5878b4;
-    if (_0x1273fa.antidemote == "true" && !_0x2b38a5.isCreator) {
-      _0x5878b4 = _0x2b38a5.isBotAdmin ? false : true;
-      if (users[_0x2b38a5.sender] && users[_0x2b38a5.sender].previous_Action === "antipromote") {
-        delete users[_0x2b38a5.sender];
+
+    let antidemoteEnabled = groupSettings.antidemote === "true" && !message.isCreator;
+    if (antidemoteEnabled) {
+      let shouldPromote = message.isBotAdmin ? false : true;
+      if (users[message.sender] && users[message.sender].previous_Action === "antipromote") {
+        delete users[message.sender];
         return;
       }
-      if (_0x2b38a5.isBotAdmin) {
+      if (message.isBotAdmin) {
         try {
-          await _0x2b38a5.promote();
-          users[_0x2b38a5.sender] = {
+          await message.promote();
+          users[message.sender] = {
             previous_Action: "antidemote"
           };
-          if (user_warns[_0x2b38a5.sender][_0x2b38a5.action] > 2) {
+          if (user_warns[message.sender][message.action] > 2) {
             return;
           }
-          return await sendWelcome(_0x2b38a5, "*[ANTIPROMOTE START] User promote automatically!* @pp ");
-        } catch (_0x275310) {
-          await _0x2b38a5.error(" Can't promote user in antidemote\n❲❒❳ GROUP: " + _0x2b38a5.metadata.subject + "\n❲❒❳ ERROR: " + _0x275310 + "\n", _0x275310, false);
+          return await sendWelcome(message, "*[ANTIDEMOTE START] User promoted automatically!* @pp ");
+        } catch (error) {
+          await message.error(" Can't promote user in antidemote\n❲❒❳ GROUP: " + message.metadata.subject + "\n❲❒❳ ERROR: " + error + "\n", error, false);
         }
       }
     }
-    if (_0x1273fa.pdm == "true" || _0x5878b4) {
-      if (user_warns[_0x2b38a5.sender][_0x2b38a5.action] > 2) {
-        return;
-      }
-      var _0x168c92 = " *[SOMEONE DEMOTE HERE]*\n  " + (_0x5878b4 ? "*Note : _I'm Not Admin Here, So I Can't promote Someone while Anti_Demote Activated_*" : "") + "\n\n  ❲❒❳ *User:* _@user_\n❲❒❳ *Position:* _Admin -> Member_ @pp\n  ❲❒❳ *Total Members:* _@count_Members_\n❲❒❳ *Group Name:* @gname\n  \n\n" + Config.caption;
-      return await sendWelcome(_0x2b38a5, _0x168c92);
+
+    let pdmEnabled = groupSettings.pdm === "true" || shouldPromote;
+    if (pdmEnabled && user_warns[message.sender][message.action] <= 2) {
+      var captionText = " *[SOMEONE DEMOTE HERE]*\n  " + (shouldPromote ? "*Note : _I'm Not Admin Here, So I Can't Promote Someone while Anti_Demote Activated_*" : "") + "\n\n  ❲❒❳ *User:* _@user_\n❲❒❳ *Position:* _Admin -> Member_ @pp\n  ❲❒❳ *Total Members:* _@count_Members_\n❲❒❳ *Group Name:* @gname\n  \n\n" + Config.caption;
+      return await sendWelcome(message, captionText);
     }
-  } catch (_0x3ef55d) {
-    console.log("Error From Demote : ", _0x3ef55d);
+  } catch (error) {
+    console.log("Error From Demote : ", error);
   }
 });
