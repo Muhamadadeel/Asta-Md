@@ -2700,3 +2700,14 @@ UserFunction({
     await message.reply(reply);
   }
 });
+UserFunction({
+  pattern: "clearban",
+  desc: "Unbans all the banned users",
+  category: "admin",
+  filename: __filename,
+  isAdminCommand: true
+}, async (message) => {
+  const bannedUsers = { bannedUsers: [] };
+  saveBannedUsers(bannedUsers);
+  await message.reply("All banned users have been unbanned.");
+});
