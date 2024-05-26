@@ -6,7 +6,7 @@ const {
 } = require("../lib");
 const {
   sck,
-  smd,
+  UserFunction,
   send,
   Config,
   tlang,
@@ -26,73 +26,47 @@ const {
   sendWelcome,
 } = require("../lib");
 const axios = require("axios");
-const sᴜʜᴀɪʟ_ᴍᴅ = require("../lib/plugins");
-smd({
-  pattern: "lydea",
-  alias: ["chatbot"],
-  desc: "activates and deactivates chatbot.\nuse buttons to toggle.",
+UserFunction({
+  pattern: "chatbot",
+  desc: "Chat Bot",
   fromMe: true,
   category: "misc",
   filename: __filename
-}, async (_0x1a5020, _0x1f22c3, {
-  cmdName: _0x431455
-}) => {
+}, async (message, citel, { cmdName: chatbot }) => {
   try {
-    let _0x974aae = _0x1f22c3.split(" ")[0].toLowerCase().trim();
-    let _0x44755b = (await groupdb.findOne({
-      id: _0x1a5020.chat
-    })) || (await groupdb.new({
-      id: _0x1a5020.chat
-    }));
-    let _0x4924e5 = (await bot_.findOne({
-      id: "bot_" + _0x1a5020.user
-    })) || (await groupdb.new({
-      id: "bot_" + _0x1a5020.user
-    })) || {
-      chatbot: "false"
-    };
-    if (_0x974aae == "all" || _0x974aae === "global") {
-      if (_0x4924e5.chatbot == "true") {
-        return await _0x1a5020.send("*" + _0x431455 + " was already enabled to all chat!.*");
+    const command = citel.split(" ")[0].toLowerCase().trim();
+
+    const group = await groupdb.findOne({ id: message.chat }) || await groupdb.new({ id: message.chat });
+    const botSettings = await bot_.findOne({ id: `bot_${message.user}` }) || await groupdb.new({ id: `bot_${message.user}` }) || { chatbot: "false" };
+
+    if (command === "all" || command === "global") {
+      if (botSettings.chatbot === "true") {
+        return await message.send(`*${chatbot} was already enabled to all chat!.*`);
       }
-      await bot_.updateOne({
-        id: "bot_" + _0x1a5020.user
-      }, {
-        chatbot: "true"
-      });
-      return await _0x1a5020.send("*" + _0x431455 + " successfully enabled to all chats!.*");
-    } else if (_0x974aae.startsWith("on") || _0x974aae.startsWith("act") || _0x974aae.startsWith("enable")) {
-      if (_0x44755b.chatbot == "true" || _0x4924e5.chatbot == "true") {
-        return await _0x1a5020.send("*" + _0x431455 + " was already enabled.*");
+      await bot_.updateOne({ id: `bot_${message.user}` }, { chatbot: "true" });
+      return await message.send(`*${chatbot} successfully enabled to all chats!.*`);
+    } else if (command.startsWith("on") || command.startsWith("act") || command.startsWith("enable")) {
+      if (group.chatbot === "true" || botSettings.chatbot === "true") {
+        return await message.send(`*${chatbot} was already enabled.*`);
       }
-      await groupdb.updateOne({
-        id: _0x1a5020.chat
-      }, {
-        chatbot: "true"
-      });
-      return await _0x1a5020.send("*" + _0x431455 + " activated successfully.*");
-    } else if (_0x974aae.startsWith("off") || _0x974aae.startsWith("deact") || _0x974aae.startsWith("disable")) {
-      if (_0x44755b.chatbot == "false" && _0x4924e5.chatbot == "false") {
-        return await _0x1a5020.send("*" + _0x431455 + " was already disabled.*");
+      await groupdb.updateOne({ id: message.chat }, { chatbot: "true" });
+      return await message.send(`*${chatbot} activated successfully.*`);
+    } else if (command.startsWith("off") || command.startsWith("deact") || command.startsWith("disable")) {
+      if (group.chatbot === "false" && botSettings.chatbot === "false") {
+        return await message.send(`*${chatbot} was already disabled.*`);
       }
-      await bot_.updateOne({
-        id: "bot_" + _0x1a5020.user
-      }, {
-        chatbot: "false"
-      });
-      await groupdb.updateOne({
-        id: _0x1a5020.chat
-      }, {
-        chatbot: "false"
-      });
-      return await _0x1a5020.send("*" + _0x431455 + " deactivated successfully.*");
+      await bot_.updateOne({ id: `bot_${message.user}` }, { chatbot: "false" });
+      await groupdb.updateOne({ id: message.chat }, { chatbot: "false" });
+      return await message.send(`*${chatbot} deactivated successfully.*`);
     } else {
-      return await _0x1a5020.reply("*_" + _0x431455 + " Currently *" + (_0x4924e5.chatbot == "true" ? "Enabled in 'all' Chats" : _0x44755b.chatbot == "true" ? "Enabled in Chat" : "Disabled in Chat") + "!_*\n*_Use On/Off/all to enable/disable " + _0x431455 + "_*");
+      const status = botSettings.chatbot === "true" ? "Enabled in 'all' Chats" : group.chatbot === "true" ? "Enabled in Chat" : "Disabled in Chat";
+      return await message.reply(`*_${chatbot} Currently *${status}!_*\n*_Use On/Off/all to enable/disable ${chatbot}_*`);
     }
-  } catch (_0x1a9758) {
-    _0x1a5020.error(_0x1a9758 + "\n\ncommand: lydea(chatbot)", _0x1a9758);
+  } catch (error) {
+    message.error(`${error}\n\ncommand: lydea(chatbot)`, error);
   }
 });
+
 let warn = {};
 warn.addwarn = async (_0x535f84, _0x1e53d3, _0x445500 = {}) => {
   try {
@@ -132,7 +106,7 @@ warn.addwarn = async (_0x535f84, _0x1e53d3, _0x445500 = {}) => {
     };
   }
 };
-smd({
+UserFunction({
   pattern: "checkwarn",
   alias: ["listwarn", "chatwarn", "allwarn"],
   desc: "create paste of text.",
@@ -178,7 +152,7 @@ smd({
     await _0x598674.error(_0x44b38e + "\n\nCommand: chatwarn", _0x44b38e);
   }
 });
-smd({
+UserFunction({
   pattern: "warn",
   fromMe: true,
   desc: "warn a user!",
@@ -238,7 +212,7 @@ smd({
     await _0xb9222e.error(_0x229851 + "\n\nCommand: warn ", _0x229851, false);
   }
 });
-smd({
+UserFunction({
   pattern: "resetwarn",
   desc: "create paste of text.",
   category: "general",
@@ -277,7 +251,7 @@ smd({
     await _0x204e61.error(_0x2b8f6c + "\n\nCommand: resetwarn", _0x2b8f6c);
   }
 });
-smd({
+UserFunction({
   pattern: "act",
   alias: ["activate", "active"],
   desc: "Switches for varios works.",
@@ -376,7 +350,7 @@ smd({
     await _0x1c1427.error(_0x54acfc + "\n\ncommand: act", _0x54acfc);
   }
 });
-smd({
+UserFunction({
   pattern: "deact",
   alias: ["deactive", "deactivate"],
   desc: "Switches for varios works.",
@@ -481,7 +455,7 @@ smd({
     await _0x3dfe85.error(_0x27fa6e + "\n\ncommand: deact", _0x27fa6e);
   }
 });
-smd({
+UserFunction({
   pattern: "bot",
   desc: "activates and deactivates bot.\nuse buttons to toggle.",
   fromMe: true,
@@ -527,7 +501,7 @@ smd({
     _0x129972.error(_0x9db1e2 + "\n\ncommand: bot", _0x9db1e2);
   }
 });
-smd({
+UserFunction({
   pattern: "antitag",
   desc: "detect tagall in group chat, then kick them",
   fromMe: true,
@@ -573,7 +547,7 @@ smd({
     _0x27399d.error(_0x3141b6 + "\n\ncommand: antitag", _0x3141b6);
   }
 });
-smd({
+UserFunction({
   pattern: "antilink",
   desc: "activates and deactivates antilink.\nuse buttons to toggle.",
   category: "group",
@@ -644,7 +618,7 @@ smd({
     _0x25c82f.error(_0x90fda9 + "\n\ncommand: antilink", _0x90fda9);
   }
 });
-smd({
+UserFunction({
   pattern: "welcome",
   alias: ["setwelcome"],
   desc: "sets welcome message in specific group.",
@@ -703,7 +677,7 @@ smd({
     _0x1e1e67.error(_0x582cfc + "\n\ncommand: setwelcome", _0x582cfc);
   }
 });
-smd({
+UserFunction({
   pattern: "goodbye",
   alias: ["setgoodbye", "setbye"],
   desc: "sets goodbye message in specific group.",
@@ -762,7 +736,7 @@ smd({
     _0x2c1a56.error(_0x5dd573 + "\n\ncommand: setgoodbye", _0x5dd573);
   }
 });
-smd({
+UserFunction({
   pattern: "onlyadmin",
   alias: ["antimessge"],
   desc: "activates and deactivates onlyadmin.",
@@ -820,7 +794,7 @@ smd({
     _0x18fcc8.error(_0x53ffd3 + "\n\ncommand: onlyadmin", _0x53ffd3);
   }
 });
-smd({
+UserFunction({
   pattern: "antibot",
   desc: "kick Bot Users from Group.!",
   category: "group",
@@ -874,7 +848,7 @@ smd({
     _0x3b3e26.error(_0x304d4d + "\n\ncommand: antibot", _0x304d4d);
   }
 });
-smd({
+UserFunction({
   pattern: "disable",
   desc: "disable cmds in Group.!",
   category: "group",
@@ -924,7 +898,7 @@ smd({
     _0x204bdc.error(_0x590dfb + "\n\ncommand: enable", _0x590dfb);
   }
 });
-smd({
+UserFunction({
   pattern: "enable",
   desc: "enable a cmd in Group.!",
   category: "group",
@@ -970,7 +944,7 @@ smd({
     _0x212b0e.error(_0x25ceaf + "\n\ncommand: disable", _0x25ceaf);
   }
 });
-smd({
+UserFunction({
   pattern: "antifake",
   desc: "𝗗𝗲𝘁𝗲𝗰𝘁𝘀 𝗽𝗿𝗼𝗺𝗼𝘁𝗲/𝗱𝗲𝗺𝗼𝘁𝗲 𝗮𝗻𝗱 𝘀𝗲𝗻𝗱𝘀 𝗮𝗹𝗲𝗿𝘁. ",
   category: "group",
@@ -1019,7 +993,7 @@ smd({
     _0x5a1eb8.error(_0x53288b + "\n\ncommand: antifake", _0x53288b);
   }
 });
-smd({
+UserFunction({
   pattern: "antidemote",
   desc: "Detects Promote and Automaticaly demote promoted person.",
   category: "group",
@@ -1065,7 +1039,7 @@ smd({
     _0x3d214e.error(_0x3863b4 + "\n\ncommand: antidemote", _0x3863b4);
   }
 });
-smd({
+UserFunction({
   pattern: "antipromote",
   desc: "Detects Promote and Automaticaly demote promoted person.",
   category: "group",
@@ -1111,7 +1085,7 @@ smd({
     _0x3d1898.error(_0x424dfe + "\n\ncommand: antipromote", _0x424dfe);
   }
 });
-smd({
+UserFunction({
   pattern: "pdm",
   desc: "Detect Promote/Demote Users And Send Alerts in Chat ",
   category: "group",
@@ -1157,7 +1131,7 @@ smd({
     _0x47f7e9.error(_0x2f089d + "\n\ncommand: pdm", _0x2f089d);
   }
 });
-smd({
+UserFunction({
   pattern: "amute",
   desc: "sets auto mute time in group.",
   category: "moderation"
@@ -1192,7 +1166,7 @@ smd({
     _0x23aaae.error(_0x47f0cd + "\n\ncommand: amute", _0x47f0cd);
   }
 });
-smd({
+UserFunction({
   pattern: "aunmute",
   desc: "sets unmute time in group.",
   category: "moderation"
@@ -1227,7 +1201,7 @@ smd({
     _0x93dfcd.error(_0x30bf1c + "\n\ncommand: aunmute", _0x30bf1c);
   }
 });
-smd({
+UserFunction({
   pattern: "dunmute",
   desc: "Delete unmute from group.",
   category: "moderation"
@@ -1255,7 +1229,7 @@ smd({
     _0xe007b5.error(_0x243aed + "\n\ncommand: dunmute", _0x243aed);
   }
 });
-smd({
+UserFunction({
   pattern: "dmute",
   desc: "Delete mute from group.",
   category: "moderation"
@@ -1291,7 +1265,7 @@ async function haveEqualMembers(_0x31ae7e, _0x107896) {
   const _0x3a93d0 = _0x5aee47.length / _0x31ae7e.length * 100;
   return _0x3a93d0 >= 76;
 }
-smd({
+UserFunction({
   pattern: "antiword",
   desc: "Detects words from chat,and delete/warn senders.",
   category: "group",
@@ -1368,7 +1342,7 @@ smd({
 });
 let bott = false;
 let chatbotCount = 0;
-smd({
+UserFunction({
   on: "main"
 }, async (_0x39f91d, _0x4baec9, {
   botNumber: _0x4ac038,
@@ -1428,7 +1402,7 @@ smd({
                 sleep(1000);
                 await _0x39f91d.bot.groupParticipantsUpdate(_0x39f91d.chat, [_0x39f91d.sender], "remove");
                 _0x3c86e4 = "*_User @" + _0x39f91d.senderNum + " kick Due To Antibot!_*";
-              } catch {}
+              } catch { }
             }
             await _0x39f91d.delete();
             await _0x39f91d.send(_0x3c86e4, {
@@ -1606,7 +1580,7 @@ smd({
 });
 let users = {};
 let user_warns = {};
-smd({
+UserFunction({
   group: "add"
 }, async (_0x28d76c, {
   Void: _0x4dedb6
@@ -1640,7 +1614,7 @@ smd({
     console.log("Error From Welcome : ", _0x476537);
   }
 });
-smd({
+UserFunction({
   group: "remove"
 }, async (_0x1b9988, {
   Void: _0xcb3386
@@ -1660,7 +1634,7 @@ smd({
     console.log("Error From Goodbye : ", _0x442765);
   }
 });
-smd({
+UserFunction({
   group: "promote"
 }, async (_0x482975, {
   Void: _0x3481d2
@@ -1712,7 +1686,7 @@ smd({
     console.log("Error From Promote : ", _0x3a436e);
   }
 });
-smd({
+UserFunction({
   group: "demote"
 }, async (_0x2b38a5, {
   Void: _0x4676d7
@@ -1765,7 +1739,7 @@ smd({
   }
 });
 
-smd({
+UserFunction({
   cmdname: "join",
   info: "joins group by link",
   type: "whatsapp",
@@ -1791,7 +1765,7 @@ smd({
     await _0x466dd8.error(_0x5d3484 + "\n\ncommand: join", _0x5d3484, "*_Can't Join, Group Id not found, Sorry!!_*");
   }
 });
-smd({
+UserFunction({
   cmdname: "newgc",
   info: "Create New Group",
   type: "whatsapp",
@@ -1823,7 +1797,7 @@ smd({
           var _0x30af68 = _0x3e3852.split("@")[0].trim();
           _0x379d99 = _0x379d99.replace(new RegExp("@" + _0x30af68, "g"), "");
         });
-      } catch {}
+      } catch { }
     }
     const _0x37b490 = _0x379d99.substring(0, 60);
     const _0x417018 = await Suhail.bot.groupCreate(_0x37b490, [..._0x5a5c26]);
@@ -1859,7 +1833,7 @@ smd({
     await _0x1d2f1f.error(_0x33d6f3 + "\n\ncommand: " + _0x49994a, _0x33d6f3, "*_Can't create new group, Sorry!!_*");
   }
 });
-smd({
+UserFunction({
   pattern: "ginfo",
   desc: "get group info by link",
   type: "group",
@@ -1902,7 +1876,7 @@ smd({
     await _0x4f7c88.error(_0x36c345 + "\n\ncommand: ginfo", _0x36c345, "*_Group Id not found, Sorry!!_*");
   }
 });
-smd({
+UserFunction({
   cmdname: "reject",
   info: "reject all request to join!",
   type: "group",
@@ -1926,7 +1900,7 @@ smd({
         await _0xb81e45.bot.groupRequestParticipantsUpdate(_0xb81e45.from, [_0x4ea369[_0x164385].jid], "reject");
         _0x32f437 += "@" + _0x4ea369[_0x164385].jid.split("@")[0] + "\n";
         _0x3b870c = [..._0x3b870c, _0x4ea369[_0x164385].jid];
-      } catch {}
+      } catch { }
     }
     await _0xb81e45.send(_0x32f437, {
       mentions: [_0x3b870c]
@@ -1935,7 +1909,7 @@ smd({
     await _0xb81e45.error(_0x13cc87 + "\n\ncommand: rejectall", _0x13cc87);
   }
 });
-smd({
+UserFunction({
   cmdname: "accept",
   info: "accept all request to join!",
   type: "group",
@@ -1959,7 +1933,7 @@ smd({
         await _0x90a6de.bot.groupRequestParticipantsUpdate(_0x90a6de.from, [_0x3da7c6[_0x5ed6e8].jid], "approve");
         _0x26ddf1 += "@" + _0x3da7c6[_0x5ed6e8].jid.split("@")[0] + "\n";
         _0x4f391e = [..._0x4f391e, _0x3da7c6[_0x5ed6e8].jid];
-      } catch {}
+      } catch { }
     }
     await _0x90a6de.send(_0x26ddf1, {
       mentions: [_0x4f391e]
@@ -1968,7 +1942,7 @@ smd({
     await _0x90a6de.error(_0x366bd4 + "\n\ncommand: acceptall", _0x366bd4);
   }
 });
-smd({
+UserFunction({
   cmdname: "requests",
   info: "Set Description of Group",
   type: "group",
@@ -1999,7 +1973,7 @@ smd({
     await _0x13cccd.error(_0x5c8e97 + "\n\ncommand: listrequest", _0x5c8e97);
   }
 });
-smd({
+UserFunction({
   cmdname: "setdesc",
   alias: ["setgdesc", "gdesc"],
   info: "Set Description of Group",
@@ -2027,7 +2001,7 @@ smd({
     await _0x160b96.error(_0x526bb2 + "\n\ncommand: setdesc", _0x526bb2);
   }
 });
-smd({
+UserFunction({
   cmdname: "setname",
   alias: ["setgname", "gname"],
   info: "Set Description of Group",
@@ -2055,7 +2029,7 @@ smd({
     await _0x25d56b.error(_0x1eee32 + "\n\ncommand: setdesc", _0x1eee32);
   }
 });
-smd({
+UserFunction({
   cmdname: "left",
   info: "left from a group.",
   fromMe: true,
@@ -2078,7 +2052,7 @@ smd({
   }
 });
 let mtypes = ["imageMessage"];
-smd({
+UserFunction({
   pattern: "gpp",
   desc: "Set Group profile picture",
   category: "group",
@@ -2101,7 +2075,7 @@ smd({
     await _0x5ac912.error(_0x5abd07 + "\n\ncommand : gpp", _0x5abd07);
   }
 });
-smd({
+UserFunction({
   pattern: "fullgpp",
   desc: "Set full screen group profile picture",
   category: "group",
@@ -2123,7 +2097,7 @@ smd({
   } catch (_0x1f879e) {
     await _0x31201a.error(_0x1f879e + "\n\ncommand : fullgpp", _0x1f879e);
   }
-  {}
+  { }
 });
 cmd({
   pattern: "common",
@@ -2356,7 +2330,7 @@ cmd({
         try {
           await _0x19564c.bot.groupParticipantsUpdate(_0x19564c.chat, [_0x723896.id], "remove");
           _0x3f4d10++;
-        } catch {}
+        } catch { }
       }
     }
     if (_0x3f4d10 == 0) {
@@ -2403,7 +2377,7 @@ cmd({
     await _0x4bd51e.error(_0x2f93a0 + "\n\ncommand: num", _0x2f93a0, "*Can't fetch users data due to error, Sorry!!*");
   }
 });
-smd({
+UserFunction({
   pattern: "poll",
   desc: "Makes poll in group.",
   category: "group",
@@ -2493,7 +2467,7 @@ cmd({
     await _0x5e533c.error(_0x14d7b9 + "\n\ncommand: kick", _0x14d7b9);
   }
 });
-smd({
+UserFunction({
   pattern: "group",
   desc: "mute and unmute group.",
   category: "group",
@@ -2567,7 +2541,7 @@ cmd({
     await _0xb552a2.error(_0x1a5f73 + "\n\ncommand : pick", _0x1a5f73);
   }
 });
-smd({
+UserFunction({
   pattern: "ship",
   category: "group",
   filename: __filename
@@ -2610,7 +2584,7 @@ smd({
     mentions: [_0x7fa6d0]
   }, "suhail");
 });
-smd({
+UserFunction({
   pattern: "mute",
   desc: "Provides admin role to replied/quoted user",
   category: "group",
@@ -2635,7 +2609,7 @@ smd({
     await _0xadbad4.error(_0x2bea0d + "\n\ncommand: gmute", _0x2bea0d);
   }
 });
-smd({
+UserFunction({
   pattern: "unmute",
   desc: "Provides admin role to replied/quoted user",
   category: "group",
@@ -2660,7 +2634,7 @@ smd({
     await _0x5d1afd.error(_0x3ea023 + "\n\ncommand: gunmute", _0x3ea023);
   }
 });
-smd({
+UserFunction({
   pattern: "lock",
   fromMe: true,
   desc: "only allow admins to modify the group's settings.",
@@ -2685,7 +2659,7 @@ smd({
     await _0x1dca9f.error(_0x9e6207 + "\n\ncommand: lock", _0x9e6207);
   }
 });
-smd({
+UserFunction({
   pattern: "unlock",
   fromMe: true,
   desc: "allow everyone to modify the group's settings.",
@@ -2710,7 +2684,7 @@ smd({
     await _0xe880ee.error(_0x20d64c + "\n\ncommand: unlock", _0x20d64c);
   }
 });
-smd({
+UserFunction({
   pattern: "tag",
   alias: ["hidetag"],
   desc: "Tags everyperson of group without mentioning their numbers",
@@ -2886,7 +2860,7 @@ cmd({
     await _0x118677.error(_0x307b66 + "\n\ncommand: demote", _0x307b66);
   }
 });
-smd({
+UserFunction({
   pattern: "del",
   alias: ["delete", "dlt"],
   desc: "Deletes message of any user",
@@ -2953,16 +2927,10 @@ cmd({
         await send(_0x553d05, _0x552932, {
           contextInfo: _0x305de9
         }, "", "", _0x4c9688);
-      } catch {}
+      } catch { }
     }
     return await _0x553d05.reply("*Successful Sending Broadcast To " + _0x4ef191.length + " Group*");
   } catch (_0x2a8ad8) {
     await _0x553d05.error(_0x2a8ad8 + "\n\ncommand: broadcast", _0x2a8ad8);
   }
 });
-/*
-{
-   pattern: "group",
-   type: "notes",
-}
-*/
