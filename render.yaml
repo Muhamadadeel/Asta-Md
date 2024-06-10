@@ -1,0 +1,30 @@
+# Exported from Render on 2024-05-25T09:19:26Z
+services:
+- type: web
+  name: Asta-Md-1
+  runtime: node
+  repo: https://github.com/Astropeda/Asta-Md
+  plan: free
+  envVars:
+  - key: CAPTION
+    sync: false
+  - key: PREFIX
+    sync: false
+  - key: OWNER_NUMBER
+    sync: false
+  - key: SUDO
+    sync: false
+  - key: PACK_NAME
+    sync: false
+  - key: PACK_AUTHER
+    sync: false
+  - key: OWNER_NAME
+    sync: false
+  - key: BOT_NAME
+    sync: false
+  - key: SESSION_ID
+    sync: false
+  region: oregon
+  buildCommand: npm install
+  startCommand: npm start
+version: "1"

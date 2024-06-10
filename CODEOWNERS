@@ -1,0 +1,26 @@
+# This is a CODEOWNERS file, used to automatically request reviews
+# for pull requests that change relevant files.
+
+# Global owners for all files
+*       @Astropeda @AstroFXDEV
+
+# Order is important; the last matching pattern takes precedence.
+
+# Tests
+/tests/ @AstroFXDEV @Astropeda
+
+# Frontend
+/front/ @AstroFXDEV @Astropeda
+
+# Backend
+/back/  @AstroFXDEV @Astropeda
+
+# Infrastructure
+/infra/ @AstroFXDEV @Astropeda
+
+# Scripts
+/scripts/ @Astropeda @AstroFXDEV
+
+# Specific files
+/package.json    @AstroFXDEV @Astropeda
+/README.md       @AstroFXDEV @Astropeda

@@ -1,12 +1,56 @@
 {
-  "name": "asta-md",
-  "description": "Asta a simple WhatsAppp Bot",
-  "logo": "https://i.imgur.com/dMwGOUP.jpeg",
+  "name": "asta-botto",
+  "description": "Simple WhatsApp Botto.",
+  "logo": "https://i.imgur.com/JMsAFRD.jpeg",
   "keywords": "Asta",
-  "success_url": "/Asta/",
-  "app_url": "/qr/",
-
+  "success_url": "/",
+  "stack": "container",
   "env": {
+    "OWNER_NAME": {
+      "description": "Name for Bot Owner",
+      "value": "Astro",
+      "required": true
+    },
+    "WELCOME": {
+      "description": "put 'false' or 'true' to enable & disable WELCOME ",
+      "value": "false",
+      "required": false
+    },
+    "GOODBYE": {
+      "description": "put 'false' or 'true' to enable & disable GOODBYE ",
+      "value": "false",
+      "required": false
+    },
+    "BOT_NAME": {
+      "description": " NAME FOR BOT",
+      "required": false,
+      "value": "ᴀsᴛᴀ-ᴍᴅ"
+    },
+    "TZ": {
+      "description": "Put TIME_ZONE according to your location",
+      "required": false,
+      "value": "Africa/Lagos"
+    },
+    "MENU_BTN": {
+      "description": "Show Buttons On Menu",
+      "required": false,
+      "value": "0"
+    },
+    "READ_COMMAND": {
+      "description": " Read bot cmds",
+      "required": false,
+      "value": "false"
+    },
+    "WARN_COUNT": {
+      "description": " Warn count for users to kick/block when warn limit exceed!",
+      "required": false,
+      "value": "3"
+    },
+    "AUTO_SAVE_STATUS": {
+      "description": " Auto save whatsapp status",
+      "required": false,
+      "value": "false"
+    },
     "HEROKU_API_KEY": {
       "description": "Put Your Heroku Api Key Here",
       "value": "",
@@ -17,71 +61,15 @@
       "value": "",
       "required": true
     },
-    "SESSION_ID": {
-        "description": "put your SESSION_ID here.",
-        "value": ""
-      },
     "WAPRESENCE": {
       "description": "Fill the value: 'unavailable'(for nothing) | 'available'(for alwaysonline) | 'composing'(for typing) | 'recording' | 'paused' ",
       "required": false,
-      "value": "online"
-    },
-    "OWNER_NAME": {
-      "description": "Owner Name",
-      "value": "Astro",
-      "required": true
-    },
-
-    "WELCOME": {
-      "description": "Welcome Message",
-      "value": "true",
-      "required": false
-    },
-
-    "GOODBYE": {
-      "description": "Goodbye Message",
-      "value": "false",
-      "required": false
-    },
-    "BOT_NAME": {
-      "description": "Bot Name",
-      "required": false,
-      "value": "ᴀꜱᴛᴀ-ᴍᴅ"
-    },
-    "USER_IMAGES": {
-      "description": "Image for bot",
-      "required": false,
-      "value": "https://i.imgur.com/lIo3cM2.jpeg,https://i.imgur.com/OQOH4Gn.jpeg"
-    },
-    "TZ": {
-      "description": "Don't change if you dont know your location.",
-      "required": false,
-      "value": "Africa/Lagos"
-    },
-    "SS_RESET": {
-      "description": "If the bot doesn't work after delpoyment",
-      "required": false,
-      "value": "false"
-    },
-    "READ_COMMAND": {
-      "description": "Read Commands",
-      "required": false,
-      "value": "false"
-    },
-    "WARN_COUNT": {
-      "description": "Warn count for users to kick/block when warn limit exceed!",
-      "required": false,
-      "value": "3"
-    },
-    "AUTO_SAVE_STATUS": {
-      "description": " Auto save whatsapp status",
-      "required": false,
-      "value": "false"
+      "value": "unavailable"
     },
     "AUTO_READ_STATUS": {
       "description": "Fill the value true if you want bot view your Statuses.",
       "required": false,
-      "value": "true"
+      "value": "false"
     },
     "MSGS_IN_LOG": {
       "description": "Fill the value -true- if you want to see Messages in logs.",
@@ -94,17 +82,21 @@
       "value": "false"
     },
     "DISABLE_PM": {
-      "description": "Disable bot in pm, Take it false if you wanna run bot in your pm (if MODE is Public)",
+      "description": "Make it 'false' if you wanna run bot in your pm (if MODE is Public)",
       "value": "false",
       "required": false
     },
     "PREFIX": {
       "description": "Enter your desired prefix for bot. you can set `all | . | .!*`",
-      "value": ""
+      "value": "."
     },
     "OWNER_NUMBER": {
-      "description": "Owner number or sudo",
+      "description": "The phone numbers of the users who you want to be admin for the bot (should be in international format without + and multiple numbers must be separated by a comma \",\")",
       "value": "2348039607375"
+    },
+    "SESSION_ID": {
+      "description": "put your SESSION_ID here.",
+      "value": ""
     },
     "OPENAI_API_KEY": {
       "description": "put your OPENAI api key here.Get it from beta.openai.com ",
@@ -112,17 +104,17 @@
       "required": false
     },
     "ELEVENLAB_API_KEY": {
-      "description": "Put your ElevenLab api key",
+      "description": "Put your ElevenLab api key here for Aitts.",
       "value": "",
       "required": false
     },
     "REMOVE_BG_KEY": {
-      "description": "put your REMOVE BG KEY here",
+      "description": "put your REMOVE BG KEY here.Get it from removeBg.com ",
       "value": "",
       "required": false
     },
     "MODE": {
-      "description": "Public or Private",
+      "description": "Worktype of your bot. Use public or private, if it is private then only bot number can use it. If public then everyone can use it.",
       "value": "private"
     },
     "PACK_NAME": {
@@ -134,17 +126,44 @@
       "description": "Put Sticker Author_Name.",
       "value": "",
       "required": false
+    },
+    "MONGODB_URI": {
+      "description": "MongoDb Key",
+      "value": "",
+      "required": false
+    },
+    "DATABASE_URL": {
+      "description": "Database URL to Store Files",
+      "value": "",
+      "required": false
+    },
+    "SUDO": {
+      "description": "Sudo Numbers",
+      "value": "",
+      "required": false
+    },
+    "USER_IMAGES": {
+      "description": "Menu Images",
+      "value": "",
+      "required": false
+    },
+    "MENU": {
+      "description": "V1 or V2 Menu Types leave empty for random",
+      "value": "",
+      "required": false
+    },
+    "GURL": {
+      "description": "Your Channel Link",
+      "value": "",
+      "required": false
     }
   },
   "buildpacks": [
-    { "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest" },
-    { "url": "https://github.com/carlosdommor/heroku-buildpack-ffmpeg-latest" }
-  ],
-  "formation": {
-    "worker": {
-      "quantity": 1,
-      "size": "basic"
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-nodejs#latest"
+    },
+    {
+      "url": "https://github.com/carlosdommor/heroku-buildpack-ffmpeg-latest"
     }
-  }
+  ]
 }
-

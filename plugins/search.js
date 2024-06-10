@@ -1,21 +1,18 @@
 const moment = require("moment-timezone");
 const {
   fetchJson,
-  smd,
+  UserFunction,
   tlang,
-  send,
+  sleep,
   prefix,
-  Config,
-  groupdb,
+  amdBuffer,
 } = require("../lib");
-let gis = require("async-g-i-s");
 const axios = require("axios");
-const fetch = require("node-fetch");
-const { shazam } = require("../lib");
-smd(
+const fetch = require("node-fetch") || fetchJson;
+
+UserFunction(
   {
-    pattern: "find",
-    alias: ["shazam"],
+    pattern: "shazam",
     category: "search",
     desc: "Finds info about song",
     filename: __filename,
@@ -26,6 +23,7 @@ smd(
       if (!/audio/.test(mime))
         return message.reply(`Reply audio ${prefix}find`);
       let buff = await message.reply_message.download();
+      const { shazam } = require(lib_dir);
       let data = await shazam(buff);
       if (!data || !data.status) return message.send(data);
       let h = `*TITLE: _${data.title}_* \n*ARTIST: _${data.artists}_*\n *ALBUM:* _${data.album}_ `;
@@ -45,11 +43,11 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "github",
     category: "search",
-    desc: "Finds info about song",
+    desc: "Finds info about github username",
     filename: __filename,
   },
   async (message, match) => {
@@ -70,22 +68,22 @@ smd(
         message.jid,
         {
           image: { url: gitdata.avatar_url },
-          caption: `ㅤㅤㅤ*[ GITHUB USER INFO ]*
+          caption: `    *[ GITHUB USER INFO ]*
 
-🚩 Id : ${gitdata.id}
-🔖 Nickname : ${gitdata.name}
-🔖 Username : ${gitdata.login}
-✨ Bio : ${gitdata.bio}
-🏢 Company : ${gitdata.company}
-📍 Location : ${gitdata.location}
-📧 Email : ${gitdata.email}
-📰 Blog : ${gitdata.blog}
-🔓 Public Repo : ${gitdata.repos_url}
-🔐 Public Gists : ${gitdata.gists_url}
-💕 Followers : ${gitdata.followers}
-👉 Following : ${gitdata.following}
-🔄 Updated At : ${gitdata.updated_at}
-🧩 Created At : ${gitdata.created_at}`,
+🚩 *Id :* ${gitdata.id}
+🔖 *Nickname :* ${gitdata.name}
+🔖 *Username :* ${gitdata.login}
+✨ *Bio :* ${gitdata.bio}
+🏢 *Company :* ${gitdata.company}
+📍 *Location :* ${gitdata.location}
+📧 *Email :* ${gitdata.email}
+📰 *Blog :* ${gitdata.blog}
+🔓 *Public Repo :* ${gitdata.repos_url}
+🔐 *Public Gists :* ${gitdata.gists_url}
+💕 *Followers :* ${gitdata.followers}
+👉 *Following :* ${gitdata.following}
+🔄 *Updated At :* ${gitdata.updated_at}
+🧩 *Created At :* ${gitdata.created_at}`,
         },
         { quoted: message }
       );
@@ -98,86 +96,9 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
-    pattern: "coffe",
-    alias: ["tea", "kofi"],
-    category: "search",
-    react: "🫡",
-    desc: "send randome coffe",
-    filename: __filename,
-  },
-  async (m) => {
-    try {
-      // m.react("🫡")
-      return await m.bot.sendMessage(
-        m.chat,
-        {
-          image: { url: "https://coffee.alexflipnote.dev/random" },
-          caption: `Here is your Coffee...`,
-        },
-        { quoted: m }
-      );
-    } catch (e) {
-      return await m.error(
-        `${e}\n\n command: coffe`,
-        e,
-        `*_Didn't get any results, Sorry!_*`
-      );
-    }
-  }
-);
-smd(
-  {
-    pattern: "lyrics",
-    alias: ["lyric"],
-    category: "search",
-    desc: "Searche lyrics of given song name",
-    use: "<text | song>",
-    filename: __filename,
-  },
-
-  async (message, text, { cmdName }) => {
-    if (!text)
-      return message.reply(
-        `*_Uhh please, give me song name_*\n*_Example ${
-          prefix + cmdName
-        } blue eyes punjabi_*`
-      );
-    try {
-      const res = await (
-        await fetch(`https://inrl-web.onrender.com/api/lyrics?text=${text}`)
-      ).json();
-      if (!res.status) return message.send("*Please Provide valid name!!!*");
-      if (!res.result)
-        return message.send("*There's a problem, try again later!*");
-      const { thumb, lyrics, title, artist } = res.result,
-        tbl = "```",
-        tcl = "*",
-        tdl = "_*",
-        contextInfo = {
-          externalAdReply: {
-            ...(await message.bot.contextInfo("𝗦𝗨𝗛𝗔𝗜𝗟-𝗠𝗗", `Lyrics-${text}`)),
-          },
-        };
-      await send(
-        message,
-        `*𝚃𝚒𝚝𝚕𝚎:* ${title}\n*𝙰𝚛𝚝𝚒𝚜𝚝:* ${artist} \n${tbl}${lyrics}${tbl} `,
-        { contextInfo: contextInfo },
-        ""
-      );
-    } catch (e) {
-      return await message.error(
-        `${e}\n\n command: ${cmdName}`,
-        e,
-        `*_Didn't get any lyrics, Sorry!_*`
-      );
-    }
-  }
-);
-smd(
-  {
-    pattern: "imdb",
+    pattern: "movie",
     category: "search",
     desc: "sends info of asked movie/series.",
     use: "<text>",
@@ -185,6 +106,7 @@ smd(
   },
   async (message, match) => {
     try {
+      message.react("🔍");
       if (!match)
         return message.reply(`_Name a Series or movie ${tlang().greet}._`);
       let { data } = await axios.get(
@@ -194,7 +116,7 @@ smd(
         return await message.reply(`*_Please provide valid country name!_*`);
 
       let imdbt =
-        "⚍⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚍\n" + " ``` 𝕀𝕄𝔻𝔹 𝕊𝔼𝔸ℝℂℍ```\n" + "⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎\n";
+        "⚍⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚍\n" + " ``` 𝕄𝕆𝕍𝕀𝔼𝕊 𝕊𝔼𝔸ℝℂℍ```\n" + "⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎⚎\n";
       imdbt += "🎬Title      : " + data.Title + "\n";
       imdbt += "📅Year       : " + data.Year + "\n";
       imdbt += "⭐Rated      : " + data.Rated + "\n";
@@ -212,10 +134,10 @@ smd(
       imdbt += "🏙️Production : " + data.Production + "\n";
       imdbt += "🌟imdbRating : " + data.imdbRating + "\n";
       imdbt += "❎imdbVotes  : " + data.imdbVotes + "\n\n";
-      imdbt += Config.caption;
+      imdbt += caption;
       await message.bot.sendUi(
         message.jid,
-        { caption: imdbt },
+        { caption: imdbt.trim() },
         { quoted: message },
         "image",
         data.Poster
@@ -229,11 +151,11 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "weather",
     category: "search",
-    desc: "Sends weather info about asked place.",
+    desc: "Sends weather info about asked place/city.",
     use: "<location>",
     filename: __filename,
   },
@@ -241,7 +163,7 @@ smd(
     try {
       if (!text)
         return message.reply(
-          `*_Give me city name, ${message.isCreator ? "Buddy" : "Idiot"}!!_*`
+          `*_Give me city name, ${message.isCreator ? "Buddy" : "Sir"}!!_*`
         );
       let { data } = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${text}&units=metric&appid=060a6bcfa19809c2cd4d97a212b19273&language=en`
@@ -251,7 +173,7 @@ smd(
       let textw = `*🌟Weather of  ${text}*\n\n`;
       textw += `*Weather:-* ${data.weather[0].main}\n`;
       textw += `*Description:-* ${data.weather[0].description}\n`;
-      textw += `*Avg Temp:-* ${data.main.assets}\n`;
+      textw += `*Avg Temp:-* ${data.main.temp}\n`;
       textw += `*Feels Like:-* ${data.main.feels_like}\n`;
       textw += `*Pressure:-* ${data.main.pressure}\n`;
       textw += `*Humidity:-* ${data.main.humidity}\n`;
@@ -259,10 +181,10 @@ smd(
       textw += `*Latitude:-* ${data.coord.lat}\n`;
       textw += `*Longitude:-* ${data.coord.lon}\n`;
       textw += `*Country:-* ${data.sys.country}\n\n`;
-      textw += Config.caption;
+      textw += caption;
       message.bot.sendUi(
         message.jid,
-        { caption: textw },
+        { caption: textw.trim() },
         { quoted: message },
         "text",
         "true"
@@ -276,10 +198,10 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "npm",
-    desc: "download mp4 from url.",
+    desc: "search npm libraries/packages.",
     category: "search",
     use: "<package name>",
     filename: __filename,
@@ -305,11 +227,11 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
-    pattern: "cric",
+    pattern: "cricket",
     category: "search",
-    desc: "Sends info of given query from Google Search.",
+    desc: "get cricket info.",
     use: "<text>",
     filename: __filename,
   },
@@ -340,87 +262,167 @@ smd(
     }
   }
 );
-smd(
+UserFunction(
   {
     pattern: "google",
-    alias: ["search", "gsearch"],
     category: "search",
     desc: "Sends info of given query from Google Search.",
-    use: "<text>",
+    use: "<query>",
     filename: __filename,
   },
   async (message, text) => {
     try {
       if (!text)
         return message.reply(
-          `*_Uhh please, give me a query_*\n*_Example : ${prefix}google Suhail Md._*`
+          `*_Uhh please, give me a query_*\n*_Example : ${prefix}google asta md._*`
         );
       let google = require("google-it");
       google({ query: text }).then((res) => {
         let msg = `Google Search From : ${text} \n\n`;
         for (let g of res) {
-          msg += `➣ Title : ${g.title}\n`;
-          msg += `➣ Description : ${g.snippet}\n`;
-          msg += `➣ Link : ${g.link}\n\n────────────────────────\n\n`;
+          msg += `➣ *Title : ${g.title}*\n`;
+          msg += `➣ *Description :* ${g.snippet}\n`;
+          msg += `➣ *Link :* _${g.link}_\n\n\n`;
         }
 
         return message.reply(msg);
       });
     } catch (e) {
-      return await message.error(
-        `${e}\n\n command: google`,
-        e,
-        `*_Uhh dear, Didn't get any results!_*`
-      );
+      return await message.error(`${e}\n\n command: google`, e, `*No Results*`);
     }
   }
 );
-smd(
+const downloadImages = async (query = "", safe = "on") => {
+  if (!query) throw "need search query";
+  const gimg_api = async (query) => {
+    try {
+      let { data } = await axios.get(
+        `${api_smd}/api/gimg?query=${encodeURIComponent(query)}`
+      );
+      if (
+        data &&
+        data.status &&
+        Array.isArray(data.result) &&
+        data.result.length > 0
+      ) {
+        return data.result;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error fetching Images From Api Server:", error);
+      return false;
+    }
+  };
+  const bing_api = async (query) => {
+    try {
+      let { data } = await axios.get(
+        `${api_smd}/api/bingimg?query=${encodeURIComponent(query)}`
+      );
+      if (
+        data &&
+        data.status &&
+        Array.isArray(data.result) &&
+        data.result.length > 0
+      ) {
+        return data.result;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error fetching Images From Api Server:", error);
+      return false;
+    }
+  };
+  const pkg_api = async (query) => {
+    try {
+      let gis = require("async-g-i-s");
+      let data = await gis(query, {
+        query: { safe },
+        userAgent:
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
+      });
+      if (data && Array.isArray(data) && data.length > 0) {
+        return data;
+      }
+      return false;
+    } catch (error) {
+      console.error("Error fetching images from Google Images:", error);
+      return false;
+    }
+  };
+  let func_Img = [pkg_api, gimg_api, bing_api];
+
+  let res = false;
+  for (let i = 0; i < func_Img.length; i++) {
+    try {
+      res = await func_Img[i](query);
+      if (res && res.length > 0) break;
+    } catch (e) {
+      console.error("Error fetching images:", e);
+    }
+  }
+  return res;
+};
+UserFunction(
   {
     pattern: "image",
-    alias: ["img", "pic"],
     category: "search",
     desc: "Searches Image on Google",
     use: "<text>",
     filename: __filename,
   },
-  async (message, match) => {
+  async (message, match, { smd }) => {
     try {
       let text = match ? match : message.reply_text;
       if (!text)
         return message.reply(`Provide me a query!\n*Ex : .image luffy |10*`);
 
       let name1 = text.split("|")[0] || text;
-      let name2 = text.split("|")[1] || `5`;
-
+      let name2 = text.split("|")[1] || 5;
       let nn = parseInt(name2) || 5;
-      let Group = await groupdb.findOne({ id: message.chat });
-      let safe = Group.nsfw == "true" ? "off" : "on";
       try {
-        let n = await gis(name1, {
-          query: { safe: safe },
-          userAgent:
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36",
-        });
-        console.log("images results : ", n);
-
+        var inital = new Date().getTime();
+        let n = await downloadImages(name1, "off");
+        var final = new Date().getTime();
         if (n && n[0]) {
           nn = n && n.length > nn ? nn : n.length;
-          message.reply(`*_Sending images of '${name1}' in chat!_*`);
+          await message.reply(`*_Sending images of '${name1}' in chat!_*`);
+          let isSent = false;
           for (let i = 0; i < nn; i++) {
             try {
               let random = Math.floor(Math.random() * n.length);
               message.bot.sendFromUrl(
                 message.jid,
-                n[random].url,
+                n[random].url || n[random],
                 "",
                 message,
                 {},
                 "image"
               );
               n.splice(random, 1);
+              isSent = random;
             } catch {}
           }
+          if (
+            isSent &&
+            /1|buttons|btn|true/gi.test(global.BUTTONS) &&
+            message.device !== "web"
+          ) {
+            await sleep(4000);
+            await sendButtons(message, {
+              caption: `*Query:* ${name1}\n*Status:* Images Sent Succesfully! \n*Results:* ${
+                n.length
+              } \n*Ping*: ${final - inital}'s \n\n\n*Requester:* ${
+                message.senderName
+              } `,
+              footer: global.caption,
+              buttons: `
+        #button:quick_reply | display_text : More Results! | id:${
+          prefix + smd
+        } ${text.replace(/|/g, " ")} /#           
+        `,
+            });
+          }
+
           return;
         }
       } catch (e) {
@@ -478,60 +480,27 @@ smd(
     }
   }
 );
-smd(
-  {
-    pattern: "couplepp",
-    category: "search",
-    desc: "Sends two couples pics.",
-    filename: __filename,
-  },
-  async (message) => {
-    try {
-      let anu = await fetchJson(
-        "https://raw.githubusercontent.com/iamriz7/kopel_/main/kopel.json"
-      );
-      let random = anu[Math.floor(Math.random() * anu.length)];
-      message.reply(
-        random.male,
-        { caption: `*✦Couple Male profile✦*` },
-        "image"
-      );
-      message.reply(
-        random.female,
-        { caption: `*✦Couple Female profile✦*` },
-        "image"
-      );
-    } catch (e) {
-      return await message.error(
-        `${e}\n\n command: couplepp`,
-        e,
-        `*_Uhh dear, Didn't get any results!_*`
-      );
-    }
-  }
-);
 //---------------------------------------------------------------------------
-smd(
+UserFunction(
   {
-    pattern: "iswa",
-    alias: ["oldwa", "bio", "onwa"],
+    pattern: "onwa",
     category: "search",
-    desc: "Searches in given rage about given number.",
-    use: "9112345678xx",
+    desc: "Search numbers in given range!.",
+    use: "234803xxxx",
     filename: __filename,
   },
   async (message, text) => {
     if (!text)
       return await message.reply(
-        "Give Me Number without + sign. Example: .iswa 2348039xx"
+        "Give Me Number without +\n\n" + prefix + "onwa 2349027862116"
       );
     var inputnumber = text.split(" ")[0];
     if (!inputnumber.includes("x"))
       return message.reply(
-        `*You did not add x*\nExample: iswa 2348039xx  \n ${Config.caption}`
+        `*You did not add x*\n\n"+prefix+"onwa 2349027862116  \n ${caption}`.trim()
       );
     message.reply(
-      `*Searching for WhatsApp account in given range...* \n ${Config.caption}`
+      `*Searching for WhatsApp account in given range...* \n ${caption}`.trim()
     );
 
     function countInstances(string, word) {
@@ -587,7 +556,7 @@ smd(
           text += `🧐 *Number:* wa.me/${anu[0].jid.split("@")[0]}\n ✨*Bio :* ${
             anu1.status
           }\n🍁*Last update :* ${moment(anu1.setAt)
-            .tz("Asia/Karachi")
+            .tz(timezone)
             .format("HH:mm:ss DD/MM/YYYY")}\n\n`;
         }
       } catch {
@@ -597,62 +566,191 @@ smd(
     return await message.reply(`${text}${nobio}${nowhatsapp}`);
   }
 );
-smd(
+
+UserFunction(
   {
-    pattern: "nowa",
+    pattern: "lyrics",
+    desc: "Get the lyrics of a song.",
     category: "search",
-    desc: "Searches in given rage about given number.",
-    use: "9112345678xx",
     filename: __filename,
+    use: "<song_name>",
   },
-  async (message, text) => {
-    if (!text)
-      return await message.reply(
-        "Give Me Number without + sign. Example: .nowa 2348039xx"
-      );
-    const inputNumber = text.split(" ")[0];
-    if (!inputNumber.includes("x"))
-      return message.reply(
-        `*You did not add x in number.*\nExample: ${prefix}nowa 2348039xx  \n ${Config.caption}`
-      );
-    message.reply(
-      `*Searching for WhatsApp account in the given range...*\n${Config.caption}`
-    );
-    function countInstances(string, word) {
-      return string.split(word).length - 1;
-    }
-    const number0 = inputNumber.split("x")[0];
-    const number1 = inputNumber.split("x").slice(-1)[0] || "";
-    const randomLength = countInstances(inputNumber, "x");
-    const randomxx = [10, 100, 1000][randomLength - 1] || 0;
-    let nobio = `\n*『 WhatsApp Account With No Bio』* \n`;
-    let nobios = "";
-    let nowhatsapp = `*『 Numbers With No WhatsApp Account 』* \n\n`;
-    for (let i = 0; i < randomxx; i++) {
-      const nu = ["1", "2", "3", "4", "5", "6", "7", "8", "9"];
-      const status = nu
-        .slice(0, randomLength)
-        .map(() => nu[Math.floor(Math.random() * nu.length)])
-        .join("");
-      const random = `${status}${
-        nu[Math.floor(Math.random() * nu.length)]
-      }`.slice(0, randomLength);
-      const anu = await message.bot.onWhatsApp(`${number0}${i}${number1}`);
-      const anuu = anu.length !== 0 ? anu : false;
-      try {
-        const anu1 = await message.bot.fetchStatus(anu[0].jid);
-        if (anu1 === "401" || anu1.status.length === 0) {
-          nobios += `wa.me/${anu[0].jid.split("@")[0]}\n`;
-        }
-      } catch {
-        nowhatsapp += ` ≛ ${number0}${i}${number1}\n`;
+  async (m, songName) => {
+    try {
+      if (!songName) {
+        return await m.send("*_Please provide a song name!_*");
       }
+
+      const apiUrl = `https://api.maher-zubair.tech/search/lyrics?q=${encodeURIComponent(
+        songName
+      )}`;
+      const response = await fetch(apiUrl);
+
+      if (!response.ok) {
+        return await m.send(
+          `*_Error: ${response.status} ${response.statusText}_*`
+        );
+      }
+
+      const data = await response.json();
+
+      if (data.status !== 200) {
+        return await m.send("*_An error occurred while fetching the data._*");
+      }
+
+      const { artist, lyrics, title } = data.result;
+
+      const lyricsMessage = `
+  *Song:* ${title}
+  *Artist:* ${artist}
+  
+  ${lyrics}
+  `;
+
+      await m.send(lyricsMessage);
+    } catch (e) {
+      await m.error(`${e}\n\ncommand: lyrics`, e);
     }
-    if (!nobios) {
-      nobio = "";
-    } else {
-      nobio += nobios + "\n\n";
+  }
+);
+UserFunction(
+  {
+    pattern: "bing",
+    alias: ["bingsearch"],
+    desc: "Search on Bing.",
+    category: "search",
+    filename: __filename,
+    use: "<search query>",
+  },
+  async (msg, query) => {
+    try {
+      if (!query) {
+        return await msg.reply("*Please provide a search query.*");
+      }
+
+      const apiUrl = `https://api-smd.onrender.com/api/bingsearch?query=${encodeURIComponent(
+        query
+      )}`;
+      const response = await fetch(apiUrl).then((res) => res.json());
+
+      if (!response || !response.status) {
+        return await msg.reply(
+          "*An error occurred while fetching the search results.*"
+        );
+      }
+
+      const results = response.result;
+      let resultText = `🔍 *Bing Search Results for "${query}"* 🔍\n\n`;
+
+      for (const result of results) {
+        resultText += `*Title:* ${result.title}\n*Description:* ${result.description}\n*URL:* ${result.url}\n\n`;
+      }
+
+      await msg.reply(resultText);
+    } catch (err) {
+      await msg.error(
+        err + "\n\ncommand: bing",
+        err,
+        "*An error occurred while searching on Bing.*"
+      );
     }
-    return await message.reply(`${nobio}${nowhatsapp}${Config.caption}`);
+  }
+);
+
+UserFunction(
+  {
+    pattern: "zip",
+    alias: ["zipcode"],
+    desc: "Provides information about a US zip code.",
+    category: "tools",
+    use: "zip [zip_code]",
+    examples: ["zip 90001", "zip 33162"],
+  },
+  async (message, input) => {
+    const zipCode = input;
+
+    if (!zipCode) {
+      return message.reply("Please provide a zip code.");
+    }
+
+    try {
+      const response = await fetch(`https://api.zippopotam.us/us/${zipCode}`);
+      const data = await response.json();
+
+      const {
+        "post code": postCode,
+        country,
+        "country abbreviation": countryAbbreviation,
+        places,
+      } = data;
+
+      let output = `
+          *Zip Code:* ${postCode}
+          *Country:* ${country} (${countryAbbreviation})
+          *Places:* ${places}
+        `;
+
+      places.forEach((place, index) => {
+        output += `\n${index + 1}. ${place["place name"]}, ${place.state} (${
+          place.latitude
+        }, ${place.longitude})`;
+      });
+
+      await message.send(output);
+    } catch (error) {
+      await message.error(
+        error + "\n\nCommand: zip",
+        error,
+        "Failed to retrieve zip code information."
+      );
+    }
+  }
+);
+UserFunction(
+  {
+    cmdname: "getsticker",
+    category: "search",
+    use: "[text]",
+    info: "Searches Stickers",
+  },
+  async (message, match) => {
+    try {
+      const { generateSticker: gifFile } = require("../lib");
+      if (!match) {
+        return message.reply("Sorry you did not give any search term!");
+      }
+      const query = await axios
+        .get(
+          "https://g.tenor.com/v1/search?q=" +
+            match +
+            "&key=LIVDSRZULELA&limit=8"
+        )
+        .catch(() => {});
+      if (!query.data || !query.data.results || !query.data.results[0]) {
+        return message.reply("*Could not find!*");
+      }
+      let result =
+        query.data.results.length > 5 ? 5 : query.data.results.length;
+      for (let scraped = 0; scraped < result; scraped++) {
+        let file = await amdBuffer(
+          query.data.results?.[scraped]?.media[0]?.mp4?.url
+        );
+        let MTYPE = {
+          pack: Config.packname,
+          author: Config.author,
+          type: "full",
+          quality: 1,
+        };
+        if (file) {
+          gifFile(message, file, MTYPE);
+        }
+      }
+    } catch (error) {
+      message.error(
+        error + "\n\nCommand: stickersearch",
+        error,
+        "*Could not find*"
+      );
+    }
   }
 );

@@ -1,4 +1,5 @@
 build:
   docker:
-      worker: Dockerfile
-   #ASTA
+    worker: Dockerfile
+run:
+  worker: npm start

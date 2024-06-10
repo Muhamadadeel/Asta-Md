@@ -1,0 +1,16 @@
+# ____REMOVE THIS LINE AFTER RENAMING .env.example to config.env ____
+SESSION_ID= ""
+MONGO_URI= ""
+OWNER_NUMER= ""
+THUMB_IMAGE = ""
+port = 3000
+OWNER_NAME = "Astro"
+AUTO_REACTION = false
+READ_MESSAGE = false
+PREFIX = "/" 
+WARN_COUNT = 3
+DISABLE_PM = false
+ANTI_BAD_WORD = "fuck"
+WELCOME_MESSAGE =  ""
+WORKTYPE = "private"
+PACK_INFO = ""

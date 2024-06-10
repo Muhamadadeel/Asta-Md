@@ -1,5 +1,5 @@
 while true
 do
-echo "Starting Asta-Md!"
+echo "Running Application!"
 node .
 done

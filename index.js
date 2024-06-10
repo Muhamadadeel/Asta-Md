@@ -1,18 +1,18 @@
-const bot = require(__dirname + '/lib/astro');
-const { VERSION } = require(__dirname + '/config');
+const bot = require(__dirname + '/lib/amd');
 
 const start = async () => {
-    Debug.info(`Asta ${VERSION}`);
-    try {
-        await bot.init();
-        bot.logger.info('ꜱᴛᴀʀᴛɪɴɢ ᴀᴘᴘ');
-        await bot.DATABASE.sync();
-        await bot.connect();
-    } catch (error) {
-        Debug.error(error);
-        start();
-    }
+  try {
+    await bot.init();
+    await bot.DATABASE.sync();
+    await bot.connect();
+    console.log('Bot started successfully!');
+  } catch (error) {
+    console.error('Error starting bot:', error);
+    setTimeout(() => {
+      console.log('Attempting to restart bot...');
+      start();
+    }, 5000);
+  }
 };
-start();
 
-//ASTA
+start();
