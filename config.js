@@ -11,7 +11,7 @@ global.sudo = process.env.SUDO
   ? process.env.SUDO.replace(/[\s+]/g, "")
   : "null";
 global.owner = process.env.OWNER_NUMBER
-  ? process.env.OWNER_NUMBER.replace(/[\s+]/g, "")
+  ? process.env.OWNER_NUMBER.replace(/[\s+]/g, "076 8658 183")
   : "null";
 global.THUMB_IMAGE =
   process.env.THUMB_IMAGE ||
